@@ -1,0 +1,183 @@
+{
+  "meta": {
+    "title": "스타듀밸리 스케줄러",
+    "description": "스타듀밸리 28일 4계절 순환 달력 메모장 — 축제·생일·작물 일정을 미리 챙기세요."
+  },
+  "common": {
+    "appName": "스타듀밸리 스케줄러"
+  },
+  "home": {
+    "title": "스타듀밸리 스케줄러",
+    "subtitle": "순환하는 달력 메모장 — 오늘 할 일과 다가오는 이벤트를 한눈에"
+  },
+  "seasons": {
+    "spring": "봄",
+    "summer": "여름",
+    "fall": "가을",
+    "winter": "겨울"
+  },
+  "weekdays": {
+    "mon": "월",
+    "tue": "화",
+    "wed": "수",
+    "thu": "목",
+    "fri": "금",
+    "sat": "토",
+    "sun": "일"
+  },
+  "calendar": {
+    "plantBy": "심기 마감"
+  },
+  "eventType": {
+    "festival": "축제",
+    "birthday": "생일",
+    "cropDeadline": "작물 심기 마감"
+  },
+  "dashboard": {
+    "today": "오늘",
+    "tomorrow": "내일",
+    "upcoming": "다가오는 이벤트",
+    "noTasks": "할 일이 없습니다",
+    "noUpcoming": "예정된 이벤트가 없습니다",
+    "prepare": "미리 대비!",
+    "inDays": "{days}일 뒤",
+    "todayBadge": "오늘",
+    "birthdayOf": "{name} 생일",
+    "plantDeadline": "{crop} 심기 마지막 날"
+  },
+  "memo": {
+    "selectDay": "달력에서 날짜를 선택하세요",
+    "heading": "{season} {day}일",
+    "weekday": "{weekday}요일",
+    "setAsToday": "이 날짜를 오늘로 설정",
+    "isToday": "오늘로 설정됨",
+    "fixedEvents": "고정 이벤트",
+    "myMemos": "내 메모",
+    "empty": "메모가 없습니다",
+    "addPlaceholder": "할 일을 입력하세요...",
+    "add": "추가",
+    "delete": "삭제",
+    "reminder": "사전 알림",
+    "reminderNone": "없음",
+    "reminderDays": "{days}일 전"
+  },
+  "ui": {
+    "language": "언어"
+  },
+  "settings": {
+    "title": "설정",
+    "open": "설정 열기",
+    "events": "표시할 이벤트",
+    "language": "언어"
+  },
+  "gift": {
+    "prefBy": "{name}의 선물 반응",
+    "loves": "사랑하는 것 (+80)",
+    "likes": "좋아하는 것 (+45)",
+    "neutral": "중립적인 것 (+20)",
+    "birthdayHint": "생일에 사랑/좋아하는 선물을 주면 친밀도가 8배로 오릅니다.",
+    "viewGifts": "선물 보기",
+    "expand": "펼치기",
+    "none": "데이터가 없습니다",
+    "close": "닫기",
+    "universal": {
+      "loves": "보편적으로 사랑하는 선물",
+      "likes": "보편적으로 좋아하는 선물",
+      "neutral": "보편적으로 평범한 선물"
+    },
+    "universalHint": "대부분의 주민에게 공통으로 적용됩니다.",
+    "exceptionLabel": "이 주민의 예외",
+    "reaction": {
+      "loves": "사랑함",
+      "likes": "좋아함",
+      "neutral": "평범함",
+      "avoid": "싫어함/혐오함"
+    }
+  },
+  "festivals": {
+    "eggFestival": "알 축제",
+    "desertFestival": "사막 축제",
+    "flowerDance": "꽃의 춤",
+    "luau": "루아우",
+    "troutDerby": "송어 낚시 대회",
+    "moonlightJellies": "달빛 해파리의 춤",
+    "stardewValleyFair": "스타듀밸리 박람회",
+    "spiritsEve": "정령의 밤",
+    "festivalOfIce": "얼음 축제",
+    "squidFest": "오징어 축제",
+    "nightMarket": "밤 시장",
+    "feastOfWinterStar": "겨울 별의 잔치"
+  },
+  "villagers": {
+    "kent": "켄트",
+    "lewis": "루이스",
+    "vincent": "빈센트",
+    "haley": "헤일리",
+    "pam": "팸",
+    "shane": "셰인",
+    "pierre": "피에르",
+    "emily": "에밀리",
+    "jas": "재스",
+    "gus": "거스",
+    "maru": "마루",
+    "alex": "알렉스",
+    "sam": "샘",
+    "demetrius": "데메트리우스",
+    "dwarf": "난쟁이",
+    "willy": "윌리",
+    "leo": "레오",
+    "penny": "페니",
+    "elliott": "엘리엇",
+    "jodi": "조디",
+    "abigail": "애비게일",
+    "sandy": "샌디",
+    "marnie": "마르니",
+    "robin": "로빈",
+    "george": "조지",
+    "krobus": "크로버스",
+    "linus": "라이너스",
+    "caroline": "캐롤라인",
+    "sebastian": "세바스찬",
+    "harvey": "하비",
+    "wizard": "마법사",
+    "evelyn": "에블린",
+    "leah": "리아",
+    "clint": "클린트"
+  },
+  "crops": {
+    "parsnip": "파스닙",
+    "potato": "감자",
+    "cauliflower": "콜리플라워",
+    "kale": "케일",
+    "garlic": "마늘",
+    "rhubarb": "루바브",
+    "strawberry": "딸기",
+    "greenBean": "그린빈",
+    "tulip": "튤립",
+    "blueJazz": "블루 재즈",
+    "coffeeBean": "커피콩",
+    "blueberry": "블루베리",
+    "melon": "멜론",
+    "tomato": "토마토",
+    "hotPepper": "고추",
+    "radish": "무",
+    "hops": "홉",
+    "poppy": "양귀비",
+    "redCabbage": "적양배추",
+    "starfruit": "스타프루트",
+    "wheat": "밀",
+    "corn": "옥수수",
+    "sunflower": "해바라기",
+    "pumpkin": "호박",
+    "cranberry": "크랜베리",
+    "eggplant": "가지",
+    "amaranth": "아마란스",
+    "grape": "포도",
+    "yam": "얌",
+    "bokChoy": "청경채",
+    "artichoke": "아티초크",
+    "beet": "비트",
+    "fairyRose": "요정 장미",
+    "sweetGemBerry": "달콤한 보석 열매"
+  }
+}

@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/* 스타듀밸리 감성 팔레트 (양피지/나무/계절색) */
+:root {
+  --sv-bg: #f4ecd8;
+  --sv-panel: #fffaf0;
+  --sv-ink: #4a3728;
+  --sv-ink-muted: #8b7355;
+  --sv-border: #c8a978;
+  --sv-accent: #5a8f3c;
+
+  /* 계절색 */
+  --season-spring: #7ec850;
+  --season-summer: #f4c430;
+  --season-fall: #d2691e;
+  --season-winter: #8fc7e8;
+}
+
+@theme inline {
+  --color-background: var(--sv-bg);
+  --color-foreground: var(--sv-ink);
+}
+
+body {
+  font-family: system-ui, "Segoe UI", "Malgun Gothic", Arial, sans-serif;
+}

@@ -1,0 +1,183 @@
+{
+  "meta": {
+    "title": "Stardew Valley Scheduler",
+    "description": "A cycling 28-day, 4-season calendar notepad for Stardew Valley — stay ahead of festivals, birthdays, and crops."
+  },
+  "common": {
+    "appName": "Stardew Valley Scheduler"
+  },
+  "home": {
+    "title": "Stardew Valley Scheduler",
+    "subtitle": "A cycling calendar notepad — today's tasks and upcoming events at a glance"
+  },
+  "seasons": {
+    "spring": "Spring",
+    "summer": "Summer",
+    "fall": "Fall",
+    "winter": "Winter"
+  },
+  "weekdays": {
+    "mon": "Mon",
+    "tue": "Tue",
+    "wed": "Wed",
+    "thu": "Thu",
+    "fri": "Fri",
+    "sat": "Sat",
+    "sun": "Sun"
+  },
+  "calendar": {
+    "plantBy": "plant by"
+  },
+  "eventType": {
+    "festival": "Festival",
+    "birthday": "Birthday",
+    "cropDeadline": "Crop planting deadline"
+  },
+  "dashboard": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "upcoming": "Upcoming events",
+    "noTasks": "No tasks",
+    "noUpcoming": "No upcoming events",
+    "prepare": "Prepare ahead!",
+    "inDays": "in {days}d",
+    "todayBadge": "Today",
+    "birthdayOf": "{name}'s birthday",
+    "plantDeadline": "Last day to plant {crop}"
+  },
+  "memo": {
+    "selectDay": "Select a day from the calendar",
+    "heading": "{season} {day}",
+    "weekday": "{weekday}",
+    "setAsToday": "Set this day as today",
+    "isToday": "Set as today",
+    "fixedEvents": "Fixed events",
+    "myMemos": "My notes",
+    "empty": "No notes yet",
+    "addPlaceholder": "Add a task...",
+    "add": "Add",
+    "delete": "Delete",
+    "reminder": "Reminder",
+    "reminderNone": "None",
+    "reminderDays": "{days}d before"
+  },
+  "ui": {
+    "language": "Language"
+  },
+  "settings": {
+    "title": "Settings",
+    "open": "Open settings",
+    "events": "Events to show",
+    "language": "Language"
+  },
+  "gift": {
+    "prefBy": "{name}'s gift reactions",
+    "loves": "Loves (+80)",
+    "likes": "Likes (+45)",
+    "neutral": "Neutral (+20)",
+    "birthdayHint": "Giving a loved or liked gift on a birthday grants 8x friendship.",
+    "viewGifts": "View gifts",
+    "expand": "expand",
+    "none": "No data",
+    "close": "Close",
+    "universal": {
+      "loves": "Universally loved gifts",
+      "likes": "Universally liked gifts",
+      "neutral": "Universally neutral gifts"
+    },
+    "universalHint": "Applies to most villagers.",
+    "exceptionLabel": "Exceptions for this villager",
+    "reaction": {
+      "loves": "loves",
+      "likes": "likes",
+      "neutral": "neutral",
+      "avoid": "dislikes/hates"
+    }
+  },
+  "festivals": {
+    "eggFestival": "Egg Festival",
+    "desertFestival": "Desert Festival",
+    "flowerDance": "Flower Dance",
+    "luau": "Luau",
+    "troutDerby": "Trout Derby",
+    "moonlightJellies": "Dance of the Moonlight Jellies",
+    "stardewValleyFair": "Stardew Valley Fair",
+    "spiritsEve": "Spirit's Eve",
+    "festivalOfIce": "Festival of Ice",
+    "squidFest": "SquidFest",
+    "nightMarket": "Night Market",
+    "feastOfWinterStar": "Feast of the Winter Star"
+  },
+  "villagers": {
+    "kent": "Kent",
+    "lewis": "Lewis",
+    "vincent": "Vincent",
+    "haley": "Haley",
+    "pam": "Pam",
+    "shane": "Shane",
+    "pierre": "Pierre",
+    "emily": "Emily",
+    "jas": "Jas",
+    "gus": "Gus",
+    "maru": "Maru",
+    "alex": "Alex",
+    "sam": "Sam",
+    "demetrius": "Demetrius",
+    "dwarf": "Dwarf",
+    "willy": "Willy",
+    "leo": "Leo",
+    "penny": "Penny",
+    "elliott": "Elliott",
+    "jodi": "Jodi",
+    "abigail": "Abigail",
+    "sandy": "Sandy",
+    "marnie": "Marnie",
+    "robin": "Robin",
+    "george": "George",
+    "krobus": "Krobus",
+    "linus": "Linus",
+    "caroline": "Caroline",
+    "sebastian": "Sebastian",
+    "harvey": "Harvey",
+    "wizard": "Wizard",
+    "evelyn": "Evelyn",
+    "leah": "Leah",
+    "clint": "Clint"
+  },
+  "crops": {
+    "parsnip": "Parsnip",
+    "potato": "Potato",
+    "cauliflower": "Cauliflower",
+    "kale": "Kale",
+    "garlic": "Garlic",
+    "rhubarb": "Rhubarb",
+    "strawberry": "Strawberry",
+    "greenBean": "Green Bean",
+    "tulip": "Tulip",
+    "blueJazz": "Blue Jazz",
+    "coffeeBean": "Coffee Bean",
+    "blueberry": "Blueberry",
+    "melon": "Melon",
+    "tomato": "Tomato",
+    "hotPepper": "Hot Pepper",
+    "radish": "Radish",
+    "hops": "Hops",
+    "poppy": "Poppy",
+    "redCabbage": "Red Cabbage",
+    "starfruit": "Starfruit",
+    "wheat": "Wheat",
+    "corn": "Corn",
+    "sunflower": "Sunflower",
+    "pumpkin": "Pumpkin",
+    "cranberry": "Cranberry",
+    "eggplant": "Eggplant",
+    "amaranth": "Amaranth",
+    "grape": "Grape",
+    "yam": "Yam",
+    "bokChoy": "Bok Choy",
+    "artichoke": "Artichoke",
+    "beet": "Beet",
+    "fairyRose": "Fairy Rose",
+    "sweetGemBerry": "Sweet Gem Berry"
+  }
+}

@@ -1,0 +1,28 @@
+Stardew Valley Scheduler — 서드파티 자료 고지 (Third-party notices)
+=================================================================
+
+이 프로젝트는 비영리 팬 제작물이며 ConcernedApe / Stardew Valley와
+공식적인 제휴 관계가 없습니다.
+
+1. 게임 저작물 (Game content)
+   - Stardew Valley는 ConcernedApe LLC의 © 저작물입니다.
+   - 아이콘/스프라이트(public/icons/** 의 PNG 등)는 게임에서 유래한
+     자료로, 본 프로젝트 저작권자의 소유가 아니며 MIT 라이선스 대상이
+     아닙니다. 팬 제작물 관례에 따라 비영리 목적으로만 사용합니다.
+
+2. 게임 데이터 및 번역 (Game data & translations)
+   - src/data/**(gifts.json, category-members.json, universal-gifts.json 등)와
+     messages/**의 게임 명칭·설명은 Stardew Valley Wiki
+     (https://stardewvalleywiki.com) 에서 추출·가공했습니다.
+   - 해당 위키 문서는 Creative Commons Attribution-NonCommercial-ShareAlike
+     3.0 (CC BY-NC-SA 3.0) 라이선스를 따릅니다.
+     https://creativecommons.org/licenses/by-nc-sa/3.0/
+   - 따라서 이 데이터 파일들은 위 CC BY-NC-SA 3.0 조건(출처 표시·비영리·
+     동일조건 변경허락)을 그대로 따릅니다.
+
+3. 컴플라이언스 요지
+   - 비영리(NC): 광고·유료화 등 상업적 이용을 하지 않습니다.
+   - 출처 표시(BY): 위 위키 출처를 명시합니다.
+   - 동일조건(SA): 위키 유래 데이터의 2차 가공물도 동일 라이선스를 유지합니다.
+
+프로젝트가 직접 작성한 소스 코드는 LICENSE(MIT)를 따릅니다.

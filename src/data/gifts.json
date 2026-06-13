@@ -1,0 +1,8311 @@
+{
+  "alex": {
+    "loves": [
+      {
+        "ko": "완벽한 아침",
+        "en": "Complete Breakfast",
+        "icon": "/icons/gifts/Complete_Breakfast.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "날렵하렴 잭, 두꺼우렴 잭",
+        "en": "Jack Be Nimble, Jack Be Thick",
+        "icon": "/icons/gifts/Jack_Be_Nimble_Jack_Be_Thick.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "연어 정찬",
+        "en": "Salmon Dinner",
+        "icon": "/icons/gifts/Salmon_Dinner.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "공룡알",
+        "en": "Dinosaur Egg",
+        "icon": "/icons/gifts/Dinosaur_Egg.png"
+      },
+      {
+        "ko": "수제 에너지바",
+        "en": "Field Snack",
+        "icon": "/icons/gifts/Field_Snack.png"
+      },
+      {
+        "ko": "앵무새 알",
+        "en": "Parrot Egg",
+        "icon": "/icons/gifts/Parrot_Egg.png"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "개구리알",
+        "en": "Green Frog Egg",
+        "icon": "/icons/gifts/Green_Frog_Egg.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 과수 과일 & 새먼베리 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      }
+    ],
+    "avoidEn": [
+      "Holly",
+      "Quartz",
+      "Salmonberry",
+      "Wild Horseradish"
+    ]
+  },
+  "elliott": {
+    "loves": [
+      {
+        "ko": "게살 케이크",
+        "en": "Crab Cakes",
+        "icon": "/icons/gifts/Crab_Cakes.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "바닷가재",
+        "en": "Lobster",
+        "icon": "/icons/gifts/Lobster.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "석류",
+        "en": "Pomegranate",
+        "icon": "/icons/gifts/Pomegranate.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "똠카 스프",
+        "en": "Tom Kha Soup",
+        "icon": "/icons/gifts/Tom_Kha_Soup.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "문어",
+        "en": "Octopus",
+        "icon": "/icons/gifts/Octopus.png"
+      },
+      {
+        "ko": "오징어",
+        "en": "Squid",
+        "icon": "/icons/gifts/Squid.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 석류 & 새먼베리 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 책",
+        "en": "All Books",
+        "detail": "모든 책",
+        "cat": "books"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "성게",
+        "en": "Sea Urchin",
+        "icon": "/icons/gifts/Sea_Urchin.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 생선",
+        "en": "All Fish",
+        "detail": "모든 생선 ( 잉어 , 바닷가재 , 문어 , 해삼 , 달팽이 & 오징어 제외)",
+        "cat": "fish"
+      }
+    ],
+    "avoidEn": [
+      "Amaranth",
+      "Daffodil",
+      "Dandelion",
+      "Ginger",
+      "Hazelnut",
+      "Holly",
+      "Leek",
+      "Pizza",
+      "Quartz",
+      "Salmonberry",
+      "Sea Cucumber",
+      "Snow Yam",
+      "Super Cucumber",
+      "Wild Horseradish",
+      "Winter Root"
+    ]
+  },
+  "harvey": {
+    "loves": [
+      {
+        "ko": "커피",
+        "en": "Coffee",
+        "icon": "/icons/gifts/Coffee.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "젤리와 피클",
+        "en": "Pickles",
+        "icon": "/icons/gifts/Pickles.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "슈퍼 건강식",
+        "en": "Super Meal",
+        "icon": "/icons/gifts/Super_Meal.png"
+      },
+      {
+        "ko": "송로버섯 오일",
+        "en": "Truffle Oil",
+        "icon": "/icons/gifts/Truffle_Oil.png"
+      },
+      {
+        "ko": "와인",
+        "en": "Wine",
+        "icon": "/icons/gifts/Wine.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "오리알",
+        "en": "Duck Egg",
+        "icon": "/icons/gifts/Duck_Egg.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "염소젖",
+        "en": "Goat Milk",
+        "icon": "/icons/gifts/Goat_Milk.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "호랑가시나무 열매",
+        "en": "Holly",
+        "icon": "/icons/gifts/Holly.png"
+      },
+      {
+        "ko": "큰 염소젖",
+        "en": "Large Goat Milk",
+        "icon": "/icons/gifts/Large_Goat_Milk.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "석영",
+        "en": "Quartz",
+        "icon": "/icons/gifts/Quartz.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "파",
+        "en": "Spring Onion",
+        "icon": "/icons/gifts/Spring_Onion.png"
+      },
+      {
+        "ko": "야생 고추냉이",
+        "en": "Wild Horseradish",
+        "icon": "/icons/gifts/Wild_Horseradish.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 새먼베리 & 백량금 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "큰 우유",
+        "en": "Large Milk",
+        "icon": "/icons/gifts/Large_Milk.png"
+      },
+      {
+        "ko": "우유",
+        "en": "Milk",
+        "icon": "/icons/gifts/Milk.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 오리알 & 공허의 달걀 )",
+        "cat": "eggs"
+      }
+    ],
+    "avoidEn": [
+      "Blueberry Tart",
+      "Bread",
+      "Cheese",
+      "Chocolate Cake",
+      "Cookie",
+      "Coral",
+      "Cranberry Sauce",
+      "Fried Mushroom",
+      "Glazed Yams",
+      "Goat Cheese",
+      "Hashbrowns",
+      "Ice Cream",
+      "Nautilus Shell",
+      "Pancakes",
+      "Pink Cake",
+      "Pizza",
+      "Rainbow Shell",
+      "Rhubarb Pie",
+      "Rice Pudding",
+      "Salmonberry",
+      "Spice Berry"
+    ]
+  },
+  "sam": {
+    "loves": [
+      {
+        "ko": "선인장 열매",
+        "en": "Cactus Fruit",
+        "icon": "/icons/gifts/Cactus_Fruit.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "메이플 바",
+        "en": "Maple Bar",
+        "icon": "/icons/gifts/Maple_Bar.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "피자",
+        "en": "Pizza",
+        "icon": "/icons/gifts/Pizza.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "호안석",
+        "en": "Tigerseye",
+        "icon": "/icons/gifts/Tigerseye.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "조자 콜라",
+        "en": "Joja Cola",
+        "icon": "/icons/gifts/Joja_Cola.png"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 선인장 열매 , 과수 과일 & 새먼베리 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      }
+    ],
+    "avoidEn": [
+      "Bone Fragment",
+      "Cinder Shard",
+      "Coal",
+      "Copper Bar",
+      "Daffodil",
+      "Dandelion",
+      "Duck Mayonnaise",
+      "Ginger",
+      "Gold Bar",
+      "Gold Ore",
+      "Hazelnut",
+      "Holly",
+      "Iridium Bar",
+      "Iridium Ore",
+      "Iron Bar",
+      "Leek",
+      "Mayonnaise",
+      "Pickles",
+      "Quartz",
+      "Refined Quartz",
+      "Salmonberry",
+      "Seaweed",
+      "Snow Yam",
+      "Wild Horseradish",
+      "Winter Root"
+    ]
+  },
+  "sebastian": {
+    "loves": [
+      {
+        "ko": "얼어붙은 눈물",
+        "en": "Frozen Tear",
+        "icon": "/icons/gifts/Frozen_Tear.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "개구리알",
+        "en": "Green Frog Egg",
+        "icon": "/icons/gifts/Green_Frog_Egg.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "흑요석",
+        "en": "Obsidian",
+        "icon": "/icons/gifts/Obsidian.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "호박죽",
+        "en": "Pumpkin Soup",
+        "icon": "/icons/gifts/Pumpkin_Soup.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "회",
+        "en": "Sashimi",
+        "icon": "/icons/gifts/Sashimi.png"
+      },
+      {
+        "ko": "공허의 달걀",
+        "en": "Void Egg",
+        "icon": "/icons/gifts/Void_Egg.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "계간 전투",
+        "en": "Combat Quarterly",
+        "icon": "/icons/gifts/Combat_Quarterly.png"
+      },
+      {
+        "ko": "가자미",
+        "en": "Flounder",
+        "icon": "/icons/gifts/Flounder.png"
+      },
+      {
+        "ko": "몬스터 개요서",
+        "en": "Monster Compendium",
+        "icon": "/icons/gifts/Monster_Compendium.png"
+      },
+      {
+        "ko": "석영",
+        "en": "Quartz",
+        "icon": "/icons/gifts/Quartz.png"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 과수 과일 & 새먼베리 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 생선",
+        "en": "All Fish",
+        "detail": "모든 생선 ( 잉어 , 가자미 , & 달팽이 제외)",
+        "cat": "fish"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      }
+    ],
+    "avoidEn": [
+      "Clay",
+      "Complete Breakfast",
+      "Daffodil",
+      "Dandelion",
+      "Farmer's Lunch",
+      "Ginger",
+      "Hazelnut",
+      "Holly",
+      "Leek",
+      "Omelet",
+      "Piña Colada",
+      "Salmonberry",
+      "Snow Yam",
+      "Wild Horseradish",
+      "Winter Root"
+    ]
+  },
+  "shane": {
+    "loves": [
+      {
+        "ko": "맥주",
+        "en": "Beer",
+        "icon": "/icons/gifts/Beer.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "매운 고추",
+        "en": "Hot Pepper",
+        "icon": "/icons/gifts/Hot_Pepper.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "페퍼 파퍼",
+        "en": "Pepper Poppers",
+        "icon": "/icons/gifts/Pepper_Poppers.png"
+      },
+      {
+        "ko": "피자",
+        "en": "Pizza",
+        "icon": "/icons/gifts/Pizza.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 매운 고추 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "수상한 롤",
+        "en": "Strange Bun",
+        "icon": "/icons/gifts/Strange_Bun.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      }
+    ],
+    "avoidEn": [
+      "Daffodil",
+      "Dandelion",
+      "Ginger",
+      "Hazelnut",
+      "Holly",
+      "Leek",
+      "Pickles",
+      "Quartz",
+      "Seaweed",
+      "Snow Yam",
+      "Wild Horseradish",
+      "Winter Root"
+    ]
+  },
+  "abigail": {
+    "loves": [
+      {
+        "ko": "자수정",
+        "en": "Amethyst",
+        "icon": "/icons/gifts/Amethyst.png"
+      },
+      {
+        "ko": "바나나 푸딩",
+        "en": "Banana Pudding",
+        "icon": "/icons/gifts/Banana_Pudding.png"
+      },
+      {
+        "ko": "블랙베리 코블러",
+        "en": "Blackberry Cobbler",
+        "icon": "/icons/gifts/Blackberry_Cobbler.png"
+      },
+      {
+        "ko": "초콜릿 케이크",
+        "en": "Chocolate Cake",
+        "icon": "/icons/gifts/Chocolate_Cake.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "몬스터 개요서",
+        "en": "Monster Compendium",
+        "icon": "/icons/gifts/Monster_Compendium.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "복어",
+        "en": "Pufferfish",
+        "icon": "/icons/gifts/Pufferfish.png"
+      },
+      {
+        "ko": "호박",
+        "en": "Pumpkin",
+        "icon": "/icons/gifts/Pumpkin.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "매콤한 장어",
+        "en": "Spicy Eel",
+        "icon": "/icons/gifts/Spicy_Eel.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "고대 검",
+        "en": "Ancient Sword",
+        "icon": "/icons/gifts/Ancient_Sword.png"
+      },
+      {
+        "ko": "바실리스크 발",
+        "en": "Basilisk Paw",
+        "icon": "/icons/gifts/Basilisk_Paw.png"
+      },
+      {
+        "ko": "뼈피리",
+        "en": "Bone Flute",
+        "icon": "/icons/gifts/Bone_Flute.png"
+      },
+      {
+        "ko": "계간 전투",
+        "en": "Combat Quarterly",
+        "icon": "/icons/gifts/Combat_Quarterly.png"
+      },
+      {
+        "ko": "석영",
+        "en": "Quartz",
+        "icon": "/icons/gifts/Quartz.png"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      }
+    ],
+    "avoidEn": [
+      "Clay",
+      "Holly",
+      "Sugar",
+      "Wild Horseradish"
+    ]
+  },
+  "emily": {
+    "loves": [
+      {
+        "ko": "자수정",
+        "en": "Amethyst",
+        "icon": "/icons/gifts/Amethyst.png"
+      },
+      {
+        "ko": "아쿠아마린",
+        "en": "Aquamarine",
+        "icon": "/icons/gifts/Aquamarine.png"
+      },
+      {
+        "ko": "옷감",
+        "en": "Cloth",
+        "icon": "/icons/gifts/Cloth.png"
+      },
+      {
+        "ko": "에메랄드",
+        "en": "Emerald",
+        "icon": "/icons/gifts/Emerald.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "옥",
+        "en": "Jade",
+        "icon": "/icons/gifts/Jade.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "앵무새 알",
+        "en": "Parrot Egg",
+        "icon": "/icons/gifts/Parrot_Egg.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "루비",
+        "en": "Ruby",
+        "icon": "/icons/gifts/Ruby.png"
+      },
+      {
+        "ko": "생존형 버거",
+        "en": "Survival Burger",
+        "icon": "/icons/gifts/Survival_Burger.png"
+      },
+      {
+        "ko": "토파즈",
+        "en": "Topaz",
+        "icon": "/icons/gifts/Topaz.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "석영",
+        "en": "Quartz",
+        "icon": "/icons/gifts/Quartz.png"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "야생 고추냉이",
+        "en": "Wild Horseradish",
+        "icon": "/icons/gifts/Wild_Horseradish.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 과수 과일 & 새먼베리 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      }
+    ],
+    "avoidEn": [
+      "Fish Taco",
+      "Fried Eel",
+      "Holly",
+      "Ice Cream",
+      "Maki Roll",
+      "Rice Pudding",
+      "Salmon Dinner",
+      "Salmonberry",
+      "Sashimi",
+      "Spicy Eel"
+    ]
+  },
+  "haley": {
+    "loves": [
+      {
+        "ko": "코코넛",
+        "en": "Coconut",
+        "icon": "/icons/gifts/Coconut.png"
+      },
+      {
+        "ko": "과일 샐러드",
+        "en": "Fruit Salad",
+        "icon": "/icons/gifts/Fruit_Salad.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "핑크 케이크",
+        "en": "Pink Cake",
+        "icon": "/icons/gifts/Pink_Cake.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "해바라기",
+        "en": "Sunflower",
+        "icon": "/icons/gifts/Sunflower.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      }
+    ],
+    "avoidEn": [
+      "Clay",
+      "Dandelion",
+      "Ginger",
+      "Hazelnut",
+      "Holly",
+      "Leek",
+      "Mystic Syrup",
+      "Prismatic Shard",
+      "Quartz",
+      "Snow Yam",
+      "Wild Horseradish",
+      "Winter Root"
+    ]
+  },
+  "leah": {
+    "loves": [
+      {
+        "ko": "염소 치즈",
+        "en": "Goat Cheese",
+        "icon": "/icons/gifts/Goat_Cheese.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "양귀비씨 머핀",
+        "en": "Poppyseed Muffin",
+        "icon": "/icons/gifts/Poppyseed_Muffin.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "샐러드",
+        "en": "Salad",
+        "icon": "/icons/gifts/Salad.png"
+      },
+      {
+        "ko": "야채 볶음",
+        "en": "Stir Fry",
+        "icon": "/icons/gifts/Stir_Fry.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "야채의 메들리",
+        "en": "Vegetable Medley",
+        "icon": "/icons/gifts/Vegetable_Medley.png"
+      },
+      {
+        "ko": "와인",
+        "en": "Wine",
+        "icon": "/icons/gifts/Wine.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "유목",
+        "en": "Driftwood",
+        "icon": "/icons/gifts/Driftwood.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "호랑가시나무 열매",
+        "en": "Holly",
+        "icon": "/icons/gifts/Holly.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "파",
+        "en": "Spring Onion",
+        "icon": "/icons/gifts/Spring_Onion.png"
+      },
+      {
+        "ko": "야생 고추냉이",
+        "en": "Wild Horseradish",
+        "icon": "/icons/gifts/Wild_Horseradish.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      }
+    ],
+    "avoidEn": [
+      "Bread",
+      "Carp Surprise",
+      "Cookie",
+      "Fried Egg",
+      "Hashbrowns",
+      "Ice Cream",
+      "Pancakes",
+      "Pink Cake",
+      "Pizza",
+      "Rice Pudding",
+      "Seaweed",
+      "Survival Burger",
+      "Tortilla",
+      "Void Egg"
+    ]
+  },
+  "maru": {
+    "loves": [
+      {
+        "ko": "배터리 팩",
+        "en": "Battery Pack",
+        "icon": "/icons/gifts/Battery_Pack.png"
+      },
+      {
+        "ko": "콜리플라워",
+        "en": "Cauliflower",
+        "icon": "/icons/gifts/Cauliflower.png"
+      },
+      {
+        "ko": "치즈 콜리플라워",
+        "en": "Cheese Cauliflower",
+        "icon": "/icons/gifts/Cheese_Cauliflower.png"
+      },
+      {
+        "ko": "다이아몬드",
+        "en": "Diamond",
+        "icon": "/icons/gifts/Diamond.png"
+      },
+      {
+        "ko": "드워프 도구",
+        "en": "Dwarf Gadget",
+        "icon": "/icons/gifts/Dwarf_Gadget.png"
+      },
+      {
+        "ko": "금 주괴",
+        "en": "Gold Bar",
+        "icon": "/icons/gifts/Gold_Bar.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "이리듐 주괴",
+        "en": "Iridium Bar",
+        "icon": "/icons/gifts/Iridium_Bar.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "광부의 간식",
+        "en": "Miner's Treat",
+        "icon": "/icons/gifts/Miner_s_Treat.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "페퍼 파퍼",
+        "en": "Pepper Poppers",
+        "icon": "/icons/gifts/Pepper_Poppers.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "방사능 주괴",
+        "en": "Radioactive Bar",
+        "icon": "/icons/gifts/Radioactive_Bar.png"
+      },
+      {
+        "ko": "대황 파이",
+        "en": "Rhubarb Pie",
+        "icon": "/icons/gifts/Rhubarb_Pie.png"
+      },
+      {
+        "ko": "딸기",
+        "en": "Strawberry",
+        "icon": "/icons/gifts/Strawberry.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "구리 주괴",
+        "en": "Copper Bar",
+        "icon": "/icons/gifts/Copper_Bar.png"
+      },
+      {
+        "ko": "철 주괴",
+        "en": "Iron Bar",
+        "icon": "/icons/gifts/Iron_Bar.png"
+      },
+      {
+        "ko": "참나무 수지",
+        "en": "Oak Resin",
+        "icon": "/icons/gifts/Oak_Resin.png"
+      },
+      {
+        "ko": "소나무 타르",
+        "en": "Pine Tar",
+        "icon": "/icons/gifts/Pine_Tar.png"
+      },
+      {
+        "ko": "석영",
+        "en": "Quartz",
+        "icon": "/icons/gifts/Quartz.png"
+      },
+      {
+        "ko": "방사능 광석",
+        "en": "Radioactive Ore",
+        "icon": "/icons/gifts/Radioactive_Ore.png"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 흔한 버섯 & 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "야생 고추냉이",
+        "en": "Wild Horseradish",
+        "icon": "/icons/gifts/Wild_Horseradish.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 블랙베리 , 수정 과일 , 과수 과일 , 새먼베리 & 딸기 )",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      }
+    ],
+    "avoidEn": [
+      "Blackberry",
+      "Common Mushroom",
+      "Crystal Fruit",
+      "Holly",
+      "Honey",
+      "Maple Syrup",
+      "Pickles",
+      "Salmonberry",
+      "Snow Yam",
+      "Truffle"
+    ]
+  },
+  "penny": {
+    "loves": [
+      {
+        "ko": "다이아몬드",
+        "en": "Diamond",
+        "icon": "/icons/gifts/Diamond.png"
+      },
+      {
+        "ko": "에메랄드",
+        "en": "Emerald",
+        "icon": "/icons/gifts/Emerald.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "멜론",
+        "en": "Melon",
+        "icon": "/icons/gifts/Melon.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "양귀비",
+        "en": "Poppy",
+        "icon": "/icons/gifts/Poppy.png"
+      },
+      {
+        "ko": "양귀비씨 머핀",
+        "en": "Poppyseed Muffin",
+        "icon": "/icons/gifts/Poppyseed_Muffin.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "붉은 정식",
+        "en": "Red Plate",
+        "icon": "/icons/gifts/Red_Plate.png"
+      },
+      {
+        "ko": "뿌리채소 모음",
+        "en": "Roots Platter",
+        "icon": "/icons/gifts/Roots_Platter.png"
+      },
+      {
+        "ko": "도루묵",
+        "en": "Sandfish",
+        "icon": "/icons/gifts/Sandfish.png"
+      },
+      {
+        "ko": "똠카 스프",
+        "en": "Tom Kha Soup",
+        "icon": "/icons/gifts/Tom_Kha_Soup.png"
+      },
+      {
+        "ko": "모든 책",
+        "en": "All Books",
+        "detail": "모든 책",
+        "cat": "books"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      },
+      {
+        "ko": "모든 유물",
+        "en": "All Artifacts",
+        "detail": "모든 유물",
+        "cat": "artifacts"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "야생 고추냉이",
+        "en": "Wild Horseradish",
+        "icon": "/icons/gifts/Wild_Horseradish.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 과수 과일 , 포도 , 멜론 & 새먼베리 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 & 보라색 버섯 제외)",
+        "cat": "mushrooms"
+      }
+    ],
+    "avoidEn": [
+      "Algae Soup",
+      "Beer",
+      "Duck Feather",
+      "Grape",
+      "Holly",
+      "Hops",
+      "Mead",
+      "Pale Ale",
+      "Pale Broth",
+      "Piña Colada",
+      "Purple Mushroom",
+      "Quartz",
+      "Rabbit's Foot",
+      "Red Mushroom",
+      "Salmonberry",
+      "Wine",
+      "Wool"
+    ]
+  },
+  "caroline": {
+    "loves": [
+      {
+        "ko": "생선 타코",
+        "en": "Fish Taco",
+        "icon": "/icons/gifts/Fish_Taco.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "녹차",
+        "en": "Green Tea",
+        "icon": "/icons/gifts/Green_Tea.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "여름별꽃",
+        "en": "Summer Spangle",
+        "icon": "/icons/gifts/Summer_Spangle.png"
+      },
+      {
+        "ko": "열대 카레",
+        "en": "Tropical Curry",
+        "icon": "/icons/gifts/Tropical_Curry.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "야생 고추냉이",
+        "en": "Wild Horseradish",
+        "icon": "/icons/gifts/Wild_Horseradish.png"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 과수 과일 & 새먼베리 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      }
+    ],
+    "avoidEn": [
+      "Amaranth",
+      "Dandelion",
+      "Duck Mayonnaise",
+      "Ginger",
+      "Hazelnut",
+      "Holly",
+      "Leek",
+      "Mayonnaise",
+      "Quartz",
+      "Salmonberry",
+      "Snow Yam",
+      "Winter Root"
+    ]
+  },
+  "clint": {
+    "loves": [
+      {
+        "ko": "자수정",
+        "en": "Amethyst",
+        "icon": "/icons/gifts/Amethyst.png"
+      },
+      {
+        "ko": "아쿠아마린",
+        "en": "Aquamarine",
+        "icon": "/icons/gifts/Aquamarine.png"
+      },
+      {
+        "ko": "아티초크 소스",
+        "en": "Artichoke Dip",
+        "icon": "/icons/gifts/Artichoke_Dip.png"
+      },
+      {
+        "ko": "에메랄드",
+        "en": "Emerald",
+        "icon": "/icons/gifts/Emerald.png"
+      },
+      {
+        "ko": "청나래고사리 리조또",
+        "en": "Fiddlehead Risotto",
+        "icon": "/icons/gifts/Fiddlehead_Risotto.png"
+      },
+      {
+        "ko": "금 주괴",
+        "en": "Gold Bar",
+        "icon": "/icons/gifts/Gold_Bar.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "이리듐 주괴",
+        "en": "Iridium Bar",
+        "icon": "/icons/gifts/Iridium_Bar.png"
+      },
+      {
+        "ko": "옥",
+        "en": "Jade",
+        "icon": "/icons/gifts/Jade.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "전 정동석",
+        "en": "Omni Geode",
+        "icon": "/icons/gifts/Omni_Geode.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "루비",
+        "en": "Ruby",
+        "icon": "/icons/gifts/Ruby.png"
+      },
+      {
+        "ko": "토파즈",
+        "en": "Topaz",
+        "icon": "/icons/gifts/Topaz.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "구리 주괴",
+        "en": "Copper Bar",
+        "icon": "/icons/gifts/Copper_Bar.png"
+      },
+      {
+        "ko": "철 주괴",
+        "en": "Iron Bar",
+        "icon": "/icons/gifts/Iron_Bar.png"
+      },
+      {
+        "ko": "월간 광부",
+        "en": "Mining Monthly",
+        "icon": "/icons/gifts/Mining_Monthly.png"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "석탄",
+        "en": "Coal",
+        "icon": "/icons/gifts/Coal.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "금광석",
+        "en": "Gold Ore",
+        "icon": "/icons/gifts/Gold_Ore.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "이리듐광석",
+        "en": "Iridium Ore",
+        "icon": "/icons/gifts/Iridium_Ore.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "정제된 석영",
+        "en": "Refined Quartz",
+        "icon": "/icons/gifts/Refined_Quartz.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 과수 과일 & 새먼베리 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      }
+    ],
+    "avoidEn": [
+      "Holly",
+      "Quartz",
+      "Salmonberry",
+      "Wild Horseradish"
+    ]
+  },
+  "demetrius": {
+    "loves": [
+      {
+        "ko": "콩 스튜",
+        "en": "Bean Hotpot",
+        "icon": "/icons/gifts/Bean_Hotpot.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "아이스크림",
+        "en": "Ice Cream",
+        "icon": "/icons/gifts/Ice_Cream.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "라이스 푸딩",
+        "en": "Rice Pudding",
+        "icon": "/icons/gifts/Rice_Pudding.png"
+      },
+      {
+        "ko": "딸기",
+        "en": "Strawberry",
+        "icon": "/icons/gifts/Strawberry.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "공룡알",
+        "en": "Dinosaur Egg",
+        "icon": "/icons/gifts/Dinosaur_Egg.png"
+      },
+      {
+        "ko": "보라색 버섯",
+        "en": "Purple Mushroom",
+        "icon": "/icons/gifts/Purple_Mushroom.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 딸기 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "야생 고추냉이",
+        "en": "Wild Horseradish",
+        "icon": "/icons/gifts/Wild_Horseradish.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 & 보라색 버섯 제외)",
+        "cat": "mushrooms"
+      },
+      {
+        "ko": "모든 생선",
+        "en": "All Fish",
+        "detail": "모든 생선 ( 잉어 & 달팽이 제외)",
+        "cat": "fish"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      }
+    ],
+    "avoidEn": [
+      "Holly",
+      "Quartz"
+    ]
+  },
+  "dwarf": {
+    "loves": [
+      {
+        "ko": "자수정",
+        "en": "Amethyst",
+        "icon": "/icons/gifts/Amethyst.png"
+      },
+      {
+        "ko": "아쿠아마린",
+        "en": "Aquamarine",
+        "icon": "/icons/gifts/Aquamarine.png"
+      },
+      {
+        "ko": "에메랄드",
+        "en": "Emerald",
+        "icon": "/icons/gifts/Emerald.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "옥",
+        "en": "Jade",
+        "icon": "/icons/gifts/Jade.png"
+      },
+      {
+        "ko": "용암 장어",
+        "en": "Lava Eel",
+        "icon": "/icons/gifts/Lava_Eel.png"
+      },
+      {
+        "ko": "레몬 스톤",
+        "en": "Lemon Stone",
+        "icon": "/icons/gifts/Lemon_Stone.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "전 정동석",
+        "en": "Omni Geode",
+        "icon": "/icons/gifts/Omni_Geode.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "루비",
+        "en": "Ruby",
+        "icon": "/icons/gifts/Ruby.png"
+      },
+      {
+        "ko": "토파즈",
+        "en": "Topaz",
+        "icon": "/icons/gifts/Topaz.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "동굴 당근",
+        "en": "Cave Carrot",
+        "icon": "/icons/gifts/Cave_Carrot.png"
+      },
+      {
+        "ko": "석영",
+        "en": "Quartz",
+        "icon": "/icons/gifts/Quartz.png"
+      },
+      {
+        "ko": "모든 유물",
+        "en": "All Artifacts",
+        "detail": "모든 유물",
+        "cat": "artifacts"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "태양 정수",
+        "en": "Solar Essence",
+        "icon": "/icons/gifts/Solar_Essence.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "공허 정수",
+        "en": "Void Essence",
+        "icon": "/icons/gifts/Void_Essence.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 과수 과일 & 새먼베리 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      }
+    ],
+    "avoidEn": [
+      "Daffodil",
+      "Dandelion",
+      "Ginger",
+      "Hazelnut",
+      "Holly",
+      "Leek",
+      "Salmonberry",
+      "Snow Yam",
+      "Wild Horseradish",
+      "Winter Root"
+    ]
+  },
+  "evelyn": {
+    "loves": [
+      {
+        "ko": "사탕무",
+        "en": "Beet",
+        "icon": "/icons/gifts/Beet.png"
+      },
+      {
+        "ko": "초콜릿 케이크",
+        "en": "Chocolate Cake",
+        "icon": "/icons/gifts/Chocolate_Cake.png"
+      },
+      {
+        "ko": "다이아몬드",
+        "en": "Diamond",
+        "icon": "/icons/gifts/Diamond.png"
+      },
+      {
+        "ko": "요정장미",
+        "en": "Fairy Rose",
+        "icon": "/icons/gifts/Fairy_Rose.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "건포도",
+        "en": "Raisins",
+        "icon": "/icons/gifts/Raisins.png"
+      },
+      {
+        "ko": "요리용 속",
+        "en": "Stuffing",
+        "icon": "/icons/gifts/Stuffing.png"
+      },
+      {
+        "ko": "튤립",
+        "en": "Tulip",
+        "icon": "/icons/gifts/Tulip.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "깨진 안경",
+        "en": "Broken Glasses",
+        "icon": "/icons/gifts/Broken_Glasses.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "새조개",
+        "en": "Cockle",
+        "icon": "/icons/gifts/Cockle.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "홍합",
+        "en": "Mussel",
+        "icon": "/icons/gifts/Mussel.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "굴",
+        "en": "Oyster",
+        "icon": "/icons/gifts/Oyster.png"
+      },
+      {
+        "ko": "성게",
+        "en": "Sea Urchin",
+        "icon": "/icons/gifts/Sea_Urchin.png"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 과수 과일 , 새먼베리 & 백량금 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      }
+    ],
+    "avoidEn": [
+      "Clay",
+      "Fried Eel",
+      "Garlic",
+      "Holly",
+      "Maki Roll",
+      "Quartz",
+      "Salmonberry",
+      "Sashimi",
+      "Spice Berry",
+      "Spicy Eel",
+      "Trout Soup",
+      "Wild Horseradish"
+    ]
+  },
+  "george": {
+    "loves": [
+      {
+        "ko": "버섯구이",
+        "en": "Fried Mushroom",
+        "icon": "/icons/gifts/Fried_Mushroom.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 과수 과일 & 새먼베리 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      }
+    ],
+    "avoidEn": [
+      "Clay",
+      "Dandelion",
+      "Holly",
+      "Quartz",
+      "Salmonberry",
+      "Wild Horseradish"
+    ]
+  },
+  "gus": {
+    "loves": [
+      {
+        "ko": "다이아몬드",
+        "en": "Diamond",
+        "icon": "/icons/gifts/Diamond.png"
+      },
+      {
+        "ko": "에스카르고",
+        "en": "Escargot",
+        "icon": "/icons/gifts/Escargot.png"
+      },
+      {
+        "ko": "생선 타코",
+        "en": "Fish Taco",
+        "icon": "/icons/gifts/Fish_Taco.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "오렌지",
+        "en": "Orange",
+        "icon": "/icons/gifts/Orange.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "열대 카레",
+        "en": "Tropical Curry",
+        "icon": "/icons/gifts/Tropical_Curry.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 과수 과일 & 새먼베리 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      }
+    ],
+    "avoidEn": [
+      "Coleslaw",
+      "Holly",
+      "Quartz",
+      "Salmonberry",
+      "Wild Horseradish"
+    ]
+  },
+  "jas": {
+    "loves": [
+      {
+        "ko": "고대 인형",
+        "en": "Ancient Doll",
+        "icon": "/icons/gifts/Ancient_Doll.png"
+      },
+      {
+        "ko": "요정 상자",
+        "en": "Fairy Box",
+        "icon": "/icons/gifts/Fairy_Box.png"
+      },
+      {
+        "ko": "요정장미",
+        "en": "Fairy Rose",
+        "icon": "/icons/gifts/Fairy_Rose.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "핑크 케이크",
+        "en": "Pink Cake",
+        "icon": "/icons/gifts/Pink_Cake.png"
+      },
+      {
+        "ko": "자두 푸딩",
+        "en": "Plum Pudding",
+        "icon": "/icons/gifts/Plum_Pudding.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "이상한 인형 (녹색)",
+        "en": "Strange Doll (green)",
+        "icon": "/icons/gifts/Strange_Doll_green.png"
+      },
+      {
+        "ko": "이상한 인형 (노란색)",
+        "en": "Strange Doll (yellow)",
+        "icon": "/icons/gifts/Strange_Doll_yellow.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "코코넛",
+        "en": "Coconut",
+        "icon": "/icons/gifts/Coconut.png"
+      },
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      }
+    ],
+    "avoidEn": [
+      "Clay",
+      "Dandelion",
+      "Ginger",
+      "Hazelnut",
+      "Holly",
+      "Leek",
+      "Piña Colada",
+      "Quartz",
+      "Snow Yam",
+      "Triple Shot Espresso",
+      "Wild Horseradish",
+      "Winter Root"
+    ]
+  },
+  "jodi": {
+    "loves": [
+      {
+        "ko": "초콜릿 케이크",
+        "en": "Chocolate Cake",
+        "icon": "/icons/gifts/Chocolate_Cake.png"
+      },
+      {
+        "ko": "우럭 튀김",
+        "en": "Crispy Bass",
+        "icon": "/icons/gifts/Crispy_Bass.png"
+      },
+      {
+        "ko": "다이아몬드",
+        "en": "Diamond",
+        "icon": "/icons/gifts/Diamond.png"
+      },
+      {
+        "ko": "가지 파마산",
+        "en": "Eggplant Parmesan",
+        "icon": "/icons/gifts/Eggplant_Parmesan.png"
+      },
+      {
+        "ko": "장어튀김",
+        "en": "Fried Eel",
+        "icon": "/icons/gifts/Fried_Eel.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "팬케이크",
+        "en": "Pancakes",
+        "icon": "/icons/gifts/Pancakes.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "대황 파이",
+        "en": "Rhubarb Pie",
+        "icon": "/icons/gifts/Rhubarb_Pie.png"
+      },
+      {
+        "ko": "야채의 메들리",
+        "en": "Vegetable Medley",
+        "icon": "/icons/gifts/Vegetable_Medley.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 백량금 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      }
+    ],
+    "avoidEn": [
+      "Daffodil",
+      "Dandelion",
+      "Garlic",
+      "Ginger",
+      "Hazelnut",
+      "Holly",
+      "Leek",
+      "Quartz",
+      "Snow Yam",
+      "Spice Berry",
+      "Wild Horseradish",
+      "Winter Root"
+    ]
+  },
+  "kent": {
+    "loves": [
+      {
+        "ko": "청나래고사리 리조또",
+        "en": "Fiddlehead Risotto",
+        "icon": "/icons/gifts/Fiddlehead_Risotto.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "구운 헤이즐넛",
+        "en": "Roasted Hazelnuts",
+        "icon": "/icons/gifts/Roasted_Hazelnuts.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "드워프 안전 지침서",
+        "en": "Dwarvish Safety Manual",
+        "icon": "/icons/gifts/Dwarvish_Safety_Manual.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "야생 고추냉이",
+        "en": "Wild Horseradish",
+        "icon": "/icons/gifts/Wild_Horseradish.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      }
+    ],
+    "avoidEn": [
+      "Algae Soup",
+      "Holly",
+      "Piña Colada",
+      "Quartz",
+      "Sashimi",
+      "Snow Yam",
+      "Tortilla"
+    ]
+  },
+  "krobus": {
+    "loves": [
+      {
+        "ko": "다이아몬드",
+        "en": "Diamond",
+        "icon": "/icons/gifts/Diamond.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "이리듐 주괴",
+        "en": "Iridium Bar",
+        "icon": "/icons/gifts/Iridium_Bar.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "몬스터 개요서",
+        "en": "Monster Compendium",
+        "icon": "/icons/gifts/Monster_Compendium.png"
+      },
+      {
+        "ko": "몬스터 사향",
+        "en": "Monster Musk",
+        "icon": "/icons/gifts/Monster_Musk.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "호박",
+        "en": "Pumpkin",
+        "icon": "/icons/gifts/Pumpkin.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "공허의 달걀",
+        "en": "Void Egg",
+        "icon": "/icons/gifts/Void_Egg.png"
+      },
+      {
+        "ko": "공허 마요네즈",
+        "en": "Void Mayonnaise",
+        "icon": "/icons/gifts/Void_Mayonnaise.png"
+      },
+      {
+        "ko": "야생 고추냉이",
+        "en": "Wild Horseradish",
+        "icon": "/icons/gifts/Wild_Horseradish.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "금 주괴",
+        "en": "Gold Bar",
+        "icon": "/icons/gifts/Gold_Bar.png"
+      },
+      {
+        "ko": "석영",
+        "en": "Quartz",
+        "icon": "/icons/gifts/Quartz.png"
+      },
+      {
+        "ko": "바다 거품 푸딩",
+        "en": "Seafoam Pudding",
+        "icon": "/icons/gifts/Seafoam_Pudding.png"
+      },
+      {
+        "ko": "수상한 롤",
+        "en": "Strange Bun",
+        "icon": "/icons/gifts/Strange_Bun.png"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 과수 과일 & 새먼베리 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      }
+    ],
+    "avoidEn": [
+      "Daffodil",
+      "Dandelion",
+      "Ginger",
+      "Hazelnut",
+      "Holly",
+      "Leek",
+      "Life Elixir",
+      "Salmonberry",
+      "Snow Yam",
+      "Winter Root"
+    ]
+  },
+  "leo": {
+    "loves": [
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "망고",
+        "en": "Mango",
+        "icon": "/icons/gifts/Mango.png"
+      },
+      {
+        "ko": "타조알",
+        "en": "Ostrich Egg",
+        "icon": "/icons/gifts/Ostrich_Egg.png"
+      },
+      {
+        "ko": "앵무새 알",
+        "en": "Parrot Egg",
+        "icon": "/icons/gifts/Parrot_Egg.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "포이",
+        "en": "Poi",
+        "icon": "/icons/gifts/Poi.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "용의 이빨",
+        "en": "Dragon Tooth",
+        "icon": "/icons/gifts/Dragon_Tooth.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "석영",
+        "en": "Quartz",
+        "icon": "/icons/gifts/Quartz.png"
+      },
+      {
+        "ko": "성게",
+        "en": "Sea Urchin",
+        "icon": "/icons/gifts/Sea_Urchin.png"
+      },
+      {
+        "ko": "백량금",
+        "en": "Spice Berry",
+        "icon": "/icons/gifts/Spice_Berry.png"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "커피",
+        "en": "Coffee",
+        "icon": "/icons/gifts/Coffee.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 과수 과일 , 망고 , 새먼베리 , & 백량금 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 타조알 과 공허의 달걀 ) 제외",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 생선",
+        "en": "All Fish",
+        "detail": "모든 생선",
+        "cat": "fish"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      }
+    ],
+    "avoidEn": [
+      "Beer",
+      "Daffodil",
+      "Dandelion",
+      "Ginger",
+      "Hazelnut",
+      "Holly",
+      "Hops",
+      "Leek",
+      "Life Elixir",
+      "Mead",
+      "Morel",
+      "Oil",
+      "Pale Ale",
+      "Pickles",
+      "Piña Colada",
+      "Salmonberry",
+      "Snow Yam",
+      "Triple Shot Espresso",
+      "Unmilled Rice",
+      "Wild Horseradish",
+      "Wine",
+      "Winter Root"
+    ]
+  },
+  "lewis": {
+    "loves": [
+      {
+        "ko": "가을의 수확",
+        "en": "Autumn's Bounty",
+        "icon": "/icons/gifts/Autumn_s_Bounty.png"
+      },
+      {
+        "ko": "맛탕",
+        "en": "Glazed Yams",
+        "icon": "/icons/gifts/Glazed_Yams.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "녹차",
+        "en": "Green Tea",
+        "icon": "/icons/gifts/Green_Tea.png"
+      },
+      {
+        "ko": "매운 고추",
+        "en": "Hot Pepper",
+        "icon": "/icons/gifts/Hot_Pepper.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "야채의 메들리",
+        "en": "Vegetable Medley",
+        "icon": "/icons/gifts/Vegetable_Medley.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "블루베리",
+        "en": "Blueberry",
+        "icon": "/icons/gifts/Blueberry.png"
+      },
+      {
+        "ko": "선인장 열매",
+        "en": "Cactus Fruit",
+        "icon": "/icons/gifts/Cactus_Fruit.png"
+      },
+      {
+        "ko": "코코넛",
+        "en": "Coconut",
+        "icon": "/icons/gifts/Coconut.png"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 블랙베리 , 선인장 열매 , 코코넛 , 과수 과일 , 매운 고추 , & 새먼베리 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      }
+    ],
+    "avoidEn": [
+      "Holly",
+      "Quartz",
+      "Salmonberry",
+      "Wild Horseradish"
+    ]
+  },
+  "linus": {
+    "loves": [
+      {
+        "ko": "블루베리 타르트",
+        "en": "Blueberry Tart",
+        "icon": "/icons/gifts/Blueberry_Tart.png"
+      },
+      {
+        "ko": "선인장 열매",
+        "en": "Cactus Fruit",
+        "icon": "/icons/gifts/Cactus_Fruit.png"
+      },
+      {
+        "ko": "코코넛",
+        "en": "Coconut",
+        "icon": "/icons/gifts/Coconut.png"
+      },
+      {
+        "ko": "바다의 요리",
+        "en": "Dish O' The Sea",
+        "icon": "/icons/gifts/Dish_O_The_Sea.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "골목 뷔페",
+        "en": "The Alleyway Buffet",
+        "icon": "/icons/gifts/The_Alleyway_Buffet.png"
+      },
+      {
+        "ko": "참마",
+        "en": "Yam",
+        "icon": "/icons/gifts/Yam.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "호랑가시나무 열매",
+        "en": "Holly",
+        "icon": "/icons/gifts/Holly.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "파",
+        "en": "Spring Onion",
+        "icon": "/icons/gifts/Spring_Onion.png"
+      },
+      {
+        "ko": "야생 고추냉이",
+        "en": "Wild Horseradish",
+        "icon": "/icons/gifts/Wild_Horseradish.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 선인장 열매 & 코코넛 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 생선",
+        "en": "All Fish",
+        "detail": "모든 생선 ( 달팽이 제외)",
+        "cat": "fish"
+      }
+    ],
+    "avoidEn": []
+  },
+  "marnie": {
+    "loves": [
+      {
+        "ko": "다이아몬드",
+        "en": "Diamond",
+        "icon": "/icons/gifts/Diamond.png"
+      },
+      {
+        "ko": "농부의 점심",
+        "en": "Farmer's Lunch",
+        "icon": "/icons/gifts/Farmer_s_Lunch.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "핑크 케이크",
+        "en": "Pink Cake",
+        "icon": "/icons/gifts/Pink_Cake.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "호박 파이",
+        "en": "Pumpkin Pie",
+        "icon": "/icons/gifts/Pumpkin_Pie.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "석영",
+        "en": "Quartz",
+        "icon": "/icons/gifts/Quartz.png"
+      },
+      {
+        "ko": "스타듀 밸리 연감",
+        "en": "Stardew Valley Almanac",
+        "icon": "/icons/gifts/Stardew_Valley_Almanac.png"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 과수 과일 & 새먼베리 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      }
+    ],
+    "avoidEn": [
+      "Clay",
+      "Holly",
+      "Salmonberry",
+      "Seaweed",
+      "Treasure Chest",
+      "Wild Horseradish"
+    ]
+  },
+  "pam": {
+    "loves": [
+      {
+        "ko": "맥주",
+        "en": "Beer",
+        "icon": "/icons/gifts/Beer.png"
+      },
+      {
+        "ko": "선인장 열매",
+        "en": "Cactus Fruit",
+        "icon": "/icons/gifts/Cactus_Fruit.png"
+      },
+      {
+        "ko": "맛탕",
+        "en": "Glazed Yams",
+        "icon": "/icons/gifts/Glazed_Yams.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "벌꿀 술",
+        "en": "Mead",
+        "icon": "/icons/gifts/Mead.png"
+      },
+      {
+        "ko": "페일 에일",
+        "en": "Pale Ale",
+        "icon": "/icons/gifts/Pale_Ale.png"
+      },
+      {
+        "ko": "파스닙",
+        "en": "Parsnip",
+        "icon": "/icons/gifts/Parsnip.png"
+      },
+      {
+        "ko": "설탕당근 스프",
+        "en": "Parsnip Soup",
+        "icon": "/icons/gifts/Parsnip_Soup.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "피나콜라다",
+        "en": "Piña Colada",
+        "icon": "/icons/gifts/Pi_a_Colada.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 선인장 열매 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "조자 콜라",
+        "en": "Joja Cola",
+        "icon": "/icons/gifts/Joja_Cola.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      },
+      {
+        "ko": "모든 생선",
+        "en": "All Fish",
+        "detail": "모든 생선 ( 잉어 , 문어 , 달팽이 & 오징어 제외)",
+        "cat": "fish"
+      }
+    ],
+    "avoidEn": [
+      "Holly",
+      "Octopus",
+      "Quartz",
+      "Squid",
+      "Wild Horseradish"
+    ]
+  },
+  "pierre": {
+    "loves": [
+      {
+        "ko": "오징어튀김",
+        "en": "Fried Calamari",
+        "icon": "/icons/gifts/Fried_Calamari.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "가격 카탈로그",
+        "en": "Price Catalogue",
+        "icon": "/icons/gifts/Price_Catalogue.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 과수 과일 & 새먼베리 제외)",
+        "cat": "fruits"
+      }
+    ],
+    "avoidEn": [
+      "Corn",
+      "Garlic",
+      "Ginger",
+      "Hazelnut",
+      "Holly",
+      "Leek",
+      "Parsnip Soup",
+      "Salmonberry",
+      "Snow Yam",
+      "Tortilla",
+      "Wild Horseradish",
+      "Winter Root"
+    ]
+  },
+  "robin": {
+    "loves": [
+      {
+        "ko": "염소 치즈",
+        "en": "Goat Cheese",
+        "icon": "/icons/gifts/Goat_Cheese.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "복숭아",
+        "en": "Peach",
+        "icon": "/icons/gifts/Peach.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "스파게티",
+        "en": "Spaghetti",
+        "icon": "/icons/gifts/Spaghetti.png"
+      },
+      {
+        "ko": "우디의 비밀",
+        "en": "Woody's Secret",
+        "icon": "/icons/gifts/Woody_s_Secret.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "단단한 나무",
+        "en": "Hardwood",
+        "icon": "/icons/gifts/Hardwood.png"
+      },
+      {
+        "ko": "석영",
+        "en": "Quartz",
+        "icon": "/icons/gifts/Quartz.png"
+      },
+      {
+        "ko": "주간 나무꾼",
+        "en": "Woodcutter's Weekly",
+        "icon": "/icons/gifts/Woodcutter_s_Weekly.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 복숭아 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      }
+    ],
+    "avoidEn": [
+      "Holly",
+      "Wild Horseradish"
+    ]
+  },
+  "sandy": {
+    "loves": [
+      {
+        "ko": "크로커스",
+        "en": "Crocus",
+        "icon": "/icons/gifts/Crocus.png"
+      },
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "카오 니야우 마무앙",
+        "en": "Mango Sticky Rice",
+        "icon": "/icons/gifts/Mango_Sticky_Rice.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "스위트피",
+        "en": "Sweet Pea",
+        "icon": "/icons/gifts/Sweet_Pea.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "염소젖",
+        "en": "Goat Milk",
+        "icon": "/icons/gifts/Goat_Milk.png"
+      },
+      {
+        "ko": "큰 염소젖",
+        "en": "Large Goat Milk",
+        "icon": "/icons/gifts/Large_Goat_Milk.png"
+      },
+      {
+        "ko": "석영",
+        "en": "Quartz",
+        "icon": "/icons/gifts/Quartz.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "민들레",
+        "en": "Dandelion",
+        "icon": "/icons/gifts/Dandelion.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "생강",
+        "en": "Ginger",
+        "icon": "/icons/gifts/Ginger.png"
+      },
+      {
+        "ko": "헤이즐넛",
+        "en": "Hazelnut",
+        "icon": "/icons/gifts/Hazelnut.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "큰 우유",
+        "en": "Large Milk",
+        "icon": "/icons/gifts/Large_Milk.png"
+      },
+      {
+        "ko": "리크",
+        "en": "Leek",
+        "icon": "/icons/gifts/Leek.png"
+      },
+      {
+        "ko": "우유",
+        "en": "Milk",
+        "icon": "/icons/gifts/Milk.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "눈마",
+        "en": "Snow Yam",
+        "icon": "/icons/gifts/Snow_Yam.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "야생 고추냉이",
+        "en": "Wild Horseradish",
+        "icon": "/icons/gifts/Wild_Horseradish.png"
+      },
+      {
+        "ko": "겨울뿌리",
+        "en": "Winter Root",
+        "icon": "/icons/gifts/Winter_Root.png"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 버섯",
+        "en": "All Mushrooms",
+        "detail": "모든 버섯 ( 붉은 버섯 제외)",
+        "cat": "mushrooms"
+      }
+    ],
+    "avoidEn": [
+      "Holly"
+    ]
+  },
+  "vincent": {
+    "loves": [
+      {
+        "ko": "크랜베리 캔디",
+        "en": "Cranberry Candy",
+        "icon": "/icons/gifts/Cranberry_Candy.png"
+      },
+      {
+        "ko": "진저 에일",
+        "en": "Ginger Ale",
+        "icon": "/icons/gifts/Ginger_Ale.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "포도",
+        "en": "Grape",
+        "icon": "/icons/gifts/Grape.png"
+      },
+      {
+        "ko": "개구리알",
+        "en": "Green Frog Egg",
+        "icon": "/icons/gifts/Green_Frog_Egg.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "핑크 케이크",
+        "en": "Pink Cake",
+        "icon": "/icons/gifts/Pink_Cake.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "달팽이",
+        "en": "Snail",
+        "icon": "/icons/gifts/Snail.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "코코넛",
+        "en": "Coconut",
+        "icon": "/icons/gifts/Coconut.png"
+      },
+      {
+        "ko": "수선화",
+        "en": "Daffodil",
+        "icon": "/icons/gifts/Daffodil.png"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      }
+    ],
+    "avoidEn": [
+      "Clay",
+      "Dandelion",
+      "Ginger",
+      "Hazelnut",
+      "Holly",
+      "Leek",
+      "Piña Colada",
+      "Quartz",
+      "Snow Yam",
+      "Triple Shot Espresso",
+      "Wild Horseradish",
+      "Winter Root"
+    ]
+  },
+  "willy": {
+    "loves": [
+      {
+        "ko": "메기",
+        "en": "Catfish",
+        "icon": "/icons/gifts/Catfish.png"
+      },
+      {
+        "ko": "다이아몬드",
+        "en": "Diamond",
+        "icon": "/icons/gifts/Diamond.png"
+      },
+      {
+        "ko": "금 주괴",
+        "en": "Gold Bar",
+        "icon": "/icons/gifts/Gold_Bar.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "이리듐 주괴",
+        "en": "Iridium Bar",
+        "icon": "/icons/gifts/Iridium_Bar.png"
+      },
+      {
+        "ko": "바다의 보석",
+        "en": "Jewels Of The Sea",
+        "icon": "/icons/gifts/Jewels_Of_The_Sea.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "벌꿀 술",
+        "en": "Mead",
+        "icon": "/icons/gifts/Mead.png"
+      },
+      {
+        "ko": "문어",
+        "en": "Octopus",
+        "icon": "/icons/gifts/Octopus.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "호박",
+        "en": "Pumpkin",
+        "icon": "/icons/gifts/Pumpkin.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "해삼",
+        "en": "Sea Cucumber",
+        "icon": "/icons/gifts/Sea_Cucumber.png"
+      },
+      {
+        "ko": "철갑상어",
+        "en": "Sturgeon",
+        "icon": "/icons/gifts/Sturgeon.png"
+      },
+      {
+        "ko": "게잡이의 기술",
+        "en": "The Art O' Crabbing",
+        "icon": "/icons/gifts/The_Art_O_Crabbing.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "미끼와 찌",
+        "en": "Bait And Bobber",
+        "icon": "/icons/gifts/Bait_And_Bobber.png"
+      },
+      {
+        "ko": "범노래미",
+        "en": "Lingcod",
+        "icon": "/icons/gifts/Lingcod.png"
+      },
+      {
+        "ko": "석영",
+        "en": "Quartz",
+        "icon": "/icons/gifts/Quartz.png"
+      },
+      {
+        "ko": "바다 거품 푸딩",
+        "en": "Seafoam Pudding",
+        "icon": "/icons/gifts/Seafoam_Pudding.png"
+      },
+      {
+        "ko": "타이거 송어",
+        "en": "Tiger Trout",
+        "icon": "/icons/gifts/Tiger_Trout.png"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "바다의 요리",
+        "en": "Dish O' The Sea",
+        "icon": "/icons/gifts/Dish_O_The_Sea.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "마키 롤",
+        "en": "Maki Roll",
+        "icon": "/icons/gifts/Maki_Roll.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "회",
+        "en": "Sashimi",
+        "icon": "/icons/gifts/Sashimi.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 과수 과일 & 새먼베리 제외)",
+        "cat": "fruits"
+      },
+      {
+        "ko": "모든 달걀",
+        "en": "All Eggs",
+        "detail": "모든 달걀 ( 공허의 달걀 제외)",
+        "cat": "eggs"
+      },
+      {
+        "ko": "모든 생선",
+        "en": "All Fish",
+        "detail": "모든 생선 ( 잉어 , 메기 , 범노래미 , 문어 , 해삼 , 달팽이 , 철갑상어 & 타이거 송어 )",
+        "cat": "fish"
+      },
+      {
+        "ko": "모든 우유",
+        "en": "All Milk",
+        "detail": "모든 우유",
+        "cat": "milk"
+      }
+    ],
+    "avoidEn": [
+      "Daffodil",
+      "Dandelion",
+      "Ginger",
+      "Hazelnut",
+      "Holly",
+      "Leek",
+      "Life Elixir",
+      "Salmonberry",
+      "Snow Yam",
+      "Wild Horseradish",
+      "Winter Root"
+    ]
+  },
+  "wizard": {
+    "loves": [
+      {
+        "ko": "미스테리의 책",
+        "en": "Book of Mysteries",
+        "icon": "/icons/gifts/Book_of_Mysteries.png"
+      },
+      {
+        "ko": "황금 호박",
+        "en": "Golden Pumpkin",
+        "icon": "/icons/gifts/Golden_Pumpkin.png"
+      },
+      {
+        "ko": "마법 얼음사탕",
+        "en": "Magic Rock Candy",
+        "icon": "/icons/gifts/Magic_Rock_Candy.png"
+      },
+      {
+        "ko": "진주",
+        "en": "Pearl",
+        "icon": "/icons/gifts/Pearl.png"
+      },
+      {
+        "ko": "무지갯빛 파편",
+        "en": "Prismatic Shard",
+        "icon": "/icons/gifts/Prismatic_Shard.png"
+      },
+      {
+        "ko": "보라색 버섯",
+        "en": "Purple Mushroom",
+        "icon": "/icons/gifts/Purple_Mushroom.png"
+      },
+      {
+        "ko": "토끼발",
+        "en": "Rabbit's Foot",
+        "icon": "/icons/gifts/Rabbit_s_Foot.png"
+      },
+      {
+        "ko": "태양 정수",
+        "en": "Solar Essence",
+        "icon": "/icons/gifts/Solar_Essence.png"
+      },
+      {
+        "ko": "슈퍼해삼",
+        "en": "Super Cucumber",
+        "icon": "/icons/gifts/Super_Cucumber.png"
+      },
+      {
+        "ko": "공허 정수",
+        "en": "Void Essence",
+        "icon": "/icons/gifts/Void_Essence.png"
+      }
+    ],
+    "likes": [
+      {
+        "ko": "이리듐 주괴",
+        "en": "Iridium Bar",
+        "icon": "/icons/gifts/Iridium_Bar.png"
+      },
+      {
+        "ko": "석영",
+        "en": "Quartz",
+        "icon": "/icons/gifts/Quartz.png"
+      },
+      {
+        "ko": "모든 장신구",
+        "en": "All Trinkets",
+        "detail": "모든 장신구",
+        "cat": "trinkets"
+      },
+      {
+        "ko": "모든 정동석 광물",
+        "en": "All Geode Minerals",
+        "detail": "모든 정동석 광물",
+        "cat": "geodeMinerals"
+      },
+      {
+        "ko": "모든 장인 제작품",
+        "en": "All Artisan Goods",
+        "detail": "모든 장인 제작품 ( 기름 은 싫어하고, 공허 마요네즈 는 혐오하는 선물이므로 제외)",
+        "cat": "artisanGoods"
+      },
+      {
+        "ko": "모든 요리",
+        "en": "All Cooking",
+        "detail": "모든 요리 ( 계란 프라이 와 빵 은 보편적으로 평범하고, 수상한 롤 과 바다 거품 푸딩 은 혐오하는 선물이므로 제외)",
+        "cat": "cooking"
+      },
+      {
+        "ko": "모든 꽃",
+        "en": "All Flowers",
+        "detail": "모든 꽃 ( 양귀비 는 혐오하는 선물이므로 제외)",
+        "cat": "flowers"
+      },
+      {
+        "ko": "모든 채집 광물",
+        "en": "All Foraged Minerals",
+        "detail": "모든 채집 광물 ( 석영 은 주민들 에 따라 다름)",
+        "cat": "foragedMinerals"
+      },
+      {
+        "ko": "모든 과일 나무 열매",
+        "en": "All Tree Fruit",
+        "detail": "모든 과일 나무 열매 ( 바나나 와 망고 는 제외)",
+        "cat": "treeFruit"
+      },
+      {
+        "ko": "모든 보석",
+        "en": "All Gems",
+        "detail": "모든 보석 ( 무지갯빛 파편 은 사랑하는 선물이니 제외)",
+        "cat": "gems"
+      },
+      {
+        "ko": "모든 야채",
+        "en": "All Vegetables",
+        "detail": "모든 야채 , 청나래고사리 포함 ( 홉 , 찻잎 , 밀 은 보편적으로 보통이고, 가공되지 않은 쌀 은 보편적으로 싫어하는 선물이므로 제외.) 생명의 영약 메이플 시럽 피나콜라다",
+        "cat": null
+      }
+    ],
+    "neutral": [
+      {
+        "ko": "빵",
+        "en": "Bread",
+        "icon": "/icons/gifts/Bread.png"
+      },
+      {
+        "ko": "조개",
+        "en": "Clam",
+        "icon": "/icons/gifts/Clam.png"
+      },
+      {
+        "ko": "산호",
+        "en": "Coral",
+        "icon": "/icons/gifts/Coral.png"
+      },
+      {
+        "ko": "오리깃털",
+        "en": "Duck Feather",
+        "icon": "/icons/gifts/Duck_Feather.png"
+      },
+      {
+        "ko": "계란 프라이",
+        "en": "Fried Egg",
+        "icon": "/icons/gifts/Fried_Egg.png"
+      },
+      {
+        "ko": "홉",
+        "en": "Hops",
+        "icon": "/icons/gifts/Hops.png"
+      },
+      {
+        "ko": "앵무조개 껍데기",
+        "en": "Nautilus Shell",
+        "icon": "/icons/gifts/Nautilus_Shell.png"
+      },
+      {
+        "ko": "무지개 껍데기",
+        "en": "Rainbow Shell",
+        "icon": "/icons/gifts/Rainbow_Shell.png"
+      },
+      {
+        "ko": "어란",
+        "en": "Roe",
+        "icon": "/icons/gifts/Roe.png"
+      },
+      {
+        "ko": "오징어 먹물",
+        "en": "Squid Ink",
+        "icon": "/icons/gifts/Squid_Ink.png"
+      },
+      {
+        "ko": "달콤보석베리",
+        "en": "Sweet Gem Berry",
+        "icon": "/icons/gifts/Sweet_Gem_Berry.png"
+      },
+      {
+        "ko": "찻잎",
+        "en": "Tea Leaves",
+        "icon": "/icons/gifts/Tea_Leaves.png"
+      },
+      {
+        "ko": "송로버섯",
+        "en": "Truffle",
+        "icon": "/icons/gifts/Truffle.png"
+      },
+      {
+        "ko": "밀",
+        "en": "Wheat",
+        "icon": "/icons/gifts/Wheat.png"
+      },
+      {
+        "ko": "양털",
+        "en": "Wool",
+        "icon": "/icons/gifts/Wool.png"
+      },
+      {
+        "ko": "모든 과일",
+        "en": "All Fruits",
+        "detail": "모든 과일 ( 과수 과일 & 새먼베리 제외)",
+        "cat": "fruits"
+      }
+    ],
+    "avoidEn": [
+      "Daffodil",
+      "Dandelion",
+      "Ginger",
+      "Hazelnut",
+      "Holly",
+      "Leek",
+      "Salmonberry",
+      "Slime",
+      "Snow Yam",
+      "Wild Horseradish",
+      "Winter Root"
+    ]
+  }
+}
