@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="grad-spring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#84E06A" />
+      <stop offset="100%" stop-color="#46A032" />
+    </linearGradient>
+    <linearGradient id="grad-summer" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFDE59" />
+      <stop offset="100%" stop-color="#D49A1C" />
+    </linearGradient>
+    <linearGradient id="grad-autumn" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF8A4C" />
+      <stop offset="100%" stop-color="#B83A00" />
+    </linearGradient>
+    <linearGradient id="grad-winter" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#318CE7" />
+      <stop offset="100%" stop-color="#80D0FE" />
+    </linearGradient>
+
+    <linearGradient id="wood-outer" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5A341D" />
+      <stop offset="100%" stop-color="#2E180B" />
+    </linearGradient>
+    <linearGradient id="wood-inner" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8C5230" />
+      <stop offset="100%" stop-color="#4A2613" />
+    </linearGradient>
+
+    <filter id="drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="4" dy="8" stdDeviation="6" flood-color="#1A0A04" flood-opacity="0.6"/>
+    </filter>
+
+    <clipPath id="pixel-circle">
+      <polygon points="
+        176,64 336,64 
+        336,96 384,96 
+        384,128 416,128 
+        416,176 448,176 
+        448,336 416,336 
+        416,384 384,384 
+        384,416 336,416 
+        336,448 176,448 
+        176,416 128,416 
+        128,384 96,384 
+        96,336 64,336 
+        64,176 96,176 
+        96,128 128,128 
+        128,96 176,96" />
+    </clipPath>
+  </defs>
+
+  <rect x="0" y="0" width="512" height="512" rx="48" fill="url(#wood-outer)" />
+  
+  <rect x="32" y="32" width="448" height="448" rx="32" fill="url(#wood-inner)" />
+  
+  <rect x="56" y="56" width="400" height="400" rx="20" fill="#261208" />
+
+  <g clip-path="url(#pixel-circle)">
+    <rect x="64" y="64" width="192" height="192" fill="url(#grad-spring)" />
+    <rect x="256" y="64" width="192" height="192" fill="url(#grad-summer)" />
+    <rect x="64" y="256" width="192" height="192" fill="url(#grad-autumn)" />
+    <rect x="256" y="256" width="192" height="192" fill="url(#grad-winter)" />
+  </g>
+
+  <rect x="32" y="32" width="48" height="48" rx="16" fill="#A8663D" opacity="0.8"/>
+  <rect x="432" y="32" width="48" height="48" rx="16" fill="#A8663D" opacity="0.8"/>
+  <rect x="32" y="432" width="48" height="48" rx="16" fill="#3D1D0D" opacity="0.8"/>
+  <rect x="432" y="432" width="48" height="48" rx="16" fill="#3D1D0D" opacity="0.8"/>
+
+  <path d="M180 250 L240 310 L340 190" 
+        fill="none" 
+        stroke="#FFFFFF" 
+        stroke-width="48" 
+        stroke-linecap="square" 
+        stroke-linejoin="miter" 
+        filter="url(#drop-shadow)" />
+</svg>
