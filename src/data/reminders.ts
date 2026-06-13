@@ -4,17 +4,21 @@ import type { Weekday } from "@/lib/calendar";
 // 표시 문자열은 i18n 키로 분리: reminders.<id>.title / reminders.<id>.detail
 
 export type ReminderId =
+  | "weatherFortune"
+  | "watering"
+  | "animalCare"
   | "travelingCart"
   | "krobusSprinkler"
   | "desertTraderStaircase"
   | "specialOrders"
-  | "queenOfSauce"
-  | "luauPrep"
-  | "fairPrep"
+  | "queenOfSauceNew"
+  | "queenOfSauceRerun"
   | "questFestivalWarning";
 
 // 트리거 종류
 export type ReminderTrigger =
+  // 매일
+  | { kind: "daily" }
   // 매주 특정 요일
   | { kind: "weekly"; weekdays: Weekday[] }
   // 특정 축제 daysBefore일 전부터 당일 직전까지 (D-day 카운트다운)
@@ -33,6 +37,21 @@ export interface ReminderDef {
 }
 
 export const REMINDERS: ReminderDef[] = [
+  {
+    id: "weatherFortune",
+    trigger: { kind: "daily" },
+    emoji: "🌤️",
+  },
+  {
+    id: "watering",
+    trigger: { kind: "daily" },
+    emoji: "💦",
+  },
+  {
+    id: "animalCare",
+    trigger: { kind: "daily" },
+    emoji: "🐄",
+  },
   {
     id: "travelingCart",
     trigger: { kind: "weekly", weekdays: ["fri", "sun"] },
@@ -56,19 +75,14 @@ export const REMINDERS: ReminderDef[] = [
     emoji: "📋",
   },
   {
-    id: "queenOfSauce",
-    trigger: { kind: "weekly", weekdays: ["sun", "wed"] },
+    id: "queenOfSauceNew",
+    trigger: { kind: "weekly", weekdays: ["sun"] },
     emoji: "📺",
   },
   {
-    id: "luauPrep",
-    trigger: { kind: "festivalPrep", festivalId: "luau", daysBefore: 7 },
-    emoji: "🍲",
-  },
-  {
-    id: "fairPrep",
-    trigger: { kind: "festivalPrep", festivalId: "stardewValleyFair", daysBefore: 7 },
-    emoji: "🎪",
+    id: "queenOfSauceRerun",
+    trigger: { kind: "weekly", weekdays: ["wed"] },
+    emoji: "📺",
   },
   {
     id: "questFestivalWarning",

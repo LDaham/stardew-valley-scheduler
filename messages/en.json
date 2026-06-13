@@ -35,17 +35,12 @@
   },
   "dashboard": {
     "today": "Today",
-    "tomorrow": "Tomorrow",
-    "upcoming": "Upcoming events",
+    "prevDay": "Prev day",
+    "nextDay": "Next day",
+    "todoList": "To Do List",
     "noTasks": "No tasks",
-    "noUpcoming": "No upcoming events",
-    "prepare": "Prepare ahead!",
-    "inDays": "in {days}d",
-    "todayBadge": "Today",
     "birthdayOf": "{name}'s birthday",
     "plantDeadline": "Last day to plant {crop}",
-    "reminders": "Today's reminders",
-    "reminderToday": "Today",
     "reminderEve": "Festival tomorrow",
     "dDay": "D-{days}"
   },
@@ -71,11 +66,25 @@
   "settings": {
     "title": "Settings",
     "open": "Open settings",
-    "events": "Events to show",
-    "reminders": "Reminders",
+    "todoSettings": "To-do list settings",
+    "openTodo": "Open to-do list settings",
+    "events": "Fixed events",
+    "reminders": "Weekly reminders",
     "language": "Language"
   },
   "reminders": {
+    "weatherFortune": {
+      "title": "Check weather & fortune",
+      "detail": "Check tomorrow's weather forecast and the daily luck (fortune) on TV"
+    },
+    "watering": {
+      "title": "Water crops",
+      "detail": "Water crops without sprinklers (skip on rainy days)"
+    },
+    "animalCare": {
+      "title": "Tend animals",
+      "detail": "Pet, feed, and collect produce to keep friendship and quality up"
+    },
     "travelingCart": {
       "title": "Traveling Cart",
       "detail": "Fri & Sun, 6:00 AM–8:00 PM / Night Market (Winter 15–17) daily, 5:00 PM–2:00 AM"
@@ -92,17 +101,13 @@
       "title": "Special Orders board refresh",
       "detail": "Monday, accept new Special Orders at the town and Mr. Qi boards"
     },
-    "queenOfSauce": {
-      "title": "Queen of Sauce (cooking recipe)",
-      "detail": "New episode on Sunday / rerun on Wednesday — check the recipe on TV"
+    "queenOfSauceNew": {
+      "title": "Queen of Sauce (new episode)",
+      "detail": "Sunday — check the new cooking recipe on TV"
     },
-    "luauPrep": {
-      "title": "Luau prep",
-      "detail": "Prepare an iridium / silver-gold high-quality crop for the Governor's soup (best reaction)"
-    },
-    "fairPrep": {
-      "title": "Stardew Valley Fair prep",
-      "detail": "Gather 9 high-quality items across crops, fruit, artisan goods, and fish to aim for 1st place (90 pts)"
+    "queenOfSauceRerun": {
+      "title": "Queen of Sauce (rerun)",
+      "detail": "Wednesday — rerun of the cooking recipe on TV"
     },
     "questFestivalWarning": {
       "title": "Quest deadline warning",

@@ -35,17 +35,12 @@
   },
   "dashboard": {
     "today": "오늘",
-    "tomorrow": "내일",
-    "upcoming": "다가오는 이벤트",
+    "prevDay": "전날",
+    "nextDay": "다음날",
+    "todoList": "To Do List",
     "noTasks": "할 일이 없습니다",
-    "noUpcoming": "예정된 이벤트가 없습니다",
-    "prepare": "미리 대비!",
-    "inDays": "{days}일 뒤",
-    "todayBadge": "오늘",
     "birthdayOf": "{name} 생일",
     "plantDeadline": "{crop} 심기 마지막 날",
-    "reminders": "오늘의 리마인더",
-    "reminderToday": "오늘",
     "reminderEve": "내일 축제",
     "dDay": "D-{days}"
   },
@@ -71,11 +66,25 @@
   "settings": {
     "title": "설정",
     "open": "설정 열기",
-    "events": "표시할 이벤트",
-    "reminders": "리마인더",
+    "todoSettings": "할 일 목록 설정",
+    "openTodo": "할 일 목록 설정 열기",
+    "events": "고정 이벤트",
+    "reminders": "요일 리마인더",
     "language": "언어"
   },
   "reminders": {
+    "weatherFortune": {
+      "title": "날씨·운세 확인",
+      "detail": "TV에서 다음날 날씨 예보와 행운의 점괘(운세) 확인"
+    },
+    "watering": {
+      "title": "작물 물주기",
+      "detail": "스프링클러가 없는 작물에 물주기 (비 오는 날은 생략)"
+    },
+    "animalCare": {
+      "title": "동물 돌보기",
+      "detail": "쓰다듬기·먹이 주기·생산물 수거로 친밀도와 품질 관리"
+    },
     "travelingCart": {
       "title": "여행 카트",
       "detail": "금·일 오전 6시~오후 8시 / 야시장(겨울 15~17일) 매일 오후 5시~오전 2시"
@@ -92,17 +101,13 @@
       "title": "특별 주문 게시판 갱신",
       "detail": "월요일, 마을 회관·미스터 치 게시판에서 새 특별 주문 수락"
     },
-    "queenOfSauce": {
-      "title": "소스의 여왕 (요리 레시피)",
-      "detail": "일요일 신규 방영 / 수요일 재방송 — TV에서 레시피 확인"
+    "queenOfSauceNew": {
+      "title": "소스의 여왕 (신규 방영)",
+      "detail": "일요일 — TV에서 새 요리 레시피 확인"
     },
-    "luauPrep": {
-      "title": "루아우 준비",
-      "detail": "도지사 수프에 넣을 이리듐·은성/금성 고품질 작물을 미리 준비 (최고 반응 +120)"
-    },
-    "fairPrep": {
-      "title": "스타듀밸리 박람회 준비",
-      "detail": "농산물·과일·장인 물품·생선 등 고품질 9종을 미리 모아 1등(90점) 목표"
+    "queenOfSauceRerun": {
+      "title": "소스의 여왕 (재방송)",
+      "detail": "수요일 — TV에서 요리 레시피 재방송 확인"
     },
     "questFestivalWarning": {
       "title": "퀘스트 마감 주의",

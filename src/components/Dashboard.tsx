@@ -1,30 +1,27 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { addDays, daysUntil, type SDate } from "@/lib/calendar";
+import { addDays, toYearDay, type SDate } from "@/lib/calendar";
+import { filterEvents, getEventsOn, type FixedEvent } from "@/lib/events";
 import {
-  filterEvents,
-  getEventsOn,
-  getUpcomingEvents,
-  type FixedEvent,
-} from "@/lib/events";
-import { getActiveReminders } from "@/lib/reminders";
+  getActiveReminders,
+  type ReminderBadge,
+} from "@/lib/reminders";
 import { useSchedule } from "@/components/ScheduleProvider";
 import { useGiftDialog } from "@/components/GiftDialogProvider";
 import EventIcon from "@/components/EventIcon";
-import type { Memo } from "@/types/schedule";
 import type { ReactNode } from "react";
 
-const UPCOMING_WINDOW = 7; // 다가오는 이벤트 표시 범위(일)
-const PREPARE_THRESHOLD = 3; // 이 일수 이내면 "미리 대비" 강조
-
-interface UpcomingItem {
+// 통합 체크리스트의 한 항목 (고정 이벤트 / 리마인더 / 메모 공통 표현)
+interface TaskRow {
   key: string;
   icon: ReactNode;
   label: string;
-  daysAway: number;
-  prepare: boolean;
-  villagerId?: string; // 생일 이벤트면 클릭 시 선물 모달을 연다
+  rightBadge?: ReactNode;
+  isGift?: boolean; // 생일이면 클릭 시 선물 모달
+  refId?: string;
+  done: boolean;
+  onToggle: () => void;
 }
 
 export default function Dashboard({
@@ -33,12 +30,19 @@ export default function Dashboard({
   onSelectDate: (date: SDate) => void;
 }) {
   const t = useTranslations();
-  const { currentDate, memosOn, memos, eventFilters, reminderToggles } =
-    useSchedule();
+  const {
+    currentDate,
+    setCurrentDate,
+    memosOn,
+    toggleDone,
+    taskDone,
+    toggleTask,
+    eventFilters,
+    reminderToggles,
+  } = useSchedule();
   const openGifts = useGiftDialog();
 
   const tomorrow = addDays(currentDate, 1);
-  const reminders = getActiveReminders(currentDate, reminderToggles);
 
   const fixedLabel = (e: FixedEvent): string => {
     if (e.type === "festival") return t(`festivals.${e.refId}`);
@@ -47,199 +51,179 @@ export default function Dashboard({
     return t("dashboard.plantDeadline", { crop: t(`crops.${e.refId}`) });
   };
 
-  // 다가오는 고정 이벤트 (오늘 제외)
-  const upcoming: UpcomingItem[] = getUpcomingEvents(currentDate, UPCOMING_WINDOW)
-    .filter((u) => u.daysAway > 0 && eventFilters[u.event.type])
-    .map((u) => ({
-      key: `f-${u.event.type}-${u.event.refId}`,
-      icon: <EventIcon event={u.event} size={18} />,
-      label: fixedLabel(u.event),
-      daysAway: u.daysAway,
-      prepare: u.daysAway <= PREPARE_THRESHOLD,
-      villagerId: u.event.type === "birthday" ? u.event.refId : undefined,
-    }));
+  const reminderBadge = (badge: ReminderBadge): ReactNode => {
+    if (badge.kind === "eve")
+      return (
+        <span className="shrink-0 rounded bg-[#c0506b] px-1.5 py-0.5 text-[10px] font-semibold text-white">
+          ⚠ {t("dashboard.reminderEve")}
+        </span>
+      );
+    if (badge.kind === "dDay")
+      return (
+        <span className="shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-[10px] font-semibold text-[#5a4416]">
+          {t("dashboard.dDay", { days: badge.days })}
+        </span>
+      );
+    return null;
+  };
 
-  // 사전 알림이 설정된 메모: 알림 범위에 들어오면 추가
-  for (const m of memos) {
-    if (m.reminderDaysBefore <= 0) continue;
-    const memoDate: SDate = { season: m.season, day: m.day };
-    const away = daysUntil(currentDate, memoDate);
-    if (away > 0 && away <= m.reminderDaysBefore) {
-      upcoming.push({
-        key: `m-${m.id}`,
-        icon: "📝",
-        label: m.text,
+  // 한 날짜의 이벤트·리마인더·메모를 하나의 체크리스트로 합친다.
+  const buildRows = (date: SDate): TaskRow[] => {
+    const yd = toYearDay(date);
+    const rows: TaskRow[] = [];
 
-        daysAway: away,
-        prepare: true,
+    for (const e of filterEvents(getEventsOn(date), eventFilters)) {
+      const key = `${yd}:event-${e.type}-${e.refId}`;
+      rows.push({
+        key,
+        icon: <EventIcon event={e} size={16} />,
+        label: fixedLabel(e),
+        isGift: e.type === "birthday",
+        refId: e.refId,
+        done: !!taskDone[key],
+        onToggle: () => toggleTask(key),
       });
     }
-  }
-  upcoming.sort((a, b) => a.daysAway - b.daysAway);
+
+    for (const r of getActiveReminders(date, reminderToggles)) {
+      const key = `${yd}:reminder-${r.id}`;
+      rows.push({
+        key,
+        icon: <span aria-hidden>{r.emoji}</span>,
+        label: t(`reminders.${r.id}.title`),
+        rightBadge: reminderBadge(r.badge),
+        done: !!taskDone[key],
+        onToggle: () => toggleTask(key),
+      });
+    }
+
+    for (const m of memosOn(date)) {
+      rows.push({
+        key: `memo-${m.id}`,
+        icon: <span aria-hidden>📝</span>,
+        label: m.text,
+        done: m.done,
+        onToggle: () => toggleDone(m.id),
+      });
+    }
+
+    return rows;
+  };
+
+  const todayRows = buildRows(currentDate);
+  const tomorrowRows = buildRows(tomorrow);
 
   return (
-    <section className="flex flex-col gap-4">
-      {/* 오늘 / 내일 */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <DayPanel
-          title={t("dashboard.today")}
-          date={currentDate}
-          highlight
-          memos={memosOn(currentDate)}
-          events={filterEvents(getEventsOn(currentDate), eventFilters)}
-          fixedLabel={fixedLabel}
-          emptyText={t("dashboard.noTasks")}
+    <section className="flex flex-col gap-3">
+      {/* 날짜 이동 버튼 (박스 밖) */}
+      <div className="flex items-center justify-between gap-2">
+        <button
+          onClick={() => setCurrentDate(addDays(currentDate, -1))}
+          className="rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-1.5 text-sm hover:bg-[var(--sv-bg)]"
+        >
+          ← {t("dashboard.prevDay")}
+        </button>
+        <button
           onClick={() => onSelectDate(currentDate)}
-        />
-        <DayPanel
-          title={t("dashboard.tomorrow")}
-          date={tomorrow}
-          memos={memosOn(tomorrow)}
-          events={filterEvents(getEventsOn(tomorrow), eventFilters)}
-          fixedLabel={fixedLabel}
-          emptyText={t("dashboard.noTasks")}
-          onClick={() => onSelectDate(tomorrow)}
-        />
+          className="flex items-baseline gap-2 hover:underline"
+        >
+          <span className="text-sm font-bold">{t("dashboard.today")}</span>
+          <span className="text-xs text-[var(--sv-ink-muted)]">
+            {t(`seasons.${currentDate.season}`)} {currentDate.day}
+          </span>
+        </button>
+        <button
+          onClick={() => setCurrentDate(addDays(currentDate, 1))}
+          className="rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-1.5 text-sm hover:bg-[var(--sv-bg)]"
+        >
+          {t("dashboard.nextDay")} →
+        </button>
       </div>
 
-      {/* 오늘의 리마인더 (활성 항목 있을 때만) */}
-      {reminders.length > 0 && (
-        <div className="rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-4 shadow-sm">
-          <h2 className="mb-2 text-sm font-bold">{t("dashboard.reminders")}</h2>
-          <ul className="flex flex-col gap-1">
-            {reminders.map((r) => (
-              <li
-                key={r.id}
-                className="flex items-start gap-2 rounded-md bg-[var(--sv-bg)] px-2 py-1.5 text-sm"
-              >
-                <span aria-hidden>{r.emoji}</span>
-                <div className="flex-1">
-                  <span className="font-medium">
-                    {t(`reminders.${r.id}.title`)}
-                  </span>
-                  <p className="text-xs text-[var(--sv-ink-muted)]">
-                    {t(`reminders.${r.id}.detail`)}
-                  </p>
-                </div>
-                {r.badge.kind === "eve" ? (
-                  <span className="shrink-0 rounded bg-[#c0506b] px-1.5 py-0.5 text-[10px] font-semibold text-white">
-                    ⚠ {t("dashboard.reminderEve")}
-                  </span>
-                ) : r.badge.kind === "dDay" ? (
-                  <span className="shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-[10px] font-semibold text-[#5a4416]">
-                    {t("dashboard.dDay", { days: r.badge.days })}
-                  </span>
-                ) : (
-                  <span className="shrink-0 rounded bg-[var(--sv-accent)] px-1.5 py-0.5 text-[10px] font-semibold text-white">
-                    {t("dashboard.reminderToday")}
-                  </span>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {/* 다가오는 이벤트 (미리 대비) */}
-      <div className="rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-4 shadow-sm">
-        <h2 className="mb-2 text-sm font-bold">{t("dashboard.upcoming")}</h2>
-        {upcoming.length === 0 ? (
-          <p className="text-sm text-[var(--sv-ink-muted)]">
-            {t("dashboard.noUpcoming")}
-          </p>
-        ) : (
-          <ul className="flex flex-col gap-1">
-            {upcoming.map((item) => (
-              <li
-                key={item.key}
-                className="flex items-center gap-2 rounded-md bg-[var(--sv-bg)] px-2 py-1.5 text-sm"
-              >
-                <span>{item.icon}</span>
-                {item.villagerId ? (
-                  <button
-                    onClick={() => openGifts(item.villagerId!)}
-                    className="flex flex-1 items-center gap-1 text-left hover:underline"
-                  >
-                    {item.label}
-                    <span className="text-[10px]">🎁</span>
-                  </button>
-                ) : (
-                  <span className="flex-1">{item.label}</span>
-                )}
-                {item.prepare && (
-                  <span className="rounded bg-[#e0b84c] px-1.5 py-0.5 text-[10px] font-semibold text-[#5a4416]">
-                    ⚠ {t("dashboard.prepare")}
-                  </span>
-                )}
-                <span className="text-xs text-[var(--sv-ink-muted)]">
-                  {t("dashboard.inDays", { days: item.daysAway })}
-                </span>
-              </li>
-            ))}
-          </ul>
+      {/* 통합 To Do List: 오늘 항목 + 점선 + 내일 항목 */}
+      <div className="rounded-xl border-2 border-[var(--sv-accent)] bg-[var(--sv-panel)] p-4 shadow-sm">
+        <h2 className="mb-2 text-sm font-bold">{t("dashboard.todoList")}</h2>
+        <TaskList
+          rows={todayRows}
+          emptyText={t("dashboard.noTasks")}
+          onGift={openGifts}
+        />
+        {tomorrowRows.length > 0 && (
+          <>
+            <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
+            {/* 내일 항목은 미리 체크할 수 없도록 비활성화 */}
+            <TaskList
+              rows={tomorrowRows}
+              emptyText={t("dashboard.noTasks")}
+              onGift={openGifts}
+              disabled
+            />
+          </>
         )}
       </div>
     </section>
   );
 }
 
-function DayPanel({
-  title,
-  date,
-  highlight,
-  memos,
-  events,
-  fixedLabel,
+// 왼쪽 체크박스 + 완료 시 줄긋기·희미 처리. 모든 항목(이벤트/리마인더/메모) 공통 렌더.
+function TaskList({
+  rows,
   emptyText,
-  onClick,
+  onGift,
+  disabled = false,
 }: {
-  title: string;
-  date: SDate;
-  highlight?: boolean;
-  memos: Memo[];
-  events: FixedEvent[];
-  fixedLabel: (e: FixedEvent) => string;
+  rows: TaskRow[];
   emptyText: string;
-  onClick: () => void;
+  onGift: (villagerId: string) => void;
+  disabled?: boolean;
 }) {
-  const t = useTranslations();
-  const empty = memos.length === 0 && events.length === 0;
-
+  if (rows.length === 0) {
+    return <p className="text-sm text-[var(--sv-ink-muted)]">{emptyText}</p>;
+  }
   return (
-    <button
-      onClick={onClick}
-      className="flex flex-col rounded-xl border bg-[var(--sv-panel)] p-4 text-left shadow-sm transition-colors hover:bg-[var(--sv-bg)]"
-      style={{
-        borderColor: highlight ? "var(--sv-accent)" : "var(--sv-border)",
-        borderWidth: highlight ? 2 : 1,
-      }}
-    >
-      <div className="mb-2 flex items-baseline gap-2">
-        <h2 className="text-sm font-bold">{title}</h2>
-        <span className="text-xs text-[var(--sv-ink-muted)]">
-          {t(`seasons.${date.season}`)} {date.day}
-        </span>
-      </div>
-      {empty ? (
-        <p className="text-sm text-[var(--sv-ink-muted)]">{emptyText}</p>
-      ) : (
-        <ul className="flex flex-col gap-1">
-          {events.map((e, i) => (
-            <li key={`e${i}`} className="flex items-center gap-1.5 text-sm">
-              <EventIcon event={e} size={16} />
-              <span>{fixedLabel(e)}</span>
-            </li>
-          ))}
-          {memos.map((m) => (
-            <li
-              key={m.id}
-              className={`text-sm ${m.done ? "text-[var(--sv-ink-muted)] line-through" : ""}`}
+    <ul className="flex flex-col gap-1">
+      {rows.map((row) => (
+        <li key={row.key}>
+          {/* 행 전체(label)를 눌러 완료 토글. 내일 항목(disabled)은 체크 불가 */}
+          <label
+            className={`flex items-center gap-2 rounded-md bg-[var(--sv-bg)] px-2 py-1.5 text-sm ${
+              disabled ? "" : "cursor-pointer"
+            }`}
+          >
+            <input
+              type="checkbox"
+              checked={row.done}
+              onChange={row.onToggle}
+              disabled={disabled}
+              className="size-4 shrink-0 accent-[var(--sv-accent)] disabled:opacity-50"
+            />
+            <span
+              className={`flex flex-1 items-center gap-1.5 ${
+                row.done ? "text-[var(--sv-ink-muted)] line-through" : ""
+              }`}
             >
-              📝 {m.text}
-            </li>
-          ))}
-        </ul>
-      )}
-    </button>
+              {row.icon}
+              {row.isGift && row.refId ? (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onGift(row.refId!);
+                  }}
+                  className="flex items-center gap-1 text-left hover:underline"
+                >
+                  <span>{row.label}</span>
+                  <span className="text-[10px]">🎁</span>
+                </button>
+              ) : (
+                <span>{row.label}</span>
+              )}
+            </span>
+            {row.rightBadge}
+          </label>
+        </li>
+      ))}
+    </ul>
   );
 }

@@ -14,6 +14,7 @@ const DEFAULT_STATE: ScheduleState = {
   memos: [],
   eventFilters: { birthday: true, festival: true, cropDeadline: true },
   reminderToggles: DEFAULT_REMINDER_TOGGLES,
+  taskDone: {},
 };
 
 let state: ScheduleState = DEFAULT_STATE;
@@ -33,6 +34,7 @@ function ensureLoaded(): void {
       ...DEFAULT_STATE.reminderToggles,
       ...saved.reminderToggles,
     },
+    taskDone: { ...DEFAULT_STATE.taskDone, ...saved.taskDone },
     version: STATE_VERSION,
   };
   loaded = true;
@@ -103,6 +105,13 @@ export const scheduleActions = {
       memos: state.memos.map((m) =>
         m.id === id ? { ...m, done: !m.done } : m,
       ),
+    });
+  },
+  // 이벤트·리마인더 완료 체크 토글 (키는 `${yearDay}:${itemKey}`)
+  toggleTask(key: string) {
+    commit({
+      ...state,
+      taskDone: { ...state.taskDone, [key]: !state.taskDone[key] },
     });
   },
 };

@@ -21,4 +21,6 @@ export interface ScheduleState {
   memos: Memo[];
   eventFilters: EventFilters; // 이벤트 타입별 표시 여부
   reminderToggles: Record<ReminderId, boolean>; // 리마인더별 on/off
+  // 이벤트·리마인더 완료 체크 상태. 키: `${yearDay}:${itemKey}` (날짜별로 구분되어 날이 바뀌면 초기화)
+  taskDone: Record<string, boolean>;
 }

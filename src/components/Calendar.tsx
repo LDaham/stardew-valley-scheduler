@@ -12,6 +12,7 @@ import {
   type Season,
 } from "@/lib/calendar";
 import { filterEvents, getEventsOn, type FixedEvent } from "@/lib/events";
+import { getActiveReminders } from "@/lib/reminders";
 import { useSchedule } from "@/components/ScheduleProvider";
 import EventIcon from "@/components/EventIcon";
 
@@ -29,7 +30,12 @@ interface CalendarProps {
 
 export default function Calendar({ selectedDate, onSelectDate }: CalendarProps) {
   const t = useTranslations();
-  const { currentDate, memosOn, eventFilters } = useSchedule();
+  const { currentDate, setCurrentDate, memosOn, eventFilters, reminderToggles } =
+    useSchedule();
+  // 선택한 날짜를 "오늘"로 설정할 수 있는지 (선택 없음/이미 오늘이면 불가)
+  const isSelectedToday =
+    selectedDate !== null && isSameDate(selectedDate, currentDate);
+  const canSetToday = selectedDate !== null && !isSelectedToday;
   // 기본은 현재 날짜의 계절을 따르고, 탭을 직접 누른 경우에만 고정한다.
   const [seasonOverride, setSeasonOverride] = useState<Season | null>(null);
   const viewedSeason = seasonOverride ?? currentDate.season;
@@ -46,6 +52,17 @@ export default function Calendar({ selectedDate, onSelectDate }: CalendarProps) 
 
   return (
     <section className="rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-4 shadow-sm">
+      {/* 선택한 날짜를 오늘로 설정 */}
+      <div className="mb-3 flex justify-end">
+        <button
+          onClick={() => selectedDate && setCurrentDate(selectedDate)}
+          disabled={!canSetToday}
+          className="rounded-lg border border-[var(--sv-accent)] px-3 py-1.5 text-xs font-semibold text-[var(--sv-accent)] disabled:opacity-40"
+        >
+          {isSelectedToday ? t("memo.isToday") : t("memo.setAsToday")}
+        </button>
+      </div>
+
       {/* 계절 탭 */}
       <div className="mb-4 flex gap-2">
         {SEASONS.map((s) => {
@@ -79,6 +96,7 @@ export default function Calendar({ selectedDate, onSelectDate }: CalendarProps) 
         {days.map((day) => {
           const date: SDate = { season: viewedSeason, day };
           const events = filterEvents(getEventsOn(date), eventFilters);
+          const reminders = getActiveReminders(date, reminderToggles);
           const memos = memosOn(date);
           const isToday = isSameDate(date, currentDate);
           const isSelected = selectedDate && isSameDate(date, selectedDate);
@@ -89,7 +107,10 @@ export default function Calendar({ selectedDate, onSelectDate }: CalendarProps) 
             <button
               key={day}
               onClick={() => onSelectDate(date)}
-              title={events.map(eventLabel).join(", ")}
+              title={[
+                ...events.map(eventLabel),
+                ...reminders.map((r) => t(`reminders.${r.id}.title`)),
+              ].join(", ")}
               className="flex aspect-square flex-col rounded-lg border p-1 text-left transition-colors hover:bg-[var(--sv-bg)]"
               style={{
                 borderColor: isSelected
@@ -112,6 +133,11 @@ export default function Calendar({ selectedDate, onSelectDate }: CalendarProps) 
               <span className="mt-auto flex flex-wrap items-center gap-0.5 text-[10px] leading-none">
                 {events.slice(0, 3).map((e, i) => (
                   <EventIcon key={i} event={e} size={14} />
+                ))}
+                {reminders.slice(0, 2).map((r) => (
+                  <span key={r.id} aria-hidden>
+                    {r.emoji}
+                  </span>
                 ))}
                 {memos.length > 0 && <span>📝</span>}
               </span>
