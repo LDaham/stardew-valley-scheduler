@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { addDays, toYearDay, type SDate } from "@/lib/calendar";
 import { filterEvents, getEventsOn, type FixedEvent } from "@/lib/events";
@@ -10,11 +11,14 @@ import {
 import { useSchedule } from "@/components/ScheduleProvider";
 import { useGiftDialog } from "@/components/GiftDialogProvider";
 import EventIcon from "@/components/EventIcon";
+import ReminderIcon from "@/components/ReminderIcon";
+import AddTaskDialog from "@/components/AddTaskDialog";
 import type { ReactNode } from "react";
 
 // 통합 체크리스트의 한 항목 (고정 이벤트 / 리마인더 / 메모 공통 표현)
 interface TaskRow {
   key: string;
+  orderKey: string; // 표시 순서 정렬용 엔트리 키
   icon: ReactNode;
   label: string;
   rightBadge?: ReactNode;
@@ -22,6 +26,7 @@ interface TaskRow {
   refId?: string;
   done: boolean;
   onToggle: () => void;
+  onDelete?: () => void; // 사용자 메모만 삭제 가능
 }
 
 export default function Dashboard({
@@ -35,12 +40,15 @@ export default function Dashboard({
     setCurrentDate,
     memosOn,
     toggleDone,
+    deleteMemo,
     taskDone,
     toggleTask,
     eventFilters,
     reminderToggles,
+    todoOrder,
   } = useSchedule();
   const openGifts = useGiftDialog();
+  const [addOpen, setAddOpen] = useState(false);
 
   const tomorrow = addDays(currentDate, 1);
 
@@ -76,6 +84,7 @@ export default function Dashboard({
       const key = `${yd}:event-${e.type}-${e.refId}`;
       rows.push({
         key,
+        orderKey: `event:${e.type}`,
         icon: <EventIcon event={e} size={16} />,
         label: fixedLabel(e),
         isGift: e.type === "birthday",
@@ -89,7 +98,8 @@ export default function Dashboard({
       const key = `${yd}:reminder-${r.id}`;
       rows.push({
         key,
-        icon: <span aria-hidden>{r.emoji}</span>,
+        orderKey: `reminder:${r.id}`,
+        icon: <ReminderIcon id={r.id} size={16} />,
         label: t(`reminders.${r.id}.title`),
         rightBadge: reminderBadge(r.badge),
         done: !!taskDone[key],
@@ -100,12 +110,21 @@ export default function Dashboard({
     for (const m of memosOn(date)) {
       rows.push({
         key: `memo-${m.id}`,
+        orderKey: `memo:${m.category ?? "machine"}`,
         icon: <span aria-hidden>📝</span>,
         label: m.text,
         done: m.done,
         onToggle: () => toggleDone(m.id),
+        onDelete: () => deleteMemo(m.id),
       });
     }
+
+    // 사용자 지정 표시 순서로 정렬(같은 엔트리 내에서는 원래 순서 유지 = 안정 정렬)
+    const rank = (k: string) => {
+      const i = todoOrder.indexOf(k);
+      return i < 0 ? Number.MAX_SAFE_INTEGER : i;
+    };
+    rows.sort((a, b) => rank(a.orderKey) - rank(b.orderKey));
 
     return rows;
   };
@@ -140,6 +159,16 @@ export default function Dashboard({
         </button>
       </div>
 
+      {/* 할 일 추가 버튼 */}
+      <div className="flex justify-end">
+        <button
+          onClick={() => setAddOpen(true)}
+          className="rounded-lg border border-[var(--sv-accent)] bg-[var(--sv-accent)] px-3 py-1.5 text-sm font-semibold text-white hover:opacity-90"
+        >
+          ＋ {t("addTask.title")}
+        </button>
+      </div>
+
       {/* 통합 To Do List: 오늘 항목 + 점선 + 내일 항목 */}
       <div className="rounded-xl border-2 border-[var(--sv-accent)] bg-[var(--sv-panel)] p-4 shadow-sm">
         <h2 className="mb-2 text-sm font-bold">{t("dashboard.todoList")}</h2>
@@ -147,6 +176,7 @@ export default function Dashboard({
           rows={todayRows}
           emptyText={t("dashboard.noTasks")}
           onGift={openGifts}
+          deleteLabel={t("memo.delete")}
         />
         {tomorrowRows.length > 0 && (
           <>
@@ -156,11 +186,14 @@ export default function Dashboard({
               rows={tomorrowRows}
               emptyText={t("dashboard.noTasks")}
               onGift={openGifts}
+              deleteLabel={t("memo.delete")}
               disabled
             />
           </>
         )}
       </div>
+
+      {addOpen && <AddTaskDialog onClose={() => setAddOpen(false)} />}
     </section>
   );
 }
@@ -170,11 +203,13 @@ function TaskList({
   rows,
   emptyText,
   onGift,
+  deleteLabel,
   disabled = false,
 }: {
   rows: TaskRow[];
   emptyText: string;
   onGift: (villagerId: string) => void;
+  deleteLabel: string;
   disabled?: boolean;
 }) {
   if (rows.length === 0) {
@@ -221,6 +256,20 @@ function TaskList({
               )}
             </span>
             {row.rightBadge}
+            {row.onDelete && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  row.onDelete!();
+                }}
+                aria-label={deleteLabel}
+                className="shrink-0 text-sm font-bold text-[#e23b3b] hover:text-[#b02a2a]"
+              >
+                ✕
+              </button>
+            )}
           </label>
         </li>
       ))}

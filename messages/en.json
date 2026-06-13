@@ -70,7 +70,67 @@
     "openTodo": "Open to-do list settings",
     "events": "Fixed events",
     "reminders": "Weekly reminders",
-    "language": "Language"
+    "language": "Language",
+    "orderHint": "Drag the ⠿ handle to reorder; check to show/hide.",
+    "reorder": "Drag to reorder",
+    "userAdded": "User-added"
+  },
+  "todoCategory": {
+    "harvest": "Harvest",
+    "tool": "Tool",
+    "machine": "Equipment"
+  },
+  "addTask": {
+    "title": "Add task",
+    "tool": "Tool upgrade",
+    "seed": "Plant seeds",
+    "machine": "Artisan equipment",
+    "back": "Back",
+    "add": "Add",
+    "selectTool": "Select tool",
+    "selectCrop": "Select crop",
+    "selectMachine": "Select machine",
+    "selectOutput": "Select output",
+    "agriculturist": "Agriculturist (−10%)",
+    "fertilizer": "Fertilizer",
+    "dateLabel": "{season} {day}",
+    "days": "{days}d",
+    "pickupPreview": "Pick up the tool on {date}",
+    "harvestPreview": "Harvest on {date}",
+    "readyPreview": "Ready on {date}",
+    "regrowNote": "Re-harvest every {days}d after",
+    "wiltWarning": "Won't mature this season — may wilt at season end",
+    "noSeasonCrops": "No crops can be planted this season",
+    "toolMemo": "Pick up {tool}",
+    "harvestMemo": "Harvest {crop}",
+    "machineMemo": "{output} ready"
+  },
+  "tools": {
+    "axe": "Axe",
+    "pickaxe": "Pickaxe",
+    "hoe": "Hoe",
+    "wateringCan": "Watering Can",
+    "trashCan": "Trash Can"
+  },
+  "fertilizer": {
+    "none": "None",
+    "speedGro": "Speed-Gro (−10%)",
+    "deluxe": "Deluxe Speed-Gro (−25%)",
+    "hyper": "Hyper Speed-Gro (−33%)"
+  },
+  "machines": {
+    "keg": "Keg",
+    "preservesJar": "Preserves Jar",
+    "beeHouse": "Bee House"
+  },
+  "machineOutputs": {
+    "wine": "Wine (fruit)",
+    "juice": "Juice (veg)",
+    "paleAle": "Pale Ale (hops)",
+    "beer": "Beer (wheat)",
+    "pickles": "Pickles (veg)",
+    "jelly": "Jelly (fruit)",
+    "honey": "Honey"
   },
   "reminders": {
     "weatherFortune": {
@@ -84,6 +144,14 @@
     "animalCare": {
       "title": "Tend animals",
       "detail": "Pet, feed, and collect produce to keep friendship and quality up"
+    },
+    "farmCave": {
+      "title": "Farm Cave foraging",
+      "detail": "Collect mushrooms / fruit from the Farm Cave"
+    },
+    "hardwood": {
+      "title": "Harvest hardwood",
+      "detail": "Cut the hardwood stumps in the Secret Woods"
     },
     "travelingCart": {
       "title": "Traveling Cart",

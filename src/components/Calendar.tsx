@@ -15,6 +15,7 @@ import { filterEvents, getEventsOn, type FixedEvent } from "@/lib/events";
 import { getActiveReminders } from "@/lib/reminders";
 import { useSchedule } from "@/components/ScheduleProvider";
 import EventIcon from "@/components/EventIcon";
+import ReminderIcon from "@/components/ReminderIcon";
 
 const SEASON_COLOR: Record<Season, string> = {
   spring: "var(--season-spring)",
@@ -135,9 +136,7 @@ export default function Calendar({ selectedDate, onSelectDate }: CalendarProps) 
                   <EventIcon key={i} event={e} size={14} />
                 ))}
                 {reminders.slice(0, 2).map((r) => (
-                  <span key={r.id} aria-hidden>
-                    {r.emoji}
-                  </span>
+                  <ReminderIcon key={r.id} id={r.id} size={12} />
                 ))}
                 {memos.length > 0 && <span>📝</span>}
               </span>

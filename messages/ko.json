@@ -70,7 +70,67 @@
     "openTodo": "할 일 목록 설정 열기",
     "events": "고정 이벤트",
     "reminders": "요일 리마인더",
-    "language": "언어"
+    "language": "언어",
+    "orderHint": "⠿ 핸들을 드래그해 표시 순서를 바꾸고, 체크로 표시 여부를 정하세요.",
+    "reorder": "드래그하여 순서 변경",
+    "userAdded": "사용자 추가"
+  },
+  "todoCategory": {
+    "harvest": "수확",
+    "tool": "도구",
+    "machine": "장비"
+  },
+  "addTask": {
+    "title": "할 일 추가",
+    "tool": "도구 업그레이드",
+    "seed": "씨앗 심기",
+    "machine": "장인 장비",
+    "back": "뒤로",
+    "add": "추가",
+    "selectTool": "도구 선택",
+    "selectCrop": "작물 선택",
+    "selectMachine": "장비 선택",
+    "selectOutput": "산출물 선택",
+    "agriculturist": "농업 전문가 (−10%)",
+    "fertilizer": "비료",
+    "dateLabel": "{season} {day}일",
+    "days": "{days}일",
+    "pickupPreview": "{date}에 도구 수령",
+    "harvestPreview": "{date} 수확 예정",
+    "readyPreview": "{date} 완성 예정",
+    "regrowNote": "이후 {days}일마다 재수확",
+    "wiltWarning": "이 계절 안에 수확 불가 — 시즌 종료로 시들 수 있어요",
+    "noSeasonCrops": "이 계절에 심을 수 있는 작물이 없습니다",
+    "toolMemo": "{tool} 수령",
+    "harvestMemo": "{crop} 수확",
+    "machineMemo": "{output} 완성"
+  },
+  "tools": {
+    "axe": "도끼",
+    "pickaxe": "곡괭이",
+    "hoe": "괭이",
+    "wateringCan": "물뿌리개",
+    "trashCan": "쓰레기통"
+  },
+  "fertilizer": {
+    "none": "없음",
+    "speedGro": "스피드-그로 (−10%)",
+    "deluxe": "고급 스피드-그로 (−25%)",
+    "hyper": "초고속 스피드-그로 (−33%)"
+  },
+  "machines": {
+    "keg": "술통",
+    "preservesJar": "절임통",
+    "beeHouse": "양봉장"
+  },
+  "machineOutputs": {
+    "wine": "와인 (과일)",
+    "juice": "주스 (야채)",
+    "paleAle": "페일 에일 (홉)",
+    "beer": "맥주 (밀)",
+    "pickles": "피클 (야채)",
+    "jelly": "젤리 (과일)",
+    "honey": "벌꿀"
   },
   "reminders": {
     "weatherFortune": {
@@ -84,6 +144,14 @@
     "animalCare": {
       "title": "동물 돌보기",
       "detail": "쓰다듬기·먹이 주기·생산물 수거로 친밀도와 품질 관리"
+    },
+    "farmCave": {
+      "title": "농장 동굴 채집",
+      "detail": "농장 동굴에서 버섯/열매 채집하기"
+    },
+    "hardwood": {
+      "title": "단단한 나무 캐기",
+      "detail": "비밀의 숲에서 단단한 나무 그루터기 채집"
     },
     "travelingCart": {
       "title": "여행 카트",

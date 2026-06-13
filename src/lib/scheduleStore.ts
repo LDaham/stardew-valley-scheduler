@@ -3,6 +3,7 @@
 
 import { loadJSON, saveJSON } from "@/lib/storage";
 import { DEFAULT_REMINDER_TOGGLES, type ReminderId } from "@/data/reminders";
+import { DEFAULT_TODO_ORDER, reconcileTodoOrder } from "@/lib/todoOrder";
 import type { Memo, ScheduleState } from "@/types/schedule";
 
 const STORAGE_KEY = "svs:schedule";
@@ -15,6 +16,7 @@ const DEFAULT_STATE: ScheduleState = {
   eventFilters: { birthday: true, festival: true, cropDeadline: true },
   reminderToggles: DEFAULT_REMINDER_TOGGLES,
   taskDone: {},
+  todoOrder: DEFAULT_TODO_ORDER,
 };
 
 let state: ScheduleState = DEFAULT_STATE;
@@ -35,6 +37,7 @@ function ensureLoaded(): void {
       ...saved.reminderToggles,
     },
     taskDone: { ...DEFAULT_STATE.taskDone, ...saved.taskDone },
+    todoOrder: reconcileTodoOrder(saved.todoOrder),
     version: STATE_VERSION,
   };
   loaded = true;
@@ -113,5 +116,9 @@ export const scheduleActions = {
       ...state,
       taskDone: { ...state.taskDone, [key]: !state.taskDone[key] },
     });
+  },
+  // To Do List 표시 순서 설정
+  setTodoOrder(order: string[]) {
+    commit({ ...state, todoOrder: order });
   },
 };

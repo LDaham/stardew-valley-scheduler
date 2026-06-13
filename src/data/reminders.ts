@@ -7,6 +7,8 @@ export type ReminderId =
   | "weatherFortune"
   | "watering"
   | "animalCare"
+  | "farmCave"
+  | "hardwood"
   | "travelingCart"
   | "krobusSprinkler"
   | "desertTraderStaircase"
@@ -51,6 +53,16 @@ export const REMINDERS: ReminderDef[] = [
     id: "animalCare",
     trigger: { kind: "daily" },
     emoji: "🐄",
+  },
+  {
+    id: "farmCave",
+    trigger: { kind: "daily" },
+    emoji: "🍄",
+  },
+  {
+    id: "hardwood",
+    trigger: { kind: "daily" },
+    emoji: "🪵",
   },
   {
     id: "travelingCart",

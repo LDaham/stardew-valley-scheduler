@@ -30,6 +30,7 @@ export function useSchedule() {
     eventFilters: state.eventFilters,
     reminderToggles: state.reminderToggles,
     taskDone: state.taskDone,
+    todoOrder: state.todoOrder,
     memosOn: (date: SDate): Memo[] =>
       state.memos.filter(
         (m) => m.season === date.season && m.day === date.day,
@@ -43,5 +44,6 @@ export function useSchedule() {
     setEventFilter: scheduleActions.setEventFilter,
     setReminderToggle: scheduleActions.setReminderToggle,
     toggleTask: scheduleActions.toggleTask,
+    setTodoOrder: scheduleActions.setTodoOrder,
   };
 }

@@ -79,51 +79,53 @@ export const BIRTHDAYS: Birthday[] = [
 
 // 작물. id는 messages "crops" 네임스페이스 키.
 // growthDays: 심은 날 제외 성장 일수. regrowDays: 첫 수확 후 재성장 주기(없으면 1회성).
+// phases: 성장 단계별 일수(합 = growthDays). 농업 전문가·비료 보정 계산에 사용(게임 알고리즘과 동일).
 export interface Crop {
   id: string;
   seasons: Season[];
   growthDays: number;
+  phases: number[];
   regrowDays?: number;
 }
 
 export const CROPS: Crop[] = [
   // 봄
-  { id: "parsnip", seasons: ["spring"], growthDays: 4 },
-  { id: "potato", seasons: ["spring"], growthDays: 6 },
-  { id: "cauliflower", seasons: ["spring"], growthDays: 12 },
-  { id: "kale", seasons: ["spring"], growthDays: 6 },
-  { id: "garlic", seasons: ["spring"], growthDays: 4 },
-  { id: "rhubarb", seasons: ["spring"], growthDays: 13 },
-  { id: "strawberry", seasons: ["spring"], growthDays: 8, regrowDays: 4 },
-  { id: "greenBean", seasons: ["spring"], growthDays: 10, regrowDays: 3 },
-  { id: "tulip", seasons: ["spring"], growthDays: 6 },
-  { id: "blueJazz", seasons: ["spring"], growthDays: 7 },
-  { id: "coffeeBean", seasons: ["spring", "summer"], growthDays: 10, regrowDays: 2 },
+  { id: "parsnip", seasons: ["spring"], growthDays: 4, phases: [1, 1, 1, 1] },
+  { id: "potato", seasons: ["spring"], growthDays: 6, phases: [1, 1, 1, 2, 1] },
+  { id: "cauliflower", seasons: ["spring"], growthDays: 12, phases: [1, 2, 4, 5] },
+  { id: "kale", seasons: ["spring"], growthDays: 6, phases: [1, 2, 2, 1] },
+  { id: "garlic", seasons: ["spring"], growthDays: 4, phases: [1, 1, 1, 1] },
+  { id: "rhubarb", seasons: ["spring"], growthDays: 13, phases: [2, 2, 2, 3, 4] },
+  { id: "strawberry", seasons: ["spring"], growthDays: 8, phases: [1, 1, 2, 2, 2], regrowDays: 4 },
+  { id: "greenBean", seasons: ["spring"], growthDays: 10, phases: [1, 1, 1, 3, 4], regrowDays: 3 },
+  { id: "tulip", seasons: ["spring"], growthDays: 6, phases: [1, 1, 2, 2] },
+  { id: "blueJazz", seasons: ["spring"], growthDays: 7, phases: [1, 2, 2, 2] },
+  { id: "coffeeBean", seasons: ["spring", "summer"], growthDays: 10, phases: [1, 2, 2, 3, 2], regrowDays: 2 },
   // 여름
-  { id: "blueberry", seasons: ["summer"], growthDays: 13, regrowDays: 4 },
-  { id: "melon", seasons: ["summer"], growthDays: 12 },
-  { id: "tomato", seasons: ["summer"], growthDays: 11, regrowDays: 4 },
-  { id: "hotPepper", seasons: ["summer"], growthDays: 5, regrowDays: 3 },
-  { id: "radish", seasons: ["summer"], growthDays: 6 },
-  { id: "hops", seasons: ["summer"], growthDays: 11, regrowDays: 1 },
-  { id: "poppy", seasons: ["summer"], growthDays: 7 },
-  { id: "redCabbage", seasons: ["summer"], growthDays: 9 },
-  { id: "starfruit", seasons: ["summer"], growthDays: 13 },
-  { id: "wheat", seasons: ["summer", "fall"], growthDays: 4 },
-  { id: "corn", seasons: ["summer", "fall"], growthDays: 14, regrowDays: 4 },
-  { id: "sunflower", seasons: ["summer", "fall"], growthDays: 8 },
+  { id: "blueberry", seasons: ["summer"], growthDays: 13, phases: [1, 3, 3, 4, 2], regrowDays: 4 },
+  { id: "melon", seasons: ["summer"], growthDays: 12, phases: [1, 2, 3, 3, 3] },
+  { id: "tomato", seasons: ["summer"], growthDays: 11, phases: [2, 2, 2, 2, 3], regrowDays: 4 },
+  { id: "hotPepper", seasons: ["summer"], growthDays: 5, phases: [1, 1, 1, 1, 1], regrowDays: 3 },
+  { id: "radish", seasons: ["summer"], growthDays: 6, phases: [2, 1, 2, 1] },
+  { id: "hops", seasons: ["summer"], growthDays: 11, phases: [1, 1, 2, 3, 4], regrowDays: 1 },
+  { id: "poppy", seasons: ["summer"], growthDays: 7, phases: [1, 2, 2, 2] },
+  { id: "redCabbage", seasons: ["summer"], growthDays: 9, phases: [2, 1, 2, 2, 2] },
+  { id: "starfruit", seasons: ["summer"], growthDays: 13, phases: [2, 3, 2, 3, 3] },
+  { id: "wheat", seasons: ["summer", "fall"], growthDays: 4, phases: [1, 1, 1, 1] },
+  { id: "corn", seasons: ["summer", "fall"], growthDays: 14, phases: [2, 3, 3, 3, 3], regrowDays: 4 },
+  { id: "sunflower", seasons: ["summer", "fall"], growthDays: 8, phases: [1, 2, 3, 2] },
   // 가을
-  { id: "pumpkin", seasons: ["fall"], growthDays: 13 },
-  { id: "cranberry", seasons: ["fall"], growthDays: 7, regrowDays: 5 },
-  { id: "eggplant", seasons: ["fall"], growthDays: 5, regrowDays: 5 },
-  { id: "amaranth", seasons: ["fall"], growthDays: 7 },
-  { id: "grape", seasons: ["fall"], growthDays: 10, regrowDays: 3 },
-  { id: "yam", seasons: ["fall"], growthDays: 10 },
-  { id: "bokChoy", seasons: ["fall"], growthDays: 4 },
-  { id: "artichoke", seasons: ["fall"], growthDays: 8 },
-  { id: "beet", seasons: ["fall"], growthDays: 6 },
-  { id: "fairyRose", seasons: ["fall"], growthDays: 12 },
-  { id: "sweetGemBerry", seasons: ["fall"], growthDays: 24 },
+  { id: "pumpkin", seasons: ["fall"], growthDays: 13, phases: [1, 2, 3, 4, 3] },
+  { id: "cranberry", seasons: ["fall"], growthDays: 7, phases: [1, 2, 1, 1, 2], regrowDays: 5 },
+  { id: "eggplant", seasons: ["fall"], growthDays: 5, phases: [1, 1, 1, 1, 1], regrowDays: 5 },
+  { id: "amaranth", seasons: ["fall"], growthDays: 7, phases: [1, 2, 2, 2] },
+  { id: "grape", seasons: ["fall"], growthDays: 10, phases: [1, 2, 3, 2, 2], regrowDays: 3 },
+  { id: "yam", seasons: ["fall"], growthDays: 10, phases: [1, 3, 3, 3] },
+  { id: "bokChoy", seasons: ["fall"], growthDays: 4, phases: [1, 1, 1, 1] },
+  { id: "artichoke", seasons: ["fall"], growthDays: 8, phases: [2, 2, 1, 2, 1] },
+  { id: "beet", seasons: ["fall"], growthDays: 6, phases: [1, 1, 2, 2] },
+  { id: "fairyRose", seasons: ["fall"], growthDays: 12, phases: [1, 4, 4, 3] },
+  { id: "sweetGemBerry", seasons: ["fall"], growthDays: 24, phases: [2, 4, 6, 6, 6] },
 ];
 
 // 해당 계절에 작물을 심어 시즌 내 첫 수확을 보려면 늦어도 이 날까지 심어야 한다.
