@@ -19,10 +19,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          # 개발 환경(Node 24 / npm 11)과 맞춰야 npm ci가 lockfile을 그대로 설치한다
+          node-version: 24
           cache: npm
       - run: npm ci
       - name: Build (static export)
