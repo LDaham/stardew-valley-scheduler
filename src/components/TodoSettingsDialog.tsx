@@ -150,6 +150,9 @@ export default function TodoSettingsDialog({
                 isOver ? "border-[var(--sv-accent)]" : "border-transparent"
               } ${isDragging ? "opacity-40" : ""}`}
             >
+              {control}
+              <span className="mt-0.5">{icon}</span>
+              <span className="flex-1">{label}</span>
               <span
                 aria-hidden
                 title={t("settings.reorder")}
@@ -174,9 +177,6 @@ export default function TodoSettingsDialog({
               >
                 ⠿
               </span>
-              {control}
-              <span className="mt-0.5">{icon}</span>
-              <span className="flex-1">{label}</span>
             </li>
           );
         })}
