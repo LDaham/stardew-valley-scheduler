@@ -8,15 +8,15 @@ const WIKI_URL = "https://stardewvalleywiki.com";
 const LICENSE_URL = "https://creativecommons.org/licenses/by-nc-sa/3.0/";
 const REPO_URL = "https://github.com/LDaham/stardew-valley-scheduler";
 
-function extLink(href: string) {
-  return (chunks: React.ReactNode) => (
+function Ext({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       className="underline hover:text-[var(--sv-ink)]"
     >
-      {chunks}
+      {children}
     </a>
   );
 }
@@ -29,9 +29,15 @@ export default function Footer() {
         <p>
           {t("fan")} {t("copyright")}
         </p>
-        <p>{t.rich("data", { wiki: extLink(WIKI_URL), license: extLink(LICENSE_URL) })}</p>
         <p>
-          {t.rich("code", { repo: extLink(REPO_URL) })} {t("nonCommercial")}
+          {t.rich("data", {
+            wiki: (c) => <Ext href={WIKI_URL}>{c}</Ext>,
+            license: (c) => <Ext href={LICENSE_URL}>{c}</Ext>,
+          })}
+        </p>
+        <p>
+          {t.rich("code", { repo: (c) => <Ext href={REPO_URL}>{c}</Ext> })}{" "}
+          {t("nonCommercial")}
         </p>
       </div>
     </footer>
