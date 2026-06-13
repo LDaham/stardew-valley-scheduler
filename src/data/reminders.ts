@@ -15,12 +15,19 @@ export type ReminderId =
   | "specialOrders"
   | "queenOfSauceNew"
   | "queenOfSauceRerun"
-  | "questFestivalWarning";
+  | "buySeeds"
+  | "helpWanted"
+  | "helpWantedDeadline"
+  | "museumDonation"
+  | "communityCenterBundle"
+  | "crabPot";
 
 // 트리거 종류
 export type ReminderTrigger =
   // 매일
   | { kind: "daily" }
+  // 매 계절 첫날(매월 1일)
+  | { kind: "seasonStart" }
   // 매주 특정 요일
   | { kind: "weekly"; weekdays: Weekday[] }
   // 특정 축제 daysBefore일 전부터 당일 직전까지 (D-day 카운트다운)
@@ -97,9 +104,34 @@ export const REMINDERS: ReminderDef[] = [
     emoji: "📺",
   },
   {
-    id: "questFestivalWarning",
+    id: "buySeeds",
+    trigger: { kind: "seasonStart" },
+    emoji: "🌱",
+  },
+  {
+    id: "helpWanted",
+    trigger: { kind: "daily" },
+    emoji: "📜",
+  },
+  {
+    id: "helpWantedDeadline",
     trigger: { kind: "festivalEve" },
     emoji: "⚠️",
+  },
+  {
+    id: "museumDonation",
+    trigger: { kind: "daily" },
+    emoji: "🏛️",
+  },
+  {
+    id: "communityCenterBundle",
+    trigger: { kind: "seasonStart" },
+    emoji: "🟢",
+  },
+  {
+    id: "crabPot",
+    trigger: { kind: "daily" },
+    emoji: "🦀",
   },
 ];
 

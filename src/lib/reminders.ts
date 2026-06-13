@@ -51,6 +51,10 @@ function matchTrigger(def: ReminderDef, date: SDate): ReminderBadge | null {
 
   if (tr.kind === "daily") return { kind: "today" };
 
+  if (tr.kind === "seasonStart") {
+    return date.day === 1 ? { kind: "today" } : null;
+  }
+
   if (tr.kind === "weekly") {
     if (tr.weekdays.includes(getWeekday(date.day))) return { kind: "today" };
     // 야시장 기간에는 요일과 무관하게 매일(여행 카트)

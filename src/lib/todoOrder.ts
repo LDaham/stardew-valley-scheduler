@@ -13,7 +13,8 @@ export interface TodoEntry {
 }
 
 export const EVENT_TYPES = ["festival", "birthday", "cropDeadline"] as const;
-export const MEMO_CATEGORIES = ["harvest", "tool", "machine"] as const;
+// harvest=작물 수확, watering=작물별 물주기(사용자 추가), tool=도구 업그레이드, machine=장인 제작품
+export const MEMO_CATEGORIES = ["harvest", "watering", "tool", "machine"] as const;
 export type MemoCategory = (typeof MEMO_CATEGORIES)[number];
 
 export const TODO_ENTRIES: TodoEntry[] = [
@@ -30,27 +31,57 @@ export const TODO_ENTRIES: TodoEntry[] = [
   })),
 ];
 
-// 기본 순서(엔트리 정의 순서)
-export const DEFAULT_TODO_ORDER: string[] = TODO_ENTRIES.map((e) => e.key);
+// 기본 표시 순서(사용자 요청 순서). 이벤트·리마인더·메모를 교차 배치.
+export const DEFAULT_TODO_ORDER: string[] = [
+  "event:festival",
+  "event:birthday",
+  "event:cropDeadline",
+  "reminder:queenOfSauceNew",
+  "reminder:queenOfSauceRerun",
+  "reminder:weatherFortune",
+  "memo:harvest",
+  "reminder:watering",
+  "memo:watering",
+  "reminder:animalCare",
+  "reminder:buySeeds",
+  "reminder:helpWanted",
+  "reminder:helpWantedDeadline",
+  "reminder:specialOrders",
+  "memo:tool",
+  "reminder:museumDonation",
+  "reminder:krobusSprinkler",
+  "reminder:communityCenterBundle",
+  "reminder:desertTraderStaircase",
+  "reminder:travelingCart",
+  "memo:machine",
+  "reminder:farmCave",
+  "reminder:crabPot",
+  "reminder:hardwood",
+];
 
 const ENTRY_BY_KEY = new Map(TODO_ENTRIES.map((e) => [e.key, e]));
 export function getTodoEntry(key: string): TodoEntry | undefined {
   return ENTRY_BY_KEY.get(key);
 }
 
-// 저장된 순서를 현재 엔트리 집합에 맞춰 정리(누락 추가·무효 제거·중복 제거).
+// 저장된 순서를 현재 엔트리 집합에 맞춰 정리.
+// 엔트리 집합이 바뀌면(앱 업데이트로 항목 추가/삭제) 기본 순서로 초기화하고,
+// 집합이 동일하면(순수 재정렬) 사용자 순서를 유지한다.
 export function reconcileTodoOrder(saved?: string[]): string[] {
-  const valid = new Set(DEFAULT_TODO_ORDER);
+  if (!saved) return [...DEFAULT_TODO_ORDER];
+  const def = new Set(DEFAULT_TODO_ORDER);
+  const sv = new Set(saved);
+  if (sv.size !== def.size || [...def].some((k) => !sv.has(k))) {
+    return [...DEFAULT_TODO_ORDER];
+  }
   const seen = new Set<string>();
   const out: string[] = [];
-  for (const k of saved ?? []) {
-    if (valid.has(k) && !seen.has(k)) {
+  for (const k of saved) {
+    if (def.has(k) && !seen.has(k)) {
       out.push(k);
       seen.add(k);
     }
   }
-  for (const k of DEFAULT_TODO_ORDER) {
-    if (!seen.has(k)) out.push(k);
-  }
+  for (const k of DEFAULT_TODO_ORDER) if (!seen.has(k)) out.push(k);
   return out;
 }

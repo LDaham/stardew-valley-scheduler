@@ -8,6 +8,7 @@ import { CROPS } from "@/data/game-data";
 import { MACHINES } from "@/data/machines";
 import { computeHarvest, type Fertilizer } from "@/lib/growth";
 import type { MemoCategory } from "@/lib/todoOrder";
+import type { Memo } from "@/types/schedule";
 import { asset } from "@/lib/asset";
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
@@ -28,7 +29,7 @@ const TOOL_UPGRADE_DAYS = 2; // 클린트 대장간: 2일 후 수령
 
 export default function AddTaskDialog({ onClose }: { onClose: () => void }) {
   const t = useTranslations();
-  const { currentDate, addMemo } = useSchedule();
+  const { currentDate, addMemo, addMemos } = useSchedule();
   const [mode, setMode] = useState<Mode>("menu");
 
   const dateLabel = (d: SDate) =>
@@ -42,6 +43,36 @@ export default function AddTaskDialog({ onClose }: { onClose: () => void }) {
       reminderDaysBefore: 0,
       category,
     });
+    onClose();
+  };
+
+  // 씨앗 심기: 수확 메모 1개 + 물주기 메모(심은 계절 내, 수확 전날까지 / 재수확이면 계절 끝까지) 일괄 생성
+  const addSeed = (cropId: string, agri: boolean, fert: Fertilizer) => {
+    const crop = CROPS.find((c) => c.id === cropId);
+    if (!crop) return;
+    const h = computeHarvest(currentDate, crop, agri, fert);
+    const cropName = t(`crops.${cropId}`);
+    const memos: Omit<Memo, "id" | "createdAt" | "done">[] = [
+      {
+        season: h.date.season,
+        day: h.date.day,
+        text: t("addTask.harvestMemo", { crop: cropName }),
+        reminderDaysBefore: 0,
+        category: "harvest",
+      },
+    ];
+    const sameSeason = h.date.season === currentDate.season;
+    const lastWater = crop.regrowDays ? 28 : sameSeason ? h.date.day - 1 : 28;
+    for (let d = currentDate.day; d <= Math.min(lastWater, 28); d++) {
+      memos.push({
+        season: currentDate.season,
+        day: d,
+        text: t("addTask.wateringMemo", { crop: cropName }),
+        reminderDaysBefore: 0,
+        category: "watering",
+      });
+    }
+    addMemos(memos);
     onClose();
   };
 
@@ -94,13 +125,7 @@ export default function AddTaskDialog({ onClose }: { onClose: () => void }) {
           plantDate={currentDate}
           dateLabel={dateLabel}
           onBack={() => setMode("menu")}
-          onAdd={(date, cropId) =>
-            addAndClose(
-              date,
-              t("addTask.harvestMemo", { crop: t(`crops.${cropId}`) }),
-              "harvest",
-            )
-          }
+          onAdd={addSeed}
         />
       )}
 
@@ -205,7 +230,7 @@ function SeedForm({
   plantDate: SDate;
   dateLabel: (d: SDate) => string;
   onBack: () => void;
-  onAdd: (date: SDate, cropId: string) => void;
+  onAdd: (cropId: string, agri: boolean, fert: Fertilizer) => void;
 }) {
   const t = useTranslations();
   const seasonCrops = CROPS.filter((c) => c.seasons.includes(plantDate.season));
@@ -280,13 +305,16 @@ function SeedForm({
               ⚠ {t("addTask.wiltWarning")}
             </p>
           )}
+          <p className="text-xs text-[var(--sv-ink-muted)]">
+            💦 {t("addTask.wateringNote")}
+          </p>
         </div>
       )}
 
       <FormFooter
         onBack={onBack}
-        onAdd={() => harvest && onAdd(harvest.date, cropId)}
-        addDisabled={!harvest}
+        onAdd={() => crop && onAdd(cropId, agri, fert)}
+        addDisabled={!crop}
       />
     </div>
   );

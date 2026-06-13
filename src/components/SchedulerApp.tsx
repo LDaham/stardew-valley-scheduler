@@ -9,12 +9,14 @@ import Dashboard from "@/components/Dashboard";
 import Calendar from "@/components/Calendar";
 import SettingsDialog from "@/components/SettingsDialog";
 import TodoSettingsDialog from "@/components/TodoSettingsDialog";
+import BundleDialog from "@/components/BundleDialog";
 
 function AppShell() {
   const t = useTranslations();
   const [selectedDate, setSelectedDate] = useState<SDate | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [todoSettingsOpen, setTodoSettingsOpen] = useState(false);
+  const [bundleOpen, setBundleOpen] = useState(false);
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 p-4">
@@ -26,7 +28,14 @@ function AppShell() {
             {t("home.subtitle")}
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap justify-end gap-2">
+          <button
+            onClick={() => setBundleOpen(true)}
+            aria-label={t("bundle.open")}
+            className="rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
+          >
+            🟢 {t("bundle.short")}
+          </button>
           <button
             onClick={() => setTodoSettingsOpen(true)}
             aria-label={t("settings.openTodo")}
@@ -53,6 +62,7 @@ function AppShell() {
       {todoSettingsOpen && (
         <TodoSettingsDialog onClose={() => setTodoSettingsOpen(false)} />
       )}
+      {bundleOpen && <BundleDialog onClose={() => setBundleOpen(false)} />}
     </div>
   );
 }

@@ -3,6 +3,8 @@ import type { EventFilters } from "@/lib/events";
 import type { ReminderId } from "@/data/reminders";
 import type { MemoCategory } from "@/lib/todoOrder";
 
+export type MemoCategoryToggles = Record<MemoCategory, boolean>;
+
 // 순환 메모 1건. (계절,일)에 귀속되어 매 순환마다 반복 표시된다.
 export interface Memo {
   id: string;
@@ -28,4 +30,12 @@ export interface ScheduleState {
   taskDone: Record<string, boolean>;
   // To Do List 표시 순서(엔트리 키 배열). 비면 기본 순서 사용.
   todoOrder: string[];
+  // 사용자 메모 카테고리(수확/물주기/도구/장비)별 표시 여부. 기본 전부 표시.
+  memoCategoryToggles: MemoCategoryToggles;
+  // 비 예보. 키=yearDay, 값=true면 그날 비 → 물주기 숨김.
+  rainDays: Record<string, boolean>;
+  // 물뿌리개 업그레이드 누적 횟수(이 수에 도달하면 비 오는 날 업그레이드 제안 중단).
+  wateringCanUpgrades: number;
+  // 마을회관 번들 품목 기증 여부. 키=`${bundleId}:${itemId}`.
+  bundleItemsDone: Record<string, boolean>;
 }

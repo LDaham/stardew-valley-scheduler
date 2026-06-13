@@ -31,6 +31,10 @@ export function useSchedule() {
     reminderToggles: state.reminderToggles,
     taskDone: state.taskDone,
     todoOrder: state.todoOrder,
+    memoCategoryToggles: state.memoCategoryToggles,
+    rainDays: state.rainDays,
+    wateringCanUpgrades: state.wateringCanUpgrades,
+    bundleItemsDone: state.bundleItemsDone,
     memosOn: (date: SDate): Memo[] =>
       state.memos.filter(
         (m) => m.season === date.season && m.day === date.day,
@@ -38,6 +42,7 @@ export function useSchedule() {
     setCurrentDate: (date: SDate) =>
       scheduleActions.setCurrentDay(toYearDay(date)),
     addMemo: scheduleActions.addMemo,
+    addMemos: scheduleActions.addMemos,
     updateMemo: scheduleActions.updateMemo,
     deleteMemo: scheduleActions.deleteMemo,
     toggleDone: scheduleActions.toggleDone,
@@ -45,5 +50,9 @@ export function useSchedule() {
     setReminderToggle: scheduleActions.setReminderToggle,
     toggleTask: scheduleActions.toggleTask,
     setTodoOrder: scheduleActions.setTodoOrder,
+    setMemoCategoryToggle: scheduleActions.setMemoCategoryToggle,
+    setRainDay: scheduleActions.setRainDay,
+    incWateringCanUpgrades: scheduleActions.incWateringCanUpgrades,
+    toggleBundleItem: scheduleActions.toggleBundleItem,
   };
 }

@@ -3,8 +3,21 @@
 
 import { loadJSON, saveJSON } from "@/lib/storage";
 import { DEFAULT_REMINDER_TOGGLES, type ReminderId } from "@/data/reminders";
-import { DEFAULT_TODO_ORDER, reconcileTodoOrder } from "@/lib/todoOrder";
-import type { Memo, ScheduleState } from "@/types/schedule";
+import {
+  DEFAULT_TODO_ORDER,
+  MEMO_CATEGORIES,
+  reconcileTodoOrder,
+  type MemoCategory,
+} from "@/lib/todoOrder";
+import type { Memo, MemoCategoryToggles, ScheduleState } from "@/types/schedule";
+
+const DEFAULT_MEMO_CATEGORY_TOGGLES: MemoCategoryToggles = MEMO_CATEGORIES.reduce(
+  (acc, c) => {
+    acc[c] = true;
+    return acc;
+  },
+  {} as MemoCategoryToggles,
+);
 
 const STORAGE_KEY = "svs:schedule";
 const STATE_VERSION = 1;
@@ -17,6 +30,10 @@ const DEFAULT_STATE: ScheduleState = {
   reminderToggles: DEFAULT_REMINDER_TOGGLES,
   taskDone: {},
   todoOrder: DEFAULT_TODO_ORDER,
+  memoCategoryToggles: DEFAULT_MEMO_CATEGORY_TOGGLES,
+  rainDays: {},
+  wateringCanUpgrades: 0,
+  bundleItemsDone: {},
 };
 
 let state: ScheduleState = DEFAULT_STATE;
@@ -38,6 +55,13 @@ function ensureLoaded(): void {
     },
     taskDone: { ...DEFAULT_STATE.taskDone, ...saved.taskDone },
     todoOrder: reconcileTodoOrder(saved.todoOrder),
+    memoCategoryToggles: {
+      ...DEFAULT_MEMO_CATEGORY_TOGGLES,
+      ...saved.memoCategoryToggles,
+    },
+    rainDays: saved.rainDays ?? {},
+    wateringCanUpgrades: saved.wateringCanUpgrades ?? 0,
+    bundleItemsDone: saved.bundleItemsDone ?? {},
     version: STATE_VERSION,
   };
   loaded = true;
@@ -93,6 +117,22 @@ export const scheduleActions = {
       ],
     });
   },
+  // 여러 메모를 한 번에 추가(씨앗 심기 → 수확+물주기 일괄 생성 시 1회 커밋)
+  addMemos(inputs: Omit<Memo, "id" | "createdAt" | "done">[]) {
+    const now = Date.now();
+    commit({
+      ...state,
+      memos: [
+        ...state.memos,
+        ...inputs.map((input) => ({
+          ...input,
+          id: newId(),
+          done: false,
+          createdAt: now,
+        })),
+      ],
+    });
+  },
   updateMemo(id: string, patch: Partial<Omit<Memo, "id">>) {
     commit({
       ...state,
@@ -120,5 +160,36 @@ export const scheduleActions = {
   // To Do List 표시 순서 설정
   setTodoOrder(order: string[]) {
     commit({ ...state, todoOrder: order });
+  },
+  // 메모 카테고리 표시 토글
+  setMemoCategoryToggle(category: MemoCategory, value: boolean) {
+    commit({
+      ...state,
+      memoCategoryToggles: {
+        ...state.memoCategoryToggles,
+        [category]: value,
+      },
+    });
+  },
+  // 특정 날(yearDay)의 비 예보 설정
+  setRainDay(yearDay: number, value: boolean) {
+    commit({
+      ...state,
+      rainDays: { ...state.rainDays, [yearDay]: value },
+    });
+  },
+  // 물뿌리개 업그레이드 횟수 +1
+  incWateringCanUpgrades() {
+    commit({ ...state, wateringCanUpgrades: state.wateringCanUpgrades + 1 });
+  },
+  // 번들 품목 기증 토글
+  toggleBundleItem(key: string) {
+    commit({
+      ...state,
+      bundleItemsDone: {
+        ...state.bundleItemsDone,
+        [key]: !state.bundleItemsDone[key],
+      },
+    });
   },
 };

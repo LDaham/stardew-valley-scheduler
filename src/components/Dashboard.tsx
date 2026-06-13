@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { addDays, toYearDay, type SDate } from "@/lib/calendar";
+import {
+  addDays,
+  isSameDate,
+  toYearDay,
+  type SDate,
+} from "@/lib/calendar";
 import { filterEvents, getEventsOn, type FixedEvent } from "@/lib/events";
 import {
   getActiveReminders,
@@ -13,7 +18,14 @@ import { useGiftDialog } from "@/components/GiftDialogProvider";
 import EventIcon from "@/components/EventIcon";
 import ReminderIcon from "@/components/ReminderIcon";
 import AddTaskDialog from "@/components/AddTaskDialog";
+import BundleDialog from "@/components/BundleDialog";
+import Modal from "@/components/Modal";
+import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import type { ReactNode } from "react";
+
+// 물뿌리개 업그레이드 제안을 멈출 누적 횟수
+const MAX_WATERING_CAN_UPGRADES = 3;
+const TOOL_UPGRADE_DAYS = 2; // 대장간 수령까지 2일
 
 // 통합 체크리스트의 한 항목 (고정 이벤트 / 리마인더 / 메모 공통 표현)
 interface TaskRow {
@@ -46,11 +58,60 @@ export default function Dashboard({
     eventFilters,
     reminderToggles,
     todoOrder,
+    memoCategoryToggles,
+    rainDays,
+    wateringCanUpgrades,
+    setRainDay,
+    incWateringCanUpgrades,
+    addMemo,
+    bundleItemsDone,
   } = useSchedule();
   const openGifts = useGiftDialog();
   const [addOpen, setAddOpen] = useState(false);
+  const [rainPromptOpen, setRainPromptOpen] = useState(false);
+  const [bundleFillOpen, setBundleFillOpen] = useState(false);
+
+  // 비 오는 날에만 구할 수 있는, 아직 필요한 번들 품목 이름
+  const rainBundleNeeds = [
+    ...new Set(
+      BUNDLES.filter(
+        (b) =>
+          b.items.filter((i) => bundleItemsDone[bundleItemKey(b.id, i.id)])
+            .length < b.needed,
+      ).flatMap((b) =>
+        b.items
+          .filter((i) => i.rainy && !bundleItemsDone[bundleItemKey(b.id, i.id)])
+          .map((i) => t(i.nameKey)),
+      ),
+    ),
+  ];
 
   const tomorrow = addDays(currentDate, 1);
+  const tomorrowYd = toYearDay(tomorrow);
+  const rainTomorrow = !!rainDays[tomorrowYd];
+
+  // "내일 비" 토글: 켜면 내일 물주기가 숨겨지고, 업그레이드 여력이 있으면 제안 띄움
+  const toggleRainTomorrow = () => {
+    const next = !rainTomorrow;
+    setRainDay(tomorrowYd, next);
+    if (next && wateringCanUpgrades < MAX_WATERING_CAN_UPGRADES) {
+      setRainPromptOpen(true);
+    }
+  };
+
+  // 물뿌리개 업그레이드를 오늘 일정(2일 뒤 수령)에 추가
+  const addWateringCanUpgrade = () => {
+    const target = addDays(currentDate, TOOL_UPGRADE_DAYS);
+    addMemo({
+      season: target.season,
+      day: target.day,
+      text: t("addTask.toolMemo", { tool: t("tools.wateringCan") }),
+      reminderDaysBefore: 0,
+      category: "tool",
+    });
+    incWateringCanUpgrades();
+    setRainPromptOpen(false);
+  };
 
   const fixedLabel = (e: FixedEvent): string => {
     if (e.type === "festival") return t(`festivals.${e.refId}`);
@@ -78,6 +139,8 @@ export default function Dashboard({
   // 한 날짜의 이벤트·리마인더·메모를 하나의 체크리스트로 합친다.
   const buildRows = (date: SDate): TaskRow[] => {
     const yd = toYearDay(date);
+    const isRain = !!rainDays[yd]; // 비 오는 날엔 물주기 숨김
+    const isToday = isSameDate(date, currentDate);
     const rows: TaskRow[] = [];
 
     for (const e of filterEvents(getEventsOn(date), eventFilters)) {
@@ -95,19 +158,43 @@ export default function Dashboard({
     }
 
     for (const r of getActiveReminders(date, reminderToggles)) {
+      // 비 오는 날은 매일 물주기 리마인더 숨김
+      if (r.id === "watering" && isRain) continue;
       const key = `${yd}:reminder-${r.id}`;
+      // 날씨·운세(오늘)에는 "내일 비" 토글, 마을회관 번들에는 "번들 채우기" 버튼
+      let rightBadge = reminderBadge(r.badge);
+      if (r.id === "weatherFortune" && isToday) {
+        rightBadge = (
+          <RainToggle
+            active={rainTomorrow}
+            onToggle={toggleRainTomorrow}
+            label={t("dashboard.rainTomorrow")}
+          />
+        );
+      } else if (r.id === "communityCenterBundle") {
+        rightBadge = (
+          <ActionChip
+            onClick={() => setBundleFillOpen(true)}
+            label={t("bundle.fill")}
+          />
+        );
+      }
       rows.push({
         key,
         orderKey: `reminder:${r.id}`,
         icon: <ReminderIcon id={r.id} size={16} />,
         label: t(`reminders.${r.id}.title`),
-        rightBadge: reminderBadge(r.badge),
+        rightBadge,
         done: !!taskDone[key],
         onToggle: () => toggleTask(key),
       });
     }
 
     for (const m of memosOn(date)) {
+      // 카테고리가 꺼져 있으면 숨김(카테고리 없는 레거시 메모는 항상 표시)
+      if (m.category && !memoCategoryToggles[m.category]) continue;
+      // 비 오는 날은 작물별 물주기 숨김
+      if (m.category === "watering" && isRain) continue;
       rows.push({
         key: `memo-${m.id}`,
         orderKey: `memo:${m.category ?? "machine"}`,
@@ -194,7 +281,109 @@ export default function Dashboard({
       </div>
 
       {addOpen && <AddTaskDialog onClose={() => setAddOpen(false)} />}
+
+      {rainPromptOpen && (
+        <Modal
+          title={t("dashboard.rainPromptTitle")}
+          onClose={() => setRainPromptOpen(false)}
+        >
+          <p className="mb-3 text-sm">{t("dashboard.rainPromptBody")}</p>
+
+          {/* 비 오는 날에만 구할 수 있는 번들 품목 */}
+          {rainBundleNeeds.length > 0 && (
+            <div className="mb-3 rounded-md bg-[var(--sv-bg)] p-3">
+              <p className="mb-1 text-xs font-semibold">
+                ☔ {t("dashboard.rainBundleItems")}
+              </p>
+              <p className="mb-2 text-sm">{rainBundleNeeds.join(", ")}</p>
+              <button
+                onClick={() => {
+                  setRainPromptOpen(false);
+                  setBundleFillOpen(true);
+                }}
+                className="rounded-lg border border-[var(--sv-accent)] px-3 py-1 text-xs font-semibold text-[var(--sv-accent)] hover:bg-[var(--sv-panel)]"
+              >
+                {t("dashboard.rainBundleOpen")}
+              </button>
+            </div>
+          )}
+
+          <div className="flex justify-end gap-2">
+            <button
+              onClick={() => setRainPromptOpen(false)}
+              className="rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm hover:bg-[var(--sv-bg)]"
+            >
+              {t("dashboard.rainPromptSkip")}
+            </button>
+            <button
+              onClick={addWateringCanUpgrade}
+              className="rounded-lg bg-[var(--sv-accent)] px-4 py-1.5 text-sm font-semibold text-white"
+            >
+              {t("dashboard.rainPromptAdd")}
+            </button>
+          </div>
+        </Modal>
+      )}
+
+      {bundleFillOpen && (
+        <BundleDialog
+          initialMode="fill"
+          onClose={() => setBundleFillOpen(false)}
+        />
+      )}
     </section>
+  );
+}
+
+// 행 우측의 작은 액션 버튼(행 토글과 분리)
+function ActionChip({
+  onClick,
+  label,
+}: {
+  onClick: () => void;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onClick();
+      }}
+      className="shrink-0 rounded bg-[var(--sv-accent)] px-1.5 py-0.5 text-[10px] font-semibold text-white"
+    >
+      {label}
+    </button>
+  );
+}
+
+// 날씨·운세 행의 "내일 비" 토글 버튼 (행 토글과 분리: preventDefault/stopPropagation)
+function RainToggle({
+  active,
+  onToggle,
+  label,
+}: {
+  active: boolean;
+  onToggle: () => void;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onToggle();
+      }}
+      className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold ${
+        active
+          ? "bg-[#5b8fb0] text-white"
+          : "bg-[var(--sv-border)] text-[var(--sv-ink-muted)]"
+      }`}
+    >
+      ☔ {label}
+    </button>
   );
 }
 

@@ -9,7 +9,7 @@ import Modal from "@/components/Modal";
 import ReminderIcon from "@/components/ReminderIcon";
 import type { FixedEventType } from "@/lib/events";
 import type { ReminderId } from "@/data/reminders";
-import { getTodoEntry } from "@/lib/todoOrder";
+import { getTodoEntry, type MemoCategory } from "@/lib/todoOrder";
 
 // 설정 표시용 대표 이미지.
 const EVENT_ICON: Record<string, string> = {
@@ -19,6 +19,7 @@ const EVENT_ICON: Record<string, string> = {
 };
 const MEMO_ICON: Record<string, string> = {
   harvest: "/icons/addTask/seed.png",
+  watering: "/icons/reminders/watering.png",
   tool: "/icons/addTask/tool.png",
   machine: "/icons/addTask/machine.png",
 };
@@ -48,6 +49,8 @@ export default function TodoSettingsDialog({
     setEventFilter,
     reminderToggles,
     setReminderToggle,
+    memoCategoryToggles,
+    setMemoCategoryToggle,
     todoOrder,
     setTodoOrder,
   } = useSchedule();
@@ -126,12 +129,19 @@ export default function TodoSettingsDialog({
               </span>
             );
           } else {
-            // memo 카테고리: 토글 없음
-            control = <span className="size-4 shrink-0" />;
-            icon = <PixelImage src={MEMO_ICON[entry.ref]} />;
+            const cat = entry.ref as MemoCategory;
+            control = (
+              <input
+                type="checkbox"
+                checked={memoCategoryToggles[cat]}
+                onChange={(e) => setMemoCategoryToggle(cat, e.target.checked)}
+                className="mt-0.5 size-4 shrink-0 accent-[var(--sv-accent)]"
+              />
+            );
+            icon = <PixelImage src={MEMO_ICON[cat]} />;
             label = (
               <span className="flex items-center gap-1.5">
-                <span className="text-sm">{t(`todoCategory.${entry.ref}`)}</span>
+                <span className="text-sm">{t(`todoCategory.${cat}`)}</span>
                 <span className="rounded bg-[var(--sv-bg)] px-1 py-0.5 text-[10px] text-[var(--sv-ink-muted)]">
                   {t("settings.userAdded")}
                 </span>
