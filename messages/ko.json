@@ -70,6 +70,13 @@
     "events": "표시할 이벤트",
     "language": "언어"
   },
+  "footer": {
+    "fan": "비공식 팬 제작물이며, ConcernedApe / Stardew Valley와 제휴하거나 보증받지 않았습니다.",
+    "copyright": "Stardew Valley © ConcernedApe.",
+    "data": "게임 데이터·번역은 <wiki>Stardew Valley 위키</wiki> 문서를 기반으로 가공했으며 <license>CC BY-NC-SA 3.0</license> 라이선스를 따릅니다.",
+    "code": "소스 코드는 <repo>GitHub</repo>에서 MIT 라이선스로 제공됩니다.",
+    "nonCommercial": "본 사이트는 비영리로 운영됩니다."
+  },
   "gift": {
     "prefBy": "{name}의 선물 반응",
     "loves": "사랑하는 것 (+80)",

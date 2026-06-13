@@ -70,6 +70,13 @@
     "events": "Events to show",
     "language": "Language"
   },
+  "footer": {
+    "fan": "An unofficial fan project, not affiliated with or endorsed by ConcernedApe / Stardew Valley.",
+    "copyright": "Stardew Valley © ConcernedApe.",
+    "data": "Game data and translations are adapted from the <wiki>Stardew Valley Wiki</wiki> and licensed under <license>CC BY-NC-SA 3.0</license>.",
+    "code": "Source code is available on <repo>GitHub</repo> under the MIT license.",
+    "nonCommercial": "This site is operated on a non-commercial basis."
+  },
   "gift": {
     "prefBy": "{name}'s gift reactions",
     "loves": "Loves (+80)",
