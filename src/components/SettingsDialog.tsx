@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useSchedule } from "@/components/ScheduleProvider";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
 import type { FixedEventType } from "@/lib/events";
+import { REMINDERS } from "@/data/reminders";
 
 // 설정 창: 표시할 이벤트 타입 체크박스 + 언어 선택.
 const FILTER_ITEMS: { type: FixedEventType; emoji: string }[] = [
@@ -15,7 +16,8 @@ const FILTER_ITEMS: { type: FixedEventType; emoji: string }[] = [
 
 export default function SettingsDialog({ onClose }: { onClose: () => void }) {
   const t = useTranslations();
-  const { eventFilters, setEventFilter } = useSchedule();
+  const { eventFilters, setEventFilter, reminderToggles, setReminderToggle } =
+    useSchedule();
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -32,7 +34,7 @@ export default function SettingsDialog({ onClose }: { onClose: () => void }) {
       role="presentation"
     >
       <div
-        className="w-full max-w-sm rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-5 shadow-xl"
+        className="max-h-[85vh] w-full max-w-sm overflow-y-auto rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-5 shadow-xl"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
@@ -64,6 +66,28 @@ export default function SettingsDialog({ onClose }: { onClose: () => void }) {
                   />
                   <span aria-hidden>{emoji}</span>
                   <span className="text-sm">{t(`eventType.${type}`)}</span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mb-4">
+          <h3 className="mb-2 text-sm font-semibold text-[var(--sv-ink-muted)]">
+            {t("settings.reminders")}
+          </h3>
+          <ul className="flex flex-col gap-1">
+            {REMINDERS.map((r) => (
+              <li key={r.id}>
+                <label className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 hover:bg-[var(--sv-bg)]">
+                  <input
+                    type="checkbox"
+                    checked={reminderToggles[r.id]}
+                    onChange={(e) => setReminderToggle(r.id, e.target.checked)}
+                    className="size-4 accent-[var(--sv-accent)]"
+                  />
+                  <span aria-hidden>{r.emoji}</span>
+                  <span className="text-sm">{t(`reminders.${r.id}.title`)}</span>
                 </label>
               </li>
             ))}

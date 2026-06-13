@@ -28,6 +28,7 @@ export function useSchedule() {
     currentDate,
     memos: state.memos,
     eventFilters: state.eventFilters,
+    reminderToggles: state.reminderToggles,
     memosOn: (date: SDate): Memo[] =>
       state.memos.filter(
         (m) => m.season === date.season && m.day === date.day,
@@ -39,5 +40,6 @@ export function useSchedule() {
     deleteMemo: scheduleActions.deleteMemo,
     toggleDone: scheduleActions.toggleDone,
     setEventFilter: scheduleActions.setEventFilter,
+    setReminderToggle: scheduleActions.setReminderToggle,
   };
 }

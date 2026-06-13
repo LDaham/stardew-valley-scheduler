@@ -8,6 +8,7 @@ import {
   getUpcomingEvents,
   type FixedEvent,
 } from "@/lib/events";
+import { getActiveReminders } from "@/lib/reminders";
 import { useSchedule } from "@/components/ScheduleProvider";
 import { useGiftDialog } from "@/components/GiftDialogProvider";
 import EventIcon from "@/components/EventIcon";
@@ -32,10 +33,12 @@ export default function Dashboard({
   onSelectDate: (date: SDate) => void;
 }) {
   const t = useTranslations();
-  const { currentDate, memosOn, memos, eventFilters } = useSchedule();
+  const { currentDate, memosOn, memos, eventFilters, reminderToggles } =
+    useSchedule();
   const openGifts = useGiftDialog();
 
   const tomorrow = addDays(currentDate, 1);
+  const reminders = getActiveReminders(currentDate, reminderToggles);
 
   const fixedLabel = (e: FixedEvent): string => {
     if (e.type === "festival") return t(`festivals.${e.refId}`);
@@ -98,6 +101,44 @@ export default function Dashboard({
           onClick={() => onSelectDate(tomorrow)}
         />
       </div>
+
+      {/* 오늘의 리마인더 (활성 항목 있을 때만) */}
+      {reminders.length > 0 && (
+        <div className="rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-4 shadow-sm">
+          <h2 className="mb-2 text-sm font-bold">{t("dashboard.reminders")}</h2>
+          <ul className="flex flex-col gap-1">
+            {reminders.map((r) => (
+              <li
+                key={r.id}
+                className="flex items-start gap-2 rounded-md bg-[var(--sv-bg)] px-2 py-1.5 text-sm"
+              >
+                <span aria-hidden>{r.emoji}</span>
+                <div className="flex-1">
+                  <span className="font-medium">
+                    {t(`reminders.${r.id}.title`)}
+                  </span>
+                  <p className="text-xs text-[var(--sv-ink-muted)]">
+                    {t(`reminders.${r.id}.detail`)}
+                  </p>
+                </div>
+                {r.badge.kind === "eve" ? (
+                  <span className="shrink-0 rounded bg-[#c0506b] px-1.5 py-0.5 text-[10px] font-semibold text-white">
+                    ⚠ {t("dashboard.reminderEve")}
+                  </span>
+                ) : r.badge.kind === "dDay" ? (
+                  <span className="shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-[10px] font-semibold text-[#5a4416]">
+                    {t("dashboard.dDay", { days: r.badge.days })}
+                  </span>
+                ) : (
+                  <span className="shrink-0 rounded bg-[var(--sv-accent)] px-1.5 py-0.5 text-[10px] font-semibold text-white">
+                    {t("dashboard.reminderToday")}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* 다가오는 이벤트 (미리 대비) */}
       <div className="rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-4 shadow-sm">

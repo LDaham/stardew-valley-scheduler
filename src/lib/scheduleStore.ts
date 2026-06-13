@@ -2,6 +2,7 @@
 // effect 내 setState 없이 SSR/하이드레이션을 안전하게 처리한다.
 
 import { loadJSON, saveJSON } from "@/lib/storage";
+import { DEFAULT_REMINDER_TOGGLES, type ReminderId } from "@/data/reminders";
 import type { Memo, ScheduleState } from "@/types/schedule";
 
 const STORAGE_KEY = "svs:schedule";
@@ -12,6 +13,7 @@ const DEFAULT_STATE: ScheduleState = {
   currentDay: 1, // 봄 1일
   memos: [],
   eventFilters: { birthday: true, festival: true, cropDeadline: true },
+  reminderToggles: DEFAULT_REMINDER_TOGGLES,
 };
 
 let state: ScheduleState = DEFAULT_STATE;
@@ -27,6 +29,10 @@ function ensureLoaded(): void {
     ...saved,
     // 신규 필드는 기본값과 병합(구버전 저장 데이터 호환)
     eventFilters: { ...DEFAULT_STATE.eventFilters, ...saved.eventFilters },
+    reminderToggles: {
+      ...DEFAULT_STATE.reminderToggles,
+      ...saved.reminderToggles,
+    },
     version: STATE_VERSION,
   };
   loaded = true;
@@ -65,6 +71,12 @@ export const scheduleActions = {
     commit({
       ...state,
       eventFilters: { ...state.eventFilters, [type]: value },
+    });
+  },
+  setReminderToggle(id: ReminderId, value: boolean) {
+    commit({
+      ...state,
+      reminderToggles: { ...state.reminderToggles, [id]: value },
     });
   },
   addMemo(input: Omit<Memo, "id" | "createdAt" | "done">) {

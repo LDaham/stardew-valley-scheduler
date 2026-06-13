@@ -1,5 +1,6 @@
 import type { Season } from "@/lib/calendar";
 import type { EventFilters } from "@/lib/events";
+import type { ReminderId } from "@/data/reminders";
 
 // 순환 메모 1건. (계절,일)에 귀속되어 매 순환마다 반복 표시된다.
 export interface Memo {
@@ -19,4 +20,5 @@ export interface ScheduleState {
   currentDay: number; // 1..112 (절대 일수)
   memos: Memo[];
   eventFilters: EventFilters; // 이벤트 타입별 표시 여부
+  reminderToggles: Record<ReminderId, boolean>; // 리마인더별 on/off
 }

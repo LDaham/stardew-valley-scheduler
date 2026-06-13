@@ -43,7 +43,11 @@
     "inDays": "{days}일 뒤",
     "todayBadge": "오늘",
     "birthdayOf": "{name} 생일",
-    "plantDeadline": "{crop} 심기 마지막 날"
+    "plantDeadline": "{crop} 심기 마지막 날",
+    "reminders": "오늘의 리마인더",
+    "reminderToday": "오늘",
+    "reminderEve": "내일 축제",
+    "dDay": "D-{days}"
   },
   "memo": {
     "selectDay": "달력에서 날짜를 선택하세요",
@@ -68,7 +72,42 @@
     "title": "설정",
     "open": "설정 열기",
     "events": "표시할 이벤트",
+    "reminders": "리마인더",
     "language": "언어"
+  },
+  "reminders": {
+    "travelingCart": {
+      "title": "여행 카트",
+      "detail": "금·일 오전 6시~오후 8시 / 야시장(겨울 15~17일) 매일 오후 5시~오전 2시"
+    },
+    "krobusSprinkler": {
+      "title": "크로버스 — 이리듐 스프링클러",
+      "detail": "금요일, 하수도에서 자동화용 이리듐 스프링클러 구매 (축제일 제외)"
+    },
+    "desertTraderStaircase": {
+      "title": "사막 상인 — 비취를 계단으로",
+      "detail": "일요일, 해골 동굴 탐험 대비 비취를 계단과 교환"
+    },
+    "specialOrders": {
+      "title": "특별 주문 게시판 갱신",
+      "detail": "월요일, 마을 회관·미스터 치 게시판에서 새 특별 주문 수락"
+    },
+    "queenOfSauce": {
+      "title": "소스의 여왕 (요리 레시피)",
+      "detail": "일요일 신규 방영 / 수요일 재방송 — TV에서 레시피 확인"
+    },
+    "luauPrep": {
+      "title": "루아우 준비",
+      "detail": "도지사 수프에 넣을 이리듐·은성/금성 고품질 작물을 미리 준비 (최고 반응 +120)"
+    },
+    "fairPrep": {
+      "title": "스타듀밸리 박람회 준비",
+      "detail": "농산물·과일·장인 물품·생선 등 고품질 9종을 미리 모아 1등(90점) 목표"
+    },
+    "questFestivalWarning": {
+      "title": "퀘스트 마감 주의",
+      "detail": "내일은 축제라 NPC·상점 이용이 막힙니다 — 오늘 안에 구인광고/배달 퀘스트를 완료하세요"
+    }
   },
   "footer": {
     "fan": "비공식 팬 제작물이며, ConcernedApe / Stardew Valley와 제휴하거나 보증받지 않았습니다.",
