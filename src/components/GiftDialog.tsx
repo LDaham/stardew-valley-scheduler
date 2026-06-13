@@ -125,9 +125,18 @@ function UniversalFolder({
       </button>
       {open && (
         <div className="mt-1.5 flex flex-col gap-1.5">
-          <p className="text-[10px] text-[var(--sv-ink-muted)]">
-            {t("gift.universalHint")}
-          </p>
+          {exceptions.length > 0 && (
+            <p className="text-[10px] text-[var(--sv-ink-muted)]">
+              <span className="font-semibold">{t("gift.exceptionLabel")}: </span>
+              {exceptions.map((ex, i) => (
+                <span key={ex.entry.en}>
+                  {i > 0 ? ", " : ""}
+                  {locale === "ko" ? ex.entry.ko : ex.entry.en}
+                  {` (${t(`gift.reaction.${ex.reaction}`)})`}
+                </span>
+              ))}
+            </p>
+          )}
           {concrete.length > 0 && (
             <ul className="grid grid-cols-2 gap-1.5 sm:grid-cols-3">
               {concrete.map((g, i) => (
@@ -147,18 +156,6 @@ function UniversalFolder({
                 />
               ))}
             </div>
-          )}
-          {exceptions.length > 0 && (
-            <p className="text-[10px] text-[var(--sv-ink-muted)]">
-              <span className="font-semibold">{t("gift.exceptionLabel")}: </span>
-              {exceptions.map((ex, i) => (
-                <span key={ex.entry.en}>
-                  {i > 0 ? ", " : ""}
-                  {locale === "ko" ? ex.entry.ko : ex.entry.en}
-                  {` (${t(`gift.reaction.${ex.reaction}`)})`}
-                </span>
-              ))}
-            </p>
           )}
         </div>
       )}
@@ -192,12 +189,12 @@ export default function GiftDialog({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
+      className="fixed inset-0 z-50 flex items-start justify-center bg-black/40 p-4 pt-[7.5vh]"
       onClick={onClose}
       role="presentation"
     >
       <div
-        className="h-[85vh] w-full max-w-lg overflow-y-auto rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-5 shadow-xl"
+        className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-5 shadow-xl"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
