@@ -70,6 +70,14 @@ export default function TodoSettingsDialog({
     setTodoOrder(next);
     resetDrag();
   };
+  // 포인터 좌표 아래에 있는 행 인덱스(마우스·터치 공통)
+  const indexFromPoint = (x: number, y: number): number | null => {
+    const el = document.elementFromPoint(x, y);
+    const li = el?.closest("[data-todo-index]") as HTMLElement | null;
+    if (!li) return null;
+    const idx = Number(li.dataset.todoIndex);
+    return Number.isNaN(idx) ? null : idx;
+  };
 
   return (
     <Modal title={t("settings.todoSettings")} onClose={onClose}>
@@ -137,17 +145,7 @@ export default function TodoSettingsDialog({
           return (
             <li
               key={key}
-              draggable
-              onDragStart={() => setDragIndex(i)}
-              onDragOver={(e) => {
-                e.preventDefault();
-                setOverIndex(i);
-              }}
-              onDrop={(e) => {
-                e.preventDefault();
-                drop(i);
-              }}
-              onDragEnd={resetDrag}
+              data-todo-index={i}
               className={`flex items-center gap-2 rounded-md border-t-2 px-2 py-1.5 hover:bg-[var(--sv-bg)] ${
                 isOver ? "border-[var(--sv-accent)]" : "border-transparent"
               } ${isDragging ? "opacity-40" : ""}`}
@@ -155,7 +153,24 @@ export default function TodoSettingsDialog({
               <span
                 aria-hidden
                 title={t("settings.reorder")}
-                className="shrink-0 cursor-grab select-none px-0.5 text-[var(--sv-ink-muted)]"
+                onPointerDown={(e) => {
+                  e.preventDefault();
+                  setDragIndex(i);
+                  setOverIndex(i);
+                  e.currentTarget.setPointerCapture(e.pointerId);
+                }}
+                onPointerMove={(e) => {
+                  if (dragIndex === null) return;
+                  const idx = indexFromPoint(e.clientX, e.clientY);
+                  if (idx !== null) setOverIndex(idx);
+                }}
+                onPointerUp={(e) => {
+                  e.currentTarget.releasePointerCapture(e.pointerId);
+                  if (overIndex !== null) drop(overIndex);
+                  else resetDrag();
+                }}
+                onPointerCancel={resetDrag}
+                className="shrink-0 cursor-grab touch-none select-none px-1 text-[var(--sv-ink-muted)]"
               >
                 ⠿
               </span>
