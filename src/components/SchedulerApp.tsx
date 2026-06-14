@@ -11,6 +11,7 @@ import SettingsDialog from "@/components/SettingsDialog";
 import TodoSettingsDialog from "@/components/TodoSettingsDialog";
 import BundleDialog from "@/components/BundleDialog";
 import CharacterDialog from "@/components/CharacterDialog";
+import MyTasksDialog from "@/components/MyTasksDialog";
 import PixelIcon from "@/components/PixelIcon";
 
 function AppShell() {
@@ -20,6 +21,7 @@ function AppShell() {
   const [todoSettingsOpen, setTodoSettingsOpen] = useState(false);
   const [bundleOpen, setBundleOpen] = useState(false);
   const [characterOpen, setCharacterOpen] = useState(false);
+  const [myTasksOpen, setMyTasksOpen] = useState(false);
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 p-4">
@@ -38,6 +40,13 @@ function AppShell() {
             className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
           >
             <PixelIcon src="/icons/ui/bundle.png" size={18} /> {t("bundle.short")}
+          </button>
+          <button
+            onClick={() => setMyTasksOpen(true)}
+            aria-label={t("myTasks.open")}
+            className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
+          >
+            <PixelIcon src="/icons/ui/note.png" size={18} /> {t("myTasks.short")}
           </button>
           <button
             onClick={() => setCharacterOpen(true)}
@@ -76,6 +85,7 @@ function AppShell() {
       {characterOpen && (
         <CharacterDialog onClose={() => setCharacterOpen(false)} />
       )}
+      {myTasksOpen && <MyTasksDialog onClose={() => setMyTasksOpen(false)} />}
     </div>
   );
 }

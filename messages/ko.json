@@ -49,6 +49,17 @@
     "rainBundleOpen": "번들 채우기 열기",
     "birthdayOf": "{name} 생일 선물 전달",
     "plantDeadline": "{crop} 심기 마지막 날",
+    "deadlineShift": "(내일 휴무로 미리 표시)",
+    "wateringGroup": "작물 물주기",
+    "rainForecast": "내일 비 예보",
+    "deleteTitle": "할 일 삭제",
+    "deleteBody": "이 항목만 삭제하거나, 같은 작물의 관련 할 일을 모든 날짜에서 한꺼번에 삭제할 수 있어요.",
+    "deleteOne": "이 항목만 삭제",
+    "deleteAllCrop": "이 작물 관련 전체 삭제",
+    "deleteAllCat": "{cat} 전체 삭제 ({count})",
+    "deleteCat_watering": "작물 물주기",
+    "deleteCat_harvest": "작물 수확",
+    "deleteCat_buySeed": "씨앗 구매",
     "dDay": "D-{days}"
   },
   "memo": {
@@ -78,6 +89,12 @@
     "events": "고정 이벤트",
     "reminders": "요일 리마인더",
     "language": "언어",
+    "resetTitle": "모든 설정 초기화",
+    "resetDesc": "번들·캐릭터·할 일 등 저장된 모든 설정을 기본값으로 되돌립니다. 되돌릴 수 없습니다.",
+    "resetButton": "모든 설정 초기화",
+    "resetConfirm": "정말 초기화할까요?",
+    "resetYes": "초기화",
+    "resetNo": "취소",
     "orderHint": "⠿ 핸들을 드래그해 표시 순서를 바꾸고, 체크로 표시 여부를 정하세요.",
     "reorder": "드래그하여 순서 변경",
     "userAdded": "사용자 추가"
@@ -108,6 +125,8 @@
     "showAll": "전체 보기",
     "showFill": "획득 불가능한 품목 제외",
     "pick": "{total}개 중 {needed}개",
+    "excludeUnobtainable": "이번 계절에 획득 불가능한 품목 제외",
+    "onlyCurrentOnly": "이번 계절({season})에만 획득 가능한 품목만 보기",
     "hiddenNote": "이번 계절에 못 구하는 품목은 '전체 보기'에서 확인하세요",
     "seasonNeeds": "이번 계절({season}) 획득 가능 · 미완료 품목",
     "seasonNeedsNone": "이번 계절에 모을 미완료 품목이 없습니다",
@@ -250,10 +269,12 @@
     "tool": "도구 업그레이드",
     "seed": "씨앗 심기",
     "machine": "장인 제작품",
+    "misc": "정동석·박물관",
     "geode": "정동석 깨기",
     "museum": "박물관 기증하기",
     "geodeMemo": "정동석 깨기 — 대장간(클린트)에 광석 정동석을 가져가 감정",
     "museumMemo": "박물관 기증하기 — 새로 얻은 광물·유물을 박물관(군터)에 기증",
+    "miscMemo": "정동석 깨고, 박물관 기증하기",
     "back": "뒤로",
     "add": "추가",
     "selectTool": "도구 선택",
@@ -334,6 +355,15 @@
     "botanist": "식물학자",
     "botanistDesc": "야생 씨앗 항상 이리듐 품질"
   },
+  "myTasks": {
+    "title": "내가 추가한 할 일",
+    "short": "내 할 일",
+    "open": "내가 추가한 할 일 열기",
+    "empty": "추가한 할 일이 없습니다",
+    "other": "기타",
+    "delete": "삭제",
+    "deleteAll": "이 그룹 전체 삭제"
+  },
   "tools": {
     "axe": "도끼",
     "pickaxe": "곡괭이",
@@ -365,10 +395,6 @@
     "weatherFortune": {
       "title": "날씨·운세 확인",
       "detail": "TV에서 다음날 날씨 예보와 행운의 점괘(운세) 확인"
-    },
-    "watering": {
-      "title": "작물 물주기",
-      "detail": "스프링클러가 없는 작물에 물주기 (비 오는 날은 생략)"
     },
     "animalCare": {
       "title": "동물 돌보기",

@@ -19,9 +19,9 @@ import Modal from "@/components/Modal";
 import Dropdown from "@/components/Dropdown";
 
 const PRODUCE: Produce[] = ["raw", "keg", "jar"];
-// 가공 유형 아이콘: 원물=옥수수, 술통=keg, 절임통=preservesJar
+// 가공 유형 아이콘: 원물=옥수수(작물), 술통=keg, 절임통=preservesJar
 const PRODUCE_ICON: Record<Produce, string> = {
-  raw: "/icons/seeds/corn.png",
+  raw: "/icons/ui/corn.png",
   keg: "/icons/machines/keg.png",
   jar: "/icons/machines/preservesJar.png",
 };

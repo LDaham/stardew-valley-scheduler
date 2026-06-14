@@ -49,6 +49,17 @@
     "rainBundleOpen": "Open bundle tracker",
     "birthdayOf": "Deliver gift to {name}",
     "plantDeadline": "Last day to plant {crop}",
+    "deadlineShift": "(shown early — shop closed tomorrow)",
+    "wateringGroup": "Water crops",
+    "rainForecast": "Rain forecast",
+    "deleteTitle": "Delete task",
+    "deleteBody": "Delete just this item, or delete the related tasks for the same crop across all dates.",
+    "deleteOne": "Delete this item only",
+    "deleteAllCrop": "Delete all for this crop",
+    "deleteAllCat": "Delete all {cat} ({count})",
+    "deleteCat_watering": "Crop watering",
+    "deleteCat_harvest": "Crop harvest",
+    "deleteCat_buySeed": "Buy seeds",
     "dDay": "D-{days}"
   },
   "memo": {
@@ -78,6 +89,12 @@
     "events": "Fixed events",
     "reminders": "Weekly reminders",
     "language": "Language",
+    "resetTitle": "Reset all settings",
+    "resetDesc": "Restores all saved settings (bundles, character, tasks, etc.) to defaults. This cannot be undone.",
+    "resetButton": "Reset all settings",
+    "resetConfirm": "Reset everything?",
+    "resetYes": "Reset",
+    "resetNo": "Cancel",
     "orderHint": "Drag the ⠿ handle to reorder; check to show/hide.",
     "reorder": "Drag to reorder",
     "userAdded": "User-added"
@@ -108,6 +125,8 @@
     "showAll": "Show all",
     "showFill": "Hide unobtainable",
     "pick": "{needed} of {total}",
+    "excludeUnobtainable": "Exclude items not obtainable this season",
+    "onlyCurrentOnly": "Only items obtainable only in {season}",
     "hiddenNote": "Items not obtainable this season are under 'Show all'",
     "seasonNeeds": "Obtainable this season ({season}) · still needed",
     "seasonNeedsNone": "No items left to gather this season",
@@ -250,10 +269,12 @@
     "tool": "Tool upgrade",
     "seed": "Plant seeds",
     "machine": "Artisan goods",
+    "misc": "Geode·Museum",
     "geode": "Crack geodes",
     "museum": "Donate to museum",
     "geodeMemo": "Crack geodes — take ore geodes to the Blacksmith (Clint) to open",
     "museumMemo": "Donate to museum — donate newly found minerals and artifacts to the museum (Gunther)",
+    "miscMemo": "Crack geodes & donate to museum",
     "back": "Back",
     "add": "Add",
     "selectTool": "Select tool",
@@ -334,6 +355,15 @@
     "botanist": "Botanist",
     "botanistDesc": "Wild seeds always iridium quality"
   },
+  "myTasks": {
+    "title": "My added tasks",
+    "short": "My tasks",
+    "open": "Open my added tasks",
+    "empty": "No tasks added yet",
+    "other": "Other",
+    "delete": "Delete",
+    "deleteAll": "Delete this group"
+  },
   "tools": {
     "axe": "Axe",
     "pickaxe": "Pickaxe",
@@ -365,10 +395,6 @@
     "weatherFortune": {
       "title": "Check weather & fortune",
       "detail": "Check tomorrow's weather forecast and the daily luck (fortune) on TV"
-    },
-    "watering": {
-      "title": "Water crops",
-      "detail": "Water crops without sprinklers (skip on rainy days)"
     },
     "animalCare": {
       "title": "Tend animals",

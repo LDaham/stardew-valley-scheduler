@@ -5,7 +5,6 @@ import type { Weekday } from "@/lib/calendar";
 
 export type ReminderId =
   | "weatherFortune"
-  | "watering"
   | "animalCare"
   | "farmCave"
   | "hardwood"
@@ -43,7 +42,6 @@ export interface ReminderDef {
 // 표시 아이콘은 이모지가 아니라 public/icons/reminders/<id>.png 이미지를 사용한다.
 export const REMINDERS: ReminderDef[] = [
   { id: "weatherFortune", trigger: { kind: "daily" } },
-  { id: "watering", trigger: { kind: "daily" } },
   { id: "animalCare", trigger: { kind: "daily" } },
   { id: "farmCave", trigger: { kind: "daily" } },
   { id: "hardwood", trigger: { kind: "daily" } },

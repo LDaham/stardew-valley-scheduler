@@ -22,7 +22,7 @@ const MEMO_ICON: Record<string, string> = {
   watering: "/icons/reminders/watering.png",
   tool: "/icons/addTask/tool.png",
   machine: "/icons/addTask/machine.png",
-  misc: "/icons/addTask/geode.png",
+  misc: "/icons/addTask/misc.png",
   eatFood: "/icons/ui/food.png",
 };
 
@@ -128,6 +128,21 @@ export default function TodoSettingsDialog({
                 <span className="block text-xs text-[var(--sv-ink-muted)]">
                   {t(`reminders.${id}.detail`)}
                 </span>
+                {/* 소스의 여왕 재방송: 신규 방영의 하위 토글(순서는 함께 이동) */}
+                {id === "queenOfSauceNew" && (
+                  <label className="mt-1 flex cursor-pointer items-center gap-1.5 text-xs">
+                    <input
+                      type="checkbox"
+                      checked={reminderToggles.queenOfSauceRerun}
+                      onChange={(e) =>
+                        setReminderToggle("queenOfSauceRerun", e.target.checked)
+                      }
+                      className="size-3.5 accent-[var(--sv-accent)]"
+                    />
+                    <ReminderIcon id="queenOfSauceRerun" size={14} />
+                    <span>{t("reminders.queenOfSauceRerun.title")}</span>
+                  </label>
+                )}
               </span>
             );
           } else {

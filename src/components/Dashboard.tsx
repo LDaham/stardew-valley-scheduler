@@ -1,17 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import {
-  addDays,
-  isSameDate,
-  toYearDay,
-  type SDate,
-} from "@/lib/calendar";
+import { addDays, toYearDay, type SDate } from "@/lib/calendar";
 import { filterEvents, getEventsOn, type FixedEvent } from "@/lib/events";
 import {
   getActiveReminders,
   festivalEveBlocked,
+  festivalBlocksOn,
   type ReminderBadge,
 } from "@/lib/reminders";
 import { useSchedule } from "@/components/ScheduleProvider";
@@ -26,6 +22,7 @@ import TimeIcon from "@/components/TimeIcon";
 import PixelIcon from "@/components/PixelIcon";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import { toolPickup } from "@/lib/blacksmith";
+import type { Memo } from "@/types/schedule";
 import type { ReactNode } from "react";
 
 // 물뿌리개 업그레이드 제안을 멈출 누적 횟수
@@ -38,11 +35,15 @@ interface TaskRow {
   icon: ReactNode;
   label: string;
   rightBadge?: ReactNode;
-  isGift?: boolean; // 생일이면 클릭 시 선물 모달
-  refId?: string;
   done: boolean;
   onToggle: () => void;
   onDelete?: () => void; // 사용자 메모만 삭제 가능
+}
+
+// 삭제 팝업 대상: 특정 메모(memoId) + 관련 작물(cropIds)
+interface DeleteTarget {
+  memoId?: string;
+  cropIds: string[];
 }
 
 export default function Dashboard({
@@ -54,9 +55,12 @@ export default function Dashboard({
   const {
     currentDate,
     setCurrentDate,
+    memos,
     memosOn,
     toggleDone,
+    setDoneMany,
     deleteMemo,
+    deleteMemos,
     taskDone,
     toggleTask,
     eventFilters,
@@ -71,26 +75,31 @@ export default function Dashboard({
     bundleItemsDone,
   } = useSchedule();
   const openGifts = useGiftDialog();
-  // 할 일 추가 대상: null=닫힘, "today"=오늘, "tomorrow"=내일
   const [addTarget, setAddTarget] = useState<"today" | "tomorrow" | null>(null);
   const [seedEffOpen, setSeedEffOpen] = useState(false);
   const [rainPromptOpen, setRainPromptOpen] = useState(false);
   const [bundleFillOpen, setBundleFillOpen] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState<DeleteTarget | null>(null);
 
-  // 비 오는 날에만 구할 수 있는, 아직 필요한 번들 품목 이름
-  const rainBundleNeeds = [
-    ...new Set(
-      BUNDLES.filter(
-        (b) =>
-          b.items.filter((i) => bundleItemsDone[bundleItemKey(b.id, i.id)])
-            .length < b.needed,
-      ).flatMap((b) =>
-        b.items
-          .filter((i) => i.rainy && !bundleItemsDone[bundleItemKey(b.id, i.id)])
-          .map((i) => t(i.nameKey)),
-      ),
-    ),
-  ];
+  // 비 오는 날에만 구할 수 있는, 아직 필요한 번들 품목(중복 id 제거)
+  const rainBundleItems = (() => {
+    const seen = new Set<string>();
+    const out: { id: string; name: string }[] = [];
+    for (const b of BUNDLES) {
+      const done = b.items.filter(
+        (i) => bundleItemsDone[bundleItemKey(b.id, i.id)],
+      ).length;
+      if (done >= b.needed) continue;
+      for (const i of b.items) {
+        if (!i.rainy) continue;
+        if (bundleItemsDone[bundleItemKey(b.id, i.id)]) continue;
+        if (seen.has(i.id)) continue;
+        seen.add(i.id);
+        out.push({ id: i.id, name: t(i.nameKey) });
+      }
+    }
+    return out;
+  })();
 
   const tomorrow = addDays(currentDate, 1);
   const tomorrowYd = toYearDay(tomorrow);
@@ -99,16 +108,13 @@ export default function Dashboard({
   const dateLabel = (d: SDate) =>
     t("addTask.dateLabel", { season: t(`seasons.${d.season}`), day: d.day });
 
-  // 마을 회관(추적 번들 전부 완료) 여부 → 금요일 휴무 판단에 사용
   const ccCompleted = BUNDLES.every(
     (b) =>
       b.items.filter((i) => bundleItemsDone[bundleItemKey(b.id, i.id)]).length >=
       b.needed,
   );
-  // 오늘 도구를 맡겼을 때 실제 수령 가능일(대장간 휴무 반영)
   const wateringPickup = toolPickup(currentDate, ccCompleted);
 
-  // "내일 비" 토글: 켜면 내일 물주기가 숨겨지고, 업그레이드 여력이 있으면 제안 띄움
   const toggleRainTomorrow = () => {
     const next = !rainTomorrow;
     setRainDay(tomorrowYd, next);
@@ -117,7 +123,6 @@ export default function Dashboard({
     }
   };
 
-  // 물뿌리개 업그레이드를 실제 수령 가능일에 추가(대장간 휴무 시 다음 영업일)
   const addWateringCanUpgrade = () => {
     const target = wateringPickup.pickup;
     addMemo({
@@ -148,42 +153,59 @@ export default function Dashboard({
     return null;
   };
 
+  // 메모 삭제: 작물 관련(씨앗 심기) 메모는 팝업, 그 외는 즉시 삭제
+  const onMemoDelete = (m: { id: string; cropId?: string }) =>
+    m.cropId
+      ? () => setDeleteTarget({ memoId: m.id, cropIds: [m.cropId!] })
+      : () => deleteMemo(m.id);
+
   // 한 날짜의 이벤트·리마인더·메모를 하나의 체크리스트로 합친다.
   const buildRows = (date: SDate): TaskRow[] => {
     const yd = toYearDay(date);
-    const isRain = !!rainDays[yd]; // 비 오는 날엔 물주기 숨김
-    const isToday = isSameDate(date, currentDate);
+    const isRain = !!rainDays[yd];
     const rows: TaskRow[] = [];
 
+    // 고정 이벤트. 작물 심기 마감일이 휴무일이면 그날은 숨기고 전날로 옮긴다.
     for (const e of filterEvents(getEventsOn(date), eventFilters)) {
+      if (e.type === "cropDeadline" && festivalBlocksOn(date)) continue;
       const key = `${yd}:event-${e.type}-${e.refId}`;
       rows.push({
         key,
         orderKey: `event:${e.type}`,
         icon: <EventIcon event={e} size={16} />,
         label: fixedLabel(e),
-        isGift: e.type === "birthday",
-        refId: e.refId,
+        rightBadge:
+          e.type === "birthday" ? (
+            <ActionChip
+              onClick={() => openGifts(e.refId)}
+              label={t("gift.viewGifts")}
+            />
+          ) : undefined,
         done: !!taskDone[key],
         onToggle: () => toggleTask(key),
       });
     }
+    // 내일이 마감일인데 내일이 휴무면 오늘 미리 표시(+ 안내)
+    const tom = addDays(date, 1);
+    if (festivalBlocksOn(tom)) {
+      for (const e of filterEvents(getEventsOn(tom), eventFilters)) {
+        if (e.type !== "cropDeadline") continue;
+        const key = `${yd}:deadline-shift-${e.refId}`;
+        rows.push({
+          key,
+          orderKey: "event:cropDeadline",
+          icon: <EventIcon event={e} size={16} />,
+          label: `${fixedLabel(e)} ${t("dashboard.deadlineShift")}`,
+          done: !!taskDone[key],
+          onToggle: () => toggleTask(key),
+        });
+      }
+    }
 
     for (const r of getActiveReminders(date, reminderToggles)) {
-      // 비 오는 날은 매일 물주기 리마인더 숨김
-      if (r.id === "watering" && isRain) continue;
       const key = `${yd}:reminder-${r.id}`;
-      // 날씨·운세(오늘)에는 "내일 비" 토글, 마을회관 번들에는 "번들 채우기" 버튼
       let rightBadge = reminderBadge(r.badge);
-      if (r.id === "weatherFortune" && isToday) {
-        rightBadge = (
-          <RainToggle
-            active={rainTomorrow}
-            onToggle={toggleRainTomorrow}
-            label={t("dashboard.rainTomorrow")}
-          />
-        );
-      } else if (r.id === "communityCenterBundle") {
+      if (r.id === "communityCenterBundle") {
         rightBadge = (
           <ActionChip
             onClick={() => setBundleFillOpen(true)}
@@ -203,9 +225,14 @@ export default function Dashboard({
       if (r.id === "helpWanted" && festivalEveBlocked(date)) {
         label = `${label} (${t("reminders.helpWanted.eveWarning")})`;
       }
+      // 소스의 여왕 재방송은 신규 방영과 함께 움직이도록 같은 순서 키 사용
+      const orderKey =
+        r.id === "queenOfSauceRerun"
+          ? "reminder:queenOfSauceNew"
+          : `reminder:${r.id}`;
       rows.push({
         key,
-        orderKey: `reminder:${r.id}`,
+        orderKey,
         icon: <ReminderIcon id={r.id} size={16} />,
         label,
         rightBadge,
@@ -214,8 +241,9 @@ export default function Dashboard({
       });
     }
 
+    // 메모: 작물 물주기는 한 줄로 묶고, 나머지는 개별 표시.
+    const wateringMemos: typeof memos = [];
     for (const m of memosOn(date)) {
-      // 씨앗 구매 메모(buySeed): buySeeds 리마인더와 순서·토글 통합
       if (m.category === "buySeed") {
         if (!reminderToggles.buySeeds) continue;
         rows.push({
@@ -225,32 +253,68 @@ export default function Dashboard({
           label: m.text,
           done: m.done,
           onToggle: () => toggleDone(m.id),
-          onDelete: () => deleteMemo(m.id),
+          onDelete: onMemoDelete(m),
         });
         continue;
       }
-      // 카테고리가 꺼져 있으면 숨김(카테고리 없는 레거시 메모는 항상 표시)
       if (m.category && !memoCategoryToggles[m.category]) continue;
-      // 비 오는 날은 작물별 물주기 숨김
-      if (m.category === "watering" && isRain) continue;
+      if (m.category === "watering") {
+        if (isRain) continue;
+        wateringMemos.push(m);
+        continue;
+      }
+      const icon =
+        m.category === "harvest" && m.cropId ? (
+          <PixelIcon src={`/icons/seeds/${m.cropId}.png`} />
+        ) : m.category === "eatFood" ? (
+          <PixelIcon src="/icons/ui/food.png" />
+        ) : m.category === "misc" ? (
+          <PixelIcon src="/icons/addTask/museum.png" />
+        ) : (
+          <PixelIcon src="/icons/ui/note.png" />
+        );
       rows.push({
         key: `memo-${m.id}`,
         orderKey: `memo:${m.category ?? "machine"}`,
-        icon: <PixelIcon src="/icons/ui/note.png" />,
+        icon,
         label: m.text,
         done: m.done,
         onToggle: () => toggleDone(m.id),
-        onDelete: () => deleteMemo(m.id),
+        onDelete: onMemoDelete(m),
+      });
+    }
+    // 작물 물주기 묶음: "작물 물주기(작물A, 작물B)" — 같은 작물은 한 번만
+    if (wateringMemos.length > 0) {
+      const names = [
+        ...new Set(
+          wateringMemos.map((m) => (m.cropId ? t(`crops.${m.cropId}`) : m.text)),
+        ),
+      ];
+      const cropIds = [
+        ...new Set(
+          wateringMemos
+            .map((m) => m.cropId)
+            .filter((id): id is string => !!id),
+        ),
+      ];
+      const ids = wateringMemos.map((m) => m.id);
+      const allDone = wateringMemos.every((m) => m.done);
+      rows.push({
+        key: `watering-${yd}`,
+        orderKey: "memo:watering",
+        icon: <PixelIcon src="/icons/reminders/watering.png" />,
+        label: `${t("dashboard.wateringGroup")}(${names.join(", ")})`,
+        done: allDone,
+        onToggle: () => setDoneMany(ids, !allDone),
+        onDelete: () => setDeleteTarget({ cropIds }),
       });
     }
 
-    // 사용자 지정 표시 순서로 정렬(같은 엔트리 내에서는 원래 순서 유지 = 안정 정렬)
     const rank = (k: string) => {
       const i = todoOrder.indexOf(k);
       return i < 0 ? Number.MAX_SAFE_INTEGER : i;
     };
     rows.sort((a, b) => rank(a.orderKey) - rank(b.orderKey));
-
     return rows;
   };
 
@@ -300,23 +364,35 @@ export default function Dashboard({
         </button>
       </div>
 
+      {/* 아침에 확인한 날씨(내일 비 예보) 토글 — todolist 박스 위 */}
+      <div className="flex justify-end">
+        <button
+          onClick={toggleRainTomorrow}
+          className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-semibold ${
+            rainTomorrow
+              ? "border-[#5b8fb0] bg-[#5b8fb0] text-white"
+              : "border-[var(--sv-border)] text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
+          }`}
+        >
+          <PixelIcon src="/icons/ui/rain.png" size={16} />
+          {t("dashboard.rainForecast")}
+        </button>
+      </div>
+
       {/* 통합 To Do List: 오늘 항목 + 점선 + 내일 항목 */}
       <div className="rounded-xl border-2 border-[var(--sv-accent)] bg-[var(--sv-panel)] p-4 shadow-sm">
         <h2 className="mb-2 text-sm font-bold">{t("dashboard.todoList")}</h2>
         <TaskList
           rows={todayRows}
           emptyText={t("dashboard.noTasks")}
-          onGift={openGifts}
           deleteLabel={t("memo.delete")}
         />
         {tomorrowRows.length > 0 && (
           <>
             <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
-            {/* 내일 항목은 미리 체크할 수 없도록 비활성화 */}
             <TaskList
               rows={tomorrowRows}
               emptyText={t("dashboard.noTasks")}
-              onGift={openGifts}
               deleteLabel={t("memo.delete")}
               disabled
             />
@@ -341,6 +417,17 @@ export default function Dashboard({
         />
       )}
 
+      {/* 관련 할 일 일괄 삭제 팝업(작물별 카테고리 삭제, 남은 항목 있으면 유지) */}
+      {deleteTarget && (
+        <DeleteTaskDialog
+          target={deleteTarget}
+          memos={memos}
+          onClose={() => setDeleteTarget(null)}
+          deleteMemo={deleteMemo}
+          deleteMemos={deleteMemos}
+        />
+      )}
+
       {rainPromptOpen && (
         <Modal
           title={t("dashboard.rainPromptTitle")}
@@ -362,14 +449,21 @@ export default function Dashboard({
             </p>
           )}
 
-          {/* 비 오는 날에만 구할 수 있는 번들 품목 */}
-          {rainBundleNeeds.length > 0 && (
+          {/* 비 오는 날에만 구할 수 있는 번들 품목(이미지 포함) */}
+          {rainBundleItems.length > 0 && (
             <div className="mb-3 rounded-md bg-[var(--sv-bg)] p-3">
-              <p className="mb-1 flex items-center gap-1 text-xs font-semibold">
+              <p className="mb-2 flex items-center gap-1 text-xs font-semibold">
                 <PixelIcon src="/icons/ui/rain.png" size={14} />
                 {t("dashboard.rainBundleItems")}
               </p>
-              <p className="mb-2 text-sm">{rainBundleNeeds.join(", ")}</p>
+              <ul className="mb-2 flex flex-wrap gap-x-3 gap-y-1">
+                {rainBundleItems.map((i) => (
+                  <li key={i.id} className="flex items-center gap-1 text-sm">
+                    <PixelIcon src={`/icons/bundleItems/${i.id}.png`} size={16} />
+                    {i.name}
+                  </li>
+                ))}
+              </ul>
               <button
                 onClick={() => {
                   setRainPromptOpen(false);
@@ -432,32 +526,122 @@ function ActionChip({
   );
 }
 
-// 날씨·운세 행의 "내일 비" 토글 버튼 (행 토글과 분리: preventDefault/stopPropagation)
-function RainToggle({
-  active,
-  onToggle,
+// 박스 안에 ✕가 있는 삭제 버튼 [x]
+function DeleteBtn({
+  onClick,
   label,
 }: {
-  active: boolean;
-  onToggle: () => void;
-  label: string;
+  onClick: () => void;
+  label?: string;
 }) {
   return (
     <button
       type="button"
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        onToggle();
-      }}
-      className={`inline-flex shrink-0 items-center gap-1 rounded px-1.5 py-0.5 text-[10px] font-semibold ${
-        active
-          ? "bg-[#5b8fb0] text-white"
-          : "bg-[var(--sv-border)] text-[var(--sv-ink-muted)]"
-      }`}
+      onClick={onClick}
+      aria-label={label ?? "삭제"}
+      className="flex size-6 shrink-0 items-center justify-center rounded border border-[#e23b3b] text-xs font-bold text-[#e23b3b] hover:bg-[#fbeaea]"
     >
-      <PixelIcon src="/icons/ui/rain.png" size={12} /> {label}
+      ✕
     </button>
+  );
+}
+
+const DELETE_CATS = ["watering", "harvest", "buySeed"] as const;
+
+// 관련 할 일 삭제 팝업: 작물별로 카테고리(물주기/수확/씨앗구매) 전체 삭제.
+// 카테고리를 지워도 닫지 않고, 삭제 가능한 항목이 남으면 계속 표시한다.
+function DeleteTaskDialog({
+  target,
+  memos,
+  onClose,
+  deleteMemo,
+  deleteMemos,
+}: {
+  target: DeleteTarget;
+  memos: Memo[];
+  onClose: () => void;
+  deleteMemo: (id: string) => void;
+  deleteMemos: (ids: string[]) => void;
+}) {
+  const t = useTranslations();
+  const idsFor = (cropId: string, cat: string) =>
+    memos.filter((m) => m.category === cat && m.cropId === cropId).map((m) => m.id);
+
+  const singleExists =
+    !!target.memoId && memos.some((m) => m.id === target.memoId);
+  const cropSections = target.cropIds
+    .map((cropId) => ({
+      cropId,
+      cats: DELETE_CATS.map((cat) => ({ cat, ids: idsFor(cropId, cat) })).filter(
+        (s) => s.ids.length > 0,
+      ),
+    }))
+    .filter((c) => c.cats.length > 0);
+
+  // 더 삭제할 게 없으면 자동으로 닫기
+  const nothingLeft = !singleExists && cropSections.length === 0;
+  useEffect(() => {
+    if (nothingLeft) onClose();
+  }, [nothingLeft, onClose]);
+  if (nothingLeft) return null;
+
+  return (
+    <Modal title={t("dashboard.deleteTitle")} onClose={onClose}>
+      <p className="mb-3 text-sm text-[var(--sv-ink-muted)]">
+        {t("dashboard.deleteBody")}
+      </p>
+      <div className="flex flex-col gap-3">
+        {singleExists && (
+          <div className="flex items-center justify-between gap-2 rounded-md bg-[var(--sv-bg)] px-2 py-1.5">
+            <span className="text-sm">{t("dashboard.deleteOne")}</span>
+            <DeleteBtn onClick={() => deleteMemo(target.memoId!)} />
+          </div>
+        )}
+        {cropSections.map((c) => {
+          const allIds = c.cats.flatMap((s) => s.ids);
+          return (
+            <div
+              key={c.cropId}
+              className="rounded-md border border-[var(--sv-border)] p-2"
+            >
+              {/* 작물명 + 이 작물 관련 전체 삭제 [x] */}
+              <div className="mb-1.5 flex items-center justify-between gap-2">
+                <span className="text-sm font-semibold">
+                  {t(`crops.${c.cropId}`)}
+                </span>
+                <DeleteBtn
+                  onClick={() => deleteMemos(allIds)}
+                  label={t("dashboard.deleteAllCrop")}
+                />
+              </div>
+              {/* 카테고리별 전체 삭제 [x] */}
+              <div className="flex flex-col gap-1">
+                {c.cats.map((s) => (
+                  <div
+                    key={s.cat}
+                    className="flex items-center justify-between gap-2 rounded bg-[var(--sv-bg)] px-2 py-1"
+                  >
+                    <span className="text-xs">
+                      {t("dashboard.deleteAllCat", {
+                        cat: t(`dashboard.deleteCat_${s.cat}`),
+                        count: s.ids.length,
+                      })}
+                    </span>
+                    <DeleteBtn onClick={() => deleteMemos(s.ids)} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+        <button
+          onClick={onClose}
+          className="mt-1 rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm hover:bg-[var(--sv-bg)]"
+        >
+          {t("dashboard.rainPromptSkip")}
+        </button>
+      </div>
+    </Modal>
   );
 }
 
@@ -465,13 +649,11 @@ function RainToggle({
 function TaskList({
   rows,
   emptyText,
-  onGift,
   deleteLabel,
   disabled = false,
 }: {
   rows: TaskRow[];
   emptyText: string;
-  onGift: (villagerId: string) => void;
   deleteLabel: string;
   disabled?: boolean;
 }) {
@@ -482,7 +664,6 @@ function TaskList({
     <ul className="flex flex-col gap-1">
       {rows.map((row) => (
         <li key={row.key}>
-          {/* 행 전체(label)를 눌러 완료 토글. 내일 항목(disabled)은 체크 불가 */}
           <label
             className={`flex items-center gap-2 rounded-md bg-[var(--sv-bg)] px-2 py-1.5 text-sm ${
               disabled ? "" : "cursor-pointer"
@@ -501,22 +682,7 @@ function TaskList({
               }`}
             >
               {row.icon}
-              {row.isGift && row.refId ? (
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    onGift(row.refId!);
-                  }}
-                  className="flex items-center gap-1 text-left hover:underline"
-                >
-                  <span>{row.label}</span>
-                  <PixelIcon src="/icons/ui/gift.png" size={14} />
-                </button>
-              ) : (
-                <span>{row.label}</span>
-              )}
+              <span>{row.label}</span>
             </span>
             {row.rightBadge}
             {row.onDelete && (

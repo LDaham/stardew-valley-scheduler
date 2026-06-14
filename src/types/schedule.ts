@@ -29,6 +29,8 @@ export interface Memo {
   reminderDaysBefore: number;
   // 할 일 추가 출처(수확/도구/장비). 순서 정렬에 사용. 없으면 일반 메모.
   category?: MemoCategory;
+  // 씨앗 심기에서 생성된 메모의 작물 id(아이콘 표시·관련 메모 일괄 삭제에 사용).
+  cropId?: string;
   createdAt: number;
 }
 

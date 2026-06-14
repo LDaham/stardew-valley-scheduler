@@ -22,9 +22,13 @@ export type VisibleMemoCategory = (typeof MEMO_CATEGORIES)[number];
 // 별도 카테고리로 노출하지 않으므로 MEMO_CATEGORIES에는 포함하지 않는다.
 export type MemoCategory = VisibleMemoCategory | "buySeed";
 
+// queenOfSauceRerun은 신규 방영(queenOfSauceNew)의 하위 항목으로 함께 움직이므로
+// 별도 순서 엔트리로 노출하지 않는다.
+const GROUPED_REMINDERS = new Set(["queenOfSauceRerun"]);
+
 export const TODO_ENTRIES: TodoEntry[] = [
   ...EVENT_TYPES.map((t) => ({ key: `event:${t}`, kind: "event" as const, ref: t })),
-  ...REMINDERS.map((r) => ({
+  ...REMINDERS.filter((r) => !GROUPED_REMINDERS.has(r.id)).map((r) => ({
     key: `reminder:${r.id}`,
     kind: "reminder" as const,
     ref: r.id,
@@ -42,11 +46,9 @@ export const DEFAULT_TODO_ORDER: string[] = [
   "event:birthday",
   "event:cropDeadline",
   "reminder:queenOfSauceNew",
-  "reminder:queenOfSauceRerun",
   "reminder:weatherFortune",
   "memo:harvest",
   "memo:eatFood",
-  "reminder:watering",
   "memo:watering",
   "reminder:animalCare",
   "reminder:buySeeds",

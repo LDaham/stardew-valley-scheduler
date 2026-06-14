@@ -46,7 +46,9 @@ export function useSchedule() {
     addMemos: scheduleActions.addMemos,
     updateMemo: scheduleActions.updateMemo,
     deleteMemo: scheduleActions.deleteMemo,
+    deleteMemos: scheduleActions.deleteMemos,
     toggleDone: scheduleActions.toggleDone,
+    setDoneMany: scheduleActions.setDoneMany,
     setEventFilter: scheduleActions.setEventFilter,
     setReminderToggle: scheduleActions.setReminderToggle,
     toggleTask: scheduleActions.toggleTask,
@@ -56,5 +58,6 @@ export function useSchedule() {
     incWateringCanUpgrades: scheduleActions.incWateringCanUpgrades,
     toggleBundleItem: scheduleActions.toggleBundleItem,
     setCharacter: scheduleActions.setCharacter,
+    resetAll: scheduleActions.resetAll,
   };
 }

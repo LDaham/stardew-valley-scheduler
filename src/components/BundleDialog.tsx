@@ -19,9 +19,16 @@ import type { Season } from "@/lib/calendar";
 const availableNow = (i: BundleItem, season: Season) =>
   i.seasons.length === 0 || i.seasons.includes(season);
 
-// 정렬 등급: 이번 계절(0) → 상시(1) → 다른 계절에만(2)
-const sortTier = (i: BundleItem, season: Season) =>
-  i.seasons.includes(season) ? 0 : i.seasons.length === 0 ? 1 : 2;
+// 이번 계절에만 획득 가능(단일 계절 = 현재 계절)
+const currentSeasonOnly = (i: BundleItem, season: Season) =>
+  i.seasons.length === 1 && i.seasons[0] === season;
+
+// 정렬 등급: 이번 계절만(0) → 이번 계절+다른 계절(1) → 상시(2) → 다른 계절에만(3)
+const sortTier = (i: BundleItem, season: Season) => {
+  if (i.seasons.length === 0) return 2;
+  if (i.seasons.includes(season)) return i.seasons.length === 1 ? 0 : 1;
+  return 3;
+};
 
 const SEASON_BG: Record<Season, string> = {
   spring: "var(--season-spring)",
@@ -40,8 +47,12 @@ export default function BundleDialog({
   const t = useTranslations();
   const { currentDate, bundleItemsDone, toggleBundleItem } = useSchedule();
   const season = currentDate.season;
-  // fill 모드: 이번 계절·사계절 획득 가능 품목만. all 모드: 전체.
-  const [showAll, setShowAll] = useState(initialMode === "all");
+  // 이번 계절에 획득 불가능한 품목 제외(fill 모드 기본 켜짐)
+  const [excludeUnobtainable, setExcludeUnobtainable] = useState(
+    initialMode === "fill",
+  );
+  // 이번 계절에만 획득 가능한 품목만 보기(카테고리 무관)
+  const [onlyCurrentOnly, setOnlyCurrentOnly] = useState(false);
 
   const isDone = (b: Bundle, itemId: string) =>
     !!bundleItemsDone[bundleItemKey(b.id, itemId)];
@@ -49,47 +60,39 @@ export default function BundleDialog({
     b.items.filter((i) => isDone(b, i.id)).length;
   const isComplete = (b: Bundle) => doneCount(b) >= b.needed;
 
-  const seasonNeeds = BUNDLES.filter((b) => !isComplete(b)).flatMap((b) =>
-    b.items
-      .filter((i) => !isDone(b, i.id) && i.seasons.includes(season))
-      .map((i) => t(i.nameKey)),
-  );
-  const uniqueNeeds = [...new Set(seasonNeeds)];
-
   return (
     <Modal title={t("bundle.title")} onClose={onClose}>
-      {/* 이번 계절 획득 가능 안내 + 보기 전환 */}
-      <div className="mb-4 rounded-lg border border-[var(--sv-accent)] bg-[var(--sv-bg)] p-3">
-        <div className="mb-1 flex items-center justify-between gap-2">
-          <h3 className="text-sm font-bold">
-            {t("bundle.seasonNeeds", { season: t(`seasons.${season}`) })}
-          </h3>
-          <button
-            onClick={() => setShowAll((v) => !v)}
-            className="shrink-0 rounded border border-[var(--sv-border)] px-2 py-0.5 text-[11px] hover:bg-[var(--sv-panel)]"
-          >
-            {showAll ? t("bundle.showFill") : t("bundle.showAll")}
-          </button>
-        </div>
-        {uniqueNeeds.length === 0 ? (
-          <p className="text-xs text-[var(--sv-ink-muted)]">
-            {t("bundle.seasonNeedsNone")}
-          </p>
-        ) : (
-          <p className="text-sm">{uniqueNeeds.join(", ")}</p>
-        )}
-        {!showAll && (
-          <p className="mt-1 text-[11px] text-[var(--sv-ink-muted)]">
-            {t("bundle.hiddenNote")}
-          </p>
-        )}
+      {/* 필터 */}
+      <div className="mb-4 flex flex-col gap-1.5">
+        <label className="flex cursor-pointer items-center gap-2 text-sm">
+          <input
+            type="checkbox"
+            checked={excludeUnobtainable}
+            onChange={(e) => setExcludeUnobtainable(e.target.checked)}
+            className="size-4 accent-[var(--sv-accent)]"
+          />
+          {t("bundle.excludeUnobtainable")}
+        </label>
+        <label className="flex cursor-pointer items-center gap-2 text-sm">
+          <input
+            type="checkbox"
+            checked={onlyCurrentOnly}
+            onChange={(e) => setOnlyCurrentOnly(e.target.checked)}
+            className="size-4 accent-[var(--sv-accent)]"
+          />
+          {t("bundle.onlyCurrentOnly", { season: t(`seasons.${season}`) })}
+        </label>
       </div>
 
       <div className="flex flex-col gap-4">
         {BUNDLES.map((b) => {
           const visible = b.items
-            .filter((i) => showAll || availableNow(i, season))
-            // 이번 계절 획득 가능 품목을 위로 정렬(기본)
+            .filter((i) =>
+              onlyCurrentOnly
+                ? currentSeasonOnly(i, season)
+                : !excludeUnobtainable || availableNow(i, season),
+            )
+            // 계절 우선 정렬(이번 계절만 → 이번+다른 → 상시 → 다른 계절만)
             .sort((a, b2) => sortTier(a, season) - sortTier(b2, season));
           if (visible.length === 0) return null;
           const done = doneCount(b);

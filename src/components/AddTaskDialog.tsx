@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { addDays, type SDate } from "@/lib/calendar";
+import { addDays, SEASONS, type SDate } from "@/lib/calendar";
 import { CROPS } from "@/data/game-data";
 import { MACHINES } from "@/data/machines";
 import { computeHarvest, type Fertilizer } from "@/lib/growth";
@@ -20,20 +20,15 @@ import PixelIcon from "@/components/PixelIcon";
 
 type Mode = "menu" | "tool" | "seed" | "machine";
 
-// 폼이 있는 메뉴(계산 필요) / 폼 없이 즉시 추가하는 단순 메뉴(misc)
-const FORM_MENU = ["tool", "seed", "machine"] as const;
-const SIMPLE_MENU = ["geode", "museum"] as const;
+// 메뉴 항목. tool/seed/machine은 하위 폼, misc(정동석·박물관)는 즉시 추가(단일 항목).
+const MENU = ["tool", "seed", "machine", "misc"] as const;
 
 // 메뉴 항목 아이콘
-const MENU_ICONS: Record<
-  (typeof FORM_MENU)[number] | (typeof SIMPLE_MENU)[number],
-  string
-> = {
+const MENU_ICONS: Record<string, string> = {
   tool: "/icons/addTask/tool.png",
   seed: "/icons/addTask/seed.png",
   machine: "/icons/addTask/machine.png",
-  geode: "/icons/addTask/geode.png",
-  museum: "/icons/addTask/museum.png",
+  misc: "/icons/addTask/misc.png",
 };
 
 const TOOLS = ["axe", "pickaxe", "hoe", "wateringCan", "trashCan"] as const;
@@ -92,10 +87,27 @@ export default function AddTaskDialog({
         text: t("addTask.harvestMemo", { crop: cropName }),
         reminderDaysBefore: 0,
         category: "harvest",
+        cropId,
       },
     ];
-    const sameSeason = h.date.season === baseDate.season;
-    const lastWater = crop.regrowDays ? 28 : sameSeason ? h.date.day - 1 : 28;
+
+    // 물주기 유효일: 이 계절 안에서 수확에 도움이 되는 날만.
+    // 단, 다음 계절에도 자라는 작물이면 계절 끝까지(다음 계절 수확을 위해).
+    const idx = SEASONS.indexOf(baseDate.season);
+    const growsNext =
+      baseDate.season !== "winter" &&
+      idx < 3 &&
+      crop.seasons.includes(SEASONS[idx + 1]);
+    let lastWater: number;
+    if (growsNext) {
+      lastWater = 28;
+    } else if (h.willWilt) {
+      lastWater = 0; // 이 계절·다음 계절 모두 수확 불가 → 물주기 제외
+    } else {
+      let last = h.date.day; // 이 계절 마지막 수확일
+      if (crop.regrowDays) while (last + crop.regrowDays <= 28) last += crop.regrowDays;
+      lastWater = last - 1; // 마지막 수확 전날까지
+    }
     for (let d = baseDate.day; d <= Math.min(lastWater, 28); d++) {
       memos.push({
         season: baseDate.season,
@@ -103,6 +115,7 @@ export default function AddTaskDialog({
         text: t("addTask.wateringMemo", { crop: cropName }),
         reminderDaysBefore: 0,
         category: "watering",
+        cropId,
       });
     }
     // 재수확 작물이 아니고 시즌 내 수확 가능하면, 수확일에 재파종용 씨앗 구매 메모 추가
@@ -113,6 +126,7 @@ export default function AddTaskDialog({
         text: t("addTask.buySeedMemo", { crop: cropName }),
         reminderDaysBefore: 0,
         category: "buySeed",
+        cropId,
       });
     }
     // 수확일에 음식 먹기(품질 버프) — 선택 시 수확일에 메모 추가
@@ -123,6 +137,7 @@ export default function AddTaskDialog({
         text: t("addTask.eatFoodMemo", { crop: cropName }),
         reminderDaysBefore: 0,
         category: "eatFood",
+        cropId,
       });
     }
     addMemos(memos);
@@ -161,10 +176,12 @@ export default function AddTaskDialog({
     >
       {mode === "menu" && (
         <ul className="flex flex-col gap-2">
-          {FORM_MENU.map((m) => renderMenuItem(m, () => setMode(m)))}
-          {SIMPLE_MENU.map((m) =>
-            renderMenuItem(m, () =>
-              addAndClose(baseDate, t(`addTask.${m}Memo`), "misc"),
+          {MENU.map((m) =>
+            renderMenuItem(
+              m,
+              m === "misc"
+                ? () => addAndClose(baseDate, t("addTask.miscMemo"), "misc")
+                : () => setMode(m),
             ),
           )}
         </ul>
@@ -313,10 +330,8 @@ function SeedForm({
   ) => void;
 }) {
   const t = useTranslations();
-  // phases가 있는 작물만 파종 대상(효율 표시 전용 작물 제외)
-  const seasonCrops = CROPS.filter(
-    (c) => c.seasons.includes(plantDate.season) && c.phases,
-  );
+  // 효율 창과 동일하게 해당 계절에 심을 수 있는 모든 작물 표시
+  const seasonCrops = CROPS.filter((c) => c.seasons.includes(plantDate.season));
   const [cropId, setCropId] = useState<string>(seasonCrops[0]?.id ?? "");
   const [agri, setAgri] = useState(false);
   const [fert, setFert] = useState<Fertilizer>("none");

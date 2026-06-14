@@ -24,3 +24,14 @@
 body {
   font-family: system-ui, "Segoe UI", "Malgun Gothic", Arial, sans-serif;
 }
+
+/* 클릭 가능한 요소는 마우스 올리면 손가락 커서(비활성은 제외).
+   Tailwind v4 preflight는 버튼에 pointer를 주지 않으므로 전역으로 지정한다. */
+@layer base {
+  button:not(:disabled),
+  a,
+  select:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}

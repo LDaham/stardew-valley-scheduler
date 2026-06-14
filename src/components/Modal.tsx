@@ -4,7 +4,11 @@ import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
-// 설정류 다이얼로그 공용 모달: 오버레이·ESC 닫기·헤더(제목+닫기) 제공.
+// 열린 모달 수(중첩 시 마지막 닫힐 때 스크롤 복원)
+let modalOpenCount = 0;
+let savedBodyOverflow = "";
+
+// 설정류 다이얼로그 공용 모달: 오버레이·ESC 닫기·헤더(제목+닫기)·배경 스크롤 잠금 제공.
 export default function Modal({
   title,
   onClose,
@@ -26,6 +30,19 @@ export default function Modal({
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
+
+  // 모달 열려 있는 동안 배경(외부) 스크롤 잠금. 모달 중첩도 안전하게 처리.
+  useEffect(() => {
+    if (modalOpenCount === 0) {
+      savedBodyOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+    }
+    modalOpenCount += 1;
+    return () => {
+      modalOpenCount -= 1;
+      if (modalOpenCount === 0) document.body.style.overflow = savedBodyOverflow;
+    };
+  }, []);
 
   return (
     <div

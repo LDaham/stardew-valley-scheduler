@@ -26,6 +26,14 @@ export function festivalEveBlocked(date: SDate): boolean {
   return !!fest && !EVENING_FESTIVALS.has(fest.id);
 }
 
+// 그날 NPC·상점이 막히는 축제일인지(피에르네 등 상점에서 씨앗 구매 불가).
+// 다중일 축제 포함, 저녁 축제는 제외.
+export function festivalBlocksOn(date: SDate): boolean {
+  return getEventsOn(date).some(
+    (e) => e.type === "festival" && !EVENING_FESTIVALS.has(e.refId),
+  );
+}
+
 export interface ActiveReminder {
   id: ReminderId;
   badge: ReminderBadge;

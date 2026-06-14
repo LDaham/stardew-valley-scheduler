@@ -159,11 +159,26 @@ export const scheduleActions = {
   deleteMemo(id: string) {
     commit({ ...state, memos: state.memos.filter((m) => m.id !== id) });
   },
+  // 여러 메모 일괄 삭제(관련 메모 전체 삭제 팝업에서 사용)
+  deleteMemos(ids: string[]) {
+    const set = new Set(ids);
+    commit({ ...state, memos: state.memos.filter((m) => !set.has(m.id)) });
+  },
   toggleDone(id: string) {
     commit({
       ...state,
       memos: state.memos.map((m) =>
         m.id === id ? { ...m, done: !m.done } : m,
+      ),
+    });
+  },
+  // 여러 메모의 완료 상태를 한 번에 설정(작물 물주기 묶음 토글에 사용)
+  setDoneMany(ids: string[], value: boolean) {
+    const set = new Set(ids);
+    commit({
+      ...state,
+      memos: state.memos.map((m) =>
+        set.has(m.id) ? { ...m, done: value } : m,
       ),
     });
   },
@@ -202,6 +217,23 @@ export const scheduleActions = {
   // 캐릭터 정보 부분 갱신
   setCharacter(patch: Partial<CharacterInfo>) {
     commit({ ...state, character: { ...state.character, ...patch } });
+  },
+  // 저장된 모든 설정 초기화(번들·캐릭터·메모·순서·토글 등 전부 기본값으로)
+  resetAll() {
+    commit({
+      version: STATE_VERSION,
+      currentDay: 1,
+      memos: [],
+      eventFilters: { birthday: true, festival: true, cropDeadline: true },
+      reminderToggles: { ...DEFAULT_REMINDER_TOGGLES },
+      taskDone: {},
+      todoOrder: [...DEFAULT_TODO_ORDER],
+      memoCategoryToggles: { ...DEFAULT_MEMO_CATEGORY_TOGGLES },
+      rainDays: {},
+      wateringCanUpgrades: 0,
+      bundleItemsDone: {},
+      character: { ...DEFAULT_CHARACTER },
+    });
   },
   // 번들 품목 기증 토글
   toggleBundleItem(key: string) {
