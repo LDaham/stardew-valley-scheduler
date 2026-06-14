@@ -16,6 +16,7 @@ import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
 import Dropdown from "@/components/Dropdown";
 import TimeIcon from "@/components/TimeIcon";
+import PixelIcon from "@/components/PixelIcon";
 
 type Mode = "menu" | "tool" | "seed" | "machine";
 
@@ -367,8 +368,9 @@ function SeedForm({
               ⚠ {t("addTask.wiltWarning")}
             </p>
           )}
-          <p className="text-xs text-[var(--sv-ink-muted)]">
-            💦 {t("addTask.wateringNote")}
+          <p className="flex items-center gap-1 text-xs text-[var(--sv-ink-muted)]">
+            <PixelIcon src="/icons/reminders/watering.png" size={14} />
+            {t("addTask.wateringNote")}
           </p>
         </div>
       )}

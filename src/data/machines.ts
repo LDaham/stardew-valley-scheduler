@@ -9,14 +9,12 @@ export interface MachineRecipe {
 
 export interface Machine {
   id: string; // i18n machines.<id> (장비 이름)
-  emoji: string;
   recipes: MachineRecipe[];
 }
 
 export const MACHINES: Machine[] = [
   {
     id: "keg",
-    emoji: "🛢️",
     recipes: [
       { id: "wine", days: 7 }, // 과일 → 와인
       { id: "juice", days: 4 }, // 야채 → 주스
@@ -26,7 +24,6 @@ export const MACHINES: Machine[] = [
   },
   {
     id: "preservesJar",
-    emoji: "🫙",
     recipes: [
       { id: "pickles", days: 3 }, // 야채 → 피클 (4000분)
       { id: "jelly", days: 3 }, // 과일 → 젤리 (4000분)
@@ -34,7 +31,6 @@ export const MACHINES: Machine[] = [
   },
   {
     id: "beeHouse",
-    emoji: "🍯",
     recipes: [
       { id: "honey", days: 4 }, // 벌꿀 (6720분)
     ],

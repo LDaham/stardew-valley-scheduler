@@ -37,96 +37,41 @@ export type ReminderTrigger =
 export interface ReminderDef {
   id: ReminderId;
   trigger: ReminderTrigger;
-  emoji: string;
   // 축제 당일에는 표시하지 않음(상점 잠김/시간 부족)
   suppressOnFestival?: boolean;
   // 야시장(겨울 15~17일)에는 요일과 무관하게 매일 표시
   nightMarketDaily?: boolean;
 }
 
+// 표시 아이콘은 이모지가 아니라 public/icons/reminders/<id>.png 이미지를 사용한다.
 export const REMINDERS: ReminderDef[] = [
-  {
-    id: "weatherFortune",
-    trigger: { kind: "daily" },
-    emoji: "🌤️",
-  },
-  {
-    id: "watering",
-    trigger: { kind: "daily" },
-    emoji: "💦",
-  },
-  {
-    id: "animalCare",
-    trigger: { kind: "daily" },
-    emoji: "🐄",
-  },
-  {
-    id: "farmCave",
-    trigger: { kind: "daily" },
-    emoji: "🍄",
-  },
-  {
-    id: "hardwood",
-    trigger: { kind: "daily" },
-    emoji: "🪵",
-  },
+  { id: "weatherFortune", trigger: { kind: "daily" } },
+  { id: "watering", trigger: { kind: "daily" } },
+  { id: "animalCare", trigger: { kind: "daily" } },
+  { id: "farmCave", trigger: { kind: "daily" } },
+  { id: "hardwood", trigger: { kind: "daily" } },
   {
     id: "travelingCart",
     trigger: { kind: "weekly", weekdays: ["fri", "sun"] },
-    emoji: "🛒",
     nightMarketDaily: true,
   },
   {
     id: "krobusSprinkler",
     trigger: { kind: "weekly", weekdays: ["fri"] },
-    emoji: "💧",
     suppressOnFestival: true,
   },
   {
     id: "desertTraderStaircase",
     trigger: { kind: "weekly", weekdays: ["sun"] },
-    emoji: "🪜",
   },
-  {
-    id: "specialOrders",
-    trigger: { kind: "weekly", weekdays: ["mon"] },
-    emoji: "📋",
-  },
-  {
-    id: "queenOfSauceNew",
-    trigger: { kind: "weekly", weekdays: ["sun"] },
-    emoji: "📺",
-  },
-  {
-    id: "queenOfSauceRerun",
-    trigger: { kind: "weekly", weekdays: ["wed"] },
-    emoji: "📺",
-  },
-  {
-    id: "buySeeds",
-    trigger: { kind: "seasonStart" },
-    emoji: "🌱",
-  },
-  {
-    id: "helpWanted",
-    trigger: { kind: "daily" },
-    emoji: "📜",
-  },
-  {
-    id: "helpWantedDeadline",
-    trigger: { kind: "festivalEve" },
-    emoji: "⚠️",
-  },
-  {
-    id: "communityCenterBundle",
-    trigger: { kind: "seasonStart" },
-    emoji: "🟢",
-  },
-  {
-    id: "crabPot",
-    trigger: { kind: "daily" },
-    emoji: "🦀",
-  },
+  { id: "specialOrders", trigger: { kind: "weekly", weekdays: ["mon"] } },
+  { id: "queenOfSauceNew", trigger: { kind: "weekly", weekdays: ["sun"] } },
+  { id: "queenOfSauceRerun", trigger: { kind: "weekly", weekdays: ["wed"] } },
+  { id: "buySeeds", trigger: { kind: "seasonStart" } },
+  { id: "helpWanted", trigger: { kind: "daily" } },
+  { id: "helpWantedDeadline", trigger: { kind: "festivalEve" } },
+  { id: "communityCenterBundle", trigger: { kind: "seasonStart" } },
+  { id: "crabPot", trigger: { kind: "daily" } },
 ];
 
 // 기본 토글 상태: 전부 꺼짐

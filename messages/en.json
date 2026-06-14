@@ -290,7 +290,7 @@
     "botanist": "Botanist",
     "detail": "{profit}g · {harvests} harvests · {perDay}g/day",
     "rawFallback": "no processing → raw",
-    "note": "Relative revenue (max = 100%). Reflects season, cross-season, processing, fertilizer and skills; ignores level, quality odds, seed cost and processing time. Botanist only affects wild seeds."
+    "note": "Relative revenue (max = 100%). Reflects a single season (28 days), processing, fertilizer and skills; ignores cross-season, level, quality odds, seed cost and processing time. Botanist only affects wild seeds."
   },
   "tools": {
     "axe": "Axe",

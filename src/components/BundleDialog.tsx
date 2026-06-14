@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { useSchedule } from "@/components/ScheduleProvider";
 import { asset } from "@/lib/asset";
 import Modal from "@/components/Modal";
+import PixelIcon from "@/components/PixelIcon";
 import {
   BUNDLES,
   bundleItemKey,
@@ -146,8 +147,9 @@ export default function BundleDialog({
                           {t(i.nameKey)}
                         </span>
                         {i.rainy && (
-                          <span className="shrink-0 rounded bg-[#5b8fb0] px-1 py-0.5 text-[10px] font-semibold text-white">
-                            ☔ {t("bundle.rainy")}
+                          <span className="inline-flex shrink-0 items-center gap-1 rounded bg-[#5b8fb0] px-1 py-0.5 text-[10px] font-semibold text-white">
+                            <PixelIcon src="/icons/ui/rain.png" size={11} />
+                            {t("bundle.rainy")}
                           </span>
                         )}
                         {/* 계절 배지: 이번 계절은 강조(테두리), 그 외는 옅게 */}

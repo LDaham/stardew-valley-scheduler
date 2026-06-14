@@ -22,7 +22,6 @@ export type ReminderBadge =
 
 export interface ActiveReminder {
   id: ReminderId;
-  emoji: string;
   badge: ReminderBadge;
 }
 
@@ -87,7 +86,7 @@ export function getActiveReminders(
     if (def.suppressOnFestival && isFestivalDay(date)) continue;
 
     const badge = matchTrigger(def, date);
-    if (badge) out.push({ id: def.id, emoji: def.emoji, badge });
+    if (badge) out.push({ id: def.id, badge });
   }
   return out;
 }

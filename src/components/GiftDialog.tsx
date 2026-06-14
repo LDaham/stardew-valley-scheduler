@@ -11,6 +11,7 @@ import {
   type Tier,
 } from "@/data/universal-gifts";
 import { asset } from "@/lib/asset";
+import PixelIcon from "@/components/PixelIcon";
 
 const TIER_COLOR: Record<string, string> = {
   loves: "#c0506b",
@@ -33,7 +34,7 @@ function ItemChip({ ko, en, icon }: { ko: string; en: string; icon?: string }) {
           style={{ imageRendering: "pixelated" }}
         />
       ) : (
-        <span aria-hidden>📦</span>
+        <PixelIcon src="/icons/ui/gift.png" size={18} />
       )}
       <span>{locale === "ko" ? ko : en}</span>
     </span>
@@ -61,7 +62,7 @@ function CategoryRow({
         title={entry.detail ?? undefined}
         className="flex items-center gap-1.5 rounded-md bg-[var(--sv-bg)] px-2 py-1 text-xs italic"
       >
-        <span aria-hidden>📦</span>
+        <PixelIcon src="/icons/ui/gift.png" size={14} />
         {locale === "ko" ? entry.ko : entry.en}
       </span>
     );
@@ -74,7 +75,7 @@ function CategoryRow({
         title={entry.detail ?? undefined}
         className="flex w-full items-center gap-1.5 text-left text-xs font-medium"
       >
-        <span aria-hidden>{open ? "📂" : "📦"}</span>
+        <PixelIcon src="/icons/ui/gift.png" size={14} />
         <span>{locale === "ko" ? entry.ko : entry.en}</span>
         <span className="ml-auto text-[10px] text-[var(--sv-ink-muted)]">
           {open ? "▾" : `▸ ${t("gift.expand")}`}
@@ -117,7 +118,7 @@ function UniversalFolder({
         onClick={() => setOpen((v) => !v)}
         className="flex w-full items-center gap-1.5 text-left text-xs font-medium"
       >
-        <span aria-hidden>{open ? "📂" : "📦"}</span>
+        <PixelIcon src="/icons/ui/gift.png" size={14} />
         <span>{t(`gift.universal.${tierKey}`)}</span>
         <span className="ml-auto text-[10px] text-[var(--sv-ink-muted)]">
           {open ? "▾" : `▸ ${t("gift.expand")}`}

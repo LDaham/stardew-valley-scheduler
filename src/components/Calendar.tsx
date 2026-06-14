@@ -16,6 +16,7 @@ import { getActiveReminders } from "@/lib/reminders";
 import { useSchedule } from "@/components/ScheduleProvider";
 import EventIcon from "@/components/EventIcon";
 import ReminderIcon from "@/components/ReminderIcon";
+import PixelIcon from "@/components/PixelIcon";
 
 const SEASON_COLOR: Record<Season, string> = {
   spring: "var(--season-spring)",
@@ -45,7 +46,7 @@ export default function Calendar({ selectedDate, onSelectDate }: CalendarProps) 
   const eventLabel = (e: FixedEvent): string => {
     if (e.type === "festival") return t(`festivals.${e.refId}`);
     if (e.type === "birthday")
-      return `${t(`villagers.${e.refId}`)} 🎂`;
+      return `${t(`villagers.${e.refId}`)} ${t("eventType.birthday")}`;
     return `${t(`crops.${e.refId}`)} ${t("calendar.plantBy")}`;
   };
 
@@ -138,7 +139,7 @@ export default function Calendar({ selectedDate, onSelectDate }: CalendarProps) 
                 {reminders.slice(0, 2).map((r) => (
                   <ReminderIcon key={r.id} id={r.id} size={12} />
                 ))}
-                {memos.length > 0 && <span>📝</span>}
+                {memos.length > 0 && <PixelIcon src="/icons/ui/note.png" size={12} />}
               </span>
             </button>
           );

@@ -10,6 +10,7 @@ import Calendar from "@/components/Calendar";
 import SettingsDialog from "@/components/SettingsDialog";
 import TodoSettingsDialog from "@/components/TodoSettingsDialog";
 import BundleDialog from "@/components/BundleDialog";
+import PixelIcon from "@/components/PixelIcon";
 
 function AppShell() {
   const t = useTranslations();
@@ -32,23 +33,23 @@ function AppShell() {
           <button
             onClick={() => setBundleOpen(true)}
             aria-label={t("bundle.open")}
-            className="rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
+            className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
           >
-            🟢 {t("bundle.short")}
+            <PixelIcon src="/icons/ui/bundle.png" size={18} /> {t("bundle.short")}
           </button>
           <button
             onClick={() => setTodoSettingsOpen(true)}
             aria-label={t("settings.openTodo")}
-            className="rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
+            className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
           >
-            🗒️ {t("settings.todoSettings")}
+            <PixelIcon src="/icons/ui/note.png" size={18} /> {t("settings.todoSettings")}
           </button>
           <button
             onClick={() => setSettingsOpen(true)}
             aria-label={t("settings.open")}
-            className="rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
+            className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
           >
-            ⚙ {t("settings.title")}
+            <PixelIcon src="/icons/ui/settings.png" size={18} /> {t("settings.title")}
           </button>
         </div>
       </header>

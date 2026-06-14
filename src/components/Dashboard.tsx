@@ -22,6 +22,7 @@ import BundleDialog from "@/components/BundleDialog";
 import SeedEfficiencyDialog from "@/components/SeedEfficiencyDialog";
 import Modal from "@/components/Modal";
 import TimeIcon from "@/components/TimeIcon";
+import PixelIcon from "@/components/PixelIcon";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import { toolPickup } from "@/lib/blacksmith";
 import type { ReactNode } from "react";
@@ -235,7 +236,7 @@ export default function Dashboard({
       rows.push({
         key: `memo-${m.id}`,
         orderKey: `memo:${m.category ?? "machine"}`,
-        icon: <span aria-hidden>📝</span>,
+        icon: <PixelIcon src="/icons/ui/note.png" />,
         label: m.text,
         done: m.done,
         onToggle: () => toggleDone(m.id),
@@ -364,8 +365,9 @@ export default function Dashboard({
           {/* 비 오는 날에만 구할 수 있는 번들 품목 */}
           {rainBundleNeeds.length > 0 && (
             <div className="mb-3 rounded-md bg-[var(--sv-bg)] p-3">
-              <p className="mb-1 text-xs font-semibold">
-                ☔ {t("dashboard.rainBundleItems")}
+              <p className="mb-1 flex items-center gap-1 text-xs font-semibold">
+                <PixelIcon src="/icons/ui/rain.png" size={14} />
+                {t("dashboard.rainBundleItems")}
               </p>
               <p className="mb-2 text-sm">{rainBundleNeeds.join(", ")}</p>
               <button
@@ -448,13 +450,13 @@ function RainToggle({
         e.stopPropagation();
         onToggle();
       }}
-      className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold ${
+      className={`inline-flex shrink-0 items-center gap-1 rounded px-1.5 py-0.5 text-[10px] font-semibold ${
         active
           ? "bg-[#5b8fb0] text-white"
           : "bg-[var(--sv-border)] text-[var(--sv-ink-muted)]"
       }`}
     >
-      ☔ {label}
+      <PixelIcon src="/icons/ui/rain.png" size={12} /> {label}
     </button>
   );
 }
@@ -510,7 +512,7 @@ function TaskList({
                   className="flex items-center gap-1 text-left hover:underline"
                 >
                   <span>{row.label}</span>
-                  <span className="text-[10px]">🎁</span>
+                  <PixelIcon src="/icons/ui/gift.png" size={14} />
                 </button>
               ) : (
                 <span>{row.label}</span>

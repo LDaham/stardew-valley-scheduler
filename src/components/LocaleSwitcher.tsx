@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import PixelIcon from "@/components/PixelIcon";
 
 export default function LocaleSwitcher() {
   const t = useTranslations();
@@ -13,7 +14,7 @@ export default function LocaleSwitcher() {
   return (
     <label className="flex items-center gap-1 text-xs text-[var(--sv-ink-muted)]">
       <span className="sr-only">{t("ui.language")}</span>
-      🌐
+      <PixelIcon src="/icons/ui/globe.png" size={16} />
       <select
         value={locale}
         onChange={(e) =>

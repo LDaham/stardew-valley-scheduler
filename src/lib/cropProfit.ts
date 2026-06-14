@@ -1,10 +1,10 @@
 // 씨앗별 효율(상대 수익) 계산. 출처 로직: progress/Stardew Profits (main.js의 harvests/profit).
-// 단순화: 레벨·품질 확률·씨앗 비용·가공 시간은 미반영(상대 비교용).
-// 반영: 계절(크로스시즌 자동), 가공 유형(원물/술통/보존병), 비료(성장 속도),
+// 단순화: 레벨·품질 확률·씨앗 비용·가공 시간·크로스시즌은 미반영(상대 비교용).
+// 반영: 단일 계절(28일), 가공 유형(원물/술통/절임통), 비료(성장 속도),
 //       스킬(경작인=원물 +10%, 농업 전문가=성장 속도, 식물학자=야생 씨앗 품질).
 
 import { CROPS, type Crop } from "@/data/game-data";
-import { DAYS_PER_SEASON, SEASONS, type Season } from "@/lib/calendar";
+import { DAYS_PER_SEASON, type Season } from "@/lib/calendar";
 import { adjustedGrowthDays, speedIncrease, type Fertilizer } from "@/lib/growth";
 
 export type Produce = "raw" | "keg" | "jar";
@@ -19,23 +19,11 @@ export interface ProfitOptions {
 
 export interface SeedProfit {
   cropId: string;
-  harvests: number; // 가용 기간 내 수확 횟수
-  spanDays: number; // 가용 일수(크로스시즌 반영)
-  profit: number; // 기간 총 수익(1포기, 비용 미반영)
+  harvests: number; // 한 계절(28일) 내 수확 횟수
+  profit: number; // 계절 총 수익(1포기, 비용 미반영)
   perDay: number; // 일일 수익
   usedProduce: Produce; // 실제 적용된 가공(해당 작물이 가공 불가면 raw로 대체)
   regrow: boolean;
-}
-
-// 해당 계절부터 연속으로 같은 작물이 자랄 수 있는 계절 수 × 28일.
-// 겨울→봄은 순환하지 않으므로 winter에서 멈춘다.
-function seasonSpan(crop: Crop, season: Season): number {
-  let span = 0;
-  for (let i = SEASONS.indexOf(season); i < SEASONS.length; i++) {
-    if (!crop.seasons.includes(SEASONS[i])) break;
-    span++;
-  }
-  return Math.max(span, 1) * DAYS_PER_SEASON;
 }
 
 // 게임 성장 알고리즘 기반 수확 횟수(계절 1일 파종 가정).
@@ -71,22 +59,17 @@ function unitValue(
   return { value: raw, produce: "raw" };
 }
 
-export function seedProfit(
-  crop: Crop,
-  season: Season,
-  opt: ProfitOptions,
-): SeedProfit {
-  const spanDays = seasonSpan(crop, season);
-  const harvests = countHarvests(crop, spanDays, opt.agriculturist, opt.fertilizer);
+export function seedProfit(crop: Crop, opt: ProfitOptions): SeedProfit {
+  // 단일 계절(28일) 기준. 크로스시즌(다계절 작물의 다음 계절 연장)은 반영하지 않는다.
+  const harvests = countHarvests(crop, DAYS_PER_SEASON, opt.agriculturist, opt.fertilizer);
   const { value, produce } = unitValue(crop, opt);
   const yieldPer = 1 + (crop.extraYield ?? 0);
   const profit = harvests * yieldPer * value;
   return {
     cropId: crop.id,
     harvests,
-    spanDays,
     profit: Math.round(profit),
-    perDay: spanDays > 0 ? profit / spanDays : 0,
+    perDay: profit / DAYS_PER_SEASON,
     usedProduce: produce,
     regrow: !!crop.regrowDays,
   };
@@ -98,6 +81,6 @@ export function seasonSeedProfits(
   opt: ProfitOptions,
 ): SeedProfit[] {
   return CROPS.filter((c) => c.seasons.includes(season))
-    .map((c) => seedProfit(c, season, opt))
+    .map((c) => seedProfit(c, opt))
     .sort((a, b) => b.profit - a.profit);
 }
