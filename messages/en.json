@@ -105,13 +105,19 @@
     "checkup": "Clint's checkup (Winter 16)",
     "friday": "Friday (after Community Center)"
   },
+  "carpenter": {
+    "tuesday": "Carpenter's Shop is closed on Tuesdays",
+    "festival": "Carpenter's Shop is closed on festival days",
+    "checkup": "Closed on Summer 18 for Robin's checkup"
+  },
   "todoCategory": {
     "harvest": "Harvest",
     "watering": "Crop watering",
     "tool": "Tool upgrade",
     "machine": "Artisan goods",
     "misc": "Geode·Museum",
-    "eatFood": "Eat food on harvest"
+    "eatFood": "Eat food on harvest",
+    "build": "Construct building"
   },
   "bundle": {
     "title": "Community Center bundles",
@@ -299,7 +305,58 @@
     "buySeedMemo": "Buy {crop} seeds (replant)",
     "eatFoodOption": "Add eat-food on harvest day",
     "eatFoodNote": "Adds a reminder to eat a Farming-buff food on harvest day for higher quality",
-    "eatFoodMemo": "Eat food on {crop} harvest day (quality buff)"
+    "eatFoodMemo": "Eat food on {crop} harvest day (quality buff)",
+    "build": "Construct building",
+    "selectBuildCategory": "Building type",
+    "selectBuilding": "Select building",
+    "buildMemo": "Build {building} (materials: {cost})",
+    "buildRequires": "Requires: {building}",
+    "buildClosureWarn": "{reason} → can order on {date}",
+    "buildInstant": "Completed instantly when ordered.",
+    "buildReadyPreview": "Ready: {date}"
+  },
+  "buildingCategory": {
+    "animal": "Animal buildings",
+    "other": "Other buildings",
+    "cabin": "Cabins & shipping bin",
+    "farmhouse": "Farmhouse upgrades"
+  },
+  "buildings": {
+    "coop": "Coop",
+    "bigCoop": "Big Coop",
+    "deluxeCoop": "Deluxe Coop",
+    "barn": "Barn",
+    "bigBarn": "Big Barn",
+    "deluxeBarn": "Deluxe Barn",
+    "fishPond": "Fish Pond",
+    "mill": "Mill",
+    "shed": "Shed",
+    "bigShed": "Big Shed",
+    "silo": "Silo",
+    "slimeHutch": "Slime Hutch",
+    "stable": "Stable",
+    "well": "Well",
+    "stoneCabin": "Stone Cabin",
+    "plankCabin": "Plank Cabin",
+    "logCabin": "Log Cabin",
+    "shippingBin": "Shipping Bin",
+    "farmhouse1": "Farmhouse Upgrade 1",
+    "farmhouse2": "Farmhouse Upgrade 2",
+    "farmhouse3": "Farmhouse Upgrade 3"
+  },
+  "materials": {
+    "wood": "Wood",
+    "stone": "Stone",
+    "clay": "Clay",
+    "cloth": "Cloth",
+    "copperBar": "Copper Bar",
+    "ironBar": "Iron Bar",
+    "iridiumBar": "Iridium Bar",
+    "refinedQuartz": "Refined Quartz",
+    "seaweed": "Seaweed",
+    "greenAlgae": "Green Algae",
+    "hardwood": "Hardwood",
+    "fiber": "Fiber"
   },
   "seedEfficiency": {
     "title": "Seed efficiency",

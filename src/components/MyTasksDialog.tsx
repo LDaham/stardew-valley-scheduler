@@ -16,6 +16,7 @@ function iconSrc(m: Memo): string {
   if (m.category === "misc") return "/icons/addTask/museum.png";
   if (m.category === "tool") return "/icons/addTask/tool.png";
   if (m.category === "machine") return "/icons/addTask/machine.png";
+  if (m.category === "build") return "/icons/addTask/build.png";
   return "/icons/ui/note.png";
 }
 

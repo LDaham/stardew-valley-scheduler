@@ -8,6 +8,13 @@ import { CROPS } from "@/data/game-data";
 import { MACHINES } from "@/data/machines";
 import { computeHarvest, type Fertilizer } from "@/lib/growth";
 import { toolPickup, type ToolPickup } from "@/lib/blacksmith";
+import {
+  BUILDINGS,
+  BUILDING_CATEGORIES,
+  type BuildingCategory,
+  type BuildingDef,
+} from "@/data/buildings";
+import { planBuilding } from "@/lib/carpenter";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import type { MemoCategory } from "@/lib/todoOrder";
 import type { Memo } from "@/types/schedule";
@@ -18,16 +25,17 @@ import Dropdown from "@/components/Dropdown";
 import TimeIcon from "@/components/TimeIcon";
 import PixelIcon from "@/components/PixelIcon";
 
-type Mode = "menu" | "tool" | "seed" | "machine";
+type Mode = "menu" | "tool" | "seed" | "machine" | "build";
 
-// 메뉴 항목. tool/seed/machine은 하위 폼, misc(정동석·박물관)는 즉시 추가(단일 항목).
-const MENU = ["tool", "seed", "machine", "misc"] as const;
+// 메뉴 항목. tool/seed/machine/build는 하위 폼, misc(정동석·박물관)는 즉시 추가(단일 항목).
+const MENU = ["tool", "seed", "machine", "build", "misc"] as const;
 
 // 메뉴 항목 아이콘
 const MENU_ICONS: Record<string, string> = {
   tool: "/icons/addTask/tool.png",
   seed: "/icons/addTask/seed.png",
   machine: "/icons/addTask/machine.png",
+  build: "/icons/addTask/build.png",
   misc: "/icons/addTask/misc.png",
 };
 
@@ -225,6 +233,15 @@ export default function AddTaskDialog({
               "machine",
             )
           }
+        />
+      )}
+
+      {mode === "build" && (
+        <BuildForm
+          requestDate={baseDate}
+          dateLabel={dateLabel}
+          onBack={() => setMode("menu")}
+          onAdd={(date, text) => addAndClose(date, text, "build")}
         />
       )}
     </Modal>
@@ -499,6 +516,128 @@ function MachineForm({
       </p>
 
       <FormFooter onBack={onBack} onAdd={() => onAdd(ready, outputId)} />
+    </div>
+  );
+}
+
+function BuildForm({
+  requestDate,
+  dateLabel,
+  onBack,
+  onAdd,
+}: {
+  requestDate: SDate;
+  dateLabel: (d: SDate) => string;
+  onBack: () => void;
+  onAdd: (orderDate: SDate, text: string) => void;
+}) {
+  const t = useTranslations();
+  const [category, setCategory] = useState<BuildingCategory>("animal");
+  const inCategory = BUILDINGS.filter((b) => b.category === category);
+  const [buildingId, setBuildingId] = useState<string>(inCategory[0]?.id ?? "");
+
+  const def: BuildingDef | undefined =
+    inCategory.find((b) => b.id === buildingId) ?? inCategory[0];
+  const plan = def ? planBuilding(requestDate, def) : null;
+
+  // 카테고리 변경 시 해당 카테고리 첫 건물로 선택 초기화
+  const changeCategory = (c: BuildingCategory) => {
+    setCategory(c);
+    const first = BUILDINGS.find((b) => b.category === c);
+    if (first) setBuildingId(first.id);
+  };
+
+  // 메모 텍스트: "{건물} 건설 (재료: 10,000g · 나무 450)" / 재료 없으면 골드만
+  const buildMemoText = (b: BuildingDef): string => {
+    const goldStr = `${b.gold.toLocaleString()}g`;
+    const matStr = b.materials
+      .map((m) => `${t(`materials.${m.id}`)} ${m.qty}`)
+      .join(" · ");
+    const cost = matStr ? `${goldStr} · ${matStr}` : goldStr;
+    return t("addTask.buildMemo", { building: t(`buildings.${b.id}`), cost });
+  };
+
+  return (
+    <div className="flex flex-col gap-3">
+      <div>
+        <FieldLabel>{t("addTask.selectBuildCategory")}</FieldLabel>
+        <Dropdown
+          value={category}
+          options={BUILDING_CATEGORIES.map((c) => ({
+            value: c,
+            label: t(`buildingCategory.${c}`),
+          }))}
+          onChange={(v) => changeCategory(v as BuildingCategory)}
+          ariaLabel={t("addTask.selectBuildCategory")}
+        />
+      </div>
+
+      <div>
+        <FieldLabel>{t("addTask.selectBuilding")}</FieldLabel>
+        <Dropdown
+          value={buildingId}
+          options={inCategory.map((b) => ({
+            value: b.id,
+            label: t(`buildings.${b.id}`),
+            icon: `/icons/buildings/${b.id}.png`,
+          }))}
+          onChange={setBuildingId}
+          ariaLabel={t("addTask.selectBuilding")}
+        />
+      </div>
+
+      {def && plan && (
+        <div className="rounded-md bg-[var(--sv-bg)] px-3 py-2 text-sm">
+          {/* 비용·재료 */}
+          <p className="font-semibold">
+            {def.gold.toLocaleString()}g
+          </p>
+          {def.materials.length > 0 && (
+            <ul className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
+              {def.materials.map((m) => (
+                <li key={m.id} className="flex items-center gap-1 text-sm">
+                  <PixelIcon src={`/icons/materials/${m.id}.png`} size={16} />
+                  {t(`materials.${m.id}`)} {m.qty}
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {/* 선행 건물 안내 */}
+          {def.requires && (
+            <p className="mt-1.5 text-xs text-[var(--sv-ink-muted)]">
+              {t("addTask.buildRequires", {
+                building: t(`buildings.${def.requires}`),
+              })}
+            </p>
+          )}
+
+          {/* 주문일 휴무 이동 안내 */}
+          {plan.orderClosure && (
+            <p className="mt-2 rounded-md bg-[#fbeaea] px-2 py-1.5 text-xs font-semibold text-[#b02a2a]">
+              ⚠{" "}
+              {t("addTask.buildClosureWarn", {
+                reason: t(`carpenter.${plan.orderClosure}`),
+                date: dateLabel(plan.order),
+              })}
+            </p>
+          )}
+
+          {/* 완성 예정일 */}
+          <p className="mt-2 flex items-center gap-1.5">
+            <TimeIcon />
+            {def.buildDays === 0
+              ? t("addTask.buildInstant")
+              : t("addTask.buildReadyPreview", { date: dateLabel(plan.ready) })}
+          </p>
+        </div>
+      )}
+
+      <FormFooter
+        onBack={onBack}
+        onAdd={() => def && plan && onAdd(plan.order, buildMemoText(def))}
+        addDisabled={!def}
+      />
     </div>
   );
 }

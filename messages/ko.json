@@ -105,13 +105,19 @@
     "checkup": "클린트 검진(겨울 16일)",
     "friday": "금요일 휴무(마을 회관 복구 후)"
   },
+  "carpenter": {
+    "tuesday": "화요일은 목공 작업실 휴무",
+    "festival": "축제일은 목공 작업실 휴무",
+    "checkup": "여름 18일은 로빈 검진으로 휴무"
+  },
   "todoCategory": {
     "harvest": "작물 수확",
     "watering": "작물별 물주기",
     "tool": "도구 업그레이드",
     "machine": "장인 제작품",
     "misc": "정동석·박물관",
-    "eatFood": "수확일 음식 먹기"
+    "eatFood": "수확일 음식 먹기",
+    "build": "건물 건설"
   },
   "bundle": {
     "title": "마을회관 번들 추적",
@@ -299,7 +305,58 @@
     "buySeedMemo": "{crop} 씨앗 구매(재파종)",
     "eatFoodOption": "수확일에 음식 먹기 추가",
     "eatFoodNote": "수확일에 농사 버프 음식을 먹어 품질을 올리도록 알림 추가",
-    "eatFoodMemo": "{crop} 수확일 음식 먹기(품질 버프)"
+    "eatFoodMemo": "{crop} 수확일 음식 먹기(품질 버프)",
+    "build": "건물 건설",
+    "selectBuildCategory": "건물 종류",
+    "selectBuilding": "건물 선택",
+    "buildMemo": "{building} 건설 (재료: {cost})",
+    "buildRequires": "선행: {building} 필요",
+    "buildClosureWarn": "{reason} → {date}에 주문 가능",
+    "buildInstant": "주문 즉시 완성됩니다.",
+    "buildReadyPreview": "완성 예정: {date}"
+  },
+  "buildingCategory": {
+    "animal": "동물 건물",
+    "other": "기타 건물",
+    "cabin": "오두막·배송 상자",
+    "farmhouse": "농가 업그레이드"
+  },
+  "buildings": {
+    "coop": "닭장",
+    "bigCoop": "큰 닭장",
+    "deluxeCoop": "디럭스 닭장",
+    "barn": "외양간",
+    "bigBarn": "큰 외양간",
+    "deluxeBarn": "디럭스 외양간",
+    "fishPond": "물고기 연못",
+    "mill": "풍차",
+    "shed": "헛간",
+    "bigShed": "큰 헛간",
+    "silo": "저장고",
+    "slimeHutch": "슬라임 장",
+    "stable": "마굿간",
+    "well": "우물",
+    "stoneCabin": "돌 오두막",
+    "plankCabin": "널빤지 오두막",
+    "logCabin": "통나무 오두막",
+    "shippingBin": "배송 상자",
+    "farmhouse1": "농가 업그레이드 1",
+    "farmhouse2": "농가 업그레이드 2",
+    "farmhouse3": "농가 업그레이드 3"
+  },
+  "materials": {
+    "wood": "나무",
+    "stone": "돌",
+    "clay": "점토",
+    "cloth": "옷감",
+    "copperBar": "구리 주괴",
+    "ironBar": "철 주괴",
+    "iridiumBar": "이리듐 주괴",
+    "refinedQuartz": "정제된 석영",
+    "seaweed": "해초",
+    "greenAlgae": "녹조류",
+    "hardwood": "단단한 나무",
+    "fiber": "섬유"
   },
   "seedEfficiency": {
     "title": "씨앗 효율",

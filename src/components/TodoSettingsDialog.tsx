@@ -22,6 +22,7 @@ const MEMO_ICON: Record<string, string> = {
   watering: "/icons/reminders/watering.png",
   tool: "/icons/addTask/tool.png",
   machine: "/icons/addTask/machine.png",
+  build: "/icons/addTask/build.png",
   misc: "/icons/addTask/misc.png",
   eatFood: "/icons/ui/food.png",
 };

@@ -270,6 +270,8 @@ export default function Dashboard({
           <PixelIcon src="/icons/ui/food.png" />
         ) : m.category === "misc" ? (
           <PixelIcon src="/icons/addTask/museum.png" />
+        ) : m.category === "build" ? (
+          <PixelIcon src="/icons/addTask/build.png" />
         ) : (
           <PixelIcon src="/icons/ui/note.png" />
         );
