@@ -75,7 +75,12 @@ export default function AddTaskDialog({
   };
 
   // 씨앗 심기: 수확 메모 1개 + 물주기 메모(심은 계절 내, 수확 전날까지 / 재수확이면 계절 끝까지) 일괄 생성
-  const addSeed = (cropId: string, agri: boolean, fert: Fertilizer) => {
+  const addSeed = (
+    cropId: string,
+    agri: boolean,
+    fert: Fertilizer,
+    eatFood: boolean,
+  ) => {
     const crop = CROPS.find((c) => c.id === cropId);
     if (!crop) return;
     const h = computeHarvest(baseDate, crop, agri, fert);
@@ -108,6 +113,16 @@ export default function AddTaskDialog({
         text: t("addTask.buySeedMemo", { crop: cropName }),
         reminderDaysBefore: 0,
         category: "buySeed",
+      });
+    }
+    // 수확일에 음식 먹기(품질 버프) — 선택 시 수확일에 메모 추가
+    if (eatFood && !h.willWilt) {
+      memos.push({
+        season: h.date.season,
+        day: h.date.day,
+        text: t("addTask.eatFoodMemo", { crop: cropName }),
+        reminderDaysBefore: 0,
+        category: "eatFood",
       });
     }
     addMemos(memos);
@@ -290,13 +305,22 @@ function SeedForm({
   plantDate: SDate;
   dateLabel: (d: SDate) => string;
   onBack: () => void;
-  onAdd: (cropId: string, agri: boolean, fert: Fertilizer) => void;
+  onAdd: (
+    cropId: string,
+    agri: boolean,
+    fert: Fertilizer,
+    eatFood: boolean,
+  ) => void;
 }) {
   const t = useTranslations();
-  const seasonCrops = CROPS.filter((c) => c.seasons.includes(plantDate.season));
+  // phases가 있는 작물만 파종 대상(효율 표시 전용 작물 제외)
+  const seasonCrops = CROPS.filter(
+    (c) => c.seasons.includes(plantDate.season) && c.phases,
+  );
   const [cropId, setCropId] = useState<string>(seasonCrops[0]?.id ?? "");
   const [agri, setAgri] = useState(false);
   const [fert, setFert] = useState<Fertilizer>("none");
+  const [eatFood, setEatFood] = useState(false);
 
   const crop = seasonCrops.find((c) => c.id === cropId);
   const harvest = crop ? computeHarvest(plantDate, crop, agri, fert) : null;
@@ -375,9 +399,25 @@ function SeedForm({
         </div>
       )}
 
+      {/* 수확일에 음식 먹기(품질 버프) 추가 여부 */}
+      <label className="flex cursor-pointer items-start gap-2 text-sm">
+        <input
+          type="checkbox"
+          checked={eatFood}
+          onChange={(e) => setEatFood(e.target.checked)}
+          className="mt-0.5 size-4 accent-[var(--sv-accent)]"
+        />
+        <span>
+          {t("addTask.eatFoodOption")}
+          <span className="block text-xs text-[var(--sv-ink-muted)]">
+            {t("addTask.eatFoodNote")}
+          </span>
+        </span>
+      </label>
+
       <FormFooter
         onBack={onBack}
-        onAdd={() => crop && onAdd(cropId, agri, fert)}
+        onAdd={() => crop && onAdd(cropId, agri, fert, eatFood)}
         addDisabled={!crop}
       />
     </div>

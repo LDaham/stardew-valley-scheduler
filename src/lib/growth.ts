@@ -22,7 +22,7 @@ export function speedIncrease(agriculturist: boolean, fert: Fertilizer): number 
 // 보정된 총 성장 일수. 게임 알고리즘: 단계 합 × 증가율을 올림한 만큼을
 // 각 단계에서 하루씩(첫 단계는 1 미만 불가) 최대 3회 순회하며 제거한다.
 export function adjustedGrowthDays(crop: Crop, increase: number): number {
-  if (increase <= 0) return crop.growthDays;
+  if (increase <= 0 || !crop.phases) return crop.growthDays;
   const p = [...crop.phases];
   const total = p.reduce((a, b) => a + b, 0);
   let daysToRemove = Math.ceil(total * increase);

@@ -9,7 +9,22 @@ import {
   reconcileTodoOrder,
   type MemoCategory,
 } from "@/lib/todoOrder";
-import type { Memo, MemoCategoryToggles, ScheduleState } from "@/types/schedule";
+import type {
+  CharacterInfo,
+  Memo,
+  MemoCategoryToggles,
+  ScheduleState,
+} from "@/types/schedule";
+
+const DEFAULT_CHARACTER: CharacterInfo = {
+  farmingLevel: 0,
+  foragingLevel: 0,
+  tiller: false,
+  agriculturist: false,
+  artisan: false,
+  gatherer: false,
+  botanist: false,
+};
 
 const DEFAULT_MEMO_CATEGORY_TOGGLES: MemoCategoryToggles = MEMO_CATEGORIES.reduce(
   (acc, c) => {
@@ -34,6 +49,7 @@ const DEFAULT_STATE: ScheduleState = {
   rainDays: {},
   wateringCanUpgrades: 0,
   bundleItemsDone: {},
+  character: DEFAULT_CHARACTER,
 };
 
 let state: ScheduleState = DEFAULT_STATE;
@@ -62,6 +78,7 @@ function ensureLoaded(): void {
     rainDays: saved.rainDays ?? {},
     wateringCanUpgrades: saved.wateringCanUpgrades ?? 0,
     bundleItemsDone: saved.bundleItemsDone ?? {},
+    character: { ...DEFAULT_CHARACTER, ...saved.character },
     version: STATE_VERSION,
   };
   loaded = true;
@@ -181,6 +198,10 @@ export const scheduleActions = {
   // 물뿌리개 업그레이드 횟수 +1
   incWateringCanUpgrades() {
     commit({ ...state, wateringCanUpgrades: state.wateringCanUpgrades + 1 });
+  },
+  // 캐릭터 정보 부분 갱신
+  setCharacter(patch: Partial<CharacterInfo>) {
+    commit({ ...state, character: { ...state.character, ...patch } });
   },
   // 번들 품목 기증 토글
   toggleBundleItem(key: string) {

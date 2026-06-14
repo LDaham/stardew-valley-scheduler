@@ -23,6 +23,7 @@ const MEMO_ICON: Record<string, string> = {
   tool: "/icons/addTask/tool.png",
   machine: "/icons/addTask/machine.png",
   misc: "/icons/addTask/geode.png",
+  eatFood: "/icons/ui/food.png",
 };
 
 function PixelImage({ src, size = 18 }: { src: string; size?: number }) {

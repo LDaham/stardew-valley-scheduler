@@ -5,17 +5,26 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import type { Season } from "@/lib/calendar";
 import { asset } from "@/lib/asset";
-import type { Fertilizer } from "@/lib/growth";
 import {
   seasonSeedProfits,
+  FERTILIZER_IDS,
+  FOOD_IDS,
   type Produce,
+  type FertilizerId,
+  type FoodId,
   type ProfitOptions,
 } from "@/lib/cropProfit";
+import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
 import Dropdown from "@/components/Dropdown";
 
-const FERTILIZERS: Fertilizer[] = ["none", "speedGro", "deluxe", "hyper"];
 const PRODUCE: Produce[] = ["raw", "keg", "jar"];
+// 가공 유형 아이콘: 원물=옥수수, 술통=keg, 절임통=preservesJar
+const PRODUCE_ICON: Record<Produce, string> = {
+  raw: "/icons/seeds/corn.png",
+  keg: "/icons/machines/keg.png",
+  jar: "/icons/machines/preservesJar.png",
+};
 
 export default function SeedEfficiencyDialog({
   season,
@@ -25,13 +34,25 @@ export default function SeedEfficiencyDialog({
   onClose: () => void;
 }) {
   const t = useTranslations();
-  const [fertilizer, setFertilizer] = useState<Fertilizer>("none");
+  const { character } = useSchedule();
+  const [crossSeason, setCrossSeason] = useState(false);
+  const [fertilizer, setFertilizer] = useState<FertilizerId>("none");
   const [produce, setProduce] = useState<Produce>("raw");
-  const [tiller, setTiller] = useState(false);
-  const [agriculturist, setAgriculturist] = useState(false);
-  const [botanist, setBotanist] = useState(false);
+  const [food, setFood] = useState<FoodId>("none");
 
-  const opt: ProfitOptions = { fertilizer, produce, tiller, agriculturist, botanist };
+  const opt: ProfitOptions = {
+    crossSeason,
+    fertilizer,
+    produce,
+    food,
+    farmingLevel: character.farmingLevel,
+    foragingLevel: character.foragingLevel,
+    tiller: character.tiller,
+    agriculturist: character.agriculturist,
+    artisan: character.artisan,
+    gatherer: character.gatherer,
+    botanist: character.botanist,
+  };
   const rows = seasonSeedProfits(season, opt);
   const max = rows.length ? rows[0].profit : 0;
 
@@ -40,6 +61,11 @@ export default function SeedEfficiencyDialog({
       title={`${t(`seasons.${season}`)} · ${t("seedEfficiency.title")}`}
       onClose={onClose}
     >
+      {/* 품질 안내 */}
+      <p className="mb-3 rounded-md bg-[var(--sv-bg)] px-3 py-2 text-xs text-[var(--sv-ink-muted)]">
+        {t("seedEfficiency.qualityHint")}
+      </p>
+
       {/* 옵션 */}
       <div className="mb-3 flex flex-col gap-2">
         <div className="grid grid-cols-2 gap-2">
@@ -49,12 +75,12 @@ export default function SeedEfficiencyDialog({
             </label>
             <Dropdown
               value={fertilizer}
-              options={FERTILIZERS.map((f) => ({
+              options={FERTILIZER_IDS.map((f) => ({
                 value: f,
-                label: t(`fertilizer.${f}`),
-                icon: f === "none" ? undefined : `/icons/fertilizer/${f}.png`,
+                label: t(`profitFertilizer.${f}`),
+                icon: f === "none" ? undefined : `/icons/profitFertilizer/${f}.png`,
               }))}
-              onChange={(v) => setFertilizer(v as Fertilizer)}
+              onChange={(v) => setFertilizer(v as FertilizerId)}
               ariaLabel={t("seedEfficiency.fertilizer")}
             />
           </div>
@@ -67,39 +93,35 @@ export default function SeedEfficiencyDialog({
               options={PRODUCE.map((p) => ({
                 value: p,
                 label: t(`seedEfficiency.${p}`),
+                icon: PRODUCE_ICON[p],
               }))}
               onChange={(v) => setProduce(v as Produce)}
               ariaLabel={t("seedEfficiency.produce")}
             />
           </div>
-        </div>
-        <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-sm">
-          <label className="flex cursor-pointer items-center gap-1.5">
+          <div>
+            <label className="mb-1 block text-xs font-semibold text-[var(--sv-ink-muted)]">
+              {t("seedEfficiency.food")}
+            </label>
+            <Dropdown
+              value={food}
+              options={FOOD_IDS.map((f) => ({
+                value: f,
+                label: t(`food.${f}`),
+                icon: f === "none" ? undefined : `/icons/food/${f}.png`,
+              }))}
+              onChange={(v) => setFood(v as FoodId)}
+              ariaLabel={t("seedEfficiency.food")}
+            />
+          </div>
+          <label className="flex cursor-pointer items-end gap-1.5 pb-2 text-sm">
             <input
               type="checkbox"
-              checked={tiller}
-              onChange={(e) => setTiller(e.target.checked)}
+              checked={crossSeason}
+              onChange={(e) => setCrossSeason(e.target.checked)}
               className="size-4 accent-[var(--sv-accent)]"
             />
-            {t("seedEfficiency.tiller")}
-          </label>
-          <label className="flex cursor-pointer items-center gap-1.5">
-            <input
-              type="checkbox"
-              checked={agriculturist}
-              onChange={(e) => setAgriculturist(e.target.checked)}
-              className="size-4 accent-[var(--sv-accent)]"
-            />
-            {t("seedEfficiency.agriculturist")}
-          </label>
-          <label className="flex cursor-pointer items-center gap-1.5">
-            <input
-              type="checkbox"
-              checked={botanist}
-              onChange={(e) => setBotanist(e.target.checked)}
-              className="size-4 accent-[var(--sv-accent)]"
-            />
-            {t("seedEfficiency.botanist")}
+            {t("seedEfficiency.crossSeason")}
           </label>
         </div>
       </div>

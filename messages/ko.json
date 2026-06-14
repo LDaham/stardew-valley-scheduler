@@ -93,7 +93,8 @@
     "watering": "작물별 물주기",
     "tool": "도구 업그레이드",
     "machine": "장인 제작품",
-    "misc": "정동석·박물관"
+    "misc": "정동석·박물관",
+    "eatFood": "수확일 음식 먹기"
   },
   "bundle": {
     "title": "마을회관 번들 추적",
@@ -274,22 +275,64 @@
     "wateringMemo": "{crop} 물주기",
     "wateringNote": "수확 전까지 매일 물주기 항목이 자동 추가됩니다 (재수확 작물은 계절 끝까지)",
     "machineMemo": "{output} 완성",
-    "buySeedMemo": "{crop} 씨앗 구매(재파종)"
+    "buySeedMemo": "{crop} 씨앗 구매(재파종)",
+    "eatFoodOption": "수확일에 음식 먹기 추가",
+    "eatFoodNote": "수확일에 농사 버프 음식을 먹어 품질을 올리도록 알림 추가",
+    "eatFoodMemo": "{crop} 수확일 음식 먹기(품질 버프)"
   },
   "seedEfficiency": {
     "title": "씨앗 효율",
     "view": "효율 보기",
     "fertilizer": "비료",
     "produce": "가공 유형",
+    "food": "음식",
+    "crossSeason": "다계절 포함",
     "raw": "원물 판매",
     "keg": "술통 가공",
     "jar": "절임통 가공",
-    "tiller": "경작인",
-    "agriculturist": "농업 전문가",
-    "botanist": "식물학자",
+    "qualityHint": "작물 등급은 수확일에 결정됩니다 — 수확일에 농사 버프 음식을 먹으면 품질이 올라갑니다. 농사·채집 레벨과 스킬은 캐릭터 정보에서 설정하세요.",
     "detail": "{profit}g · {harvests}회 수확 · 일 {perDay}g",
     "rawFallback": "가공 불가 → 원물",
-    "note": "상대 수익(최대=100%) 기준. 단일 계절(28일)·가공·비료·스킬을 반영하며, 크로스시즌·레벨·품질 확률·씨앗 비용·가공 시간은 반영하지 않습니다. 식물학자는 야생 씨앗 전용입니다."
+    "note": "상대 수익(최대=100%) 기준. 계절·가공·비료·음식·캐릭터(레벨·스킬)를 반영하며, 씨앗 비용·구매처·가공 시간은 반영하지 않습니다. 술통·절임통 가공물은 품질·경작인을 적용하지 않습니다."
+  },
+  "profitFertilizer": {
+    "none": "없음",
+    "basic": "기본 비료",
+    "quality": "고급 비료",
+    "deluxeFert": "이리듐 비료",
+    "speedGro": "스피드그로",
+    "deluxeSpeed": "고급 스피드그로",
+    "hyperSpeed": "초고속 스피드그로"
+  },
+  "food": {
+    "none": "없음",
+    "mapleBar": "메이플 바 (+1)",
+    "hashbrowns": "해시브라운 (+1)",
+    "completeBreakfast": "완전한 아침식사 (+2)",
+    "pepperPoppers": "페퍼 파퍼 (+2)",
+    "tomKhaSoup": "톰 카 수프 (+2)",
+    "farmersLunch": "농부의 점심 (+3)"
+  },
+  "character": {
+    "title": "캐릭터 정보",
+    "short": "캐릭터",
+    "open": "캐릭터 정보 열기",
+    "hint": "씨앗 효율의 성장·품질 계산에 사용됩니다.",
+    "farmingLevel": "농사 레벨",
+    "foragingLevel": "채집 레벨",
+    "tiller": "경작인",
+    "tillerDesc": "원물 판매가 +10%",
+    "profession": "농사 10레벨 전문직 (택1)",
+    "profession_none": "없음",
+    "profession_agriculturist": "농업 전문가",
+    "profession_artisan": "장인",
+    "agriculturist": "농업 전문가",
+    "agriculturistDesc": "작물 성장 속도 +10%",
+    "artisanDesc": "가공물(술통·절임통) 가치 +40%",
+    "gatherer": "채집가",
+    "gathererDesc": "야생 씨앗 수확량 +20%",
+    "botanist": "식물학자",
+    "botanistDesc": "야생 씨앗 항상 이리듐 품질"
   },
   "tools": {
     "axe": "도끼",
@@ -496,6 +539,20 @@
     "artichoke": "아티초크",
     "beet": "비트",
     "fairyRose": "요정 장미",
-    "sweetGemBerry": "달콤한 보석 열매"
+    "sweetGemBerry": "달콤한 보석 열매",
+    "carrot": "당근",
+    "unmilledRice": "도정 안 한 쌀",
+    "springSeeds": "봄 씨앗",
+    "pineapple": "파인애플",
+    "summerSquash": "여름 호박",
+    "taroRoot": "토란",
+    "summerSpangle": "여름 스팽글",
+    "summerSeeds": "여름 씨앗",
+    "broccoli": "브로콜리",
+    "fallSeeds": "가을 씨앗",
+    "powdermelon": "가루멜론",
+    "winterSeeds": "겨울 씨앗",
+    "teaLeaves": "찻잎",
+    "ancientFruit": "고대 과일"
   }
 }

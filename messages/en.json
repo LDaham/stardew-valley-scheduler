@@ -93,7 +93,8 @@
     "watering": "Crop watering",
     "tool": "Tool upgrade",
     "machine": "Artisan goods",
-    "misc": "Geode·Museum"
+    "misc": "Geode·Museum",
+    "eatFood": "Eat food on harvest"
   },
   "bundle": {
     "title": "Community Center bundles",
@@ -274,22 +275,64 @@
     "wateringMemo": "Water {crop}",
     "wateringNote": "Daily watering items are auto-added until harvest (regrow crops: until season end)",
     "machineMemo": "{output} ready",
-    "buySeedMemo": "Buy {crop} seeds (replant)"
+    "buySeedMemo": "Buy {crop} seeds (replant)",
+    "eatFoodOption": "Add eat-food on harvest day",
+    "eatFoodNote": "Adds a reminder to eat a Farming-buff food on harvest day for higher quality",
+    "eatFoodMemo": "Eat food on {crop} harvest day (quality buff)"
   },
   "seedEfficiency": {
     "title": "Seed efficiency",
     "view": "View efficiency",
     "fertilizer": "Fertilizer",
     "produce": "Produce type",
+    "food": "Food",
+    "crossSeason": "Include multi-season",
     "raw": "Sell raw",
     "keg": "Keg",
     "jar": "Preserves Jar",
-    "tiller": "Tiller",
-    "agriculturist": "Agriculturist",
-    "botanist": "Botanist",
+    "qualityHint": "Crop quality is set on harvest day — eating a Farming-buff food on harvest day raises quality. Set farming/foraging level and skills in Character info.",
     "detail": "{profit}g · {harvests} harvests · {perDay}g/day",
     "rawFallback": "no processing → raw",
-    "note": "Relative revenue (max = 100%). Reflects a single season (28 days), processing, fertilizer and skills; ignores cross-season, level, quality odds, seed cost and processing time. Botanist only affects wild seeds."
+    "note": "Relative revenue (max = 100%). Reflects season, processing, fertilizer, food and character (level·skills); ignores seed cost, seed source and processing time. Keg/jar goods do not apply quality or Tiller."
+  },
+  "profitFertilizer": {
+    "none": "None",
+    "basic": "Basic Fertilizer",
+    "quality": "Quality Fertilizer",
+    "deluxeFert": "Deluxe Fertilizer",
+    "speedGro": "Speed-Gro",
+    "deluxeSpeed": "Deluxe Speed-Gro",
+    "hyperSpeed": "Hyper Speed-Gro"
+  },
+  "food": {
+    "none": "None",
+    "mapleBar": "Maple Bar (+1)",
+    "hashbrowns": "Hashbrowns (+1)",
+    "completeBreakfast": "Complete Breakfast (+2)",
+    "pepperPoppers": "Pepper Poppers (+2)",
+    "tomKhaSoup": "Tom Kha Soup (+2)",
+    "farmersLunch": "Farmer's Lunch (+3)"
+  },
+  "character": {
+    "title": "Character info",
+    "short": "Character",
+    "open": "Open character info",
+    "hint": "Used for growth and quality in seed efficiency.",
+    "farmingLevel": "Farming level",
+    "foragingLevel": "Foraging level",
+    "tiller": "Tiller",
+    "tillerDesc": "+10% crop sell price",
+    "profession": "Farming level-10 profession (pick one)",
+    "profession_none": "None",
+    "profession_agriculturist": "Agriculturist",
+    "profession_artisan": "Artisan",
+    "agriculturist": "Agriculturist",
+    "agriculturistDesc": "+10% crop growth speed",
+    "artisanDesc": "+40% artisan goods value",
+    "gatherer": "Gatherer",
+    "gathererDesc": "+20% wild seed yield",
+    "botanist": "Botanist",
+    "botanistDesc": "Wild seeds always iridium quality"
   },
   "tools": {
     "axe": "Axe",
@@ -496,6 +539,20 @@
     "artichoke": "Artichoke",
     "beet": "Beet",
     "fairyRose": "Fairy Rose",
-    "sweetGemBerry": "Sweet Gem Berry"
+    "sweetGemBerry": "Sweet Gem Berry",
+    "carrot": "Carrot",
+    "unmilledRice": "Unmilled Rice",
+    "springSeeds": "Spring Seeds",
+    "pineapple": "Pineapple",
+    "summerSquash": "Summer Squash",
+    "taroRoot": "Taro Root",
+    "summerSpangle": "Summer Spangle",
+    "summerSeeds": "Summer Seeds",
+    "broccoli": "Broccoli",
+    "fallSeeds": "Fall Seeds",
+    "powdermelon": "Powdermelon",
+    "winterSeeds": "Winter Seeds",
+    "teaLeaves": "Tea Leaves",
+    "ancientFruit": "Ancient Fruit"
   }
 }

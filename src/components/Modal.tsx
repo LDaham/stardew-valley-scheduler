@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
@@ -15,6 +15,9 @@ export default function Modal({
   children: ReactNode;
 }) {
   const t = useTranslations();
+  // 오버레이에서 "눌러서 시작"한 클릭만 닫기로 처리.
+  // (입력값 드래그 중 창 밖에서 마우스를 떼도 닫히지 않도록)
+  const pressedOnBackdrop = useRef(false);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -27,12 +30,16 @@ export default function Modal({
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
-      onClick={onClose}
+      onMouseDown={(e) => {
+        pressedOnBackdrop.current = e.target === e.currentTarget;
+      }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget && pressedOnBackdrop.current) onClose();
+      }}
       role="presentation"
     >
       <div
         className="max-h-[85vh] w-full max-w-sm overflow-y-auto rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-5 shadow-xl"
-        onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
       >

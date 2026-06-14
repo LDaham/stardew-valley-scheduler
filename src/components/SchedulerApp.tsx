@@ -10,6 +10,7 @@ import Calendar from "@/components/Calendar";
 import SettingsDialog from "@/components/SettingsDialog";
 import TodoSettingsDialog from "@/components/TodoSettingsDialog";
 import BundleDialog from "@/components/BundleDialog";
+import CharacterDialog from "@/components/CharacterDialog";
 import PixelIcon from "@/components/PixelIcon";
 
 function AppShell() {
@@ -18,6 +19,7 @@ function AppShell() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [todoSettingsOpen, setTodoSettingsOpen] = useState(false);
   const [bundleOpen, setBundleOpen] = useState(false);
+  const [characterOpen, setCharacterOpen] = useState(false);
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 p-4">
@@ -36,6 +38,13 @@ function AppShell() {
             className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
           >
             <PixelIcon src="/icons/ui/bundle.png" size={18} /> {t("bundle.short")}
+          </button>
+          <button
+            onClick={() => setCharacterOpen(true)}
+            aria-label={t("character.open")}
+            className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
+          >
+            <PixelIcon src="/icons/ui/character.png" size={18} /> {t("character.short")}
           </button>
           <button
             onClick={() => setTodoSettingsOpen(true)}
@@ -64,6 +73,9 @@ function AppShell() {
         <TodoSettingsDialog onClose={() => setTodoSettingsOpen(false)} />
       )}
       {bundleOpen && <BundleDialog onClose={() => setBundleOpen(false)} />}
+      {characterOpen && (
+        <CharacterDialog onClose={() => setCharacterOpen(false)} />
+      )}
     </div>
   );
 }

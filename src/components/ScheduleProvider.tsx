@@ -35,6 +35,7 @@ export function useSchedule() {
     rainDays: state.rainDays,
     wateringCanUpgrades: state.wateringCanUpgrades,
     bundleItemsDone: state.bundleItemsDone,
+    character: state.character,
     memosOn: (date: SDate): Memo[] =>
       state.memos.filter(
         (m) => m.season === date.season && m.day === date.day,
@@ -54,5 +55,6 @@ export function useSchedule() {
     setRainDay: scheduleActions.setRainDay,
     incWateringCanUpgrades: scheduleActions.incWateringCanUpgrades,
     toggleBundleItem: scheduleActions.toggleBundleItem,
+    setCharacter: scheduleActions.setCharacter,
   };
 }

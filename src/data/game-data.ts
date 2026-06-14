@@ -84,13 +84,17 @@ export interface Crop {
   id: string;
   seasons: Season[];
   growthDays: number;
-  phases: number[];
+  // 성장 단계별 일수(합 = growthDays). AddTaskDialog 파종 대상은 이 값이 있어야 한다.
+  // 효율 표시 전용(파종 불가) 작물은 생략한다.
+  phases?: number[];
   regrowDays?: number;
   // 효율 계산용 경제 데이터(출처: Stardew Profits crops.js).
   sellPrice: number; // 원물 기본 판매가(일반 품질)
   extraYield?: number; // 평균 추가 수확량(= extra × extraPerc), 없으면 0
   kegPrice?: number; // 술통 가공물 판매가(가공 불가 작물은 생략)
-  jarPrice?: number; // 보존병 가공물 판매가(가공 불가 작물은 생략)
+  jarPrice?: number; // 절임통 가공물 판매가(가공 불가 작물은 생략)
+  isWildseed?: boolean; // 야생 씨앗(품질이 채집 레벨로 결정)
+  isTea?: boolean; // 찻잎(계절 마지막 7일에만 수확, 품질 일반 고정)
 }
 
 export const CROPS: Crop[] = [
@@ -131,6 +135,27 @@ export const CROPS: Crop[] = [
   { id: "beet", seasons: ["fall"], growthDays: 6, phases: [1, 1, 2, 2], sellPrice: 100, kegPrice: 225, jarPrice: 250 },
   { id: "fairyRose", seasons: ["fall"], growthDays: 12, phases: [1, 4, 4, 3], sellPrice: 290 },
   { id: "sweetGemBerry", seasons: ["fall"], growthDays: 24, phases: [2, 4, 6, 6, 6], sellPrice: 3000 },
+
+  // Stardew Profits 추가 작물(효율 표시 전용 — phases 없음, AddTaskDialog 파종 대상 아님).
+  // 봄
+  { id: "carrot", seasons: ["spring"], growthDays: 3, sellPrice: 35, kegPrice: 78, jarPrice: 120 },
+  { id: "unmilledRice", seasons: ["spring"], growthDays: 8, sellPrice: 30, extraYield: 0.11, kegPrice: 67, jarPrice: 110 },
+  { id: "springSeeds", seasons: ["spring"], growthDays: 7, sellPrice: 45, isWildseed: true },
+  // 여름
+  { id: "pineapple", seasons: ["summer"], growthDays: 14, regrowDays: 7, sellPrice: 300, kegPrice: 900, jarPrice: 650 },
+  { id: "summerSquash", seasons: ["summer"], growthDays: 6, regrowDays: 3, sellPrice: 45, kegPrice: 101, jarPrice: 140 },
+  { id: "taroRoot", seasons: ["summer"], growthDays: 10, sellPrice: 100, kegPrice: 225, jarPrice: 250 },
+  { id: "summerSpangle", seasons: ["summer"], growthDays: 8, sellPrice: 90 },
+  { id: "summerSeeds", seasons: ["summer"], growthDays: 7, sellPrice: 70, kegPrice: 210, jarPrice: 190, isWildseed: true },
+  // 가을
+  { id: "broccoli", seasons: ["fall"], growthDays: 8, regrowDays: 4, sellPrice: 70, kegPrice: 157, jarPrice: 190 },
+  { id: "fallSeeds", seasons: ["fall"], growthDays: 7, sellPrice: 57.5, kegPrice: 172, jarPrice: 165, isWildseed: true },
+  // 겨울
+  { id: "powdermelon", seasons: ["winter"], growthDays: 7, sellPrice: 60, kegPrice: 180, jarPrice: 170 },
+  { id: "winterSeeds", seasons: ["winter"], growthDays: 7, sellPrice: 95, kegPrice: 285, jarPrice: 240, isWildseed: true },
+  // 다계절(봄·여름·가을)
+  { id: "teaLeaves", seasons: ["spring", "summer", "fall"], growthDays: 20, regrowDays: 1, sellPrice: 50, kegPrice: 100, jarPrice: 150, isTea: true },
+  { id: "ancientFruit", seasons: ["spring", "summer", "fall"], growthDays: 28, regrowDays: 7, sellPrice: 550, kegPrice: 1650, jarPrice: 1150 },
 ];
 
 // 해당 계절에 작물을 심어 시즌 내 첫 수확을 보려면 늦어도 이 날까지 심어야 한다.
