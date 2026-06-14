@@ -7,30 +7,57 @@ import { addDays, type SDate } from "@/lib/calendar";
 import { CROPS } from "@/data/game-data";
 import { MACHINES } from "@/data/machines";
 import { computeHarvest, type Fertilizer } from "@/lib/growth";
+import { toolPickup, type ToolPickup } from "@/lib/blacksmith";
+import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import type { MemoCategory } from "@/lib/todoOrder";
 import type { Memo } from "@/types/schedule";
 import { asset } from "@/lib/asset";
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
 import Dropdown from "@/components/Dropdown";
+import TimeIcon from "@/components/TimeIcon";
 
 type Mode = "menu" | "tool" | "seed" | "machine";
 
-// 메뉴 항목 아이콘: 도구 업그레이드=호미, 씨앗 심기=쌀 씨앗, 장인 장비=숙성용 나무통
-const MENU_ICONS: Record<"tool" | "seed" | "machine", string> = {
+// 폼이 있는 메뉴(계산 필요) / 폼 없이 즉시 추가하는 단순 메뉴(misc)
+const FORM_MENU = ["tool", "seed", "machine"] as const;
+const SIMPLE_MENU = ["geode", "museum"] as const;
+
+// 메뉴 항목 아이콘
+const MENU_ICONS: Record<
+  (typeof FORM_MENU)[number] | (typeof SIMPLE_MENU)[number],
+  string
+> = {
   tool: "/icons/addTask/tool.png",
   seed: "/icons/addTask/seed.png",
   machine: "/icons/addTask/machine.png",
+  geode: "/icons/addTask/geode.png",
+  museum: "/icons/addTask/museum.png",
 };
 
 const TOOLS = ["axe", "pickaxe", "hoe", "wateringCan", "trashCan"] as const;
 const FERTILIZERS: Fertilizer[] = ["none", "speedGro", "deluxe", "hyper"];
-const TOOL_UPGRADE_DAYS = 2; // 클린트 대장간: 2일 후 수령
 
-export default function AddTaskDialog({ onClose }: { onClose: () => void }) {
+export default function AddTaskDialog({
+  baseDate,
+  dayLabel,
+  onClose,
+}: {
+  baseDate: SDate;
+  dayLabel: string;
+  onClose: () => void;
+}) {
   const t = useTranslations();
-  const { currentDate, addMemo, addMemos } = useSchedule();
+  const { addMemo, addMemos, bundleItemsDone } = useSchedule();
   const [mode, setMode] = useState<Mode>("menu");
+
+  // 마을 회관 완료 여부 → 대장간 금요일 휴무 판단
+  const ccCompleted = BUNDLES.every(
+    (b) =>
+      b.items.filter((i) => bundleItemsDone[bundleItemKey(b.id, i.id)]).length >=
+      b.needed,
+  );
+  const pickup = toolPickup(baseDate, ccCompleted);
 
   const dateLabel = (d: SDate) =>
     t("addTask.dateLabel", { season: t(`seasons.${d.season}`), day: d.day });
@@ -50,7 +77,7 @@ export default function AddTaskDialog({ onClose }: { onClose: () => void }) {
   const addSeed = (cropId: string, agri: boolean, fert: Fertilizer) => {
     const crop = CROPS.find((c) => c.id === cropId);
     if (!crop) return;
-    const h = computeHarvest(currentDate, crop, agri, fert);
+    const h = computeHarvest(baseDate, crop, agri, fert);
     const cropName = t(`crops.${cropId}`);
     const memos: Omit<Memo, "id" | "createdAt" | "done">[] = [
       {
@@ -61,58 +88,80 @@ export default function AddTaskDialog({ onClose }: { onClose: () => void }) {
         category: "harvest",
       },
     ];
-    const sameSeason = h.date.season === currentDate.season;
+    const sameSeason = h.date.season === baseDate.season;
     const lastWater = crop.regrowDays ? 28 : sameSeason ? h.date.day - 1 : 28;
-    for (let d = currentDate.day; d <= Math.min(lastWater, 28); d++) {
+    for (let d = baseDate.day; d <= Math.min(lastWater, 28); d++) {
       memos.push({
-        season: currentDate.season,
+        season: baseDate.season,
         day: d,
         text: t("addTask.wateringMemo", { crop: cropName }),
         reminderDaysBefore: 0,
         category: "watering",
       });
     }
+    // 재수확 작물이 아니고 시즌 내 수확 가능하면, 수확일에 재파종용 씨앗 구매 메모 추가
+    if (!crop.regrowDays && !h.willWilt) {
+      memos.push({
+        season: h.date.season,
+        day: h.date.day,
+        text: t("addTask.buySeedMemo", { crop: cropName }),
+        reminderDaysBefore: 0,
+        category: "buySeed",
+      });
+    }
     addMemos(memos);
     onClose();
   };
 
+  // 메뉴 항목 렌더(아이콘 + 라벨 + 클릭 동작 공통)
+  const renderMenuItem = (m: string, onClick: () => void) => (
+    <li key={m}>
+      <button
+        onClick={onClick}
+        className="flex w-full items-center gap-3 rounded-lg border border-[var(--sv-border)] px-3 py-3 text-left text-sm font-semibold hover:bg-[var(--sv-bg)]"
+      >
+        <Image
+          src={asset(MENU_ICONS[m as keyof typeof MENU_ICONS])}
+          alt=""
+          width={28}
+          height={28}
+          unoptimized
+          className="shrink-0"
+          style={{ imageRendering: "pixelated" }}
+        />
+        {t(`addTask.${m}`)}
+      </button>
+    </li>
+  );
+
   return (
     <Modal
-      title={mode === "menu" ? t("addTask.title") : t(`addTask.${mode}`)}
+      title={
+        mode === "menu"
+          ? t("addTask.titleWithDay", { day: dayLabel })
+          : t(`addTask.${mode}`)
+      }
       onClose={onClose}
     >
       {mode === "menu" && (
         <ul className="flex flex-col gap-2">
-          {(["tool", "seed", "machine"] as const).map((m) => (
-            <li key={m}>
-              <button
-                onClick={() => setMode(m)}
-                className="flex w-full items-center gap-3 rounded-lg border border-[var(--sv-border)] px-3 py-3 text-left text-sm font-semibold hover:bg-[var(--sv-bg)]"
-              >
-                <Image
-                  src={asset(MENU_ICONS[m])}
-                  alt=""
-                  width={28}
-                  height={28}
-                  unoptimized
-                  className="shrink-0"
-                  style={{ imageRendering: "pixelated" }}
-                />
-                {t(`addTask.${m}`)}
-              </button>
-            </li>
-          ))}
+          {FORM_MENU.map((m) => renderMenuItem(m, () => setMode(m)))}
+          {SIMPLE_MENU.map((m) =>
+            renderMenuItem(m, () =>
+              addAndClose(baseDate, t(`addTask.${m}Memo`), "misc"),
+            ),
+          )}
         </ul>
       )}
 
       {mode === "tool" && (
         <ToolForm
           dateLabel={dateLabel}
-          target={addDays(currentDate, TOOL_UPGRADE_DAYS)}
+          pickup={pickup}
           onBack={() => setMode("menu")}
           onAdd={(toolId) =>
             addAndClose(
-              addDays(currentDate, TOOL_UPGRADE_DAYS),
+              pickup.pickup,
               t("addTask.toolMemo", { tool: t(`tools.${toolId}`) }),
               "tool",
             )
@@ -122,7 +171,7 @@ export default function AddTaskDialog({ onClose }: { onClose: () => void }) {
 
       {mode === "seed" && (
         <SeedForm
-          plantDate={currentDate}
+          plantDate={baseDate}
           dateLabel={dateLabel}
           onBack={() => setMode("menu")}
           onAdd={addSeed}
@@ -131,7 +180,7 @@ export default function AddTaskDialog({ onClose }: { onClose: () => void }) {
 
       {mode === "machine" && (
         <MachineForm
-          startDate={currentDate}
+          startDate={baseDate}
           dateLabel={dateLabel}
           onBack={() => setMode("menu")}
           onAdd={(date, outputId) =>
@@ -188,12 +237,12 @@ function FieldLabel({ children }: { children: React.ReactNode }) {
 
 function ToolForm({
   dateLabel,
-  target,
+  pickup,
   onBack,
   onAdd,
 }: {
   dateLabel: (d: SDate) => string;
-  target: SDate;
+  pickup: ToolPickup;
   onBack: () => void;
   onAdd: (toolId: string) => void;
 }) {
@@ -213,9 +262,19 @@ function ToolForm({
         onChange={setTool}
         ariaLabel={t("addTask.selectTool")}
       />
-      <p className="mt-3 rounded-md bg-[var(--sv-bg)] px-3 py-2 text-sm">
-        📅 {t("addTask.pickupPreview", { date: dateLabel(target) })}
+      <p className="mt-3 flex items-center gap-1.5 rounded-md bg-[var(--sv-bg)] px-3 py-2 text-sm">
+        <TimeIcon />
+        {t("addTask.pickupPreview", { date: dateLabel(pickup.pickup) })}
       </p>
+      {pickup.closure && (
+        <p className="mt-2 rounded-md bg-[#fbeaea] px-3 py-2 text-xs font-semibold text-[#b02a2a]">
+          ⚠{" "}
+          {t("blacksmith.pickupWarn", {
+            ready: dateLabel(pickup.ready),
+            reason: t(`blacksmith.${pickup.closure}`),
+          })}
+        </p>
+      )}
       <FormFooter onBack={onBack} onAdd={() => onAdd(tool)} />
     </div>
   );
@@ -294,7 +353,10 @@ function SeedForm({
 
       {harvest && (
         <div className="rounded-md bg-[var(--sv-bg)] px-3 py-2 text-sm">
-          <p>🌾 {t("addTask.harvestPreview", { date: dateLabel(harvest.date) })}</p>
+          <p className="flex items-center gap-1.5">
+            <TimeIcon />
+            {t("addTask.harvestPreview", { date: dateLabel(harvest.date) })}
+          </p>
           {harvest.regrowDays && (
             <p className="text-xs text-[var(--sv-ink-muted)]">
               {t("addTask.regrowNote", { days: harvest.regrowDays })}
@@ -375,15 +437,7 @@ function MachineForm({
       </div>
 
       <p className="flex items-center gap-1.5 rounded-md bg-[var(--sv-bg)] px-3 py-2 text-sm">
-        <Image
-          src={asset("/icons/ui/time.png")}
-          alt=""
-          width={16}
-          height={16}
-          unoptimized
-          className="shrink-0"
-          style={{ imageRendering: "pixelated" }}
-        />
+        <TimeIcon />
         {t("addTask.readyPreview", { date: dateLabel(ready) })}
       </p>
 

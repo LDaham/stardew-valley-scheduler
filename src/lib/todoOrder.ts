@@ -13,9 +13,14 @@ export interface TodoEntry {
 }
 
 export const EVENT_TYPES = ["festival", "birthday", "cropDeadline"] as const;
-// harvest=작물 수확, watering=작물별 물주기(사용자 추가), tool=도구 업그레이드, machine=장인 제작품
-export const MEMO_CATEGORIES = ["harvest", "watering", "tool", "machine"] as const;
-export type MemoCategory = (typeof MEMO_CATEGORIES)[number];
+// harvest=작물 수확, watering=작물별 물주기(사용자 추가), tool=도구 업그레이드,
+// machine=장인 제작품, misc=정동석 깨기·박물관 기증(사용자 추가)
+export const MEMO_CATEGORIES = ["harvest", "watering", "tool", "machine", "misc"] as const;
+// 설정·순서에 노출되는 카테고리(토글/정렬 대상)
+export type VisibleMemoCategory = (typeof MEMO_CATEGORIES)[number];
+// buySeed: 수확일 씨앗 구매 메모. 순서·토글은 buySeeds 리마인더와 통합되어
+// 별도 카테고리로 노출하지 않으므로 MEMO_CATEGORIES에는 포함하지 않는다.
+export type MemoCategory = VisibleMemoCategory | "buySeed";
 
 export const TODO_ENTRIES: TodoEntry[] = [
   ...EVENT_TYPES.map((t) => ({ key: `event:${t}`, kind: "event" as const, ref: t })),
@@ -48,7 +53,7 @@ export const DEFAULT_TODO_ORDER: string[] = [
   "reminder:helpWantedDeadline",
   "reminder:specialOrders",
   "memo:tool",
-  "reminder:museumDonation",
+  "memo:misc",
   "reminder:krobusSprinkler",
   "reminder:communityCenterBundle",
   "reminder:desertTraderStaircase",

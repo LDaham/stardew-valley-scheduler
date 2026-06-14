@@ -19,13 +19,15 @@ import EventIcon from "@/components/EventIcon";
 import ReminderIcon from "@/components/ReminderIcon";
 import AddTaskDialog from "@/components/AddTaskDialog";
 import BundleDialog from "@/components/BundleDialog";
+import SeedEfficiencyDialog from "@/components/SeedEfficiencyDialog";
 import Modal from "@/components/Modal";
+import TimeIcon from "@/components/TimeIcon";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
+import { toolPickup } from "@/lib/blacksmith";
 import type { ReactNode } from "react";
 
 // 물뿌리개 업그레이드 제안을 멈출 누적 횟수
 const MAX_WATERING_CAN_UPGRADES = 3;
-const TOOL_UPGRADE_DAYS = 2; // 대장간 수령까지 2일
 
 // 통합 체크리스트의 한 항목 (고정 이벤트 / 리마인더 / 메모 공통 표현)
 interface TaskRow {
@@ -67,7 +69,9 @@ export default function Dashboard({
     bundleItemsDone,
   } = useSchedule();
   const openGifts = useGiftDialog();
-  const [addOpen, setAddOpen] = useState(false);
+  // 할 일 추가 대상: null=닫힘, "today"=오늘, "tomorrow"=내일
+  const [addTarget, setAddTarget] = useState<"today" | "tomorrow" | null>(null);
+  const [seedEffOpen, setSeedEffOpen] = useState(false);
   const [rainPromptOpen, setRainPromptOpen] = useState(false);
   const [bundleFillOpen, setBundleFillOpen] = useState(false);
 
@@ -90,6 +94,18 @@ export default function Dashboard({
   const tomorrowYd = toYearDay(tomorrow);
   const rainTomorrow = !!rainDays[tomorrowYd];
 
+  const dateLabel = (d: SDate) =>
+    t("addTask.dateLabel", { season: t(`seasons.${d.season}`), day: d.day });
+
+  // 마을 회관(추적 번들 전부 완료) 여부 → 금요일 휴무 판단에 사용
+  const ccCompleted = BUNDLES.every(
+    (b) =>
+      b.items.filter((i) => bundleItemsDone[bundleItemKey(b.id, i.id)]).length >=
+      b.needed,
+  );
+  // 오늘 도구를 맡겼을 때 실제 수령 가능일(대장간 휴무 반영)
+  const wateringPickup = toolPickup(currentDate, ccCompleted);
+
   // "내일 비" 토글: 켜면 내일 물주기가 숨겨지고, 업그레이드 여력이 있으면 제안 띄움
   const toggleRainTomorrow = () => {
     const next = !rainTomorrow;
@@ -99,9 +115,9 @@ export default function Dashboard({
     }
   };
 
-  // 물뿌리개 업그레이드를 오늘 일정(2일 뒤 수령)에 추가
+  // 물뿌리개 업그레이드를 실제 수령 가능일에 추가(대장간 휴무 시 다음 영업일)
   const addWateringCanUpgrade = () => {
-    const target = addDays(currentDate, TOOL_UPGRADE_DAYS);
+    const target = wateringPickup.pickup;
     addMemo({
       season: target.season,
       day: target.day,
@@ -178,6 +194,13 @@ export default function Dashboard({
             label={t("bundle.fill")}
           />
         );
+      } else if (r.id === "buySeeds") {
+        rightBadge = (
+          <ActionChip
+            onClick={() => setSeedEffOpen(true)}
+            label={t("seedEfficiency.view")}
+          />
+        );
       }
       rows.push({
         key,
@@ -191,6 +214,20 @@ export default function Dashboard({
     }
 
     for (const m of memosOn(date)) {
+      // 씨앗 구매 메모(buySeed): buySeeds 리마인더와 순서·토글 통합
+      if (m.category === "buySeed") {
+        if (!reminderToggles.buySeeds) continue;
+        rows.push({
+          key: `memo-${m.id}`,
+          orderKey: "reminder:buySeeds",
+          icon: <ReminderIcon id="buySeeds" size={16} />,
+          label: m.text,
+          done: m.done,
+          onToggle: () => toggleDone(m.id),
+          onDelete: () => deleteMemo(m.id),
+        });
+        continue;
+      }
       // 카테고리가 꺼져 있으면 숨김(카테고리 없는 레거시 메모는 항상 표시)
       if (m.category && !memoCategoryToggles[m.category]) continue;
       // 비 오는 날은 작물별 물주기 숨김
@@ -246,13 +283,19 @@ export default function Dashboard({
         </button>
       </div>
 
-      {/* 할 일 추가 버튼 */}
-      <div className="flex justify-end">
+      {/* 할 일 추가 버튼: 오늘 / 내일 */}
+      <div className="flex justify-end gap-2">
         <button
-          onClick={() => setAddOpen(true)}
+          onClick={() => setAddTarget("today")}
           className="rounded-lg border border-[var(--sv-accent)] bg-[var(--sv-accent)] px-3 py-1.5 text-sm font-semibold text-white hover:opacity-90"
         >
-          ＋ {t("addTask.title")}
+          ＋ {t("addTask.titleWithDay", { day: t("dashboard.today") })}
+        </button>
+        <button
+          onClick={() => setAddTarget("tomorrow")}
+          className="rounded-lg border border-[var(--sv-accent)] px-3 py-1.5 text-sm font-semibold text-[var(--sv-accent)] hover:bg-[var(--sv-bg)]"
+        >
+          ＋ {t("addTask.titleWithDay", { day: t("dashboard.tomorrow") })}
         </button>
       </div>
 
@@ -280,14 +323,43 @@ export default function Dashboard({
         )}
       </div>
 
-      {addOpen && <AddTaskDialog onClose={() => setAddOpen(false)} />}
+      {addTarget && (
+        <AddTaskDialog
+          baseDate={addTarget === "today" ? currentDate : tomorrow}
+          dayLabel={
+            addTarget === "today" ? t("dashboard.today") : t("dashboard.tomorrow")
+          }
+          onClose={() => setAddTarget(null)}
+        />
+      )}
+
+      {seedEffOpen && (
+        <SeedEfficiencyDialog
+          season={currentDate.season}
+          onClose={() => setSeedEffOpen(false)}
+        />
+      )}
 
       {rainPromptOpen && (
         <Modal
           title={t("dashboard.rainPromptTitle")}
           onClose={() => setRainPromptOpen(false)}
         >
-          <p className="mb-3 text-sm">{t("dashboard.rainPromptBody")}</p>
+          <p className="mb-2 text-sm">{t("dashboard.rainPromptBody")}</p>
+
+          {/* 도구 수령일 + 대장간 휴무 경고 */}
+          <p className="mb-3 flex items-center gap-1.5 text-xs text-[var(--sv-ink-muted)]">
+            <TimeIcon size={14} />
+            {t("addTask.pickupPreview", { date: dateLabel(wateringPickup.pickup) })}
+          </p>
+          {wateringPickup.closure && (
+            <p className="mb-3 rounded-md bg-[#fbeaea] px-3 py-2 text-xs font-semibold text-[#b02a2a]">
+              ⚠ {t("blacksmith.pickupWarn", {
+                ready: dateLabel(wateringPickup.ready),
+                reason: t(`blacksmith.${wateringPickup.closure}`),
+              })}
+            </p>
+          )}
 
           {/* 비 오는 날에만 구할 수 있는 번들 품목 */}
           {rainBundleNeeds.length > 0 && (

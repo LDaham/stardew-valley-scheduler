@@ -1,9 +1,10 @@
 import type { Season } from "@/lib/calendar";
 import type { EventFilters } from "@/lib/events";
 import type { ReminderId } from "@/data/reminders";
-import type { MemoCategory } from "@/lib/todoOrder";
+import type { MemoCategory, VisibleMemoCategory } from "@/lib/todoOrder";
 
-export type MemoCategoryToggles = Record<MemoCategory, boolean>;
+// 토글은 설정에 노출되는 카테고리만 대상(buySeed 제외 — buySeeds 리마인더와 통합)
+export type MemoCategoryToggles = Record<VisibleMemoCategory, boolean>;
 
 // 순환 메모 1건. (계절,일)에 귀속되어 매 순환마다 반복 표시된다.
 export interface Memo {

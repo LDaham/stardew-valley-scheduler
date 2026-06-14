@@ -9,7 +9,7 @@ import Modal from "@/components/Modal";
 import ReminderIcon from "@/components/ReminderIcon";
 import type { FixedEventType } from "@/lib/events";
 import type { ReminderId } from "@/data/reminders";
-import { getTodoEntry, type MemoCategory } from "@/lib/todoOrder";
+import { getTodoEntry, type VisibleMemoCategory } from "@/lib/todoOrder";
 
 // 설정 표시용 대표 이미지.
 const EVENT_ICON: Record<string, string> = {
@@ -22,6 +22,7 @@ const MEMO_ICON: Record<string, string> = {
   watering: "/icons/reminders/watering.png",
   tool: "/icons/addTask/tool.png",
   machine: "/icons/addTask/machine.png",
+  misc: "/icons/addTask/geode.png",
 };
 
 function PixelImage({ src, size = 18 }: { src: string; size?: number }) {
@@ -129,7 +130,7 @@ export default function TodoSettingsDialog({
               </span>
             );
           } else {
-            const cat = entry.ref as MemoCategory;
+            const cat = entry.ref as VisibleMemoCategory;
             control = (
               <input
                 type="checkbox"

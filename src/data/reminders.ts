@@ -18,7 +18,6 @@ export type ReminderId =
   | "buySeeds"
   | "helpWanted"
   | "helpWantedDeadline"
-  | "museumDonation"
   | "communityCenterBundle"
   | "crabPot";
 
@@ -117,11 +116,6 @@ export const REMINDERS: ReminderDef[] = [
     id: "helpWantedDeadline",
     trigger: { kind: "festivalEve" },
     emoji: "⚠️",
-  },
-  {
-    id: "museumDonation",
-    trigger: { kind: "daily" },
-    emoji: "🏛️",
   },
   {
     id: "communityCenterBundle",

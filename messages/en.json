@@ -35,13 +35,14 @@
   },
   "dashboard": {
     "today": "Today",
+    "tomorrow": "Tomorrow",
     "prevDay": "Prev day",
     "nextDay": "Next day",
     "todoList": "To Do List",
     "noTasks": "No tasks",
     "rainTomorrow": "Rain tmrw",
     "rainPromptTitle": "Rain forecast tomorrow",
-    "rainPromptBody": "It rains tomorrow, so no watering needed. Add a watering can upgrade today? (ready in 2 days)",
+    "rainPromptBody": "It rains tomorrow, so no watering needed. Add a watering can upgrade today?",
     "rainPromptAdd": "Add",
     "rainPromptSkip": "No",
     "rainBundleItems": "Bundle items only obtainable on rainy days",
@@ -82,11 +83,18 @@
     "reorder": "Drag to reorder",
     "userAdded": "User-added"
   },
+  "blacksmith": {
+    "pickupWarn": "Blacksmith is closed on the ready day {ready} ({reason}); you'll pick it up the next open day",
+    "festival": "festival closure",
+    "checkup": "Clint's checkup (Winter 16)",
+    "friday": "Friday (after Community Center)"
+  },
   "todoCategory": {
     "harvest": "Harvest",
     "watering": "Crop watering",
     "tool": "Tool upgrade",
-    "machine": "Artisan goods"
+    "machine": "Artisan goods",
+    "misc": "Geode·Museum"
   },
   "bundle": {
     "title": "Community Center bundles",
@@ -238,9 +246,14 @@
   },
   "addTask": {
     "title": "Add task",
+    "titleWithDay": "Add {day} task",
     "tool": "Tool upgrade",
     "seed": "Plant seeds",
     "machine": "Artisan goods",
+    "geode": "Crack geodes",
+    "museum": "Donate to museum",
+    "geodeMemo": "Crack geodes — take ore geodes to the Blacksmith (Clint) to open",
+    "museumMemo": "Donate to museum — donate newly found minerals and artifacts to the museum (Gunther)",
     "back": "Back",
     "add": "Add",
     "selectTool": "Select tool",
@@ -261,7 +274,23 @@
     "harvestMemo": "Harvest {crop}",
     "wateringMemo": "Water {crop}",
     "wateringNote": "Daily watering items are auto-added until harvest (regrow crops: until season end)",
-    "machineMemo": "{output} ready"
+    "machineMemo": "{output} ready",
+    "buySeedMemo": "Buy {crop} seeds (replant)"
+  },
+  "seedEfficiency": {
+    "title": "Seed efficiency",
+    "view": "View efficiency",
+    "fertilizer": "Fertilizer",
+    "produce": "Produce type",
+    "raw": "Sell raw",
+    "keg": "Keg",
+    "jar": "Preserves Jar",
+    "tiller": "Tiller",
+    "agriculturist": "Agriculturist",
+    "botanist": "Botanist",
+    "detail": "{profit}g · {harvests} harvests · {perDay}g/day",
+    "rawFallback": "no processing → raw",
+    "note": "Relative revenue (max = 100%). Reflects season, cross-season, processing, fertilizer and skills; ignores level, quality odds, seed cost and processing time. Botanist only affects wild seeds."
   },
   "tools": {
     "axe": "Axe",
@@ -334,10 +363,6 @@
     "helpWantedDeadline": {
       "title": "Help Wanted deadline",
       "detail": "Tomorrow is a festival — NPCs and shops are unavailable, so finish Help Wanted requests today"
-    },
-    "museumDonation": {
-      "title": "Donate to the museum",
-      "detail": "Donate newly found minerals and artifacts to the museum (Gunther)"
     },
     "communityCenterBundle": {
       "title": "Fill Community Center bundles",

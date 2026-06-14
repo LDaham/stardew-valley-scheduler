@@ -35,13 +35,14 @@
   },
   "dashboard": {
     "today": "오늘",
+    "tomorrow": "내일",
     "prevDay": "전날",
     "nextDay": "다음날",
     "todoList": "To Do List",
     "noTasks": "할 일이 없습니다",
     "rainTomorrow": "내일 비",
     "rainPromptTitle": "내일 비 예보",
-    "rainPromptBody": "내일 비가 와서 물을 줄 필요가 없어요. 오늘 물뿌리개 업그레이드를 추가할까요? (2일 뒤 수령)",
+    "rainPromptBody": "내일 비가 와서 물을 줄 필요가 없어요. 오늘 물뿌리개 업그레이드를 추가할까요?",
     "rainPromptAdd": "추가",
     "rainPromptSkip": "아니요",
     "rainBundleItems": "비 오는 날에만 구할 수 있는 번들 품목",
@@ -82,11 +83,18 @@
     "reorder": "드래그하여 순서 변경",
     "userAdded": "사용자 추가"
   },
+  "blacksmith": {
+    "pickupWarn": "완성 예정일 {ready}은 대장간 휴무({reason})라 다음 영업일에 수령합니다",
+    "festival": "축제 휴무",
+    "checkup": "클린트 검진(겨울 16일)",
+    "friday": "금요일 휴무(마을 회관 복구 후)"
+  },
   "todoCategory": {
     "harvest": "작물 수확",
     "watering": "작물별 물주기",
     "tool": "도구 업그레이드",
-    "machine": "장인 제작품"
+    "machine": "장인 제작품",
+    "misc": "정동석·박물관"
   },
   "bundle": {
     "title": "마을회관 번들 추적",
@@ -238,9 +246,14 @@
   },
   "addTask": {
     "title": "할 일 추가",
+    "titleWithDay": "{day} 할 일 추가",
     "tool": "도구 업그레이드",
     "seed": "씨앗 심기",
     "machine": "장인 제작품",
+    "geode": "정동석 깨기",
+    "museum": "박물관 기증하기",
+    "geodeMemo": "정동석 깨기 — 대장간(클린트)에 광석 정동석을 가져가 감정",
+    "museumMemo": "박물관 기증하기 — 새로 얻은 광물·유물을 박물관(군터)에 기증",
     "back": "뒤로",
     "add": "추가",
     "selectTool": "도구 선택",
@@ -261,7 +274,23 @@
     "harvestMemo": "{crop} 수확",
     "wateringMemo": "{crop} 물주기",
     "wateringNote": "수확 전까지 매일 물주기 항목이 자동 추가됩니다 (재수확 작물은 계절 끝까지)",
-    "machineMemo": "{output} 완성"
+    "machineMemo": "{output} 완성",
+    "buySeedMemo": "{crop} 씨앗 구매(재파종)"
+  },
+  "seedEfficiency": {
+    "title": "씨앗 효율",
+    "view": "효율 보기",
+    "fertilizer": "비료",
+    "produce": "가공 유형",
+    "raw": "원물 판매",
+    "keg": "술통 가공",
+    "jar": "보존병 가공",
+    "tiller": "경작인",
+    "agriculturist": "농업 전문가",
+    "botanist": "식물학자",
+    "detail": "{profit}g · {harvests}회 수확 · 일 {perDay}g",
+    "rawFallback": "가공 불가 → 원물",
+    "note": "상대 수익(최대=100%) 기준. 계절·크로스시즌·가공·비료·스킬을 반영하며, 레벨·품질 확률·씨앗 비용·가공 시간은 반영하지 않습니다. 식물학자는 야생 씨앗 전용입니다."
   },
   "tools": {
     "axe": "도끼",
@@ -334,10 +363,6 @@
     "helpWantedDeadline": {
       "title": "구인광고 마감 주의",
       "detail": "내일은 축제라 NPC·상점 이용이 막힙니다 — 오늘 안에 구인광고 의뢰를 완료하세요"
-    },
-    "museumDonation": {
-      "title": "박물관 기증하기",
-      "detail": "새로 얻은 광물·유물을 박물관(군터)에 기증"
     },
     "communityCenterBundle": {
       "title": "마을회관 번들 채우기",
