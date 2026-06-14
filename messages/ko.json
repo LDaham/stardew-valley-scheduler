@@ -49,7 +49,6 @@
     "rainBundleOpen": "번들 채우기 열기",
     "birthdayOf": "{name} 생일 선물 전달",
     "plantDeadline": "{crop} 심기 마지막 날",
-    "reminderEve": "내일 축제",
     "dDay": "D-{days}"
   },
   "memo": {
@@ -358,11 +357,8 @@
     },
     "helpWanted": {
       "title": "구인광고 확인",
-      "detail": "피에르네 게시판의 구인광고(배달·잡기 등) 의뢰 확인"
-    },
-    "helpWantedDeadline": {
-      "title": "구인광고 마감 주의",
-      "detail": "내일은 축제라 NPC·상점 이용이 막힙니다 — 오늘 안에 구인광고 의뢰를 완료하세요"
+      "detail": "피에르네 게시판의 구인광고(배달·잡기 등) 의뢰 확인",
+      "eveWarning": "내일은 축제라 NPC·상점 이용이 막힙니다"
     },
     "communityCenterBundle": {
       "title": "마을회관 번들 채우기",

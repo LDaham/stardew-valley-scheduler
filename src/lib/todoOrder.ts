@@ -50,7 +50,6 @@ export const DEFAULT_TODO_ORDER: string[] = [
   "reminder:animalCare",
   "reminder:buySeeds",
   "reminder:helpWanted",
-  "reminder:helpWantedDeadline",
   "reminder:specialOrders",
   "memo:tool",
   "memo:misc",

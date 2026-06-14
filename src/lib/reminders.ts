@@ -17,8 +17,14 @@ const EVENING_FESTIVALS = new Set([
 
 export type ReminderBadge =
   | { kind: "today" }
-  | { kind: "dDay"; days: number }
-  | { kind: "eve" };
+  | { kind: "dDay"; days: number };
+
+// 내일이 NPC·상점 이용을 막는 축제 시작일인지(= 구인광고 등을 오늘 안에 끝내야 하는 날).
+// 저녁에 시작해 건물이 잠기지 않는 축제는 제외.
+export function festivalEveBlocked(date: SDate): boolean {
+  const fest = festivalStartingOn(addDays(date, 1));
+  return !!fest && !EVENING_FESTIVALS.has(fest.id);
+}
 
 export interface ActiveReminder {
   id: ReminderId;
@@ -61,17 +67,11 @@ function matchTrigger(def: ReminderDef, date: SDate): ReminderBadge | null {
     return null;
   }
 
-  if (tr.kind === "festivalPrep") {
-    const fd = festivalDate(tr.festivalId);
-    if (!fd) return null;
-    const away = daysUntil(date, fd);
-    if (away >= 1 && away <= tr.daysBefore) return { kind: "dDay", days: away };
-    return null;
-  }
-
-  // festivalEve: 내일이 축제 시작일이고, 저녁 축제가 아니면 경고
-  const fest = festivalStartingOn(addDays(date, 1));
-  if (fest && !EVENING_FESTIVALS.has(fest.id)) return { kind: "eve" };
+  // festivalPrep
+  const fd = festivalDate(tr.festivalId);
+  if (!fd) return null;
+  const away = daysUntil(date, fd);
+  if (away >= 1 && away <= tr.daysBefore) return { kind: "dDay", days: away };
   return null;
 }
 

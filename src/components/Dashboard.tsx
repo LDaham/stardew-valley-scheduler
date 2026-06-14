@@ -11,6 +11,7 @@ import {
 import { filterEvents, getEventsOn, type FixedEvent } from "@/lib/events";
 import {
   getActiveReminders,
+  festivalEveBlocked,
   type ReminderBadge,
 } from "@/lib/reminders";
 import { useSchedule } from "@/components/ScheduleProvider";
@@ -138,12 +139,6 @@ export default function Dashboard({
   };
 
   const reminderBadge = (badge: ReminderBadge): ReactNode => {
-    if (badge.kind === "eve")
-      return (
-        <span className="shrink-0 rounded bg-[#c0506b] px-1.5 py-0.5 text-[10px] font-semibold text-white">
-          ⚠ {t("dashboard.reminderEve")}
-        </span>
-      );
     if (badge.kind === "dDay")
       return (
         <span className="shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-[10px] font-semibold text-[#5a4416]">
@@ -203,11 +198,16 @@ export default function Dashboard({
           />
         );
       }
+      // 구인광고 확인: 내일이 NPC·상점을 막는 축제면 마감 경고를 함께 표시
+      let label = t(`reminders.${r.id}.title`);
+      if (r.id === "helpWanted" && festivalEveBlocked(date)) {
+        label = `${label} (${t("reminders.helpWanted.eveWarning")})`;
+      }
       rows.push({
         key,
         orderKey: `reminder:${r.id}`,
         icon: <ReminderIcon id={r.id} size={16} />,
-        label: t(`reminders.${r.id}.title`),
+        label,
         rightBadge,
         done: !!taskDone[key],
         onToggle: () => toggleTask(key),

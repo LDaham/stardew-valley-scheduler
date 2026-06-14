@@ -49,7 +49,6 @@
     "rainBundleOpen": "Open bundle tracker",
     "birthdayOf": "Deliver gift to {name}",
     "plantDeadline": "Last day to plant {crop}",
-    "reminderEve": "Festival tomorrow",
     "dDay": "D-{days}"
   },
   "memo": {
@@ -358,11 +357,8 @@
     },
     "helpWanted": {
       "title": "Check Help Wanted board",
-      "detail": "Check the Help Wanted requests (delivery, gathering, etc.) at Pierre's board"
-    },
-    "helpWantedDeadline": {
-      "title": "Help Wanted deadline",
-      "detail": "Tomorrow is a festival — NPCs and shops are unavailable, so finish Help Wanted requests today"
+      "detail": "Check the Help Wanted requests (delivery, gathering, etc.) at Pierre's board",
+      "eveWarning": "Tomorrow is a festival — NPCs and shops are unavailable"
     },
     "communityCenterBundle": {
       "title": "Fill Community Center bundles",

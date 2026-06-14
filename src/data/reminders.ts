@@ -17,7 +17,6 @@ export type ReminderId =
   | "queenOfSauceRerun"
   | "buySeeds"
   | "helpWanted"
-  | "helpWantedDeadline"
   | "communityCenterBundle"
   | "crabPot";
 
@@ -30,9 +29,7 @@ export type ReminderTrigger =
   // 매주 특정 요일
   | { kind: "weekly"; weekdays: Weekday[] }
   // 특정 축제 daysBefore일 전부터 당일 직전까지 (D-day 카운트다운)
-  | { kind: "festivalPrep"; festivalId: string; daysBefore: number }
-  // 모든 축제 시작 "전날" (저녁 축제는 logic에서 제외)
-  | { kind: "festivalEve" };
+  | { kind: "festivalPrep"; festivalId: string; daysBefore: number };
 
 export interface ReminderDef {
   id: ReminderId;
@@ -69,7 +66,6 @@ export const REMINDERS: ReminderDef[] = [
   { id: "queenOfSauceRerun", trigger: { kind: "weekly", weekdays: ["wed"] } },
   { id: "buySeeds", trigger: { kind: "seasonStart" } },
   { id: "helpWanted", trigger: { kind: "daily" } },
-  { id: "helpWantedDeadline", trigger: { kind: "festivalEve" } },
   { id: "communityCenterBundle", trigger: { kind: "seasonStart" } },
   { id: "crabPot", trigger: { kind: "daily" } },
 ];
