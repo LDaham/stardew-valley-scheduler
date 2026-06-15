@@ -17,7 +17,8 @@ export type ReminderId =
   | "buySeeds"
   | "helpWanted"
   | "communityCenterBundle"
-  | "crabPot";
+  | "crabPot"
+  | "pondCheck";
 
 // 트리거 종류
 export type ReminderTrigger =
@@ -66,6 +67,8 @@ export const REMINDERS: ReminderDef[] = [
   { id: "helpWanted", trigger: { kind: "daily" } },
   { id: "communityCenterBundle", trigger: { kind: "seasonStart" } },
   { id: "crabPot", trigger: { kind: "daily" } },
+  // 물고기 연못 확인: 매일 연못 바구니에 생산물이 쌓이므로 매일 표시
+  { id: "pondCheck", trigger: { kind: "daily" } },
 ];
 
 // 기본 토글 상태: 전부 꺼짐

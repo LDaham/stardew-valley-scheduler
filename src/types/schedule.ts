@@ -74,6 +74,8 @@ export interface ScheduleState {
   perfectionChecks: Record<string, boolean>;
   // 완벽 추적 카운터(운송·황금 호두). 키=catId.
   perfectionCounts: Record<string, number>;
+  // 할 일 추가 상세 옵션: 숨긴 항목. 키=`menu:<id>`/`machine:<id>`/`building:<id>`/`fruit:<id>`, 값=true면 숨김.
+  hiddenItems: Record<string, boolean>;
   // 캐릭터 정보(농사/채집 레벨·스킬). 씨앗 효율 계산에 사용.
   character: CharacterInfo;
 }

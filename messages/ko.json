@@ -61,7 +61,8 @@
     "deleteCat_harvest": "작물 수확",
     "deleteCat_buySeed": "씨앗 구매",
     "dDay": "D-{days}",
-    "deleteCat_eatFood": "수확일 음식 먹기"
+    "deleteCat_eatFood": "수확일 음식 먹기",
+    "deleteCat_fruit": "과일 수확"
   },
   "memo": {
     "selectDay": "달력에서 날짜를 선택하세요",
@@ -114,11 +115,14 @@
   "todoCategory": {
     "harvest": "작물 수확",
     "watering": "작물별 물주기",
+    "fruit": "과일나무 수확",
     "tool": "도구 업그레이드",
     "machine": "장인 제작품",
     "misc": "정동석·박물관",
     "eatFood": "수확일 음식 먹기",
-    "build": "건물 건설"
+    "build": "건물 건설",
+    "mining": "채굴하러 가기",
+    "fishing": "낚시하러 가기"
   },
   "bundle": {
     "title": "마을회관 번들 추적",
@@ -413,7 +417,39 @@
     "replantOption": "재파종 일정 추가",
     "replantNote": "수확일에 다시 심을 씨앗 구매 할 일을 추가합니다.",
     "selectMachineCategory": "장비 종류",
-    "sameDay": "당일 완성"
+    "sameDay": "당일 완성",
+    "fruit": "과일 수확하기",
+    "artisanMachine": "장인 장비 사용",
+    "refiningMachine": "정제 장비 사용",
+    "mining": "채굴하러 가기",
+    "fishing": "낚시하러 가기",
+    "pond": "물고기 연못 확인",
+    "options": "상세 옵션",
+    "miningMemo": "채굴하러 가기 (광산·해골 동굴)",
+    "fishingMemo": "낚시하러 가기",
+    "greenhouseOption": "온실에 심기",
+    "greenhouseNote": "모든 계절 작물이 표시되고, 시즌 종료로 시들지 않습니다.",
+    "fruitGreenhouseNote": "온실은 계절과 무관하게 연중 열매를 맺습니다.",
+    "selectFruitTree": "과일나무 선택",
+    "fruitMatureNote": "{date} 성숙 (심은 뒤 28일)",
+    "fruitHarvestMemo": "{fruit} 수확",
+    "fruitHarvestHint": "{season} 동안 3일마다 수확 알림 (나무는 최대 3개 보관)",
+    "fruitHarvestGreenhouseHint": "연중 3일마다 수확 알림 (나무는 최대 3개 보관)",
+    "allHidden": "표시할 항목이 없습니다. 상세 옵션에서 다시 켜세요.",
+    "optionsHint": "체크를 해제한 항목은 할 일 추가 목록에서 숨겨집니다.",
+    "optionMenu": "메뉴",
+    "optionBuilding": "건물",
+    "optionFruit": "과일나무"
+  },
+  "fruitTrees": {
+    "apricot": "살구",
+    "cherry": "체리",
+    "banana": "바나나",
+    "mango": "망고",
+    "peach": "복숭아",
+    "orange": "오렌지",
+    "apple": "사과",
+    "pomegranate": "석류"
   },
   "buildingCategory": {
     "animal": "동물 건물",
@@ -645,6 +681,10 @@
     "crabPot": {
       "title": "통발 확인",
       "detail": "통발에서 어획물 수거 후 미끼 다시 넣기"
+    },
+    "pondCheck": {
+      "title": "물고기 연못 확인",
+      "detail": "연못 바구니에 매일 쌓이는 알·생산물을 수거하세요"
     },
     "specialOrders": {
       "title": "특별 주문 게시판 갱신",

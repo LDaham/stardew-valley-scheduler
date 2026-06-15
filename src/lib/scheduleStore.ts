@@ -63,6 +63,7 @@ const DEFAULT_STATE: ScheduleState = {
   seedDefaults: DEFAULT_SEED_DEFAULTS,
   perfectionChecks: {},
   perfectionCounts: {},
+  hiddenItems: {},
   character: DEFAULT_CHARACTER,
 };
 
@@ -97,6 +98,7 @@ function ensureLoaded(): void {
     seedDefaults: { ...DEFAULT_SEED_DEFAULTS, ...saved.seedDefaults },
     perfectionChecks: saved.perfectionChecks ?? {},
     perfectionCounts: saved.perfectionCounts ?? {},
+    hiddenItems: saved.hiddenItems ?? {},
     character: { ...DEFAULT_CHARACTER, ...saved.character },
     version: STATE_VERSION,
   };
@@ -256,6 +258,7 @@ export const scheduleActions = {
       seedDefaults: { ...DEFAULT_SEED_DEFAULTS },
       perfectionChecks: {},
       perfectionCounts: {},
+      hiddenItems: {},
       character: { ...DEFAULT_CHARACTER },
     });
   },
@@ -299,6 +302,13 @@ export const scheduleActions = {
     commit({
       ...state,
       perfectionCounts: { ...state.perfectionCounts, [catId]: value },
+    });
+  },
+  // 할 일 추가 상세 옵션: 항목 숨김 토글
+  setHiddenItem(key: string, hidden: boolean) {
+    commit({
+      ...state,
+      hiddenItems: { ...state.hiddenItems, [key]: hidden },
     });
   },
 };

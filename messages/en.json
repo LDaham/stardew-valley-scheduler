@@ -61,7 +61,8 @@
     "deleteCat_harvest": "Crop harvest",
     "deleteCat_buySeed": "Buy seeds",
     "dDay": "D-{days}",
-    "deleteCat_eatFood": "Eat food on harvest day"
+    "deleteCat_eatFood": "Eat food on harvest day",
+    "deleteCat_fruit": "Fruit harvest"
   },
   "memo": {
     "selectDay": "Select a day from the calendar",
@@ -114,11 +115,14 @@
   "todoCategory": {
     "harvest": "Harvest",
     "watering": "Crop watering",
+    "fruit": "Fruit tree harvest",
     "tool": "Tool upgrade",
     "machine": "Artisan goods",
     "misc": "Geode·Museum",
     "eatFood": "Eat food on harvest",
-    "build": "Construct building"
+    "build": "Construct building",
+    "mining": "Go mining",
+    "fishing": "Go fishing"
   },
   "bundle": {
     "title": "Community Center bundles",
@@ -413,7 +417,39 @@
     "replantOption": "Add replant task",
     "replantNote": "Add a buy-seed task on harvest day for replanting.",
     "selectMachineCategory": "Equipment type",
-    "sameDay": "Same day"
+    "sameDay": "Same day",
+    "fruit": "Harvest fruit",
+    "artisanMachine": "Use artisan equipment",
+    "refiningMachine": "Use refining equipment",
+    "mining": "Go mining",
+    "fishing": "Go fishing",
+    "pond": "Check fish pond",
+    "options": "Options",
+    "miningMemo": "Go mining (Mines·Skull Cavern)",
+    "fishingMemo": "Go fishing",
+    "greenhouseOption": "Plant in greenhouse",
+    "greenhouseNote": "Shows crops of every season and they never wilt at season end.",
+    "fruitGreenhouseNote": "Greenhouse trees bear fruit year-round regardless of season.",
+    "selectFruitTree": "Select fruit tree",
+    "fruitMatureNote": "Matures {date} (28 days after planting)",
+    "fruitHarvestMemo": "Harvest {fruit}",
+    "fruitHarvestHint": "Harvest reminder every 3 days during {season} (tree holds up to 3)",
+    "fruitHarvestGreenhouseHint": "Harvest reminder every 3 days year-round (tree holds up to 3)",
+    "allHidden": "No items to show. Re-enable them in Options.",
+    "optionsHint": "Unchecked items are hidden from the Add Task menu.",
+    "optionMenu": "Menu",
+    "optionBuilding": "Buildings",
+    "optionFruit": "Fruit trees"
+  },
+  "fruitTrees": {
+    "apricot": "Apricot",
+    "cherry": "Cherry",
+    "banana": "Banana",
+    "mango": "Mango",
+    "peach": "Peach",
+    "orange": "Orange",
+    "apple": "Apple",
+    "pomegranate": "Pomegranate"
   },
   "buildingCategory": {
     "animal": "Animal buildings",
@@ -645,6 +681,10 @@
     "crabPot": {
       "title": "Check crab pots",
       "detail": "Collect from crab pots and re-bait them"
+    },
+    "pondCheck": {
+      "title": "Check fish pond",
+      "detail": "Collect the roe and produce that accumulate in the pond basket each day"
     },
     "specialOrders": {
       "title": "Special Orders board refresh",

@@ -40,6 +40,7 @@ export function useSchedule() {
     seedDefaults: state.seedDefaults,
     perfectionChecks: state.perfectionChecks,
     perfectionCounts: state.perfectionCounts,
+    hiddenItems: state.hiddenItems,
     character: state.character,
     memosOn: (date: SDate): Memo[] =>
       state.memos.filter(
@@ -67,6 +68,7 @@ export function useSchedule() {
     setSeedDefaults: scheduleActions.setSeedDefaults,
     togglePerfCheck: scheduleActions.togglePerfCheck,
     setPerfCount: scheduleActions.setPerfCount,
+    setHiddenItem: scheduleActions.setHiddenItem,
     setCharacter: scheduleActions.setCharacter,
     resetAll: scheduleActions.resetAll,
   };

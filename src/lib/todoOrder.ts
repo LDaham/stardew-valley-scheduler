@@ -15,8 +15,8 @@ export interface TodoEntry {
 export const EVENT_TYPES = ["festival", "birthday", "cropDeadline"] as const;
 // harvest=작물 수확, watering=작물별 물주기(사용자 추가), tool=도구 업그레이드,
 // machine=장인 제작품, build=농장 건물 건설·농가 업그레이드, misc=정동석 깨기·박물관 기증,
-// eatFood=수확일 음식 먹기(품질 버프)
-export const MEMO_CATEGORIES = ["harvest", "watering", "tool", "machine", "build", "misc", "eatFood"] as const;
+// eatFood=수확일 음식 먹기(품질 버프), fruit=과일나무 수확, mining=채굴, fishing=낚시
+export const MEMO_CATEGORIES = ["harvest", "watering", "fruit", "tool", "machine", "build", "mining", "fishing", "misc", "eatFood"] as const;
 // 설정·순서에 노출되는 카테고리(토글/정렬 대상)
 export type VisibleMemoCategory = (typeof MEMO_CATEGORIES)[number];
 // buySeed: 수확일 씨앗 구매 메모. 순서·토글은 buySeeds 리마인더와 통합되어
@@ -51,12 +51,17 @@ export const DEFAULT_TODO_ORDER: string[] = [
   "memo:eatFood",
   "memo:harvest",
   "memo:watering",
+  "memo:fruit",
   "reminder:animalCare",
   "reminder:buySeeds",
   "reminder:helpWanted",
   "reminder:specialOrders",
   "memo:tool",
   "memo:build",
+  "memo:mining",
+  "memo:fishing",
+  "reminder:pondCheck",
+  "reminder:crabPot",
   "memo:misc",
   "reminder:krobusSprinkler",
   "reminder:communityCenterBundle",
@@ -64,7 +69,6 @@ export const DEFAULT_TODO_ORDER: string[] = [
   "reminder:travelingCart",
   "memo:machine",
   "reminder:farmCave",
-  "reminder:crabPot",
   "reminder:hardwood",
 ];
 

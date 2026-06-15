@@ -10,9 +10,12 @@ import PixelIcon from "@/components/PixelIcon";
 // 카테고리별 아이콘(수확은 작물 이미지)
 function iconSrc(m: Memo): string {
   if (m.category === "harvest" && m.cropId) return `/icons/seeds/${m.cropId}.png`;
+  if (m.category === "fruit" && m.cropId) return `/icons/fruitTrees/${m.cropId}.png`;
   if (m.category === "watering") return "/icons/reminders/watering.png";
   if (m.category === "buySeed") return "/icons/reminders/buySeeds.png";
   if (m.category === "eatFood") return "/icons/ui/food.png";
+  if (m.category === "mining") return "/icons/tools/pickaxe.png";
+  if (m.category === "fishing") return "/icons/addTask/fishing.png";
   if (m.category === "misc") return "/icons/addTask/museum.png";
   if (m.category === "tool") return "/icons/addTask/tool.png";
   if (m.category === "machine") return "/icons/addTask/machine.png";
@@ -58,7 +61,10 @@ export default function MyTasksDialog({ onClose }: { onClose: () => void }) {
   const groups: { key: string; title: string; list: Memo[] }[] = [];
   for (const cropId of cropOrder) {
     const list = byCrop.get(cropId)!;
-    const name = t(`crops.${cropId}`);
+    // 과일나무는 fruitTrees, 작물은 crops 네임스페이스
+    const name = list.some((m) => m.category === "fruit")
+      ? t(`fruitTrees.${cropId}`)
+      : t(`crops.${cropId}`);
     // groupId별 하위 묶음(추가 순서 유지)
     const subOrder: string[] = [];
     const byGroup = new Map<string, Memo[]>();

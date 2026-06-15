@@ -289,8 +289,14 @@ export default function Dashboard({
       const icon =
         m.category === "harvest" && m.cropId ? (
           <PixelIcon src={`/icons/seeds/${m.cropId}.png`} />
+        ) : m.category === "fruit" && m.cropId ? (
+          <PixelIcon src={`/icons/fruitTrees/${m.cropId}.png`} />
         ) : m.category === "eatFood" ? (
           <PixelIcon src="/icons/ui/food.png" />
+        ) : m.category === "mining" ? (
+          <PixelIcon src="/icons/tools/pickaxe.png" />
+        ) : m.category === "fishing" ? (
+          <PixelIcon src="/icons/addTask/fishing.png" />
         ) : m.category === "misc" ? (
           <PixelIcon src="/icons/addTask/museum.png" />
         ) : m.category === "build" ? (
@@ -570,8 +576,8 @@ function DeleteBtn({
   );
 }
 
-// 씨앗 심기 한 번에서 파생되는 할 일들(같은 작물). 삭제 창에서 묶어 관리한다.
-const DELETE_CATS = ["watering", "eatFood", "harvest", "buySeed"] as const;
+// 씨앗 심기·과일나무 한 번에서 파생되는 할 일들(같은 작물·나무). 삭제 창에서 묶어 관리한다.
+const DELETE_CATS = ["watering", "eatFood", "harvest", "buySeed", "fruit"] as const;
 
 // 관련 할 일 삭제 팝업: 작물별로 카테고리(물주기/수확/씨앗구매) 전체 삭제.
 // 카테고리를 지워도 닫지 않고, 삭제 가능한 항목이 남으면 계속 표시한다.
@@ -589,6 +595,11 @@ function DeleteTaskDialog({
   const t = useTranslations();
   const idsFor = (cropId: string, cat: string) =>
     memos.filter((m) => m.category === cat && m.cropId === cropId).map((m) => m.id);
+  // 과일나무는 fruitTrees, 작물은 crops 네임스페이스로 이름 표시
+  const entityName = (cropId: string) =>
+    memos.some((m) => m.cropId === cropId && m.category === "fruit")
+      ? t(`fruitTrees.${cropId}`)
+      : t(`crops.${cropId}`);
 
   // 아직 남아 있는(삭제 가능한) 단일 항목 id들
   const singleIds = (target.memoIds ?? []).filter((id) =>
@@ -633,7 +644,7 @@ function DeleteTaskDialog({
               {/* 작물명 + 이 작물 관련 전체 삭제 [x] */}
               <div className="mb-1.5 flex items-center justify-between gap-2">
                 <span className="text-sm font-semibold">
-                  {t(`crops.${c.cropId}`)}
+                  {entityName(c.cropId)}
                 </span>
                 <DeleteBtn
                   onClick={() => deleteMemos(allIds)}

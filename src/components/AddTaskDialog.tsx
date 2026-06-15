@@ -5,11 +5,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { addDays, SEASONS, type SDate } from "@/lib/calendar";
 import { CROPS } from "@/data/game-data";
-import {
-  MACHINES,
-  MACHINE_CATEGORIES,
-  type MachineCategory,
-} from "@/data/machines";
+import { MACHINES, type MachineCategory } from "@/data/machines";
 import { computeHarvest, type Fertilizer } from "@/lib/growth";
 import { toolPickup, type ToolPickup } from "@/lib/blacksmith";
 import {
@@ -19,6 +15,11 @@ import {
   type BuildingDef,
 } from "@/data/buildings";
 import { planBuilding } from "@/lib/carpenter";
+import {
+  FRUIT_TREES,
+  FRUIT_TREE_MATURE_DAYS,
+  FRUIT_HARVEST_INTERVAL,
+} from "@/data/fruitTrees";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import type { MemoCategory } from "@/lib/todoOrder";
 import type { Memo, SeedDefaults } from "@/types/schedule";
@@ -29,17 +30,41 @@ import Dropdown from "@/components/Dropdown";
 import TimeIcon from "@/components/TimeIcon";
 import PixelIcon from "@/components/PixelIcon";
 
-type Mode = "menu" | "tool" | "seed" | "machine" | "build";
+type Mode =
+  | "menu"
+  | "tool"
+  | "seed"
+  | "fruit"
+  | "artisanMachine"
+  | "refiningMachine"
+  | "build"
+  | "options";
 
-// 메뉴 항목. tool/seed/machine/build는 하위 폼, misc(정동석·박물관)는 즉시 추가(단일 항목).
-const MENU = ["tool", "seed", "machine", "build", "misc"] as const;
+// 메뉴 항목. tool/seed/fruit/장비/build는 하위 폼, mining/fishing/pond/misc는 즉시 처리.
+const MENU = [
+  "tool",
+  "seed",
+  "fruit",
+  "artisanMachine",
+  "refiningMachine",
+  "build",
+  "mining",
+  "fishing",
+  "pond",
+  "misc",
+] as const;
 
-// 메뉴 항목 아이콘
+// 메뉴 항목 아이콘(없는 것은 기존 도구·장비·건물 아이콘 재사용)
 const MENU_ICONS: Record<string, string> = {
   tool: "/icons/addTask/tool.png",
   seed: "/icons/addTask/seed.png",
-  machine: "/icons/addTask/machine.png",
+  fruit: "/icons/addTask/fruit.png",
+  artisanMachine: "/icons/machines/keg.png",
+  refiningMachine: "/icons/machines/furnace.png",
   build: "/icons/addTask/build.png",
+  mining: "/icons/tools/pickaxe.png",
+  fishing: "/icons/addTask/fishing.png",
+  pond: "/icons/buildings/fishPond.png",
   misc: "/icons/addTask/misc.png",
 };
 
@@ -56,8 +81,17 @@ export default function AddTaskDialog({
   onClose: () => void;
 }) {
   const t = useTranslations();
-  const { addMemo, addMemos, bundleItemsDone, character, seedDefaults, setSeedDefaults } =
-    useSchedule();
+  const {
+    addMemo,
+    addMemos,
+    bundleItemsDone,
+    character,
+    seedDefaults,
+    setSeedDefaults,
+    hiddenItems,
+    setHiddenItem,
+    setReminderToggle,
+  } = useSchedule();
   const [mode, setMode] = useState<Mode>("menu");
 
   // 마을 회관 완료 여부 → 대장간 금요일 휴무 판단
@@ -90,10 +124,13 @@ export default function AddTaskDialog({
     eatFood: boolean,
     noWatering: boolean,
     replant: boolean,
+    greenhouse: boolean,
   ) => {
     const crop = CROPS.find((c) => c.id === cropId);
     if (!crop) return;
+    // 온실: 계절·시듦 무시. computeHarvest는 시듦 여부만 영향 → 온실이면 무시한다.
     const h = computeHarvest(baseDate, crop, character.agriculturist, fert);
+    const willWilt = greenhouse ? false : h.willWilt;
     const cropName = t(`crops.${cropId}`);
     const memos: Omit<Memo, "id" | "createdAt" | "done">[] = [
       {
@@ -106,39 +143,58 @@ export default function AddTaskDialog({
       },
     ];
 
-    // 물주기 유효일: 이 계절 안에서 수확에 도움이 되는 날만.
-    // 단, 다음 계절에도 자라는 작물이면 계절 끝까지(다음 계절 수확을 위해).
-    // noWatering(스프링클러 사용 등)이면 물주기 메모를 생성하지 않는다.
-    const idx = SEASONS.indexOf(baseDate.season);
-    const growsNext =
-      baseDate.season !== "winter" &&
-      idx < 3 &&
-      crop.seasons.includes(SEASONS[idx + 1]);
-    let lastWater: number;
-    if (growsNext) {
-      lastWater = 28;
-    } else if (h.willWilt) {
-      lastWater = 0; // 이 계절·다음 계절 모두 수확 불가 → 물주기 제외
-    } else {
-      let last = h.date.day; // 이 계절 마지막 수확일
-      if (crop.regrowDays) while (last + crop.regrowDays <= 28) last += crop.regrowDays;
-      lastWater = last - 1; // 마지막 수확 전날까지
-    }
+    // 물주기 메모 생성. noWatering(스프링클러 등)이면 건너뛴다.
     if (!noWatering) {
-      for (let d = baseDate.day; d <= Math.min(lastWater, 28); d++) {
-        memos.push({
-          season: baseDate.season,
-          day: d,
-          text: t("addTask.wateringMemo", { crop: cropName }),
-          reminderDaysBefore: 0,
-          category: "watering",
-          cropId,
-        });
+      if (greenhouse) {
+        // 온실: 계절 경계 무시. 절대 일수로 매일 물주기.
+        // 재수확 작물은 1년 내내(한 순환=112일 미만으로 제한해 날짜 중복 방지),
+        // 일반 작물은 수확 전날까지.
+        const waterDays = crop.regrowDays ? 110 : Math.max(h.growthDays - 1, 0);
+        for (let i = 0; i <= waterDays; i++) {
+          const d = addDays(baseDate, i);
+          memos.push({
+            season: d.season,
+            day: d.day,
+            text: t("addTask.wateringMemo", { crop: cropName }),
+            reminderDaysBefore: 0,
+            category: "watering",
+            cropId,
+          });
+        }
+      } else {
+        // 비온실: 이 계절 안에서 수확에 도움이 되는 날만.
+        // 단, 다음 계절에도 자라는 작물이면 계절 끝까지(다음 계절 수확을 위해).
+        const idx = SEASONS.indexOf(baseDate.season);
+        const growsNext =
+          baseDate.season !== "winter" &&
+          idx < 3 &&
+          crop.seasons.includes(SEASONS[idx + 1]);
+        let lastWater: number;
+        if (growsNext) {
+          lastWater = 28;
+        } else if (willWilt) {
+          lastWater = 0; // 이 계절·다음 계절 모두 수확 불가 → 물주기 제외
+        } else {
+          let last = h.date.day; // 이 계절 마지막 수확일
+          if (crop.regrowDays)
+            while (last + crop.regrowDays <= 28) last += crop.regrowDays;
+          lastWater = last - 1; // 마지막 수확 전날까지
+        }
+        for (let d = baseDate.day; d <= Math.min(lastWater, 28); d++) {
+          memos.push({
+            season: baseDate.season,
+            day: d,
+            text: t("addTask.wateringMemo", { crop: cropName }),
+            reminderDaysBefore: 0,
+            category: "watering",
+            cropId,
+          });
+        }
       }
     }
     // 재수확 작물이 아니고 시즌 내 수확 가능하며 재파종을 선택했으면,
     // 수확일에 재파종용 씨앗 구매 메모 추가
-    if (replant && !crop.regrowDays && !h.willWilt) {
+    if (replant && !crop.regrowDays && !willWilt) {
       memos.push({
         season: h.date.season,
         day: h.date.day,
@@ -149,7 +205,7 @@ export default function AddTaskDialog({
       });
     }
     // 수확일에 음식 먹기(품질 버프) — 선택 시 수확일에 메모 추가
-    if (eatFood && !h.willWilt) {
+    if (eatFood && !willWilt) {
       memos.push({
         season: h.date.season,
         day: h.date.day,
@@ -167,6 +223,71 @@ export default function AddTaskDialog({
       .slice(2, 6)}`;
     addMemos(memos.map((m) => ({ ...m, groupId })));
     onClose();
+  };
+
+  // 과일나무 수확: 성숙(심은 뒤 28일) 후 3일마다 수확 알림.
+  // 비온실=해당 계절 동안, 온실=연중(한 순환 미만으로 제한).
+  const addFruit = (treeId: string, greenhouse: boolean) => {
+    const tree = FRUIT_TREES.find((f) => f.id === treeId);
+    if (!tree) return;
+    const fruitName = t(`fruitTrees.${treeId}`);
+    const mature = addDays(baseDate, FRUIT_TREE_MATURE_DAYS);
+    const text = t("addTask.fruitHarvestMemo", { fruit: fruitName });
+    const memos: Omit<Memo, "id" | "createdAt" | "done">[] = [];
+    if (greenhouse) {
+      // 성숙일부터 3일마다, 한 순환(112일) 미만 범위로 중복 없이 생성
+      for (let i = 0; i <= 108; i += FRUIT_HARVEST_INTERVAL) {
+        const d = addDays(mature, i);
+        memos.push({
+          season: d.season,
+          day: d.day,
+          text,
+          reminderDaysBefore: 0,
+          category: "fruit",
+          cropId: treeId,
+        });
+      }
+    } else {
+      // 해당 계절 안에서만. 성숙이 그 계절 안이면 성숙일부터, 아니면 1일부터 3일 간격.
+      const startDay = mature.season === tree.season ? mature.day : 1;
+      for (let day = startDay; day <= 28; day += FRUIT_HARVEST_INTERVAL) {
+        memos.push({
+          season: tree.season,
+          day,
+          text,
+          reminderDaysBefore: 0,
+          category: "fruit",
+          cropId: treeId,
+        });
+      }
+    }
+    const groupId = `${treeId}-${Date.now().toString(36)}-${Math.random()
+      .toString(36)
+      .slice(2, 6)}`;
+    addMemos(memos.map((m) => ({ ...m, groupId })));
+    onClose();
+  };
+
+  // 물고기 연못 확인: 매일 리마인더로 표시(메모 대신 토글 활성화)
+  const enablePond = () => {
+    setReminderToggle("pondCheck", true);
+    onClose();
+  };
+
+  // 메뉴 항목 클릭 동작
+  const menuAction = (m: string): (() => void) => {
+    switch (m) {
+      case "mining":
+        return () => addAndClose(baseDate, t("addTask.miningMemo"), "mining");
+      case "fishing":
+        return () => addAndClose(baseDate, t("addTask.fishingMemo"), "fishing");
+      case "pond":
+        return enablePond;
+      case "misc":
+        return () => addAndClose(baseDate, t("addTask.miscMemo"), "misc");
+      default:
+        return () => setMode(m as Mode);
+    }
   };
 
   // 메뉴 항목 렌더(아이콘 + 라벨 + 클릭 동작 공통)
@@ -200,16 +321,41 @@ export default function AddTaskDialog({
       onClose={onClose}
     >
       {mode === "menu" && (
-        <ul className="flex flex-col gap-2">
-          {MENU.map((m) =>
-            renderMenuItem(
-              m,
-              m === "misc"
-                ? () => addAndClose(baseDate, t("addTask.miscMemo"), "misc")
-                : () => setMode(m),
-            ),
-          )}
-        </ul>
+        <>
+          {/* 상세 옵션(보고 싶지 않은 항목 숨기기) */}
+          <div className="mb-2 flex justify-end">
+            <button
+              onClick={() => setMode("options")}
+              aria-label={t("addTask.options")}
+              className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] px-2.5 py-1 text-xs text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
+            >
+              <PixelIcon src="/icons/ui/settings.png" size={14} />
+              {t("addTask.options")}
+            </button>
+          </div>
+          <ul className="flex flex-col gap-2">
+            {MENU.filter((m) => !hiddenItems[`menu:${m}`]).map((m) =>
+              renderMenuItem(m, menuAction(m)),
+            )}
+          </ul>
+        </>
+      )}
+
+      {mode === "options" && (
+        <OptionsPanel
+          hiddenItems={hiddenItems}
+          setHiddenItem={setHiddenItem}
+          onBack={() => setMode("menu")}
+        />
+      )}
+
+      {mode === "fruit" && (
+        <FruitForm
+          plantDate={baseDate}
+          hiddenItems={hiddenItems}
+          onBack={() => setMode("menu")}
+          onAdd={addFruit}
+        />
       )}
 
       {mode === "tool" && (
@@ -238,10 +384,12 @@ export default function AddTaskDialog({
         />
       )}
 
-      {mode === "machine" && (
+      {(mode === "artisanMachine" || mode === "refiningMachine") && (
         <MachineForm
           startDate={baseDate}
           dateLabel={dateLabel}
+          fixedCategory={mode === "artisanMachine" ? "artisan" : "refining"}
+          hiddenItems={hiddenItems}
           onBack={() => setMode("menu")}
           onAdd={(date, outputId) =>
             addAndClose(
@@ -259,6 +407,7 @@ export default function AddTaskDialog({
         <BuildForm
           requestDate={baseDate}
           dateLabel={dateLabel}
+          hiddenItems={hiddenItems}
           onBack={() => setMode("menu")}
           onAdd={(date, text) => addAndClose(date, text, "build")}
         />
@@ -368,11 +517,15 @@ function SeedForm({
     eatFood: boolean,
     noWatering: boolean,
     replant: boolean,
+    greenhouse: boolean,
   ) => void;
 }) {
   const t = useTranslations();
-  // 효율 창과 동일하게 해당 계절에 심을 수 있는 모든 작물 표시
-  const seasonCrops = CROPS.filter((c) => c.seasons.includes(plantDate.season));
+  const [greenhouse, setGreenhouse] = useState(false);
+  // 온실은 모든 계절 작물, 비온실은 해당 계절 작물만 표시
+  const seasonCrops = greenhouse
+    ? CROPS
+    : CROPS.filter((c) => c.seasons.includes(plantDate.season));
   const [cropId, setCropId] = useState<string>(seasonCrops[0]?.id ?? "");
   const [fert, setFert] = useState<Fertilizer>(defaults.fertilizer);
   const [eatFood, setEatFood] = useState(defaults.eatFood);
@@ -380,7 +533,18 @@ function SeedForm({
   const [replant, setReplant] = useState(defaults.replant);
 
   const crop = seasonCrops.find((c) => c.id === cropId);
-  const harvest = crop ? computeHarvest(plantDate, crop, agri, fert) : null;
+  const rawHarvest = crop ? computeHarvest(plantDate, crop, agri, fert) : null;
+  // 온실에서는 시즌 종료로 시드는 일이 없다.
+  const harvest = rawHarvest
+    ? { ...rawHarvest, willWilt: greenhouse ? false : rawHarvest.willWilt }
+    : null;
+
+  // 온실 토글 시 현재 작물이 목록에 없으면 첫 작물로 초기화
+  const toggleGreenhouse = (on: boolean) => {
+    setGreenhouse(on);
+    const list = on ? CROPS : CROPS.filter((c) => c.seasons.includes(plantDate.season));
+    if (!list.some((c) => c.id === cropId)) setCropId(list[0]?.id ?? "");
+  };
 
   if (seasonCrops.length === 0) {
     return (
@@ -395,6 +559,22 @@ function SeedForm({
 
   return (
     <div className="flex flex-col gap-3">
+      {/* 온실: 모든 계절 작물 등장, 시듦/계절 제약 없음 */}
+      <label className="flex cursor-pointer items-start gap-2 text-sm">
+        <input
+          type="checkbox"
+          checked={greenhouse}
+          onChange={(e) => toggleGreenhouse(e.target.checked)}
+          className="mt-0.5 size-4 accent-[var(--sv-accent)]"
+        />
+        <span>
+          {t("addTask.greenhouseOption")}
+          <span className="block text-xs text-[var(--sv-ink-muted)]">
+            {t("addTask.greenhouseNote")}
+          </span>
+        </span>
+      </label>
+
       <div>
         <FieldLabel>{t("addTask.selectCrop")}</FieldLabel>
         <Dropdown
@@ -500,7 +680,9 @@ function SeedForm({
 
       <FormFooter
         onBack={onBack}
-        onAdd={() => crop && onAdd(cropId, fert, eatFood, noWatering, replant)}
+        onAdd={() =>
+          crop && onAdd(cropId, fert, eatFood, noWatering, replant, greenhouse)
+        }
         addDisabled={!crop}
       />
     </div>
@@ -510,51 +692,48 @@ function SeedForm({
 function MachineForm({
   startDate,
   dateLabel,
+  fixedCategory,
+  hiddenItems,
   onBack,
   onAdd,
 }: {
   startDate: SDate;
   dateLabel: (d: SDate) => string;
+  fixedCategory: MachineCategory;
+  hiddenItems: Record<string, boolean>;
   onBack: () => void;
   onAdd: (date: SDate, outputId: string) => void;
 }) {
   const t = useTranslations();
-  const [category, setCategory] = useState<MachineCategory>("artisan");
-  const inCategory = MACHINES.filter((m) => m.category === category);
-  const [machineId, setMachineId] = useState(inCategory[0].id);
-  const machine =
-    inCategory.find((m) => m.id === machineId) ?? inCategory[0];
-  const [outputId, setOutputId] = useState(machine.recipes[0].id);
-
-  const recipe =
-    machine.recipes.find((r) => r.id === outputId) ?? machine.recipes[0];
-  const ready = addDays(startDate, recipe.days);
+  // 해당 카테고리에서 상세 옵션으로 숨기지 않은 장비만
+  const inCategory = MACHINES.filter(
+    (m) => m.category === fixedCategory && !hiddenItems[`machine:${m.id}`],
+  );
+  const [machineId, setMachineId] = useState(inCategory[0]?.id ?? "");
+  const machine = inCategory.find((m) => m.id === machineId) ?? inCategory[0];
+  const [outputId, setOutputId] = useState(machine?.recipes[0].id ?? "");
 
   // 산출물 라벨: 당일 완성(0일)이면 "당일 완성", 아니면 "N일"
   const daysLabel = (days: number) =>
     days === 0 ? t("addTask.sameDay") : t("addTask.days", { days });
 
+  if (!machine) {
+    return (
+      <div>
+        <p className="text-sm text-[var(--sv-ink-muted)]">
+          {t("addTask.allHidden")}
+        </p>
+        <FormFooter onBack={onBack} onAdd={() => {}} addDisabled />
+      </div>
+    );
+  }
+
+  const recipe =
+    machine.recipes.find((r) => r.id === outputId) ?? machine.recipes[0];
+  const ready = addDays(startDate, recipe.days);
+
   return (
     <div className="flex flex-col gap-3">
-      <div>
-        <FieldLabel>{t("addTask.selectMachineCategory")}</FieldLabel>
-        <Dropdown
-          value={category}
-          options={MACHINE_CATEGORIES.map((c) => ({
-            value: c,
-            label: t(`machineCategory.${c}`),
-          }))}
-          onChange={(v) => {
-            const c = v as MachineCategory;
-            const first = MACHINES.find((m) => m.category === c) ?? MACHINES[0];
-            setCategory(c);
-            setMachineId(first.id);
-            setOutputId(first.recipes[0].id);
-          }}
-          ariaLabel={t("addTask.selectMachineCategory")}
-        />
-      </div>
-
       <div>
         <FieldLabel>{t("addTask.selectMachine")}</FieldLabel>
         <Dropdown
@@ -600,28 +779,35 @@ function MachineForm({
 function BuildForm({
   requestDate,
   dateLabel,
+  hiddenItems,
   onBack,
   onAdd,
 }: {
   requestDate: SDate;
   dateLabel: (d: SDate) => string;
+  hiddenItems: Record<string, boolean>;
   onBack: () => void;
   onAdd: (orderDate: SDate, text: string) => void;
 }) {
   const t = useTranslations();
   const [category, setCategory] = useState<BuildingCategory>("animal");
-  const inCategory = BUILDINGS.filter((b) => b.category === category);
+  // 상세 옵션으로 숨기지 않은 건물만
+  const inCategory = BUILDINGS.filter(
+    (b) => b.category === category && !hiddenItems[`building:${b.id}`],
+  );
   const [buildingId, setBuildingId] = useState<string>(inCategory[0]?.id ?? "");
 
   const def: BuildingDef | undefined =
     inCategory.find((b) => b.id === buildingId) ?? inCategory[0];
   const plan = def ? planBuilding(requestDate, def) : null;
 
-  // 카테고리 변경 시 해당 카테고리 첫 건물로 선택 초기화
+  // 카테고리 변경 시 해당 카테고리 첫(숨기지 않은) 건물로 선택 초기화
   const changeCategory = (c: BuildingCategory) => {
     setCategory(c);
-    const first = BUILDINGS.find((b) => b.category === c);
-    if (first) setBuildingId(first.id);
+    const first = BUILDINGS.find(
+      (b) => b.category === c && !hiddenItems[`building:${b.id}`],
+    );
+    setBuildingId(first?.id ?? "");
   };
 
   // 메모 텍스트: "{건물} 건설 (재료: 10,000g · 나무 450)" / 재료 없으면 골드만
@@ -715,6 +901,183 @@ function BuildForm({
         onAdd={() => def && plan && onAdd(plan.order, buildMemoText(def))}
         addDisabled={!def}
       />
+    </div>
+  );
+}
+
+function FruitForm({
+  plantDate,
+  hiddenItems,
+  onBack,
+  onAdd,
+}: {
+  plantDate: SDate;
+  hiddenItems: Record<string, boolean>;
+  onBack: () => void;
+  onAdd: (treeId: string, greenhouse: boolean) => void;
+}) {
+  const t = useTranslations();
+  const [greenhouse, setGreenhouse] = useState(false);
+  // 상세 옵션으로 숨기지 않은 과일나무만
+  const trees = FRUIT_TREES.filter((f) => !hiddenItems[`fruit:${f.id}`]);
+  const [treeId, setTreeId] = useState<string>(trees[0]?.id ?? "");
+  const tree = trees.find((f) => f.id === treeId) ?? trees[0];
+
+  const dateLabel = (d: SDate) =>
+    t("addTask.dateLabel", { season: t(`seasons.${d.season}`), day: d.day });
+  const mature = addDays(plantDate, FRUIT_TREE_MATURE_DAYS);
+
+  if (!tree) {
+    return (
+      <div>
+        <p className="text-sm text-[var(--sv-ink-muted)]">
+          {t("addTask.allHidden")}
+        </p>
+        <FormFooter onBack={onBack} onAdd={() => {}} addDisabled />
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-3">
+      {/* 온실: 연중 열매 */}
+      <label className="flex cursor-pointer items-start gap-2 text-sm">
+        <input
+          type="checkbox"
+          checked={greenhouse}
+          onChange={(e) => setGreenhouse(e.target.checked)}
+          className="mt-0.5 size-4 accent-[var(--sv-accent)]"
+        />
+        <span>
+          {t("addTask.greenhouseOption")}
+          <span className="block text-xs text-[var(--sv-ink-muted)]">
+            {t("addTask.fruitGreenhouseNote")}
+          </span>
+        </span>
+      </label>
+
+      <div>
+        <FieldLabel>{t("addTask.selectFruitTree")}</FieldLabel>
+        <Dropdown
+          value={treeId}
+          options={trees.map((f) => ({
+            value: f.id,
+            label: `${t(`fruitTrees.${f.id}`)} · ${t(`seasons.${f.season}`)}`,
+            icon: `/icons/fruitTrees/${f.id}.png`,
+          }))}
+          onChange={setTreeId}
+          ariaLabel={t("addTask.selectFruitTree")}
+        />
+      </div>
+
+      <div className="rounded-md bg-[var(--sv-bg)] px-3 py-2 text-sm">
+        <p className="flex items-center gap-1.5">
+          <TimeIcon />
+          {t("addTask.fruitMatureNote", { date: dateLabel(mature) })}
+        </p>
+        <p className="text-xs text-[var(--sv-ink-muted)]">
+          {greenhouse
+            ? t("addTask.fruitHarvestGreenhouseHint")
+            : t("addTask.fruitHarvestHint", {
+                season: t(`seasons.${tree.season}`),
+              })}
+        </p>
+      </div>
+
+      <FormFooter onBack={onBack} onAdd={() => onAdd(treeId, greenhouse)} />
+    </div>
+  );
+}
+
+// 상세 옵션: 할 일 추가에서 보고 싶지 않은 항목 숨기기(체크=표시).
+function OptionsPanel({
+  hiddenItems,
+  setHiddenItem,
+  onBack,
+}: {
+  hiddenItems: Record<string, boolean>;
+  setHiddenItem: (key: string, hidden: boolean) => void;
+  onBack: () => void;
+}) {
+  const t = useTranslations();
+
+  // 한 줄(체크=표시). 컴포넌트가 아니라 렌더 헬퍼로 정의(상태 보존).
+  const renderRow = (itemKey: string, label: string, icon?: string) => {
+    const hidden = !!hiddenItems[itemKey];
+    return (
+      <li key={itemKey}>
+        <label className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-sm hover:bg-[var(--sv-bg)]">
+          <input
+            type="checkbox"
+            checked={!hidden}
+            onChange={(e) => setHiddenItem(itemKey, !e.target.checked)}
+            className="size-4 shrink-0 accent-[var(--sv-accent)]"
+          />
+          {icon && <PixelIcon src={icon} size={16} />}
+          <span
+            className={hidden ? "text-[var(--sv-ink-muted)] line-through" : ""}
+          >
+            {label}
+          </span>
+        </label>
+      </li>
+    );
+  };
+
+  const renderSection = (title: string, rows: React.ReactNode) => (
+    <div>
+      <FieldLabel>{title}</FieldLabel>
+      <ul className="flex flex-col gap-0.5">{rows}</ul>
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col gap-4">
+      <p className="text-xs text-[var(--sv-ink-muted)]">
+        {t("addTask.optionsHint")}
+      </p>
+
+      {renderSection(
+        t("addTask.optionMenu"),
+        MENU.map((m) => renderRow(`menu:${m}`, t(`addTask.${m}`), MENU_ICONS[m])),
+      )}
+
+      {renderSection(
+        t("machineCategory.artisan"),
+        MACHINES.filter((m) => m.category === "artisan").map((m) =>
+          renderRow(`machine:${m.id}`, t(`machines.${m.id}`), `/icons/machines/${m.id}.png`),
+        ),
+      )}
+
+      {renderSection(
+        t("machineCategory.refining"),
+        MACHINES.filter((m) => m.category === "refining").map((m) =>
+          renderRow(`machine:${m.id}`, t(`machines.${m.id}`), `/icons/machines/${m.id}.png`),
+        ),
+      )}
+
+      {renderSection(
+        t("addTask.optionBuilding"),
+        BUILDINGS.map((b) =>
+          renderRow(`building:${b.id}`, t(`buildings.${b.id}`), `/icons/buildings/${b.id}.png`),
+        ),
+      )}
+
+      {renderSection(
+        t("addTask.optionFruit"),
+        FRUIT_TREES.map((f) =>
+          renderRow(`fruit:${f.id}`, t(`fruitTrees.${f.id}`), `/icons/fruitTrees/${f.id}.png`),
+        ),
+      )}
+
+      <div className="mt-1 flex justify-start">
+        <button
+          onClick={onBack}
+          className="rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm hover:bg-[var(--sv-bg)]"
+        >
+          ← {t("addTask.back")}
+        </button>
+      </div>
     </div>
   );
 }
