@@ -38,6 +38,8 @@ export function useSchedule() {
     bundleMode: state.bundleMode,
     remixChoices: state.remixChoices,
     seedDefaults: state.seedDefaults,
+    perfectionChecks: state.perfectionChecks,
+    perfectionCounts: state.perfectionCounts,
     character: state.character,
     memosOn: (date: SDate): Memo[] =>
       state.memos.filter(
@@ -63,6 +65,8 @@ export function useSchedule() {
     setBundleMode: scheduleActions.setBundleMode,
     setRemixChoice: scheduleActions.setRemixChoice,
     setSeedDefaults: scheduleActions.setSeedDefaults,
+    togglePerfCheck: scheduleActions.togglePerfCheck,
+    setPerfCount: scheduleActions.setPerfCount,
     setCharacter: scheduleActions.setCharacter,
     resetAll: scheduleActions.resetAll,
   };

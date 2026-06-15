@@ -10,6 +10,7 @@ import Calendar from "@/components/Calendar";
 import SettingsDialog from "@/components/SettingsDialog";
 import TodoSettingsDialog from "@/components/TodoSettingsDialog";
 import BundleDialog from "@/components/BundleDialog";
+import PerfectionDialog from "@/components/PerfectionDialog";
 import CharacterDialog from "@/components/CharacterDialog";
 import MyTasksDialog from "@/components/MyTasksDialog";
 import PixelIcon from "@/components/PixelIcon";
@@ -20,6 +21,7 @@ function AppShell() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [todoSettingsOpen, setTodoSettingsOpen] = useState(false);
   const [bundleOpen, setBundleOpen] = useState(false);
+  const [perfectionOpen, setPerfectionOpen] = useState(false);
   const [characterOpen, setCharacterOpen] = useState(false);
   const [myTasksOpen, setMyTasksOpen] = useState(false);
 
@@ -40,6 +42,13 @@ function AppShell() {
             className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
           >
             <PixelIcon src="/icons/ui/bundle.png" size={18} /> {t("bundle.short")}
+          </button>
+          <button
+            onClick={() => setPerfectionOpen(true)}
+            aria-label={t("perfection.open")}
+            className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
+          >
+            <PixelIcon src="/icons/ui/perfection.png" size={18} /> {t("perfection.short")}
           </button>
           <button
             onClick={() => setMyTasksOpen(true)}
@@ -82,6 +91,9 @@ function AppShell() {
         <TodoSettingsDialog onClose={() => setTodoSettingsOpen(false)} />
       )}
       {bundleOpen && <BundleDialog onClose={() => setBundleOpen(false)} />}
+      {perfectionOpen && (
+        <PerfectionDialog onClose={() => setPerfectionOpen(false)} />
+      )}
       {characterOpen && (
         <CharacterDialog onClose={() => setCharacterOpen(false)} />
       )}

@@ -61,6 +61,8 @@ const DEFAULT_STATE: ScheduleState = {
   bundleMode: "standard",
   remixChoices: {},
   seedDefaults: DEFAULT_SEED_DEFAULTS,
+  perfectionChecks: {},
+  perfectionCounts: {},
   character: DEFAULT_CHARACTER,
 };
 
@@ -93,6 +95,8 @@ function ensureLoaded(): void {
     bundleMode: saved.bundleMode ?? "standard",
     remixChoices: saved.remixChoices ?? {},
     seedDefaults: { ...DEFAULT_SEED_DEFAULTS, ...saved.seedDefaults },
+    perfectionChecks: saved.perfectionChecks ?? {},
+    perfectionCounts: saved.perfectionCounts ?? {},
     character: { ...DEFAULT_CHARACTER, ...saved.character },
     version: STATE_VERSION,
   };
@@ -250,6 +254,8 @@ export const scheduleActions = {
       bundleMode: "standard",
       remixChoices: {},
       seedDefaults: { ...DEFAULT_SEED_DEFAULTS },
+      perfectionChecks: {},
+      perfectionCounts: {},
       character: { ...DEFAULT_CHARACTER },
     });
   },
@@ -277,5 +283,22 @@ export const scheduleActions = {
   // 씨앗 심기 선택지 기본값 갱신(다음 심기에 재사용)
   setSeedDefaults(patch: Partial<SeedDefaults>) {
     commit({ ...state, seedDefaults: { ...state.seedDefaults, ...patch } });
+  },
+  // 완벽 추적 체크 토글
+  togglePerfCheck(key: string) {
+    commit({
+      ...state,
+      perfectionChecks: {
+        ...state.perfectionChecks,
+        [key]: !state.perfectionChecks[key],
+      },
+    });
+  },
+  // 완벽 추적 카운터 설정(운송·황금 호두)
+  setPerfCount(catId: string, value: number) {
+    commit({
+      ...state,
+      perfectionCounts: { ...state.perfectionCounts, [catId]: value },
+    });
   },
 };

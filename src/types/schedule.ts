@@ -70,6 +70,10 @@ export interface ScheduleState {
   remixChoices: Record<string, string[]>;
   // 씨앗 심기 선택지 기본값(비료·물주기·음식·재파종).
   seedDefaults: SeedDefaults;
+  // 완벽 추적 체크 상태. 키=`${catId}:${itemId}`.
+  perfectionChecks: Record<string, boolean>;
+  // 완벽 추적 카운터(운송·황금 호두). 키=catId.
+  perfectionCounts: Record<string, number>;
   // 캐릭터 정보(농사/채집 레벨·스킬). 씨앗 효율 계산에 사용.
   character: CharacterInfo;
 }
