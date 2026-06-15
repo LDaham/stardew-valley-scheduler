@@ -15,6 +15,7 @@ import type {
   Memo,
   MemoCategoryToggles,
   ScheduleState,
+  SeedDefaults,
 } from "@/types/schedule";
 
 const DEFAULT_CHARACTER: CharacterInfo = {
@@ -25,6 +26,13 @@ const DEFAULT_CHARACTER: CharacterInfo = {
   artisan: false,
   gatherer: false,
   botanist: false,
+};
+
+const DEFAULT_SEED_DEFAULTS: SeedDefaults = {
+  fertilizer: "none",
+  noWatering: false,
+  eatFood: false,
+  replant: true,
 };
 
 const DEFAULT_MEMO_CATEGORY_TOGGLES: MemoCategoryToggles = MEMO_CATEGORIES.reduce(
@@ -52,6 +60,7 @@ const DEFAULT_STATE: ScheduleState = {
   bundleItemsDone: {},
   bundleMode: "standard",
   remixChoices: {},
+  seedDefaults: DEFAULT_SEED_DEFAULTS,
   character: DEFAULT_CHARACTER,
 };
 
@@ -83,6 +92,7 @@ function ensureLoaded(): void {
     bundleItemsDone: saved.bundleItemsDone ?? {},
     bundleMode: saved.bundleMode ?? "standard",
     remixChoices: saved.remixChoices ?? {},
+    seedDefaults: { ...DEFAULT_SEED_DEFAULTS, ...saved.seedDefaults },
     character: { ...DEFAULT_CHARACTER, ...saved.character },
     version: STATE_VERSION,
   };
@@ -239,6 +249,7 @@ export const scheduleActions = {
       bundleItemsDone: {},
       bundleMode: "standard",
       remixChoices: {},
+      seedDefaults: { ...DEFAULT_SEED_DEFAULTS },
       character: { ...DEFAULT_CHARACTER },
     });
   },
@@ -262,5 +273,9 @@ export const scheduleActions = {
       ...state,
       remixChoices: { ...state.remixChoices, [slotId]: bundleIds },
     });
+  },
+  // 씨앗 심기 선택지 기본값 갱신(다음 심기에 재사용)
+  setSeedDefaults(patch: Partial<SeedDefaults>) {
+    commit({ ...state, seedDefaults: { ...state.seedDefaults, ...patch } });
   },
 };

@@ -17,7 +17,7 @@ import {
 import { planBuilding } from "@/lib/carpenter";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import type { MemoCategory } from "@/lib/todoOrder";
-import type { Memo } from "@/types/schedule";
+import type { Memo, SeedDefaults } from "@/types/schedule";
 import { asset } from "@/lib/asset";
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
@@ -52,7 +52,8 @@ export default function AddTaskDialog({
   onClose: () => void;
 }) {
   const t = useTranslations();
-  const { addMemo, addMemos, bundleItemsDone, character } = useSchedule();
+  const { addMemo, addMemos, bundleItemsDone, character, seedDefaults, setSeedDefaults } =
+    useSchedule();
   const [mode, setMode] = useState<Mode>("menu");
 
   // 마을 회관 완료 여부 → 대장간 금요일 휴무 판단
@@ -154,6 +155,8 @@ export default function AddTaskDialog({
         cropId,
       });
     }
+    // 선택지를 기본값으로 저장(다음 심기에 재사용)
+    setSeedDefaults({ fertilizer: fert, eatFood, noWatering, replant });
     // 한 번의 심기로 파생된 메모를 같은 groupId로 묶는다(같은 작물 다른 날짜 구분용).
     const groupId = `${cropId}-${Date.now().toString(36)}-${Math.random()
       .toString(36)
@@ -225,6 +228,7 @@ export default function AddTaskDialog({
           plantDate={baseDate}
           dateLabel={dateLabel}
           agri={character.agriculturist}
+          defaults={seedDefaults}
           onBack={() => setMode("menu")}
           onAdd={addSeed}
         />
@@ -345,12 +349,14 @@ function SeedForm({
   plantDate,
   dateLabel,
   agri,
+  defaults,
   onBack,
   onAdd,
 }: {
   plantDate: SDate;
   dateLabel: (d: SDate) => string;
   agri: boolean; // 농업 전문가 여부(캐릭터 정보에서 전달)
+  defaults: SeedDefaults; // 지난번 선택지 기본값
   onBack: () => void;
   onAdd: (
     cropId: string,
@@ -364,10 +370,10 @@ function SeedForm({
   // 효율 창과 동일하게 해당 계절에 심을 수 있는 모든 작물 표시
   const seasonCrops = CROPS.filter((c) => c.seasons.includes(plantDate.season));
   const [cropId, setCropId] = useState<string>(seasonCrops[0]?.id ?? "");
-  const [fert, setFert] = useState<Fertilizer>("none");
-  const [eatFood, setEatFood] = useState(false);
-  const [noWatering, setNoWatering] = useState(false);
-  const [replant, setReplant] = useState(true);
+  const [fert, setFert] = useState<Fertilizer>(defaults.fertilizer);
+  const [eatFood, setEatFood] = useState(defaults.eatFood);
+  const [noWatering, setNoWatering] = useState(defaults.noWatering);
+  const [replant, setReplant] = useState(defaults.replant);
 
   const crop = seasonCrops.find((c) => c.id === cropId);
   const harvest = crop ? computeHarvest(plantDate, crop, agri, fert) : null;

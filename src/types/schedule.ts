@@ -2,6 +2,15 @@ import type { Season } from "@/lib/calendar";
 import type { EventFilters } from "@/lib/events";
 import type { ReminderId } from "@/data/reminders";
 import type { MemoCategory, VisibleMemoCategory } from "@/lib/todoOrder";
+import type { Fertilizer } from "@/lib/growth";
+
+// 씨앗 심기 선택지 기본값(다음 심기에도 재사용되도록 영속).
+export interface SeedDefaults {
+  fertilizer: Fertilizer;
+  noWatering: boolean;
+  eatFood: boolean;
+  replant: boolean;
+}
 
 // 토글은 설정에 노출되는 카테고리만 대상(buySeed 제외 — buySeeds 리마인더와 통합)
 export type MemoCategoryToggles = Record<VisibleMemoCategory, boolean>;
@@ -59,6 +68,8 @@ export interface ScheduleState {
   bundleMode: BundleMode;
   // 리믹스 무작위 슬롯에서 사용자가 선택한 꾸러미 id 목록. 키=슬롯 id.
   remixChoices: Record<string, string[]>;
+  // 씨앗 심기 선택지 기본값(비료·물주기·음식·재파종).
+  seedDefaults: SeedDefaults;
   // 캐릭터 정보(농사/채집 레벨·스킬). 씨앗 효율 계산에 사용.
   character: CharacterInfo;
 }

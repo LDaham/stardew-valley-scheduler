@@ -37,6 +37,7 @@ export function useSchedule() {
     bundleItemsDone: state.bundleItemsDone,
     bundleMode: state.bundleMode,
     remixChoices: state.remixChoices,
+    seedDefaults: state.seedDefaults,
     character: state.character,
     memosOn: (date: SDate): Memo[] =>
       state.memos.filter(
@@ -61,6 +62,7 @@ export function useSchedule() {
     toggleBundleItem: scheduleActions.toggleBundleItem,
     setBundleMode: scheduleActions.setBundleMode,
     setRemixChoice: scheduleActions.setRemixChoice,
+    setSeedDefaults: scheduleActions.setSeedDefaults,
     setCharacter: scheduleActions.setCharacter,
     resetAll: scheduleActions.resetAll,
   };
