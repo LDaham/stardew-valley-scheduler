@@ -15,11 +15,7 @@ import {
   type BuildingDef,
 } from "@/data/buildings";
 import { planBuilding } from "@/lib/carpenter";
-import {
-  FRUIT_TREES,
-  FRUIT_TREE_MATURE_DAYS,
-  FRUIT_HARVEST_INTERVAL,
-} from "@/data/fruitTrees";
+import { FRUIT_TREES, FRUIT_TREE_MATURE_DAYS } from "@/data/fruitTrees";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import type { MemoCategory } from "@/lib/todoOrder";
 import type { Memo, SeedDefaults } from "@/types/schedule";
@@ -143,6 +139,15 @@ export default function AddTaskDialog({
       },
     ];
 
+    // 재파종: 재수확 작물이 아니고 재파종을 선택했으면 수확 완료 시 씨앗 구매를 생성.
+    // (지금 심어도 수확 가능한지는 수확 완료 시점에 다시 판단한다.)
+    if (replant && !crop.regrowDays) {
+      memos[0].chain = {
+        kind: "replant",
+        buySeedText: t("addTask.buySeedMemo", { crop: cropName }),
+      };
+    }
+
     // 물주기 메모 생성. noWatering(스프링클러 등)이면 건너뛴다.
     if (!noWatering) {
       if (greenhouse) {
@@ -192,18 +197,6 @@ export default function AddTaskDialog({
         }
       }
     }
-    // 재수확 작물이 아니고 시즌 내 수확 가능하며 재파종을 선택했으면,
-    // 수확일에 재파종용 씨앗 구매 메모 추가
-    if (replant && !crop.regrowDays && !willWilt) {
-      memos.push({
-        season: h.date.season,
-        day: h.date.day,
-        text: t("addTask.buySeedMemo", { crop: cropName }),
-        reminderDaysBefore: 0,
-        category: "buySeed",
-        cropId,
-      });
-    }
     // 수확일에 음식 먹기(품질 버프) — 선택 시 수확일에 메모 추가
     if (eatFood && !willWilt) {
       memos.push({
@@ -221,50 +214,71 @@ export default function AddTaskDialog({
     const groupId = `${cropId}-${Date.now().toString(36)}-${Math.random()
       .toString(36)
       .slice(2, 6)}`;
-    addMemos(memos.map((m) => ({ ...m, groupId })));
+    addMemos(memos.map((m) => ({ ...m, groupId, greenhouse })));
     onClose();
   };
 
-  // 과일나무 수확: 성숙(심은 뒤 28일) 후 3일마다 수확 알림.
-  // 비온실=해당 계절 동안, 온실=연중(한 순환 미만으로 제한).
-  const addFruit = (treeId: string, greenhouse: boolean) => {
-    const tree = FRUIT_TREES.find((f) => f.id === treeId);
-    if (!tree) return;
+  // 과일 묘목 심기: 당일에 '묘목 심기' 할 일을 추가하고,
+  // 심기를 완료하면 수확 일정(성숙 후 3일마다)이 생성된다.
+  const addFruitPlant = (treeId: string, greenhouse: boolean) => {
     const fruitName = t(`fruitTrees.${treeId}`);
-    const mature = addDays(baseDate, FRUIT_TREE_MATURE_DAYS);
-    const text = t("addTask.fruitHarvestMemo", { fruit: fruitName });
-    const memos: Omit<Memo, "id" | "createdAt" | "done">[] = [];
-    if (greenhouse) {
-      // 성숙일부터 3일마다, 한 순환(112일) 미만 범위로 중복 없이 생성
-      for (let i = 0; i <= 108; i += FRUIT_HARVEST_INTERVAL) {
-        const d = addDays(mature, i);
-        memos.push({
-          season: d.season,
-          day: d.day,
-          text,
-          reminderDaysBefore: 0,
-          category: "fruit",
-          cropId: treeId,
-        });
-      }
-    } else {
-      // 해당 계절 안에서만. 성숙이 그 계절 안이면 성숙일부터, 아니면 1일부터 3일 간격.
-      const startDay = mature.season === tree.season ? mature.day : 1;
-      for (let day = startDay; day <= 28; day += FRUIT_HARVEST_INTERVAL) {
-        memos.push({
-          season: tree.season,
-          day,
-          text,
-          reminderDaysBefore: 0,
-          category: "fruit",
-          cropId: treeId,
-        });
-      }
-    }
     const groupId = `${treeId}-${Date.now().toString(36)}-${Math.random()
       .toString(36)
       .slice(2, 6)}`;
-    addMemos(memos.map((m) => ({ ...m, groupId })));
+    addMemo({
+      season: baseDate.season,
+      day: baseDate.day,
+      text: t("addTask.fruitPlantMemo", { fruit: fruitName }),
+      reminderDaysBefore: 0,
+      category: "fruit",
+      cropId: treeId,
+      greenhouse,
+      groupId,
+      chain: {
+        kind: "fruitPlant",
+        harvestText: t("addTask.fruitHarvestMemo", { fruit: fruitName }),
+      },
+    });
+    onClose();
+  };
+
+  // 도구 업그레이드: 당일에 '업그레이드 맡기기'를 추가. 완료하면 수령 일정이 생성된다.
+  const addToolUpgrade = (toolId: string) => {
+    const toolName = t(`tools.${toolId}`);
+    addMemo({
+      season: baseDate.season,
+      day: baseDate.day,
+      text: t("addTask.toolUpgradeMemo", { tool: toolName }),
+      reminderDaysBefore: 0,
+      category: "tool",
+      chain: { kind: "tool", pickupText: t("addTask.toolMemo", { tool: toolName }) },
+    });
+    onClose();
+  };
+
+  // 장비 사용: 당일에 '가동'을 추가. 완료하면 N일 뒤 수령이 생성되고,
+  // 반복 제작이면 수령 완료 시 가동이 다시 생성된다.
+  const addMachineUse = (
+    machineId: string,
+    outputId: string,
+    days: number,
+    repeat: boolean,
+  ) => {
+    const useText = t("addTask.machineUseMemo", {
+      machine: t(`machines.${machineId}`),
+      output: t(`machineOutputs.${outputId}`),
+    });
+    const receiveText = t("addTask.machineMemo", {
+      output: t(`machineOutputs.${outputId}`),
+    });
+    addMemo({
+      season: baseDate.season,
+      day: baseDate.day,
+      text: useText,
+      reminderDaysBefore: 0,
+      category: "machine",
+      chain: { kind: "machine", role: "use", useText, receiveText, days, repeat },
+    });
     onClose();
   };
 
@@ -361,7 +375,7 @@ export default function AddTaskDialog({
           plantDate={baseDate}
           hiddenItems={hiddenItems}
           onBack={() => setMode("menu")}
-          onAdd={addFruit}
+          onAdd={addFruitPlant}
         />
       )}
       {mode === "tool" && (
@@ -369,13 +383,7 @@ export default function AddTaskDialog({
           dateLabel={dateLabel}
           pickup={pickup}
           onBack={() => setMode("menu")}
-          onAdd={(toolId) =>
-            addAndClose(
-              pickup.pickup,
-              t("addTask.toolMemo", { tool: t(`tools.${toolId}`) }),
-              "tool",
-            )
-          }
+          onAdd={addToolUpgrade}
         />
       )}
 
@@ -397,15 +405,7 @@ export default function AddTaskDialog({
           fixedCategory={mode === "artisanMachine" ? "artisan" : "refining"}
           hiddenItems={hiddenItems}
           onBack={() => setMode("menu")}
-          onAdd={(date, outputId) =>
-            addAndClose(
-              date,
-              t("addTask.machineMemo", {
-                output: t(`machineOutputs.${outputId}`),
-              }),
-              "machine",
-            )
-          }
+          onAdd={addMachineUse}
         />
       )}
 
@@ -708,7 +708,12 @@ function MachineForm({
   fixedCategory: MachineCategory;
   hiddenItems: Record<string, boolean>;
   onBack: () => void;
-  onAdd: (date: SDate, outputId: string) => void;
+  onAdd: (
+    machineId: string,
+    outputId: string,
+    days: number,
+    repeat: boolean,
+  ) => void;
 }) {
   const t = useTranslations();
   // 해당 카테고리에서 상세 옵션으로 숨기지 않은 장비만
@@ -718,6 +723,8 @@ function MachineForm({
   const [machineId, setMachineId] = useState(inCategory[0]?.id ?? "");
   const machine = inCategory.find((m) => m.id === machineId) ?? inCategory[0];
   const [outputId, setOutputId] = useState(machine?.recipes[0].id ?? "");
+  // 해당 산출물 반복 제작: 수령 완료 시 '가동'을 자동으로 다시 추가
+  const [repeat, setRepeat] = useState(false);
 
   // 산출물 라벨: 당일 완성(0일)이면 "당일 완성", 아니면 "N일"
   const daysLabel = (days: number) =>
@@ -772,12 +779,34 @@ function MachineForm({
         />
       </div>
 
+      {/* 오늘 가동 → N일 뒤 수령 예정 */}
       <p className="flex items-center gap-1.5 rounded-md bg-[var(--sv-bg)] px-3 py-2 text-sm">
         <TimeIcon />
-        {t("addTask.readyPreview", { date: dateLabel(ready) })}
+        {recipe.days === 0
+          ? t("addTask.machineUseToday")
+          : t("addTask.machineUsePreview", { date: dateLabel(ready) })}
       </p>
 
-      <FormFooter onBack={onBack} onAdd={() => onAdd(ready, outputId)} />
+      {/* 반복 제작 */}
+      <label className="flex cursor-pointer items-start gap-2 text-sm">
+        <input
+          type="checkbox"
+          checked={repeat}
+          onChange={(e) => setRepeat(e.target.checked)}
+          className="mt-0.5 size-4 accent-[var(--sv-accent)]"
+        />
+        <span>
+          {t("addTask.repeatOption")}
+          <span className="block text-xs text-[var(--sv-ink-muted)]">
+            {t("addTask.repeatNote")}
+          </span>
+        </span>
+      </label>
+
+      <FormFooter
+        onBack={onBack}
+        onAdd={() => onAdd(machine.id, recipe.id, recipe.days, repeat)}
+      />
     </div>
   );
 }

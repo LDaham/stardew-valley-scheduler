@@ -36,6 +36,8 @@ export interface ReminderDef {
   trigger: ReminderTrigger;
   // 축제 당일에는 표시하지 않음(상점 잠김/시간 부족)
   suppressOnFestival?: boolean;
+  // 축제 전날에도 표시하지 않음(다음 날 상점/NPC 막힘 — 구인광고 등)
+  suppressOnFestivalEve?: boolean;
   // 야시장(겨울 15~17일)에는 요일과 무관하게 매일 표시
   nightMarketDaily?: boolean;
 }
@@ -60,11 +62,24 @@ export const REMINDERS: ReminderDef[] = [
     id: "desertTraderStaircase",
     trigger: { kind: "weekly", weekdays: ["sun"] },
   },
-  { id: "specialOrders", trigger: { kind: "weekly", weekdays: ["mon"] } },
+  // 매주 월요일 갱신 + 일요일까지 미룰 수 있음(주중 매일 표시, 완료 시 그 주는 숨김 — Dashboard 처리)
+  {
+    id: "specialOrders",
+    trigger: {
+      kind: "weekly",
+      weekdays: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"],
+    },
+  },
   { id: "queenOfSauceNew", trigger: { kind: "weekly", weekdays: ["sun"] } },
   { id: "queenOfSauceRerun", trigger: { kind: "weekly", weekdays: ["wed"] } },
   { id: "buySeeds", trigger: { kind: "seasonStart" } },
-  { id: "helpWanted", trigger: { kind: "daily" } },
+  {
+    id: "helpWanted",
+    trigger: { kind: "daily" },
+    // 축제 전날·당일은 상점/NPC가 막혀 구인광고 확인 불가
+    suppressOnFestival: true,
+    suppressOnFestivalEve: true,
+  },
   { id: "communityCenterBundle", trigger: { kind: "seasonStart" } },
   { id: "crabPot", trigger: { kind: "daily" } },
   // 물고기 연못 확인: 매일 연못 바구니에 생산물이 쌓이므로 매일 표시

@@ -27,6 +27,24 @@ export interface CharacterInfo {
   botanist: boolean; // 식물학자: 야생 씨앗 항상 이리듐 품질
 }
 
+// 완료 시 후속 할 일을 생성하는 체인 메타데이터(텍스트는 생성 시점에 미리 구워 둠).
+// - tool: 도구 업그레이드 완료 → 수령 생성
+// - machine: 장비 사용 완료 → 수령 생성 / 수령 완료 → (반복 시) 사용 재생성
+// - fruitPlant: 묘목 심기 완료 → 수확 일정 생성
+// - replant: 작물 수확 완료 → (재수확 아님·수확 가능 시) 씨앗 구매(재파종) 생성
+export type MemoChain =
+  | { kind: "tool"; pickupText: string }
+  | {
+      kind: "machine";
+      role: "use" | "receive";
+      useText: string;
+      receiveText: string;
+      days: number;
+      repeat: boolean;
+    }
+  | { kind: "fruitPlant"; harvestText: string }
+  | { kind: "replant"; buySeedText: string };
+
 // 순환 메모 1건. (계절,일)에 귀속되어 매 순환마다 반복 표시된다.
 export interface Memo {
   id: string;
@@ -42,6 +60,11 @@ export interface Memo {
   cropId?: string;
   // 한 번의 씨앗 심기로 파생된 메모 묶음 id(같은 작물을 다른 날 심으면 구분).
   groupId?: string;
+  // 온실에서 심음(계절 만료 없음 — 작물/과일 수확 메모가 사라지지 않는다).
+  greenhouse?: boolean;
+  // 완료 시 후속 할 일을 생성하는 체인. spawned=이미 생성 완료(재체크 시 중복 방지).
+  chain?: MemoChain;
+  spawned?: boolean;
   createdAt: number;
 }
 

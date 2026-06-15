@@ -147,6 +147,11 @@ export default function TodoSettingsDialog({
                     <span>{t("reminders.queenOfSauceRerun.title")}</span>
                   </label>
                 )}
+                {id === "queenOfSauceNew" && (
+                  <span className="mt-0.5 block text-[10px] text-[var(--sv-ink-muted)]">
+                    {t("reminders.queenOfSauceRerun.note")}
+                  </span>
+                )}
               </span>
             );
           } else {

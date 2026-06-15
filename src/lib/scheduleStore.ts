@@ -2,6 +2,9 @@
 // effect 내 setState 없이 SSR/하이드레이션을 안전하게 처리한다.
 
 import { loadJSON, saveJSON } from "@/lib/storage";
+import { fromYearDay } from "@/lib/calendar";
+import { chainSpawn } from "@/lib/chains";
+import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import { DEFAULT_REMINDER_TOGGLES, type ReminderId } from "@/data/reminders";
 import {
   DEFAULT_TODO_ORDER,
@@ -132,6 +135,51 @@ function newId(): string {
   return Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
 }
 
+// 마을회관 번들 전부 완료 여부(대장간 금요일 휴무 판단용)
+function ccCompleted(done: Record<string, boolean>): boolean {
+  return BUNDLES.every(
+    (b) =>
+      b.items.filter((i) => done[bundleItemKey(b.id, i.id)]).length >= b.needed,
+  );
+}
+
+// 메모 완료(value=true) 처리 시: 수확→음식 취소 + 체인 후속 할 일 생성.
+function applyCompletion(memos: Memo[], ids: string[]): Memo[] {
+  const today = fromYearDay(state.currentDay);
+  const cc = ccCompleted(state.bundleItemsDone);
+  const idset = new Set(ids);
+  // 수확일 음식 자동 삭제: 완료된 작물 수확의 그룹에서 아직 안 먹은 음식 메모 제거
+  const harvestGroups = new Set(
+    memos
+      .filter(
+        (m) =>
+          idset.has(m.id) && m.done && m.category === "harvest" && m.groupId,
+      )
+      .map((m) => m.groupId),
+  );
+  let result = memos.filter(
+    (m) =>
+      !(
+        m.category === "eatFood" &&
+        !m.done &&
+        m.groupId &&
+        harvestGroups.has(m.groupId)
+      ),
+  );
+  // 체인 후속 생성(완료·미생성·체인 보유). spawned로 재체크 중복 방지.
+  const toSpawn = result.filter(
+    (m) => idset.has(m.id) && m.done && !m.spawned && m.chain,
+  );
+  const spawnIds = new Set(toSpawn.map((m) => m.id));
+  result = result.map((m) => (spawnIds.has(m.id) ? { ...m, spawned: true } : m));
+  const now = Date.now();
+  const children: Memo[] = [];
+  for (const m of toSpawn)
+    for (const c of chainSpawn(m, today, cc))
+      children.push({ ...c, id: newId(), done: false, createdAt: now });
+  return [...result, ...children];
+}
+
 export const scheduleActions = {
   setCurrentDay(day: number) {
     commit({ ...state, currentDay: day });
@@ -188,22 +236,22 @@ export const scheduleActions = {
     commit({ ...state, memos: state.memos.filter((m) => !set.has(m.id)) });
   },
   toggleDone(id: string) {
-    commit({
-      ...state,
-      memos: state.memos.map((m) =>
-        m.id === id ? { ...m, done: !m.done } : m,
-      ),
-    });
+    const cur = state.memos.find((m) => m.id === id);
+    const newVal = !cur?.done;
+    let memos = state.memos.map((m) =>
+      m.id === id ? { ...m, done: newVal } : m,
+    );
+    if (newVal) memos = applyCompletion(memos, [id]);
+    commit({ ...state, memos });
   },
   // 여러 메모의 완료 상태를 한 번에 설정(작물 물주기 묶음 토글에 사용)
   setDoneMany(ids: string[], value: boolean) {
     const set = new Set(ids);
-    commit({
-      ...state,
-      memos: state.memos.map((m) =>
-        set.has(m.id) ? { ...m, done: value } : m,
-      ),
-    });
+    let memos = state.memos.map((m) =>
+      set.has(m.id) ? { ...m, done: value } : m,
+    );
+    if (value) memos = applyCompletion(memos, ids);
+    commit({ ...state, memos });
   },
   // 이벤트·리마인더 완료 체크 토글 (키는 `${yearDay}:${itemKey}`)
   toggleTask(key: string) {

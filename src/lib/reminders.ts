@@ -92,6 +92,7 @@ export function getActiveReminders(
   for (const def of REMINDERS) {
     if (!toggles[def.id]) continue;
     if (def.suppressOnFestival && isFestivalDay(date)) continue;
+    if (def.suppressOnFestivalEve && festivalEveBlocked(date)) continue;
 
     const badge = matchTrigger(def, date);
     if (badge) out.push({ id: def.id, badge });

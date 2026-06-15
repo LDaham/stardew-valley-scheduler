@@ -6,7 +6,6 @@ import { addDays, toYearDay, type SDate } from "@/lib/calendar";
 import { filterEvents, getEventsOn, type FixedEvent } from "@/lib/events";
 import {
   getActiveReminders,
-  festivalEveBlocked,
   festivalBlocksOn,
   type ReminderBadge,
 } from "@/lib/reminders";
@@ -29,6 +28,13 @@ import type { ReactNode } from "react";
 // 물뿌리개 업그레이드 제안을 멈출 누적 횟수
 const MAX_WATERING_CAN_UPGRADES = 3;
 
+// 미루기(rollover) 분류
+// - 당일만(미루기 없음): 물주기·수확일 음식(그날 못 하면 의미 없음)
+const NO_ROLLOVER = new Set(["watering", "eatFood"]);
+// - 계절 만료: 작물 수확·재파종·과일 수확(온실 아니면 그 계절 끝나면 사라짐)
+const SEASON_EXPIRE = new Set(["harvest", "buySeed", "fruit"]);
+// 그 외(도구·장비·건설·채굴·낚시·정동석 등)는 무기한 → 완료까지 매일 표시(미루기)
+
 // 통합 체크리스트의 한 항목 (고정 이벤트 / 리마인더 / 메모 공통 표현)
 interface TaskRow {
   key: string;
@@ -39,6 +45,7 @@ interface TaskRow {
   done: boolean;
   onToggle: () => void;
   onDelete?: () => void; // 사용자 메모만 삭제 가능
+  logic?: string; // 표시 로직 설명(ⓘ로 펼침, 개발 확인용)
 }
 
 // 삭제 팝업 대상: 특정 메모들(memoIds, 같은 날 묶인 항목) + 관련 작물(cropIds)
@@ -57,7 +64,6 @@ export default function Dashboard({
     currentDate,
     setCurrentDate,
     memos,
-    memosOn,
     setDoneMany,
     deleteMemos,
     taskDone,
@@ -124,13 +130,15 @@ export default function Dashboard({
   };
 
   const addWateringCanUpgrade = () => {
-    const target = wateringPickup.pickup;
+    // 당일에 '업그레이드 맡기기'를 추가(완료하면 수령 일정이 생성됨)
+    const toolName = t("tools.wateringCan");
     addMemo({
-      season: target.season,
-      day: target.day,
-      text: t("addTask.toolMemo", { tool: t("tools.wateringCan") }),
+      season: currentDate.season,
+      day: currentDate.day,
+      text: t("addTask.toolUpgradeMemo", { tool: toolName }),
       reminderDaysBefore: 0,
       category: "tool",
+      chain: { kind: "tool", pickupText: t("addTask.toolMemo", { tool: toolName }) },
     });
     incWateringCanUpgrades();
     setRainPromptOpen(false);
@@ -165,51 +173,126 @@ export default function Dashboard({
       : () => deleteMemos(ids);
   };
 
-  // 한 날짜의 이벤트·리마인더·메모를 하나의 체크리스트로 합친다.
-  const buildRows = (date: SDate): TaskRow[] => {
+  // 그 날짜에 "표시할" 메모 = 미루기 + 만료 규칙 적용.
+  // - 당일만 카테고리(물주기·음식): anchor == 오늘일 때만.
+  // - 그 외: 생성일(anchor) ≤ 오늘이면 완료/만료 전까지 매일 표시(미루기).
+  //   계절 만료 카테고리는 온실이 아니면 그 계절이 지나면 사라짐.
+  const activeMemosOn = (date: SDate): Memo[] => {
+    const d = toYearDay(date);
+    return memos.filter((m) => {
+      const a = toYearDay({ season: m.season, day: m.day });
+      if (m.category && NO_ROLLOVER.has(m.category)) return a === d;
+      if (a === d) return true; // 당일은 완료 여부와 무관하게 표시(체크 확인용)
+      if (m.done) return false; // 미루기는 미완료만
+      if (a > d) return false; // 아직 시작 전
+      // 과일 묘목 심기(fruitPlant 체인)는 수확이 아니라 심는 행동이므로 만료 대상 아님.
+      if (
+        m.category &&
+        SEASON_EXPIRE.has(m.category) &&
+        !m.greenhouse &&
+        m.chain?.kind !== "fruitPlant"
+      ) {
+        const seasonEnd = toYearDay({ season: m.season, day: 28 });
+        if (d > seasonEnd) return false; // 계절 만료
+      }
+      return true;
+    });
+  };
+
+  // 한 날짜의 항목을 정보(info)와 할 일(todo)로 나눠 만든다.
+  const buildRows = (date: SDate): { info: TaskRow[]; todo: TaskRow[] } => {
     const yd = toYearDay(date);
     const isRain = !!rainDays[yd];
+    const info: TaskRow[] = [];
     const rows: TaskRow[] = [];
 
-    // 고정 이벤트. 작물 심기 마감일이 휴무일이면 그날은 숨기고 전날로 옮긴다.
+    // 고정 이벤트: 축제·작물 마감일은 정보(완료 없음), 생일은 할 일(당일 한정).
     for (const e of filterEvents(getEventsOn(date), eventFilters)) {
       if (e.type === "cropDeadline" && festivalBlocksOn(date)) continue;
       const key = `${yd}:event-${e.type}-${e.refId}`;
-      rows.push({
-        key,
-        orderKey: `event:${e.type}`,
-        icon: <EventIcon event={e} size={16} />,
-        label: fixedLabel(e),
-        rightBadge:
-          e.type === "birthday" ? (
+      if (e.type === "birthday") {
+        rows.push({
+          key,
+          orderKey: `event:${e.type}`,
+          icon: <EventIcon event={e} size={16} />,
+          label: fixedLabel(e),
+          rightBadge: (
             <ActionChip
               onClick={() => openGifts(e.refId)}
               label={t("gift.viewGifts")}
             />
-          ) : undefined,
-        done: !!taskDone[key],
-        onToggle: () => toggleTask(key),
-      });
+          ),
+          done: !!taskDone[key],
+          onToggle: () => toggleTask(key),
+          logic: t("logic.birthday"),
+        });
+      } else {
+        info.push({
+          key,
+          orderKey: `event:${e.type}`,
+          icon: <EventIcon event={e} size={16} />,
+          label: fixedLabel(e),
+          done: false,
+          onToggle: () => {},
+          logic: t(`logic.${e.type}`),
+        });
+      }
     }
-    // 내일이 마감일인데 내일이 휴무면 오늘 미리 표시(+ 안내)
+    // 내일이 마감일인데 내일이 휴무면 오늘 미리 표시(정보)
     const tom = addDays(date, 1);
     if (festivalBlocksOn(tom)) {
       for (const e of filterEvents(getEventsOn(tom), eventFilters)) {
         if (e.type !== "cropDeadline") continue;
         const key = `${yd}:deadline-shift-${e.refId}`;
-        rows.push({
+        info.push({
           key,
           orderKey: "event:cropDeadline",
           icon: <EventIcon event={e} size={16} />,
           label: `${fixedLabel(e)} ${t("dashboard.deadlineShift")}`,
-          done: !!taskDone[key],
-          onToggle: () => toggleTask(key),
+          done: false,
+          onToggle: () => {},
+          logic: t("logic.cropDeadline"),
         });
       }
     }
 
     for (const r of getActiveReminders(date, reminderToggles)) {
       const key = `${yd}:reminder-${r.id}`;
+      // 소스의 여왕 재방송: 직전 일요일 신규 방영을 봤으면(체크) 생략.
+      if (r.id === "queenOfSauceRerun") {
+        const sunYd = toYearDay(addDays(date, -3));
+        if (taskDone[`${sunYd}:reminder-queenOfSauceNew`]) continue;
+      }
+      // 특별 주문: 이번 주(월요일~) 이미 확인했으면 그 주 동안 숨김(월요일에 갱신).
+      if (r.id === "specialOrders") {
+        const weekMon = yd - ((yd - 1) % 7);
+        let doneEarlier = false;
+        for (let dd = weekMon; dd < yd; dd++)
+          if (taskDone[`${dd}:reminder-specialOrders`]) {
+            doneEarlier = true;
+            break;
+          }
+        if (doneEarlier) continue;
+      }
+      // 새 계절 알림(씨앗 구매 알림 대체)은 정보로 표시(완료 체크 없음).
+      if (r.id === "buySeeds") {
+        info.push({
+          key,
+          orderKey: `reminder:${r.id}`,
+          icon: <ReminderIcon id={r.id} size={16} />,
+          label: t("reminders.buySeeds.title"),
+          rightBadge: (
+            <ActionChip
+              onClick={() => setSeedEffOpen(true)}
+              label={t("seedEfficiency.view")}
+            />
+          ),
+          done: false,
+          onToggle: () => {},
+          logic: t("logic.newSeason"),
+        });
+        continue;
+      }
       let rightBadge = reminderBadge(r.badge);
       if (r.id === "communityCenterBundle") {
         rightBadge = (
@@ -218,18 +301,6 @@ export default function Dashboard({
             label={t("bundle.fill")}
           />
         );
-      } else if (r.id === "buySeeds") {
-        rightBadge = (
-          <ActionChip
-            onClick={() => setSeedEffOpen(true)}
-            label={t("seedEfficiency.view")}
-          />
-        );
-      }
-      // 구인광고 확인: 내일이 NPC·상점을 막는 축제면 마감 경고를 함께 표시
-      let label = t(`reminders.${r.id}.title`);
-      if (r.id === "helpWanted" && festivalEveBlocked(date)) {
-        label = `${label} (${t("reminders.helpWanted.eveWarning")})`;
       }
       // 소스의 여왕 재방송은 신규 방영과 함께 움직이도록 같은 순서 키 사용
       const orderKey =
@@ -240,10 +311,11 @@ export default function Dashboard({
         key,
         orderKey,
         icon: <ReminderIcon id={r.id} size={16} />,
-        label,
+        label: t(`reminders.${r.id}.title`),
         rightBadge,
         done: !!taskDone[key],
         onToggle: () => toggleTask(key),
+        logic: t(`logic.${r.id}`),
       });
     }
 
@@ -253,18 +325,17 @@ export default function Dashboard({
     const fruitMemos: typeof memos = [];
     const memoGroups = new Map<string, typeof memos>();
     const memoGroupOrder: string[] = [];
-    for (const m of memosOn(date)) {
-      if (m.category === "buySeed") {
-        if (!reminderToggles.buySeeds) continue;
-      } else {
+    for (const m of activeMemosOn(date)) {
+      // 재파종(buySeed)은 별도 토글 없이 항상 표시. 그 외만 카테고리 토글/그룹 처리.
+      if (m.category !== "buySeed") {
         if (m.category && !memoCategoryToggles[m.category]) continue;
         if (m.category === "watering") {
           if (isRain) continue;
           wateringMemos.push(m);
           continue;
         }
-        // 과일 수확: 같은 날 여러 나무를 한 줄로 묶는다(물주기와 동일).
-        if (m.category === "fruit") {
+        // 과일 수확만 한 줄로 묶는다(물주기와 동일). 묘목 심기(fruitPlant)는 개별 표시.
+        if (m.category === "fruit" && m.chain?.kind !== "fruitPlant") {
           fruitMemos.push(m);
           continue;
         }
@@ -291,6 +362,7 @@ export default function Dashboard({
           done: allDone,
           onToggle: () => setDoneMany(ids, !allDone),
           onDelete,
+          logic: t("logic.buySeed"),
         });
         continue;
       }
@@ -328,6 +400,7 @@ export default function Dashboard({
         done: allDone,
         onToggle: () => setDoneMany(ids, !allDone),
         onDelete,
+        logic: t(`logic.${m.category ?? "machine"}`),
       });
     }
     // 작물 물주기 묶음: "작물 물주기(작물A, 작물B)" — 같은 작물은 한 번만
@@ -354,6 +427,7 @@ export default function Dashboard({
         done: allDone,
         onToggle: () => setDoneMany(ids, !allDone),
         onDelete: () => setDeleteTarget({ cropIds }),
+        logic: t("logic.watering"),
       });
     }
     // 과일 수확 묶음: "과일 수확하기(살구, 체리)" — 같은 나무는 한 번만
@@ -380,6 +454,7 @@ export default function Dashboard({
         done: allDone,
         onToggle: () => setDoneMany(ids, !allDone),
         onDelete: () => setDeleteTarget({ cropIds }),
+        logic: t("logic.fruit"),
       });
     }
 
@@ -387,12 +462,14 @@ export default function Dashboard({
       const i = todoOrder.indexOf(k);
       return i < 0 ? Number.MAX_SAFE_INTEGER : i;
     };
-    rows.sort((a, b) => rank(a.orderKey) - rank(b.orderKey));
-    return rows;
+    const byRank = (a: TaskRow, b: TaskRow) => rank(a.orderKey) - rank(b.orderKey);
+    info.sort(byRank);
+    rows.sort(byRank);
+    return { info, todo: rows };
   };
 
-  const todayRows = buildRows(currentDate);
-  const tomorrowRows = buildRows(tomorrow);
+  const todayBuilt = buildRows(currentDate);
+  const tomorrowBuilt = buildRows(tomorrow);
 
   return (
     <section className="flex flex-col gap-3">
@@ -452,19 +529,50 @@ export default function Dashboard({
         </button>
       </div>
 
+      {/* 정보(info): 축제·작물 마감일·새 계절 — 완료 표시 없음 */}
+      {(todayBuilt.info.length > 0 || tomorrowBuilt.info.length > 0) && (
+        <div className="rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-4 shadow-sm">
+          <h2 className="mb-2 text-sm font-bold text-[var(--sv-ink-muted)]">
+            {t("dashboard.infoTitle")}
+          </h2>
+          {todayBuilt.info.length > 0 && (
+            <TaskList
+              rows={todayBuilt.info}
+              emptyText={t("dashboard.noTasks")}
+              deleteLabel={t("memo.delete")}
+              hideCheckbox
+            />
+          )}
+          {tomorrowBuilt.info.length > 0 && (
+            <>
+              {todayBuilt.info.length > 0 && (
+                <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
+              )}
+              <TaskList
+                rows={tomorrowBuilt.info}
+                emptyText={t("dashboard.noTasks")}
+                deleteLabel={t("memo.delete")}
+                hideCheckbox
+                disabled
+              />
+            </>
+          )}
+        </div>
+      )}
+
       {/* 통합 To Do List: 오늘 항목 + 점선 + 내일 항목 */}
       <div className="rounded-xl border-2 border-[var(--sv-accent)] bg-[var(--sv-panel)] p-4 shadow-sm">
         <h2 className="mb-2 text-sm font-bold">{t("dashboard.todoList")}</h2>
         <TaskList
-          rows={todayRows}
+          rows={todayBuilt.todo}
           emptyText={t("dashboard.noTasks")}
           deleteLabel={t("memo.delete")}
         />
-        {tomorrowRows.length > 0 && (
+        {tomorrowBuilt.todo.length > 0 && (
           <>
             <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
             <TaskList
-              rows={tomorrowRows}
+              rows={tomorrowBuilt.todo}
               emptyText={t("dashboard.noTasks")}
               deleteLabel={t("memo.delete")}
               disabled
@@ -732,17 +840,29 @@ function DeleteTaskDialog({
 }
 
 // 왼쪽 체크박스 + 완료 시 줄긋기·희미 처리. 모든 항목(이벤트/리마인더/메모) 공통 렌더.
+// hideCheckbox=정보(info) 항목(완료 표시 없음). ⓘ로 표시 로직 펼침.
 function TaskList({
   rows,
   emptyText,
   deleteLabel,
   disabled = false,
+  hideCheckbox = false,
 }: {
   rows: TaskRow[];
   emptyText: string;
   deleteLabel: string;
   disabled?: boolean;
+  hideCheckbox?: boolean;
 }) {
+  const [openLogic, setOpenLogic] = useState<Set<string>>(new Set());
+  const toggleLogic = (key: string) =>
+    setOpenLogic((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+
   if (rows.length === 0) {
     return <p className="text-sm text-[var(--sv-ink-muted)]">{emptyText}</p>;
   }
@@ -750,27 +870,41 @@ function TaskList({
     <ul className="flex flex-col gap-1">
       {rows.map((row) => (
         <li key={row.key}>
-          <label
-            className={`flex items-center gap-2 rounded-md bg-[var(--sv-bg)] px-2 py-1.5 text-sm ${
-              disabled ? "" : "cursor-pointer"
-            }`}
-          >
-            <input
-              type="checkbox"
-              checked={row.done}
-              onChange={row.onToggle}
-              disabled={disabled}
-              className="size-4 shrink-0 accent-[var(--sv-accent)] disabled:opacity-50"
-            />
-            <span
-              className={`flex flex-1 items-center gap-1.5 ${
-                row.done ? "text-[var(--sv-ink-muted)] line-through" : ""
+          <div className="flex items-center gap-2 rounded-md bg-[var(--sv-bg)] px-2 py-1.5 text-sm">
+            <label
+              className={`flex min-w-0 flex-1 items-center gap-2 ${
+                disabled || hideCheckbox ? "" : "cursor-pointer"
               }`}
             >
-              {row.icon}
-              <span>{row.label}</span>
-            </span>
+              {!hideCheckbox && (
+                <input
+                  type="checkbox"
+                  checked={row.done}
+                  onChange={row.onToggle}
+                  disabled={disabled}
+                  className="size-4 shrink-0 accent-[var(--sv-accent)] disabled:opacity-50"
+                />
+              )}
+              <span
+                className={`flex flex-1 items-center gap-1.5 ${
+                  row.done ? "text-[var(--sv-ink-muted)] line-through" : ""
+                }`}
+              >
+                {row.icon}
+                <span>{row.label}</span>
+              </span>
+            </label>
             {row.rightBadge}
+            {row.logic && (
+              <button
+                type="button"
+                onClick={() => toggleLogic(row.key)}
+                aria-label="표시 로직"
+                className="shrink-0 text-xs font-bold text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
+              >
+                ⓘ
+              </button>
+            )}
             {row.onDelete && (
               <button
                 type="button"
@@ -785,7 +919,12 @@ function TaskList({
                 ✕
               </button>
             )}
-          </label>
+          </div>
+          {row.logic && openLogic.has(row.key) && (
+            <p className="mx-2 mb-1 mt-0.5 rounded bg-[var(--sv-bg)] px-2 py-1 text-[11px] leading-snug text-[var(--sv-ink-muted)]">
+              {row.logic}
+            </p>
+          )}
         </li>
       ))}
     </ul>
