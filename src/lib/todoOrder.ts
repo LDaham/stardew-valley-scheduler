@@ -16,7 +16,7 @@ export const EVENT_TYPES = ["festival", "birthday", "cropDeadline"] as const;
 // harvest=작물 수확, watering=작물별 물주기(사용자 추가), tool=도구 업그레이드,
 // machine=장인 제작품, build=농장 건물 건설·농가 업그레이드, misc=정동석 깨기·박물관 기증,
 // eatFood=수확일 음식 먹기(품질 버프), fruit=과일나무 수확, mining=채굴, fishing=낚시
-export const MEMO_CATEGORIES = ["harvest", "watering", "fruit", "tool", "machine", "build", "mining", "fishing", "misc", "eatFood"] as const;
+export const MEMO_CATEGORIES = ["plant", "harvest", "watering", "fruit", "tool", "machine", "build", "mining", "fishing", "misc", "eatFood"] as const;
 // 설정·순서에 노출되는 카테고리(토글/정렬 대상)
 export type VisibleMemoCategory = (typeof MEMO_CATEGORIES)[number];
 // buySeed: 수확일 씨앗 구매 메모. 순서·토글은 buySeeds 리마인더와 통합되어
@@ -41,35 +41,39 @@ export const TODO_ENTRIES: TodoEntry[] = [
   })),
 ];
 
-// 기본 표시 순서(사용자 요청 순서). 이벤트·리마인더·메모를 교차 배치.
+// 기본 표시 순서(사용자 요청 순서). 정보 항목 → 할 일 항목 순.
+// (정보/할 일 구분은 Dashboard가 항목 종류로 판단하고, 각 구역 안에서 이 순서로 정렬한다.)
 export const DEFAULT_TODO_ORDER: string[] = [
-  "event:festival",
-  "event:birthday",
-  "event:cropDeadline",
-  "reminder:queenOfSauceNew",
-  "reminder:weatherFortune",
-  "memo:eatFood",
-  "memo:harvest",
+  // 정보
+  "reminder:buySeeds", // 새 계절
+  "reminder:communityCenterBundle", // 마을회관 꾸러미 채우기
+  "event:festival", // 축제
+  "event:cropDeadline", // 작물 심기 마감
+  // 할 일
+  "reminder:weatherFortune", // 날씨·운세 확인
+  "reminder:queenOfSauceNew", // 소스의 여왕(재방송 포함)
+  "memo:plant", // 씨앗 심기(물주기·수확·음식 그룹)
   "memo:watering",
-  "memo:fruit",
-  "reminder:animalCare",
-  "reminder:buySeeds",
-  "reminder:helpWanted",
-  "reminder:specialOrders",
-  "memo:tool",
-  "memo:build",
-  "memo:mining",
-  "memo:fishing",
-  "reminder:pondCheck",
-  "reminder:crabPot",
-  "memo:misc",
-  "reminder:krobusSprinkler",
-  "reminder:communityCenterBundle",
-  "reminder:desertTraderStaircase",
-  "reminder:travelingCart",
-  "memo:machine",
-  "reminder:farmCave",
-  "reminder:hardwood",
+  "memo:harvest",
+  "memo:eatFood",
+  "reminder:animalCare", // 동물 돌보기
+  "memo:fruit", // 과일나무 수확
+  "reminder:farmCave", // 농장 동굴 채집
+  "memo:machine", // 장인/정제 장비 사용
+  "memo:build", // 건물 건설
+  "memo:tool", // 도구 업그레이드
+  "memo:misc", // 정동석·박물관
+  "event:birthday", // 생일 선물 전달
+  "reminder:helpWanted", // 구인 광고 확인
+  "reminder:specialOrders", // 특별 주문 게시판 확인
+  "reminder:krobusSprinkler", // 이리듐 스프링클러 구매
+  "reminder:travelingCart", // 여행 상인 물품 확인
+  "reminder:desertTraderStaircase", // 계단 구매
+  "memo:mining", // 채굴하러 가기
+  "memo:fishing", // 낚시하러 가기
+  "reminder:pondCheck", // 물고기 연못 확인
+  "reminder:crabPot", // 통발 확인
+  "reminder:hardwood", // 단단한 나무 캐기
 ];
 
 const ENTRY_BY_KEY = new Map(TODO_ENTRIES.map((e) => [e.key, e]));

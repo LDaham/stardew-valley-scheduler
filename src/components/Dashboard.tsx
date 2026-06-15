@@ -4,11 +4,7 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { addDays, toYearDay, type SDate } from "@/lib/calendar";
 import { filterEvents, getEventsOn, type FixedEvent } from "@/lib/events";
-import {
-  getActiveReminders,
-  festivalBlocksOn,
-  type ReminderBadge,
-} from "@/lib/reminders";
+import { getActiveReminders, type ReminderBadge } from "@/lib/reminders";
 import { useSchedule } from "@/components/ScheduleProvider";
 import { useGiftDialog } from "@/components/GiftDialogProvider";
 import EventIcon from "@/components/EventIcon";
@@ -16,23 +12,26 @@ import ReminderIcon from "@/components/ReminderIcon";
 import AddTaskDialog from "@/components/AddTaskDialog";
 import BundleDialog from "@/components/BundleDialog";
 import FishInfoDialog from "@/components/FishInfoDialog";
+import MiniCalendarDialog from "@/components/MiniCalendarDialog";
 import SeedEfficiencyDialog from "@/components/SeedEfficiencyDialog";
 import Modal from "@/components/Modal";
 import TimeIcon from "@/components/TimeIcon";
 import PixelIcon from "@/components/PixelIcon";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
-import { toolPickup } from "@/lib/blacksmith";
+import { toolPickup, blacksmithClosureOn } from "@/lib/blacksmith";
+import { carpenterClosureOn } from "@/lib/carpenter";
 import type { Memo } from "@/types/schedule";
 import type { ReactNode } from "react";
 
-// 물뿌리개 업그레이드 제안을 멈출 누적 횟수
-const MAX_WATERING_CAN_UPGRADES = 3;
+// 물뿌리개 업그레이드 제안을 멈출 누적 횟수(기본→구리→강철→황금→이리듐 = 4단계)
+const MAX_WATERING_CAN_UPGRADES = 4;
 
 // 미루기(rollover) 분류
-// - 당일만(미루기 없음): 물주기·수확일 음식(그날 못 하면 의미 없음)
-const NO_ROLLOVER = new Set(["watering", "eatFood"]);
-// - 계절 만료: 작물 수확·재파종·과일 수확(온실 아니면 그 계절 끝나면 사라짐)
-const SEASON_EXPIRE = new Set(["harvest", "buySeed", "fruit"]);
+// - 당일만(미루기 없음): 수확일 음식(수확 전에 먹어야 의미 있음)
+const NO_ROLLOVER = new Set(["eatFood"]);
+// - 자체 계절 끝 만료: 과일 수확·재파종 씨앗 구매(온실 아니면 그 계절 끝나면 사라짐)
+const SEASON_EXPIRE = new Set(["fruit", "buySeed"]);
+// 작물 생명주기(씨앗 심기·물주기·수확)는 deadlineYearDay로 만료(비온실).
 // 그 외(도구·장비·건설·채굴·낚시·정동석 등)는 무기한 → 완료까지 매일 표시(미루기)
 
 // 통합 체크리스트의 한 항목 (고정 이벤트 / 리마인더 / 메모 공통 표현)
@@ -46,6 +45,8 @@ interface TaskRow {
   onToggle: () => void;
   onDelete?: () => void; // 사용자 메모만 삭제 가능
   logic?: string; // 표시 로직 설명(ⓘ로 펼침, 개발 확인용)
+  blocked?: string; // 오늘 해당 가게 휴무로 불가능할 때 사유(빨간색 표시)
+  rolled?: boolean; // 이전 날에서 미뤄진 할 일([미뤄짐] 표시)
 }
 
 // 삭제 팝업 대상: 특정 메모들(memoIds, 같은 날 묶인 항목) + 관련 작물(cropIds)
@@ -54,15 +55,13 @@ interface DeleteTarget {
   cropIds: string[];
 }
 
-export default function Dashboard({
-  onSelectDate,
-}: {
-  onSelectDate: (date: SDate) => void;
-}) {
+export default function Dashboard() {
   const t = useTranslations();
   const {
     currentDate,
-    setCurrentDate,
+    year,
+    goToNextDay,
+    goToPrevDay,
     memos,
     setDoneMany,
     deleteMemos,
@@ -85,7 +84,12 @@ export default function Dashboard({
   const [rainPromptOpen, setRainPromptOpen] = useState(false);
   const [bundleFillOpen, setBundleFillOpen] = useState(false);
   const [fishInfoOpen, setFishInfoOpen] = useState(false);
+  const [miniCalOpen, setMiniCalOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<DeleteTarget | null>(null);
+
+  // 게임 시작일(1년째 봄 1일): 전날로 이동 불가
+  const atStart =
+    year === 1 && currentDate.season === "spring" && currentDate.day === 1;
 
   // 비 오는 날에만 구할 수 있는, 아직 필요한 번들 품목(중복 id 제거)
   const rainBundleItems = (() => {
@@ -185,7 +189,10 @@ export default function Dashboard({
       if (a === d) return true; // 당일은 완료 여부와 무관하게 표시(체크 확인용)
       if (m.done) return false; // 미루기는 미완료만
       if (a > d) return false; // 아직 시작 전
-      // 과일 묘목 심기(fruitPlant 체인)는 수확이 아니라 심는 행동이므로 만료 대상 아님.
+      // 작물 생명주기: 수확 마감(deadlineYearDay)을 넘기면 비온실은 소멸.
+      if (m.deadlineYearDay != null && !m.greenhouse && d > m.deadlineYearDay)
+        return false;
+      // 과일 수확·재파종: 자체 계절 끝 만료(비온실). 묘목 심기(fruitPlant)는 제외.
       if (
         m.category &&
         SEASON_EXPIRE.has(m.category) &&
@@ -199,16 +206,38 @@ export default function Dashboard({
     });
   };
 
+  // 가게 일정에 묶인 할 일이 그 날 불가능하면 사유를 반환(아니면 undefined).
+  // - tool(도구 업그레이드 맡기기·수령)·misc(정동석 깨기): 대장간 휴무
+  // - build(건물 건설 주문): 목공 작업실 휴무
+  const blockedReason = (date: SDate, category?: string): string | undefined => {
+    if (category === "tool" || category === "misc") {
+      const c = blacksmithClosureOn(date, ccCompleted);
+      return c
+        ? t("dashboard.blockedToday", { reason: t(`blacksmith.${c}`) })
+        : undefined;
+    }
+    if (category === "build") {
+      const c = carpenterClosureOn(date);
+      return c
+        ? t("dashboard.blockedToday", { reason: t(`carpenter.${c}`) })
+        : undefined;
+    }
+    return undefined;
+  };
+
   // 한 날짜의 항목을 정보(info)와 할 일(todo)로 나눠 만든다.
   const buildRows = (date: SDate): { info: TaskRow[]; todo: TaskRow[] } => {
     const yd = toYearDay(date);
     const isRain = !!rainDays[yd];
     const info: TaskRow[] = [];
     const rows: TaskRow[] = [];
+    // 메모 anchor가 오늘보다 이전이면 미뤄진 할 일([미뤄짐] 표시).
+    const isRolled = (m: Memo) =>
+      toYearDay({ season: m.season, day: m.day }) < yd;
 
     // 고정 이벤트: 축제·작물 마감일은 정보(완료 없음), 생일은 할 일(당일 한정).
+    // 작물 마감일은 휴무 여부와 무관하게 항상 원래 날짜에 표시한다.
     for (const e of filterEvents(getEventsOn(date), eventFilters)) {
-      if (e.type === "cropDeadline" && festivalBlocksOn(date)) continue;
       const key = `${yd}:event-${e.type}-${e.refId}`;
       if (e.type === "birthday") {
         rows.push({
@@ -238,23 +267,6 @@ export default function Dashboard({
         });
       }
     }
-    // 내일이 마감일인데 내일이 휴무면 오늘 미리 표시(정보)
-    const tom = addDays(date, 1);
-    if (festivalBlocksOn(tom)) {
-      for (const e of filterEvents(getEventsOn(tom), eventFilters)) {
-        if (e.type !== "cropDeadline") continue;
-        const key = `${yd}:deadline-shift-${e.refId}`;
-        info.push({
-          key,
-          orderKey: "event:cropDeadline",
-          icon: <EventIcon event={e} size={16} />,
-          label: `${fixedLabel(e)} ${t("dashboard.deadlineShift")}`,
-          done: false,
-          onToggle: () => {},
-          logic: t("logic.cropDeadline"),
-        });
-      }
-    }
 
     for (const r of getActiveReminders(date, reminderToggles)) {
       const key = `${yd}:reminder-${r.id}`;
@@ -263,8 +275,12 @@ export default function Dashboard({
         const sunYd = toYearDay(addDays(date, -3));
         if (taskDone[`${sunYd}:reminder-queenOfSauceNew`]) continue;
       }
-      // 특별 주문: 이번 주(월요일~) 이미 확인했으면 그 주 동안 숨김(월요일에 갱신).
+      // 특별 주문: 1년차 가을 2일(화)에 게시판 해금 — 그 전에는 표시 안 함.
+      // 해금 후엔 7요일 트리거 + 아래 '그 주 확인 시 숨김'으로 화~일 미루기가 유지된다.
       if (r.id === "specialOrders") {
+        const unlockYd = toYearDay({ season: "fall", day: 2 });
+        if (year === 1 && yd < unlockYd) continue;
+        // 이번 주(월요일~) 이미 확인했으면 그 주 동안 숨김(월요일에 갱신).
         const weekMon = yd - ((yd - 1) % 7);
         let doneEarlier = false;
         for (let dd = weekMon; dd < yd; dd++)
@@ -293,12 +309,33 @@ export default function Dashboard({
         });
         continue;
       }
-      let rightBadge = reminderBadge(r.badge);
+      // 마을회관 꾸러미 채우기도 정보로 표시(완료 체크 없음, 꾸러미 창 열기 버튼).
       if (r.id === "communityCenterBundle") {
+        info.push({
+          key,
+          orderKey: `reminder:${r.id}`,
+          icon: <ReminderIcon id={r.id} size={16} />,
+          label: t("reminders.communityCenterBundle.title"),
+          rightBadge: (
+            <ActionChip
+              onClick={() => setBundleFillOpen(true)}
+              label={t("bundle.fill")}
+            />
+          ),
+          done: false,
+          onToggle: () => {},
+          logic: t("logic.communityCenterBundle"),
+        });
+        continue;
+      }
+      let rightBadge = reminderBadge(r.badge);
+      // 내일 비 예보 토글 — 날씨·운세 확인 행 오른쪽에 배치
+      if (r.id === "weatherFortune") {
         rightBadge = (
-          <ActionChip
-            onClick={() => setBundleFillOpen(true)}
-            label={t("bundle.fill")}
+          <RainSwitch
+            on={rainTomorrow}
+            onToggle={toggleRainTomorrow}
+            label={t("dashboard.rainForecast")}
           />
         );
       }
@@ -363,11 +400,12 @@ export default function Dashboard({
           onToggle: () => setDoneMany(ids, !allDone),
           onDelete,
           logic: t("logic.buySeed"),
+          rolled: list.some(isRolled),
         });
         continue;
       }
       const icon =
-        m.category === "harvest" && m.cropId ? (
+        (m.category === "harvest" || m.category === "plant") && m.cropId ? (
           <PixelIcon src={`/icons/seeds/${m.cropId}.png`} />
         ) : m.category === "fruit" && m.cropId ? (
           <PixelIcon src={`/icons/fruitTrees/${m.cropId}.png`} />
@@ -401,6 +439,8 @@ export default function Dashboard({
         onToggle: () => setDoneMany(ids, !allDone),
         onDelete,
         logic: t(`logic.${m.category ?? "machine"}`),
+        blocked: blockedReason(date, m.category),
+        rolled: list.some(isRolled),
       });
     }
     // 작물 물주기 묶음: "작물 물주기(작물A, 작물B)" — 같은 작물은 한 번만
@@ -428,6 +468,7 @@ export default function Dashboard({
         onToggle: () => setDoneMany(ids, !allDone),
         onDelete: () => setDeleteTarget({ cropIds }),
         logic: t("logic.watering"),
+        rolled: wateringMemos.some(isRolled),
       });
     }
     // 과일 수확 묶음: "과일 수확하기(살구, 체리)" — 같은 나무는 한 번만
@@ -455,6 +496,7 @@ export default function Dashboard({
         onToggle: () => setDoneMany(ids, !allDone),
         onDelete: () => setDeleteTarget({ cropIds }),
         logic: t("logic.fruit"),
+        rolled: fruitMemos.some(isRolled),
       });
     }
 
@@ -476,109 +518,89 @@ export default function Dashboard({
       {/* 날짜 이동 버튼 (박스 밖) */}
       <div className="flex items-center justify-between gap-2">
         <button
-          onClick={() => setCurrentDate(addDays(currentDate, -1))}
-          className="rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-1.5 text-sm hover:bg-[var(--sv-bg)]"
+          onClick={goToPrevDay}
+          disabled={atStart}
+          className="sv-btn px-3 py-1.5 text-sm"
         >
-          ← {t("dashboard.prevDay")}
+          ◀ {t("dashboard.prevDay")}
         </button>
         <button
-          onClick={() => onSelectDate(currentDate)}
+          onClick={() => setMiniCalOpen(true)}
           className="flex items-baseline gap-2 hover:underline"
         >
-          <span className="text-sm font-bold">{t("dashboard.today")}</span>
-          <span className="text-xs text-[var(--sv-ink-muted)]">
-            {t(`seasons.${currentDate.season}`)} {currentDate.day}
+          <span className="text-base font-bold">
+            {t("dashboard.dateFull", {
+              year,
+              season: t(`seasons.${currentDate.season}`),
+              day: currentDate.day,
+            })}
           </span>
         </button>
-        <button
-          onClick={() => setCurrentDate(addDays(currentDate, 1))}
-          className="rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-1.5 text-sm hover:bg-[var(--sv-bg)]"
-        >
-          {t("dashboard.nextDay")} →
+        <button onClick={goToNextDay} className="sv-btn px-3 py-1.5 text-sm">
+          {t("dashboard.nextDay")} ▶
         </button>
       </div>
 
-      {/* 할 일 추가 버튼: 오늘 / 내일 */}
-      <div className="flex justify-end gap-2">
-        <button
-          onClick={() => setAddTarget("today")}
-          className="rounded-lg border border-[var(--sv-accent)] bg-[var(--sv-accent)] px-3 py-1.5 text-sm font-semibold text-white hover:opacity-90"
-        >
-          ＋ {t("addTask.titleWithDay", { day: t("dashboard.today") })}
-        </button>
-        <button
-          onClick={() => setAddTarget("tomorrow")}
-          className="rounded-lg border border-[var(--sv-accent)] px-3 py-1.5 text-sm font-semibold text-[var(--sv-accent)] hover:bg-[var(--sv-bg)]"
-        >
-          ＋ {t("addTask.titleWithDay", { day: t("dashboard.tomorrow") })}
-        </button>
-      </div>
-
-      {/* 아침에 확인한 날씨(내일 비 예보) 토글 — todolist 박스 위 */}
-      <div className="flex justify-end">
-        <button
-          onClick={toggleRainTomorrow}
-          className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-semibold ${
-            rainTomorrow
-              ? "border-[#5b8fb0] bg-[#5b8fb0] text-white"
-              : "border-[var(--sv-border)] text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
-          }`}
-        >
-          <PixelIcon src="/icons/ui/rain.png" size={16} />
-          {t("dashboard.rainForecast")}
-        </button>
-      </div>
-
-      {/* 정보(info): 축제·작물 마감일·새 계절 — 완료 표시 없음 */}
-      {(todayBuilt.info.length > 0 || tomorrowBuilt.info.length > 0) && (
-        <div className="rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-4 shadow-sm">
-          <h2 className="mb-2 text-sm font-bold text-[var(--sv-ink-muted)]">
-            {t("dashboard.infoTitle")}
-          </h2>
-          {todayBuilt.info.length > 0 && (
-            <TaskList
-              rows={todayBuilt.info}
-              emptyText={t("dashboard.noTasks")}
-              deleteLabel={t("memo.delete")}
-              hideCheckbox
-            />
-          )}
-          {tomorrowBuilt.info.length > 0 && (
-            <>
-              {todayBuilt.info.length > 0 && (
-                <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
-              )}
-              <TaskList
-                rows={tomorrowBuilt.info}
-                emptyText={t("dashboard.noTasks")}
-                deleteLabel={t("memo.delete")}
-                hideCheckbox
-                disabled
-              />
-            </>
-          )}
-        </div>
+      {/* 게임 시작일(1년째 봄 1일)에만 보이는 이스터에그 안내 — 정보 상단 */}
+      {year === 1 && currentDate.season === "spring" && currentDate.day === 1 && (
+        <p className="sv-panel px-3 py-2 text-xs text-[var(--sv-ink-muted)]">
+          {t("dashboard.easterEggTip")}
+        </p>
       )}
 
-      {/* 통합 To Do List: 오늘 항목 + 점선 + 내일 항목 */}
-      <div className="rounded-xl border-2 border-[var(--sv-accent)] bg-[var(--sv-panel)] p-4 shadow-sm">
+      {/* 정보 · 할 일 · 내일 정보 — 한 박스 안에서 점선으로 구분, 비어 있어도 표시.
+          할 일 추가 버튼은 박스 맨 아래. */}
+      <div className="sv-box p-4">
+        {/* 오늘 정보: 축제·작물 마감일·새 계절(완료 표시 없음) */}
+        <h2 className="mb-2 text-sm font-bold text-[var(--sv-ink-muted)]">
+          {t("dashboard.infoTitle")}
+        </h2>
+        <TaskList
+          rows={todayBuilt.info}
+          emptyText={t("dashboard.noInfo")}
+          deleteLabel={t("memo.delete")}
+          hideCheckbox
+        />
+
+        <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
+
+        {/* 오늘 할 일 */}
         <h2 className="mb-2 text-sm font-bold">{t("dashboard.todoList")}</h2>
         <TaskList
           rows={todayBuilt.todo}
           emptyText={t("dashboard.noTasks")}
           deleteLabel={t("memo.delete")}
         />
-        {tomorrowBuilt.todo.length > 0 && (
-          <>
-            <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
-            <TaskList
-              rows={tomorrowBuilt.todo}
-              emptyText={t("dashboard.noTasks")}
-              deleteLabel={t("memo.delete")}
-              disabled
-            />
-          </>
-        )}
+
+        {/* 할 일 추가 버튼: 오늘 / 내일 (todolist 맨 아래) */}
+        <div className="mt-3 flex flex-wrap justify-end gap-2">
+          <button
+            onClick={() => setAddTarget("today")}
+            className="sv-btn sv-btn-primary px-3 py-1.5 text-sm"
+          >
+            ＋ {t("addTask.titleWithDay", { day: t("dashboard.today") })}
+          </button>
+          <button
+            onClick={() => setAddTarget("tomorrow")}
+            className="sv-btn px-3 py-1.5 text-sm"
+          >
+            ＋ {t("addTask.titleWithDay", { day: t("dashboard.tomorrow") })}
+          </button>
+        </div>
+
+        <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
+
+        {/* 내일 정보: 다음 날 축제·마감일 미리 확인(완료 표시 없음) */}
+        <h2 className="mb-2 text-sm font-bold text-[var(--sv-ink-muted)]">
+          {t("dashboard.tomorrowInfoTitle")}
+        </h2>
+        <TaskList
+          rows={tomorrowBuilt.info}
+          emptyText={t("dashboard.noInfo")}
+          deleteLabel={t("memo.delete")}
+          hideCheckbox
+          disabled
+        />
       </div>
 
       {addTarget && (
@@ -686,6 +708,10 @@ export default function Dashboard({
           onClose={() => setFishInfoOpen(false)}
         />
       )}
+
+      {miniCalOpen && (
+        <MiniCalendarDialog onClose={() => setMiniCalOpen(false)} />
+      )}
     </section>
   );
 }
@@ -713,6 +739,43 @@ function ActionChip({
   );
 }
 
+// 내일 비 예보 토글 스위치(날씨·운세 행 우측). 행 체크와 분리.
+function RainSwitch({
+  on,
+  onToggle,
+  label,
+}: {
+  on: boolean;
+  onToggle: () => void;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={on}
+      aria-label={label}
+      title={label}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onToggle();
+      }}
+      className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full border transition-colors ${
+        on
+          ? "border-[#5b8fb0] bg-[#5b8fb0]"
+          : "border-[var(--sv-border)] bg-[var(--sv-bg)]"
+      }`}
+    >
+      <span
+        className={`inline-block size-4 rounded-full bg-white shadow transition-transform ${
+          on ? "translate-x-4" : "translate-x-0.5"
+        }`}
+      />
+    </button>
+  );
+}
+
 // 박스 안에 ✕가 있는 삭제 버튼 [x]
 function DeleteBtn({
   onClick,
@@ -734,7 +797,7 @@ function DeleteBtn({
 }
 
 // 씨앗 심기·과일나무 한 번에서 파생되는 할 일들(같은 작물·나무). 삭제 창에서 묶어 관리한다.
-const DELETE_CATS = ["watering", "eatFood", "harvest", "buySeed", "fruit"] as const;
+const DELETE_CATS = ["plant", "watering", "eatFood", "harvest", "buySeed", "fruit"] as const;
 
 // 관련 할 일 삭제 팝업: 작물별로 카테고리(물주기/수확/씨앗구매) 전체 삭제.
 // 카테고리를 지워도 닫지 않고, 삭제 가능한 항목이 남으면 계속 표시한다.
@@ -854,6 +917,7 @@ function TaskList({
   disabled?: boolean;
   hideCheckbox?: boolean;
 }) {
+  const t = useTranslations();
   const [openLogic, setOpenLogic] = useState<Set<string>>(new Set());
   const toggleLogic = (key: string) =>
     setOpenLogic((prev) => {
@@ -887,11 +951,20 @@ function TaskList({
               )}
               <span
                 className={`flex flex-1 items-center gap-1.5 ${
-                  row.done ? "text-[var(--sv-ink-muted)] line-through" : ""
+                  row.done
+                    ? "text-[var(--sv-ink-muted)] line-through"
+                    : row.blocked
+                      ? "font-semibold text-[#e23b3b]"
+                      : ""
                 }`}
               >
                 {row.icon}
                 <span>{row.label}</span>
+                {row.rolled && !row.done && (
+                  <span className="shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-[10px] font-semibold text-[#5a4416]">
+                    {t("dashboard.rolled")}
+                  </span>
+                )}
               </span>
             </label>
             {row.rightBadge}
@@ -920,6 +993,11 @@ function TaskList({
               </button>
             )}
           </div>
+          {row.blocked && !row.done && (
+            <p className="mx-2 mb-1 mt-0.5 rounded bg-[#fbeaea] px-2 py-1 text-[11px] font-semibold leading-snug text-[#b02a2a]">
+              ⚠ {row.blocked}
+            </p>
+          )}
           {row.logic && openLogic.has(row.key) && (
             <p className="mx-2 mb-1 mt-0.5 rounded bg-[var(--sv-bg)] px-2 py-1 text-[11px] leading-snug text-[var(--sv-ink-muted)]">
               {row.logic}

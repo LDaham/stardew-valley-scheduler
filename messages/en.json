@@ -5,7 +5,16 @@
   },
   "common": {
     "appName": "Stardew Valley Scheduler",
-    "incompleteFirst": "Show incomplete first"
+    "incompleteFirst": "Show incomplete first",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "miniCalendar": {
+    "title": "Go to date",
+    "yearLabel": "Year {year}",
+    "prevYear": "Previous year",
+    "nextYear": "Next year",
+    "confirmMove": "Move to {date}?"
   },
   "home": {
     "title": "Stardew Valley Scheduler",
@@ -62,13 +71,20 @@
     "deleteOne": "Delete this item only",
     "deleteAllCrop": "Delete all for this crop",
     "deleteAllCat": "Delete all {cat} ({count})",
+    "deleteCat_plant": "Plant seeds",
     "deleteCat_watering": "Crop watering",
     "deleteCat_harvest": "Crop harvest",
     "deleteCat_buySeed": "Buy seeds",
     "dDay": "D-{days}",
     "deleteCat_eatFood": "Eat food on harvest day",
     "deleteCat_fruit": "Fruit harvest",
-    "infoTitle": "Info"
+    "infoTitle": "Info",
+    "tomorrowInfoTitle": "Tomorrow's Info",
+    "noInfo": "No info",
+    "rolled": "Rolled over",
+    "blockedToday": "Not possible today ({reason})",
+    "dateFull": "Year {year}, {season} Day {day}",
+    "easterEggTip": "Entering \"ConcernedApe\" as your favorite thing triggers an easter egg."
   },
   "memo": {
     "selectDay": "Select a day from the calendar",
@@ -92,7 +108,7 @@
   "settings": {
     "title": "Settings",
     "open": "Open settings",
-    "todoSettings": "To-do list settings",
+    "todoSettings": "Scheduler settings",
     "openTodo": "Open to-do list settings",
     "events": "Fixed events",
     "reminders": "Weekly reminders",
@@ -105,7 +121,9 @@
     "resetNo": "Cancel",
     "orderHint": "Drag the ⠿ handle to reorder; check to show/hide.",
     "reorder": "Drag to reorder",
-    "userAdded": "User-added"
+    "userAdded": "User-added",
+    "cropGroup": "Plant seeds",
+    "cropGroupNote": "Plant → water → harvest → eat/replant. Each step appears only after the previous is done."
   },
   "blacksmith": {
     "pickupWarn": "Blacksmith is closed on the ready day {ready} ({reason}); you'll pick it up the next open day",
@@ -119,6 +137,7 @@
     "checkup": "Closed on Summer 18 for Robin's checkup"
   },
   "todoCategory": {
+    "plant": "Plant seeds",
     "harvest": "Harvest",
     "watering": "Crop watering",
     "fruit": "Fruit tree harvest",
@@ -403,6 +422,7 @@
     "wiltWarning": "Won't mature this season — may wilt at season end",
     "noSeasonCrops": "No crops can be planted this season",
     "toolMemo": "Pick up {tool}",
+    "plantMemo": "Plant {crop} seeds",
     "harvestMemo": "Harvest {crop}",
     "wateringMemo": "Water {crop}",
     "wateringNote": "Daily watering items are auto-added until harvest (regrow crops: until season end)",
@@ -567,7 +587,14 @@
     "gatherer": "Gatherer",
     "gathererDesc": "+20% wild seed yield",
     "botanist": "Botanist",
-    "botanistDesc": "Wild seeds always iridium quality"
+    "botanistDesc": "Wild seeds always iridium quality",
+    "toolTier": "Watering Can tier",
+    "toolTierDesc": "Used to decide whether to suggest a Watering Can upgrade on rainy forecasts (no suggestion at Iridium).",
+    "toolTier_0": "Watering Can",
+    "toolTier_1": "Copper Watering Can",
+    "toolTier_2": "Steel Watering Can",
+    "toolTier_3": "Gold Watering Can",
+    "toolTier_4": "Iridium Watering Can"
   },
   "myTasks": {
     "title": "My added tasks",
@@ -2077,15 +2104,16 @@
     "queenOfSauceNew": "일요일 신규 방영 · 안 보면(체크 안 하면) 같은 레시피를 수요일 재방송으로만 다시 볼 수 있음. 당일 끝남.",
     "queenOfSauceRerun": "수요일 재방송 · 신규 방영을 못 본 경우에만 표시. 당일 끝남.",
     "helpWanted": "매일 · 당일 끝남. 축제 전날·당일에는 상점/NPC가 막혀 표시 안 함.",
-    "communityCenterBundle": "무기한 · 안 하면 미뤄짐(현재 계절 첫날 알림, 완료까지 표시 예정).",
+    "communityCenterBundle": "정보 · 계절 첫날 표시(이번 계절 모을 꾸러미 품목). 완료 표시 없음.",
     "crabPot": "무기한 · 안 하면 미뤄짐.",
     "pondCheck": "매일 · 당일 끝남(연못 바구니에 매일 생산물 누적).",
     "festival": "정보 · 축제일(상점/NPC 일정 영향). 완료 표시 없음.",
     "cropDeadline": "정보 · 이 날까지 심어야 이번 계절 수확 가능. 완료 표시 없음.",
     "birthday": "당일 한정 · 오늘 전달해야 '생일 선물'. 안 하면 일반 선물이 됨.",
     "newSeason": "정보 · 새 계절 시작(이번 계절 씨앗 구매 가능). 완료 표시 없음.",
-    "harvest": "무기한 · 수확 안 하면 미뤄짐. 온실 아니면 수확 계절 지나면 사라짐.",
-    "watering": "무기한(매일) · 물 안 주면 미뤄짐. 온실 아니면 수확 불가해지면 사라짐.",
+    "plant": "심을 때까지 미뤄짐 · 심어야 물주기·수확이 생김. 온실 아니면 수확 계절 지나면 사라짐.",
+    "harvest": "물주기를 다 마치면 생성 · 수확 안 하면 미뤄짐. 온실 아니면 수확 계절 지나면 사라짐.",
+    "watering": "심은 뒤 매일 1회 · 물 안 주면 밀리고 수확도 함께 밀림. 온실 아니면 수확 불가해지면 사라짐.",
     "fruit": "무기한 · 수확 안 하면 미뤄짐(최대 3개 누적). 온실 아니면 계절 지나면 사라짐.",
     "tool": "무기한 · 업그레이드 맡길 때까지 미뤄짐(대장간 휴무일 반영).",
     "machine": "무기한 · 장비 사용/수령까지 미뤄짐. 상위 사용 후 수령 생성.",

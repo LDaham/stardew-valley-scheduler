@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useSchedule } from "@/components/ScheduleProvider";
@@ -18,6 +18,7 @@ const EVENT_ICON: Record<string, string> = {
   cropDeadline: "/icons/event/cropDeadline.png",
 };
 const MEMO_ICON: Record<string, string> = {
+  plant: "/icons/addTask/seed.png",
   harvest: "/icons/addTask/seed.png",
   watering: "/icons/reminders/watering.png",
   fruit: "/icons/addTask/fruit.png",
@@ -29,6 +30,11 @@ const MEMO_ICON: Record<string, string> = {
   misc: "/icons/addTask/misc.png",
   eatFood: "/icons/ui/food.png",
 };
+
+// 씨앗 심기 생명주기(상위→하위 순서). 설정에서는 한 그룹으로 묶어 표시한다.
+const CROP_GROUP_CATS = ["plant", "watering", "harvest", "eatFood"] as const;
+const CROP_GROUP_KEYS = CROP_GROUP_CATS.map((c) => `memo:${c}`);
+const CROP_GROUP_ID = "group:crop";
 
 function PixelImage({ src, size = 18 }: { src: string; size?: number }) {
   return (
@@ -61,7 +67,25 @@ export default function TodoSettingsDialog({
     setTodoOrder,
   } = useSchedule();
 
-  // 드래그 앤 드롭 순서 변경
+  // 씨앗 심기(plant/watering/harvest/eatFood)는 한 그룹으로 접어 표시한다.
+  // 표시·드래그는 displayItems(그룹=1행) 기준으로 하고, 저장 시 키 배열로 펼친다.
+  const displayItems = useMemo(() => {
+    const items: { id: string; keys: string[] }[] = [];
+    let groupAdded = false;
+    for (const key of todoOrder) {
+      if (CROP_GROUP_KEYS.includes(key)) {
+        if (!groupAdded) {
+          items.push({ id: CROP_GROUP_ID, keys: [...CROP_GROUP_KEYS] });
+          groupAdded = true;
+        }
+        continue;
+      }
+      items.push({ id: key, keys: [key] });
+    }
+    return items;
+  }, [todoOrder]);
+
+  // 드래그 앤 드롭 순서 변경(displayItems 기준)
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [overIndex, setOverIndex] = useState<number | null>(null);
   const resetDrag = () => {
@@ -73,12 +97,16 @@ export default function TodoSettingsDialog({
       resetDrag();
       return;
     }
-    const next = [...todoOrder];
-    const [moved] = next.splice(dragIndex, 1);
-    next.splice(i, 0, moved);
-    setTodoOrder(next);
+    const items = [...displayItems];
+    const [moved] = items.splice(dragIndex, 1);
+    items.splice(i, 0, moved);
+    setTodoOrder(items.flatMap((it) => it.keys));
     resetDrag();
   };
+  // 그룹 체크박스 상태: 4개 카테고리 모두 켜져 있을 때만 체크
+  const cropGroupOn = CROP_GROUP_CATS.every((c) => memoCategoryToggles[c]);
+  const setCropGroup = (val: boolean) =>
+    CROP_GROUP_CATS.forEach((c) => setMemoCategoryToggle(c, val));
   // 포인터 좌표 아래에 있는 행 인덱스(마우스·터치 공통)
   const indexFromPoint = (x: number, y: number): number | null => {
     const el = document.elementFromPoint(x, y);
@@ -94,15 +122,36 @@ export default function TodoSettingsDialog({
         {t("settings.orderHint")}
       </p>
       <ul className="flex flex-col gap-1">
-        {todoOrder.map((key, i) => {
-          const entry = getTodoEntry(key);
-          if (!entry) return null;
-
+        {displayItems.map((item, i) => {
           // 종류별 컨트롤/아이콘/라벨 구성
           let control: React.ReactNode;
           let icon: React.ReactNode;
           let label: React.ReactNode;
 
+          if (item.id === CROP_GROUP_ID) {
+            // 씨앗 심기 그룹: 4개 카테고리 일괄 토글 + 상위→하위 게이팅 안내
+            control = (
+              <input
+                type="checkbox"
+                checked={cropGroupOn}
+                onChange={(e) => setCropGroup(e.target.checked)}
+                className="mt-0.5 size-4 shrink-0 accent-[var(--sv-accent)]"
+              />
+            );
+            icon = <PixelImage src="/icons/addTask/seed.png" />;
+            label = (
+              <span>
+                <span className="text-sm font-semibold">
+                  {t("settings.cropGroup")}
+                </span>
+                <span className="block text-xs text-[var(--sv-ink-muted)]">
+                  {t("settings.cropGroupNote")}
+                </span>
+              </span>
+            );
+          } else {
+          const entry = getTodoEntry(item.id);
+          if (!entry) return null;
           if (entry.kind === "event") {
             const type = entry.ref as FixedEventType;
             control = (
@@ -174,13 +223,14 @@ export default function TodoSettingsDialog({
               </span>
             );
           }
+          }
 
           const isDragging = dragIndex === i;
           const isOver =
             overIndex === i && dragIndex !== null && dragIndex !== i;
           return (
             <li
-              key={key}
+              key={item.id}
               data-todo-index={i}
               className={`flex items-center gap-2 rounded-md border-t-2 px-2 py-1.5 hover:bg-[var(--sv-bg)] ${
                 isOver ? "border-[var(--sv-accent)]" : "border-transparent"

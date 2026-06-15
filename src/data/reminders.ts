@@ -86,11 +86,23 @@ export const REMINDERS: ReminderDef[] = [
   { id: "pondCheck", trigger: { kind: "daily" } },
 ];
 
-// 기본 토글 상태: 전부 꺼짐
+// 기본으로 켜진 리마인더(나머지는 꺼짐).
+const DEFAULT_ON_REMINDERS: ReminderId[] = [
+  "buySeeds", // 새 계절
+  "communityCenterBundle", // 마을회관 꾸러미
+  "weatherFortune", // 날씨·운세
+  "queenOfSauceNew", // 소스의 여왕(신규)
+  "queenOfSauceRerun", // 소스의 여왕(재방송)
+  "helpWanted", // 구인 광고
+  "specialOrders", // 특별 주문
+  "travelingCart", // 여행 상인
+];
+
+// 기본 토글 상태
 export const DEFAULT_REMINDER_TOGGLES: Record<ReminderId, boolean> =
   REMINDERS.reduce(
     (acc, r) => {
-      acc[r.id] = false;
+      acc[r.id] = DEFAULT_ON_REMINDERS.includes(r.id);
       return acc;
     },
     {} as Record<ReminderId, boolean>,

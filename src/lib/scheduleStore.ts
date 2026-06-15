@@ -2,7 +2,7 @@
 // effect 내 setState 없이 SSR/하이드레이션을 안전하게 처리한다.
 
 import { loadJSON, saveJSON } from "@/lib/storage";
-import { fromYearDay } from "@/lib/calendar";
+import { fromYearDay, normalizeYearDay, DAYS_PER_YEAR } from "@/lib/calendar";
 import { chainSpawn } from "@/lib/chains";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import { DEFAULT_REMINDER_TOGGLES, type ReminderId } from "@/data/reminders";
@@ -38,9 +38,11 @@ const DEFAULT_SEED_DEFAULTS: SeedDefaults = {
   replant: true,
 };
 
+// 기본으로 꺼진 메모 카테고리: 과일나무 수확·장인/정제 장비 사용.
+const MEMO_OFF_BY_DEFAULT = new Set<string>(["fruit", "machine"]);
 const DEFAULT_MEMO_CATEGORY_TOGGLES: MemoCategoryToggles = MEMO_CATEGORIES.reduce(
   (acc, c) => {
-    acc[c] = true;
+    acc[c] = !MEMO_OFF_BY_DEFAULT.has(c);
     return acc;
   },
   {} as MemoCategoryToggles,
@@ -52,6 +54,7 @@ const STATE_VERSION = 1;
 const DEFAULT_STATE: ScheduleState = {
   version: STATE_VERSION,
   currentDay: 1, // 봄 1일
+  year: 1,
   memos: [],
   eventFilters: { birthday: true, festival: true, cropDeadline: true },
   reminderToggles: DEFAULT_REMINDER_TOGGLES,
@@ -105,6 +108,7 @@ function ensureLoaded(): void {
     hiddenItems: saved.hiddenItems ?? {},
     achievementsDone: saved.achievementsDone ?? {},
     character: { ...DEFAULT_CHARACTER, ...saved.character },
+    year: saved.year ?? 1,
     version: STATE_VERSION,
   };
   loaded = true;
@@ -182,7 +186,24 @@ function applyCompletion(memos: Memo[], ids: string[]): Memo[] {
 
 export const scheduleActions = {
   setCurrentDay(day: number) {
+    // 달력에서 임의 날짜 선택: 연도는 그대로 둔다.
     commit({ ...state, currentDay: day });
+  },
+  // 하루 뒤로: winter 28(112)→spring 1이면 연도 +1.
+  goToNextDay() {
+    const year = state.currentDay === DAYS_PER_YEAR ? state.year + 1 : state.year;
+    commit({ ...state, currentDay: normalizeYearDay(state.currentDay + 1), year });
+  },
+  // 하루 앞으로: spring 1→winter 28이면 연도 -1(최소 1).
+  goToPrevDay() {
+    // 게임 시작일(1년째 봄 1일) 이전으로는 이동 불가
+    if (state.year === 1 && state.currentDay === 1) return;
+    const year = state.currentDay === 1 ? Math.max(1, state.year - 1) : state.year;
+    commit({ ...state, currentDay: normalizeYearDay(state.currentDay - 1), year });
+  },
+  // 미니 달력 등에서 특정 (연도, 날짜)로 직접 이동
+  goToDate(yearDay: number, year: number) {
+    commit({ ...state, currentDay: yearDay, year: Math.max(1, year) });
   },
   setEventFilter(type: keyof ScheduleState["eventFilters"], value: boolean) {
     commit({
@@ -285,6 +306,10 @@ export const scheduleActions = {
   incWateringCanUpgrades() {
     commit({ ...state, wateringCanUpgrades: state.wateringCanUpgrades + 1 });
   },
+  // 도구 등급 직접 설정(캐릭터 창의 등급 선택). 0(기본)~4(이리듐)로 제한.
+  setWateringCanUpgrades(n: number) {
+    commit({ ...state, wateringCanUpgrades: Math.max(0, Math.min(4, n)) });
+  },
   // 캐릭터 정보 부분 갱신
   setCharacter(patch: Partial<CharacterInfo>) {
     commit({ ...state, character: { ...state.character, ...patch } });
@@ -294,6 +319,7 @@ export const scheduleActions = {
     commit({
       version: STATE_VERSION,
       currentDay: 1,
+      year: 1,
       memos: [],
       eventFilters: { birthday: true, festival: true, cropDeadline: true },
       reminderToggles: { ...DEFAULT_REMINDER_TOGGLES },

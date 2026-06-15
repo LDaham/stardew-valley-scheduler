@@ -9,7 +9,8 @@ import PixelIcon from "@/components/PixelIcon";
 
 // 카테고리별 아이콘(수확은 작물 이미지)
 function iconSrc(m: Memo): string {
-  if (m.category === "harvest" && m.cropId) return `/icons/seeds/${m.cropId}.png`;
+  if ((m.category === "harvest" || m.category === "plant") && m.cropId)
+    return `/icons/seeds/${m.cropId}.png`;
   if (m.category === "fruit" && m.cropId) return `/icons/fruitTrees/${m.cropId}.png`;
   if (m.category === "watering") return "/icons/reminders/watering.png";
   if (m.category === "buySeed") return "/icons/reminders/buySeeds.png";

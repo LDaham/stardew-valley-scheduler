@@ -56,7 +56,7 @@ export default function Modal({
       role="presentation"
     >
       <div
-        className="max-h-[85vh] w-full max-w-sm overflow-y-auto rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-5 shadow-xl"
+        className="max-h-[85vh] w-full max-w-3xl overflow-y-auto rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-5 shadow-xl"
         role="dialog"
         aria-modal="true"
       >

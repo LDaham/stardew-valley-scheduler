@@ -2,98 +2,88 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import type { SDate } from "@/lib/calendar";
 import { ScheduleProvider } from "@/components/ScheduleProvider";
 import { GiftDialogProvider } from "@/components/GiftDialogProvider";
 import Dashboard from "@/components/Dashboard";
-import Calendar from "@/components/Calendar";
 import SettingsDialog from "@/components/SettingsDialog";
 import TodoSettingsDialog from "@/components/TodoSettingsDialog";
 import BundleDialog from "@/components/BundleDialog";
 import PerfectionDialog from "@/components/PerfectionDialog";
 import CharacterDialog from "@/components/CharacterDialog";
-import MyTasksDialog from "@/components/MyTasksDialog";
 import AchievementDialog from "@/components/AchievementDialog";
 import PixelIcon from "@/components/PixelIcon";
 
 function AppShell() {
   const t = useTranslations();
-  const [selectedDate, setSelectedDate] = useState<SDate | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [todoSettingsOpen, setTodoSettingsOpen] = useState(false);
   const [bundleOpen, setBundleOpen] = useState(false);
   const [perfectionOpen, setPerfectionOpen] = useState(false);
   const [characterOpen, setCharacterOpen] = useState(false);
-  const [myTasksOpen, setMyTasksOpen] = useState(false);
   const [achievementOpen, setAchievementOpen] = useState(false);
 
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 p-4">
-      {/* 헤더 */}
-      <header className="flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-bold">{t("common.appName")}</h1>
-          <p className="text-xs text-[var(--sv-ink-muted)]">
-            {t("home.subtitle")}
-          </p>
+    <div className="sv-frame mx-auto my-4 flex w-full max-w-5xl flex-col gap-4 p-4 sm:p-6">
+      {/* 헤더: 타이틀 배너(중앙) + 좌/우 버튼 그룹 */}
+      <header className="flex flex-col gap-3">
+        <div className="sv-banner mx-auto px-6 py-2 text-center">
+          <h1 className="text-xl font-bold tracking-wide text-[var(--sv-ink)]">
+            {t("common.appName")}
+          </h1>
         </div>
-        <div className="flex flex-wrap justify-end gap-2">
-          <button
-            onClick={() => setBundleOpen(true)}
-            aria-label={t("bundle.open")}
-            className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
-          >
-            <PixelIcon src="/icons/ui/bundle.png" size={18} /> {t("bundle.short")}
-          </button>
-          <button
-            onClick={() => setPerfectionOpen(true)}
-            aria-label={t("perfection.open")}
-            className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
-          >
-            <PixelIcon src="/icons/ui/perfection.png" size={18} /> {t("perfection.short")}
-          </button>
-          <button
-            onClick={() => setAchievementOpen(true)}
-            aria-label={t("achievement.open")}
-            className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
-          >
-            <PixelIcon src="/icons/ui/achievement.jpg" size={18} /> {t("achievement.short")}
-          </button>
-          <button
-            onClick={() => setMyTasksOpen(true)}
-            aria-label={t("myTasks.open")}
-            className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
-          >
-            <PixelIcon src="/icons/ui/note.png" size={18} /> {t("myTasks.short")}
-          </button>
-          <button
-            onClick={() => setCharacterOpen(true)}
-            aria-label={t("character.open")}
-            className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
-          >
-            <PixelIcon src="/icons/ui/character.png" size={18} /> {t("character.short")}
-          </button>
-          <button
-            onClick={() => setTodoSettingsOpen(true)}
-            aria-label={t("settings.openTodo")}
-            className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
-          >
-            <PixelIcon src="/icons/ui/note.png" size={18} /> {t("settings.todoSettings")}
-          </button>
-          <button
-            onClick={() => setSettingsOpen(true)}
-            aria-label={t("settings.open")}
-            className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
-          >
-            <PixelIcon src="/icons/ui/settings.png" size={18} /> {t("settings.title")}
-          </button>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          {/* 좌측: 꾸러미 · 완벽 · 업적 */}
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setBundleOpen(true)}
+              aria-label={t("bundle.open")}
+              className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
+            >
+              <PixelIcon src="/icons/ui/bundle.png" size={18} /> {t("bundle.short")}
+            </button>
+            <button
+              onClick={() => setPerfectionOpen(true)}
+              aria-label={t("perfection.open")}
+              className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
+            >
+              <PixelIcon src="/icons/ui/perfection.png" size={18} /> {t("perfection.short")}
+            </button>
+            <button
+              onClick={() => setAchievementOpen(true)}
+              aria-label={t("achievement.open")}
+              className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
+            >
+              <PixelIcon src="/icons/ui/achievement.jpg" size={18} /> {t("achievement.short")}
+            </button>
+          </div>
+          {/* 우측: 캐릭터 · 스케줄러 설정 · 설정 */}
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setCharacterOpen(true)}
+              aria-label={t("character.open")}
+              className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
+            >
+              <PixelIcon src="/icons/ui/character.png" size={18} /> {t("character.short")}
+            </button>
+            <button
+              onClick={() => setTodoSettingsOpen(true)}
+              aria-label={t("settings.openTodo")}
+              className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
+            >
+              <PixelIcon src="/icons/ui/note.png" size={18} /> {t("settings.todoSettings")}
+            </button>
+            <button
+              onClick={() => setSettingsOpen(true)}
+              aria-label={t("settings.open")}
+              className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
+            >
+              <PixelIcon src="/icons/ui/settings.png" size={18} /> {t("settings.title")}
+            </button>
+          </div>
         </div>
       </header>
 
-      <Dashboard onSelectDate={setSelectedDate} />
-
-      {/* 캘린더 */}
-      <Calendar selectedDate={selectedDate} onSelectDate={setSelectedDate} />
+      <Dashboard />
 
       {settingsOpen && <SettingsDialog onClose={() => setSettingsOpen(false)} />}
       {todoSettingsOpen && (
@@ -106,7 +96,6 @@ function AppShell() {
       {characterOpen && (
         <CharacterDialog onClose={() => setCharacterOpen(false)} />
       )}
-      {myTasksOpen && <MyTasksDialog onClose={() => setMyTasksOpen(false)} />}
       {achievementOpen && (
         <AchievementDialog onClose={() => setAchievementOpen(false)} />
       )}

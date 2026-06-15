@@ -43,7 +43,25 @@ export type MemoChain =
       repeat: boolean;
     }
   | { kind: "fruitPlant"; harvestText: string }
-  | { kind: "replant"; buySeedText: string };
+  | { kind: "replant"; buySeedText: string }
+  // 작물 생명주기 순차 체인: 씨앗 심기 → 물주기 ×K → 수확(+음식/재파종).
+  // 상위 단계를 완료해야 하위 단계가 생성된다(미완료는 미루기로 그날 계속 표시).
+  // stage=plant: 완료 시 물주기 #1(remaining=K) 당일 생성(noWatering이면 수확을 +K일에 생성).
+  // stage=water: 완료 시 remaining-1>0이면 다음 물주기를 다음 날, 0이면 수확을 다음 날 생성.
+  // stage=regrow: 재수확 작물의 수확. 완료 시 다음 재성장 물주기(remaining=regrowDays)를 다음 날 생성(반복).
+  | {
+      kind: "crop";
+      stage: "plant" | "water" | "regrow";
+      cropId: string;
+      remaining: number; // 남은 물주기 수(plant 단계에선 총 K)
+      noWatering: boolean;
+      eatFood: boolean;
+      replant: boolean;
+      waterText: string;
+      harvestText: string;
+      eatFoodText: string;
+      buySeedText: string;
+    };
 
 // 순환 메모 1건. (계절,일)에 귀속되어 매 순환마다 반복 표시된다.
 export interface Memo {
@@ -62,6 +80,8 @@ export interface Memo {
   groupId?: string;
   // 온실에서 심음(계절 만료 없음 — 작물/과일 수확 메모가 사라지지 않는다).
   greenhouse?: boolean;
+  // 작물 생명주기 메모의 수확 마감(yearDay). 비온실에서 이 날을 넘기면 통째로 소멸.
+  deadlineYearDay?: number;
   // 완료 시 후속 할 일을 생성하는 체인. spawned=이미 생성 완료(재체크 시 중복 방지).
   chain?: MemoChain;
   spawned?: boolean;
@@ -71,7 +91,8 @@ export interface Memo {
 // localStorage에 저장되는 전체 스케줄 상태
 export interface ScheduleState {
   version: number;
-  currentDay: number; // 1..112 (절대 일수)
+  currentDay: number; // 1..112 (계절 내 절대 일수, 순환)
+  year: number; // 1부터 시작. winter 28→spring 1 넘어가면 +1, 역방향 -1
   memos: Memo[];
   eventFilters: EventFilters; // 이벤트 타입별 표시 여부
   reminderToggles: Record<ReminderId, boolean>; // 리마인더별 on/off

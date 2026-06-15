@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { addDays, SEASONS, type SDate } from "@/lib/calendar";
+import { addDays, SEASONS, toYearDay, type SDate } from "@/lib/calendar";
 import { CROPS } from "@/data/game-data";
 import { MACHINES, type MachineCategory } from "@/data/machines";
 import { computeHarvest, type Fertilizer } from "@/lib/growth";
@@ -18,7 +18,7 @@ import { planBuilding } from "@/lib/carpenter";
 import { FRUIT_TREES, FRUIT_TREE_MATURE_DAYS } from "@/data/fruitTrees";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import type { MemoCategory } from "@/lib/todoOrder";
-import type { Memo, SeedDefaults } from "@/types/schedule";
+import type { SeedDefaults } from "@/types/schedule";
 import { asset } from "@/lib/asset";
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
@@ -35,6 +35,18 @@ type Mode =
   | "refiningMachine"
   | "build"
   | "options";
+
+// 비온실 작물의 수확 마감(yearDay): 심은 계절부터 작물이 자라는 마지막 연속 계절의 28일.
+// 이 날을 넘기면(미루기로 밀려서) 작물이 시들어 사라진다.
+function cropDeadlineYearDay(
+  plant: SDate,
+  crop: (typeof CROPS)[number],
+): number {
+  let last = SEASONS.indexOf(plant.season);
+  while (last + 1 < SEASONS.length && crop.seasons.includes(SEASONS[last + 1]))
+    last++;
+  return toYearDay({ season: SEASONS[last], day: 28 });
+}
 
 // 메뉴 항목. tool/seed/fruit/장비/build는 하위 폼, mining/fishing/pond/misc는 즉시 처리.
 const MENU = [
@@ -79,7 +91,6 @@ export default function AddTaskDialog({
   const t = useTranslations();
   const {
     addMemo,
-    addMemos,
     bundleItemsDone,
     character,
     seedDefaults,
@@ -112,8 +123,9 @@ export default function AddTaskDialog({
     onClose();
   };
 
-  // 씨앗 심기: 수확 메모 1개 + 물주기 메모(심은 계절 내, 수확 전날까지 / 재수확이면 계절 끝까지) 일괄 생성
-  // 농업 전문가(성장 속도) 여부는 캐릭터 정보를 활용한다.
+  // 씨앗 심기: 당일 '씨앗 심기' 1건만 생성한다(순차 체인).
+  // 완료하면 물주기 ×K → 수확 → (음식/재파종)이 차례로 생성되고,
+  // 한 단계가 밀리면 하위 단계가 그만큼 늦게 생긴다(미루기·cascade).
   const addSeed = (
     cropId: string,
     fert: Fertilizer,
@@ -128,93 +140,41 @@ export default function AddTaskDialog({
     const h = computeHarvest(baseDate, crop, character.agriculturist, fert);
     const willWilt = greenhouse ? false : h.willWilt;
     const cropName = t(`crops.${cropId}`);
-    const memos: Omit<Memo, "id" | "createdAt" | "done">[] = [
-      {
-        season: h.date.season,
-        day: h.date.day,
-        text: t("addTask.harvestMemo", { crop: cropName }),
-        reminderDaysBefore: 0,
-        category: "harvest",
-        cropId,
-      },
-    ];
-
-    // 재파종: 재수확 작물이 아니고 재파종을 선택했으면 수확 완료 시 씨앗 구매를 생성.
-    // (지금 심어도 수확 가능한지는 수확 완료 시점에 다시 판단한다.)
-    if (replant && !crop.regrowDays) {
-      memos[0].chain = {
-        kind: "replant",
-        buySeedText: t("addTask.buySeedMemo", { crop: cropName }),
-      };
-    }
-
-    // 물주기 메모 생성. noWatering(스프링클러 등)이면 건너뛴다.
-    if (!noWatering) {
-      if (greenhouse) {
-        // 온실: 계절 경계 무시. 절대 일수로 매일 물주기.
-        // 재수확 작물은 1년 내내(한 순환=112일 미만으로 제한해 날짜 중복 방지),
-        // 일반 작물은 수확 전날까지.
-        const waterDays = crop.regrowDays ? 110 : Math.max(h.growthDays - 1, 0);
-        for (let i = 0; i <= waterDays; i++) {
-          const d = addDays(baseDate, i);
-          memos.push({
-            season: d.season,
-            day: d.day,
-            text: t("addTask.wateringMemo", { crop: cropName }),
-            reminderDaysBefore: 0,
-            category: "watering",
-            cropId,
-          });
-        }
-      } else {
-        // 비온실: 이 계절 안에서 수확에 도움이 되는 날만.
-        // 단, 다음 계절에도 자라는 작물이면 계절 끝까지(다음 계절 수확을 위해).
-        const idx = SEASONS.indexOf(baseDate.season);
-        const growsNext =
-          baseDate.season !== "winter" &&
-          idx < 3 &&
-          crop.seasons.includes(SEASONS[idx + 1]);
-        let lastWater: number;
-        if (growsNext) {
-          lastWater = 28;
-        } else if (willWilt) {
-          lastWater = 0; // 이 계절·다음 계절 모두 수확 불가 → 물주기 제외
-        } else {
-          let last = h.date.day; // 이 계절 마지막 수확일
-          if (crop.regrowDays)
-            while (last + crop.regrowDays <= 28) last += crop.regrowDays;
-          lastWater = last - 1; // 마지막 수확 전날까지
-        }
-        for (let d = baseDate.day; d <= Math.min(lastWater, 28); d++) {
-          memos.push({
-            season: baseDate.season,
-            day: d,
-            text: t("addTask.wateringMemo", { crop: cropName }),
-            reminderDaysBefore: 0,
-            category: "watering",
-            cropId,
-          });
-        }
-      }
-    }
-    // 수확일에 음식 먹기(품질 버프) — 선택 시 수확일에 메모 추가
-    if (eatFood && !willWilt) {
-      memos.push({
-        season: h.date.season,
-        day: h.date.day,
-        text: t("addTask.eatFoodMemo", { crop: cropName }),
-        reminderDaysBefore: 0,
-        category: "eatFood",
-        cropId,
-      });
-    }
-    // 선택지를 기본값으로 저장(다음 심기에 재사용)
-    setSeedDefaults({ fertilizer: fert, eatFood, noWatering, replant });
-    // 한 번의 심기로 파생된 메모를 같은 groupId로 묶는다(같은 작물 다른 날짜 구분용).
+    // 물주기 횟수 K = 보정된 성장 일수(심은 날부터 수확 전날까지 매일 1회).
+    const K = h.growthDays;
+    // 비온실 수확 마감: 작물이 자라는 마지막 연속 계절의 28일(넘기면 통째 소멸).
+    const deadlineYearDay = greenhouse
+      ? undefined
+      : cropDeadlineYearDay(baseDate, crop);
     const groupId = `${cropId}-${Date.now().toString(36)}-${Math.random()
       .toString(36)
       .slice(2, 6)}`;
-    addMemos(memos.map((m) => ({ ...m, groupId, greenhouse })));
+    addMemo({
+      season: baseDate.season,
+      day: baseDate.day,
+      text: t("addTask.plantMemo", { crop: cropName }),
+      reminderDaysBefore: 0,
+      category: "plant",
+      cropId,
+      greenhouse,
+      groupId,
+      deadlineYearDay,
+      chain: {
+        kind: "crop",
+        stage: "plant",
+        cropId,
+        remaining: K,
+        noWatering,
+        eatFood: eatFood && !willWilt,
+        replant,
+        waterText: t("addTask.wateringMemo", { crop: cropName }),
+        harvestText: t("addTask.harvestMemo", { crop: cropName }),
+        eatFoodText: t("addTask.eatFoodMemo", { crop: cropName }),
+        buySeedText: t("addTask.buySeedMemo", { crop: cropName }),
+      },
+    });
+    // 선택지를 기본값으로 저장(다음 심기에 재사용)
+    setSeedDefaults({ fertilizer: fert, eatFood, noWatering, replant });
     onClose();
   };
 

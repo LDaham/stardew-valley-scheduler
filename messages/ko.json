@@ -5,7 +5,16 @@
   },
   "common": {
     "appName": "스타듀밸리 스케줄러",
-    "incompleteFirst": "완료되지 않은 항목 먼저 보기"
+    "incompleteFirst": "완료되지 않은 항목 먼저 보기",
+    "cancel": "취소",
+    "confirm": "확인"
+  },
+  "miniCalendar": {
+    "title": "날짜 이동",
+    "yearLabel": "{year}년째",
+    "prevYear": "이전 연도",
+    "nextYear": "다음 연도",
+    "confirmMove": "{date}(으)로 이동하시겠습니까?"
   },
   "home": {
     "title": "스타듀밸리 스케줄러",
@@ -62,13 +71,20 @@
     "deleteOne": "이 항목만 삭제",
     "deleteAllCrop": "이 작물 관련 전체 삭제",
     "deleteAllCat": "{cat} 전체 삭제 ({count})",
+    "deleteCat_plant": "씨앗 심기",
     "deleteCat_watering": "작물 물주기",
     "deleteCat_harvest": "작물 수확",
     "deleteCat_buySeed": "씨앗 구매",
     "dDay": "D-{days}",
     "deleteCat_eatFood": "수확일 음식 먹기",
     "deleteCat_fruit": "과일 수확",
-    "infoTitle": "정보"
+    "infoTitle": "정보",
+    "tomorrowInfoTitle": "내일 정보",
+    "noInfo": "표시할 정보 없음",
+    "rolled": "미뤄짐",
+    "blockedToday": "오늘은 불가({reason})",
+    "dateFull": "{year}년째, {season}의 {day}일째",
+    "easterEggTip": "좋아하는 것으로 \"ConcernedApe\"를 입력할시 이스터에그가 발동됩니다."
   },
   "memo": {
     "selectDay": "달력에서 날짜를 선택하세요",
@@ -92,7 +108,7 @@
   "settings": {
     "title": "설정",
     "open": "설정 열기",
-    "todoSettings": "할 일 목록 설정",
+    "todoSettings": "스케줄러 설정",
     "openTodo": "할 일 목록 설정 열기",
     "events": "고정 이벤트",
     "reminders": "요일 리마인더",
@@ -105,7 +121,9 @@
     "resetNo": "취소",
     "orderHint": "⠿ 핸들을 드래그해 표시 순서를 바꾸고, 체크로 표시 여부를 정하세요.",
     "reorder": "드래그하여 순서 변경",
-    "userAdded": "사용자 추가"
+    "userAdded": "사용자 추가",
+    "cropGroup": "씨앗 심기",
+    "cropGroupNote": "심기 → 물주기 → 수확 → 음식/재파종 순서. 상위를 완료해야 하위 할 일이 생깁니다."
   },
   "blacksmith": {
     "pickupWarn": "완성 예정일 {ready}은 대장간 휴무({reason})라 다음 영업일에 수령합니다",
@@ -119,11 +137,12 @@
     "checkup": "여름 18일은 로빈 검진으로 휴무"
   },
   "todoCategory": {
+    "plant": "씨앗 심기",
     "harvest": "작물 수확",
     "watering": "작물별 물주기",
     "fruit": "과일나무 수확",
     "tool": "도구 업그레이드",
-    "machine": "장인 제작품",
+    "machine": "장인 장비 사용",
     "misc": "정동석·박물관",
     "eatFood": "수확일 음식 먹기",
     "build": "건물 건설",
@@ -379,7 +398,7 @@
     "titleWithDay": "{day} 할 일 추가",
     "tool": "도구 업그레이드",
     "seed": "씨앗 심기",
-    "machine": "장인 제작품",
+    "machine": "장인 장비 사용",
     "misc": "정동석·박물관",
     "geode": "정동석 깨기",
     "museum": "박물관 기증하기",
@@ -403,6 +422,7 @@
     "wiltWarning": "이 계절 안에 수확 불가 — 시즌 종료로 시들 수 있어요",
     "noSeasonCrops": "이 계절에 심을 수 있는 작물이 없습니다",
     "toolMemo": "{tool} 수령",
+    "plantMemo": "{crop} 씨앗 심기",
     "harvestMemo": "{crop} 수확",
     "wateringMemo": "{crop} 물주기",
     "wateringNote": "수확 전까지 매일 물주기 항목이 자동 추가됩니다 (재수확 작물은 계절 끝까지)",
@@ -567,7 +587,14 @@
     "gatherer": "채집가",
     "gathererDesc": "야생 씨앗 수확량 +20%",
     "botanist": "식물학자",
-    "botanistDesc": "야생 씨앗 항상 이리듐 품질"
+    "botanistDesc": "야생 씨앗 항상 이리듐 품질",
+    "toolTier": "물뿌리개 등급",
+    "toolTierDesc": "비 예보 시 물뿌리개 업그레이드 제안 여부에 사용됩니다(이리듐이면 제안 안 함).",
+    "toolTier_0": "물뿌리개",
+    "toolTier_1": "구리 물뿌리개",
+    "toolTier_2": "강철 물뿌리개",
+    "toolTier_3": "황금 물뿌리개",
+    "toolTier_4": "이리듐 물뿌리개"
   },
   "myTasks": {
     "title": "내가 추가한 할 일",
@@ -718,7 +745,7 @@
     "queenOfSauceRerun": {
       "title": "소스의 여왕 (재방송)",
       "detail": "수요일 — TV에서 요리 레시피 재방송 확인",
-      "note": "신규 방영을 일요일에 체크하지 않으면 수요일에 재방송이 표시됩니다."
+      "note": "신규 방영을 일요일에 완료하지 않으면 수요일에 재방송이 표시됩니다."
     }
   },
   "footer": {
@@ -2077,15 +2104,16 @@
     "queenOfSauceNew": "일요일 신규 방영 · 안 보면(체크 안 하면) 같은 레시피를 수요일 재방송으로만 다시 볼 수 있음. 당일 끝남.",
     "queenOfSauceRerun": "수요일 재방송 · 신규 방영을 못 본 경우에만 표시. 당일 끝남.",
     "helpWanted": "매일 · 당일 끝남. 축제 전날·당일에는 상점/NPC가 막혀 표시 안 함.",
-    "communityCenterBundle": "무기한 · 안 하면 미뤄짐(현재 계절 첫날 알림, 완료까지 표시 예정).",
+    "communityCenterBundle": "정보 · 계절 첫날 표시(이번 계절 모을 꾸러미 품목). 완료 표시 없음.",
     "crabPot": "무기한 · 안 하면 미뤄짐.",
     "pondCheck": "매일 · 당일 끝남(연못 바구니에 매일 생산물 누적).",
     "festival": "정보 · 축제일(상점/NPC 일정 영향). 완료 표시 없음.",
     "cropDeadline": "정보 · 이 날까지 심어야 이번 계절 수확 가능. 완료 표시 없음.",
     "birthday": "당일 한정 · 오늘 전달해야 '생일 선물'. 안 하면 일반 선물이 됨.",
     "newSeason": "정보 · 새 계절 시작(이번 계절 씨앗 구매 가능). 완료 표시 없음.",
-    "harvest": "무기한 · 수확 안 하면 미뤄짐. 온실 아니면 수확 계절 지나면 사라짐.",
-    "watering": "무기한(매일) · 물 안 주면 미뤄짐. 온실 아니면 수확 불가해지면 사라짐.",
+    "plant": "심을 때까지 미뤄짐 · 심어야 물주기·수확이 생김. 온실 아니면 수확 계절 지나면 사라짐.",
+    "harvest": "물주기를 다 마치면 생성 · 수확 안 하면 미뤄짐. 온실 아니면 수확 계절 지나면 사라짐.",
+    "watering": "심은 뒤 매일 1회 · 물 안 주면 밀리고 수확도 함께 밀림. 온실 아니면 수확 불가해지면 사라짐.",
     "fruit": "무기한 · 수확 안 하면 미뤄짐(최대 3개 누적). 온실 아니면 계절 지나면 사라짐.",
     "tool": "무기한 · 업그레이드 맡길 때까지 미뤄짐(대장간 휴무일 반영).",
     "machine": "무기한 · 장비 사용/수령까지 미뤄짐. 상위 사용 후 수령 생성.",

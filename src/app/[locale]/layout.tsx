@@ -43,7 +43,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className="h-full antialiased">
-      <body className="min-h-full flex flex-col bg-[var(--sv-bg)] text-[var(--sv-ink)]">
+      <body className="min-h-full flex flex-col bg-[var(--sv-desk)] text-[var(--sv-ink)]">
         <NextIntlClientProvider>
           <div className="flex-1">{children}</div>
           <Footer />

@@ -4,16 +4,21 @@ import { useTranslations } from "next-intl";
 import type { CharacterInfo } from "@/types/schedule";
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
+import PixelIcon from "@/components/PixelIcon";
 
 // 체크박스로 켜는 독립 스킬(경작인·채집가·식물학자)
 const CHECK_SKILLS: (keyof CharacterInfo)[] = ["tiller", "gatherer", "botanist"];
+
+// 도구 등급: 0(기본)~4(이리듐). wateringCanUpgrades 값과 1:1 대응.
+const TOOL_TIER_MAX = 4;
 
 // 농사 10레벨 전문직(상호 배타): 농업 전문가 / 장인 (체크박스로 택1)
 type Profession = "agriculturist" | "artisan";
 
 export default function CharacterDialog({ onClose }: { onClose: () => void }) {
   const t = useTranslations();
-  const { character, setCharacter } = useSchedule();
+  const { character, setCharacter, wateringCanUpgrades, setWateringCanUpgrades } =
+    useSchedule();
 
   // 체크박스 택1: 하나를 켜면 나머지는 꺼지고, 끄면 둘 다 해제(전문직 없음)
   const toggleProfession = (p: Profession, checked: boolean) =>
@@ -72,6 +77,43 @@ export default function CharacterDialog({ onClose }: { onClose: () => void }) {
       <div className="mb-3 grid grid-cols-2 gap-2">
         {levelInput("farmingLevel")}
         {levelInput("foragingLevel")}
+      </div>
+
+      {/* 도구 등급(물뿌리개 업그레이드 제안과 연동) */}
+      <div className="mb-3 rounded-md border border-[var(--sv-border)] p-2">
+        <label className="mb-1 block text-xs font-semibold text-[var(--sv-ink-muted)]">
+          {t("character.toolTier")}
+        </label>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            aria-label="−"
+            disabled={wateringCanUpgrades <= 0}
+            onClick={() => setWateringCanUpgrades(wateringCanUpgrades - 1)}
+            className={stepBtn}
+          >
+            −
+          </button>
+          <span className="flex flex-1 items-center justify-center gap-2 text-sm font-semibold">
+            <PixelIcon
+              src={`/icons/tools/wateringCan${wateringCanUpgrades}.png`}
+              size={24}
+            />
+            {t(`character.toolTier_${wateringCanUpgrades}`)}
+          </span>
+          <button
+            type="button"
+            aria-label="+"
+            disabled={wateringCanUpgrades >= TOOL_TIER_MAX}
+            onClick={() => setWateringCanUpgrades(wateringCanUpgrades + 1)}
+            className={stepBtn}
+          >
+            +
+          </button>
+        </div>
+        <p className="mt-1 text-[11px] text-[var(--sv-ink-muted)]">
+          {t("character.toolTierDesc")}
+        </p>
       </div>
 
       <div className="flex flex-col gap-2">

@@ -26,6 +26,7 @@ export function useSchedule() {
 
   return {
     currentDate,
+    year: state.year,
     memos: state.memos,
     eventFilters: state.eventFilters,
     reminderToggles: state.reminderToggles,
@@ -49,6 +50,10 @@ export function useSchedule() {
       ),
     setCurrentDate: (date: SDate) =>
       scheduleActions.setCurrentDay(toYearDay(date)),
+    goToNextDay: scheduleActions.goToNextDay,
+    goToPrevDay: scheduleActions.goToPrevDay,
+    goToDate: (date: SDate, yr: number) =>
+      scheduleActions.goToDate(toYearDay(date), yr),
     addMemo: scheduleActions.addMemo,
     addMemos: scheduleActions.addMemos,
     updateMemo: scheduleActions.updateMemo,
@@ -63,6 +68,7 @@ export function useSchedule() {
     setMemoCategoryToggle: scheduleActions.setMemoCategoryToggle,
     setRainDay: scheduleActions.setRainDay,
     incWateringCanUpgrades: scheduleActions.incWateringCanUpgrades,
+    setWateringCanUpgrades: scheduleActions.setWateringCanUpgrades,
     toggleBundleItem: scheduleActions.toggleBundleItem,
     setBundleMode: scheduleActions.setBundleMode,
     setRemixChoice: scheduleActions.setRemixChoice,

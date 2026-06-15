@@ -10,15 +10,96 @@ import {
   FRUIT_TREE_MATURE_DAYS,
   FRUIT_HARVEST_INTERVAL,
 } from "@/data/fruitTrees";
-import type { Memo } from "@/types/schedule";
+import type { Memo, MemoChain } from "@/types/schedule";
 
 // 새로 추가할 메모(아직 id/완료/생성시각 없음)
 export type NewMemo = Omit<Memo, "id" | "createdAt" | "done">;
+
+// 작물 물주기 메모 1건 생성(부모의 작물·온실·마감 정보를 그대로 물려준다).
+function cropWaterMemo(
+  date: SDate,
+  memo: Memo,
+  chain: Extract<MemoChain, { kind: "crop" }>,
+  remaining: number,
+): NewMemo {
+  return {
+    season: date.season,
+    day: date.day,
+    text: chain.waterText,
+    reminderDaysBefore: 0,
+    category: "watering",
+    cropId: chain.cropId,
+    greenhouse: memo.greenhouse,
+    groupId: memo.groupId,
+    deadlineYearDay: memo.deadlineYearDay,
+    chain: { ...chain, stage: "water", remaining },
+  };
+}
+
+// 수확(+선택 시 수확일 음식) 메모 생성. 재파종 작물이면 수확에 replant 체인을 단다.
+function cropHarvestMemos(
+  date: SDate,
+  memo: Memo,
+  chain: Extract<MemoChain, { kind: "crop" }>,
+): NewMemo[] {
+  const harvest: NewMemo = {
+    season: date.season,
+    day: date.day,
+    text: chain.harvestText,
+    reminderDaysBefore: 0,
+    category: "harvest",
+    cropId: chain.cropId,
+    greenhouse: memo.greenhouse,
+    groupId: memo.groupId,
+    deadlineYearDay: memo.deadlineYearDay,
+  };
+  const crop = CROPS.find((c) => c.id === chain.cropId);
+  if (crop?.regrowDays) {
+    // 재수확 작물: 수확 완료 시 재성장 물주기(regrowDays회)를 거쳐 다시 수확(반복).
+    // 비온실은 deadlineYearDay로, 온실은 무기한 반복.
+    harvest.chain = { ...chain, stage: "regrow", remaining: crop.regrowDays };
+  } else if (chain.replant) {
+    // 재수확 작물이 아니고 재파종 선택 시 수확 완료 → 씨앗 구매(재파종) 생성
+    harvest.chain = { kind: "replant", buySeedText: chain.buySeedText };
+  }
+  const out: NewMemo[] = [harvest];
+  if (chain.eatFood) {
+    out.push({
+      season: date.season,
+      day: date.day,
+      text: chain.eatFoodText,
+      reminderDaysBefore: 0,
+      category: "eatFood",
+      cropId: chain.cropId,
+      greenhouse: memo.greenhouse,
+      groupId: memo.groupId,
+    });
+  }
+  return out;
+}
 
 // 완료된 메모로부터 생성할 후속 메모들. today=완료한 날(현재 날짜), cc=마을회관 복구 여부.
 export function chainSpawn(memo: Memo, today: SDate, cc: boolean): NewMemo[] {
   const chain = memo.chain;
   if (!chain) return [];
+
+  if (chain.kind === "crop") {
+    if (chain.stage === "plant") {
+      // 스프링클러(noWatering): 물주기 없이 수확을 +K일에 생성.
+      if (chain.noWatering)
+        return cropHarvestMemos(addDays(today, chain.remaining), memo, chain);
+      // 일반: 심은 당일에 물주기 #1 생성(remaining=K).
+      return [cropWaterMemo(today, memo, chain, chain.remaining)];
+    }
+    if (chain.stage === "regrow") {
+      // 재수확 작물 수확 완료 → 다음 날부터 재성장 물주기(remaining=regrowDays) 시작.
+      return [cropWaterMemo(addDays(today, 1), memo, chain, chain.remaining)];
+    }
+    // stage === "water": 이번 물주기 완료 → 남은 수에 따라 다음 물주기/수확.
+    const left = chain.remaining - 1;
+    if (left > 0) return [cropWaterMemo(addDays(today, 1), memo, chain, left)];
+    return cropHarvestMemos(addDays(today, 1), memo, chain);
+  }
 
   if (chain.kind === "tool") {
     const pk = toolPickup(today, cc).pickup;
