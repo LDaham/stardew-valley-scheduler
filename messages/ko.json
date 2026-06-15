@@ -411,7 +411,9 @@
     "noWateringOption": "물주기 추가 안 함",
     "noWateringNote": "스프링클러 사용 등으로 물주기 할 일을 만들지 않습니다.",
     "replantOption": "재파종 일정 추가",
-    "replantNote": "수확일에 다시 심을 씨앗 구매 할 일을 추가합니다."
+    "replantNote": "수확일에 다시 심을 씨앗 구매 할 일을 추가합니다.",
+    "selectMachineCategory": "장비 종류",
+    "sameDay": "당일 완성"
   },
   "buildingCategory": {
     "animal": "동물 건물",
@@ -535,7 +537,28 @@
   "machines": {
     "keg": "술통",
     "preservesJar": "절임통",
-    "beeHouse": "양봉장"
+    "beeHouse": "양봉장",
+    "cask": "숙성용 나무통",
+    "mayonnaiseMachine": "마요네즈 기계",
+    "cheesePress": "치즈 착제기",
+    "loom": "물레",
+    "oilMaker": "착유기",
+    "furnace": "용광로",
+    "recyclingMachine": "재활용 기계",
+    "crystalarium": "결정생성기",
+    "charcoalKiln": "숯 가마",
+    "boneMill": "뼈 제분기",
+    "geodeCrusher": "정동석 분쇄기",
+    "woodChipper": "목재파쇄기",
+    "tapper": "수액 채취기",
+    "heavyTapper": "중형 수액 채취기",
+    "slimeIncubator": "슬라임 부화기",
+    "ostrichIncubator": "타조알 부화기",
+    "solarPanel": "태양 전지판"
+  },
+  "machineCategory": {
+    "artisan": "장인 장비",
+    "refining": "정제 장비"
   },
   "machineOutputs": {
     "wine": "와인 (과일)",
@@ -544,7 +567,38 @@
     "beer": "맥주 (밀)",
     "pickles": "피클 (야채)",
     "jelly": "젤리 (과일)",
-    "honey": "벌꿀"
+    "honey": "벌꿀",
+    "mead": "벌꿀 술",
+    "cheese": "치즈",
+    "goatCheese": "염소 치즈",
+    "mayonnaise": "마요네즈",
+    "cloth": "옷감",
+    "truffleOil": "송로버섯 오일",
+    "oil": "기름",
+    "copperBar": "구리 주괴",
+    "ironBar": "철 주괴",
+    "goldBar": "금 주괴",
+    "iridiumBar": "이리듐 주괴",
+    "refinedQuartz": "정제된 석영",
+    "diamond": "다이아몬드",
+    "emerald": "에메랄드",
+    "ruby": "루비",
+    "jade": "옥",
+    "aquamarine": "아쿠아마린",
+    "amethyst": "자수정",
+    "topaz": "토파즈",
+    "quartz": "석영",
+    "coal": "석탄",
+    "boneFertilizer": "비료",
+    "mineral": "광물",
+    "wood": "나무",
+    "mapleSyrup": "메이플 시럽",
+    "oakResin": "참나무 수지",
+    "pineTar": "소나무 타르",
+    "slimeHatch": "슬라임 부화",
+    "ostrichHatch": "타조 부화",
+    "batteryPack": "배터리 팩",
+    "recycle": "재활용 결과물"
   },
   "reminders": {
     "weatherFortune": {

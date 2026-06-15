@@ -5,7 +5,11 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { addDays, SEASONS, type SDate } from "@/lib/calendar";
 import { CROPS } from "@/data/game-data";
-import { MACHINES } from "@/data/machines";
+import {
+  MACHINES,
+  MACHINE_CATEGORIES,
+  type MachineCategory,
+} from "@/data/machines";
 import { computeHarvest, type Fertilizer } from "@/lib/growth";
 import { toolPickup, type ToolPickup } from "@/lib/blacksmith";
 import {
@@ -515,27 +519,53 @@ function MachineForm({
   onAdd: (date: SDate, outputId: string) => void;
 }) {
   const t = useTranslations();
-  const [machineId, setMachineId] = useState(MACHINES[0].id);
-  const machine = MACHINES.find((m) => m.id === machineId) ?? MACHINES[0];
+  const [category, setCategory] = useState<MachineCategory>("artisan");
+  const inCategory = MACHINES.filter((m) => m.category === category);
+  const [machineId, setMachineId] = useState(inCategory[0].id);
+  const machine =
+    inCategory.find((m) => m.id === machineId) ?? inCategory[0];
   const [outputId, setOutputId] = useState(machine.recipes[0].id);
 
   const recipe =
     machine.recipes.find((r) => r.id === outputId) ?? machine.recipes[0];
   const ready = addDays(startDate, recipe.days);
 
+  // 산출물 라벨: 당일 완성(0일)이면 "당일 완성", 아니면 "N일"
+  const daysLabel = (days: number) =>
+    days === 0 ? t("addTask.sameDay") : t("addTask.days", { days });
+
   return (
     <div className="flex flex-col gap-3">
+      <div>
+        <FieldLabel>{t("addTask.selectMachineCategory")}</FieldLabel>
+        <Dropdown
+          value={category}
+          options={MACHINE_CATEGORIES.map((c) => ({
+            value: c,
+            label: t(`machineCategory.${c}`),
+          }))}
+          onChange={(v) => {
+            const c = v as MachineCategory;
+            const first = MACHINES.find((m) => m.category === c) ?? MACHINES[0];
+            setCategory(c);
+            setMachineId(first.id);
+            setOutputId(first.recipes[0].id);
+          }}
+          ariaLabel={t("addTask.selectMachineCategory")}
+        />
+      </div>
+
       <div>
         <FieldLabel>{t("addTask.selectMachine")}</FieldLabel>
         <Dropdown
           value={machineId}
-          options={MACHINES.map((m) => ({
+          options={inCategory.map((m) => ({
             value: m.id,
             label: t(`machines.${m.id}`),
             icon: `/icons/machines/${m.id}.png`,
           }))}
           onChange={(v) => {
-            const m = MACHINES.find((x) => x.id === v) ?? MACHINES[0];
+            const m = inCategory.find((x) => x.id === v) ?? inCategory[0];
             setMachineId(m.id);
             setOutputId(m.recipes[0].id);
           }}
@@ -549,7 +579,7 @@ function MachineForm({
           value={outputId}
           options={machine.recipes.map((r) => ({
             value: r.id,
-            label: `${t(`machineOutputs.${r.id}`)} · ${t("addTask.days", { days: r.days })}`,
+            label: `${t(`machineOutputs.${r.id}`)} · ${daysLabel(r.days)}`,
             icon: `/icons/machineOutputs/${r.id}.png`,
           }))}
           onChange={setOutputId}

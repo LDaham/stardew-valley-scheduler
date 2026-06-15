@@ -411,7 +411,9 @@
     "noWateringOption": "Don't add watering",
     "noWateringNote": "Skip watering tasks (e.g. when using sprinklers).",
     "replantOption": "Add replant task",
-    "replantNote": "Add a buy-seed task on harvest day for replanting."
+    "replantNote": "Add a buy-seed task on harvest day for replanting.",
+    "selectMachineCategory": "Equipment type",
+    "sameDay": "Same day"
   },
   "buildingCategory": {
     "animal": "Animal buildings",
@@ -535,7 +537,28 @@
   "machines": {
     "keg": "Keg",
     "preservesJar": "Preserves Jar",
-    "beeHouse": "Bee House"
+    "beeHouse": "Bee House",
+    "cask": "Cask",
+    "mayonnaiseMachine": "Mayonnaise Machine",
+    "cheesePress": "Cheese Press",
+    "loom": "Loom",
+    "oilMaker": "Oil Maker",
+    "furnace": "Furnace",
+    "recyclingMachine": "Recycling Machine",
+    "crystalarium": "Crystalarium",
+    "charcoalKiln": "Charcoal Kiln",
+    "boneMill": "Bone Mill",
+    "geodeCrusher": "Geode Crusher",
+    "woodChipper": "Wood Chipper",
+    "tapper": "Tapper",
+    "heavyTapper": "Heavy Tapper",
+    "slimeIncubator": "Slime Incubator",
+    "ostrichIncubator": "Ostrich Incubator",
+    "solarPanel": "Solar Panel"
+  },
+  "machineCategory": {
+    "artisan": "Artisan equipment",
+    "refining": "Refining equipment"
   },
   "machineOutputs": {
     "wine": "Wine (fruit)",
@@ -544,7 +567,38 @@
     "beer": "Beer (wheat)",
     "pickles": "Pickles (veg)",
     "jelly": "Jelly (fruit)",
-    "honey": "Honey"
+    "honey": "Honey",
+    "mead": "Mead",
+    "cheese": "Cheese",
+    "goatCheese": "Goat Cheese",
+    "mayonnaise": "Mayonnaise",
+    "cloth": "Cloth",
+    "truffleOil": "Truffle Oil",
+    "oil": "Oil",
+    "copperBar": "Copper Bar",
+    "ironBar": "Iron Bar",
+    "goldBar": "Gold Bar",
+    "iridiumBar": "Iridium Bar",
+    "refinedQuartz": "Refined Quartz",
+    "diamond": "Diamond",
+    "emerald": "Emerald",
+    "ruby": "Ruby",
+    "jade": "Jade",
+    "aquamarine": "Aquamarine",
+    "amethyst": "Amethyst",
+    "topaz": "Topaz",
+    "quartz": "Quartz",
+    "coal": "Coal",
+    "boneFertilizer": "Fertilizer",
+    "mineral": "Mineral",
+    "wood": "Wood",
+    "mapleSyrup": "Maple Syrup",
+    "oakResin": "Oak Resin",
+    "pineTar": "Pine Tar",
+    "slimeHatch": "Slime (hatch)",
+    "ostrichHatch": "Ostrich (hatch)",
+    "batteryPack": "Battery Pack",
+    "recycle": "Recycled goods"
   },
   "reminders": {
     "weatherFortune": {
