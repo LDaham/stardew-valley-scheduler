@@ -76,6 +76,8 @@ export interface ScheduleState {
   perfectionCounts: Record<string, number>;
   // 할 일 추가 상세 옵션: 숨긴 항목. 키=`menu:<id>`/`machine:<id>`/`building:<id>`/`fruit:<id>`, 값=true면 숨김.
   hiddenItems: Record<string, boolean>;
+  // 달성한 업적. 키=업적 id.
+  achievementsDone: Record<string, boolean>;
   // 캐릭터 정보(농사/채집 레벨·스킬). 씨앗 효율 계산에 사용.
   character: CharacterInfo;
 }

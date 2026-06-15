@@ -41,6 +41,7 @@ export function useSchedule() {
     perfectionChecks: state.perfectionChecks,
     perfectionCounts: state.perfectionCounts,
     hiddenItems: state.hiddenItems,
+    achievementsDone: state.achievementsDone,
     character: state.character,
     memosOn: (date: SDate): Memo[] =>
       state.memos.filter(
@@ -69,6 +70,7 @@ export function useSchedule() {
     togglePerfCheck: scheduleActions.togglePerfCheck,
     setPerfCount: scheduleActions.setPerfCount,
     setHiddenItem: scheduleActions.setHiddenItem,
+    toggleAchievement: scheduleActions.toggleAchievement,
     setCharacter: scheduleActions.setCharacter,
     resetAll: scheduleActions.resetAll,
   };

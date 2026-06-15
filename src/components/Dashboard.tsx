@@ -16,6 +16,7 @@ import EventIcon from "@/components/EventIcon";
 import ReminderIcon from "@/components/ReminderIcon";
 import AddTaskDialog from "@/components/AddTaskDialog";
 import BundleDialog from "@/components/BundleDialog";
+import FishInfoDialog from "@/components/FishInfoDialog";
 import SeedEfficiencyDialog from "@/components/SeedEfficiencyDialog";
 import Modal from "@/components/Modal";
 import TimeIcon from "@/components/TimeIcon";
@@ -77,6 +78,7 @@ export default function Dashboard({
   const [seedEffOpen, setSeedEffOpen] = useState(false);
   const [rainPromptOpen, setRainPromptOpen] = useState(false);
   const [bundleFillOpen, setBundleFillOpen] = useState(false);
+  const [fishInfoOpen, setFishInfoOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<DeleteTarget | null>(null);
 
   // 비 오는 날에만 구할 수 있는, 아직 필요한 번들 품목(중복 id 제거)
@@ -315,6 +317,14 @@ export default function Dashboard({
         orderKey: `memo:${m.category ?? "machine"}`,
         icon,
         label: m.text,
+        // 낚시 메모: 우측에 생선 정보 버튼
+        rightBadge:
+          m.category === "fishing" ? (
+            <ActionChip
+              onClick={() => setFishInfoOpen(true)}
+              label={t("fish.title")}
+            />
+          ) : undefined,
         done: allDone,
         onToggle: () => setDoneMany(ids, !allDone),
         onDelete,
@@ -559,6 +569,13 @@ export default function Dashboard({
         <BundleDialog
           initialMode="fill"
           onClose={() => setBundleFillOpen(false)}
+        />
+      )}
+
+      {fishInfoOpen && (
+        <FishInfoDialog
+          season={currentDate.season}
+          onClose={() => setFishInfoOpen(false)}
         />
       )}
     </section>

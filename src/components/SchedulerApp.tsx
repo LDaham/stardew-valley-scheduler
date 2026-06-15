@@ -13,6 +13,7 @@ import BundleDialog from "@/components/BundleDialog";
 import PerfectionDialog from "@/components/PerfectionDialog";
 import CharacterDialog from "@/components/CharacterDialog";
 import MyTasksDialog from "@/components/MyTasksDialog";
+import AchievementDialog from "@/components/AchievementDialog";
 import PixelIcon from "@/components/PixelIcon";
 
 function AppShell() {
@@ -24,6 +25,7 @@ function AppShell() {
   const [perfectionOpen, setPerfectionOpen] = useState(false);
   const [characterOpen, setCharacterOpen] = useState(false);
   const [myTasksOpen, setMyTasksOpen] = useState(false);
+  const [achievementOpen, setAchievementOpen] = useState(false);
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 p-4">
@@ -49,6 +51,13 @@ function AppShell() {
             className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
           >
             <PixelIcon src="/icons/ui/perfection.png" size={18} /> {t("perfection.short")}
+          </button>
+          <button
+            onClick={() => setAchievementOpen(true)}
+            aria-label={t("achievement.open")}
+            className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-2 text-sm hover:bg-[var(--sv-bg)]"
+          >
+            <PixelIcon src="/icons/ui/achievement.jpg" size={18} /> {t("achievement.short")}
           </button>
           <button
             onClick={() => setMyTasksOpen(true)}
@@ -98,6 +107,9 @@ function AppShell() {
         <CharacterDialog onClose={() => setCharacterOpen(false)} />
       )}
       {myTasksOpen && <MyTasksDialog onClose={() => setMyTasksOpen(false)} />}
+      {achievementOpen && (
+        <AchievementDialog onClose={() => setAchievementOpen(false)} />
+      )}
     </div>
   );
 }

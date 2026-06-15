@@ -64,6 +64,7 @@ const DEFAULT_STATE: ScheduleState = {
   perfectionChecks: {},
   perfectionCounts: {},
   hiddenItems: {},
+  achievementsDone: {},
   character: DEFAULT_CHARACTER,
 };
 
@@ -99,6 +100,7 @@ function ensureLoaded(): void {
     perfectionChecks: saved.perfectionChecks ?? {},
     perfectionCounts: saved.perfectionCounts ?? {},
     hiddenItems: saved.hiddenItems ?? {},
+    achievementsDone: saved.achievementsDone ?? {},
     character: { ...DEFAULT_CHARACTER, ...saved.character },
     version: STATE_VERSION,
   };
@@ -259,6 +261,7 @@ export const scheduleActions = {
       perfectionChecks: {},
       perfectionCounts: {},
       hiddenItems: {},
+      achievementsDone: {},
       character: { ...DEFAULT_CHARACTER },
     });
   },
@@ -309,6 +312,16 @@ export const scheduleActions = {
     commit({
       ...state,
       hiddenItems: { ...state.hiddenItems, [key]: hidden },
+    });
+  },
+  // 업적 달성 토글
+  toggleAchievement(id: string) {
+    commit({
+      ...state,
+      achievementsDone: {
+        ...state.achievementsDone,
+        [id]: !state.achievementsDone[id],
+      },
     });
   },
 };

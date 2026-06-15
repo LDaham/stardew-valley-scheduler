@@ -15,14 +15,11 @@ import {
 } from "@/data/bundles";
 import { REMIX_SLOTS, type RemixSlot } from "@/data/remixBundles";
 import type { Season } from "@/lib/calendar";
-
-// 빈 계절 배열 = 사계절/상시 → 항상 "획득 가능"
-const availableNow = (i: BundleItem, season: Season) =>
-  i.seasons.length === 0 || i.seasons.includes(season);
-
-// 이번 계절에만 획득 가능(단일 계절 = 현재 계절)
-const currentSeasonOnly = (i: BundleItem, season: Season) =>
-  i.seasons.length === 1 && i.seasons[0] === season;
+import SeasonFilter, {
+  defaultSeasonSelection,
+  matchesSeason,
+  type SeasonToken,
+} from "@/components/SeasonFilter";
 
 // 정렬 등급: 이번 계절만(0) → 이번 계절+다른 계절(1) → 상시(2) → 다른 계절에만(3)
 const sortTier = (i: BundleItem, season: Season) => {
@@ -40,7 +37,6 @@ const SEASON_BG: Record<Season, string> = {
 
 export default function BundleDialog({
   onClose,
-  initialMode = "all",
 }: {
   onClose: () => void;
   initialMode?: "fill" | "all";
@@ -56,14 +52,20 @@ export default function BundleDialog({
     setRemixChoice,
   } = useSchedule();
   const season = currentDate.season;
-  // 이번 계절에 획득 불가능한 품목 제외(fill 모드 기본 켜짐)
-  const [excludeUnobtainable, setExcludeUnobtainable] = useState(
-    initialMode === "fill",
+  // 계절 필터(상시·봄·여름·가을·겨울). 기본=이번 계절+상시.
+  const [selected, setSelected] = useState<Set<SeasonToken>>(() =>
+    defaultSeasonSelection(season),
   );
-  // 이번 계절에만 획득 가능한 품목만 보기(카테고리 무관)
-  const [onlyCurrentOnly, setOnlyCurrentOnly] = useState(false);
-  // 상시(사계절) 획득 가능한 품목 제외
-  const [excludeAllSeasons, setExcludeAllSeasons] = useState(false);
+  const toggleToken = (tk: SeasonToken) => {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(tk)) next.delete(tk);
+      else next.add(tk);
+      return next;
+    });
+  };
+  // 완료되지 않은 꾸러미 먼저 보기
+  const [incompleteFirst, setIncompleteFirst] = useState(false);
 
   const isDone = (b: Bundle, itemId: string) =>
     !!bundleItemsDone[bundleItemKey(b.id, itemId)];
@@ -74,12 +76,7 @@ export default function BundleDialog({
   // 꾸러미 한 개를 섹션으로 렌더(필터 적용 후 표시할 품목이 없으면 null)
   const renderBundle = (b: Bundle) => {
     const visible = b.items
-      .filter((i) => {
-        if (excludeAllSeasons && i.seasons.length === 0) return false;
-        return onlyCurrentOnly
-          ? currentSeasonOnly(i, season)
-          : !excludeUnobtainable || availableNow(i, season);
-      })
+      .filter((i) => matchesSeason(i.seasons, selected))
       .sort((a, b2) => sortTier(a, season) - sortTier(b2, season));
     if (visible.length === 0) return null;
     const done = doneCount(b);
@@ -257,36 +254,19 @@ export default function BundleDialog({
         ))}
       </div>
 
-      {/* 필터 */}
-      <div className="mb-4 flex flex-col gap-1.5">
-        <label className="flex cursor-pointer items-center gap-2 text-sm">
-          <input
-            type="checkbox"
-            checked={excludeUnobtainable}
-            onChange={(e) => setExcludeUnobtainable(e.target.checked)}
-            className="size-4 accent-[var(--sv-accent)]"
-          />
-          {t("bundle.excludeUnobtainable")}
-        </label>
-        <label className="flex cursor-pointer items-center gap-2 text-sm">
-          <input
-            type="checkbox"
-            checked={onlyCurrentOnly}
-            onChange={(e) => setOnlyCurrentOnly(e.target.checked)}
-            className="size-4 accent-[var(--sv-accent)]"
-          />
-          {t("bundle.onlyCurrentOnly", { season: t(`seasons.${season}`) })}
-        </label>
-        <label className="flex cursor-pointer items-center gap-2 text-sm">
-          <input
-            type="checkbox"
-            checked={excludeAllSeasons}
-            onChange={(e) => setExcludeAllSeasons(e.target.checked)}
-            className="size-4 accent-[var(--sv-accent)]"
-          />
-          {t("bundle.excludeAllSeasons")}
-        </label>
+      {/* 계절 필터(상시·봄·여름·가을·겨울) */}
+      <div className="mb-2">
+        <SeasonFilter selected={selected} onToggle={toggleToken} />
       </div>
+      <label className="mb-4 flex cursor-pointer items-center gap-2 text-sm">
+        <input
+          type="checkbox"
+          checked={incompleteFirst}
+          onChange={(e) => setIncompleteFirst(e.target.checked)}
+          className="size-4 accent-[var(--sv-accent)]"
+        />
+        {t("common.incompleteFirst")}
+      </label>
 
       {bundleMode === "remix" && (
         <p className="mb-3 text-[11px] leading-relaxed text-[var(--sv-ink-muted)]">
@@ -296,7 +276,12 @@ export default function BundleDialog({
 
       <div className="flex flex-col gap-4">
         {bundleMode === "standard"
-          ? BUNDLES.map((b) => renderBundle(b))
+          ? (incompleteFirst
+              ? [...BUNDLES].sort(
+                  (a, b) => Number(isComplete(a)) - Number(isComplete(b)),
+                )
+              : BUNDLES
+            ).map((b) => renderBundle(b))
           : REMIX_SLOTS.map((slot) =>
               slot.fixed
                 ? slot.bundles.map((b) => renderBundle(b))

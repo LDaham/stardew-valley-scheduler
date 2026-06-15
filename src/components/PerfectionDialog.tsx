@@ -18,6 +18,8 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
   } = useSchedule();
   // 한 번에 한 범주만 펼친다(항목이 많아 접어둠)
   const [open, setOpen] = useState<string | null>(null);
+  // 완료되지 않은 범주 먼저 보기
+  const [incompleteFirst, setIncompleteFirst] = useState(false);
 
   const progress = (c: PerfCategory) => {
     if (c.kind === "count") {
@@ -35,6 +37,17 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
     const { done, total } = progress(c);
     return s + c.weight * (total ? done / total : 0);
   }, 0);
+
+  const catComplete = (c: PerfCategory) => {
+    const { done, total } = progress(c);
+    return total > 0 && done >= total;
+  };
+  // 완료되지 않은 범주를 위로(안정 정렬)
+  const orderedCats = incompleteFirst
+    ? [...PERFECTION].sort(
+        (a, b) => Number(catComplete(a)) - Number(catComplete(b)),
+      )
+    : PERFECTION;
 
   const itemName = (c: PerfCategory, id: string) =>
     c.nameVia === "villagers"
@@ -65,8 +78,18 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
         </div>
       </div>
 
+      <label className="mb-3 flex cursor-pointer items-center gap-2 text-sm">
+        <input
+          type="checkbox"
+          checked={incompleteFirst}
+          onChange={(e) => setIncompleteFirst(e.target.checked)}
+          className="size-4 accent-[var(--sv-accent)]"
+        />
+        {t("common.incompleteFirst")}
+      </label>
+
       <div className="flex flex-col gap-2">
-        {PERFECTION.map((c) => {
+        {orderedCats.map((c) => {
           const { done, total } = progress(c);
           const complete = total > 0 && done >= total;
           const isOpen = open === c.id;

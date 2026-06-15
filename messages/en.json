@@ -4,7 +4,8 @@
     "description": "A cycling 28-day, 4-season calendar notepad for Stardew Valley — stay ahead of festivals, birthdays, and crops."
   },
   "common": {
-    "appName": "Stardew Valley Scheduler"
+    "appName": "Stardew Valley Scheduler",
+    "incompleteFirst": "Show incomplete first"
   },
   "home": {
     "title": "Stardew Valley Scheduler",
@@ -15,6 +16,9 @@
     "summer": "Summer",
     "fall": "Fall",
     "winter": "Winter"
+  },
+  "seasonFilter": {
+    "all": "All-season"
   },
   "weekdays": {
     "mon": "Mon",
@@ -1139,18 +1143,18 @@
       "cookoutKit": "Cookout Kit"
     },
     "monster": {
-      "slime": "Slimes",
-      "voidSpirit": "Void Spirits",
-      "bat": "Bats",
-      "skeleton": "Skeletons",
-      "caveInsect": "Cave Insects",
-      "duggy": "Duggies",
-      "dustSprite": "Dust Sprites",
-      "rockCrab": "Rock Crabs",
-      "mummy": "Mummies",
-      "pepperRex": "Pepper Rex",
-      "serpent": "Serpents",
-      "magmaSprite": "Magma Sprites"
+      "slime": "Slimes ×1000",
+      "voidSpirit": "Void Spirits ×150",
+      "bat": "Bats ×200",
+      "skeleton": "Skeletons ×50",
+      "caveInsect": "Cave Insects ×80",
+      "duggy": "Duggies ×30",
+      "dustSprite": "Dust Sprites ×500",
+      "rockCrab": "Rock Crabs ×60",
+      "mummy": "Mummies ×100",
+      "pepperRex": "Pepper Rex ×50",
+      "serpent": "Serpents ×250",
+      "magmaSprite": "Magma Sprites ×150"
     },
     "skill": {
       "farming": "Farming",
@@ -1847,5 +1851,209 @@
       "hopper": "단단한 나무 10 이리듐 주괴 1 방사능 주괴 1",
       "cookoutKit": "나무 15 섬유 10 석탄 3"
     }
+  },
+  "achievements": {
+    "a1": {
+      "name": "풋내기",
+      "desc": "15,000골드 벌기."
+    },
+    "a2": {
+      "name": "소몰이",
+      "desc": "50,000골드 벌기."
+    },
+    "a3": {
+      "name": "농가 주인",
+      "desc": "250,000골드 벌기."
+    },
+    "a4": {
+      "name": "백만장자",
+      "desc": "1,000,000골드 벌기."
+    },
+    "a5": {
+      "name": "전설",
+      "desc": "10,000,000골드 벌기 (히든 업적)."
+    },
+    "a6": {
+      "name": "완성된 컬렉션",
+      "desc": "박물관 소장품 모두 완성."
+    },
+    "a7": {
+      "name": "새 친구",
+      "desc": "주민 한 명과 친밀도 5 하트 달성."
+    },
+    "a8": {
+      "name": "절친",
+      "desc": "주민 한 명과 친밀도 10 하트 달성."
+    },
+    "a9": {
+      "name": "총애 받는 농부",
+      "desc": "주민 8명과 친밀도 10 하트 달성."
+    },
+    "a10": {
+      "name": "무리",
+      "desc": "주민 4명과 친밀도 5 하트 달성."
+    },
+    "a11": {
+      "name": "인맥 형성",
+      "desc": "주민 10명과 친밀도 5 하트 달성."
+    },
+    "a12": {
+      "name": "인기인",
+      "desc": "주민 20명과 친밀도 5 하트 달성."
+    },
+    "a13": {
+      "name": "요리사",
+      "desc": "10가지 요리 만들기."
+    },
+    "a14": {
+      "name": "수셰프",
+      "desc": "25가지 요리 만들기."
+    },
+    "a15": {
+      "name": "미식가 셰프",
+      "desc": "모든 요리 만들기."
+    },
+    "a16": {
+      "name": "출세",
+      "desc": "집 업그레이드 하기."
+    },
+    "a17": {
+      "name": "크게 살기",
+      "desc": "집 최대 크기로 업그레이드 하기. (지하 저장고까지가 아닌 2번째 업그레이드)"
+    },
+    "a18": {
+      "name": "수작업",
+      "desc": "15가지 아이템 제작 하기."
+    },
+    "a19": {
+      "name": "장인",
+      "desc": "30가지 아이템 제작 하기."
+    },
+    "a20": {
+      "name": "제작의 달인",
+      "desc": "모든 아이템 제작 하기."
+    },
+    "a21": {
+      "name": "낚시꾼",
+      "desc": "10가지 물고기 잡기."
+    },
+    "a22": {
+      "name": "경험 많은 뱃사람",
+      "desc": "24가지 물고기 잡기."
+    },
+    "a23": {
+      "name": "낚시의 달인",
+      "desc": "모든 종류의 물고기 잡기."
+    },
+    "a24": {
+      "name": "낚시의 신",
+      "desc": "물고기 100마리 잡기."
+    },
+    "a25": {
+      "name": "보물창고",
+      "desc": "박물관 에 40가지 다른 아이템 기증하기."
+    },
+    "a26": {
+      "name": "심부름꾼",
+      "desc": "' 도움 필요함 ' 요청 10개 완수."
+    },
+    "a27": {
+      "name": "큰 도움",
+      "desc": "' 도움 필요함 ' 요청 40개 완수."
+    },
+    "a28": {
+      "name": "혼합 양식",
+      "desc": "각 작물 을 15개씩 배송 . (자세한 내용은 아래의 노트 에서 볼 수 있습니다)"
+    },
+    "a29": {
+      "name": "단일재배",
+      "desc": "한 종류의 작물 을 300개 배송 . 자세한 내용은 아래의 노트 에서 볼 수 있습니다)"
+    },
+    "a30": {
+      "name": "수송품 한가득",
+      "desc": "모든 아이템 운송 하기."
+    },
+    "a31": {
+      "name": "Prairie King",
+      "desc": "' 대초원의 왕의 모험 '에서 승리."
+    },
+    "a32": {
+      "name": "The Bottom",
+      "desc": "광산 최하층에 도달."
+    },
+    "a33": {
+      "name": "Local Legend",
+      "desc": "펠리칸 타운의 마을 회관 복구."
+    },
+    "a34": {
+      "name": "Joja Co. Member Of The Year",
+      "desc": "조자 지역 개발 프로젝트 전부 완성."
+    },
+    "a35": {
+      "name": "Mystery Of The Stardrops",
+      "desc": "모든 별방울 획득."
+    },
+    "a36": {
+      "name": "Full House",
+      "desc": "결혼 해서 두 명의 아이 낳기."
+    },
+    "a37": {
+      "name": "Singular Talent",
+      "desc": "스킬 레벨 10 달성."
+    },
+    "a38": {
+      "name": "Master Of The Five Ways",
+      "desc": "모든 스킬 레벨 10 달성."
+    },
+    "a39": {
+      "name": "Protector Of The Valley",
+      "desc": "모험가의 길드 의 몬스터 토벌 목표 전부 완료."
+    },
+    "a40": {
+      "name": "Fector's Challenge",
+      "desc": "' 대초원의 왕의 모험 '을 죽지 않고 클리어. (히든 업적)"
+    },
+    "a41": {
+      "name": "먼 곳의 해안",
+      "desc": "진저 섬 에 도달."
+    },
+    "a42": {
+      "name": "독서왕",
+      "desc": "모든 책 읽기. 참고: 능력 책에만 적용됩니다."
+    },
+    "a43": {
+      "name": "최고의 평점",
+      "desc": "영화 보기."
+    },
+    "a44": {
+      "name": "블루 리본",
+      "desc": "스타듀 밸리 품평회 농가 전시 우승하기."
+    },
+    "a45": {
+      "name": "잊을 수 없는 스프",
+      "desc": "도지사 를 기쁘게 하기."
+    },
+    "a46": {
+      "name": "좋은 이웃",
+      "desc": "숲의 이웃 이 가정을 꾸릴 수 있게 돕기."
+    },
+    "a47": {
+      "name": "깊은 곳의 위험",
+      "desc": "'위험한' 광산 바닥에 도달."
+    },
+    "a48": {
+      "name": "무한한 힘",
+      "desc": "가장 강한 무기 획득."
+    },
+    "a49": {
+      "name": "완벽",
+      "desc": "정상 에 도달."
+    }
+  },
+  "achievement": {
+    "title": "Achievements",
+    "short": "Achievements",
+    "open": "Open achievements",
+    "progress": "{done} / {total} unlocked"
   }
 }
