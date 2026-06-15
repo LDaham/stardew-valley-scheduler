@@ -40,9 +40,9 @@ interface TaskRow {
   onDelete?: () => void; // 사용자 메모만 삭제 가능
 }
 
-// 삭제 팝업 대상: 특정 메모(memoId) + 관련 작물(cropIds)
+// 삭제 팝업 대상: 특정 메모들(memoIds, 같은 날 묶인 항목) + 관련 작물(cropIds)
 interface DeleteTarget {
-  memoId?: string;
+  memoIds?: string[];
   cropIds: string[];
 }
 
@@ -57,9 +57,7 @@ export default function Dashboard({
     setCurrentDate,
     memos,
     memosOn,
-    toggleDone,
     setDoneMany,
-    deleteMemo,
     deleteMemos,
     taskDone,
     toggleTask,
@@ -153,11 +151,17 @@ export default function Dashboard({
     return null;
   };
 
-  // 메모 삭제: 작물 관련(씨앗 심기) 메모는 팝업, 그 외는 즉시 삭제
-  const onMemoDelete = (m: { id: string; cropId?: string }) =>
-    m.cropId
-      ? () => setDeleteTarget({ memoId: m.id, cropIds: [m.cropId!] })
-      : () => deleteMemo(m.id);
+  // 메모 묶음 삭제: 작물 관련(씨앗 심기) 메모는 팝업, 그 외는 즉시 삭제.
+  // list는 같은 날 같은 카테고리·내용으로 묶인 메모들(여러 번 심어 겹친 경우 포함).
+  const memoGroupDelete = (list: { id: string; cropId?: string }[]) => {
+    const ids = list.map((m) => m.id);
+    const cropIds = [
+      ...new Set(list.map((m) => m.cropId).filter((id): id is string => !!id)),
+    ];
+    return cropIds.length > 0
+      ? () => setDeleteTarget({ memoIds: ids, cropIds })
+      : () => deleteMemos(ids);
+  };
 
   // 한 날짜의 이벤트·리마인더·메모를 하나의 체크리스트로 합친다.
   const buildRows = (date: SDate): TaskRow[] => {
@@ -241,26 +245,45 @@ export default function Dashboard({
       });
     }
 
-    // 메모: 작물 물주기는 한 줄로 묶고, 나머지는 개별 표시.
+    // 메모: 작물 물주기는 한 줄로 묶고, 나머지도 같은 날 같은 카테고리·내용이면
+    // 한 번만 표시한다(같은 작물을 여러 번 심어 수확·재파종 등이 겹치는 경우).
     const wateringMemos: typeof memos = [];
+    const memoGroups = new Map<string, typeof memos>();
+    const memoGroupOrder: string[] = [];
     for (const m of memosOn(date)) {
       if (m.category === "buySeed") {
         if (!reminderToggles.buySeeds) continue;
+      } else {
+        if (m.category && !memoCategoryToggles[m.category]) continue;
+        if (m.category === "watering") {
+          if (isRain) continue;
+          wateringMemos.push(m);
+          continue;
+        }
+      }
+      const gk = `${m.category ?? ""}|${m.text}`;
+      if (!memoGroups.has(gk)) {
+        memoGroups.set(gk, []);
+        memoGroupOrder.push(gk);
+      }
+      memoGroups.get(gk)!.push(m);
+    }
+    for (const gk of memoGroupOrder) {
+      const list = memoGroups.get(gk)!;
+      const m = list[0];
+      const ids = list.map((x) => x.id);
+      const allDone = list.every((x) => x.done);
+      const onDelete = memoGroupDelete(list);
+      if (m.category === "buySeed") {
         rows.push({
           key: `memo-${m.id}`,
           orderKey: "reminder:buySeeds",
           icon: <ReminderIcon id="buySeeds" size={16} />,
           label: m.text,
-          done: m.done,
-          onToggle: () => toggleDone(m.id),
-          onDelete: onMemoDelete(m),
+          done: allDone,
+          onToggle: () => setDoneMany(ids, !allDone),
+          onDelete,
         });
-        continue;
-      }
-      if (m.category && !memoCategoryToggles[m.category]) continue;
-      if (m.category === "watering") {
-        if (isRain) continue;
-        wateringMemos.push(m);
         continue;
       }
       const icon =
@@ -280,9 +303,9 @@ export default function Dashboard({
         orderKey: `memo:${m.category ?? "machine"}`,
         icon,
         label: m.text,
-        done: m.done,
-        onToggle: () => toggleDone(m.id),
-        onDelete: onMemoDelete(m),
+        done: allDone,
+        onToggle: () => setDoneMany(ids, !allDone),
+        onDelete,
       });
     }
     // 작물 물주기 묶음: "작물 물주기(작물A, 작물B)" — 같은 작물은 한 번만
@@ -425,7 +448,6 @@ export default function Dashboard({
           target={deleteTarget}
           memos={memos}
           onClose={() => setDeleteTarget(null)}
-          deleteMemo={deleteMemo}
           deleteMemos={deleteMemos}
         />
       )}
@@ -548,7 +570,8 @@ function DeleteBtn({
   );
 }
 
-const DELETE_CATS = ["watering", "harvest", "buySeed"] as const;
+// 씨앗 심기 한 번에서 파생되는 할 일들(같은 작물). 삭제 창에서 묶어 관리한다.
+const DELETE_CATS = ["watering", "eatFood", "harvest", "buySeed"] as const;
 
 // 관련 할 일 삭제 팝업: 작물별로 카테고리(물주기/수확/씨앗구매) 전체 삭제.
 // 카테고리를 지워도 닫지 않고, 삭제 가능한 항목이 남으면 계속 표시한다.
@@ -556,21 +579,22 @@ function DeleteTaskDialog({
   target,
   memos,
   onClose,
-  deleteMemo,
   deleteMemos,
 }: {
   target: DeleteTarget;
   memos: Memo[];
   onClose: () => void;
-  deleteMemo: (id: string) => void;
   deleteMemos: (ids: string[]) => void;
 }) {
   const t = useTranslations();
   const idsFor = (cropId: string, cat: string) =>
     memos.filter((m) => m.category === cat && m.cropId === cropId).map((m) => m.id);
 
-  const singleExists =
-    !!target.memoId && memos.some((m) => m.id === target.memoId);
+  // 아직 남아 있는(삭제 가능한) 단일 항목 id들
+  const singleIds = (target.memoIds ?? []).filter((id) =>
+    memos.some((m) => m.id === id),
+  );
+  const singleExists = singleIds.length > 0;
   const cropSections = target.cropIds
     .map((cropId) => ({
       cropId,
@@ -596,7 +620,7 @@ function DeleteTaskDialog({
         {singleExists && (
           <div className="flex items-center justify-between gap-2 rounded-md bg-[var(--sv-bg)] px-2 py-1.5">
             <span className="text-sm">{t("dashboard.deleteOne")}</span>
-            <DeleteBtn onClick={() => deleteMemo(target.memoId!)} />
+            <DeleteBtn onClick={() => deleteMemos(singleIds)} />
           </div>
         )}
         {cropSections.map((c) => {

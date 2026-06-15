@@ -10,6 +10,7 @@ import {
   type MemoCategory,
 } from "@/lib/todoOrder";
 import type {
+  BundleMode,
   CharacterInfo,
   Memo,
   MemoCategoryToggles,
@@ -49,6 +50,8 @@ const DEFAULT_STATE: ScheduleState = {
   rainDays: {},
   wateringCanUpgrades: 0,
   bundleItemsDone: {},
+  bundleMode: "standard",
+  remixChoices: {},
   character: DEFAULT_CHARACTER,
 };
 
@@ -78,6 +81,8 @@ function ensureLoaded(): void {
     rainDays: saved.rainDays ?? {},
     wateringCanUpgrades: saved.wateringCanUpgrades ?? 0,
     bundleItemsDone: saved.bundleItemsDone ?? {},
+    bundleMode: saved.bundleMode ?? "standard",
+    remixChoices: saved.remixChoices ?? {},
     character: { ...DEFAULT_CHARACTER, ...saved.character },
     version: STATE_VERSION,
   };
@@ -232,6 +237,8 @@ export const scheduleActions = {
       rainDays: {},
       wateringCanUpgrades: 0,
       bundleItemsDone: {},
+      bundleMode: "standard",
+      remixChoices: {},
       character: { ...DEFAULT_CHARACTER },
     });
   },
@@ -243,6 +250,17 @@ export const scheduleActions = {
         ...state.bundleItemsDone,
         [key]: !state.bundleItemsDone[key],
       },
+    });
+  },
+  // 꾸러미 추적 모드 전환(표준/리믹스)
+  setBundleMode(mode: BundleMode) {
+    commit({ ...state, bundleMode: mode });
+  },
+  // 리믹스 무작위 슬롯의 선택 꾸러미 목록 설정
+  setRemixChoice(slotId: string, bundleIds: string[]) {
+    commit({
+      ...state,
+      remixChoices: { ...state.remixChoices, [slotId]: bundleIds },
     });
   },
 };

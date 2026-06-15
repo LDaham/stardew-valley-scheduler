@@ -31,6 +31,8 @@ export interface Memo {
   category?: MemoCategory;
   // 씨앗 심기에서 생성된 메모의 작물 id(아이콘 표시·관련 메모 일괄 삭제에 사용).
   cropId?: string;
+  // 한 번의 씨앗 심기로 파생된 메모 묶음 id(같은 작물을 다른 날 심으면 구분).
+  groupId?: string;
   createdAt: number;
 }
 
@@ -53,6 +55,12 @@ export interface ScheduleState {
   wateringCanUpgrades: number;
   // 마을회관 번들 품목 기증 여부. 키=`${bundleId}:${itemId}`.
   bundleItemsDone: Record<string, boolean>;
+  // 꾸러미 추적 모드: 표준(고정) / 리믹스(무작위).
+  bundleMode: BundleMode;
+  // 리믹스 무작위 슬롯에서 사용자가 선택한 꾸러미 id 목록. 키=슬롯 id.
+  remixChoices: Record<string, string[]>;
   // 캐릭터 정보(농사/채집 레벨·스킬). 씨앗 효율 계산에 사용.
   character: CharacterInfo;
 }
+
+export type BundleMode = "standard" | "remix";

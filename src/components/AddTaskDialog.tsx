@@ -52,7 +52,7 @@ export default function AddTaskDialog({
   onClose: () => void;
 }) {
   const t = useTranslations();
-  const { addMemo, addMemos, bundleItemsDone } = useSchedule();
+  const { addMemo, addMemos, bundleItemsDone, character } = useSchedule();
   const [mode, setMode] = useState<Mode>("menu");
 
   // 마을 회관 완료 여부 → 대장간 금요일 휴무 판단
@@ -78,15 +78,17 @@ export default function AddTaskDialog({
   };
 
   // 씨앗 심기: 수확 메모 1개 + 물주기 메모(심은 계절 내, 수확 전날까지 / 재수확이면 계절 끝까지) 일괄 생성
+  // 농업 전문가(성장 속도) 여부는 캐릭터 정보를 활용한다.
   const addSeed = (
     cropId: string,
-    agri: boolean,
     fert: Fertilizer,
     eatFood: boolean,
+    noWatering: boolean,
+    replant: boolean,
   ) => {
     const crop = CROPS.find((c) => c.id === cropId);
     if (!crop) return;
-    const h = computeHarvest(baseDate, crop, agri, fert);
+    const h = computeHarvest(baseDate, crop, character.agriculturist, fert);
     const cropName = t(`crops.${cropId}`);
     const memos: Omit<Memo, "id" | "createdAt" | "done">[] = [
       {
@@ -101,6 +103,7 @@ export default function AddTaskDialog({
 
     // 물주기 유효일: 이 계절 안에서 수확에 도움이 되는 날만.
     // 단, 다음 계절에도 자라는 작물이면 계절 끝까지(다음 계절 수확을 위해).
+    // noWatering(스프링클러 사용 등)이면 물주기 메모를 생성하지 않는다.
     const idx = SEASONS.indexOf(baseDate.season);
     const growsNext =
       baseDate.season !== "winter" &&
@@ -116,18 +119,21 @@ export default function AddTaskDialog({
       if (crop.regrowDays) while (last + crop.regrowDays <= 28) last += crop.regrowDays;
       lastWater = last - 1; // 마지막 수확 전날까지
     }
-    for (let d = baseDate.day; d <= Math.min(lastWater, 28); d++) {
-      memos.push({
-        season: baseDate.season,
-        day: d,
-        text: t("addTask.wateringMemo", { crop: cropName }),
-        reminderDaysBefore: 0,
-        category: "watering",
-        cropId,
-      });
+    if (!noWatering) {
+      for (let d = baseDate.day; d <= Math.min(lastWater, 28); d++) {
+        memos.push({
+          season: baseDate.season,
+          day: d,
+          text: t("addTask.wateringMemo", { crop: cropName }),
+          reminderDaysBefore: 0,
+          category: "watering",
+          cropId,
+        });
+      }
     }
-    // 재수확 작물이 아니고 시즌 내 수확 가능하면, 수확일에 재파종용 씨앗 구매 메모 추가
-    if (!crop.regrowDays && !h.willWilt) {
+    // 재수확 작물이 아니고 시즌 내 수확 가능하며 재파종을 선택했으면,
+    // 수확일에 재파종용 씨앗 구매 메모 추가
+    if (replant && !crop.regrowDays && !h.willWilt) {
       memos.push({
         season: h.date.season,
         day: h.date.day,
@@ -148,7 +154,11 @@ export default function AddTaskDialog({
         cropId,
       });
     }
-    addMemos(memos);
+    // 한 번의 심기로 파생된 메모를 같은 groupId로 묶는다(같은 작물 다른 날짜 구분용).
+    const groupId = `${cropId}-${Date.now().toString(36)}-${Math.random()
+      .toString(36)
+      .slice(2, 6)}`;
+    addMemos(memos.map((m) => ({ ...m, groupId })));
     onClose();
   };
 
@@ -214,6 +224,7 @@ export default function AddTaskDialog({
         <SeedForm
           plantDate={baseDate}
           dateLabel={dateLabel}
+          agri={character.agriculturist}
           onBack={() => setMode("menu")}
           onAdd={addSeed}
         />
@@ -333,26 +344,30 @@ function ToolForm({
 function SeedForm({
   plantDate,
   dateLabel,
+  agri,
   onBack,
   onAdd,
 }: {
   plantDate: SDate;
   dateLabel: (d: SDate) => string;
+  agri: boolean; // 농업 전문가 여부(캐릭터 정보에서 전달)
   onBack: () => void;
   onAdd: (
     cropId: string,
-    agri: boolean,
     fert: Fertilizer,
     eatFood: boolean,
+    noWatering: boolean,
+    replant: boolean,
   ) => void;
 }) {
   const t = useTranslations();
   // 효율 창과 동일하게 해당 계절에 심을 수 있는 모든 작물 표시
   const seasonCrops = CROPS.filter((c) => c.seasons.includes(plantDate.season));
   const [cropId, setCropId] = useState<string>(seasonCrops[0]?.id ?? "");
-  const [agri, setAgri] = useState(false);
   const [fert, setFert] = useState<Fertilizer>("none");
   const [eatFood, setEatFood] = useState(false);
+  const [noWatering, setNoWatering] = useState(false);
+  const [replant, setReplant] = useState(true);
 
   const crop = seasonCrops.find((c) => c.id === cropId);
   const harvest = crop ? computeHarvest(plantDate, crop, agri, fert) : null;
@@ -384,16 +399,6 @@ function SeedForm({
         />
       </div>
 
-      <label className="flex cursor-pointer items-center gap-2 text-sm">
-        <input
-          type="checkbox"
-          checked={agri}
-          onChange={(e) => setAgri(e.target.checked)}
-          className="size-4 accent-[var(--sv-accent)]"
-        />
-        {t("addTask.agriculturist")}
-      </label>
-
       <div>
         <FieldLabel>{t("addTask.fertilizer")}</FieldLabel>
         <Dropdown
@@ -424,12 +429,30 @@ function SeedForm({
               ⚠ {t("addTask.wiltWarning")}
             </p>
           )}
-          <p className="flex items-center gap-1 text-xs text-[var(--sv-ink-muted)]">
-            <PixelIcon src="/icons/reminders/watering.png" size={14} />
-            {t("addTask.wateringNote")}
-          </p>
+          {!noWatering && (
+            <p className="flex items-center gap-1 text-xs text-[var(--sv-ink-muted)]">
+              <PixelIcon src="/icons/reminders/watering.png" size={14} />
+              {t("addTask.wateringNote")}
+            </p>
+          )}
         </div>
       )}
+
+      {/* 물주기 메모 추가 안 함(스프링클러 사용 등) */}
+      <label className="flex cursor-pointer items-start gap-2 text-sm">
+        <input
+          type="checkbox"
+          checked={noWatering}
+          onChange={(e) => setNoWatering(e.target.checked)}
+          className="mt-0.5 size-4 accent-[var(--sv-accent)]"
+        />
+        <span>
+          {t("addTask.noWateringOption")}
+          <span className="block text-xs text-[var(--sv-ink-muted)]">
+            {t("addTask.noWateringNote")}
+          </span>
+        </span>
+      </label>
 
       {/* 수확일에 음식 먹기(품질 버프) 추가 여부 */}
       <label className="flex cursor-pointer items-start gap-2 text-sm">
@@ -447,9 +470,27 @@ function SeedForm({
         </span>
       </label>
 
+      {/* 재파종(수확일 씨앗 구매) 메모 추가 여부 — 재수확/시들 작물은 해당 없음 */}
+      {crop && !crop.regrowDays && harvest && !harvest.willWilt && (
+        <label className="flex cursor-pointer items-start gap-2 text-sm">
+          <input
+            type="checkbox"
+            checked={replant}
+            onChange={(e) => setReplant(e.target.checked)}
+            className="mt-0.5 size-4 accent-[var(--sv-accent)]"
+          />
+          <span>
+            {t("addTask.replantOption")}
+            <span className="block text-xs text-[var(--sv-ink-muted)]">
+              {t("addTask.replantNote")}
+            </span>
+          </span>
+        </label>
+      )}
+
       <FormFooter
         onBack={onBack}
-        onAdd={() => crop && onAdd(cropId, agri, fert, eatFood)}
+        onAdd={() => crop && onAdd(cropId, fert, eatFood, noWatering, replant)}
         addDisabled={!crop}
       />
     </div>

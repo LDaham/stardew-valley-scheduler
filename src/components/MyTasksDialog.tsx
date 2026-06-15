@@ -38,7 +38,8 @@ export default function MyTasksDialog({ onClose }: { onClose: () => void }) {
   const t = useTranslations();
   const { memos, deleteMemo, deleteMemos } = useSchedule();
 
-  // 작물별 그룹(추가 순서 유지) + 기타(작물 없는 메모)
+  // 작물별 그룹(추가 순서 유지). 같은 작물을 다른 날 심었으면(groupId가 다르면)
+  // 파스닙(1), 파스닙(2)처럼 나눠 표시한다. 작물 없는 메모는 기타로 묶는다.
   const cropOrder: string[] = [];
   const byCrop = new Map<string, Memo[]>();
   const other: Memo[] = [];
@@ -53,6 +54,38 @@ export default function MyTasksDialog({ onClose }: { onClose: () => void }) {
       other.push(m);
     }
   }
+
+  const groups: { key: string; title: string; list: Memo[] }[] = [];
+  for (const cropId of cropOrder) {
+    const list = byCrop.get(cropId)!;
+    const name = t(`crops.${cropId}`);
+    // groupId별 하위 묶음(추가 순서 유지)
+    const subOrder: string[] = [];
+    const byGroup = new Map<string, Memo[]>();
+    for (const m of list) {
+      const g = m.groupId ?? "__none__";
+      if (!byGroup.has(g)) {
+        byGroup.set(g, []);
+        subOrder.push(g);
+      }
+      byGroup.get(g)!.push(m);
+    }
+    if (subOrder.length <= 1) {
+      groups.push({ key: cropId, title: name, list });
+    } else {
+      subOrder.forEach((g, i) => {
+        groups.push({
+          key: `${cropId}-${g}`,
+          title: `${name} (${i + 1})`,
+          list: byGroup.get(g)!,
+        });
+      });
+    }
+  }
+  if (other.length > 0) {
+    groups.push({ key: "__other__", title: t("myTasks.other"), list: other });
+  }
+
   const byDate = (a: Memo, b: Memo) =>
     toYearDay({ season: a.season, day: a.day }) -
     toYearDay({ season: b.season, day: b.day });
@@ -60,8 +93,11 @@ export default function MyTasksDialog({ onClose }: { onClose: () => void }) {
   const dateLabel = (m: Memo) =>
     t("addTask.dateLabel", { season: t(`seasons.${m.season}`), day: m.day });
 
-  const renderGroup = (title: string, list: Memo[]) => (
-    <div className="rounded-md border border-[var(--sv-border)] p-2">
+  const renderGroup = (key: string, title: string, list: Memo[]) => (
+    <div
+      key={key}
+      className="rounded-md border border-[var(--sv-border)] p-2"
+    >
       <div className="mb-1.5 flex items-center justify-between gap-2">
         <span className="text-sm font-semibold">
           {title}{" "}
@@ -106,10 +142,7 @@ export default function MyTasksDialog({ onClose }: { onClose: () => void }) {
         </p>
       ) : (
         <div className="flex flex-col gap-3">
-          {cropOrder.map((cropId) =>
-            renderGroup(t(`crops.${cropId}`), byCrop.get(cropId)!),
-          )}
-          {other.length > 0 && renderGroup(t("myTasks.other"), other)}
+          {groups.map((g) => renderGroup(g.key, g.title, g.list))}
         </div>
       )}
     </Modal>

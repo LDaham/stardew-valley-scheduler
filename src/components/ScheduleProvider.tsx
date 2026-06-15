@@ -35,6 +35,8 @@ export function useSchedule() {
     rainDays: state.rainDays,
     wateringCanUpgrades: state.wateringCanUpgrades,
     bundleItemsDone: state.bundleItemsDone,
+    bundleMode: state.bundleMode,
+    remixChoices: state.remixChoices,
     character: state.character,
     memosOn: (date: SDate): Memo[] =>
       state.memos.filter(
@@ -57,6 +59,8 @@ export function useSchedule() {
     setRainDay: scheduleActions.setRainDay,
     incWateringCanUpgrades: scheduleActions.incWateringCanUpgrades,
     toggleBundleItem: scheduleActions.toggleBundleItem,
+    setBundleMode: scheduleActions.setBundleMode,
+    setRemixChoice: scheduleActions.setRemixChoice,
     setCharacter: scheduleActions.setCharacter,
     resetAll: scheduleActions.resetAll,
   };
