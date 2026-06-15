@@ -3,8 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { addDays, SEASONS, type SDate } from "@/lib/calendar";
+import { addDays, SEASONS, type SDate, type Season } from "@/lib/calendar";
 import { CROPS } from "@/data/game-data";
+import { FISH } from "@/data/fish";
 import { MACHINES, type MachineCategory } from "@/data/machines";
 import { computeHarvest, type Fertilizer } from "@/lib/growth";
 import { toolPickup, type ToolPickup } from "@/lib/blacksmith";
@@ -38,7 +39,8 @@ type Mode =
   | "artisanMachine"
   | "refiningMachine"
   | "build"
-  | "options";
+  | "options"
+  | "fish";
 
 // 메뉴 항목. tool/seed/fruit/장비/build는 하위 폼, mining/fishing/pond/misc는 즉시 처리.
 const MENU = [
@@ -290,24 +292,31 @@ export default function AddTaskDialog({
     }
   };
 
-  // 메뉴 항목 렌더(아이콘 + 라벨 + 클릭 동작 공통)
-  const renderMenuItem = (m: string, onClick: () => void) => (
+  // 메뉴 항목 렌더(아이콘 + 라벨 + 클릭 동작 공통). aside는 우측 보조 버튼.
+  const renderMenuItem = (
+    m: string,
+    onClick: () => void,
+    aside?: React.ReactNode,
+  ) => (
     <li key={m}>
-      <button
-        onClick={onClick}
-        className="flex w-full items-center gap-3 rounded-lg border border-[var(--sv-border)] px-3 py-3 text-left text-sm font-semibold hover:bg-[var(--sv-bg)]"
-      >
-        <Image
-          src={asset(MENU_ICONS[m as keyof typeof MENU_ICONS])}
-          alt=""
-          width={28}
-          height={28}
-          unoptimized
-          className="shrink-0"
-          style={{ imageRendering: "pixelated" }}
-        />
-        {t(`addTask.${m}`)}
-      </button>
+      <div className="flex items-center gap-2">
+        <button
+          onClick={onClick}
+          className="flex flex-1 items-center gap-3 rounded-lg border border-[var(--sv-border)] px-3 py-3 text-left text-sm font-semibold hover:bg-[var(--sv-bg)]"
+        >
+          <Image
+            src={asset(MENU_ICONS[m as keyof typeof MENU_ICONS])}
+            alt=""
+            width={28}
+            height={28}
+            unoptimized
+            className="shrink-0"
+            style={{ imageRendering: "pixelated" }}
+          />
+          {t(`addTask.${m}`)}
+        </button>
+        {aside}
+      </div>
     </li>
   );
 
@@ -335,7 +344,19 @@ export default function AddTaskDialog({
           </div>
           <ul className="flex flex-col gap-2">
             {MENU.filter((m) => !hiddenItems[`menu:${m}`]).map((m) =>
-              renderMenuItem(m, menuAction(m)),
+              renderMenuItem(
+                m,
+                menuAction(m),
+                m === "fishing" ? (
+                  <button
+                    onClick={() => setMode("fish")}
+                    className="flex shrink-0 items-center gap-1.5 rounded-lg border border-[var(--sv-border)] px-3 py-3 text-sm font-semibold hover:bg-[var(--sv-bg)]"
+                  >
+                    <PixelIcon src="/icons/addTask/fishing.png" size={18} />
+                    {t("fish.title")}
+                  </button>
+                ) : undefined,
+              ),
             )}
           </ul>
         </>
@@ -356,6 +377,10 @@ export default function AddTaskDialog({
           onBack={() => setMode("menu")}
           onAdd={addFruit}
         />
+      )}
+
+      {mode === "fish" && (
+        <FishInfoForm season={baseDate.season} onBack={() => setMode("menu")} />
       )}
 
       {mode === "tool" && (
@@ -1069,6 +1094,106 @@ function OptionsPanel({
           renderRow(`fruit:${f.id}`, t(`fruitTrees.${f.id}`), `/icons/fruitTrees/${f.id}.png`),
         ),
       )}
+
+      <div className="mt-1 flex justify-start">
+        <button
+          onClick={onBack}
+          className="rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm hover:bg-[var(--sv-bg)]"
+        >
+          ← {t("addTask.back")}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// 생선 정보: 출현 위치·계절·시간. 이번 계절에 못 잡는 생선 제외 필터.
+function FishInfoForm({
+  season,
+  onBack,
+}: {
+  season: Season;
+  onBack: () => void;
+}) {
+  const t = useTranslations();
+  const [excludeUnobtainable, setExcludeUnobtainable] = useState(false);
+  const visible = FISH.filter(
+    (f) => !excludeUnobtainable || f.seasons.includes(season),
+  )
+    .slice()
+    // 이번 계절에 잡히는 생선을 위로
+    .sort(
+      (a, b) =>
+        Number(b.seasons.includes(season)) - Number(a.seasons.includes(season)),
+    );
+
+  const seasonChip = (s: Season, active: boolean) => (
+    <span
+      key={s}
+      className={`shrink-0 rounded px-1 py-0.5 text-[10px] font-semibold ${
+        active
+          ? "bg-[var(--sv-accent)] text-white"
+          : "bg-[var(--sv-border)] text-[var(--sv-ink-muted)]"
+      }`}
+    >
+      {t(`seasons.${s}`)}
+    </span>
+  );
+
+  return (
+    <div className="flex flex-col gap-3">
+      <label className="flex cursor-pointer items-center gap-2 text-sm">
+        <input
+          type="checkbox"
+          checked={excludeUnobtainable}
+          onChange={(e) => setExcludeUnobtainable(e.target.checked)}
+          className="size-4 accent-[var(--sv-accent)]"
+        />
+        {t("fish.excludeUnobtainable")}
+      </label>
+
+      <ul className="flex flex-col gap-1.5">
+        {visible.map((f) => {
+          const allSeasons = f.seasons.length === 4;
+          return (
+            <li
+              key={f.id}
+              className="flex items-start gap-2 rounded-md bg-[var(--sv-bg)] px-2 py-1.5"
+            >
+              <Image
+                src={asset(`/icons/fish/${f.id}.png`)}
+                alt=""
+                width={24}
+                height={24}
+                unoptimized
+                className="mt-0.5 shrink-0"
+                style={{ imageRendering: "pixelated" }}
+              />
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className="text-sm font-semibold">
+                    {t(`fishInfo.${f.id}.name`)}
+                  </span>
+                  {allSeasons ? (
+                    <span className="shrink-0 rounded bg-[var(--sv-border)] px-1 py-0.5 text-[10px] font-semibold text-[var(--sv-ink-muted)]">
+                      {t("fish.allSeasons")}
+                    </span>
+                  ) : (
+                    f.seasons.map((s) => seasonChip(s, s === season))
+                  )}
+                </div>
+                <div className="text-xs text-[var(--sv-ink-muted)]">
+                  {t("fish.location")}: {t(`fishInfo.${f.id}.location`)}
+                </div>
+                <div className="flex items-center gap-1 text-xs text-[var(--sv-ink-muted)]">
+                  <TimeIcon size={12} />
+                  {t(`fishInfo.${f.id}.time`)}
+                </div>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
 
       <div className="mt-1 flex justify-start">
         <button

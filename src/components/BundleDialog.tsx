@@ -62,6 +62,8 @@ export default function BundleDialog({
   );
   // 이번 계절에만 획득 가능한 품목만 보기(카테고리 무관)
   const [onlyCurrentOnly, setOnlyCurrentOnly] = useState(false);
+  // 상시(사계절) 획득 가능한 품목 제외
+  const [excludeAllSeasons, setExcludeAllSeasons] = useState(false);
 
   const isDone = (b: Bundle, itemId: string) =>
     !!bundleItemsDone[bundleItemKey(b.id, itemId)];
@@ -72,11 +74,12 @@ export default function BundleDialog({
   // 꾸러미 한 개를 섹션으로 렌더(필터 적용 후 표시할 품목이 없으면 null)
   const renderBundle = (b: Bundle) => {
     const visible = b.items
-      .filter((i) =>
-        onlyCurrentOnly
+      .filter((i) => {
+        if (excludeAllSeasons && i.seasons.length === 0) return false;
+        return onlyCurrentOnly
           ? currentSeasonOnly(i, season)
-          : !excludeUnobtainable || availableNow(i, season),
-      )
+          : !excludeUnobtainable || availableNow(i, season);
+      })
       .sort((a, b2) => sortTier(a, season) - sortTier(b2, season));
     if (visible.length === 0) return null;
     const done = doneCount(b);
@@ -273,6 +276,15 @@ export default function BundleDialog({
             className="size-4 accent-[var(--sv-accent)]"
           />
           {t("bundle.onlyCurrentOnly", { season: t(`seasons.${season}`) })}
+        </label>
+        <label className="flex cursor-pointer items-center gap-2 text-sm">
+          <input
+            type="checkbox"
+            checked={excludeAllSeasons}
+            onChange={(e) => setExcludeAllSeasons(e.target.checked)}
+            className="size-4 accent-[var(--sv-accent)]"
+          />
+          {t("bundle.excludeAllSeasons")}
         </label>
       </div>
 

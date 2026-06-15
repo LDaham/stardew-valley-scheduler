@@ -147,6 +147,11 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
                   {(c.items ?? []).map((it) => {
                     const key = perfKey(c.id, it.id);
                     const checked = !!perfectionChecks[key];
+                    // 요리·제작은 조합법(재료)을 이름 아래 인라인 표시
+                    const recipe =
+                      c.id === "cooking" || c.id === "crafting"
+                        ? t(`recipe.${c.id}.${it.id}`)
+                        : "";
                     return (
                       <li key={it.id}>
                         <label className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-sm hover:bg-[var(--sv-bg)]">
@@ -165,10 +170,21 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
                             className="shrink-0"
                             style={{ imageRendering: "pixelated" }}
                           />
-                          <span
-                            className={`flex-1 ${checked ? "text-[var(--sv-ink-muted)] line-through" : ""}`}
-                          >
-                            {itemName(c, it.id)}
+                          <span className="flex-1">
+                            <span
+                              className={
+                                checked
+                                  ? "text-[var(--sv-ink-muted)] line-through"
+                                  : ""
+                              }
+                            >
+                              {itemName(c, it.id)}
+                            </span>
+                            {recipe && (
+                              <span className="block text-[11px] leading-tight text-[var(--sv-ink-muted)]">
+                                {recipe}
+                              </span>
+                            )}
                           </span>
                         </label>
                       </li>

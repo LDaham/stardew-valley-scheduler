@@ -179,7 +179,6 @@ export const PERFECTION: PerfCategory[] = [
   },
   {
     id: "cooking", weight: 10, kind: "checklist", items: [
-    { id: "qiGem", icon: "/icons/perfection/cooking/qiGem.png" },
     { id: "friedEgg", icon: "/icons/perfection/cooking/friedEgg.png" },
     { id: "omelet", icon: "/icons/perfection/cooking/omelet.png" },
     { id: "salad", icon: "/icons/perfection/cooking/salad.png" },

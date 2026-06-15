@@ -45,8 +45,8 @@
     "rainPromptBody": "내일 비가 와서 물을 줄 필요가 없어요. 오늘 물뿌리개 업그레이드를 추가할까요?",
     "rainPromptAdd": "추가",
     "rainPromptSkip": "아니요",
-    "rainBundleItems": "비 오는 날에만 구할 수 있는 번들 품목",
-    "rainBundleOpen": "번들 채우기 열기",
+    "rainBundleItems": "비 오는 날에만 구할 수 있는 꾸러미 품목",
+    "rainBundleOpen": "꾸러미 채우기 열기",
     "birthdayOf": "{name} 생일 선물 전달",
     "plantDeadline": "{crop} 심기 마지막 날",
     "deadlineShift": "(내일 휴무로 미리 표시)",
@@ -93,7 +93,7 @@
     "reminders": "요일 리마인더",
     "language": "언어",
     "resetTitle": "모든 설정 초기화",
-    "resetDesc": "번들·캐릭터·할 일 등 저장된 모든 설정을 기본값으로 되돌립니다. 되돌릴 수 없습니다.",
+    "resetDesc": "꾸러미·캐릭터·할 일 등 저장된 모든 설정을 기본값으로 되돌립니다. 되돌릴 수 없습니다.",
     "resetButton": "모든 설정 초기화",
     "resetConfirm": "정말 초기화할까요?",
     "resetYes": "초기화",
@@ -126,10 +126,10 @@
     "fishing": "낚시하러 가기"
   },
   "bundle": {
-    "title": "마을회관 번들 추적",
-    "short": "번들",
-    "open": "번들 추적 열기",
-    "fill": "번들 채우기",
+    "title": "마을회관 꾸러미 추적",
+    "short": "꾸러미",
+    "open": "꾸러미 추적 열기",
+    "fill": "꾸러미 채우기",
     "complete": "완료",
     "inSeason": "이번 계절",
     "rainy": "비",
@@ -139,6 +139,7 @@
     "pick": "{total}개 중 {needed}개",
     "excludeUnobtainable": "이번 계절에 획득 불가능한 품목 제외",
     "onlyCurrentOnly": "이번 계절({season})에만 획득 가능한 품목만 보기",
+    "excludeAllSeasons": "상시(사계절) 획득 가능한 품목 제외",
     "hiddenNote": "이번 계절에 못 구하는 품목은 '전체 보기'에서 확인하세요",
     "seasonNeeds": "이번 계절({season}) 획득 가능 · 미완료 품목",
     "seasonNeedsNone": "이번 계절에 모을 미완료 품목이 없습니다",
@@ -440,7 +441,14 @@
     "optionsHint": "체크를 해제한 항목은 할 일 추가 목록에서 숨겨집니다.",
     "optionMenu": "메뉴",
     "optionBuilding": "건물",
-    "optionFruit": "과일나무"
+    "optionFruit": "과일나무",
+    "fish": "생선 정보"
+  },
+  "fish": {
+    "title": "생선 정보",
+    "excludeUnobtainable": "이번 계절에 잡을 수 없는 생선 제외",
+    "location": "위치",
+    "allSeasons": "상시"
   },
   "fruitTrees": {
     "apricot": "살구",
@@ -676,8 +684,8 @@
       "eveWarning": "내일은 축제라 NPC·상점 이용이 막힙니다"
     },
     "communityCenterBundle": {
-      "title": "마을회관 번들 채우기",
-      "detail": "이번 계절 첫날 — 이번 계절에 모을 수 있는 번들 품목 확인"
+      "title": "마을회관 꾸러미 채우기",
+      "detail": "이번 계절 첫날 — 이번 계절에 모을 수 있는 꾸러미 품목 확인"
     },
     "crabPot": {
       "title": "통발 확인",
@@ -846,7 +854,6 @@
   },
   "perfectionItems": {
     "cooking": {
-      "qiGem": "치의 양념",
       "friedEgg": "계란 프라이",
       "omelet": "오믈렛",
       "salad": "샐러드",
@@ -1336,5 +1343,509 @@
     "contribute": "기여",
     "short": "완벽",
     "open": "완벽 추적 열기"
+  },
+  "fishInfo": {
+    "pufferfish": {
+      "name": "복어",
+      "location": "바다, 진저 섬 바다",
+      "time": "오후 12시 – 오후 4시"
+    },
+    "anchovy": {
+      "name": "멸치",
+      "location": "바다",
+      "time": "아무때나"
+    },
+    "tuna": {
+      "name": "참치",
+      "location": "바다, 진저 섬 바다",
+      "time": "오전 6시 – 오후 7시"
+    },
+    "sardine": {
+      "name": "정어리",
+      "location": "바다",
+      "time": "오전 6시 – 오후 7시"
+    },
+    "bream": {
+      "name": "도미",
+      "location": "강 (마을 + 숲)",
+      "time": "오후 6시 – 오전 2시"
+    },
+    "largemouthBass": {
+      "name": "큰입우럭",
+      "location": "산 호수",
+      "time": "오전 6시 – 오후 7시"
+    },
+    "smallmouthBass": {
+      "name": "작은입우럭",
+      "location": "강 (마을) 숲 연못 강변 농장",
+      "time": "아무때나"
+    },
+    "rainbowTrout": {
+      "name": "무지개송어",
+      "location": "강 (마을+숲) 산 호수",
+      "time": "오전 6시 – 오후 7시"
+    },
+    "salmon": {
+      "name": "연어",
+      "location": "강 (마을+숲)",
+      "time": "오전 6시 – 오후 7시"
+    },
+    "walleye": {
+      "name": "월아이",
+      "location": "강 (마을+숲) 숲 연못 산 호수",
+      "time": "오후 12시 – 오전 2시"
+    },
+    "perch": {
+      "name": "농어",
+      "location": "강 (마을+숲) 숲 연못 산 호수",
+      "time": "아무때나"
+    },
+    "carp": {
+      "name": "잉어",
+      "location": "산 호수 비밀의 숲 연못 하수도",
+      "time": "아무때나"
+    },
+    "catfish": {
+      "name": "메기",
+      "location": "강 (마을+숲) 비밀의 숲 연못 마녀의 늪",
+      "time": "아무때나"
+    },
+    "pike": {
+      "name": "강꼬치고기",
+      "location": "강 (마을+숲) 숲 연못",
+      "time": "아무때나"
+    },
+    "sunfish": {
+      "name": "선피쉬",
+      "location": "강 (마을+숲) 삼림 농장",
+      "time": "오전 6시 – 오후 7시"
+    },
+    "redMullet": {
+      "name": "숭어",
+      "location": "바다",
+      "time": "오전 6시 – 오후 7시"
+    },
+    "herring": {
+      "name": "청어",
+      "location": "바다",
+      "time": "아무때나"
+    },
+    "eel": {
+      "name": "장어",
+      "location": "바다",
+      "time": "오후 4시 – 오전 2시"
+    },
+    "octopus": {
+      "name": "문어",
+      "location": "바다",
+      "time": "오전 6시 – 오후 1시"
+    },
+    "redSnapper": {
+      "name": "붉은 퉁돔",
+      "location": "바다",
+      "time": "오전 6시 – 오후 7시"
+    },
+    "squid": {
+      "name": "오징어",
+      "location": "바다",
+      "time": "오후 6시 – 오전 2시"
+    },
+    "seaCucumber": {
+      "name": "해삼",
+      "location": "바다",
+      "time": "오전 6시 – 오후 7시"
+    },
+    "superCucumber": {
+      "name": "슈퍼해삼",
+      "location": "바다, 진저 섬 바다",
+      "time": "오후 6시 – 오전 2시"
+    },
+    "ghostfish": {
+      "name": "귀신물고기",
+      "location": "광산 (20, 60) 유령 드랍",
+      "time": "아무때나"
+    },
+    "stonefish": {
+      "name": "쑥치",
+      "location": "광산 20층 낚시 3 레벨 이상",
+      "time": "아무때나"
+    },
+    "icePip": {
+      "name": "아이스핍",
+      "location": "광산 60층 낚시 5 레벨 이상",
+      "time": "아무때나"
+    },
+    "lavaEel": {
+      "name": "용암 장어",
+      "location": "광산 100층 낚시 7 레벨 이상 화산 칼데라",
+      "time": "아무때나"
+    },
+    "sandfish": {
+      "name": "도루묵",
+      "location": "사막",
+      "time": "오전 6시 – 오후 8시"
+    },
+    "scorpionCarp": {
+      "name": "전갈 잉어",
+      "location": "사막 낚시 4 레벨 이상",
+      "time": "오전 6시 – 오후 8시"
+    },
+    "flounder": {
+      "name": "가자미",
+      "location": "바다 , 진저 섬 바다",
+      "time": "오전 6시 – 오후 8시"
+    },
+    "midnightCarp": {
+      "name": "자정 잉어",
+      "location": "산 호수 , 숲 호수, 진저 섬 호수와 강",
+      "time": "오후 10시 – 오전 2시"
+    },
+    "sturgeon": {
+      "name": "철갑상어",
+      "location": "산 호수",
+      "time": "오전 6시 – 오후 7시"
+    },
+    "tigerTrout": {
+      "name": "타이거 송어",
+      "location": "강 (마을+숲)",
+      "time": "오전 6시 – 오후 7시"
+    },
+    "bullhead": {
+      "name": "눈동자개",
+      "location": "산 호수",
+      "time": "아무때나"
+    },
+    "tilapia": {
+      "name": "틸라피아",
+      "location": "바다, 진저 섬 민물",
+      "time": "오전 6시 – 오후 2시"
+    },
+    "chub": {
+      "name": "피라미",
+      "location": "강 (숲) 산 호수",
+      "time": "아무때나"
+    },
+    "dorado": {
+      "name": "만새기",
+      "location": "강 (숲)",
+      "time": "오전 6시 – 오후 7시"
+    },
+    "albacore": {
+      "name": "날개다랑어",
+      "location": "바다",
+      "time": "오전 6시 – 오전 11시 오후 6시 – 오전 2시"
+    },
+    "shad": {
+      "name": "전어",
+      "location": "강 (마을+숲)",
+      "time": "오전 9시 – 오전 2시"
+    },
+    "lingcod": {
+      "name": "범노래미",
+      "location": "강 (마을+숲) 산 호수",
+      "time": "아무때나"
+    },
+    "halibut": {
+      "name": "넙치",
+      "location": "바다",
+      "time": "오전 6시 – 오전 11시 오후 7시 – 오전 2시"
+    },
+    "woodskip": {
+      "name": "숲고기",
+      "location": "비밀의 숲 연못 삼림 농장",
+      "time": "아무때나"
+    },
+    "voidSalmon": {
+      "name": "공허의 연어",
+      "location": "마녀의 늪",
+      "time": "아무때나"
+    },
+    "slimejack": {
+      "name": "슬라임잭",
+      "location": "돌연변이 곤충 둥지",
+      "time": "아무때나"
+    },
+    "lionfish": {
+      "name": "쏠배감펭",
+      "location": "진저 섬 바다",
+      "time": "아무때나"
+    },
+    "blueDiscus": {
+      "name": "블루 디스커스",
+      "location": "진저 섬 호수와 강",
+      "time": "아무때나"
+    },
+    "stingray": {
+      "name": "가오리",
+      "location": "해적의 만(진저 섬)",
+      "time": "아무때나"
+    },
+    "crimsonfish": {
+      "name": "크림슨피쉬",
+      "location": "해변 의 동쪽 다리. 깊은 물에서. 낚시 레벨 5 필요.",
+      "time": "아무때나"
+    },
+    "angler": {
+      "name": "아귀",
+      "location": "조자마트 북쪽에 있는 나무판자 다리. 낚시 레벨 3 필요.",
+      "time": "아무때나"
+    },
+    "legend": {
+      "name": "전설의 물고기",
+      "location": "산 호수 통나무 근처. 낚시 레벨 10 필요.",
+      "time": "아무때나"
+    },
+    "glacierfish": {
+      "name": "빙하고기",
+      "location": "화살머리 섬 남쪽 끝에 있는 잉걸불 수액 숲 . 깊은 물에서. 낚시 레벨 6 필요.",
+      "time": "아무때나"
+    },
+    "mutantCarp": {
+      "name": "돌연변이 잉어",
+      "location": "하수도",
+      "time": "아무때나"
+    },
+    "sonOfCrimsonfish": {
+      "name": "크림슨피쉬의 아들",
+      "location": "해변 의 동쪽 부두. 낚시 레벨 5 필요.",
+      "time": "아무때나"
+    },
+    "msAngler": {
+      "name": "아귀 아씨",
+      "location": "조자마트 북쪽 나무판자 다리. 낚시 레벨 3 필요.",
+      "time": "아무때나"
+    },
+    "legendII": {
+      "name": "전설의 물고기 II",
+      "location": "산 호수 통나무 근처. 낚시 레벨 10 이상 필요.",
+      "time": "아무때나"
+    },
+    "glacierfishJr": {
+      "name": "빙하고기 주니어",
+      "location": "화살머리 섬 남쪽 끝에 있는 잉걸불 수액 숲 . 낚시 레벨 6 필요.",
+      "time": "아무때나"
+    },
+    "radioactiveCarp": {
+      "name": "방사능 잉어",
+      "location": "하수도",
+      "time": "아무때나"
+    }
+  },
+  "recipe": {
+    "cooking": {
+      "friedEgg": "달걀 1",
+      "omelet": "달걀 1 우유 1",
+      "salad": "리크 1 민들레 1 식초 1",
+      "cheeseCauliflower": "콜리플라워 1 치즈 1",
+      "bakedFish": "선피쉬 1 도미 1 밀가루 1",
+      "parsnipSoup": "파스닙 1 우유 1 식초 1",
+      "vegetableMedley": "토마토 1 사탕무 1",
+      "completeBreakfast": "계란 프라이 1 우유 1 해시브라운 1 팬케이크 1",
+      "friedCalamari": "오징어 1 밀가루 1 기름 1",
+      "strangeBun": "밀가루 1 충알고둥 1 공허 마요네즈 1",
+      "luckyLunch": "해삼 1 또띠아 1 푸른 재즈 1",
+      "friedMushroom": "흔한 버섯 1 곰보버섯 1 기름 1",
+      "pizza": "밀가루 1 토마토 1 치즈 1",
+      "beanHotpot": "완두콩 2",
+      "glazedYams": "참마 1 설탕 1",
+      "carpSurprise": "잉어 4",
+      "hashbrowns": "감자 1 기름 1",
+      "pancakes": "밀가루 1 달걀 1",
+      "salmonDinner": "연어 1 아마란스 1 케일 1",
+      "fishTaco": "참치 1 또띠아 1 붉은 양배추 1 마요네즈 1",
+      "crispyBass": "큰입우럭 1 밀가루 1 기름 1",
+      "pepperPoppers": "매운 고추 1 치즈 1",
+      "bread": "밀가루 1",
+      "tomKhaSoup": "코코넛 1 새우 1 흔한 버섯 1",
+      "troutSoup": "무지개송어 1 녹조류 1",
+      "chocolateCake": "밀가루 1 설탕 1 달걀 1",
+      "pinkCake": "멜론 1 밀가루 1 설탕 1 달걀 1",
+      "rhubarbPie": "대황 1 밀가루 1 설탕 1",
+      "cookie": "밀가루 1 설탕 1 달걀 1",
+      "spaghetti": "밀가루 1 토마토 1",
+      "friedEel": "장어 1 기름 1",
+      "spicyEel": "장어 1 매운 고추 1",
+      "sashimi": "아무 생선 1",
+      "makiRoll": "아무 생선 1 해초 1 쌀 1",
+      "tortilla": "옥수수 1",
+      "redPlate": "붉은 양배추 1 무 1",
+      "eggplantParmesan": "가지 1 토마토 1",
+      "ricePudding": "우유 1 설탕 1 쌀 1",
+      "iceCream": "우유 1 설탕 1",
+      "blueberryTart": "블루베리 1 밀가루 1 설탕 1 달걀 1",
+      "autumnsBounty": "참마 1 호박 1",
+      "pumpkinSoup": "호박 1 우유 1",
+      "superMeal": "청경채 1 크랜베리 1 아티초크 1",
+      "cranberrySauce": "크랜베리 1 설탕 1",
+      "stuffing": "빵 1 크랜베리 1 헤이즐넛 1",
+      "farmersLunch": "오믈렛 1 파스닙 1",
+      "survivalBurger": "빵 1 동굴 당근 1 가지 1",
+      "dishOTheSea": "정어리 2 해시브라운 1",
+      "minersTreat": "동굴 당근 2 설탕 1 우유 1",
+      "rootsPlatter": "동굴 당근 1 겨울뿌리 1",
+      "tripleShotEspresso": "커피 3",
+      "seafoamPudding": "가자미 1 자정 잉어 1 오징어 먹물 1",
+      "algaeSoup": "녹조류 4",
+      "paleBroth": "흰 조류 2",
+      "plumPudding": "야생 자두 2 밀가루 1 설탕 1",
+      "artichokeDip": "아티초크 1 우유 1",
+      "stirFry": "동굴 당근 1 흔한 버섯 1 케일 1 기름 1",
+      "roastedHazelnuts": "헤이즐넛 3",
+      "pumpkinPie": "호박 1 밀가루 1 우유 1 설탕 1",
+      "radishSalad": "기름 1 식초 1 무 1",
+      "fruitSalad": "블루베리 1 멜론 1 살구 1",
+      "blackberryCobbler": "블랙베리 2 설탕 1 밀가루 1",
+      "cranberryCandy": "크랜베리 1 사과 1 설탕 1",
+      "bruschetta": "빵 1 기름 1 토마토 1",
+      "coleslaw": "붉은 양배추 1 식초 1 마요네즈 1",
+      "fiddleheadRisotto": "기름 1 청나래고사리 1 마늘 1",
+      "poppyseedMuffin": "양귀비 1 밀가루 1 설탕 1",
+      "chowder": "조개 1 우유 1",
+      "fishStew": "민물가재 1 홍합 1 충알고둥 1 토마토 1",
+      "escargot": "달팽이 1 마늘 1",
+      "lobsterBisque": "바닷가재 1 우유 1",
+      "mapleBar": "메이플 시럽 1 설탕 1 밀가루 1",
+      "crabCakes": "게 1 밀가루 1 달걀 1 기름 1",
+      "shrimpCocktail": "토마토 1 새우 1 야생 고추냉이 1",
+      "gingerAle": "생강 3 설탕 1",
+      "bananaPudding": "바나나 1 우유 1 (아무거나) 설탕 1",
+      "mangoStickyRice": "망고 1 코코넛 1 쌀 1",
+      "poi": "토란 4",
+      "tropicalCurry": "코코넛 1 파인애플 1 매운 고추 1",
+      "squidInkRavioli": "오징어 먹물 1 밀가루 1 토마토 1"
+    },
+    "crafting": {
+      "cherryBomb": "구리광석 4 석탄 1",
+      "bomb": "철광석 4 석탄 1",
+      "megaBomb": "금광석 4 태양 정수 1 공허 정수 1",
+      "gate": "나무 10",
+      "woodFence": "나무 2",
+      "stoneFence": "돌 2",
+      "ironFence": "철 주괴 1",
+      "hardwoodFence": "단단한 나무 1",
+      "sprinkler": "구리 주괴 1 철 주괴 1",
+      "qualitySprinkler": "철 주괴 1 금 주괴 1 정제된 석영 1",
+      "iridiumSprinkler": "금 주괴 1 이리듐 주괴 1 배터리 팩 1",
+      "mayonnaiseMachine": "나무 15 돌 15 땅의 수정 1 구리 주괴 1",
+      "beeHouse": "나무 40 석탄 8 철 주괴 1 메이플 시럽 1",
+      "preservesJar": "나무 50 돌 40 석탄 8",
+      "cheesePress": "나무 45 돌 45 단단한 나무 10 구리 주괴 1",
+      "loom": "나무 60 섬유 30 소나무 타르 1",
+      "keg": "나무 30 구리 주괴 1 철 주괴 1 참나무 수지 1",
+      "oilMaker": "슬라임 50 단단한 나무 20 금 주괴 1",
+      "cask": "나무 20 단단한 나무 1",
+      "basicFertilizer": "수액 2",
+      "qualityFertilizer": "수액 2 생선 1",
+      "deluxeFertilizer": "이리듐 주괴 1 수액 40",
+      "speedGro": "소나무 타르 1 조개 1",
+      "deluxeSpeedGro": "참나무 수지 1 산호 1",
+      "hyperSpeedGro": "방사능 광석 1 뼛조각 3 태양 정수 1",
+      "basicRetainingSoil": "돌 2",
+      "qualityRetainingSoil": "돌 3 점토 1",
+      "deluxeRetainingSoil": "돌 5 섬유 3 점토 1",
+      "treeFertilizer": "섬유 5 돌 5",
+      "springSeeds": "야생 고추냉이 1 수선화 1 리크 1 민들레 1",
+      "summerSeeds": "백량금 1 포도 1 스위트피 1",
+      "fallSeeds": "흔한 버섯 1 야생 자두 1 헤이즐넛 1 블랙베리 1",
+      "winterSeeds": "겨울뿌리 1 수정 과일 1 눈마 1 크로커스 1",
+      "ancientSeeds": "고대 씨앗 1",
+      "grassStarter": "섬유 10",
+      "teaSapling": "야생 씨앗 (아무거나) 2 섬유 5 나무 5",
+      "fiberSeeds": "씨앗 모음 1 수액 5 점토 1",
+      "woodFloor": "나무 1",
+      "rusticPlankFloor": "나무 1",
+      "strawFloor": "나무 1 섬유 1",
+      "weatheredFloor": "나무 1",
+      "crystalFloor": "정제된 석영 1",
+      "stoneFloor": "돌 1",
+      "stoneWalkwayFloor": "돌 1",
+      "brickFloor": "점토 2 돌 5",
+      "woodPath": "나무 1",
+      "gravelPath": "돌 1",
+      "cobblestonePath": "돌 1",
+      "steppingStonePath": "돌 1",
+      "crystalPath": "정제된 석영 1",
+      "spinner": "철 주괴 2",
+      "trapBobber": "구리 주괴 1 수액 10",
+      "corkBobber": "나무 10 단단한 나무 5 슬라임 10",
+      "qualityBobber": "구리 주괴 1 수액 20 태양 정수 5",
+      "treasureHunter": "금 주괴 2",
+      "dressedSpinner": "철 주괴 2 옷감 1",
+      "barbedHook": "구리 주괴 1 철 주괴 1 금 주괴 1",
+      "magnet": "철 주괴 1",
+      "bait": "벌레 고기 1",
+      "wildBait": "섬유 10 벌레 고기 5 슬라임 5",
+      "magicBait": "방사능 광석 1 벌레 고기 3",
+      "crabPot": "나무 40 철 주괴 3 덫 사냥꾼 직업일 때: 나무 25 구리 주괴 2",
+      "sturdyRing": "구리 주괴 2 벌레 고기 25 슬라임 25",
+      "warriorRing": "철 주괴 10 석탄 25 얼어붙은 눈물 10",
+      "ringOfYoba": "금 주괴 5 철 주괴 5 다이아몬드 1",
+      "thornsRing": "뼛조각 50 돌 50 금 주괴 1",
+      "glowstoneRing": "태양 정수 5 철 주괴 5",
+      "iridiumBand": "이리듐 주괴 5 태양 정수 50 공허 정수 50",
+      "weddingRing": "이리듐 주괴 5 무지갯빛 파편 1",
+      "fieldSnack": "도토리 1 단풍 씨앗 1 솔방울 1",
+      "bugSteak": "벌레 고기 10",
+      "lifeElixir": "붉은 버섯 1 보라색 버섯 1 곰보버섯 1 살구버섯 1",
+      "oilOfGarlic": "마늘 10 기름 1",
+      "monsterMusk": "박쥐 날개 30 슬라임 30",
+      "fairyDust": "다이아몬드 1 요정장미 1",
+      "warpTotemBeach": "단단한 나무 1 산호 2 섬유 10",
+      "warpTotemMountains": "단단한 나무 1 철 주괴 1 돌 25",
+      "warpTotemFarm": "단단한 나무 1 벌꿀 1 섬유 20",
+      "warpTotemDesert": "단단한 나무 2 코코넛 1 이리듐광석 4",
+      "warpTotemIsland": "단단한 나무 5 용의 이빨 1 생강 1",
+      "rainTotem": "단단한 나무 1 송로버섯 오일 1 소나무 타르 5",
+      "torch": "나무 1 수액 2",
+      "campfire": "돌 10 나무 10 섬유 10",
+      "woodenBrazier": "나무 10 석탄 1 섬유 5",
+      "stoneBrazier": "돌 10 석탄 1 섬유 5",
+      "goldBrazier": "금 주괴 1 석탄 1 섬유 5",
+      "carvedBrazier": "단단한 나무 10 석탄 1",
+      "stumpBrazier": "단단한 나무 5 석탄 1",
+      "barrelBrazier": "나무 50 태양 정수 1 석탄 1",
+      "skullBrazier": "1.5버전 이전 단단한 나무 10 태양 정수 1 석탄 1 1.5버전 이후 뼛조각 10",
+      "marbleBrazier": "대리석 1 아쿠아마린 1 돌 100",
+      "woodLampPost": "나무 50 배터리 팩 1",
+      "ironLampPost": "철 주괴 1 배터리 팩 1",
+      "jackOLantern": "호박 1 횃불 1",
+      "charcoalKiln": "나무 20 구리 주괴 2",
+      "crystalarium": "돌 99 금 주괴 5 이리듐 주괴 2 배터리 팩 1",
+      "furnace": "구리광석 20 돌 25",
+      "lightningRod": "철 주괴 1 정제된 석영 1 박쥐 날개 5",
+      "solarPanel": "정제된 석영 10 철 주괴 5 금 주괴 5",
+      "recyclingMachine": "나무 25 돌 25 철 주괴 1",
+      "seedMaker": "나무 25 석탄 10 금 주괴 1",
+      "slimeIncubator": "이리듐 주괴 2 슬라임 100",
+      "ostrichIncubator": "뼛조각 50 단단한 나무 50 잉걸불 파편 20",
+      "slimeEggPress": "석탄 25 불의 석영 1 배터리 팩 1",
+      "tapper": "나무 40 구리 주괴 2",
+      "heavyTapper": "단단한 나무 30 방사능 주괴 1",
+      "wormBin": "단단한 나무 25 금 주괴 1 철 주괴 1 섬유 50",
+      "deluxeWormBin": "지렁이 통 1 이끼 30",
+      "boneMill": "뼛조각 10 점토 3 돌 20",
+      "geodeCrusher": "금 주괴 2 돌 50 다이아몬드 1",
+      "tubOFlowers": "나무 15 튤립 구근 1 재즈 씨앗 1 양귀비 씨앗 1 여름별꽃 씨앗 1",
+      "wickedStatue": "돌 25 석탄 5",
+      "fluteBlock": "나무 10 구리광석 2 섬유 20",
+      "drumBlock": "돌 10 구리광석 2 섬유 20",
+      "chest": "나무 50",
+      "stoneChest": "돌 50",
+      "woodSign": "나무 25",
+      "stoneSign": "돌 25",
+      "darkSign": "박쥐 날개 5 뼛조각 5",
+      "gardenPot": "점토 1 돌 10 정제된 석영 1",
+      "scarecrow": "나무 50 석탄 1 섬유 20",
+      "deluxeScarecrow": "나무 50 섬유 40 이리듐광석 1",
+      "staircase": "돌 99",
+      "explosiveAmmo": "철 주괴 1 석탄 2",
+      "ironBar": "구리 주괴 3",
+      "goldBar": "철 주괴 2",
+      "miniJukebox": "철 주괴 2 배터리 팩 1",
+      "miniObelisk": "단단한 나무 30 태양 정수 20 금 주괴 3",
+      "farmComputer": "드워프 도구 1 배터리 팩 1 정제된 석영 10",
+      "hopper": "단단한 나무 10 이리듐 주괴 1 방사능 주괴 1",
+      "cookoutKit": "나무 15 섬유 10 석탄 3"
+    }
   }
 }
