@@ -51,6 +51,7 @@
     "plantDeadline": "Last day to plant {crop}",
     "deadlineShift": "(shown early — shop closed tomorrow)",
     "wateringGroup": "Water crops",
+    "fruitGroup": "Harvest fruit",
     "rainForecast": "Rain forecast",
     "deleteTitle": "Delete task",
     "deleteBody": "Delete just this item, or delete the related tasks for the same crop across all dates.",

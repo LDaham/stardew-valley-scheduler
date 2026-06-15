@@ -51,6 +51,7 @@
     "plantDeadline": "{crop} 심기 마지막 날",
     "deadlineShift": "(내일 휴무로 미리 표시)",
     "wateringGroup": "작물 물주기",
+    "fruitGroup": "과일 수확하기",
     "rainForecast": "내일 비 예보",
     "deleteTitle": "할 일 삭제",
     "deleteBody": "이 항목만 삭제하거나, 같은 작물의 관련 할 일을 모든 날짜에서 한꺼번에 삭제할 수 있어요.",

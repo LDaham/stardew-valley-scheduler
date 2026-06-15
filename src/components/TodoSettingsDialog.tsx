@@ -20,9 +20,12 @@ const EVENT_ICON: Record<string, string> = {
 const MEMO_ICON: Record<string, string> = {
   harvest: "/icons/addTask/seed.png",
   watering: "/icons/reminders/watering.png",
+  fruit: "/icons/addTask/fruit.png",
   tool: "/icons/addTask/tool.png",
   machine: "/icons/addTask/machine.png",
   build: "/icons/addTask/build.png",
+  mining: "/icons/tools/pickaxe.png",
+  fishing: "/icons/addTask/fishing.png",
   misc: "/icons/addTask/misc.png",
   eatFood: "/icons/ui/food.png",
 };

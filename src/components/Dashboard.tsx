@@ -248,6 +248,7 @@ export default function Dashboard({
     // 메모: 작물 물주기는 한 줄로 묶고, 나머지도 같은 날 같은 카테고리·내용이면
     // 한 번만 표시한다(같은 작물을 여러 번 심어 수확·재파종 등이 겹치는 경우).
     const wateringMemos: typeof memos = [];
+    const fruitMemos: typeof memos = [];
     const memoGroups = new Map<string, typeof memos>();
     const memoGroupOrder: string[] = [];
     for (const m of memosOn(date)) {
@@ -258,6 +259,11 @@ export default function Dashboard({
         if (m.category === "watering") {
           if (isRain) continue;
           wateringMemos.push(m);
+          continue;
+        }
+        // 과일 수확: 같은 날 여러 나무를 한 줄로 묶는다(물주기와 동일).
+        if (m.category === "fruit") {
+          fruitMemos.push(m);
           continue;
         }
       }
@@ -335,6 +341,32 @@ export default function Dashboard({
         orderKey: "memo:watering",
         icon: <PixelIcon src="/icons/reminders/watering.png" />,
         label: `${t("dashboard.wateringGroup")}(${names.join(", ")})`,
+        done: allDone,
+        onToggle: () => setDoneMany(ids, !allDone),
+        onDelete: () => setDeleteTarget({ cropIds }),
+      });
+    }
+    // 과일 수확 묶음: "과일 수확하기(살구, 체리)" — 같은 나무는 한 번만
+    if (fruitMemos.length > 0) {
+      const names = [
+        ...new Set(
+          fruitMemos.map((m) =>
+            m.cropId ? t(`fruitTrees.${m.cropId}`) : m.text,
+          ),
+        ),
+      ];
+      const cropIds = [
+        ...new Set(
+          fruitMemos.map((m) => m.cropId).filter((id): id is string => !!id),
+        ),
+      ];
+      const ids = fruitMemos.map((m) => m.id);
+      const allDone = fruitMemos.every((m) => m.done);
+      rows.push({
+        key: `fruit-${yd}`,
+        orderKey: "memo:fruit",
+        icon: <PixelIcon src="/icons/addTask/fruit.png" />,
+        label: `${t("dashboard.fruitGroup")}(${names.join(", ")})`,
         done: allDone,
         onToggle: () => setDoneMany(ids, !allDone),
         onDelete: () => setDeleteTarget({ cropIds }),
