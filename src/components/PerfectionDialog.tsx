@@ -15,11 +15,15 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
     perfectionCounts,
     togglePerfCheck,
     setPerfCount,
+    dialogFilters,
+    setDialogFilters,
   } = useSchedule();
   // 한 번에 한 범주만 펼친다(항목이 많아 접어둠)
   const [open, setOpen] = useState<string | null>(null);
-  // 완료되지 않은 범주 먼저 보기
-  const [incompleteFirst, setIncompleteFirst] = useState(false);
+  // 완료되지 않은 범주 먼저 보기(마지막 선택값 영속)
+  const incompleteFirst = dialogFilters.perfectionIncompleteFirst;
+  const setIncompleteFirst = (v: boolean) =>
+    setDialogFilters({ perfectionIncompleteFirst: v });
 
   const progress = (c: PerfCategory) => {
     if (c.kind === "count") {

@@ -201,6 +201,7 @@ export default function AddTaskDialog({
       text: t("addTask.toolUpgradeMemo", { tool: toolName }),
       reminderDaysBefore: 0,
       category: "tool",
+      toolId,
       chain: { kind: "tool", pickupText: t("addTask.toolMemo", { tool: toolName }) },
     });
     onClose();

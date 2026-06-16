@@ -83,8 +83,7 @@
     "noInfo": "No info",
     "rolled": "Rolled over",
     "blockedToday": "Not possible today ({reason})",
-    "dateFull": "Year {year}, {season} Day {day}",
-    "easterEggTip": "Entering \"ConcernedApe\" as your favorite thing triggers an easter egg."
+    "dateFull": "Year {year}, {season} Day {day}"
   },
   "memo": {
     "selectDay": "Select a day from the calendar",
@@ -123,19 +122,7 @@
     "reorder": "Drag to reorder",
     "userAdded": "User-added",
     "cropGroup": "Plant seeds",
-    "cropGroupNote": "Plant → water → harvest → eat/replant. Each step appears only after the previous is done.",
-    "minMaxMode": "Min/max schedule mode",
-    "minMaxModeLabel": "Use min/max route guide",
-    "minMaxModeNote": "When on, shows the min/max run route by date instead of the to-do list (Spring 1–28)."
-  },
-  "minMax": {
-    "rules": "Rules",
-    "rulesShort": "Rules",
-    "routeTitle": "{season} {day} route",
-    "goal": "Today's goal:",
-    "result": "Result:",
-    "noEntry": "No route guide for this date yet. (Only Spring 1–28 is available.)",
-    "source": "Source: BlackSight6 & Zamiel — Stardew Valley Min-Max Routing/Strategy guide (github.com/Zamiell/stardew-valley). Non-commercial summary/translation."
+    "cropGroupNote": "Plant → water → harvest → eat/replant. Each step appears only after the previous is done."
   },
   "blacksmith": {
     "pickupWarn": "Blacksmith is closed on the ready day {ready} ({reason}); you'll pick it up the next open day",
@@ -552,6 +539,7 @@
   },
   "seedEfficiency": {
     "title": "Seed efficiency",
+    "short": "Crop value",
     "view": "View efficiency",
     "fertilizer": "Fertilizer",
     "produce": "Produce type",

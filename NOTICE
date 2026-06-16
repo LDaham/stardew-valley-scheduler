@@ -20,13 +20,7 @@ Stardew Valley Scheduler — 서드파티 자료 고지 (Third-party notices)
    - 따라서 이 데이터 파일들은 위 CC BY-NC-SA 3.0 조건(출처 표시·비영리·
      동일조건 변경허락)을 그대로 따릅니다.
 
-3. min/max 루트 가이드 (Min-max route guide)
-   - src/data/minMaxRoute.ts, src/data/minMaxPreface.ts의 루트·규칙 내용은
-     BlackSight6 & Zamiel의 "Stardew Valley Min-Max Routing / Strategy"
-     (https://github.com/Zamiell/stardew-valley) 를 비영리 목적으로
-     한국어 요약·번역한 것입니다. 저작권은 원저자에게 있습니다.
-
-4. 컴플라이언스 요지
+3. 컴플라이언스 요지
    - 비영리(NC): 광고·유료화 등 상업적 이용을 하지 않습니다.
    - 출처 표시(BY): 위 위키 출처를 명시합니다.
    - 동일조건(SA): 위키 유래 데이터의 2차 가공물도 동일 라이선스를 유지합니다.

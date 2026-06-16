@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useSchedule } from "@/components/ScheduleProvider";
@@ -50,22 +50,28 @@ export default function BundleDialog({
     setBundleMode,
     remixChoices,
     setRemixChoice,
+    dialogFilters,
+    setDialogFilters,
   } = useSchedule();
   const season = currentDate.season;
-  // 계절 필터(상시·봄·여름·가을·겨울). 기본=이번 계절+상시.
-  const [selected, setSelected] = useState<Set<SeasonToken>>(() =>
-    defaultSeasonSelection(season),
+  // 계절 필터(상시·봄·여름·가을·겨울). 저장값 없으면 이번 계절+상시. 마지막 선택값 영속.
+  const selected = useMemo(
+    () =>
+      dialogFilters.bundleSeasons
+        ? new Set(dialogFilters.bundleSeasons as SeasonToken[])
+        : defaultSeasonSelection(season),
+    [dialogFilters.bundleSeasons, season],
   );
   const toggleToken = (tk: SeasonToken) => {
-    setSelected((prev) => {
-      const next = new Set(prev);
-      if (next.has(tk)) next.delete(tk);
-      else next.add(tk);
-      return next;
-    });
+    const next = new Set(selected);
+    if (next.has(tk)) next.delete(tk);
+    else next.add(tk);
+    setDialogFilters({ bundleSeasons: [...next] });
   };
-  // 완료되지 않은 꾸러미 먼저 보기
-  const [incompleteFirst, setIncompleteFirst] = useState(false);
+  // 완료되지 않은 꾸러미 먼저 보기(마지막 선택값 영속)
+  const incompleteFirst = dialogFilters.bundleIncompleteFirst;
+  const setIncompleteFirst = (v: boolean) =>
+    setDialogFilters({ bundleIncompleteFirst: v });
 
   const isDone = (b: Bundle, itemId: string) =>
     !!bundleItemsDone[bundleItemKey(b.id, itemId)];

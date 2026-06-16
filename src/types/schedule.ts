@@ -76,6 +76,8 @@ export interface Memo {
   category?: MemoCategory;
   // 씨앗 심기에서 생성된 메모의 작물 id(아이콘 표시·관련 메모 일괄 삭제에 사용).
   cropId?: string;
+  // 도구 업그레이드 메모의 도구 id(기본 도구 아이콘 표시에 사용). axe/pickaxe/hoe/wateringCan/trashCan.
+  toolId?: string;
   // 한 번의 씨앗 심기로 파생된 메모 묶음 id(같은 작물을 다른 날 심으면 구분).
   groupId?: string;
   // 온실에서 심음(계절 만료 없음 — 작물/과일 수확 메모가 사라지지 않는다).
@@ -128,8 +130,22 @@ export interface ScheduleState {
   achievementsDone: Record<string, boolean>;
   // 캐릭터 정보(농사/채집 레벨·스킬). 씨앗 효율 계산에 사용.
   character: CharacterInfo;
-  // min/max 스케줄 모드: 켜면 todolist 대신 min/max 루트 가이드를 날짜별로 표시.
-  minMaxMode: boolean;
+  // 다이얼로그 필터(꾸러미·완벽·업적·생선·씨앗 효율)의 마지막 선택값. 다시 열 때 복원.
+  dialogFilters: DialogFilters;
 }
 
 export type BundleMode = "standard" | "remix";
+
+// 다이얼로그별 필터/선택값(영속). 계절 토큰·가공 유형 등은 string으로 저장해 컴포넌트에서 캐스팅.
+// 계절 필터는 undefined면 '이번 계절 + 상시' 기본값을 사용한다.
+export interface DialogFilters {
+  bundleSeasons?: string[];
+  bundleIncompleteFirst: boolean;
+  fishSeasons?: string[];
+  perfectionIncompleteFirst: boolean;
+  achievementIncompleteFirst: boolean;
+  seedCrossSeason: boolean;
+  seedFertilizer: string;
+  seedProduce: string;
+  seedFood: string;
+}

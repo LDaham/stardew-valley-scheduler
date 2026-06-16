@@ -110,6 +110,7 @@ export function chainSpawn(memo: Memo, today: SDate, cc: boolean): NewMemo[] {
         text: chain.pickupText,
         reminderDaysBefore: 0,
         category: "tool",
+        toolId: memo.toolId,
         groupId: memo.groupId,
       },
     ];

@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
+import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
 import TimeIcon from "@/components/TimeIcon";
 import SeasonFilter, {
@@ -23,16 +24,20 @@ export default function FishInfoDialog({
   onClose: () => void;
 }) {
   const t = useTranslations();
-  const [selected, setSelected] = useState<Set<SeasonToken>>(() =>
-    defaultSeasonSelection(season),
+  const { dialogFilters, setDialogFilters } = useSchedule();
+  // 저장값 없으면 이번 계절+상시. 마지막 선택값 영속.
+  const selected = useMemo(
+    () =>
+      dialogFilters.fishSeasons
+        ? new Set(dialogFilters.fishSeasons as SeasonToken[])
+        : defaultSeasonSelection(season),
+    [dialogFilters.fishSeasons, season],
   );
   const toggleToken = (tk: SeasonToken) => {
-    setSelected((prev) => {
-      const next = new Set(prev);
-      if (next.has(tk)) next.delete(tk);
-      else next.add(tk);
-      return next;
-    });
+    const next = new Set(selected);
+    if (next.has(tk)) next.delete(tk);
+    else next.add(tk);
+    setDialogFilters({ fishSeasons: [...next] });
   };
 
   const visible = FISH.filter((f) => matchesSeason(f.seasons, selected)).sort(

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
-import { addDays, toYearDay, type SDate, type Season } from "@/lib/calendar";
+import { addDays, toYearDay, type SDate } from "@/lib/calendar";
 import { filterEvents, getEventsOn, type FixedEvent } from "@/lib/events";
 import { getActiveReminders, type ReminderBadge } from "@/lib/reminders";
 import { useSchedule } from "@/components/ScheduleProvider";
@@ -22,7 +22,6 @@ import PixelIcon from "@/components/PixelIcon";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import { toolPickup, blacksmithClosureOn } from "@/lib/blacksmith";
 import { carpenterClosureOn } from "@/lib/carpenter";
-import { routeEntryFor } from "@/data/minMaxRoute";
 import type { Memo } from "@/types/schedule";
 import type { ReactNode } from "react";
 
@@ -80,7 +79,6 @@ export default function Dashboard() {
     incWateringCanUpgrades,
     addMemo,
     bundleItemsDone,
-    minMaxMode,
   } = useSchedule();
   const openGifts = useGiftDialog();
   const [addTarget, setAddTarget] = useState<"today" | "tomorrow" | null>(null);
@@ -146,6 +144,7 @@ export default function Dashboard() {
       text: t("addTask.toolUpgradeMemo", { tool: toolName }),
       reminderDaysBefore: 0,
       category: "tool",
+      toolId: "wateringCan",
       chain: { kind: "tool", pickupText: t("addTask.toolMemo", { tool: toolName }) },
     });
     incWateringCanUpgrades();
@@ -415,6 +414,9 @@ export default function Dashboard() {
           <PixelIcon src={`/icons/fruitTrees/${m.cropId}.png`} />
         ) : m.category === "eatFood" ? (
           <PixelIcon src="/icons/ui/food.png" />
+        ) : m.category === "tool" && m.toolId ? (
+          // 도구 업그레이드/수령: 업그레이드 등급이 아닌 기본 도구 이미지 표시
+          <PixelIcon src={`/icons/tools/${m.toolId}.png`} />
         ) : m.category === "mining" ? (
           <PixelIcon src="/icons/tools/pickaxe.png" />
         ) : m.category === "fishing" ? (
@@ -556,20 +558,7 @@ export default function Dashboard() {
         </button>
       </div>
 
-      {/* 게임 시작일(1년째 봄 1일)에만 보이는 이스터에그 안내 — 정보 상단 */}
-      {!minMaxMode && year === 1 && currentDate.season === "spring" && currentDate.day === 1 && (
-        <p className="sv-panel px-3 py-2 text-sm text-[var(--sv-ink-muted)]">
-          {t("dashboard.easterEggTip")}
-        </p>
-      )}
-
-      {/* min/max 모드: todolist 대신 그날의 루트 가이드 표시 */}
-      {minMaxMode && (
-        <MinMaxRouteView season={currentDate.season} day={currentDate.day} />
-      )}
-
       {/* 정보(오늘·내일 좌우 분할) → 점선 → 할 일 목록 → 할 일 추가. 비어 있어도 표시. */}
-      {!minMaxMode && (
       <div className="sv-box p-4">
         {/* 오늘 정보 / 내일 정보 좌우 분할 */}
         <div className="grid grid-cols-2 gap-4">
@@ -618,7 +607,6 @@ export default function Dashboard() {
           </button>
         </div>
       </div>
-      )}
 
       {addTarget && (
         <AddTaskDialog
@@ -1026,63 +1014,5 @@ function TaskList({
         </li>
       ))}
     </ul>
-  );
-}
-
-// min/max 모드: 그날의 루트 가이드를 정보로 표시(todolist 대체).
-function MinMaxRouteView({ season, day }: { season: Season; day: number }) {
-  const t = useTranslations();
-  const entry = routeEntryFor(season, day);
-
-  if (!entry) {
-    return (
-      <div className="sv-box p-4">
-        <p className="text-base text-[var(--sv-ink-muted)]">
-          {t("minMax.noEntry")}
-        </p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="sv-box p-4">
-      <div className="mb-3 flex flex-wrap items-center gap-2">
-        <h2 className="text-lg font-bold">
-          {t("minMax.routeTitle", {
-            season: t(`seasons.${season}`),
-            day,
-          })}
-        </h2>
-        {entry.weather && (
-          <span className="rounded bg-[#5b8fb0] px-2 py-0.5 text-[13px] font-semibold text-white">
-            {entry.weather}
-          </span>
-        )}
-      </div>
-
-      {entry.goal && (
-        <p className="mb-3 rounded-md bg-[var(--sv-bg)] px-3 py-2 text-base leading-relaxed">
-          <span className="font-bold">{t("minMax.goal")} </span>
-          {entry.goal}
-        </p>
-      )}
-
-      <ol className="flex list-none flex-col gap-1.5">
-        {entry.steps.map((step, i) => (
-          <li key={i} className="flex gap-2 text-base leading-relaxed">
-            <span className="shrink-0 font-bold text-[var(--sv-ink-muted)]">
-              {i + 1}.
-            </span>
-            <span>{step}</span>
-          </li>
-        ))}
-      </ol>
-
-      {entry.result && (
-        <p className="mt-3 rounded-md bg-[var(--sv-bg)] px-3 py-2 text-base font-semibold">
-          {t("minMax.result")} {entry.result}
-        </p>
-      )}
-    </div>
   );
 }

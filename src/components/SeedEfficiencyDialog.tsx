@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import type { Season } from "@/lib/calendar";
+import { SEASONS, type Season } from "@/lib/calendar";
 import { asset } from "@/lib/asset";
 import {
   seasonSeedProfits,
@@ -34,11 +34,20 @@ export default function SeedEfficiencyDialog({
   onClose: () => void;
 }) {
   const t = useTranslations();
-  const { character } = useSchedule();
-  const [crossSeason, setCrossSeason] = useState(false);
-  const [fertilizer, setFertilizer] = useState<FertilizerId>("none");
-  const [produce, setProduce] = useState<Produce>("raw");
-  const [food, setFood] = useState<FoodId>("none");
+  const { character, dialogFilters, setDialogFilters } = useSchedule();
+  // 보고 있는 계절(기본=열 때의 현재 계절, 다이얼로그 안에서 전환 가능)
+  const [viewSeason, setViewSeason] = useState<Season>(season);
+  // 필터(다계절 포함·비료·가공·음식) 마지막 선택값 영속.
+  const crossSeason = dialogFilters.seedCrossSeason;
+  const setCrossSeason = (v: boolean) =>
+    setDialogFilters({ seedCrossSeason: v });
+  const fertilizer = dialogFilters.seedFertilizer as FertilizerId;
+  const setFertilizer = (v: FertilizerId) =>
+    setDialogFilters({ seedFertilizer: v });
+  const produce = dialogFilters.seedProduce as Produce;
+  const setProduce = (v: Produce) => setDialogFilters({ seedProduce: v });
+  const food = dialogFilters.seedFood as FoodId;
+  const setFood = (v: FoodId) => setDialogFilters({ seedFood: v });
 
   const opt: ProfitOptions = {
     crossSeason,
@@ -53,14 +62,34 @@ export default function SeedEfficiencyDialog({
     gatherer: character.gatherer,
     botanist: character.botanist,
   };
-  const rows = seasonSeedProfits(season, opt);
+  const rows = seasonSeedProfits(viewSeason, opt);
   const max = rows.length ? rows[0].profit : 0;
 
   return (
     <Modal
-      title={`${t(`seasons.${season}`)} · ${t("seedEfficiency.title")}`}
+      title={`${t(`seasons.${viewSeason}`)} · ${t("seedEfficiency.title")}`}
       onClose={onClose}
     >
+      {/* 계절 선택(꾸러미 계절 필터와 동일한 스타일, 단일 선택) */}
+      <div className="mb-3 flex flex-wrap gap-1.5">
+        {SEASONS.map((s) => {
+          const on = s === viewSeason;
+          return (
+            <button
+              key={s}
+              onClick={() => setViewSeason(s)}
+              className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                on
+                  ? "bg-[var(--sv-accent)] text-white"
+                  : "border border-[var(--sv-border)] text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
+              }`}
+            >
+              {t(`seasons.${s}`)}
+            </button>
+          );
+        })}
+      </div>
+
       {/* 품질 안내 */}
       <p className="mb-3 rounded-md bg-[var(--sv-bg)] px-3 py-2 text-xs text-[var(--sv-ink-muted)]">
         {t("seedEfficiency.qualityHint")}

@@ -21,6 +21,7 @@ import {
 import type {
   BundleMode,
   CharacterInfo,
+  DialogFilters,
   Memo,
   MemoCategoryToggles,
   ScheduleState,
@@ -53,6 +54,17 @@ const DEFAULT_MEMO_CATEGORY_TOGGLES: MemoCategoryToggles = MEMO_CATEGORIES.reduc
   },
   {} as MemoCategoryToggles,
 );
+
+// 다이얼로그 필터 기본값(계절 필터는 undefined → 컴포넌트에서 계절 기반 기본값 사용)
+const DEFAULT_DIALOG_FILTERS: DialogFilters = {
+  bundleIncompleteFirst: false,
+  perfectionIncompleteFirst: false,
+  achievementIncompleteFirst: false,
+  seedCrossSeason: false,
+  seedFertilizer: "none",
+  seedProduce: "raw",
+  seedFood: "none",
+};
 
 const STORAGE_KEY = "svs:schedule";
 const STATE_VERSION = 1;
@@ -97,7 +109,7 @@ const DEFAULT_STATE: ScheduleState = {
   addTaskChildOrder: defaultChildOrder(),
   achievementsDone: {},
   character: DEFAULT_CHARACTER,
-  minMaxMode: false,
+  dialogFilters: DEFAULT_DIALOG_FILTERS,
 };
 
 let state: ScheduleState = DEFAULT_STATE;
@@ -136,7 +148,7 @@ function ensureLoaded(): void {
     addTaskChildOrder: reconcileAllChildOrders(saved.addTaskChildOrder),
     achievementsDone: saved.achievementsDone ?? {},
     character: { ...DEFAULT_CHARACTER, ...saved.character },
-    minMaxMode: saved.minMaxMode ?? false,
+    dialogFilters: { ...DEFAULT_DIALOG_FILTERS, ...saved.dialogFilters },
     year: saved.year ?? 1,
     version: STATE_VERSION,
   };
@@ -343,6 +355,10 @@ export const scheduleActions = {
   setCharacter(patch: Partial<CharacterInfo>) {
     commit({ ...state, character: { ...state.character, ...patch } });
   },
+  // 다이얼로그 필터 부분 갱신(마지막 선택값 영속)
+  setDialogFilters(patch: Partial<DialogFilters>) {
+    commit({ ...state, dialogFilters: { ...state.dialogFilters, ...patch } });
+  },
   // 저장된 모든 설정 초기화(번들·캐릭터·메모·순서·토글 등 전부 기본값으로)
   resetAll() {
     commit({
@@ -368,7 +384,7 @@ export const scheduleActions = {
       addTaskChildOrder: defaultChildOrder(),
       achievementsDone: {},
       character: { ...DEFAULT_CHARACTER },
-      minMaxMode: false,
+      dialogFilters: { ...DEFAULT_DIALOG_FILTERS },
     });
   },
   // 번들 품목 기증 토글
@@ -430,10 +446,6 @@ export const scheduleActions = {
       ...state,
       addTaskChildOrder: { ...state.addTaskChildOrder, [parent]: order },
     });
-  },
-  // min/max 스케줄 모드 전환
-  setMinMaxMode(on: boolean) {
-    commit({ ...state, minMaxMode: on });
   },
   // 업적 달성 토글
   toggleAchievement(id: string) {

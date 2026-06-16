@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
@@ -8,9 +7,12 @@ import { ACHIEVEMENTS } from "@/data/achievements";
 
 export default function AchievementDialog({ onClose }: { onClose: () => void }) {
   const t = useTranslations();
-  const { achievementsDone, toggleAchievement } = useSchedule();
-  // 완료되지 않은 업적 우선 표시
-  const [incompleteFirst, setIncompleteFirst] = useState(false);
+  const { achievementsDone, toggleAchievement, dialogFilters, setDialogFilters } =
+    useSchedule();
+  // 완료되지 않은 업적 우선 표시(마지막 선택값 영속)
+  const incompleteFirst = dialogFilters.achievementIncompleteFirst;
+  const setIncompleteFirst = (v: boolean) =>
+    setDialogFilters({ achievementIncompleteFirst: v });
 
   const total = ACHIEVEMENTS.length;
   const done = ACHIEVEMENTS.filter((a) => achievementsDone[a.id]).length;

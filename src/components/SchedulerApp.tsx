@@ -11,19 +11,19 @@ import BundleDialog from "@/components/BundleDialog";
 import PerfectionDialog from "@/components/PerfectionDialog";
 import CharacterDialog from "@/components/CharacterDialog";
 import AchievementDialog from "@/components/AchievementDialog";
-import MinMaxRulesDialog from "@/components/MinMaxRulesDialog";
+import SeedEfficiencyDialog from "@/components/SeedEfficiencyDialog";
 import PixelIcon from "@/components/PixelIcon";
 
 function AppShell() {
   const t = useTranslations();
-  const { minMaxMode } = useSchedule();
+  const { currentDate } = useSchedule();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [todoSettingsOpen, setTodoSettingsOpen] = useState(false);
   const [bundleOpen, setBundleOpen] = useState(false);
   const [perfectionOpen, setPerfectionOpen] = useState(false);
   const [characterOpen, setCharacterOpen] = useState(false);
   const [achievementOpen, setAchievementOpen] = useState(false);
-  const [rulesOpen, setRulesOpen] = useState(false);
+  const [seedEffOpen, setSeedEffOpen] = useState(false);
 
   return (
     <div className="sv-frame mx-auto my-4 flex w-full max-w-5xl flex-col gap-4 p-4 sm:p-6">
@@ -35,7 +35,7 @@ function AppShell() {
           </h1>
         </div>
         <div className="flex flex-wrap items-center justify-between gap-2">
-          {/* 좌측: 꾸러미 · 완벽 · 업적 */}
+          {/* 좌측: 꾸러미 · 완벽 · 업적 · 작물 효율 */}
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setBundleOpen(true)}
@@ -58,35 +58,30 @@ function AppShell() {
             >
               <PixelIcon src="/icons/ui/achievement.jpg" size={18} /> {t("achievement.short")}
             </button>
+            <button
+              onClick={() => setSeedEffOpen(true)}
+              aria-label={t("seedEfficiency.title")}
+              className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
+            >
+              <PixelIcon src="/icons/ui/corn.png" size={18} /> {t("seedEfficiency.short")}
+            </button>
           </div>
-          {/* 우측: (일반) 캐릭터·스케줄러 설정 / (min/max) 규칙 + 설정 */}
+          {/* 우측: 캐릭터 · 스케줄러 설정 · 설정 */}
           <div className="flex flex-wrap gap-2">
-            {minMaxMode ? (
-              <button
-                onClick={() => setRulesOpen(true)}
-                aria-label={t("minMax.rules")}
-                className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
-              >
-                <PixelIcon src="/icons/ui/note.png" size={18} /> {t("minMax.rulesShort")}
-              </button>
-            ) : (
-              <>
-                <button
-                  onClick={() => setCharacterOpen(true)}
-                  aria-label={t("character.open")}
-                  className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
-                >
-                  <PixelIcon src="/icons/ui/character.png" size={18} /> {t("character.short")}
-                </button>
-                <button
-                  onClick={() => setTodoSettingsOpen(true)}
-                  aria-label={t("settings.openTodo")}
-                  className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
-                >
-                  <PixelIcon src="/icons/ui/note.png" size={18} /> {t("settings.todoSettings")}
-                </button>
-              </>
-            )}
+            <button
+              onClick={() => setCharacterOpen(true)}
+              aria-label={t("character.open")}
+              className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
+            >
+              <PixelIcon src="/icons/ui/character.png" size={18} /> {t("character.short")}
+            </button>
+            <button
+              onClick={() => setTodoSettingsOpen(true)}
+              aria-label={t("settings.openTodo")}
+              className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
+            >
+              <PixelIcon src="/icons/ui/note.png" size={18} /> {t("settings.todoSettings")}
+            </button>
             <button
               onClick={() => setSettingsOpen(true)}
               aria-label={t("settings.open")}
@@ -114,7 +109,12 @@ function AppShell() {
       {achievementOpen && (
         <AchievementDialog onClose={() => setAchievementOpen(false)} />
       )}
-      {rulesOpen && <MinMaxRulesDialog onClose={() => setRulesOpen(false)} />}
+      {seedEffOpen && (
+        <SeedEfficiencyDialog
+          season={currentDate.season}
+          onClose={() => setSeedEffOpen(false)}
+        />
+      )}
     </div>
   );
 }
