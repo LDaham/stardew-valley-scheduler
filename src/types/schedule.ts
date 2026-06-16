@@ -120,6 +120,10 @@ export interface ScheduleState {
   perfectionCounts: Record<string, number>;
   // 할 일 추가 상세 옵션: 숨긴 항목. 키=`menu:<id>`/`machine:<id>`/`building:<id>`/`fruit:<id>`, 값=true면 숨김.
   hiddenItems: Record<string, boolean>;
+  // 할 일 추가 메뉴 표시 순서(상위 항목 키 배열).
+  addTaskOrder: string[];
+  // 할 일 추가 하위 항목 순서. 키=상위 메뉴 키(artisanMachine/refiningMachine/build/fruit), 값=자식 id 배열.
+  addTaskChildOrder: Record<string, string[]>;
   // 달성한 업적. 키=업적 id.
   achievementsDone: Record<string, boolean>;
   // 캐릭터 정보(농사/채집 레벨·스킬). 씨앗 효율 계산에 사용.

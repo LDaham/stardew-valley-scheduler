@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { asset } from "@/lib/asset";
 import { addDays, toYearDay, type SDate } from "@/lib/calendar";
 import { filterEvents, getEventsOn, type FixedEvent } from "@/lib/events";
 import { getActiveReminders, type ReminderBadge } from "@/lib/reminders";
@@ -158,7 +160,7 @@ export default function Dashboard() {
   const reminderBadge = (badge: ReminderBadge): ReactNode => {
     if (badge.kind === "dDay")
       return (
-        <span className="shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-[10px] font-semibold text-[#5a4416]">
+        <span className="shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-[12px] font-semibold text-[#5a4416]">
           {t("dashboard.dDay", { days: badge.days })}
         </span>
       );
@@ -520,15 +522,26 @@ export default function Dashboard() {
         <button
           onClick={goToPrevDay}
           disabled={atStart}
-          className="sv-btn px-3 py-1.5 text-sm"
+          className="sv-btn px-3 py-1.5 text-base"
         >
           ◀ {t("dashboard.prevDay")}
         </button>
         <button
           onClick={() => setMiniCalOpen(true)}
-          className="flex items-baseline gap-2 hover:underline"
+          aria-label={t("miniCalendar.title")}
+          className="flex items-center gap-2 hover:underline"
         >
-          <span className="text-base font-bold">
+          {/* 달력 이미지 = 날짜 수정 가능 표시 */}
+          <Image
+            src={asset("/icons/ui/calendar.png")}
+            alt=""
+            width={18}
+            height={25}
+            unoptimized
+            className="shrink-0"
+            style={{ imageRendering: "pixelated" }}
+          />
+          <span className="text-lg font-bold">
             {t("dashboard.dateFull", {
               year,
               season: t(`seasons.${currentDate.season}`),
@@ -536,71 +549,66 @@ export default function Dashboard() {
             })}
           </span>
         </button>
-        <button onClick={goToNextDay} className="sv-btn px-3 py-1.5 text-sm">
+        <button onClick={goToNextDay} className="sv-btn px-3 py-1.5 text-base">
           {t("dashboard.nextDay")} ▶
         </button>
       </div>
 
       {/* 게임 시작일(1년째 봄 1일)에만 보이는 이스터에그 안내 — 정보 상단 */}
       {year === 1 && currentDate.season === "spring" && currentDate.day === 1 && (
-        <p className="sv-panel px-3 py-2 text-xs text-[var(--sv-ink-muted)]">
+        <p className="sv-panel px-3 py-2 text-sm text-[var(--sv-ink-muted)]">
           {t("dashboard.easterEggTip")}
         </p>
       )}
 
-      {/* 정보 · 할 일 · 내일 정보 — 한 박스 안에서 점선으로 구분, 비어 있어도 표시.
-          할 일 추가 버튼은 박스 맨 아래. */}
+      {/* 정보(오늘·내일 좌우 분할) → 점선 → 할 일 목록 → 할 일 추가. 비어 있어도 표시. */}
       <div className="sv-box p-4">
-        {/* 오늘 정보: 축제·작물 마감일·새 계절(완료 표시 없음) */}
-        <h2 className="mb-2 text-sm font-bold text-[var(--sv-ink-muted)]">
-          {t("dashboard.infoTitle")}
-        </h2>
-        <TaskList
-          rows={todayBuilt.info}
-          emptyText={t("dashboard.noInfo")}
-          deleteLabel={t("memo.delete")}
-          hideCheckbox
-        />
+        {/* 오늘 정보 / 내일 정보 좌우 분할 */}
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <h2 className="mb-2 text-base font-bold text-[var(--sv-ink-muted)]">
+              {t("dashboard.infoTitle")}
+            </h2>
+            <TaskList
+              rows={todayBuilt.info}
+              emptyText={t("dashboard.noInfo")}
+              deleteLabel={t("memo.delete")}
+              hideCheckbox
+            />
+          </div>
+          <div className="border-l border-dashed border-[var(--sv-border)] pl-4">
+            <h2 className="mb-2 text-base font-bold text-[var(--sv-ink-muted)]">
+              {t("dashboard.tomorrowInfoTitle")}
+            </h2>
+            <TaskList
+              rows={tomorrowBuilt.info}
+              emptyText={t("dashboard.noInfo")}
+              deleteLabel={t("memo.delete")}
+              hideCheckbox
+              disabled
+            />
+          </div>
+        </div>
 
         <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
 
-        {/* 오늘 할 일 */}
-        <h2 className="mb-2 text-sm font-bold">{t("dashboard.todoList")}</h2>
+        {/* 할 일 목록 */}
+        <h2 className="mb-2 text-base font-bold">{t("dashboard.todoList")}</h2>
         <TaskList
           rows={todayBuilt.todo}
           emptyText={t("dashboard.noTasks")}
           deleteLabel={t("memo.delete")}
         />
 
-        {/* 할 일 추가 버튼: 오늘 / 내일 (todolist 맨 아래) */}
-        <div className="mt-3 flex flex-wrap justify-end gap-2">
+        {/* 할 일 추가(오늘) */}
+        <div className="mt-3 flex justify-end">
           <button
             onClick={() => setAddTarget("today")}
-            className="sv-btn sv-btn-primary px-3 py-1.5 text-sm"
+            className="sv-btn sv-btn-primary px-3 py-1.5 text-base"
           >
             ＋ {t("addTask.titleWithDay", { day: t("dashboard.today") })}
           </button>
-          <button
-            onClick={() => setAddTarget("tomorrow")}
-            className="sv-btn px-3 py-1.5 text-sm"
-          >
-            ＋ {t("addTask.titleWithDay", { day: t("dashboard.tomorrow") })}
-          </button>
         </div>
-
-        <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
-
-        {/* 내일 정보: 다음 날 축제·마감일 미리 확인(완료 표시 없음) */}
-        <h2 className="mb-2 text-sm font-bold text-[var(--sv-ink-muted)]">
-          {t("dashboard.tomorrowInfoTitle")}
-        </h2>
-        <TaskList
-          rows={tomorrowBuilt.info}
-          emptyText={t("dashboard.noInfo")}
-          deleteLabel={t("memo.delete")}
-          hideCheckbox
-          disabled
-        />
       </div>
 
       {addTarget && (
@@ -635,15 +643,15 @@ export default function Dashboard() {
           title={t("dashboard.rainPromptTitle")}
           onClose={() => setRainPromptOpen(false)}
         >
-          <p className="mb-2 text-sm">{t("dashboard.rainPromptBody")}</p>
+          <p className="mb-2 text-base">{t("dashboard.rainPromptBody")}</p>
 
           {/* 도구 수령일 + 대장간 휴무 경고 */}
-          <p className="mb-3 flex items-center gap-1.5 text-xs text-[var(--sv-ink-muted)]">
+          <p className="mb-3 flex items-center gap-1.5 text-sm text-[var(--sv-ink-muted)]">
             <TimeIcon size={14} />
             {t("addTask.pickupPreview", { date: dateLabel(wateringPickup.pickup) })}
           </p>
           {wateringPickup.closure && (
-            <p className="mb-3 rounded-md bg-[#fbeaea] px-3 py-2 text-xs font-semibold text-[#b02a2a]">
+            <p className="mb-3 rounded-md bg-[#fbeaea] px-3 py-2 text-sm font-semibold text-[#b02a2a]">
               ⚠ {t("blacksmith.pickupWarn", {
                 ready: dateLabel(wateringPickup.ready),
                 reason: t(`blacksmith.${wateringPickup.closure}`),
@@ -654,13 +662,13 @@ export default function Dashboard() {
           {/* 비 오는 날에만 구할 수 있는 번들 품목(이미지 포함) */}
           {rainBundleItems.length > 0 && (
             <div className="mb-3 rounded-md bg-[var(--sv-bg)] p-3">
-              <p className="mb-2 flex items-center gap-1 text-xs font-semibold">
+              <p className="mb-2 flex items-center gap-1 text-sm font-semibold">
                 <PixelIcon src="/icons/ui/rain.png" size={14} />
                 {t("dashboard.rainBundleItems")}
               </p>
               <ul className="mb-2 flex flex-wrap gap-x-3 gap-y-1">
                 {rainBundleItems.map((i) => (
-                  <li key={i.id} className="flex items-center gap-1 text-sm">
+                  <li key={i.id} className="flex items-center gap-1 text-base">
                     <PixelIcon src={`/icons/bundleItems/${i.id}.png`} size={16} />
                     {i.name}
                   </li>
@@ -671,7 +679,7 @@ export default function Dashboard() {
                   setRainPromptOpen(false);
                   setBundleFillOpen(true);
                 }}
-                className="rounded-lg border border-[var(--sv-accent)] px-3 py-1 text-xs font-semibold text-[var(--sv-accent)] hover:bg-[var(--sv-panel)]"
+                className="rounded-lg border border-[var(--sv-accent)] px-3 py-1 text-sm font-semibold text-[var(--sv-accent)] hover:bg-[var(--sv-panel)]"
               >
                 {t("dashboard.rainBundleOpen")}
               </button>
@@ -681,13 +689,13 @@ export default function Dashboard() {
           <div className="flex justify-end gap-2">
             <button
               onClick={() => setRainPromptOpen(false)}
-              className="rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm hover:bg-[var(--sv-bg)]"
+              className="rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-base hover:bg-[var(--sv-bg)]"
             >
               {t("dashboard.rainPromptSkip")}
             </button>
             <button
               onClick={addWateringCanUpgrade}
-              className="rounded-lg bg-[var(--sv-accent)] px-4 py-1.5 text-sm font-semibold text-white"
+              className="rounded-lg bg-[var(--sv-accent)] px-4 py-1.5 text-base font-semibold text-white"
             >
               {t("dashboard.rainPromptAdd")}
             </button>
@@ -732,7 +740,7 @@ function ActionChip({
         e.stopPropagation();
         onClick();
       }}
-      className="shrink-0 rounded bg-[var(--sv-accent)] px-1.5 py-0.5 text-[10px] font-semibold text-white"
+      className="shrink-0 rounded bg-[var(--sv-accent)] px-1.5 py-0.5 text-[12px] font-semibold text-white"
     >
       {label}
     </button>
@@ -750,29 +758,32 @@ function RainSwitch({
   label: string;
 }) {
   return (
-    <button
-      type="button"
-      role="switch"
-      aria-checked={on}
-      aria-label={label}
-      title={label}
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        onToggle();
-      }}
-      className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full border transition-colors ${
-        on
-          ? "border-[#5b8fb0] bg-[#5b8fb0]"
-          : "border-[var(--sv-border)] bg-[var(--sv-bg)]"
-      }`}
-    >
-      <span
-        className={`inline-block size-4 rounded-full bg-white shadow transition-transform ${
-          on ? "translate-x-4" : "translate-x-0.5"
+    <span className="flex shrink-0 items-center gap-1.5">
+      <span className="text-sm text-[var(--sv-ink-muted)]">{label}</span>
+      <button
+        type="button"
+        role="switch"
+        aria-checked={on}
+        aria-label={label}
+        title={label}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          onToggle();
+        }}
+        className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full border transition-colors ${
+          on
+            ? "border-[#5b8fb0] bg-[#5b8fb0]"
+            : "border-[var(--sv-border)] bg-[var(--sv-bg)]"
         }`}
-      />
-    </button>
+      >
+        <span
+          className={`inline-block size-4 rounded-full bg-white shadow transition-transform ${
+            on ? "translate-x-4" : "translate-x-0.5"
+          }`}
+        />
+      </button>
+    </span>
   );
 }
 
@@ -789,7 +800,7 @@ function DeleteBtn({
       type="button"
       onClick={onClick}
       aria-label={label ?? "삭제"}
-      className="flex size-6 shrink-0 items-center justify-center rounded border border-[#e23b3b] text-xs font-bold text-[#e23b3b] hover:bg-[#fbeaea]"
+      className="flex size-6 shrink-0 items-center justify-center rounded border border-[#e23b3b] text-sm font-bold text-[#e23b3b] hover:bg-[#fbeaea]"
     >
       ✕
     </button>
@@ -844,13 +855,13 @@ function DeleteTaskDialog({
 
   return (
     <Modal title={t("dashboard.deleteTitle")} onClose={onClose}>
-      <p className="mb-3 text-sm text-[var(--sv-ink-muted)]">
+      <p className="mb-3 text-base text-[var(--sv-ink-muted)]">
         {t("dashboard.deleteBody")}
       </p>
       <div className="flex flex-col gap-3">
         {singleExists && (
           <div className="flex items-center justify-between gap-2 rounded-md bg-[var(--sv-bg)] px-2 py-1.5">
-            <span className="text-sm">{t("dashboard.deleteOne")}</span>
+            <span className="text-base">{t("dashboard.deleteOne")}</span>
             <DeleteBtn onClick={() => deleteMemos(singleIds)} />
           </div>
         )}
@@ -863,7 +874,7 @@ function DeleteTaskDialog({
             >
               {/* 작물명 + 이 작물 관련 전체 삭제 [x] */}
               <div className="mb-1.5 flex items-center justify-between gap-2">
-                <span className="text-sm font-semibold">
+                <span className="text-base font-semibold">
                   {entityName(c.cropId)}
                 </span>
                 <DeleteBtn
@@ -878,7 +889,7 @@ function DeleteTaskDialog({
                     key={s.cat}
                     className="flex items-center justify-between gap-2 rounded bg-[var(--sv-bg)] px-2 py-1"
                   >
-                    <span className="text-xs">
+                    <span className="text-sm">
                       {t("dashboard.deleteAllCat", {
                         cat: t(`dashboard.deleteCat_${s.cat}`),
                         count: s.ids.length,
@@ -893,7 +904,7 @@ function DeleteTaskDialog({
         })}
         <button
           onClick={onClose}
-          className="mt-1 rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm hover:bg-[var(--sv-bg)]"
+          className="mt-1 rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-base hover:bg-[var(--sv-bg)]"
         >
           {t("dashboard.rainPromptSkip")}
         </button>
@@ -928,13 +939,13 @@ function TaskList({
     });
 
   if (rows.length === 0) {
-    return <p className="text-sm text-[var(--sv-ink-muted)]">{emptyText}</p>;
+    return <p className="text-base text-[var(--sv-ink-muted)]">{emptyText}</p>;
   }
   return (
     <ul className="flex flex-col gap-1">
       {rows.map((row) => (
         <li key={row.key}>
-          <div className="flex items-center gap-2 rounded-md bg-[var(--sv-bg)] px-2 py-1.5 text-sm">
+          <div className="flex items-center gap-2 rounded-md bg-[var(--sv-bg)] px-2 py-1.5 text-base">
             <label
               className={`flex min-w-0 flex-1 items-center gap-2 ${
                 disabled || hideCheckbox ? "" : "cursor-pointer"
@@ -961,7 +972,7 @@ function TaskList({
                 {row.icon}
                 <span>{row.label}</span>
                 {row.rolled && !row.done && (
-                  <span className="shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-[10px] font-semibold text-[#5a4416]">
+                  <span className="shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-[12px] font-semibold text-[#5a4416]">
                     {t("dashboard.rolled")}
                   </span>
                 )}
@@ -973,7 +984,7 @@ function TaskList({
                 type="button"
                 onClick={() => toggleLogic(row.key)}
                 aria-label="표시 로직"
-                className="shrink-0 text-xs font-bold text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
+                className="shrink-0 text-sm font-bold text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
               >
                 ⓘ
               </button>
@@ -987,19 +998,19 @@ function TaskList({
                   row.onDelete!();
                 }}
                 aria-label={deleteLabel}
-                className="shrink-0 text-sm font-bold text-[#e23b3b] hover:text-[#b02a2a]"
+                className="shrink-0 text-base font-bold text-[#e23b3b] hover:text-[#b02a2a]"
               >
                 ✕
               </button>
             )}
           </div>
           {row.blocked && !row.done && (
-            <p className="mx-2 mb-1 mt-0.5 rounded bg-[#fbeaea] px-2 py-1 text-[11px] font-semibold leading-snug text-[#b02a2a]">
+            <p className="mx-2 mb-1 mt-0.5 rounded bg-[#fbeaea] px-2 py-1 text-[13px] font-semibold leading-snug text-[#b02a2a]">
               ⚠ {row.blocked}
             </p>
           )}
           {row.logic && openLogic.has(row.key) && (
-            <p className="mx-2 mb-1 mt-0.5 rounded bg-[var(--sv-bg)] px-2 py-1 text-[11px] leading-snug text-[var(--sv-ink-muted)]">
+            <p className="mx-2 mb-1 mt-0.5 rounded bg-[var(--sv-bg)] px-2 py-1 text-[13px] leading-snug text-[var(--sv-ink-muted)]">
               {row.logic}
             </p>
           )}

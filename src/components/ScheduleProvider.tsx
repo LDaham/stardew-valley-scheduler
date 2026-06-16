@@ -42,6 +42,8 @@ export function useSchedule() {
     perfectionChecks: state.perfectionChecks,
     perfectionCounts: state.perfectionCounts,
     hiddenItems: state.hiddenItems,
+    addTaskOrder: state.addTaskOrder,
+    addTaskChildOrder: state.addTaskChildOrder,
     achievementsDone: state.achievementsDone,
     character: state.character,
     memosOn: (date: SDate): Memo[] =>
@@ -76,6 +78,8 @@ export function useSchedule() {
     togglePerfCheck: scheduleActions.togglePerfCheck,
     setPerfCount: scheduleActions.setPerfCount,
     setHiddenItem: scheduleActions.setHiddenItem,
+    setAddTaskOrder: scheduleActions.setAddTaskOrder,
+    setAddTaskChildOrder: scheduleActions.setAddTaskChildOrder,
     toggleAchievement: scheduleActions.toggleAchievement,
     setCharacter: scheduleActions.setCharacter,
     resetAll: scheduleActions.resetAll,

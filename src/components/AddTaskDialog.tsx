@@ -17,6 +17,7 @@ import {
 import { planBuilding } from "@/lib/carpenter";
 import { FRUIT_TREES, FRUIT_TREE_MATURE_DAYS } from "@/data/fruitTrees";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
+import { ADD_TASK_CHILDREN, orderBy } from "@/lib/addTaskOrder";
 import type { MemoCategory } from "@/lib/todoOrder";
 import type { SeedDefaults } from "@/types/schedule";
 import { asset } from "@/lib/asset";
@@ -48,21 +49,8 @@ function cropDeadlineYearDay(
   return toYearDay({ season: SEASONS[last], day: 28 });
 }
 
-// 메뉴 항목. tool/seed/fruit/장비/build는 하위 폼, mining/fishing/pond/misc는 즉시 처리.
-const MENU = [
-  "tool",
-  "seed",
-  "fruit",
-  "artisanMachine",
-  "refiningMachine",
-  "build",
-  "mining",
-  "fishing",
-  "pond",
-  "misc",
-] as const;
-
-// 메뉴 항목 아이콘(없는 것은 기존 도구·장비·건물 아이콘 재사용)
+// 메뉴 항목 아이콘(없는 것은 기존 도구·장비·건물 아이콘 재사용).
+// 표시 순서·표시 여부는 사용자 설정(addTaskOrder/hiddenItems)을 따른다.
 const MENU_ICONS: Record<string, string> = {
   tool: "/icons/addTask/tool.png",
   seed: "/icons/addTask/seed.png",
@@ -72,7 +60,6 @@ const MENU_ICONS: Record<string, string> = {
   build: "/icons/addTask/build.png",
   mining: "/icons/tools/pickaxe.png",
   fishing: "/icons/addTask/fishing.png",
-  pond: "/icons/buildings/fishPond.png",
   misc: "/icons/addTask/misc.png",
 };
 
@@ -97,7 +84,10 @@ export default function AddTaskDialog({
     setSeedDefaults,
     hiddenItems,
     setHiddenItem,
-    setReminderToggle,
+    addTaskOrder,
+    addTaskChildOrder,
+    setAddTaskOrder,
+    setAddTaskChildOrder,
   } = useSchedule();
   const [mode, setMode] = useState<Mode>("menu");
 
@@ -242,12 +232,6 @@ export default function AddTaskDialog({
     onClose();
   };
 
-  // 물고기 연못 확인: 매일 리마인더로 표시(메모 대신 토글 활성화)
-  const enablePond = () => {
-    setReminderToggle("pondCheck", true);
-    onClose();
-  };
-
   // 메뉴 항목 클릭 동작
   const menuAction = (m: string): (() => void) => {
     switch (m) {
@@ -255,8 +239,6 @@ export default function AddTaskDialog({
         return () => addAndClose(baseDate, t("addTask.miningMemo"), "mining");
       case "fishing":
         return () => addAndClose(baseDate, t("addTask.fishingMemo"), "fishing");
-      case "pond":
-        return enablePond;
       case "misc":
         return () => addAndClose(baseDate, t("addTask.miscMemo"), "misc");
       default:
@@ -315,9 +297,9 @@ export default function AddTaskDialog({
             </button>
           </div>
           <ul className="flex flex-col gap-2">
-            {MENU.filter((m) => !hiddenItems[`menu:${m}`]).map((m) =>
-              renderMenuItem(m, menuAction(m)),
-            )}
+            {addTaskOrder
+              .filter((m) => !hiddenItems[`menu:${m}`])
+              .map((m) => renderMenuItem(m, menuAction(m)))}
           </ul>
         </>
       )}
@@ -326,6 +308,10 @@ export default function AddTaskDialog({
         <OptionsPanel
           hiddenItems={hiddenItems}
           setHiddenItem={setHiddenItem}
+          order={addTaskOrder}
+          setOrder={setAddTaskOrder}
+          childOrder={addTaskChildOrder}
+          setChildOrder={setAddTaskChildOrder}
           onBack={() => setMode("menu")}
         />
       )}
@@ -334,6 +320,7 @@ export default function AddTaskDialog({
         <FruitForm
           plantDate={baseDate}
           hiddenItems={hiddenItems}
+          childOrder={addTaskChildOrder.fruit ?? []}
           onBack={() => setMode("menu")}
           onAdd={addFruitPlant}
         />
@@ -364,6 +351,7 @@ export default function AddTaskDialog({
           dateLabel={dateLabel}
           fixedCategory={mode === "artisanMachine" ? "artisan" : "refining"}
           hiddenItems={hiddenItems}
+          childOrder={addTaskChildOrder[mode] ?? []}
           onBack={() => setMode("menu")}
           onAdd={addMachineUse}
         />
@@ -374,6 +362,7 @@ export default function AddTaskDialog({
           requestDate={baseDate}
           dateLabel={dateLabel}
           hiddenItems={hiddenItems}
+          childOrder={addTaskChildOrder.build ?? []}
           onBack={() => setMode("menu")}
           onAdd={(date, text) => addAndClose(date, text, "build")}
         />
@@ -660,6 +649,7 @@ function MachineForm({
   dateLabel,
   fixedCategory,
   hiddenItems,
+  childOrder,
   onBack,
   onAdd,
 }: {
@@ -667,6 +657,7 @@ function MachineForm({
   dateLabel: (d: SDate) => string;
   fixedCategory: MachineCategory;
   hiddenItems: Record<string, boolean>;
+  childOrder: string[];
   onBack: () => void;
   onAdd: (
     machineId: string,
@@ -676,9 +667,13 @@ function MachineForm({
   ) => void;
 }) {
   const t = useTranslations();
-  // 해당 카테고리에서 상세 옵션으로 숨기지 않은 장비만
-  const inCategory = MACHINES.filter(
-    (m) => m.category === fixedCategory && !hiddenItems[`machine:${m.id}`],
+  // 해당 카테고리에서 상세 옵션으로 숨기지 않은 장비만(사용자 순서 적용)
+  const inCategory = orderBy(
+    MACHINES.filter(
+      (m) => m.category === fixedCategory && !hiddenItems[`machine:${m.id}`],
+    ),
+    (m) => m.id,
+    childOrder,
   );
   const [machineId, setMachineId] = useState(inCategory[0]?.id ?? "");
   const machine = inCategory.find((m) => m.id === machineId) ?? inCategory[0];
@@ -775,21 +770,27 @@ function BuildForm({
   requestDate,
   dateLabel,
   hiddenItems,
+  childOrder,
   onBack,
   onAdd,
 }: {
   requestDate: SDate;
   dateLabel: (d: SDate) => string;
   hiddenItems: Record<string, boolean>;
+  childOrder: string[];
   onBack: () => void;
   onAdd: (orderDate: SDate, text: string) => void;
 }) {
   const t = useTranslations();
   const [category, setCategory] = useState<BuildingCategory>("animal");
-  // 상세 옵션으로 숨기지 않은 건물만
-  const inCategory = BUILDINGS.filter(
-    (b) => b.category === category && !hiddenItems[`building:${b.id}`],
-  );
+  // 상세 옵션으로 숨기지 않은 건물만(사용자 순서 적용)
+  const buildingsIn = (c: BuildingCategory) =>
+    orderBy(
+      BUILDINGS.filter((b) => b.category === c && !hiddenItems[`building:${b.id}`]),
+      (b) => b.id,
+      childOrder,
+    );
+  const inCategory = buildingsIn(category);
   const [buildingId, setBuildingId] = useState<string>(inCategory[0]?.id ?? "");
 
   const def: BuildingDef | undefined =
@@ -799,10 +800,7 @@ function BuildForm({
   // 카테고리 변경 시 해당 카테고리 첫(숨기지 않은) 건물로 선택 초기화
   const changeCategory = (c: BuildingCategory) => {
     setCategory(c);
-    const first = BUILDINGS.find(
-      (b) => b.category === c && !hiddenItems[`building:${b.id}`],
-    );
-    setBuildingId(first?.id ?? "");
+    setBuildingId(buildingsIn(c)[0]?.id ?? "");
   };
 
   // 메모 텍스트: "{건물} 건설 (재료: 10,000g · 나무 450)" / 재료 없으면 골드만
@@ -903,18 +901,24 @@ function BuildForm({
 function FruitForm({
   plantDate,
   hiddenItems,
+  childOrder,
   onBack,
   onAdd,
 }: {
   plantDate: SDate;
   hiddenItems: Record<string, boolean>;
+  childOrder: string[];
   onBack: () => void;
   onAdd: (treeId: string, greenhouse: boolean) => void;
 }) {
   const t = useTranslations();
   const [greenhouse, setGreenhouse] = useState(false);
-  // 상세 옵션으로 숨기지 않은 과일나무만
-  const trees = FRUIT_TREES.filter((f) => !hiddenItems[`fruit:${f.id}`]);
+  // 상세 옵션으로 숨기지 않은 과일나무만(사용자 순서 적용)
+  const trees = orderBy(
+    FRUIT_TREES.filter((f) => !hiddenItems[`fruit:${f.id}`]),
+    (f) => f.id,
+    childOrder,
+  );
   const [treeId, setTreeId] = useState<string>(trees[0]?.id ?? "");
   const tree = trees.find((f) => f.id === treeId) ?? trees[0];
 
@@ -984,92 +988,212 @@ function FruitForm({
   );
 }
 
-// 상세 옵션: 할 일 추가에서 보고 싶지 않은 항목 숨기기(체크=표시).
+// 상세 옵션: 트리(상위→하위) + 체크(표시 여부) + ⠿ 드래그(순서 변경, 할 일 추가 표시 순서).
 function OptionsPanel({
   hiddenItems,
   setHiddenItem,
+  order,
+  setOrder,
+  childOrder,
+  setChildOrder,
   onBack,
 }: {
   hiddenItems: Record<string, boolean>;
   setHiddenItem: (key: string, hidden: boolean) => void;
+  order: string[];
+  setOrder: (order: string[]) => void;
+  childOrder: Record<string, string[]>;
+  setChildOrder: (parent: string, order: string[]) => void;
   onBack: () => void;
 }) {
   const t = useTranslations();
-
-  // 한 줄(체크=표시). 컴포넌트가 아니라 렌더 헬퍼로 정의(상태 보존).
-  const renderRow = (itemKey: string, label: string, icon?: string) => {
-    const hidden = !!hiddenItems[itemKey];
-    return (
-      <li key={itemKey}>
-        <label className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-sm hover:bg-[var(--sv-bg)]">
-          <input
-            type="checkbox"
-            checked={!hidden}
-            onChange={(e) => setHiddenItem(itemKey, !e.target.checked)}
-            className="size-4 shrink-0 accent-[var(--sv-accent)]"
-          />
-          {icon && <PixelIcon src={icon} size={16} />}
-          <span
-            className={hidden ? "text-[var(--sv-ink-muted)] line-through" : ""}
-          >
-            {label}
-          </span>
-        </label>
-      </li>
-    );
+  const [expanded, setExpanded] = useState<Set<string>>(new Set());
+  // 드래그 상태: parent=null이면 상위, 그 외엔 해당 그룹 내부.
+  const [drag, setDrag] = useState<{ parent: string | null; from: number } | null>(
+    null,
+  );
+  const [over, setOver] = useState<number | null>(null);
+  const resetDrag = () => {
+    setDrag(null);
+    setOver(null);
   };
 
-  const renderSection = (title: string, rows: React.ReactNode) => (
-    <div>
-      <FieldLabel>{title}</FieldLabel>
-      <ul className="flex flex-col gap-0.5">{rows}</ul>
-    </div>
+  const toggleExpand = (key: string) =>
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+
+  const childList = (parent: string) =>
+    childOrder[parent] ?? ADD_TASK_CHILDREN[parent]?.defaultIds ?? [];
+
+  const move = (arr: string[], from: number, to: number) => {
+    const next = [...arr];
+    const [m] = next.splice(from, 1);
+    next.splice(to, 0, m);
+    return next;
+  };
+
+  const drop = (parent: string | null, to: number) => {
+    if (!drag || drag.parent !== parent || drag.from === to) {
+      resetDrag();
+      return;
+    }
+    if (parent === null) setOrder(move(order, drag.from, to));
+    else setChildOrder(parent, move(childList(parent), drag.from, to));
+    resetDrag();
+  };
+
+  // 같은 레벨에서 포인터 아래의 인덱스
+  const indexFromPoint = (
+    parent: string | null,
+    x: number,
+    y: number,
+  ): number | null => {
+    const sel =
+      parent === null
+        ? "[data-top-index]"
+        : `[data-child-index][data-child-parent="${parent}"]`;
+    const el = document.elementFromPoint(x, y);
+    const li = el?.closest(sel) as HTMLElement | null;
+    if (!li) return null;
+    const idx = Number(
+      parent === null ? li.dataset.topIndex : li.dataset.childIndex,
+    );
+    return Number.isNaN(idx) ? null : idx;
+  };
+
+  // 드래그 핸들(컴포넌트가 아닌 렌더 헬퍼).
+  const renderHandle = (parent: string | null, i: number) => (
+    <span
+      aria-hidden
+      title={t("settings.reorder")}
+      onClick={(e) => e.stopPropagation()}
+      onPointerDown={(e) => {
+        e.preventDefault();
+        setDrag({ parent, from: i });
+        setOver(i);
+        e.currentTarget.setPointerCapture(e.pointerId);
+      }}
+      onPointerMove={(e) => {
+        if (!drag || drag.parent !== parent) return;
+        const idx = indexFromPoint(parent, e.clientX, e.clientY);
+        if (idx !== null) setOver(idx);
+      }}
+      onPointerUp={(e) => {
+        e.currentTarget.releasePointerCapture(e.pointerId);
+        if (over !== null) drop(parent, over);
+        else resetDrag();
+      }}
+      onPointerCancel={resetDrag}
+      className="shrink-0 cursor-grab touch-none select-none px-1 text-[var(--sv-ink-muted)]"
+    >
+      ⠿
+    </span>
   );
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3">
       <p className="text-xs text-[var(--sv-ink-muted)]">
-        {t("addTask.optionsHint")}
+        {t("addTask.optionsTreeHint")}
       </p>
+      <ul className="flex flex-col gap-1">
+        {order.map((key, i) => {
+          const group = ADD_TASK_CHILDREN[key];
+          const open = expanded.has(key);
+          const hidden = !!hiddenItems[`menu:${key}`];
+          const isOver = over === i && drag?.parent === null && drag.from !== i;
+          const isDragging = drag?.parent === null && drag.from === i;
+          return (
+            <li
+              key={key}
+              data-top-index={i}
+              className={`rounded-md border-t-2 ${
+                isOver ? "border-[var(--sv-accent)]" : "border-transparent"
+              } ${isDragging ? "opacity-40" : ""}`}
+            >
+              <div
+                className={`flex items-center gap-1.5 px-1 py-1.5 hover:bg-[var(--sv-bg)] ${
+                  group ? "cursor-pointer" : ""
+                }`}
+                onClick={group ? () => toggleExpand(key) : undefined}
+              >
+                <input
+                  type="checkbox"
+                  checked={!hidden}
+                  onClick={(e) => e.stopPropagation()}
+                  onChange={(e) => setHiddenItem(`menu:${key}`, !e.target.checked)}
+                  className="size-4 shrink-0 accent-[var(--sv-accent)]"
+                />
+                <PixelIcon src={MENU_ICONS[key]} size={18} />
+                <span
+                  className={`text-sm font-semibold ${
+                    hidden ? "text-[var(--sv-ink-muted)] line-through" : ""
+                  }`}
+                >
+                  {t(`addTask.${key}`)}
+                </span>
+                <span className="ml-auto flex shrink-0 items-center gap-1">
+                  {group && (
+                    <span
+                      aria-label={open ? t("addTask.collapse") : t("addTask.expand")}
+                      className="text-xs text-[var(--sv-ink-muted)]"
+                    >
+                      {open ? "▲" : "▼"}
+                    </span>
+                  )}
+                  {renderHandle(null, i)}
+                </span>
+              </div>
 
-      {renderSection(
-        t("addTask.optionMenu"),
-        MENU.map((m) => renderRow(`menu:${m}`, t(`addTask.${m}`), MENU_ICONS[m])),
-      )}
-
-      {renderSection(
-        t("machineCategory.artisan"),
-        MACHINES.filter((m) => m.category === "artisan").map((m) =>
-          renderRow(`machine:${m.id}`, t(`machines.${m.id}`), `/icons/machines/${m.id}.png`),
-        ),
-      )}
-
-      {renderSection(
-        t("machineCategory.refining"),
-        MACHINES.filter((m) => m.category === "refining").map((m) =>
-          renderRow(`machine:${m.id}`, t(`machines.${m.id}`), `/icons/machines/${m.id}.png`),
-        ),
-      )}
-
-      {renderSection(
-        t("addTask.optionBuilding"),
-        BUILDINGS.map((b) =>
-          renderRow(`building:${b.id}`, t(`buildings.${b.id}`), `/icons/buildings/${b.id}.png`),
-        ),
-      )}
-
-      {renderSection(
-        t("addTask.optionFruit"),
-        FRUIT_TREES.map((f) =>
-          renderRow(`fruit:${f.id}`, t(`fruitTrees.${f.id}`), `/icons/fruitTrees/${f.id}.png`),
-        ),
-      )}
+              {group && open && (
+                <ul className="ml-7 flex flex-col gap-0.5 border-l border-dashed border-[var(--sv-border)] pl-2">
+                  {childList(key).map((id, ci) => {
+                    const ck = `${group.hiddenPrefix}:${id}`;
+                    const chidden = !!hiddenItems[ck];
+                    const cOver =
+                      over === ci && drag?.parent === key && drag.from !== ci;
+                    const cDragging = drag?.parent === key && drag.from === ci;
+                    return (
+                      <li
+                        key={id}
+                        data-child-index={ci}
+                        data-child-parent={key}
+                        className={`flex items-center gap-1.5 rounded-md border-t-2 px-1 py-1 hover:bg-[var(--sv-bg)] ${
+                          cOver ? "border-[var(--sv-accent)]" : "border-transparent"
+                        } ${cDragging ? "opacity-40" : ""}`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={!chidden}
+                          onChange={(e) => setHiddenItem(ck, !e.target.checked)}
+                          className="size-4 shrink-0 accent-[var(--sv-accent)]"
+                        />
+                        <PixelIcon src={group.icon(id)} size={16} />
+                        <span
+                          className={`text-sm ${
+                            chidden ? "text-[var(--sv-ink-muted)] line-through" : ""
+                          }`}
+                        >
+                          {t(group.labelKey(id))}
+                        </span>
+                        <span className="ml-auto shrink-0">
+                          {renderHandle(key, ci)}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+            </li>
+          );
+        })}
+      </ul>
 
       <div className="mt-1 flex justify-start">
-        <button
-          onClick={onBack}
-          className="rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm hover:bg-[var(--sv-bg)]"
-        >
+        <button onClick={onBack} className="sv-btn px-3 py-1.5 text-sm">
           ← {t("addTask.back")}
         </button>
       </div>

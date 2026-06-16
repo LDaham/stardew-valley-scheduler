@@ -12,6 +12,12 @@ import {
   reconcileTodoOrder,
   type MemoCategory,
 } from "@/lib/todoOrder";
+import {
+  DEFAULT_ADD_TASK_ORDER,
+  ADD_TASK_CHILDREN,
+  reconcileAddTaskOrder,
+  reconcileChildOrder,
+} from "@/lib/addTaskOrder";
 import type {
   BundleMode,
   CharacterInfo,
@@ -51,6 +57,23 @@ const DEFAULT_MEMO_CATEGORY_TOGGLES: MemoCategoryToggles = MEMO_CATEGORIES.reduc
 const STORAGE_KEY = "svs:schedule";
 const STATE_VERSION = 1;
 
+// 할 일 추가 하위 항목 기본 순서(그룹별 데이터 순).
+function defaultChildOrder(): Record<string, string[]> {
+  const out: Record<string, string[]> = {};
+  for (const key of Object.keys(ADD_TASK_CHILDREN))
+    out[key] = [...ADD_TASK_CHILDREN[key].defaultIds];
+  return out;
+}
+// 저장된 하위 순서를 그룹별로 정리(집합 다르면 기본값으로).
+function reconcileAllChildOrders(
+  saved?: Record<string, string[]>,
+): Record<string, string[]> {
+  const out: Record<string, string[]> = {};
+  for (const key of Object.keys(ADD_TASK_CHILDREN))
+    out[key] = reconcileChildOrder(key, saved?.[key]);
+  return out;
+}
+
 const DEFAULT_STATE: ScheduleState = {
   version: STATE_VERSION,
   currentDay: 1, // 봄 1일
@@ -70,6 +93,8 @@ const DEFAULT_STATE: ScheduleState = {
   perfectionChecks: {},
   perfectionCounts: {},
   hiddenItems: {},
+  addTaskOrder: DEFAULT_ADD_TASK_ORDER,
+  addTaskChildOrder: defaultChildOrder(),
   achievementsDone: {},
   character: DEFAULT_CHARACTER,
 };
@@ -106,6 +131,8 @@ function ensureLoaded(): void {
     perfectionChecks: saved.perfectionChecks ?? {},
     perfectionCounts: saved.perfectionCounts ?? {},
     hiddenItems: saved.hiddenItems ?? {},
+    addTaskOrder: reconcileAddTaskOrder(saved.addTaskOrder),
+    addTaskChildOrder: reconcileAllChildOrders(saved.addTaskChildOrder),
     achievementsDone: saved.achievementsDone ?? {},
     character: { ...DEFAULT_CHARACTER, ...saved.character },
     year: saved.year ?? 1,
@@ -335,6 +362,8 @@ export const scheduleActions = {
       perfectionChecks: {},
       perfectionCounts: {},
       hiddenItems: {},
+      addTaskOrder: [...DEFAULT_ADD_TASK_ORDER],
+      addTaskChildOrder: defaultChildOrder(),
       achievementsDone: {},
       character: { ...DEFAULT_CHARACTER },
     });
@@ -386,6 +415,17 @@ export const scheduleActions = {
     commit({
       ...state,
       hiddenItems: { ...state.hiddenItems, [key]: hidden },
+    });
+  },
+  // 할 일 추가 메뉴 순서 설정
+  setAddTaskOrder(order: string[]) {
+    commit({ ...state, addTaskOrder: order });
+  },
+  // 할 일 추가 하위 항목 순서 설정(그룹별)
+  setAddTaskChildOrder(parent: string, order: string[]) {
+    commit({
+      ...state,
+      addTaskChildOrder: { ...state.addTaskChildOrder, [parent]: order },
     });
   },
   // 업적 달성 토글
