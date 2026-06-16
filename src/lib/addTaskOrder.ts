@@ -1,7 +1,6 @@
 // 할 일 추가(AddTask) 메뉴의 표시 순서 + 하위 항목(장비·건물·과일나무) 순서 정의.
 // 스케줄러 설정처럼 사용자가 상세 옵션에서 드래그로 순서를 바꿀 수 있다.
 
-import { MACHINES } from "@/data/machines";
 import { BUILDINGS } from "@/data/buildings";
 import { FRUIT_TREES } from "@/data/fruitTrees";
 
@@ -10,9 +9,9 @@ import { FRUIT_TREES } from "@/data/fruitTrees";
 export const DEFAULT_ADD_TASK_ORDER: string[] = [
   "seed", // 씨앗 심기
   "fruit", // 과일 수확하기(과일나무 묘목 심기)
-  "artisanMachine", // 장인 장비 사용
   "tool", // 도구 업그레이드
   "build", // 건물 건설
+  "artisanMachine", // 장인 장비 사용
   "refiningMachine", // 정제 장비 사용
 ];
 
@@ -29,14 +28,23 @@ export const ADD_TASK_CHILDREN: Record<string, ChildGroup> = {
   artisanMachine: {
     parent: "artisanMachine",
     hiddenPrefix: "machine",
-    defaultIds: MACHINES.filter((m) => m.category === "artisan").map((m) => m.id),
+    // 표시 순서: 술통 → 절임통 → 숙성용 나무통 → 양봉장 → 착유기
+    defaultIds: ["keg", "preservesJar", "cask", "beeHouse", "oilMaker"],
     icon: (id) => `/icons/machines/${id}.png`,
     labelKey: (id) => `machines.${id}`,
   },
   refiningMachine: {
     parent: "refiningMachine",
     hiddenPrefix: "machine",
-    defaultIds: MACHINES.filter((m) => m.category === "refining").map((m) => m.id),
+    // 표시 순서: 수액 채취기 → 중형(고급) → 결정생성기 → 태양 전지판 → 타조알 → 슬라임
+    defaultIds: [
+      "tapper",
+      "heavyTapper",
+      "crystalarium",
+      "solarPanel",
+      "ostrichIncubator",
+      "slimeIncubator",
+    ],
     icon: (id) => `/icons/machines/${id}.png`,
     labelKey: (id) => `machines.${id}`,
   },

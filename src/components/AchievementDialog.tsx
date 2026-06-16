@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
@@ -11,19 +12,24 @@ export default function AchievementDialog({ onClose }: { onClose: () => void }) 
     useSchedule();
   // 완료되지 않은 업적 우선 표시(마지막 선택값 영속)
   const incompleteFirst = dialogFilters.achievementIncompleteFirst;
-  const setIncompleteFirst = (v: boolean) =>
+
+  // 정렬 순서는 '열 때 / 필터 변경 시'에만 다시 계산한다(체크 직후 즉시 재정렬하지
+  // 않아, 실수로 누른 항목을 그 자리에서 다시 해제하기 쉽게 한다).
+  const computeList = (incFirst: boolean) =>
+    incFirst
+      ? [...ACHIEVEMENTS].sort(
+          (a, b) =>
+            Number(!!achievementsDone[a.id]) - Number(!!achievementsDone[b.id]),
+        )
+      : ACHIEVEMENTS;
+  const [list, setList] = useState(() => computeList(incompleteFirst));
+  const setIncompleteFirst = (v: boolean) => {
     setDialogFilters({ achievementIncompleteFirst: v });
+    setList(computeList(v));
+  };
 
   const total = ACHIEVEMENTS.length;
   const done = ACHIEVEMENTS.filter((a) => achievementsDone[a.id]).length;
-
-  // 원래 순서 유지하되, 옵션 시 미완료를 위로(안정 정렬)
-  const list = incompleteFirst
-    ? [...ACHIEVEMENTS].sort(
-        (a, b) =>
-          Number(!!achievementsDone[a.id]) - Number(!!achievementsDone[b.id]),
-      )
-    : ACHIEVEMENTS;
 
   return (
     <Modal title={t("achievement.title")} onClose={onClose}>

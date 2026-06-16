@@ -150,4 +150,5 @@ export interface DialogFilters {
   seedFertilizer: string;
   seedProduce: string;
   seedFood: string;
+  seedSeason?: string; // 작물 효율 계절 필터(없으면 현재 계절)
 }

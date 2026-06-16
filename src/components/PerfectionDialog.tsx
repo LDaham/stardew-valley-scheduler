@@ -22,8 +22,6 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
   const [open, setOpen] = useState<string | null>(null);
   // 완료되지 않은 범주 먼저 보기(마지막 선택값 영속)
   const incompleteFirst = dialogFilters.perfectionIncompleteFirst;
-  const setIncompleteFirst = (v: boolean) =>
-    setDialogFilters({ perfectionIncompleteFirst: v });
 
   const progress = (c: PerfCategory) => {
     if (c.kind === "count") {
@@ -46,12 +44,21 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
     const { done, total } = progress(c);
     return total > 0 && done >= total;
   };
-  // 완료되지 않은 범주를 위로(안정 정렬)
-  const orderedCats = incompleteFirst
-    ? [...PERFECTION].sort(
-        (a, b) => Number(catComplete(a)) - Number(catComplete(b)),
-      )
-    : PERFECTION;
+  // 정렬은 '열 때 / 필터 변경 시'에만 다시 계산(체크 직후 즉시 재정렬하지 않아,
+  // 실수로 누른 항목을 그 자리에서 다시 해제하기 쉽게 한다).
+  const computeOrder = (incFirst: boolean) =>
+    incFirst
+      ? [...PERFECTION].sort(
+          (a, b) => Number(catComplete(a)) - Number(catComplete(b)),
+        )
+      : PERFECTION;
+  const [orderedCats, setOrderedCats] = useState(() =>
+    computeOrder(incompleteFirst),
+  );
+  const setIncompleteFirst = (v: boolean) => {
+    setDialogFilters({ perfectionIncompleteFirst: v });
+    setOrderedCats(computeOrder(v));
+  };
 
   const itemName = (c: PerfCategory, id: string) =>
     c.nameVia === "villagers"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useSchedule } from "@/components/ScheduleProvider";
@@ -62,22 +62,35 @@ export default function BundleDialog({
         : defaultSeasonSelection(season),
     [dialogFilters.bundleSeasons, season],
   );
-  const toggleToken = (tk: SeasonToken) => {
-    const next = new Set(selected);
-    if (next.has(tk)) next.delete(tk);
-    else next.add(tk);
-    setDialogFilters({ bundleSeasons: [...next] });
-  };
   // 완료되지 않은 꾸러미 먼저 보기(마지막 선택값 영속)
   const incompleteFirst = dialogFilters.bundleIncompleteFirst;
-  const setIncompleteFirst = (v: boolean) =>
-    setDialogFilters({ bundleIncompleteFirst: v });
 
   const isDone = (b: Bundle, itemId: string) =>
     !!bundleItemsDone[bundleItemKey(b.id, itemId)];
   const doneCount = (b: Bundle) =>
     b.items.filter((i) => isDone(b, i.id)).length;
   const isComplete = (b: Bundle) => doneCount(b) >= b.needed;
+
+  // 표시 순서는 '열 때 / 필터(계절·먼저 보기) 변경 시'에만 다시 계산한다.
+  // 체크 직후 즉시 재정렬하지 않아, 실수로 완료한 꾸러미를 그 자리에서 해제하기 쉽다.
+  const computeOrder = (incFirst: boolean): Bundle[] =>
+    incFirst
+      ? [...BUNDLES].sort((a, b) => Number(isComplete(a)) - Number(isComplete(b)))
+      : BUNDLES;
+  const [bundleOrder, setBundleOrder] = useState(() =>
+    computeOrder(incompleteFirst),
+  );
+  const setIncompleteFirst = (v: boolean) => {
+    setDialogFilters({ bundleIncompleteFirst: v });
+    setBundleOrder(computeOrder(v));
+  };
+  const toggleToken = (tk: SeasonToken) => {
+    const next = new Set(selected);
+    if (next.has(tk)) next.delete(tk);
+    else next.add(tk);
+    setDialogFilters({ bundleSeasons: [...next] });
+    setBundleOrder(computeOrder(incompleteFirst));
+  };
 
   // 꾸러미 한 개를 섹션으로 렌더(필터 적용 후 표시할 품목이 없으면 null)
   const renderBundle = (b: Bundle) => {
@@ -282,12 +295,7 @@ export default function BundleDialog({
 
       <div className="flex flex-col gap-4">
         {bundleMode === "standard"
-          ? (incompleteFirst
-              ? [...BUNDLES].sort(
-                  (a, b) => Number(isComplete(a)) - Number(isComplete(b)),
-                )
-              : BUNDLES
-            ).map((b) => renderBundle(b))
+          ? bundleOrder.map((b) => renderBundle(b))
           : REMIX_SLOTS.map((slot) =>
               slot.fixed
                 ? slot.bundles.map((b) => renderBundle(b))

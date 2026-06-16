@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { SEASONS, type Season } from "@/lib/calendar";
@@ -35,8 +34,9 @@ export default function SeedEfficiencyDialog({
 }) {
   const t = useTranslations();
   const { character, dialogFilters, setDialogFilters } = useSchedule();
-  // 보고 있는 계절(기본=열 때의 현재 계절, 다이얼로그 안에서 전환 가능)
-  const [viewSeason, setViewSeason] = useState<Season>(season);
+  // 보고 있는 계절(저장값 없으면 현재 계절). 닫았다 열어도 마지막 선택 유지.
+  const viewSeason = (dialogFilters.seedSeason as Season) ?? season;
+  const setViewSeason = (s: Season) => setDialogFilters({ seedSeason: s });
   // 필터(다계절 포함·비료·가공·음식) 마지막 선택값 영속.
   const crossSeason = dialogFilters.seedCrossSeason;
   const setCrossSeason = (v: boolean) =>

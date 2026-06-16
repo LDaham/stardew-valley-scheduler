@@ -67,7 +67,8 @@ const DEFAULT_DIALOG_FILTERS: DialogFilters = {
 };
 
 const STORAGE_KEY = "svs:schedule";
-const STATE_VERSION = 1;
+// v2: 할 일 추가 메뉴/장비 기본 순서 개편 → 기존 저장 순서를 1회 새 기본값으로 재설정.
+const STATE_VERSION = 2;
 
 // 할 일 추가 하위 항목 기본 순서(그룹별 데이터 순).
 function defaultChildOrder(): Record<string, string[]> {
@@ -120,6 +121,8 @@ const listeners = new Set<() => void>();
 function ensureLoaded(): void {
   if (loaded || typeof window === "undefined") return;
   const saved = loadJSON(STORAGE_KEY, DEFAULT_STATE);
+  // 구버전(<2) 저장본은 할 일 추가 순서를 새 기본값으로 1회 마이그레이션한다.
+  const migrateOrder = saved.version !== STATE_VERSION;
   state = {
     ...DEFAULT_STATE,
     ...saved,
@@ -144,8 +147,12 @@ function ensureLoaded(): void {
     perfectionChecks: saved.perfectionChecks ?? {},
     perfectionCounts: saved.perfectionCounts ?? {},
     hiddenItems: saved.hiddenItems ?? {},
-    addTaskOrder: reconcileAddTaskOrder(saved.addTaskOrder),
-    addTaskChildOrder: reconcileAllChildOrders(saved.addTaskChildOrder),
+    addTaskOrder: migrateOrder
+      ? [...DEFAULT_ADD_TASK_ORDER]
+      : reconcileAddTaskOrder(saved.addTaskOrder),
+    addTaskChildOrder: migrateOrder
+      ? defaultChildOrder()
+      : reconcileAllChildOrders(saved.addTaskChildOrder),
     achievementsDone: saved.achievementsDone ?? {},
     character: { ...DEFAULT_CHARACTER, ...saved.character },
     dialogFilters: { ...DEFAULT_DIALOG_FILTERS, ...saved.dialogFilters },

@@ -716,7 +716,11 @@ function MachineForm({
   );
   const [machineId, setMachineId] = useState(inCategory[0]?.id ?? "");
   const machine = inCategory.find((m) => m.id === machineId) ?? inCategory[0];
-  const [outputId, setOutputId] = useState(machine?.recipes[0].id ?? "");
+  // 산출물은 적게 걸리는 것부터(소요일 오름차순) 표시한다.
+  const sortedRecipes = machine
+    ? [...machine.recipes].sort((a, b) => a.days - b.days)
+    : [];
+  const [outputId, setOutputId] = useState(sortedRecipes[0]?.id ?? "");
   // 해당 산출물 반복 제작: 수령 완료 시 '가동'을 자동으로 다시 추가.
   // 장인 장비(술통·절임통 등)는 기본 활성화, 정제 장비는 기본 비활성화.
   const [repeat, setRepeat] = useState(fixedCategory === "artisan");
@@ -737,7 +741,7 @@ function MachineForm({
   }
 
   const recipe =
-    machine.recipes.find((r) => r.id === outputId) ?? machine.recipes[0];
+    sortedRecipes.find((r) => r.id === outputId) ?? sortedRecipes[0];
   const ready = addDays(startDate, recipe.days);
 
   return (
@@ -754,7 +758,9 @@ function MachineForm({
           onChange={(v) => {
             const m = inCategory.find((x) => x.id === v) ?? inCategory[0];
             setMachineId(m.id);
-            setOutputId(m.recipes[0].id);
+            setOutputId(
+              [...m.recipes].sort((a, b) => a.days - b.days)[0].id,
+            );
           }}
           ariaLabel={t("addTask.selectMachine")}
         />
@@ -764,7 +770,7 @@ function MachineForm({
         <FieldLabel>{t("addTask.selectOutput")}</FieldLabel>
         <Dropdown
           value={outputId}
-          options={machine.recipes.map((r) => ({
+          options={sortedRecipes.map((r) => ({
             value: r.id,
             label: `${t(`machineOutputs.${r.id}`)} · ${daysLabel(r.days)}`,
             icon: `/icons/machineOutputs/${r.id}.png`,
