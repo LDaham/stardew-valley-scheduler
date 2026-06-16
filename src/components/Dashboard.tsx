@@ -1046,12 +1046,19 @@ function MinMaxRouteView({ season, day }: { season: Season; day: number }) {
 
   return (
     <div className="sv-box p-4">
-      <h2 className="mb-3 text-lg font-bold">
-        {t("minMax.routeTitle", {
-          season: t(`seasons.${season}`),
-          day,
-        })}
-      </h2>
+      <div className="mb-3 flex flex-wrap items-center gap-2">
+        <h2 className="text-lg font-bold">
+          {t("minMax.routeTitle", {
+            season: t(`seasons.${season}`),
+            day,
+          })}
+        </h2>
+        {entry.weather && (
+          <span className="rounded bg-[#5b8fb0] px-2 py-0.5 text-[13px] font-semibold text-white">
+            {entry.weather}
+          </span>
+        )}
+      </div>
 
       {entry.goal && (
         <p className="mb-3 rounded-md bg-[var(--sv-bg)] px-3 py-2 text-base leading-relaxed">
