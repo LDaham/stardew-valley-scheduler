@@ -97,6 +97,7 @@ const DEFAULT_STATE: ScheduleState = {
   addTaskChildOrder: defaultChildOrder(),
   achievementsDone: {},
   character: DEFAULT_CHARACTER,
+  minMaxMode: false,
 };
 
 let state: ScheduleState = DEFAULT_STATE;
@@ -135,6 +136,7 @@ function ensureLoaded(): void {
     addTaskChildOrder: reconcileAllChildOrders(saved.addTaskChildOrder),
     achievementsDone: saved.achievementsDone ?? {},
     character: { ...DEFAULT_CHARACTER, ...saved.character },
+    minMaxMode: saved.minMaxMode ?? false,
     year: saved.year ?? 1,
     version: STATE_VERSION,
   };
@@ -366,6 +368,7 @@ export const scheduleActions = {
       addTaskChildOrder: defaultChildOrder(),
       achievementsDone: {},
       character: { ...DEFAULT_CHARACTER },
+      minMaxMode: false,
     });
   },
   // 번들 품목 기증 토글
@@ -427,6 +430,10 @@ export const scheduleActions = {
       ...state,
       addTaskChildOrder: { ...state.addTaskChildOrder, [parent]: order },
     });
+  },
+  // min/max 스케줄 모드 전환
+  setMinMaxMode(on: boolean) {
+    commit({ ...state, minMaxMode: on });
   },
   // 업적 달성 토글
   toggleAchievement(id: string) {

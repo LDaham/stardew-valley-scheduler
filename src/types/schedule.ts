@@ -128,6 +128,8 @@ export interface ScheduleState {
   achievementsDone: Record<string, boolean>;
   // 캐릭터 정보(농사/채집 레벨·스킬). 씨앗 효율 계산에 사용.
   character: CharacterInfo;
+  // min/max 스케줄 모드: 켜면 todolist 대신 min/max 루트 가이드를 날짜별로 표시.
+  minMaxMode: boolean;
 }
 
 export type BundleMode = "standard" | "remix";

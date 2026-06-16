@@ -123,7 +123,19 @@
     "reorder": "드래그하여 순서 변경",
     "userAdded": "사용자 추가",
     "cropGroup": "씨앗 심기",
-    "cropGroupNote": "심기 → 물주기 → 수확 → 음식/재파종 순서. 상위를 완료해야 하위 할 일이 생깁니다."
+    "cropGroupNote": "심기 → 물주기 → 수확 → 음식/재파종 순서. 상위를 완료해야 하위 할 일이 생깁니다.",
+    "minMaxMode": "min/max 스케줄 전환",
+    "minMaxModeLabel": "min/max 루트 가이드 사용",
+    "minMaxModeNote": "켜면 할 일 목록 대신 min/max 공략 루트를 날짜별로 보여줍니다(봄 1~28일)."
+  },
+  "minMax": {
+    "rules": "규칙",
+    "rulesShort": "규칙",
+    "routeTitle": "{season}의 {day}일째 루트",
+    "goal": "오늘의 목표:",
+    "result": "결과:",
+    "noEntry": "이 날짜의 루트 가이드가 아직 없습니다. (현재 봄 1~28일만 정리되어 있습니다.)",
+    "source": "출처: BlackSight6 & Zamiel — Stardew Valley Min-Max Routing/Strategy 가이드(github.com/Zamiell/stardew-valley). 비영리 요약·번역."
   },
   "blacksmith": {
     "pickupWarn": "완성 예정일 {ready}은 대장간 휴무({reason})라 다음 영업일에 수령합니다",

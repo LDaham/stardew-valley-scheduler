@@ -46,6 +46,7 @@ export function useSchedule() {
     addTaskChildOrder: state.addTaskChildOrder,
     achievementsDone: state.achievementsDone,
     character: state.character,
+    minMaxMode: state.minMaxMode,
     memosOn: (date: SDate): Memo[] =>
       state.memos.filter(
         (m) => m.season === date.season && m.day === date.day,
@@ -82,6 +83,7 @@ export function useSchedule() {
     setAddTaskChildOrder: scheduleActions.setAddTaskChildOrder,
     toggleAchievement: scheduleActions.toggleAchievement,
     setCharacter: scheduleActions.setCharacter,
+    setMinMaxMode: scheduleActions.setMinMaxMode,
     resetAll: scheduleActions.resetAll,
   };
 }
