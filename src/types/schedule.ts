@@ -78,6 +78,8 @@ export interface Memo {
   cropId?: string;
   // 도구 업그레이드 메모의 도구 id(기본 도구 아이콘 표시에 사용). axe/pickaxe/hoe/wateringCan/trashCan.
   toolId?: string;
+  // 장비 사용 메모의 장비 id(장비 아이콘 표시에 사용). 예: keg, crystalarium.
+  machineId?: string;
   // 한 번의 씨앗 심기로 파생된 메모 묶음 id(같은 작물을 다른 날 심으면 구분).
   groupId?: string;
   // 온실에서 심음(계절 만료 없음 — 작물/과일 수확 메모가 사라지지 않는다).

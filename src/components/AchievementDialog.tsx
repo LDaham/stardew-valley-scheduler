@@ -55,11 +55,12 @@ export default function AchievementDialog({ onClose }: { onClose: () => void }) 
           const checked = !!achievementsDone[a.id];
           return (
             <li key={a.id}>
-              <label className="flex cursor-pointer items-start gap-2 rounded-md bg-[var(--sv-bg)] px-2.5 py-1.5 hover:bg-[var(--sv-panel)]">
+              <div className="flex items-start gap-2 rounded-md bg-[var(--sv-bg)] px-2.5 py-1.5 hover:bg-[var(--sv-panel)]">
                 <input
                   type="checkbox"
                   checked={checked}
                   onChange={() => toggleAchievement(a.id)}
+                  aria-label={t(`achievements.${a.id}.name`)}
                   className="mt-0.5 size-4 shrink-0 accent-[var(--sv-accent)]"
                 />
                 <div className="min-w-0 flex-1">
@@ -72,7 +73,7 @@ export default function AchievementDialog({ onClose }: { onClose: () => void }) 
                     {t(`achievements.${a.id}.desc`)}
                   </p>
                 </div>
-              </label>
+              </div>
             </li>
           );
         })}

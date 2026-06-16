@@ -76,9 +76,8 @@ export const REMINDERS: ReminderDef[] = [
   {
     id: "helpWanted",
     trigger: { kind: "daily" },
-    // 축제 전날·당일은 상점/NPC가 막혀 구인광고 확인 불가
+    // 축제 당일은 구인 게시판이 막혀 확인 불가. 전날은 표시(내일 축제 안내 문구 함께 노출).
     suppressOnFestival: true,
-    suppressOnFestivalEve: true,
   },
   { id: "communityCenterBundle", trigger: { kind: "seasonStart" } },
   { id: "crabPot", trigger: { kind: "daily" } },

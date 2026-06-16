@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "스타듀밸리 스케줄러",
-    "description": "스타듀밸리 28일 4계절 순환 달력 메모장 — 축제·생일·작물 일정을 미리 챙기세요."
+    "description": "스타듀밸리 28일 4계절 순환 달력 메모장 - 축제·생일·작물 일정을 미리 챙기세요."
   },
   "common": {
     "appName": "스타듀밸리 스케줄러",
@@ -18,7 +18,7 @@
   },
   "home": {
     "title": "스타듀밸리 스케줄러",
-    "subtitle": "순환하는 달력 메모장 — 오늘 할 일과 다가오는 이벤트를 한눈에"
+    "subtitle": "순환하는 달력 메모장 - 오늘 할 일과 다가오는 이벤트를 한눈에"
   },
   "seasons": {
     "spring": "봄",
@@ -83,7 +83,8 @@
     "noInfo": "표시할 정보 없음",
     "rolled": "미뤄짐",
     "blockedToday": "오늘은 불가({reason})",
-    "dateFull": "{year}년째, {season}의 {day}일째"
+    "dateFull": "{year}년째, {season}의 {day}일째",
+    "festivalEveNote": "내일은 {festival}입니다. 축제 당일엔 상점·NPC·구인 게시판 이용이 막히니 오늘 처리할 일을 끝내세요."
   },
   "memo": {
     "selectDay": "달력에서 날짜를 선택하세요",
@@ -395,14 +396,18 @@
   "addTask": {
     "title": "할 일 추가",
     "titleWithDay": "{day} 할 일 추가",
+    "offCategoryTitle": "표시 꺼짐 종류",
+    "offCategoryBody": "{category} 종류는 스케줄러 설정에서 꺼져 있어 할 일 목록에 표시되지 않습니다. 켜시겠습니까?",
+    "offCategoryEnable": "켜기",
+    "offCategoryKeep": "끈 채로 두기",
     "tool": "도구 업그레이드",
     "seed": "씨앗 심기",
     "machine": "장인 장비 사용",
     "misc": "정동석·박물관",
     "geode": "정동석 깨기",
     "museum": "박물관 기증하기",
-    "geodeMemo": "정동석 깨기 — 대장간(클린트)에 광석 정동석을 가져가 감정",
-    "museumMemo": "박물관 기증하기 — 새로 얻은 광물·유물을 박물관(군터)에 기증",
+    "geodeMemo": "정동석 깨기 - 대장간(클린트)에 광석 정동석을 가져가 감정",
+    "museumMemo": "박물관 기증하기 - 새로 얻은 광물·유물을 박물관(군터)에 기증",
     "miscMemo": "정동석 깨기, 박물관 기증",
     "back": "뒤로",
     "add": "추가",
@@ -418,7 +423,7 @@
     "harvestPreview": "{date} 수확 예정",
     "readyPreview": "{date} 완성 예정",
     "regrowNote": "이후 {days}일마다 재수확",
-    "wiltWarning": "이 계절 안에 수확 불가 — 시즌 종료로 시들 수 있어요",
+    "wiltWarning": "이 계절 안에 수확 불가 - 시즌 종료로 시들 수 있어요",
     "noSeasonCrops": "이 계절에 심을 수 있는 작물이 없습니다",
     "toolMemo": "{tool} 수령",
     "plantMemo": "{crop} 씨앗 심기",
@@ -471,7 +476,7 @@
     "optionFruit": "과일나무",
     "fish": "생선 정보",
     "toolUpgradeMemo": "{tool} 업그레이드 맡기기",
-    "machineUseMemo": "{machine} 가동 — {output}",
+    "machineUseMemo": "{machine} 가동 - {output}",
     "machineUseToday": "오늘 가동 → 당일 완성",
     "machineUsePreview": "오늘 가동 → {date} 수령 예정",
     "fruitPlantMemo": "{fruit}나무 묘목 심기",
@@ -548,7 +553,7 @@
     "raw": "원물 판매",
     "keg": "술통 가공",
     "jar": "절임통 가공",
-    "qualityHint": "작물 등급은 수확일에 결정됩니다 — 수확일에 농사 버프 음식을 먹으면 품질이 올라갑니다. 농사·채집 레벨과 스킬은 캐릭터 정보에서 설정하세요.",
+    "qualityHint": "작물 등급은 수확일에 결정됩니다 - 수확일에 농사 버프 음식을 먹으면 품질이 올라갑니다. 농사·채집 레벨과 스킬은 캐릭터 정보에서 설정하세요.",
     "detail": "{profit}g · {harvests}회 수확 · 일 {perDay}g",
     "rawFallback": "가공 불가 → 원물",
     "note": "상대 수익(최대=100%) 기준. 계절·가공·비료·음식·캐릭터(레벨·스킬)를 반영하며, 씨앗 비용·구매처·가공 시간은 반영하지 않습니다. 술통·절임통 가공물은 품질·경작인을 적용하지 않습니다."
@@ -602,8 +607,11 @@
   "myTasks": {
     "title": "내가 추가한 할 일",
     "short": "내 할 일",
+    "checkButton": "추가한 할 일 확인",
     "open": "내가 추가한 할 일 열기",
     "empty": "추가한 할 일이 없습니다",
+    "emptyFuture": "표시할 이후·미뤄진 할 일이 없습니다",
+    "futureOnly": "이후 할 일만 보기(끄면 이전에 추가한 할 일도 표시)",
     "other": "기타",
     "delete": "삭제",
     "deleteAll": "이 그룹 전체 삭제"
@@ -718,7 +726,7 @@
     },
     "buySeeds": {
       "title": "새 계절",
-      "detail": "새 계절이 시작됐습니다 — 이번 계절 작물 씨앗을 구매할 수 있어요"
+      "detail": "새 계절이 시작됐습니다 - 이번 계절 작물 씨앗을 구매할 수 있어요"
     },
     "helpWanted": {
       "title": "구인광고 확인",
@@ -727,7 +735,7 @@
     },
     "communityCenterBundle": {
       "title": "마을회관 꾸러미 채우기",
-      "detail": "이번 계절 첫날 — 이번 계절에 모을 수 있는 꾸러미 품목 확인"
+      "detail": "이번 계절 첫날 - 이번 계절에 모을 수 있는 꾸러미 품목 확인"
     },
     "crabPot": {
       "title": "통발 확인",
@@ -743,11 +751,11 @@
     },
     "queenOfSauceNew": {
       "title": "소스의 여왕 (신규 방영)",
-      "detail": "일요일 — TV에서 새 요리 레시피 확인"
+      "detail": "일요일 - TV에서 새 요리 레시피 확인"
     },
     "queenOfSauceRerun": {
       "title": "소스의 여왕 (재방송)",
-      "detail": "수요일 — TV에서 요리 레시피 재방송 확인",
+      "detail": "수요일 - TV에서 요리 레시피 재방송 확인",
       "note": "신규 방영을 일요일에 완료하지 않으면 수요일에 재방송이 표시됩니다."
     }
   },

@@ -1,8 +1,8 @@
 // 장비(장인·정제) 처리시간 — 리마인더(완성 예정일) 계산용. 표시명은 i18n 키로 분리.
 // 출처: progress/제작 및 각 장비 위키(술통·절임통·양봉장·숙성용 나무통·결정생성기·수액 채취기·용광로 등)
-// days: 투입 후 완성까지 걸리는 일수(밤을 넘기는 기준). 0 = 같은 날 완성(몇 시간).
-// 즉시 완료(씨앗 생성기·슬라임 알 압착기)와 1.6 신규(탈수기·생선 훈제기·버섯 통나무·미끼 제작기),
-// 자동 생산(지렁이 통)·날씨 의존(피뢰침)은 제외한다.
+// days: 투입 후 완성까지 걸리는 일수(밤을 넘기는 기준).
+// 같은 날 완성(days 0)되는 품목은 일정 관리가 불필요하므로 제외하고, 하루 이상 걸리는 품목만 남긴다.
+// (그 결과 모든 산출물이 같은 날이던 장비 - 용광로·치즈 압착기·재활용 기계 등 - 는 통째로 제외)
 
 export type MachineCategory = "artisan" | "refining";
 
@@ -56,51 +56,14 @@ export const MACHINES: Machine[] = [
     ],
   },
   {
-    id: "mayonnaiseMachine",
-    category: "artisan",
-    recipes: [{ id: "mayonnaise", days: 0 }],
-  },
-  {
-    id: "cheesePress",
-    category: "artisan",
-    recipes: [
-      { id: "cheese", days: 0 },
-      { id: "goatCheese", days: 0 },
-    ],
-  },
-  {
-    id: "loom",
-    category: "artisan",
-    recipes: [{ id: "cloth", days: 0 }],
-  },
-  {
     id: "oilMaker",
     category: "artisan",
-    recipes: [
-      { id: "truffleOil", days: 0 },
-      { id: "oil", days: 1 },
-    ],
+    recipes: [{ id: "oil", days: 1 }],
   },
 
   // ── 정제 장비 ──
   {
-    id: "furnace",
-    category: "refining",
-    recipes: [
-      { id: "copperBar", days: 0 },
-      { id: "ironBar", days: 0 },
-      { id: "goldBar", days: 0 },
-      { id: "iridiumBar", days: 0 },
-      { id: "refinedQuartz", days: 0 },
-    ],
-  },
-  {
-    id: "recyclingMachine",
-    category: "refining",
-    recipes: [{ id: "recycle", days: 0 }],
-  },
-  {
-    // 결정생성기: 보석별 복제 시간(일 단위 반올림, 12시간 미만은 같은 날)
+    // 결정생성기: 보석별 복제 시간(일 단위 반올림, 12시간 미만 항목은 제외)
     id: "crystalarium",
     category: "refining",
     recipes: [
@@ -111,28 +74,7 @@ export const MACHINES: Machine[] = [
       { id: "aquamarine", days: 2 },
       { id: "amethyst", days: 1 },
       { id: "topaz", days: 1 },
-      { id: "quartz", days: 0 },
     ],
-  },
-  {
-    id: "charcoalKiln",
-    category: "refining",
-    recipes: [{ id: "coal", days: 0 }],
-  },
-  {
-    id: "boneMill",
-    category: "refining",
-    recipes: [{ id: "boneFertilizer", days: 0 }],
-  },
-  {
-    id: "geodeCrusher",
-    category: "refining",
-    recipes: [{ id: "mineral", days: 0 }],
-  },
-  {
-    id: "woodChipper",
-    category: "refining",
-    recipes: [{ id: "wood", days: 0 }],
   },
   {
     id: "tapper",

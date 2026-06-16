@@ -19,11 +19,16 @@ export type ReminderBadge =
   | { kind: "today" }
   | { kind: "dDay"; days: number };
 
-// 내일이 NPC·상점 이용을 막는 축제 시작일인지(= 구인광고 등을 오늘 안에 끝내야 하는 날).
+// 내일 시작하는, NPC·상점 이용을 막는 축제(없으면 null). 전날 안내 문구용.
 // 저녁에 시작해 건물이 잠기지 않는 축제는 제외.
-export function festivalEveBlocked(date: SDate): boolean {
+export function festivalEveOf(date: SDate) {
   const fest = festivalStartingOn(addDays(date, 1));
-  return !!fest && !EVENING_FESTIVALS.has(fest.id);
+  return fest && !EVENING_FESTIVALS.has(fest.id) ? fest : null;
+}
+
+// 내일이 NPC·상점 이용을 막는 축제 시작일인지(= 오늘 안에 끝내야 하는 날).
+export function festivalEveBlocked(date: SDate): boolean {
+  return !!festivalEveOf(date);
 }
 
 // 그날 NPC·상점이 막히는 축제일인지(피에르네 등 상점에서 씨앗 구매 불가).

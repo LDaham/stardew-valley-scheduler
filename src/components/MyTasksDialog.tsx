@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { toYearDay } from "@/lib/calendar";
 import type { Memo } from "@/types/schedule";
@@ -40,14 +41,27 @@ function DeleteBtn({ onClick, label }: { onClick: () => void; label: string }) {
 
 export default function MyTasksDialog({ onClose }: { onClose: () => void }) {
   const t = useTranslations();
-  const { memos, deleteMemo, deleteMemos } = useSchedule();
+  const { memos, deleteMemo, deleteMemos, currentDate } = useSchedule();
+  // 이후 할 일 필터: 기본 켜짐 → 현재 날짜 이후(당일 포함)의 할 일 + 미뤄진 일(과거·미완료)만 표시.
+  // 끄면 이전에 추가했던(완료한 과거 포함) 할 일까지 모두 보인다.
+  const [futureOnly, setFutureOnly] = useState(true);
+
+  const todayYd = toYearDay(currentDate);
+  // 미뤄진 일: 날짜가 오늘보다 이전이고 아직 완료하지 않은 메모(매일 미뤄져 표시됨).
+  const isRolled = (m: Memo) =>
+    toYearDay({ season: m.season, day: m.day }) < todayYd && !m.done;
+  const visible = futureOnly
+    ? memos.filter(
+        (m) => toYearDay({ season: m.season, day: m.day }) >= todayYd || isRolled(m),
+      )
+    : memos;
 
   // 작물별 그룹(추가 순서 유지). 같은 작물을 다른 날 심었으면(groupId가 다르면)
   // 파스닙(1), 파스닙(2)처럼 나눠 표시한다. 작물 없는 메모는 기타로 묶는다.
   const cropOrder: string[] = [];
   const byCrop = new Map<string, Memo[]>();
   const other: Memo[] = [];
-  for (const m of memos) {
+  for (const m of visible) {
     if (m.cropId) {
       if (!byCrop.has(m.cropId)) {
         byCrop.set(m.cropId, []);
@@ -128,6 +142,11 @@ export default function MyTasksDialog({ onClose }: { onClose: () => void }) {
             >
               <PixelIcon src={iconSrc(m)} size={16} />
               <span className="flex-1 text-sm">{m.text}</span>
+              {isRolled(m) && (
+                <span className="shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-[10px] font-semibold text-[#5a4416]">
+                  {t("dashboard.rolled")}
+                </span>
+              )}
               <span className="shrink-0 text-[11px] text-[var(--sv-ink-muted)]">
                 {dateLabel(m)}
               </span>
@@ -143,9 +162,20 @@ export default function MyTasksDialog({ onClose }: { onClose: () => void }) {
 
   return (
     <Modal title={t("myTasks.title")} onClose={onClose}>
-      {memos.length === 0 ? (
+      {/* 이후 할 일 필터 */}
+      <label className="mb-3 flex cursor-pointer items-center gap-2 text-sm">
+        <input
+          type="checkbox"
+          checked={futureOnly}
+          onChange={(e) => setFutureOnly(e.target.checked)}
+          className="size-4 accent-[var(--sv-accent)]"
+        />
+        {t("myTasks.futureOnly")}
+      </label>
+
+      {visible.length === 0 ? (
         <p className="text-sm text-[var(--sv-ink-muted)]">
-          {t("myTasks.empty")}
+          {futureOnly ? t("myTasks.emptyFuture") : t("myTasks.empty")}
         </p>
       ) : (
         <div className="flex flex-col gap-3">

@@ -62,15 +62,12 @@ export const DEFAULT_TODO_ORDER: string[] = [
   "memo:machine", // 장인/정제 장비 사용
   "memo:build", // 건물 건설
   "memo:tool", // 도구 업그레이드
-  "memo:misc", // 정동석·박물관
   "event:birthday", // 생일 선물 전달
   "reminder:helpWanted", // 구인 광고 확인
   "reminder:specialOrders", // 특별 주문 게시판 확인
   "reminder:krobusSprinkler", // 이리듐 스프링클러 구매
   "reminder:travelingCart", // 여행 상인 물품 확인
   "reminder:desertTraderStaircase", // 계단 구매
-  "memo:mining", // 채굴하러 가기
-  "memo:fishing", // 낚시하러 가기
   "reminder:pondCheck", // 물고기 연못 확인
   "reminder:crabPot", // 통발 확인
   "reminder:hardwood", // 단단한 나무 캐기

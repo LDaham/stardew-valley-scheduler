@@ -119,7 +119,7 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
                   className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold ${
                     complete
                       ? "bg-[var(--sv-accent)] text-white"
-                      : "bg-[var(--sv-border)] text-[var(--sv-ink-muted)]"
+                      : "bg-[var(--sv-ink)] text-white"
                   }`}
                 >
                   {complete ? t("perfection.complete") : `${done}/${total}`}
@@ -181,11 +181,12 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
                         : "";
                     return (
                       <li key={it.id}>
-                        <label className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-sm hover:bg-[var(--sv-bg)]">
+                        <div className="flex items-center gap-2 rounded-md px-2 py-1 text-sm hover:bg-[var(--sv-bg)]">
                           <input
                             type="checkbox"
                             checked={checked}
                             onChange={() => togglePerfCheck(key)}
+                            aria-label={itemName(c, it.id)}
                             className="size-4 shrink-0 accent-[var(--sv-accent)]"
                           />
                           <Image
@@ -213,7 +214,7 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
                               </span>
                             )}
                           </span>
-                        </label>
+                        </div>
                       </li>
                     );
                   })}

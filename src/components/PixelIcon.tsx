@@ -20,7 +20,14 @@ export default function PixelIcon({
       height={size}
       unoptimized
       className={`shrink-0 ${className}`}
-      style={{ imageRendering: "pixelated" }}
+      // width/height를 inline으로 고정(+object-contain)해 Tailwind의 img{height:auto}로
+      // 비정사각형 이미지가 늘어나 행 크기가 커지는 것을 막는다.
+      style={{
+        width: size,
+        height: size,
+        objectFit: "contain",
+        imageRendering: "pixelated",
+      }}
     />
   );
 }

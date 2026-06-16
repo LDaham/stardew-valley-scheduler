@@ -81,7 +81,7 @@ export default function SeedEfficiencyDialog({
               className={`rounded-full px-3 py-1 text-xs font-semibold ${
                 on
                   ? "bg-[var(--sv-accent)] text-white"
-                  : "border border-[var(--sv-border)] text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
+                  : "border border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink)] hover:bg-[var(--sv-bg)]"
               }`}
             >
               {t(`seasons.${s}`)}

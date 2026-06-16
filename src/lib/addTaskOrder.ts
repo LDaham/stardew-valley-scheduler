@@ -5,16 +5,14 @@ import { MACHINES } from "@/data/machines";
 import { BUILDINGS } from "@/data/buildings";
 import { FRUIT_TREES } from "@/data/fruitTrees";
 
-// 상위 메뉴 기본 순서(= 할 일 추가에서 보여지는 순서). 물고기 연못 확인은 제외됨.
+// 상위 메뉴 기본 순서(= 할 일 추가에서 보여지는 순서).
+// 물고기 연못 확인·정동석/박물관·채굴·낚시는 제외됨.
 export const DEFAULT_ADD_TASK_ORDER: string[] = [
   "seed", // 씨앗 심기
   "fruit", // 과일 수확하기(과일나무 묘목 심기)
   "artisanMachine", // 장인 장비 사용
   "tool", // 도구 업그레이드
   "build", // 건물 건설
-  "misc", // 정동석, 박물관
-  "mining", // 채굴하러 가기
-  "fishing", // 낚시하러 가기
   "refiningMachine", // 정제 장비 사용
 ];
 

@@ -106,7 +106,7 @@ export default function BundleDialog({
             className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold ${
               complete
                 ? "bg-[var(--sv-accent)] text-white"
-                : "bg-[var(--sv-border)] text-[var(--sv-ink-muted)]"
+                : "bg-[var(--sv-ink)] text-white"
             }`}
           >
             {complete ? t("bundle.complete") : `${done}/${b.needed}`}
@@ -118,11 +118,12 @@ export default function BundleDialog({
             const checked = isDone(b, i.id);
             return (
               <li key={i.id}>
-                <label className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-sm hover:bg-[var(--sv-bg)]">
+                <div className="flex items-center gap-2 rounded-md px-2 py-1 text-sm hover:bg-[var(--sv-bg)]">
                   <input
                     type="checkbox"
                     checked={checked}
                     onChange={() => toggleBundleItem(key)}
+                    aria-label={t(i.nameKey)}
                     className="size-4 shrink-0 accent-[var(--sv-accent)]"
                   />
                   <Image
@@ -146,7 +147,7 @@ export default function BundleDialog({
                     </span>
                   )}
                   {i.seasons.length === 0 ? (
-                    <span className="shrink-0 rounded bg-[var(--sv-border)] px-1 py-0.5 text-[10px] font-semibold text-[var(--sv-ink-muted)]">
+                    <span className="shrink-0 rounded border border-[var(--sv-border)] bg-[var(--sv-bg)] px-1 py-0.5 text-[10px] font-semibold text-[var(--sv-ink)]">
                       {t("bundle.allSeasons")}
                     </span>
                   ) : (
@@ -157,7 +158,7 @@ export default function BundleDialog({
                         style={{
                           background: SEASON_BG[s],
                           color: "#2b2016",
-                          opacity: s === season ? 1 : 0.55,
+                          // 현재 계절은 테두리로 구분(다른 계절도 흐리지 않고 또렷하게)
                           outline:
                             s === season ? "2px solid var(--sv-ink)" : "none",
                         }}
@@ -166,7 +167,7 @@ export default function BundleDialog({
                       </span>
                     ))
                   )}
-                </label>
+                </div>
               </li>
             );
           })}
@@ -211,11 +212,9 @@ export default function BundleDialog({
               !checked && selected.length >= slot.pick && slot.pick > 1;
             return (
               <li key={b.id}>
-                <label
+                <div
                   className={`flex items-center gap-2 rounded-md px-2 py-1 text-sm ${
-                    atLimit
-                      ? "cursor-not-allowed opacity-40"
-                      : "cursor-pointer hover:bg-[var(--sv-bg)]"
+                    atLimit ? "opacity-40" : "hover:bg-[var(--sv-bg)]"
                   }`}
                 >
                   <input
@@ -223,10 +222,11 @@ export default function BundleDialog({
                     checked={checked}
                     disabled={atLimit}
                     onChange={() => toggle(b.id)}
+                    aria-label={t(`bundle.${b.id}`)}
                     className="size-4 shrink-0 accent-[var(--sv-accent)]"
                   />
                   <span className="flex-1">{t(`bundle.${b.id}`)}</span>
-                </label>
+                </div>
               </li>
             );
           })}

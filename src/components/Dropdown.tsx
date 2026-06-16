@@ -79,7 +79,13 @@ function OptIcon({ src }: { src: string }) {
       height={20}
       unoptimized
       className="shrink-0"
-      style={{ imageRendering: "pixelated" }}
+      // 크기 고정(+object-contain): 비정사각형 이미지가 행을 늘리지 않도록
+      style={{
+        width: 20,
+        height: 20,
+        objectFit: "contain",
+        imageRendering: "pixelated",
+      }}
     />
   );
 }

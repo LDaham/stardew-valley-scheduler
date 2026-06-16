@@ -46,6 +46,7 @@ body {
   button:not(:disabled),
   a,
   select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }

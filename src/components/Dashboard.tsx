@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
 import { addDays, toYearDay, type SDate } from "@/lib/calendar";
 import { filterEvents, getEventsOn, type FixedEvent } from "@/lib/events";
-import { getActiveReminders, type ReminderBadge } from "@/lib/reminders";
+import { getActiveReminders, festivalEveOf, type ReminderBadge } from "@/lib/reminders";
 import { useSchedule } from "@/components/ScheduleProvider";
 import { useGiftDialog } from "@/components/GiftDialogProvider";
 import EventIcon from "@/components/EventIcon";
@@ -15,6 +15,7 @@ import AddTaskDialog from "@/components/AddTaskDialog";
 import BundleDialog from "@/components/BundleDialog";
 import FishInfoDialog from "@/components/FishInfoDialog";
 import MiniCalendarDialog from "@/components/MiniCalendarDialog";
+import MyTasksDialog from "@/components/MyTasksDialog";
 import SeedEfficiencyDialog from "@/components/SeedEfficiencyDialog";
 import Modal from "@/components/Modal";
 import TimeIcon from "@/components/TimeIcon";
@@ -87,6 +88,7 @@ export default function Dashboard() {
   const [bundleFillOpen, setBundleFillOpen] = useState(false);
   const [fishInfoOpen, setFishInfoOpen] = useState(false);
   const [miniCalOpen, setMiniCalOpen] = useState(false);
+  const [myTasksOpen, setMyTasksOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<DeleteTarget | null>(null);
 
   // 게임 시작일(1년째 봄 1일): 전날로 이동 불가
@@ -271,6 +273,21 @@ export default function Dashboard() {
       }
     }
 
+    // 축제 전날: "내일이 축제임을 고려" 안내(상점·NPC·구인 게시판 휴무)
+    const eveFest = festivalEveOf(date);
+    if (eveFest) {
+      info.push({
+        key: `${yd}:festivalEve`,
+        orderKey: "event:festival",
+        icon: <PixelIcon src="/icons/festival/flag.png" size={16} />,
+        label: t("dashboard.festivalEveNote", {
+          festival: t(`festivals.${eveFest.id}`),
+        }),
+        done: false,
+        onToggle: () => {},
+      });
+    }
+
     for (const r of getActiveReminders(date, reminderToggles)) {
       const key = `${yd}:reminder-${r.id}`;
       // 소스의 여왕 재방송: 직전 일요일 신규 방영을 봤으면(체크) 생략.
@@ -417,6 +434,9 @@ export default function Dashboard() {
         ) : m.category === "tool" && m.toolId ? (
           // 도구 업그레이드/수령: 업그레이드 등급이 아닌 기본 도구 이미지 표시
           <PixelIcon src={`/icons/tools/${m.toolId}.png`} />
+        ) : m.category === "machine" && m.machineId ? (
+          // 장비 사용/수령: 해당 장비 이미지 표시
+          <PixelIcon src={`/icons/machines/${m.machineId}.png`} />
         ) : m.category === "mining" ? (
           <PixelIcon src="/icons/tools/pickaxe.png" />
         ) : m.category === "fishing" ? (
@@ -589,23 +609,29 @@ export default function Dashboard() {
 
         <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
 
-        {/* 할 일 목록 */}
-        <h2 className="mb-2 text-base font-bold">{t("dashboard.todoList")}</h2>
+        {/* 할 일 목록 헤더: 좌측 제목, 우측 [추가한 할 일 확인][오늘 할 일 추가] */}
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+          <h2 className="text-base font-bold">{t("dashboard.todoList")}</h2>
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={() => setMyTasksOpen(true)}
+              className="sv-btn px-3 py-1.5 text-base"
+            >
+              {t("myTasks.checkButton")}
+            </button>
+            <button
+              onClick={() => setAddTarget("today")}
+              className="sv-btn sv-btn-primary px-3 py-1.5 text-base"
+            >
+              ＋ {t("addTask.titleWithDay", { day: t("dashboard.today") })}
+            </button>
+          </div>
+        </div>
         <TaskList
           rows={todayBuilt.todo}
           emptyText={t("dashboard.noTasks")}
           deleteLabel={t("memo.delete")}
         />
-
-        {/* 할 일 추가(오늘) */}
-        <div className="mt-3 flex justify-end">
-          <button
-            onClick={() => setAddTarget("today")}
-            className="sv-btn sv-btn-primary px-3 py-1.5 text-base"
-          >
-            ＋ {t("addTask.titleWithDay", { day: t("dashboard.today") })}
-          </button>
-        </div>
       </div>
 
       {addTarget && (
@@ -717,6 +743,8 @@ export default function Dashboard() {
       {miniCalOpen && (
         <MiniCalendarDialog onClose={() => setMiniCalOpen(false)} />
       )}
+
+      {myTasksOpen && <MyTasksDialog onClose={() => setMyTasksOpen(false)} />}
     </section>
   );
 }
@@ -943,17 +971,14 @@ function TaskList({
       {rows.map((row) => (
         <li key={row.key}>
           <div className="flex items-center gap-2 rounded-md bg-[var(--sv-bg)] px-2 py-1.5 text-base">
-            <label
-              className={`flex min-w-0 flex-1 items-center gap-2 ${
-                disabled || hideCheckbox ? "" : "cursor-pointer"
-              }`}
-            >
+            <div className="flex min-w-0 flex-1 items-center gap-2">
               {!hideCheckbox && (
                 <input
                   type="checkbox"
                   checked={row.done}
                   onChange={row.onToggle}
                   disabled={disabled}
+                  aria-label={row.label}
                   className="size-4 shrink-0 accent-[var(--sv-accent)] disabled:opacity-50"
                 />
               )}
@@ -974,7 +999,7 @@ function TaskList({
                   </span>
                 )}
               </span>
-            </label>
+            </div>
             {row.rightBadge}
             {row.logic && (
               <button

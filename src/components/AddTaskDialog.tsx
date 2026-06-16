@@ -18,7 +18,7 @@ import { planBuilding } from "@/lib/carpenter";
 import { FRUIT_TREES, FRUIT_TREE_MATURE_DAYS } from "@/data/fruitTrees";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import { ADD_TASK_CHILDREN, orderBy } from "@/lib/addTaskOrder";
-import type { MemoCategory } from "@/lib/todoOrder";
+import type { MemoCategory, VisibleMemoCategory } from "@/lib/todoOrder";
 import type { SeedDefaults } from "@/types/schedule";
 import { asset } from "@/lib/asset";
 import { useSchedule } from "@/components/ScheduleProvider";
@@ -58,9 +58,6 @@ const MENU_ICONS: Record<string, string> = {
   artisanMachine: "/icons/machines/keg.png",
   refiningMachine: "/icons/machines/furnace.png",
   build: "/icons/addTask/build.png",
-  mining: "/icons/tools/pickaxe.png",
-  fishing: "/icons/addTask/fishing.png",
-  misc: "/icons/addTask/misc.png",
 };
 
 const TOOLS = ["axe", "pickaxe", "hoe", "wateringCan", "trashCan"] as const;
@@ -88,8 +85,23 @@ export default function AddTaskDialog({
     addTaskChildOrder,
     setAddTaskOrder,
     setAddTaskChildOrder,
+    memoCategoryToggles,
+    setMemoCategoryToggle,
   } = useSchedule();
   const [mode, setMode] = useState<Mode>("menu");
+  // 추가한 할 일의 종류가 스케줄러 설정에서 꺼져 있을 때, 켜기 제안용 카테고리
+  const [pendingOffCategory, setPendingOffCategory] =
+    useState<VisibleMemoCategory | null>(null);
+
+  // 할 일 추가 후 처리: 해당 종류가 꺼져 있으면 켜기 제안, 아니면 바로 닫기.
+  const afterAdd = (category: MemoCategory) => {
+    const cat = category as VisibleMemoCategory;
+    if (cat in memoCategoryToggles && !memoCategoryToggles[cat]) {
+      setPendingOffCategory(cat);
+    } else {
+      onClose();
+    }
+  };
 
   // 마을 회관 완료 여부 → 대장간 금요일 휴무 판단
   const ccCompleted = BUNDLES.every(
@@ -110,7 +122,7 @@ export default function AddTaskDialog({
       reminderDaysBefore: 0,
       category,
     });
-    onClose();
+    afterAdd(category);
   };
 
   // 씨앗 심기: 당일 '씨앗 심기' 1건만 생성한다(순차 체인).
@@ -165,7 +177,7 @@ export default function AddTaskDialog({
     });
     // 선택지를 기본값으로 저장(다음 심기에 재사용)
     setSeedDefaults({ fertilizer: fert, eatFood, noWatering, replant });
-    onClose();
+    afterAdd("plant");
   };
 
   // 과일 묘목 심기: 당일에 '묘목 심기' 할 일을 추가하고,
@@ -189,7 +201,7 @@ export default function AddTaskDialog({
         harvestText: t("addTask.fruitHarvestMemo", { fruit: fruitName }),
       },
     });
-    onClose();
+    afterAdd("fruit");
   };
 
   // 도구 업그레이드: 당일에 '업그레이드 맡기기'를 추가. 완료하면 수령 일정이 생성된다.
@@ -204,7 +216,7 @@ export default function AddTaskDialog({
       toolId,
       chain: { kind: "tool", pickupText: t("addTask.toolMemo", { tool: toolName }) },
     });
-    onClose();
+    afterAdd("tool");
   };
 
   // 장비 사용: 당일에 '가동'을 추가. 완료하면 N일 뒤 수령이 생성되고,
@@ -228,24 +240,14 @@ export default function AddTaskDialog({
       text: useText,
       reminderDaysBefore: 0,
       category: "machine",
+      machineId,
       chain: { kind: "machine", role: "use", useText, receiveText, days, repeat },
     });
-    onClose();
+    afterAdd("machine");
   };
 
-  // 메뉴 항목 클릭 동작
-  const menuAction = (m: string): (() => void) => {
-    switch (m) {
-      case "mining":
-        return () => addAndClose(baseDate, t("addTask.miningMemo"), "mining");
-      case "fishing":
-        return () => addAndClose(baseDate, t("addTask.fishingMemo"), "fishing");
-      case "misc":
-        return () => addAndClose(baseDate, t("addTask.miscMemo"), "misc");
-      default:
-        return () => setMode(m as Mode);
-    }
-  };
+  // 메뉴 항목 클릭 동작(모든 항목이 상세 폼 모드로 전환)
+  const menuAction = (m: string): (() => void) => () => setMode(m as Mode);
 
   // 메뉴 항목 렌더(아이콘 + 라벨 + 클릭 동작 공통). aside는 우측 보조 버튼.
   const renderMenuItem = (
@@ -266,7 +268,13 @@ export default function AddTaskDialog({
             height={28}
             unoptimized
             className="shrink-0"
-            style={{ imageRendering: "pixelated" }}
+            // 크기 고정(+object-contain): 비정사각형 아이콘이 메뉴 행을 늘리지 않도록
+            style={{
+              width: 28,
+              height: 28,
+              objectFit: "contain",
+              imageRendering: "pixelated",
+            }}
           />
           {t(`addTask.${m}`)}
         </button>
@@ -276,6 +284,7 @@ export default function AddTaskDialog({
   );
 
   return (
+    <>
     <Modal
       title={
         mode === "menu"
@@ -369,6 +378,35 @@ export default function AddTaskDialog({
         />
       )}
     </Modal>
+
+    {/* 추가한 종류가 스케줄러 설정에서 꺼져 있을 때: 켜기 제안 */}
+    {pendingOffCategory && (
+      <Modal title={t("addTask.offCategoryTitle")} onClose={onClose}>
+        <p className="mb-4 text-sm leading-relaxed">
+          {t("addTask.offCategoryBody", {
+            category: t(`todoCategory.${pendingOffCategory}`),
+          })}
+        </p>
+        <div className="flex justify-end gap-2">
+          <button
+            onClick={onClose}
+            className="rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm hover:bg-[var(--sv-bg)]"
+          >
+            {t("addTask.offCategoryKeep")}
+          </button>
+          <button
+            onClick={() => {
+              setMemoCategoryToggle(pendingOffCategory, true);
+              onClose();
+            }}
+            className="rounded-lg bg-[var(--sv-accent)] px-4 py-1.5 text-sm font-semibold text-white"
+          >
+            {t("addTask.offCategoryEnable")}
+          </button>
+        </div>
+      </Modal>
+    )}
+    </>
   );
 }
 
@@ -679,8 +717,9 @@ function MachineForm({
   const [machineId, setMachineId] = useState(inCategory[0]?.id ?? "");
   const machine = inCategory.find((m) => m.id === machineId) ?? inCategory[0];
   const [outputId, setOutputId] = useState(machine?.recipes[0].id ?? "");
-  // 해당 산출물 반복 제작: 수령 완료 시 '가동'을 자동으로 다시 추가
-  const [repeat, setRepeat] = useState(false);
+  // 해당 산출물 반복 제작: 수령 완료 시 '가동'을 자동으로 다시 추가.
+  // 장인 장비(술통·절임통 등)는 기본 활성화, 정제 장비는 기본 비활성화.
+  const [repeat, setRepeat] = useState(fixedCategory === "artisan");
 
   // 산출물 라벨: 당일 완성(0일)이면 "당일 완성", 아니면 "N일"
   const daysLabel = (days: number) =>
