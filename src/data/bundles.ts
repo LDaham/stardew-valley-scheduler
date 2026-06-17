@@ -16,6 +16,7 @@ export interface Bundle {
   roomKey: string; // i18n bundleRoom.<room>
   needed: number; // 채워야 하는 칸 수
   items: BundleItem[];
+  quality?: "gold"; // 지정 시 모든 품목이 해당 품질 이상이어야 함(고급 작물·고급 어류)
 }
 
 const crop = (id: string, seasons: Season[]): BundleItem => ({
@@ -152,12 +153,16 @@ export const BUNDLES: Bundle[] = [
     item("woodskip", []),
   ]),
   // ── 식료품 저장실 (추가) ──
-  all("qualityCrops", "pantry", [
-    crop("parsnip", ["spring"]),
-    crop("melon", ["summer"]),
-    crop("pumpkin", ["fall"]),
-    crop("corn", ["summer", "fall"]),
-  ]),
+  // 고급 작물 꾸러미: 모든 작물이 금 등급 이상이어야 함
+  {
+    ...all("qualityCrops", "pantry", [
+      crop("parsnip", ["spring"]),
+      crop("melon", ["summer"]),
+      crop("pumpkin", ["fall"]),
+      crop("corn", ["summer", "fall"]),
+    ]),
+    quality: "gold",
+  },
   all(
     "animalProducts",
     "pantry",

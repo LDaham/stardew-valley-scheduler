@@ -158,6 +158,7 @@
     "inSeason": "이번 계절",
     "rainy": "비",
     "allSeasons": "상시",
+    "qualityGoldNote": "모든 품목을 금 등급(★) 이상으로 제출해야 합니다.",
     "showAll": "전체 보기",
     "showFill": "획득 불가능한 품목 제외",
     "pick": "{total}개 중 {needed}개",
@@ -243,6 +244,14 @@
     "remixRandomSlot": "무작위 칸",
     "remixPickCount": "{pick}개 선택 ({count}/{pick})",
     "remixChooseHint": "갖고 있는 꾸러미를 선택하세요."
+  },
+  "bundleTracker": {
+    "title": "꾸러미 추적",
+    "showOnMain": "메인 화면에서 꾸러미 추적 보기",
+    "settings": "표시 설정",
+    "settingsTitle": "추적할 꾸러미 선택",
+    "settingsHint": "메인 화면 꾸러미 추적 박스에 표시할 꾸러미를 선택하세요.",
+    "empty": "표시할 꾸러미가 없습니다. 설정에서 추적할 꾸러미를 선택하세요."
   },
   "bundleRoom": {
     "pantry": "식료품 저장실",

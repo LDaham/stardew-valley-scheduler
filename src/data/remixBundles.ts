@@ -169,20 +169,23 @@ export const REMIX_SLOTS: RemixSlot[] = [
   {
     id: "pantry4", roomKey: "pantry", fixed: false, pick: 1,
     bundles: [
-      // 고급 작물(금별): needed는 추정(3) — 위키 미명시
-      bundle("rx_qualityCrops", "pantry", [
-        c("parsnip", ["spring"]),
-        c("greenBean", ["spring"]),
-        c("potato", ["spring"]),
-        c("cauliflower", ["spring"]),
-        c("melon", ["summer"]),
-        c("blueberry", ["summer"]),
-        c("hotPepper", ["summer"]),
-        c("pumpkin", ["fall"]),
-        c("yam", ["fall"]),
-        c("eggplant", ["fall"]),
-        c("corn", ["summer", "fall"]),
-      ], 3),
+      // 고급 작물(금별): needed는 추정(3) — 위키 미명시. 모든 작물 금 등급 이상.
+      {
+        ...bundle("rx_qualityCrops", "pantry", [
+          c("parsnip", ["spring"]),
+          c("greenBean", ["spring"]),
+          c("potato", ["spring"]),
+          c("cauliflower", ["spring"]),
+          c("melon", ["summer"]),
+          c("blueberry", ["summer"]),
+          c("hotPepper", ["summer"]),
+          c("pumpkin", ["fall"]),
+          c("yam", ["fall"]),
+          c("eggplant", ["fall"]),
+          c("corn", ["summer", "fall"]),
+        ], 3),
+        quality: "gold",
+      },
       bundle("rx_rareCrops", "pantry", [
         c("ancientFruit", ["spring", "summer", "fall"]),
         c("sweetGemBerry", ["fall"]),
@@ -311,12 +314,16 @@ export const REMIX_SLOTS: RemixSlot[] = [
         b("sandfish", ["fall"]),
         b("woodskip", []),
       ]),
-      bundle("rx_qualityFish", "fishTank", [
-        b("largemouthBass", []),
-        b("shad", [], true),
-        b("tuna", ["summer", "winter"]),
-        b("walleye", ["fall"], true),
-      ]),
+      // 고급 어류: 모든 물고기 금 등급 이상.
+      {
+        ...bundle("rx_qualityFish", "fishTank", [
+          b("largemouthBass", []),
+          b("shad", [], true),
+          b("tuna", ["summer", "winter"]),
+          b("walleye", ["fall"], true),
+        ]),
+        quality: "gold",
+      },
       bundle("rx_masterFisher", "fishTank", [
         b("lavaEel", []),
         b("scorpionCarp", []),

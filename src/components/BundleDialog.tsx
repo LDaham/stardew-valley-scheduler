@@ -52,6 +52,8 @@ export default function BundleDialog({
     setRemixChoice,
     dialogFilters,
     setDialogFilters,
+    bundleTrackerShown,
+    setBundleTrackerShown,
   } = useSchedule();
   const season = currentDate.season;
   // 계절 필터(상시·봄·여름·가을·겨울). 저장값 없으면 이번 계절+상시. 마지막 선택값 영속.
@@ -125,6 +127,11 @@ export default function BundleDialog({
             {complete ? t("bundle.complete") : `${done}/${b.needed}`}
           </span>
         </div>
+        {b.quality === "gold" && (
+          <p className="mb-1 rounded bg-[#fff3d6] px-2 py-1 text-[11px] font-semibold text-[#b8860b]">
+            {t("bundle.qualityGoldNote")}
+          </p>
+        )}
         <ul className="flex flex-col gap-1">
           {visible.map((i) => {
             const key = bundleItemKey(b.id, i.id);
@@ -272,6 +279,17 @@ export default function BundleDialog({
           </button>
         ))}
       </div>
+
+      {/* 메인 화면 꾸러미 추적 박스 표시 옵션 */}
+      <label className="mb-3 flex cursor-pointer items-center gap-2 text-sm">
+        <input
+          type="checkbox"
+          checked={bundleTrackerShown}
+          onChange={(e) => setBundleTrackerShown(e.target.checked)}
+          className="size-4 accent-[var(--sv-accent)]"
+        />
+        {t("bundleTracker.showOnMain")}
+      </label>
 
       {/* 계절 필터(상시·봄·여름·가을·겨울) */}
       <div className="mb-2">

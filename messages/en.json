@@ -158,6 +158,7 @@
     "inSeason": "In season",
     "rainy": "Rain",
     "allSeasons": "Year-round",
+    "qualityGoldNote": "Every item must be submitted at gold quality (★) or higher.",
     "showAll": "Show all",
     "showFill": "Hide unobtainable",
     "pick": "{needed} of {total}",
@@ -243,6 +244,14 @@
     "remixRandomSlot": "Random slot",
     "remixPickCount": "Pick {pick} ({count}/{pick})",
     "remixChooseHint": "Select the bundles you have."
+  },
+  "bundleTracker": {
+    "title": "Bundle Tracker",
+    "showOnMain": "Show bundle tracker on main screen",
+    "settings": "Display settings",
+    "settingsTitle": "Choose bundles to track",
+    "settingsHint": "Select which bundles appear in the main-screen bundle tracker.",
+    "empty": "No bundles to show. Choose bundles to track in settings."
   },
   "bundleRoom": {
     "pantry": "Pantry",

@@ -136,6 +136,10 @@ export interface ScheduleState {
   character: CharacterInfo;
   // 다이얼로그 필터(꾸러미·완벽·업적·생선·씨앗 효율)의 마지막 선택값. 다시 열 때 복원.
   dialogFilters: DialogFilters;
+  // 메인 화면 꾸러미 추적 박스 표시 여부.
+  bundleTrackerShown: boolean;
+  // 추적 박스에 표시할 꾸러미 id 목록(표준 BUNDLES 기준).
+  bundleTrackerIds: string[];
 }
 
 export type BundleMode = "standard" | "remix";

@@ -111,6 +111,8 @@ const DEFAULT_STATE: ScheduleState = {
   achievementsDone: {},
   character: DEFAULT_CHARACTER,
   dialogFilters: DEFAULT_DIALOG_FILTERS,
+  bundleTrackerShown: false,
+  bundleTrackerIds: [],
 };
 
 let state: ScheduleState = DEFAULT_STATE;
@@ -156,6 +158,8 @@ function ensureLoaded(): void {
     achievementsDone: saved.achievementsDone ?? {},
     character: { ...DEFAULT_CHARACTER, ...saved.character },
     dialogFilters: { ...DEFAULT_DIALOG_FILTERS, ...saved.dialogFilters },
+    bundleTrackerShown: saved.bundleTrackerShown ?? false,
+    bundleTrackerIds: saved.bundleTrackerIds ?? [],
     year: saved.year ?? 1,
     version: STATE_VERSION,
   };
@@ -393,6 +397,20 @@ export const scheduleActions = {
   setDialogFilters(patch: Partial<DialogFilters>) {
     commit({ ...state, dialogFilters: { ...state.dialogFilters, ...patch } });
   },
+  // 메인 화면 꾸러미 추적 박스 표시 여부
+  setBundleTrackerShown(value: boolean) {
+    commit({ ...state, bundleTrackerShown: value });
+  },
+  // 추적 박스에 표시할 꾸러미 토글
+  toggleBundleTrackerId(id: string) {
+    const has = state.bundleTrackerIds.includes(id);
+    commit({
+      ...state,
+      bundleTrackerIds: has
+        ? state.bundleTrackerIds.filter((x) => x !== id)
+        : [...state.bundleTrackerIds, id],
+    });
+  },
   // 저장된 모든 설정 초기화(번들·캐릭터·메모·순서·토글 등 전부 기본값으로)
   resetAll() {
     commit({
@@ -419,6 +437,8 @@ export const scheduleActions = {
       achievementsDone: {},
       character: { ...DEFAULT_CHARACTER },
       dialogFilters: { ...DEFAULT_DIALOG_FILTERS },
+      bundleTrackerShown: false,
+      bundleTrackerIds: [],
     });
   },
   // 번들 품목 기증 토글

@@ -13,6 +13,7 @@ import EventIcon from "@/components/EventIcon";
 import ReminderIcon from "@/components/ReminderIcon";
 import AddTaskDialog from "@/components/AddTaskDialog";
 import BundleDialog from "@/components/BundleDialog";
+import BundleTrackerBox from "@/components/BundleTrackerBox";
 import FishInfoDialog from "@/components/FishInfoDialog";
 import MiniCalendarDialog from "@/components/MiniCalendarDialog";
 import MyTasksDialog from "@/components/MyTasksDialog";
@@ -544,6 +545,9 @@ export default function Dashboard() {
 
   return (
     <section className="flex flex-col gap-3">
+      {/* 꾸러미 추적 박스(옵션 켜짐 시 날짜 이동 위에 표시) */}
+      <BundleTrackerBox />
+
       {/* 날짜 이동 버튼 (박스 밖) */}
       <div className="flex items-center justify-between gap-2">
         <button
