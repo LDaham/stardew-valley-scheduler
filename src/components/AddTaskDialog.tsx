@@ -75,6 +75,7 @@ export default function AddTaskDialog({
   const t = useTranslations();
   const {
     addMemo,
+    year,
     bundleItemsDone,
     character,
     seedDefaults,
@@ -182,7 +183,11 @@ export default function AddTaskDialog({
 
   // 과일 묘목 심기: 당일에 '묘목 심기' 할 일을 추가하고,
   // 심기를 완료하면 수확 일정(성숙 후 3일마다)이 생성된다.
-  const addFruitPlant = (treeId: string, greenhouse: boolean) => {
+  const addFruitPlant = (
+    treeId: string,
+    greenhouse: boolean,
+    repeatYearly: boolean,
+  ) => {
     const fruitName = t(`fruitTrees.${treeId}`);
     const groupId = `${treeId}-${Date.now().toString(36)}-${Math.random()
       .toString(36)
@@ -196,9 +201,12 @@ export default function AddTaskDialog({
       cropId: treeId,
       greenhouse,
       groupId,
+      // 묘목 심기 메모는 심은 연도에만 표시(매년 반복되지 않도록)
+      year,
       chain: {
         kind: "fruitPlant",
         harvestText: t("addTask.fruitHarvestMemo", { fruit: fruitName }),
+        repeatYearly,
       },
     });
     afterAdd("fruit");
@@ -955,10 +963,12 @@ function FruitForm({
   hiddenItems: Record<string, boolean>;
   childOrder: string[];
   onBack: () => void;
-  onAdd: (treeId: string, greenhouse: boolean) => void;
+  onAdd: (treeId: string, greenhouse: boolean, repeatYearly: boolean) => void;
 }) {
   const t = useTranslations();
   const [greenhouse, setGreenhouse] = useState(false);
+  // 매년 해당 계절에 수확 알림 반복(기본 켜짐). 연도 이동 시 그 해 배치가 보충된다.
+  const [repeatYearly, setRepeatYearly] = useState(true);
   // 상세 옵션으로 숨기지 않은 과일나무만(사용자 순서 적용)
   const trees = orderBy(
     FRUIT_TREES.filter((f) => !hiddenItems[`fruit:${f.id}`]),
@@ -1029,7 +1039,26 @@ function FruitForm({
         </p>
       </div>
 
-      <FormFooter onBack={onBack} onAdd={() => onAdd(treeId, greenhouse)} />
+      {/* 매년 수확 알림 반복 */}
+      <label className="flex cursor-pointer items-start gap-2 text-sm">
+        <input
+          type="checkbox"
+          checked={repeatYearly}
+          onChange={(e) => setRepeatYearly(e.target.checked)}
+          className="mt-0.5 size-4 accent-[var(--sv-accent)]"
+        />
+        <span>
+          {t("addTask.fruitRepeatYearly")}
+          <span className="block text-xs text-[var(--sv-ink-muted)]">
+            {t("addTask.fruitRepeatYearlyNote")}
+          </span>
+        </span>
+      </label>
+
+      <FormFooter
+        onBack={onBack}
+        onAdd={() => onAdd(treeId, greenhouse, repeatYearly)}
+      />
     </div>
   );
 }

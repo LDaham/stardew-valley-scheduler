@@ -189,6 +189,8 @@ export default function Dashboard() {
   const activeMemosOn = (date: SDate): Memo[] => {
     const d = toYearDay(date);
     return memos.filter((m) => {
+      // 연도 스탬프가 있는 메모(과일나무 연차별 수확)는 그 연도에만 표시
+      if (m.year != null && m.year !== year) return false;
       const a = toYearDay({ season: m.season, day: m.day });
       if (m.category && NO_ROLLOVER.has(m.category)) return a === d;
       if (a === d) return true; // 당일은 완료 여부와 무관하게 표시(체크 확인용)
@@ -428,7 +430,8 @@ export default function Dashboard() {
         (m.category === "harvest" || m.category === "plant") && m.cropId ? (
           <PixelIcon src={`/icons/seeds/${m.cropId}.png`} />
         ) : m.category === "fruit" && m.cropId ? (
-          <PixelIcon src={`/icons/fruitTrees/${m.cropId}.png`} />
+          // 개별 표시는 묘목 심기(fruitPlant)뿐 — 열매가 아닌 묘목 이미지로 표시
+          <PixelIcon src={`/icons/fruitTrees/saplings/${m.cropId}.png`} />
         ) : m.category === "eatFood" ? (
           <PixelIcon src="/icons/ui/food.png" />
         ) : m.category === "tool" && m.toolId ? (

@@ -42,7 +42,7 @@ export type MemoChain =
       days: number;
       repeat: boolean;
     }
-  | { kind: "fruitPlant"; harvestText: string }
+  | { kind: "fruitPlant"; harvestText: string; repeatYearly: boolean }
   | { kind: "replant"; buySeedText: string }
   // 작물 생명주기 순차 체인: 씨앗 심기 → 물주기 ×K → 수확(+음식/재파종).
   // 상위 단계를 완료해야 하위 단계가 생성된다(미완료는 미루기로 그날 계속 표시).
@@ -84,6 +84,8 @@ export interface Memo {
   groupId?: string;
   // 온실에서 심음(계절 만료 없음 — 작물/과일 수확 메모가 사라지지 않는다).
   greenhouse?: boolean;
+  // 특정 연도에만 표시할 메모(과일나무 연차별 수확). 없으면 매년 순환 표시.
+  year?: number;
   // 작물 생명주기 메모의 수확 마감(yearDay). 비온실에서 이 날을 넘기면 통째로 소멸.
   deadlineYearDay?: number;
   // 완료 시 후속 할 일을 생성하는 체인. spawned=이미 생성 완료(재체크 시 중복 방지).

@@ -3,7 +3,7 @@
 
 import { loadJSON, saveJSON } from "@/lib/storage";
 import { fromYearDay, normalizeYearDay, DAYS_PER_YEAR } from "@/lib/calendar";
-import { chainSpawn } from "@/lib/chains";
+import { chainSpawn, spawnYearlyFruitHarvests } from "@/lib/chains";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import { DEFAULT_REMINDER_TOGGLES, type ReminderId } from "@/data/reminders";
 import {
@@ -227,9 +227,20 @@ function applyCompletion(memos: Memo[], ids: string[]): Memo[] {
   const now = Date.now();
   const children: Memo[] = [];
   for (const m of toSpawn)
-    for (const c of chainSpawn(m, today, cc))
+    for (const c of chainSpawn(m, today, cc, state.year))
       children.push({ ...c, id: newId(), done: false, createdAt: now });
   return [...result, ...children];
+}
+
+// 연도가 바뀐 직후, 반복 설정된 과일나무의 targetYear 수확 배치를 보충(없으면 추가).
+function withYearlyFruit(memos: Memo[], targetYear: number): Memo[] {
+  const extra = spawnYearlyFruitHarvests(memos, targetYear);
+  if (extra.length === 0) return memos;
+  const now = Date.now();
+  return [
+    ...memos,
+    ...extra.map((c) => ({ ...c, id: newId(), done: false, createdAt: now })),
+  ];
 }
 
 export const scheduleActions = {
@@ -240,18 +251,34 @@ export const scheduleActions = {
   // 하루 뒤로: winter 28(112)→spring 1이면 연도 +1.
   goToNextDay() {
     const year = state.currentDay === DAYS_PER_YEAR ? state.year + 1 : state.year;
-    commit({ ...state, currentDay: normalizeYearDay(state.currentDay + 1), year });
+    const memos =
+      year !== state.year ? withYearlyFruit(state.memos, year) : state.memos;
+    commit({
+      ...state,
+      currentDay: normalizeYearDay(state.currentDay + 1),
+      year,
+      memos,
+    });
   },
   // 하루 앞으로: spring 1→winter 28이면 연도 -1(최소 1).
   goToPrevDay() {
     // 게임 시작일(1년째 봄 1일) 이전으로는 이동 불가
     if (state.year === 1 && state.currentDay === 1) return;
     const year = state.currentDay === 1 ? Math.max(1, state.year - 1) : state.year;
-    commit({ ...state, currentDay: normalizeYearDay(state.currentDay - 1), year });
+    const memos =
+      year !== state.year ? withYearlyFruit(state.memos, year) : state.memos;
+    commit({
+      ...state,
+      currentDay: normalizeYearDay(state.currentDay - 1),
+      year,
+      memos,
+    });
   },
   // 미니 달력 등에서 특정 (연도, 날짜)로 직접 이동
   goToDate(yearDay: number, year: number) {
-    commit({ ...state, currentDay: yearDay, year: Math.max(1, year) });
+    const y = Math.max(1, year);
+    const memos = y !== state.year ? withYearlyFruit(state.memos, y) : state.memos;
+    commit({ ...state, currentDay: yearDay, year: y, memos });
   },
   setEventFilter(type: keyof ScheduleState["eventFilters"], value: boolean) {
     commit({

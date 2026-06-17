@@ -47,6 +47,19 @@ export function addDays(d: SDate, days: number): SDate {
   return fromYearDay(normalizeYearDay(toYearDay(d) + days));
 }
 
+// 연도를 포함한 절대 일수 (1년째 봄 1일 = 1). 순환 메모에 연도를 결합해
+// 연도 간 간격·순서를 계산할 때 사용(예: 과일나무 연차별 수확 배치).
+export function toAbsDay(d: SDate, year: number): number {
+  return (year - 1) * DAYS_PER_YEAR + toYearDay(d);
+}
+
+// 절대 일수 → { 날짜, 연도 }
+export function fromAbsDay(abs: number): { date: SDate; year: number } {
+  const year = Math.floor((abs - 1) / DAYS_PER_YEAR) + 1;
+  const yd = ((abs - 1) % DAYS_PER_YEAR) + 1;
+  return { date: fromYearDay(yd), year };
+}
+
 // from에서 다음 to 발생까지 남은 일수 (0..111). 같은 날이면 0.
 export function daysUntil(from: SDate, to: SDate): number {
   const diff = toYearDay(to) - toYearDay(from);

@@ -8,7 +8,7 @@ import { FRUIT_TREES } from "@/data/fruitTrees";
 // 물고기 연못 확인·정동석/박물관·채굴·낚시는 제외됨.
 export const DEFAULT_ADD_TASK_ORDER: string[] = [
   "seed", // 씨앗 심기
-  "fruit", // 과일 수확하기(과일나무 묘목 심기)
+  "fruit", // 묘목 심기(과일나무)
   "tool", // 도구 업그레이드
   "build", // 건물 건설
   "artisanMachine", // 장인 장비 사용
