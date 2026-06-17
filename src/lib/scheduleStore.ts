@@ -64,6 +64,7 @@ const DEFAULT_DIALOG_FILTERS: DialogFilters = {
   seedFertilizer: "none",
   seedProduce: "raw",
   seedFood: "none",
+  trackerIncompleteFirst: false,
 };
 
 const STORAGE_KEY = "svs:schedule";
@@ -111,7 +112,6 @@ const DEFAULT_STATE: ScheduleState = {
   achievementsDone: {},
   character: DEFAULT_CHARACTER,
   dialogFilters: DEFAULT_DIALOG_FILTERS,
-  bundleTrackerShown: false,
   bundleTrackerIds: [],
 };
 
@@ -158,7 +158,6 @@ function ensureLoaded(): void {
     achievementsDone: saved.achievementsDone ?? {},
     character: { ...DEFAULT_CHARACTER, ...saved.character },
     dialogFilters: { ...DEFAULT_DIALOG_FILTERS, ...saved.dialogFilters },
-    bundleTrackerShown: saved.bundleTrackerShown ?? false,
     bundleTrackerIds: saved.bundleTrackerIds ?? [],
     year: saved.year ?? 1,
     version: STATE_VERSION,
@@ -397,10 +396,6 @@ export const scheduleActions = {
   setDialogFilters(patch: Partial<DialogFilters>) {
     commit({ ...state, dialogFilters: { ...state.dialogFilters, ...patch } });
   },
-  // 메인 화면 꾸러미 추적 박스 표시 여부
-  setBundleTrackerShown(value: boolean) {
-    commit({ ...state, bundleTrackerShown: value });
-  },
   // 추적 박스에 표시할 꾸러미 토글
   toggleBundleTrackerId(id: string) {
     const has = state.bundleTrackerIds.includes(id);
@@ -437,7 +432,6 @@ export const scheduleActions = {
       achievementsDone: {},
       character: { ...DEFAULT_CHARACTER },
       dialogFilters: { ...DEFAULT_DIALOG_FILTERS },
-      bundleTrackerShown: false,
       bundleTrackerIds: [],
     });
   },

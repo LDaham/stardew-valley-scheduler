@@ -247,11 +247,13 @@
   },
   "bundleTracker": {
     "title": "Bundle Tracker",
-    "showOnMain": "Show bundle tracker on main screen",
     "settings": "Display settings",
     "settingsTitle": "Choose bundles to track",
     "settingsHint": "Select which bundles appear in the main-screen bundle tracker.",
-    "empty": "No bundles to show. Choose bundles to track in settings."
+    "settingsHintRemix": "In remix mode, the random bundles you selected in the Remix tab are shown.",
+    "incompleteFirst": "Show incomplete items first",
+    "empty": "No bundles to show. Choose bundles to track in settings.",
+    "emptyRemix": "No random bundles selected. Choose bundles in the Remix tab."
   },
   "bundleRoom": {
     "pantry": "Pantry",
@@ -746,7 +748,7 @@
     },
     "communityCenterBundle": {
       "title": "Fill Community Center bundles",
-      "detail": "First day of the season - check which bundle items you can gather this season"
+      "detail": "First day of the season - check which bundle items you can gather this season. When on, the bundle tracker box is also shown at the top of the main screen."
     },
     "crabPot": {
       "title": "Check crab pots",

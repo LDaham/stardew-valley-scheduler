@@ -47,7 +47,6 @@ export function useSchedule() {
     achievementsDone: state.achievementsDone,
     character: state.character,
     dialogFilters: state.dialogFilters,
-    bundleTrackerShown: state.bundleTrackerShown,
     bundleTrackerIds: state.bundleTrackerIds,
     memosOn: (date: SDate): Memo[] =>
       state.memos.filter(
@@ -86,7 +85,6 @@ export function useSchedule() {
     toggleAchievement: scheduleActions.toggleAchievement,
     setCharacter: scheduleActions.setCharacter,
     setDialogFilters: scheduleActions.setDialogFilters,
-    setBundleTrackerShown: scheduleActions.setBundleTrackerShown,
     toggleBundleTrackerId: scheduleActions.toggleBundleTrackerId,
     resetAll: scheduleActions.resetAll,
   };

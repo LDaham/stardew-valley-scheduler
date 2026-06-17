@@ -1,12 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useSchedule } from "@/components/ScheduleProvider";
-import { asset } from "@/lib/asset";
 import Modal from "@/components/Modal";
-import PixelIcon from "@/components/PixelIcon";
+import BundleItemChip from "@/components/BundleItemChip";
 import {
   BUNDLES,
   bundleItemKey,
@@ -28,13 +26,6 @@ const sortTier = (i: BundleItem, season: Season) => {
   return 3;
 };
 
-const SEASON_BG: Record<Season, string> = {
-  spring: "var(--season-spring)",
-  summer: "var(--season-summer)",
-  fall: "var(--season-fall)",
-  winter: "var(--season-winter)",
-};
-
 export default function BundleDialog({
   onClose,
 }: {
@@ -52,8 +43,6 @@ export default function BundleDialog({
     setRemixChoice,
     dialogFilters,
     setDialogFilters,
-    bundleTrackerShown,
-    setBundleTrackerShown,
   } = useSchedule();
   const season = currentDate.season;
   // 계절 필터(상시·봄·여름·가을·겨울). 저장값 없으면 이번 계절+상시. 마지막 선택값 영속.
@@ -97,7 +86,7 @@ export default function BundleDialog({
   // 꾸러미 한 개를 섹션으로 렌더(필터 적용 후 표시할 품목이 없으면 null)
   const renderBundle = (b: Bundle) => {
     const visible = b.items
-      .filter((i) => matchesSeason(i.seasons, selected))
+      .filter((i) => matchesSeason(i.seasons, selected, i.rainy))
       .sort((a, b2) => sortTier(a, season) - sortTier(b2, season));
     if (visible.length === 0) return null;
     const done = doneCount(b);
@@ -132,65 +121,18 @@ export default function BundleDialog({
             {t("bundle.qualityGoldNote")}
           </p>
         )}
-        <ul className="flex flex-col gap-1">
-          {visible.map((i) => {
-            const key = bundleItemKey(b.id, i.id);
-            const checked = isDone(b, i.id);
-            return (
-              <li key={i.id}>
-                <div className="flex items-center gap-2 rounded-md px-2 py-1 text-sm hover:bg-[var(--sv-bg)]">
-                  <input
-                    type="checkbox"
-                    checked={checked}
-                    onChange={() => toggleBundleItem(key)}
-                    aria-label={t(i.nameKey)}
-                    className="size-4 shrink-0 accent-[var(--sv-accent)]"
-                  />
-                  <Image
-                    src={asset(`/icons/bundleItems/${i.id}.png`)}
-                    alt=""
-                    width={18}
-                    height={18}
-                    unoptimized
-                    className="shrink-0"
-                    style={{ imageRendering: "pixelated" }}
-                  />
-                  <span
-                    className={`flex-1 ${checked ? "text-[var(--sv-ink-muted)] line-through" : ""}`}
-                  >
-                    {t(i.nameKey)}
-                  </span>
-                  {i.rainy && (
-                    <span className="inline-flex shrink-0 items-center gap-1 rounded bg-[#5b8fb0] px-1 py-0.5 text-[10px] font-semibold text-white">
-                      <PixelIcon src="/icons/ui/rain.png" size={11} />
-                      {t("bundle.rainy")}
-                    </span>
-                  )}
-                  {i.seasons.length === 0 ? (
-                    <span className="shrink-0 rounded border border-[var(--sv-border)] bg-[var(--sv-bg)] px-1 py-0.5 text-[10px] font-semibold text-[var(--sv-ink)]">
-                      {t("bundle.allSeasons")}
-                    </span>
-                  ) : (
-                    i.seasons.map((s) => (
-                      <span
-                        key={s}
-                        className="shrink-0 rounded px-1 py-0.5 text-[10px] font-semibold"
-                        style={{
-                          background: SEASON_BG[s],
-                          color: "#2b2016",
-                          // 현재 계절은 테두리로 구분(다른 계절도 흐리지 않고 또렷하게)
-                          outline:
-                            s === season ? "2px solid var(--sv-ink)" : "none",
-                        }}
-                      >
-                        {t(`seasons.${s}`)}
-                      </span>
-                    ))
-                  )}
-                </div>
-              </li>
-            );
-          })}
+        {/* 물품: 클릭하면 완료 토글되는 칩을 행으로 나열(넘치면 다음 줄) */}
+        <ul className="flex flex-wrap gap-1.5">
+          {visible.map((i) => (
+            <li key={i.id}>
+              <BundleItemChip
+                item={i}
+                checked={isDone(b, i.id)}
+                season={season}
+                onToggle={() => toggleBundleItem(bundleItemKey(b.id, i.id))}
+              />
+            </li>
+          ))}
         </ul>
       </section>
     );
@@ -280,20 +222,9 @@ export default function BundleDialog({
         ))}
       </div>
 
-      {/* 메인 화면 꾸러미 추적 박스 표시 옵션 */}
-      <label className="mb-3 flex cursor-pointer items-center gap-2 text-sm">
-        <input
-          type="checkbox"
-          checked={bundleTrackerShown}
-          onChange={(e) => setBundleTrackerShown(e.target.checked)}
-          className="size-4 accent-[var(--sv-accent)]"
-        />
-        {t("bundleTracker.showOnMain")}
-      </label>
-
-      {/* 계절 필터(상시·봄·여름·가을·겨울) */}
+      {/* 계절 필터(상시·봄·여름·가을·겨울·비) */}
       <div className="mb-2">
-        <SeasonFilter selected={selected} onToggle={toggleToken} />
+        <SeasonFilter selected={selected} onToggle={toggleToken} showRain />
       </div>
       <label className="mb-4 flex cursor-pointer items-center gap-2 text-sm">
         <input
