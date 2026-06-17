@@ -128,8 +128,8 @@ export default function BundleDialog({
               <BundleItemChip
                 item={i}
                 checked={isDone(b, i.id)}
-                season={season}
                 onToggle={() => toggleBundleItem(bundleItemKey(b.id, i.id))}
+                disabled={complete && !isDone(b, i.id)}
               />
             </li>
           ))}
@@ -222,9 +222,9 @@ export default function BundleDialog({
         ))}
       </div>
 
-      {/* 계절 필터(상시·봄·여름·가을·겨울·비) */}
+      {/* 계절 필터(상시·봄·여름·가을·겨울) */}
       <div className="mb-2">
-        <SeasonFilter selected={selected} onToggle={toggleToken} showRain />
+        <SeasonFilter selected={selected} onToggle={toggleToken} />
       </div>
       <label className="mb-4 flex cursor-pointer items-center gap-2 text-sm">
         <input

@@ -10,7 +10,7 @@
 // 명시가 없으면 표준 꾸러미(data/bundles.ts) 동등값을 따른다(일부는 추정 — 주석 표시).
 // 리믹스 꾸러미 id는 표준과 충돌하지 않도록 모두 rx_ 접두를 쓴다.
 
-import type { Bundle, BundleItem } from "@/data/bundles";
+import { qn, type Bundle, type BundleItem } from "@/data/bundles";
 import type { Season } from "@/lib/calendar";
 
 const c = (id: string, seasons: Season[] = []): BundleItem => ({
@@ -90,18 +90,18 @@ export const REMIX_SLOTS: RemixSlot[] = [
     id: "crafts5", roomKey: "craftsRoom", fixed: false, pick: 1,
     bundles: [
       bundle("rx_construction", "craftsRoom", [
-        b("wood", []),
-        b("wood2", []),
-        b("stone", []),
-        b("hardwood", []),
+        qn(b("wood", []), 99),
+        qn(b("wood2", []), 99),
+        qn(b("stone", []), 99),
+        qn(b("hardwood", []), 10),
       ]),
-      bundle("rx_sticky", "craftsRoom", [b("sap", [])]),
+      bundle("rx_sticky", "craftsRoom", [qn(b("sap", []), 500)]),
       // 숲 꾸러미: 위키 "무작위로 3개가 선정됨" → needed 3
       bundle("rx_forest", "craftsRoom", [
-        b("moss", []),
-        b("fiber", []),
-        b("acorn", []),
-        b("mapleSeed", []),
+        qn(b("moss", []), 10),
+        qn(b("fiber", []), 200),
+        qn(b("acorn", []), 10),
+        qn(b("mapleSeed", []), 10),
       ], 3),
     ],
   },
@@ -120,10 +120,10 @@ export const REMIX_SLOTS: RemixSlot[] = [
         b("morel", ["spring"]),
       ], 5),
       bundle("rx_wildMedicine", "craftsRoom", [
-        b("purpleMushroom", []),
-        b("fiddleheadFern", ["summer"]),
-        b("whiteAlgae", []),
-        c("hops", ["summer"]),
+        qn(b("purpleMushroom", []), 5),
+        qn(b("fiddleheadFern", ["summer"]), 5),
+        qn(b("whiteAlgae", []), 5),
+        qn(c("hops", ["summer"]), 5),
       ]),
     ],
   },
@@ -172,17 +172,17 @@ export const REMIX_SLOTS: RemixSlot[] = [
       // 고급 작물(금별): needed는 추정(3) — 위키 미명시. 모든 작물 금 등급 이상.
       {
         ...bundle("rx_qualityCrops", "pantry", [
-          c("parsnip", ["spring"]),
-          c("greenBean", ["spring"]),
-          c("potato", ["spring"]),
-          c("cauliflower", ["spring"]),
-          c("melon", ["summer"]),
-          c("blueberry", ["summer"]),
-          c("hotPepper", ["summer"]),
-          c("pumpkin", ["fall"]),
-          c("yam", ["fall"]),
-          c("eggplant", ["fall"]),
-          c("corn", ["summer", "fall"]),
+          qn(c("parsnip", ["spring"]), 5),
+          qn(c("greenBean", ["spring"]), 5),
+          qn(c("potato", ["spring"]), 5),
+          qn(c("cauliflower", ["spring"]), 5),
+          qn(c("melon", ["summer"]), 5),
+          qn(c("blueberry", ["summer"]), 5),
+          qn(c("hotPepper", ["summer"]), 5),
+          qn(c("pumpkin", ["fall"]), 5),
+          qn(c("yam", ["fall"]), 5),
+          qn(c("eggplant", ["fall"]), 5),
+          qn(c("corn", ["summer", "fall"]), 5),
         ], 3),
         quality: "gold",
       },
@@ -204,8 +204,8 @@ export const REMIX_SLOTS: RemixSlot[] = [
         b("duckEgg", []),
       ], 5),
       bundle("rx_fishFarmer", "pantry", [
-        b("roe", []),
-        b("agedRoe", []),
+        qn(b("roe", []), 15),
+        qn(b("agedRoe", []), 15),
         b("squidInk", []),
       ]),
       // 정원 꾸러미: needed 추정(4) — 위키 미명시
@@ -350,11 +350,11 @@ export const REMIX_SLOTS: RemixSlot[] = [
       ]),
       // 모험: 위키 "목록 중 4개 무작위 선정" — 표준 모험 꾸러미 needed 2를 따름
       bundle("rx_adventurer", "boilerRoom", [
-        b("slime", []),
-        b("batWing", []),
+        qn(b("slime", []), 99),
+        qn(b("batWing", []), 10),
         b("solarEssence", []),
         b("voidEssence", []),
-        b("boneFragment", []),
+        qn(b("boneFragment", []), 10),
       ], 2),
       bundle("rx_treasureHunter", "boilerRoom", [
         b("amethyst", []),
@@ -367,7 +367,7 @@ export const REMIX_SLOTS: RemixSlot[] = [
       bundle("rx_engineer", "boilerRoom", [
         b("iridiumOre", []),
         b("batteryPack", []),
-        b("refinedQuartz", []),
+        qn(b("refinedQuartz", []), 5),
       ]),
     ],
   },
@@ -405,9 +405,9 @@ export const REMIX_SLOTS: RemixSlot[] = [
         b("frozenGeode", []),
       ]),
       bundle("rx_fodder", "bulletinBoard", [
-        c("wheat", ["summer", "fall"]),
-        b("hay", []),
-        b("apple", ["fall"]),
+        qn(c("wheat", ["summer", "fall"]), 10),
+        qn(b("hay", []), 10),
+        qn(b("apple", ["fall"]), 3),
       ]),
       bundle("rx_enchanter", "bulletinBoard", [
         b("oakResin", []),
@@ -416,25 +416,25 @@ export const REMIX_SLOTS: RemixSlot[] = [
         b("pomegranate", ["fall"]),
       ]),
       bundle("rx_homestead", "bulletinBoard", [
-        b("egg", []),
-        b("milk", []),
-        b("flour", []),
+        qn(b("egg", []), 10),
+        qn(b("milk", []), 10),
+        qn(b("flour", []), 100),
       ]),
       bundle("rx_child", "bulletinBoard", [
-        b("salmonberry", ["spring"]),
+        qn(b("salmonberry", ["spring"]), 10),
         b("cookie", []),
         b("ancientDoll", []),
         b("iceCream", ["summer"]),
       ]),
       bundle("rx_forager", "bulletinBoard", [
-        b("salmonberry", ["spring"]),
-        b("blackberry", ["fall"]),
-        b("wildPlum", ["fall"]),
+        qn(b("salmonberry", ["spring"]), 50),
+        qn(b("blackberry", ["fall"]), 50),
+        qn(b("wildPlum", ["fall"]), 20),
       ]),
       bundle("rx_spiritsEve", "bulletinBoard", [
         b("jackOLantern", ["fall"]),
-        c("corn", ["summer", "fall"]),
-        b("batWing", []),
+        qn(c("corn", ["summer", "fall"]), 10),
+        qn(b("batWing", []), 10),
       ]),
     ],
   },

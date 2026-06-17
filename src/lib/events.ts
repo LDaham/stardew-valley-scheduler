@@ -6,7 +6,11 @@ import {
 } from "@/data/game-data";
 import { type SDate, type Season, daysUntil } from "@/lib/calendar";
 
-export type FixedEventType = "festival" | "birthday" | "cropDeadline";
+export type FixedEventType =
+  | "festival"
+  | "birthday"
+  | "cropDeadline"
+  | "foraging";
 
 // 이벤트 타입별 표시 여부 필터
 export type EventFilters = Record<FixedEventType, boolean>;
@@ -14,11 +18,41 @@ export type EventFilters = Record<FixedEventType, boolean>;
 // 게임 내장 고정 이벤트의 통합 표현. refId는 해당 i18n 네임스페이스 키.
 export interface FixedEvent {
   type: FixedEventType;
-  refId: string; // festivals.* | villagers.* | crops.*
+  refId: string; // festivals.* | villagers.* | crops.* | foraging.*
   season: Season;
-  day: number; // 시작일(축제) / 생일 / 심기 마감일
-  endDay?: number; // 다중일 축제 종료일
+  day: number; // 시작일(축제) / 생일 / 심기 마감일 / 채집 이벤트 시작일
+  endDay?: number; // 다중일 축제·채집 이벤트 종료일
+  icon?: string; // 채집 이벤트 등 개별 아이콘 경로
 }
+
+// 계절 채집 이벤트(달력 위키). 정보 영역에 기간 동안 표시(완료 체크 없음).
+// 출처: 달력 - Stardew Valley Wiki / 아이콘: 채집 - Stardew Valley Wiki
+const FORAGING_EVENTS: FixedEvent[] = [
+  {
+    type: "foraging",
+    refId: "salmonberrySeason",
+    season: "spring",
+    day: 15,
+    endDay: 18,
+    icon: "/icons/bundleItems/salmonberry.png",
+  },
+  {
+    type: "foraging",
+    refId: "summerBeachForaging",
+    season: "summer",
+    day: 12,
+    endDay: 14,
+    icon: "/icons/bundleItems/clam.png",
+  },
+  {
+    type: "foraging",
+    refId: "blackberrySeason",
+    season: "fall",
+    day: 8,
+    endDay: 11,
+    icon: "/icons/bundleItems/blackberry.png",
+  },
+];
 
 // 모든 고정 이벤트를 평탄화한 목록 (메모이즈)
 export const FIXED_EVENTS: FixedEvent[] = [
@@ -43,6 +77,7 @@ export const FIXED_EVENTS: FixedEvent[] = [
       day: cropLastPlantDay(c),
     })),
   ),
+  ...FORAGING_EVENTS,
 ];
 
 // 활성화된 타입만 남긴다

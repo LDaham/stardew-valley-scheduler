@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
 import { addDays, toYearDay, type SDate } from "@/lib/calendar";
 import { filterEvents, getEventsOn, type FixedEvent } from "@/lib/events";
-import { getActiveReminders, festivalEveOf, type ReminderBadge } from "@/lib/reminders";
+import { getActiveReminders, type ReminderBadge } from "@/lib/reminders";
 import { useSchedule } from "@/components/ScheduleProvider";
 import { useGiftDialog } from "@/components/GiftDialogProvider";
 import EventIcon from "@/components/EventIcon";
@@ -158,6 +158,7 @@ export default function Dashboard() {
     if (e.type === "festival") return t(`festivals.${e.refId}`);
     if (e.type === "birthday")
       return t("dashboard.birthdayOf", { name: t(`villagers.${e.refId}`) });
+    if (e.type === "foraging") return t(`foraging.${e.refId}`);
     return t("dashboard.plantDeadline", { crop: t(`crops.${e.refId}`) });
   };
 
@@ -276,20 +277,6 @@ export default function Dashboard() {
       }
     }
 
-    // 축제 전날: "내일이 축제임을 고려" 안내(상점·NPC·구인 게시판 휴무)
-    const eveFest = festivalEveOf(date);
-    if (eveFest) {
-      info.push({
-        key: `${yd}:festivalEve`,
-        orderKey: "event:festival",
-        icon: <PixelIcon src="/icons/festival/flag.png" size={16} />,
-        label: t("dashboard.festivalEveNote", {
-          festival: t(`festivals.${eveFest.id}`),
-        }),
-        done: false,
-        onToggle: () => {},
-      });
-    }
 
     for (const r of getActiveReminders(date, reminderToggles)) {
       const key = `${yd}:reminder-${r.id}`;
@@ -332,36 +319,7 @@ export default function Dashboard() {
         });
         continue;
       }
-      // 마을회관 꾸러미 채우기도 정보로 표시(완료 체크 없음, 꾸러미 창 열기 버튼).
-      if (r.id === "communityCenterBundle") {
-        info.push({
-          key,
-          orderKey: `reminder:${r.id}`,
-          icon: <ReminderIcon id={r.id} size={16} />,
-          label: t("reminders.communityCenterBundle.title"),
-          rightBadge: (
-            <ActionChip
-              onClick={() => setBundleFillOpen(true)}
-              label={t("bundle.fill")}
-            />
-          ),
-          done: false,
-          onToggle: () => {},
-          logic: t("logic.communityCenterBundle"),
-        });
-        continue;
-      }
-      let rightBadge = reminderBadge(r.badge);
-      // 내일 비 예보 토글 — 날씨·운세 확인 행 오른쪽에 배치
-      if (r.id === "weatherFortune") {
-        rightBadge = (
-          <RainSwitch
-            on={rainTomorrow}
-            onToggle={toggleRainTomorrow}
-            label={t("dashboard.rainForecast")}
-          />
-        );
-      }
+      const rightBadge = reminderBadge(r.badge);
       // 소스의 여왕 재방송은 신규 방영과 함께 움직이도록 같은 순서 키 사용
       const orderKey =
         r.id === "queenOfSauceRerun"
@@ -537,6 +495,20 @@ export default function Dashboard() {
     const byRank = (a: TaskRow, b: TaskRow) => rank(a.orderKey) - rank(b.orderKey);
     info.sort(byRank);
     rows.sort(byRank);
+
+    // 비 예보가 켜진 날만 정보 맨 위에 표시(내일=비 예보, 오늘=비 오는 날).
+    // 토글 버튼은 내일 정보 제목 옆에 둔다(여기서는 상태만 표시).
+    if (isRain) {
+      const isTom = yd === tomorrowYd;
+      info.unshift({
+        key: `${yd}:${isTom ? "rainForecast" : "rainToday"}`,
+        orderKey: "info:rain",
+        icon: <PixelIcon src="/icons/ui/rain.png" size={16} />,
+        label: t(isTom ? "dashboard.rainExpected" : "dashboard.rainToday"),
+        done: false,
+        onToggle: () => {},
+      });
+    }
     return { info, todo: rows };
   };
 
@@ -601,9 +573,20 @@ export default function Dashboard() {
             />
           </div>
           <div className="border-l border-dashed border-[var(--sv-border)] pl-4">
-            <h2 className="mb-2 text-base font-bold text-[var(--sv-ink-muted)]">
-              {t("dashboard.tomorrowInfoTitle")}
-            </h2>
+            <div className="mb-2 flex items-center justify-between gap-2">
+              <h2 className="text-base font-bold text-[var(--sv-ink-muted)]">
+                {t("dashboard.tomorrowInfoTitle")}
+              </h2>
+              {/* 내일 비 예보 토글 (제목 오른쪽) */}
+              <span className="flex shrink-0 items-center gap-1">
+                <PixelIcon src="/icons/ui/rain.png" size={14} />
+                <RainSwitch
+                  on={rainTomorrow}
+                  onToggle={toggleRainTomorrow}
+                  ariaLabel={t("dashboard.rainForecast")}
+                />
+              </span>
+            </div>
             <TaskList
               rows={tomorrowBuilt.info}
               emptyText={t("dashboard.noInfo")}
@@ -779,25 +762,24 @@ function ActionChip({
   );
 }
 
-// 내일 비 예보 토글 스위치(날씨·운세 행 우측). 행 체크와 분리.
+// 비 예보 토글 스위치(내일 정보 행 우측). 행 체크와 분리.
 function RainSwitch({
   on,
   onToggle,
-  label,
+  ariaLabel,
 }: {
   on: boolean;
   onToggle: () => void;
-  label: string;
+  ariaLabel: string;
 }) {
   return (
     <span className="flex shrink-0 items-center gap-1.5">
-      <span className="text-sm text-[var(--sv-ink-muted)]">{label}</span>
       <button
         type="button"
         role="switch"
         aria-checked={on}
-        aria-label={label}
-        title={label}
+        aria-label={ariaLabel}
+        title={ariaLabel}
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();

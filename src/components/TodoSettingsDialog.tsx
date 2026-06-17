@@ -16,6 +16,7 @@ const EVENT_ICON: Record<string, string> = {
   festival: "/icons/festival/flag.png",
   birthday: "/icons/event/birthday.png",
   cropDeadline: "/icons/event/cropDeadline.png",
+  foraging: "/icons/bundleItems/salmonberry.png",
 };
 const MEMO_ICON: Record<string, string> = {
   plant: "/icons/addTask/seed.png",
@@ -40,9 +41,9 @@ const CROP_GROUP_ID = "group:crop";
 // 영향을 주지 않으므로 설정에서도 점선으로 구분해 각 그룹 안에서만 정렬한다.
 const INFO_KEYS = new Set<string>([
   "reminder:buySeeds", // 새 계절
-  "reminder:communityCenterBundle", // 마을회관 꾸러미 채우기
   "event:festival", // 축제
   "event:cropDeadline", // 작물 심기 마감
+  "event:foraging", // 계절 채집 이벤트
 ]);
 
 type Section = "info" | "todo";
@@ -92,6 +93,8 @@ export default function TodoSettingsDialog({
     setMemoCategoryToggle,
     todoOrder,
     setTodoOrder,
+    bundleTrackerShown,
+    setBundleTrackerShown,
   } = useSchedule();
 
   // 씨앗 심기(plant/watering/harvest/eatFood)는 한 그룹으로 접어 표시한다.
@@ -316,6 +319,27 @@ export default function TodoSettingsDialog({
 
   return (
     <Modal title={t("settings.todoSettings")} onClose={onClose}>
+      {/* 최상단 고정: 메인 화면 꾸러미 추적 박스 표시 토글(순서 변경 대상 아님) */}
+      <label className="mb-3 flex cursor-pointer items-start gap-2 rounded-md border border-[var(--sv-border)] bg-[var(--sv-bg)] px-2 py-2">
+        <input
+          type="checkbox"
+          checked={bundleTrackerShown}
+          onChange={(e) => setBundleTrackerShown(e.target.checked)}
+          className="mt-0.5 size-4 shrink-0 accent-[var(--sv-accent)]"
+        />
+        <span className="mt-0.5">
+          <PixelImage src="/icons/ui/bundle.png" />
+        </span>
+        <span className="flex-1">
+          <span className="text-sm font-semibold">
+            {t("settings.bundleTracker")}
+          </span>
+          <span className="block text-xs text-[var(--sv-ink-muted)]">
+            {t("settings.bundleTrackerNote")}
+          </span>
+        </span>
+      </label>
+
       <p className="mb-2 text-xs text-[var(--sv-ink-muted)]">
         {t("settings.orderHint")}
       </p>

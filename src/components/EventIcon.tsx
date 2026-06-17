@@ -7,6 +7,8 @@ import { asset } from "@/lib/asset";
 function src(event: FixedEvent): string {
   if (event.type === "birthday") return `/icons/villagers/${event.refId}.png`;
   if (event.type === "festival") return `/icons/festival/flag.png`;
+  if (event.type === "foraging")
+    return event.icon ?? `/icons/festival/flag.png`;
   return `/icons/seeds/${event.refId}.png`;
 }
 

@@ -1,10 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import PixelIcon from "@/components/PixelIcon";
 import type { Season } from "@/lib/calendar";
 
-// 계절 필터 토큰: 상시(사계절) + 4계절 + 비(선택 노출)
+// 계절 필터 토큰: 상시(사계절) + 4계절 (+ 비: 더 이상 필터로 노출하지 않음)
 export type SeasonToken = "all" | Season | "rain";
 export const SEASON_TOKENS: SeasonToken[] = [
   "all",
@@ -47,19 +46,14 @@ const DOT_COLOR: Record<string, string> = {
 export default function SeasonFilter({
   selected,
   onToggle,
-  showRain = false,
 }: {
   selected: Set<SeasonToken>;
   onToggle: (tk: SeasonToken) => void;
-  showRain?: boolean;
 }) {
   const t = useTranslations();
-  const tokens: SeasonToken[] = showRain
-    ? [...SEASON_TOKENS, "rain"]
-    : SEASON_TOKENS;
   return (
     <div className="flex flex-wrap gap-1.5">
-      {tokens.map((tk) => {
+      {SEASON_TOKENS.map((tk) => {
         const on = selected.has(tk);
         return (
           <button
@@ -71,22 +65,14 @@ export default function SeasonFilter({
                 : "border border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink)] hover:bg-[var(--sv-bg)]"
             }`}
           >
-            {tk === "rain" ? (
-              <PixelIcon src="/icons/ui/rain.png" size={12} />
-            ) : (
-              <span
-                className="inline-block size-2 rounded-full"
-                style={{
-                  background: DOT_COLOR[tk],
-                  outline: on ? "1px solid white" : "none",
-                }}
-              />
-            )}
-            {tk === "all"
-              ? t("seasonFilter.all")
-              : tk === "rain"
-                ? t("bundle.rainy")
-                : t(`seasons.${tk}`)}
+            <span
+              className="inline-block size-2 rounded-full"
+              style={{
+                background: DOT_COLOR[tk],
+                outline: on ? "1px solid white" : "none",
+              }}
+            />
+            {tk === "all" ? t("seasonFilter.all") : t(`seasons.${tk}`)}
           </button>
         );
       })}

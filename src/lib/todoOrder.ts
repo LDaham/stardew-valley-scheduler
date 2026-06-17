@@ -12,7 +12,7 @@ export interface TodoEntry {
   ref: string; // 이벤트 타입 / 리마인더 id / 메모 카테고리
 }
 
-export const EVENT_TYPES = ["festival", "birthday", "cropDeadline"] as const;
+export const EVENT_TYPES = ["festival", "birthday", "cropDeadline", "foraging"] as const;
 // harvest=작물 수확, watering=작물별 물주기(사용자 추가), tool=도구 업그레이드,
 // machine=장인 제작품, build=농장 건물 건설·농가 업그레이드, misc=정동석 깨기·박물관 기증,
 // eatFood=수확일 음식 먹기(품질 버프), fruit=과일나무 수확, mining=채굴, fishing=낚시
@@ -46,9 +46,9 @@ export const TODO_ENTRIES: TodoEntry[] = [
 export const DEFAULT_TODO_ORDER: string[] = [
   // 정보
   "reminder:buySeeds", // 새 계절
-  "reminder:communityCenterBundle", // 마을회관 꾸러미 채우기
   "event:festival", // 축제
   "event:cropDeadline", // 작물 심기 마감
+  "event:foraging", // 계절 채집 이벤트(새먼베리철 등)
   // 할 일
   "reminder:weatherFortune", // 날씨·운세 확인
   "reminder:queenOfSauceNew", // 소스의 여왕(재방송 포함)

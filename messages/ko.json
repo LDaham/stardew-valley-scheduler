@@ -44,7 +44,13 @@
   "eventType": {
     "festival": "축제",
     "birthday": "생일 선물 전달",
-    "cropDeadline": "작물 심기 마감"
+    "cropDeadline": "작물 심기 마감",
+    "foraging": "계절 채집 이벤트"
+  },
+  "foraging": {
+    "salmonberrySeason": "새먼베리철",
+    "summerBeachForaging": "해변에서 추가 채집물 채집 가능",
+    "blackberrySeason": "블랙베리철"
   },
   "dashboard": {
     "today": "오늘",
@@ -66,6 +72,8 @@
     "wateringGroup": "작물 물주기",
     "fruitGroup": "과일 수확하기",
     "rainForecast": "내일 비 예보",
+    "rainExpected": "비 예보",
+    "rainToday": "비 오는 날",
     "deleteTitle": "할 일 삭제",
     "deleteBody": "이 항목만 삭제하거나, 같은 작물의 관련 할 일을 모든 날짜에서 한꺼번에 삭제할 수 있어요.",
     "deleteOne": "이 항목만 삭제",
@@ -83,8 +91,7 @@
     "noInfo": "표시할 정보 없음",
     "rolled": "미뤄짐",
     "blockedToday": "오늘은 불가({reason})",
-    "dateFull": "{year}년째, {season}의 {day}일째",
-    "festivalEveNote": "내일은 {festival}입니다. 축제 당일엔 상점·NPC·구인 게시판 이용이 막히니 오늘 처리할 일을 끝내세요."
+    "dateFull": "{year}년째, {season}의 {day}일째"
   },
   "memo": {
     "selectDay": "달력에서 날짜를 선택하세요",
@@ -123,7 +130,9 @@
     "reorder": "드래그하여 순서 변경",
     "userAdded": "사용자 추가",
     "cropGroup": "씨앗 심기",
-    "cropGroupNote": "심기 → 물주기 → 수확 → 음식/재파종 순서. 상위를 완료해야 하위 할 일이 생깁니다."
+    "cropGroupNote": "심기 → 물주기 → 수확 → 음식/재파종 순서. 상위를 완료해야 하위 할 일이 생깁니다.",
+    "bundleTracker": "꾸러미 추적",
+    "bundleTrackerNote": "메인 화면 상단에 꾸러미 추적 박스가 함께 표시됩니다."
   },
   "blacksmith": {
     "pickupWarn": "완성 예정일 {ready}은 대장간 휴무({reason})라 다음 영업일에 수령합니다",
@@ -153,15 +162,14 @@
     "title": "마을회관 꾸러미 추적",
     "short": "꾸러미",
     "open": "꾸러미 추적 열기",
-    "fill": "꾸러미 채우기",
     "complete": "완료",
     "inSeason": "이번 계절",
-    "rainy": "비",
     "allSeasons": "상시",
     "qualityGoldNote": "모든 품목을 금 등급(★) 이상으로 제출해야 합니다.",
     "showAll": "전체 보기",
     "showFill": "획득 불가능한 품목 제외",
     "pick": "{total}개 중 {needed}개",
+    "needMetLock": "필요 개수를 모두 채웠습니다. 다른 품목을 해제하면 다시 선택할 수 있습니다.",
     "excludeUnobtainable": "이번 계절에 획득 불가능한 품목 제외",
     "onlyCurrentOnly": "이번 계절({season})에만 획득 가능한 품목만 보기",
     "excludeAllSeasons": "상시(사계절) 획득 가능한 품목 제외",
@@ -247,12 +255,8 @@
   },
   "bundleTracker": {
     "title": "꾸러미 추적",
-    "settings": "표시 설정",
-    "settingsTitle": "추적할 꾸러미 선택",
-    "settingsHint": "메인 화면 꾸러미 추적 박스에 표시할 꾸러미를 선택하세요.",
-    "settingsHintRemix": "리믹스 모드에서는 리믹스 탭에서 선택한 무작위 꾸러미가 표시됩니다.",
-    "incompleteFirst": "완료되지 않은 물품 먼저 보기",
-    "empty": "표시할 꾸러미가 없습니다. 설정에서 추적할 꾸러미를 선택하세요.",
+    "onlyIncomplete": "완료되지 않은 물품만 보기",
+    "empty": "표시할 꾸러미가 없습니다.",
     "emptyRemix": "선택된 무작위 꾸러미가 없습니다. 리믹스 탭에서 꾸러미를 선택하세요."
   },
   "bundleRoom": {
@@ -745,10 +749,6 @@
       "title": "구인광고 확인",
       "detail": "피에르네 게시판의 구인광고(배달·잡기 등) 의뢰 확인",
       "eveWarning": "내일은 축제라 NPC·상점 이용이 막힙니다"
-    },
-    "communityCenterBundle": {
-      "title": "마을회관 꾸러미 채우기",
-      "detail": "이번 계절 첫날 - 이번 계절에 모을 수 있는 꾸러미 품목 확인. 켜면 메인 화면 상단에 꾸러미 추적 박스가 함께 표시됩니다."
     },
     "crabPot": {
       "title": "통발 확인",
@@ -2128,11 +2128,11 @@
     "queenOfSauceNew": "일요일 신규 방영 · 안 보면(체크 안 하면) 같은 레시피를 수요일 재방송으로만 다시 볼 수 있음. 당일 끝남.",
     "queenOfSauceRerun": "수요일 재방송 · 신규 방영을 못 본 경우에만 표시. 당일 끝남.",
     "helpWanted": "매일 · 당일 끝남. 축제 전날·당일에는 상점/NPC가 막혀 표시 안 함.",
-    "communityCenterBundle": "정보 · 계절 첫날 표시(이번 계절 모을 꾸러미 품목). 완료 표시 없음.",
     "crabPot": "무기한 · 안 하면 미뤄짐.",
     "pondCheck": "매일 · 당일 끝남(연못 바구니에 매일 생산물 누적).",
     "festival": "정보 · 축제일(상점/NPC 일정 영향). 완료 표시 없음.",
     "cropDeadline": "정보 · 이 날까지 심어야 이번 계절 수확 가능. 완료 표시 없음.",
+    "foraging": "정보 · 계절 채집 이벤트 기간(새먼베리철 등). 완료 표시 없음.",
     "birthday": "당일 한정 · 오늘 전달해야 '생일 선물'. 안 하면 일반 선물이 됨.",
     "newSeason": "정보 · 새 계절 시작(이번 계절 씨앗 구매 가능). 완료 표시 없음.",
     "plant": "심을 때까지 미뤄짐 · 심어야 물주기·수확이 생김. 온실 아니면 수확 계절 지나면 사라짐.",

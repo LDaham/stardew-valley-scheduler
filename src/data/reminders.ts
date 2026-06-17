@@ -16,7 +16,6 @@ export type ReminderId =
   | "queenOfSauceRerun"
   | "buySeeds"
   | "helpWanted"
-  | "communityCenterBundle"
   | "crabPot"
   | "pondCheck";
 
@@ -79,7 +78,6 @@ export const REMINDERS: ReminderDef[] = [
     // 축제 당일은 구인 게시판이 막혀 확인 불가. 전날은 표시(내일 축제 안내 문구 함께 노출).
     suppressOnFestival: true,
   },
-  { id: "communityCenterBundle", trigger: { kind: "seasonStart" } },
   { id: "crabPot", trigger: { kind: "daily" } },
   // 물고기 연못 확인: 매일 연못 바구니에 생산물이 쌓이므로 매일 표시
   { id: "pondCheck", trigger: { kind: "daily" } },
@@ -88,7 +86,6 @@ export const REMINDERS: ReminderDef[] = [
 // 기본으로 켜진 리마인더(나머지는 꺼짐).
 const DEFAULT_ON_REMINDERS: ReminderId[] = [
   "buySeeds", // 새 계절
-  "communityCenterBundle", // 마을회관 꾸러미
   "weatherFortune", // 날씨·운세
   "queenOfSauceNew", // 소스의 여왕(신규)
   "queenOfSauceRerun", // 소스의 여왕(재방송)

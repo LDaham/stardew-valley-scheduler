@@ -9,6 +9,7 @@ export interface BundleItem {
   nameKey: string; // i18n 키 (crops.* | bundleItem.*)
   seasons: Season[];
   rainy?: boolean;
+  qty?: number; // 제출해야 하는 개수(2 이상일 때만 "(N)" 표기). 출처: 꾸러미 위키
 }
 
 export interface Bundle {
@@ -29,6 +30,9 @@ const item = (
   seasons: Season[],
   rainy = false,
 ): BundleItem => ({ id, nameKey: `bundleItem.${id}`, seasons, rainy });
+
+// 제출 개수 지정(여러 개 채워야 하는 품목). 예: qn(item("wood", []), 99)
+export const qn = (i: BundleItem, qty: number): BundleItem => ({ ...i, qty });
 
 // needed 미지정 시 전체 필요
 const all = (
@@ -83,9 +87,9 @@ export const BUNDLES: Bundle[] = [
     item("crocus", ["winter"]),
   ]),
   all("construction", "craftsRoom", [
-    item("wood", []),
-    item("stone", []),
-    item("hardwood", []),
+    qn(item("wood", []), 99),
+    qn(item("stone", []), 99),
+    qn(item("hardwood", []), 10),
   ]),
   // 9개 중 5개 선택
   all(
@@ -156,10 +160,10 @@ export const BUNDLES: Bundle[] = [
   // 고급 작물 꾸러미: 모든 작물이 금 등급 이상이어야 함
   {
     ...all("qualityCrops", "pantry", [
-      crop("parsnip", ["spring"]),
-      crop("melon", ["summer"]),
-      crop("pumpkin", ["fall"]),
-      crop("corn", ["summer", "fall"]),
+      qn(crop("parsnip", ["spring"]), 5),
+      qn(crop("melon", ["summer"]), 5),
+      qn(crop("pumpkin", ["fall"]), 5),
+      qn(crop("corn", ["summer", "fall"]), 5),
     ]),
     quality: "gold",
   },
@@ -211,8 +215,8 @@ export const BUNDLES: Bundle[] = [
     "adventurer",
     "boilerRoom",
     [
-      item("slime", []),
-      item("batWing", []),
+      qn(item("slime", []), 99),
+      qn(item("batWing", []), 10),
       item("solarEssence", []),
       item("voidEssence", []),
     ],
@@ -242,9 +246,9 @@ export const BUNDLES: Bundle[] = [
     item("frozenGeode", []),
   ]),
   all("fodder", "bulletinBoard", [
-    crop("wheat", ["summer", "fall"]),
-    item("hay", []),
-    item("apple", ["fall"]),
+    qn(crop("wheat", ["summer", "fall"]), 10),
+    qn(item("hay", []), 10),
+    qn(item("apple", ["fall"]), 3),
   ]),
   all("enchanter", "bulletinBoard", [
     item("oakResin", []),

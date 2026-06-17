@@ -64,7 +64,9 @@ const DEFAULT_DIALOG_FILTERS: DialogFilters = {
   seedFertilizer: "none",
   seedProduce: "raw",
   seedFood: "none",
-  trackerIncompleteFirst: false,
+  // 꾸러미 추적 기본: 봄만 선택, 완료되지 않은 물품만 보기
+  trackerSeasons: ["spring"],
+  trackerOnlyIncomplete: true,
 };
 
 const STORAGE_KEY = "svs:schedule";
@@ -93,7 +95,7 @@ const DEFAULT_STATE: ScheduleState = {
   currentDay: 1, // 봄 1일
   year: 1,
   memos: [],
-  eventFilters: { birthday: true, festival: true, cropDeadline: true },
+  eventFilters: { birthday: true, festival: true, cropDeadline: true, foraging: true },
   reminderToggles: DEFAULT_REMINDER_TOGGLES,
   taskDone: {},
   todoOrder: DEFAULT_TODO_ORDER,
@@ -112,7 +114,7 @@ const DEFAULT_STATE: ScheduleState = {
   achievementsDone: {},
   character: DEFAULT_CHARACTER,
   dialogFilters: DEFAULT_DIALOG_FILTERS,
-  bundleTrackerIds: [],
+  bundleTrackerShown: true,
 };
 
 let state: ScheduleState = DEFAULT_STATE;
@@ -158,7 +160,7 @@ function ensureLoaded(): void {
     achievementsDone: saved.achievementsDone ?? {},
     character: { ...DEFAULT_CHARACTER, ...saved.character },
     dialogFilters: { ...DEFAULT_DIALOG_FILTERS, ...saved.dialogFilters },
-    bundleTrackerIds: saved.bundleTrackerIds ?? [],
+    bundleTrackerShown: saved.bundleTrackerShown ?? true,
     year: saved.year ?? 1,
     version: STATE_VERSION,
   };
@@ -396,15 +398,9 @@ export const scheduleActions = {
   setDialogFilters(patch: Partial<DialogFilters>) {
     commit({ ...state, dialogFilters: { ...state.dialogFilters, ...patch } });
   },
-  // 추적 박스에 표시할 꾸러미 토글
-  toggleBundleTrackerId(id: string) {
-    const has = state.bundleTrackerIds.includes(id);
-    commit({
-      ...state,
-      bundleTrackerIds: has
-        ? state.bundleTrackerIds.filter((x) => x !== id)
-        : [...state.bundleTrackerIds, id],
-    });
+  // 메인 화면 꾸러미 추적 박스 표시 여부
+  setBundleTrackerShown(v: boolean) {
+    commit({ ...state, bundleTrackerShown: v });
   },
   // 저장된 모든 설정 초기화(번들·캐릭터·메모·순서·토글 등 전부 기본값으로)
   resetAll() {
@@ -413,7 +409,7 @@ export const scheduleActions = {
       currentDay: 1,
       year: 1,
       memos: [],
-      eventFilters: { birthday: true, festival: true, cropDeadline: true },
+      eventFilters: { birthday: true, festival: true, cropDeadline: true, foraging: true },
       reminderToggles: { ...DEFAULT_REMINDER_TOGGLES },
       taskDone: {},
       todoOrder: [...DEFAULT_TODO_ORDER],
@@ -432,7 +428,7 @@ export const scheduleActions = {
       achievementsDone: {},
       character: { ...DEFAULT_CHARACTER },
       dialogFilters: { ...DEFAULT_DIALOG_FILTERS },
-      bundleTrackerIds: [],
+      bundleTrackerShown: true,
     });
   },
   // 번들 품목 기증 토글

@@ -136,10 +136,8 @@ export interface ScheduleState {
   character: CharacterInfo;
   // 다이얼로그 필터(꾸러미·완벽·업적·생선·씨앗 효율)의 마지막 선택값. 다시 열 때 복원.
   dialogFilters: DialogFilters;
-  // 메인 화면 꾸러미 추적 박스 표시 여부는 reminderToggles.communityCenterBundle와 공유한다
-  // (스케줄러 설정의 "마을회관 꾸러미 채우기" 토글이 곧 박스 표시 스위치).
-  // 추적 박스에 표시할 꾸러미 id 목록(표준 BUNDLES 기준).
-  bundleTrackerIds: string[];
+  // 메인 화면 상단 꾸러미 추적 박스 표시 여부(스케줄러 설정 최상단의 "꾸러미 추적" 토글).
+  bundleTrackerShown: boolean;
 }
 
 export type BundleMode = "standard" | "remix";
@@ -157,6 +155,6 @@ export interface DialogFilters {
   seedProduce: string;
   seedFood: string;
   seedSeason?: string; // 작물 효율 계절 필터(없으면 현재 계절)
-  trackerSeasons?: string[]; // 꾸러미 추적 표시 설정의 계절 필터(없으면 현재 계절+상시)
-  trackerIncompleteFirst: boolean; // 추적 표시 설정에서 미완료 물품 먼저 보기
+  trackerSeasons?: string[]; // 꾸러미 추적의 계절 필터(없으면 현재 계절+상시)
+  trackerOnlyIncomplete: boolean; // 꾸러미 추적에서 완료되지 않은 물품만 보기
 }
