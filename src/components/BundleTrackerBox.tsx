@@ -129,7 +129,7 @@ export default function BundleTrackerBox() {
             : t("bundleTracker.empty")}
         </p>
       ) : (
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {snapshot.map(({ bundle: b, items }) => {
             // 필터로 표시할 물품이 없으면 해당 꾸러미는 숨김
             if (items.length === 0) return null;

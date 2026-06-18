@@ -18,6 +18,7 @@ import { planBuilding } from "@/lib/carpenter";
 import { FRUIT_TREES, FRUIT_TREE_MATURE_DAYS } from "@/data/fruitTrees";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import { ADD_TASK_CHILDREN, orderBy } from "@/lib/addTaskOrder";
+import { seedSkipPlantMemos } from "@/lib/chains";
 import type { MemoCategory, VisibleMemoCategory } from "@/lib/todoOrder";
 import type { SeedDefaults } from "@/types/schedule";
 import { asset } from "@/lib/asset";
@@ -75,6 +76,7 @@ export default function AddTaskDialog({
   const t = useTranslations();
   const {
     addMemo,
+    addMemos,
     year,
     bundleItemsDone,
     character,
@@ -126,14 +128,13 @@ export default function AddTaskDialog({
     afterAdd(category);
   };
 
-  // 씨앗 심기: 당일 '씨앗 심기' 1건만 생성한다(순차 체인).
-  // 완료하면 물주기 ×K → 수확 → (음식)이 차례로 생성되고,
-  // 한 단계가 밀리면 하위 단계가 그만큼 늦게 생긴다(미루기·cascade).
+  // 작물 재배: 단계별 토글(심기·물주기·수확·음식)에 따라 메모를 생성한다.
+  // 심기 ON: 당일 '씨앗 심기' 1건 생성 → 완료 시 물주기 ×K → 수확 → (음식) cascade.
+  // 심기 OFF: 이미 심은 것으로 보고 물주기/수확을 baseDate부터 직접 생성.
   const addSeed = (
     cropId: string,
     fert: Fertilizer,
-    eatFood: boolean,
-    noWatering: boolean,
+    flags: { plant: boolean; watering: boolean; harvest: boolean; eatFood: boolean },
     greenhouse: boolean,
   ) => {
     const crop = CROPS.find((c) => c.id === cropId);
@@ -151,31 +152,53 @@ export default function AddTaskDialog({
     const groupId = `${cropId}-${Date.now().toString(36)}-${Math.random()
       .toString(36)
       .slice(2, 6)}`;
-    addMemo({
-      season: baseDate.season,
-      day: baseDate.day,
-      text: t("addTask.plantMemo", { crop: cropName }),
-      reminderDaysBefore: 0,
-      category: "plant",
+    const chain = {
+      kind: "crop" as const,
+      stage: "plant" as const,
       cropId,
-      greenhouse,
-      groupId,
-      deadlineYearDay,
-      chain: {
-        kind: "crop",
-        stage: "plant",
+      remaining: K,
+      noWatering: !flags.watering,
+      harvest: flags.harvest,
+      eatFood: flags.eatFood && !willWilt,
+      waterText: t("addTask.wateringMemo", { crop: cropName }),
+      harvestText: t("addTask.harvestMemo", { crop: cropName }),
+      eatFoodText: t("addTask.eatFoodMemo", { crop: cropName }),
+    };
+    if (flags.plant) {
+      addMemo({
+        season: baseDate.season,
+        day: baseDate.day,
+        text: t("addTask.plantMemo", { crop: cropName }),
+        reminderDaysBefore: 0,
+        category: "plant",
         cropId,
-        remaining: K,
-        noWatering,
-        eatFood: eatFood && !willWilt,
-        waterText: t("addTask.wateringMemo", { crop: cropName }),
-        harvestText: t("addTask.harvestMemo", { crop: cropName }),
-        eatFoodText: t("addTask.eatFoodMemo", { crop: cropName }),
-      },
-    });
+        greenhouse,
+        groupId,
+        deadlineYearDay,
+        chain,
+      });
+    } else {
+      // 이미 심음: 심기 완료가 만들 메모를 baseDate부터 직접 생성
+      const ms = seedSkipPlantMemos({ greenhouse, groupId, deadlineYearDay }, chain, baseDate);
+      if (ms.length) addMemos(ms);
+    }
     // 선택지를 기본값으로 저장(다음 심기에 재사용)
-    setSeedDefaults({ fertilizer: fert, eatFood, noWatering });
-    afterAdd("plant");
+    setSeedDefaults({
+      fertilizer: fert,
+      plant: flags.plant,
+      watering: flags.watering,
+      harvest: flags.harvest,
+      eatFood: flags.eatFood,
+    });
+    // 생성한 첫 단계 기준으로 '꺼진 카테고리 켜기' 제안
+    const firstCat: MemoCategory = flags.plant
+      ? "plant"
+      : flags.watering
+        ? "watering"
+        : flags.harvest
+          ? "harvest"
+          : "eatFood";
+    afterAdd(firstCat);
   };
 
   // 과일 묘목 심기: 당일에 '묘목 심기' 할 일을 추가하고,
@@ -452,6 +475,39 @@ function FieldLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
+// 작물 재배 단계 토글 1줄(체크박스 + 이미지 + 라벨/설명)
+function StageCheckbox({
+  on,
+  onChange,
+  icon,
+  label,
+  note,
+}: {
+  on: boolean;
+  onChange: (v: boolean) => void;
+  icon: string;
+  label: string;
+  note?: string;
+}) {
+  return (
+    <label className="flex cursor-pointer items-start gap-2 text-sm">
+      <input
+        type="checkbox"
+        checked={on}
+        onChange={(e) => onChange(e.target.checked)}
+        className="mt-0.5 size-4 shrink-0 accent-[var(--sv-accent)]"
+      />
+      <PixelIcon src={icon} size={18} />
+      <span>
+        {label}
+        {note && (
+          <span className="block text-xs text-[var(--sv-ink-muted)]">{note}</span>
+        )}
+      </span>
+    </label>
+  );
+}
+
 function ToolForm({
   dateLabel,
   pickup,
@@ -513,8 +569,7 @@ function SeedForm({
   onAdd: (
     cropId: string,
     fert: Fertilizer,
-    eatFood: boolean,
-    noWatering: boolean,
+    flags: { plant: boolean; watering: boolean; harvest: boolean; eatFood: boolean },
     greenhouse: boolean,
   ) => void;
 }) {
@@ -526,8 +581,11 @@ function SeedForm({
     : CROPS.filter((c) => c.seasons.includes(plantDate.season));
   const [cropId, setCropId] = useState<string>(seasonCrops[0]?.id ?? "");
   const [fert, setFert] = useState<Fertilizer>(defaults.fertilizer);
+  // 단계별 생성 토글(심기·물주기·수확·음식)
+  const [plant, setPlant] = useState(defaults.plant);
+  const [water, setWater] = useState(defaults.watering);
+  const [harvestOn, setHarvestOn] = useState(defaults.harvest);
   const [eatFood, setEatFood] = useState(defaults.eatFood);
-  const [noWatering, setNoWatering] = useState(defaults.noWatering);
 
   const crop = seasonCrops.find((c) => c.id === cropId);
   const rawHarvest = crop ? computeHarvest(plantDate, crop, agri, fert) : null;
@@ -616,7 +674,7 @@ function SeedForm({
               ⚠ {t("addTask.wiltWarning")}
             </p>
           )}
-          {!noWatering && (
+          {water && (
             <p className="flex items-center gap-1 text-xs text-[var(--sv-ink-muted)]">
               <PixelIcon src="/icons/reminders/watering.png" size={14} />
               {t("addTask.wateringNote")}
@@ -625,44 +683,51 @@ function SeedForm({
         </div>
       )}
 
-      {/* 물주기 메모 추가 안 함(스프링클러 사용 등) */}
-      <label className="flex cursor-pointer items-start gap-2 text-sm">
-        <input
-          type="checkbox"
-          checked={noWatering}
-          onChange={(e) => setNoWatering(e.target.checked)}
-          className="mt-0.5 size-4 accent-[var(--sv-accent)]"
+      {/* 단계별 생성 토글: 심기·물주기·수확하기·음식 먹기(각 이미지 포함) */}
+      <div className="flex flex-col gap-2">
+        <StageCheckbox
+          on={plant}
+          onChange={setPlant}
+          icon="/icons/addTask/seed.png"
+          label={t("addTask.stagePlant")}
+          note={t("addTask.stagePlantNote")}
         />
-        <span>
-          {t("addTask.noWateringOption")}
-          <span className="block text-xs text-[var(--sv-ink-muted)]">
-            {t("addTask.noWateringNote")}
-          </span>
-        </span>
-      </label>
-
-      {/* 수확일에 음식 먹기(품질 버프) 추가 여부 */}
-      <label className="flex cursor-pointer items-start gap-2 text-sm">
-        <input
-          type="checkbox"
-          checked={eatFood}
-          onChange={(e) => setEatFood(e.target.checked)}
-          className="mt-0.5 size-4 accent-[var(--sv-accent)]"
+        <StageCheckbox
+          on={water}
+          onChange={setWater}
+          icon="/icons/reminders/watering.png"
+          label={t("addTask.stageWater")}
+          note={t("addTask.stageWaterNote")}
         />
-        <span>
-          {t("addTask.eatFoodOption")}
-          <span className="block text-xs text-[var(--sv-ink-muted)]">
-            {t("addTask.eatFoodNote")}
-          </span>
-        </span>
-      </label>
+        <StageCheckbox
+          on={harvestOn}
+          onChange={setHarvestOn}
+          icon={cropId ? `/icons/seeds/${cropId}.png` : "/icons/addTask/seed.png"}
+          label={t("addTask.stageHarvest")}
+          note={t("addTask.stageHarvestNote")}
+        />
+        <StageCheckbox
+          on={eatFood}
+          onChange={setEatFood}
+          icon="/icons/ui/food.png"
+          label={t("addTask.stageEatFood")}
+          note={t("addTask.stageEatFoodNote")}
+        />
+      </div>
 
       <FormFooter
         onBack={onBack}
         onAdd={() =>
-          crop && onAdd(cropId, fert, eatFood, noWatering, greenhouse)
+          crop &&
+          onAdd(
+            cropId,
+            fert,
+            { plant, watering: water, harvest: harvestOn, eatFood },
+            greenhouse,
+          )
         }
-        addDisabled={!crop}
+        // 아무 단계도 생성하지 않으면(심기·물주기·수확 모두 끔) 추가 비활성
+        addDisabled={!crop || (!plant && !water && !harvestOn)}
       />
     </div>
   );

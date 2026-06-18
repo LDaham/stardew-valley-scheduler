@@ -58,6 +58,7 @@ export const DEFAULT_TODO_ORDER: string[] = [
   "memo:fruit", // 과일나무 수확
   "reminder:farmCave", // 농장 동굴 채집
   "memo:machine", // 장인/정제 장비 사용
+  "reminder:forageWeekly", // 채집물 채집(토요일)
   "memo:build", // 건물 건설
   "memo:tool", // 도구 업그레이드
   "event:birthday", // 생일 선물 전달

@@ -40,7 +40,9 @@ const DEFAULT_CHARACTER: CharacterInfo = {
 
 const DEFAULT_SEED_DEFAULTS: SeedDefaults = {
   fertilizer: "none",
-  noWatering: false,
+  plant: true,
+  watering: true,
+  harvest: true,
   eatFood: false,
 };
 

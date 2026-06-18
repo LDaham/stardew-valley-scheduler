@@ -180,26 +180,16 @@ export default function TodoSettingsDialog({
       icon = <PixelImage src="/icons/addTask/seed.png" />;
       label = (
         <span>
-          <span className="text-sm font-semibold">
-            {t("settings.cropGroup")}
+          <span className="flex items-center gap-1.5">
+            <span className="text-sm font-semibold">
+              {t("settings.cropGroup")}
+            </span>
+            <span className="rounded bg-[var(--sv-bg)] px-1 py-0.5 text-[10px] text-[var(--sv-ink-muted)]">
+              {t("settings.userAdded")}
+            </span>
           </span>
           <span className="block text-xs text-[var(--sv-ink-muted)]">
             {t("settings.cropGroupNote")}
-          </span>
-          {/* 하위 단계 개별 토글(심기·물주기·수확·음식). 체크박스로만 토글되도록 span 사용 */}
-          <span className="mt-1.5 flex flex-col gap-1 border-l-2 border-[var(--sv-border)] pl-2">
-            {CROP_GROUP_CATS.map((c) => (
-              <span key={c} className="flex items-center gap-1.5 text-xs">
-                <input
-                  type="checkbox"
-                  checked={memoCategoryToggles[c]}
-                  onChange={(e) => setMemoCategoryToggle(c, e.target.checked)}
-                  className="size-3.5 shrink-0 accent-[var(--sv-accent)]"
-                />
-                <PixelImage src={MEMO_ICON[c]} size={14} />
-                <span>{t(`todoCategory.${c}`)}</span>
-              </span>
-            ))}
           </span>
         </span>
       );

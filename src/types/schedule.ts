@@ -5,10 +5,13 @@ import type { MemoCategory, VisibleMemoCategory } from "@/lib/todoOrder";
 import type { Fertilizer } from "@/lib/growth";
 
 // 씨앗 심기 선택지 기본값(다음 심기에도 재사용되도록 영속).
+// 작물 재배 단계별 생성 여부(다음 심기에도 재사용되도록 영속).
 export interface SeedDefaults {
   fertilizer: Fertilizer;
-  noWatering: boolean;
-  eatFood: boolean;
+  plant: boolean; // 심기 할 일 생성(끄면 이미 심은 것으로 보고 다음 단계부터)
+  watering: boolean; // 물주기 생성
+  harvest: boolean; // 수확 생성
+  eatFood: boolean; // 수확일 음식 먹기 생성
 }
 
 // 토글은 설정에 노출되는 카테고리만 대상(buySeed 제외 — buySeeds 리마인더와 통합)
@@ -52,6 +55,7 @@ export type MemoChain =
       cropId: string;
       remaining: number; // 남은 물주기 수(plant 단계에선 총 K)
       noWatering: boolean;
+      harvest: boolean; // 수확 메모 생성 여부(끄면 마지막 물주기 후 종료)
       eatFood: boolean;
       waterText: string;
       harvestText: string;

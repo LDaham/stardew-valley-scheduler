@@ -16,6 +16,7 @@ export type ReminderId =
   | "queenOfSauceRerun"
   | "buySeeds"
   | "helpWanted"
+  | "forageWeekly"
   | "crabPot"
   | "pondCheck";
 
@@ -78,6 +79,8 @@ export const REMINDERS: ReminderDef[] = [
     // 축제 당일은 구인 게시판이 막혀 확인 불가. 전날은 표시(내일 축제 안내 문구 함께 노출).
     suppressOnFestival: true,
   },
+  // 채집물 채집: 채집물이 일요일마다 리셋되므로 토요일에 모으는 게 가장 효율적
+  { id: "forageWeekly", trigger: { kind: "weekly", weekdays: ["sat"] } },
   { id: "crabPot", trigger: { kind: "daily" } },
   // 물고기 연못 확인: 매일 연못 바구니에 생산물이 쌓이므로 매일 표시
   { id: "pondCheck", trigger: { kind: "daily" } },
@@ -92,6 +95,7 @@ const DEFAULT_ON_REMINDERS: ReminderId[] = [
   "helpWanted", // 구인 광고
   "specialOrders", // 특별 주문
   "travelingCart", // 여행 상인
+  "forageWeekly", // 채집물 채집(토요일)
 ];
 
 // 기본 토글 상태

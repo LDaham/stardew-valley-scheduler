@@ -21,10 +21,18 @@ import type { Memo, MemoChain } from "@/types/schedule";
 // 새로 추가할 메모(아직 id/완료/생성시각 없음)
 export type NewMemo = Omit<Memo, "id" | "createdAt" | "done">;
 
+// 메모 생성에 필요한 부모 정보(작물·온실·묶음·마감)만 추린 형태.
+// 심기 메모(완료 후 cascade)와 '심기 건너뛰기' 직접 생성 양쪽에서 공통으로 쓴다.
+type CropParent = {
+  greenhouse?: boolean;
+  groupId?: string;
+  deadlineYearDay?: number;
+};
+
 // 작물 물주기 메모 1건 생성(부모의 작물·온실·마감 정보를 그대로 물려준다).
 function cropWaterMemo(
   date: SDate,
-  memo: Memo,
+  parent: CropParent,
   chain: Extract<MemoChain, { kind: "crop" }>,
   remaining: number,
 ): NewMemo {
@@ -35,19 +43,20 @@ function cropWaterMemo(
     reminderDaysBefore: 0,
     category: "watering",
     cropId: chain.cropId,
-    greenhouse: memo.greenhouse,
-    groupId: memo.groupId,
-    deadlineYearDay: memo.deadlineYearDay,
+    greenhouse: parent.greenhouse,
+    groupId: parent.groupId,
+    deadlineYearDay: parent.deadlineYearDay,
     chain: { ...chain, stage: "water", remaining },
   };
 }
 
-// 수확(+선택 시 수확일 음식) 메모 생성.
+// 수확(+선택 시 수확일 음식) 메모 생성. 수확 비활성(harvest=false)이면 아무것도 만들지 않는다.
 function cropHarvestMemos(
   date: SDate,
-  memo: Memo,
+  parent: CropParent,
   chain: Extract<MemoChain, { kind: "crop" }>,
 ): NewMemo[] {
+  if (!chain.harvest) return [];
   const harvest: NewMemo = {
     season: date.season,
     day: date.day,
@@ -55,9 +64,9 @@ function cropHarvestMemos(
     reminderDaysBefore: 0,
     category: "harvest",
     cropId: chain.cropId,
-    greenhouse: memo.greenhouse,
-    groupId: memo.groupId,
-    deadlineYearDay: memo.deadlineYearDay,
+    greenhouse: parent.greenhouse,
+    groupId: parent.groupId,
+    deadlineYearDay: parent.deadlineYearDay,
   };
   const crop = CROPS.find((c) => c.id === chain.cropId);
   if (crop?.regrowDays) {
@@ -74,11 +83,23 @@ function cropHarvestMemos(
       reminderDaysBefore: 0,
       category: "eatFood",
       cropId: chain.cropId,
-      greenhouse: memo.greenhouse,
-      groupId: memo.groupId,
+      greenhouse: parent.greenhouse,
+      groupId: parent.groupId,
     });
   }
   return out;
+}
+
+// 심기 단계를 건너뛸 때(이미 심음): 심기 완료가 생성하는 메모를 baseDate 기준으로 직접 생성.
+// chainSpawn의 plant 단계 처리와 동일한 분기를 사용한다.
+export function seedSkipPlantMemos(
+  parent: CropParent,
+  chain: Extract<MemoChain, { kind: "crop" }>,
+  baseDate: SDate,
+): NewMemo[] {
+  if (chain.noWatering)
+    return cropHarvestMemos(addDays(baseDate, chain.remaining), parent, chain);
+  return [cropWaterMemo(baseDate, parent, chain, chain.remaining)];
 }
 
 // 과일나무 수확 공통 정보(텍스트·작물·온실·묶음)
