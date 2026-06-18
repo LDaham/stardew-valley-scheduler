@@ -5,15 +5,7 @@ import {
   type ReminderId,
 } from "@/data/reminders";
 import { addDays, daysUntil, getWeekday, type SDate } from "@/lib/calendar";
-import { getEventsOn } from "@/lib/events";
-
-// 저녁에 시작해 건물이 잠기지 않는 축제 — 이 축제 전날은 퀘스트 완료가 가능하므로 경고 제외.
-// (정령의 밤·달빛 해파리·밤 시장. 가게 일정표 위키 기준)
-const EVENING_FESTIVALS = new Set([
-  "spiritsEve",
-  "moonlightJellies",
-  "nightMarket",
-]);
+import { NON_LOCKING_FESTIVALS, festivalLocksShops } from "@/lib/events";
 
 export type ReminderBadge =
   | { kind: "today" }
@@ -23,7 +15,7 @@ export type ReminderBadge =
 // 저녁에 시작해 건물이 잠기지 않는 축제는 제외.
 export function festivalEveOf(date: SDate) {
   const fest = festivalStartingOn(addDays(date, 1));
-  return fest && !EVENING_FESTIVALS.has(fest.id) ? fest : null;
+  return fest && !NON_LOCKING_FESTIVALS.has(fest.id) ? fest : null;
 }
 
 // 내일이 NPC·상점 이용을 막는 축제 시작일인지(= 오늘 안에 끝내야 하는 날).
@@ -34,9 +26,7 @@ export function festivalEveBlocked(date: SDate): boolean {
 // 그날 NPC·상점이 막히는 축제일인지(피에르네 등 상점에서 씨앗 구매 불가).
 // 다중일 축제 포함, 저녁 축제는 제외.
 export function festivalBlocksOn(date: SDate): boolean {
-  return getEventsOn(date).some(
-    (e) => e.type === "festival" && !EVENING_FESTIVALS.has(e.refId),
-  );
+  return festivalLocksShops(date);
 }
 
 export interface ActiveReminder {
@@ -47,11 +37,6 @@ export interface ActiveReminder {
 function festivalDate(id: string): SDate | null {
   const f = FESTIVALS.find((x) => x.id === id);
   return f ? { season: f.season, day: f.day } : null;
-}
-
-// 해당 날짜가 축제 기간(다중일 포함)인지
-function isFestivalDay(date: SDate): boolean {
-  return getEventsOn(date).some((e) => e.type === "festival");
 }
 
 // 야시장(겨울 15~17일)인지
@@ -96,7 +81,7 @@ export function getActiveReminders(
   const out: ActiveReminder[] = [];
   for (const def of REMINDERS) {
     if (!toggles[def.id]) continue;
-    if (def.suppressOnFestival && isFestivalDay(date)) continue;
+    if (def.suppressOnFestival && festivalLocksShops(date)) continue;
     if (def.suppressOnFestivalEve && festivalEveBlocked(date)) continue;
 
     const badge = matchTrigger(def, date);

@@ -3,14 +3,7 @@
 // 대장간 휴무: ① 축제일(저녁 비잠김 축제 제외) ② 금요일(마을 회관 복구 이후) ③ 겨울 16일(클린트 검진)
 
 import { addDays, getWeekday, isSameDate, type SDate } from "@/lib/calendar";
-import { getEventsOn } from "@/lib/events";
-
-// 건물을 잠그지 않는(저녁/비잠김) 축제 — 이 축제일에는 대장간이 정상 영업.
-const NON_LOCKING_FESTIVALS = new Set([
-  "spiritsEve", // 영령의 전야제
-  "moonlightJellies", // 달빛 해파리들의 춤
-  "nightMarket", // 야시장(겨울 15~17일)
-]);
+import { lockingFestivalOn } from "@/lib/events";
 
 const TOOL_UPGRADE_DAYS = 2; // 맡긴 뒤 2일 후 완성(= 3일째 되는 날)
 
@@ -21,8 +14,8 @@ export function blacksmithClosureOn(
   date: SDate,
   ccCompleted: boolean,
 ): BlacksmithClosure | null {
-  const fest = getEventsOn(date).find((e) => e.type === "festival");
-  if (fest && !NON_LOCKING_FESTIVALS.has(fest.refId)) return "festival";
+  // 축제 휴무(사막 축제·송어 시합·오징어 축제·야시장·저녁 축제 등 예외 제외)
+  if (lockingFestivalOn(date)) return "festival";
   // 클린트 검진: 겨울 16일
   if (date.season === "winter" && date.day === 16) return "checkup";
   // 마을 회관 복구 이후 금요일 휴무

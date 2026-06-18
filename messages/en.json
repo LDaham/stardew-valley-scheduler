@@ -136,7 +136,7 @@
   "blacksmith": {
     "pickupWarn": "Blacksmith is closed on the ready day {ready} ({reason}); you'll pick it up the next open day",
     "festival": "festival closure",
-    "checkup": "Clint's checkup (Winter 16)",
+    "checkup": "Clint's checkup",
     "friday": "Friday (after Community Center)"
   },
   "carpenter": {
@@ -410,10 +410,6 @@
   "addTask": {
     "title": "Add task",
     "titleWithDay": "Add {day} task",
-    "offCategoryTitle": "Hidden task type",
-    "offCategoryBody": "The \"{category}\" type is turned off in scheduler settings, so this task won't appear in the to-do list. Turn it on?",
-    "offCategoryEnable": "Turn on",
-    "offCategoryKeep": "Keep off",
     "tool": "Tool upgrade",
     "seed": "Grow crops",
     "machine": "Artisan goods",
@@ -570,7 +566,7 @@
     "raw": "Sell raw",
     "keg": "Keg",
     "jar": "Preserves Jar",
-    "qualityHint": "Crop quality is set on harvest day - eating a Farming-buff food on harvest day raises quality. Set farming/foraging level and skills in Character info.",
+    "qualityHint": "Crop quality is set on harvest day - eating a Farming-buff food on harvest day raises quality. Set farming/foraging level and skills in Character settings.",
     "detail": "{profit}g · {harvests} harvests · {perDay}g/day",
     "rawFallback": "no processing → raw",
     "note": "Relative revenue (max = 100%). Reflects season, processing, fertilizer, food and character (level·skills); ignores seed cost, seed source and processing time. Keg/jar goods do not apply quality or Tiller."
@@ -593,10 +589,165 @@
     "tomKhaSoup": "Tom Kha Soup (+2)",
     "farmersLunch": "Farmer's Lunch (+3)"
   },
+  "shopSchedule": {
+    "title": "Shop schedule",
+    "short": "Shops",
+    "open": "Open shop schedule",
+    "selectShop": "Select shop",
+    "ruleFestival": "Festival-day exceptions: Spirit's Eve, Dance of the Moonlight Jellies, Desert Festival, Trout Derby, SquidFest, Night Market.",
+    "ruleKey": "Key to the Town: once obtained, each shop's usable hours extend.",
+    "keyToggle": "Key to the Town",
+    "ccToggle": "Community Center",
+    "festivalToggle": "Festival day",
+    "statusOpen": "Open",
+    "statusClosed": "Festival closed",
+    "statusPartial": "Closed on some festivals",
+    "statusPermanent": "Permanently closed",
+    "legendOpen": "Open",
+    "legendClosed": "Closed",
+    "pin": "Pin",
+    "source": "Source: Stardew Valley Wiki - Shop Schedules (CC BY-NC-SA 3.0)",
+    "colOpen": "Open hours",
+    "colKey": "Key hours",
+    "colClosed": "Closed days",
+    "colFestival": "Festival closure",
+    "colCheckup": "Regular day off",
+    "colNote": "Note",
+    "shops": {
+      "adventurersGuild": {
+        "name": "Adventurer's Guild",
+        "open": "2 PM – 10 PM",
+        "key": "6 AM – 2 PM",
+        "closed": "None",
+        "festival": "Closed (except exception festivals)",
+        "checkup": "None"
+      },
+      "blacksmith": {
+        "name": "Blacksmith",
+        "open": "9 AM – 4 PM",
+        "key": "6 AM – 7 PM",
+        "closed": "Friday (after Community Center restored)",
+        "festival": "Closed (except exception festivals)",
+        "checkup": "Winter 16"
+      },
+      "carpenter": {
+        "name": "Carpenter's Shop",
+        "open": "9 AM – 5 PM",
+        "key": "8:20 AM – 5 PM",
+        "closed": "Tuesday",
+        "festival": "Closed (except exception festivals)",
+        "checkup": "Summer 18"
+      },
+      "fishShop": {
+        "name": "Fish Shop",
+        "open": "9 AM – 5 PM",
+        "key": "No change",
+        "closed": "Saturday (when not raining)",
+        "festival": "Closed (except exception festivals)",
+        "checkup": "Spring 9",
+        "note": "On Spring 9 (Willy's checkup) only 9–10 AM before he leaves. Opens at 8 AM after the Ginger Island boat repair, but Willy's schedule is unchanged."
+      },
+      "clinic": {
+        "name": "Harvey's Clinic",
+        "open": "9 AM – 3 PM",
+        "key": "No change",
+        "closed": "None",
+        "festival": "Closed (except exception festivals)",
+        "checkup": "None",
+        "note": "Closed Saturdays. Until 2 PM on Tue/Thu; until 12 PM on Sun/Mon/Wed/Fri."
+      },
+      "iceCreamStand": {
+        "name": "Ice Cream Stand",
+        "open": "1 PM – 5 PM",
+        "key": "No change",
+        "closed": "Wednesday / rainy days",
+        "festival": "None",
+        "checkup": "Summer 16",
+        "note": "Operates only in summer."
+      },
+      "joja": {
+        "name": "JojaMart",
+        "open": "9 AM – 11 PM",
+        "key": "6 AM – 2 AM",
+        "closed": "None",
+        "festival": "Closed (except exception festivals)",
+        "checkup": "None",
+        "note": "Permanently closes after Community Center bundles are completed."
+      },
+      "ranch": {
+        "name": "Marnie's Ranch",
+        "open": "9 AM – 4 PM",
+        "key": "6–8:30 AM / 9 AM–5 PM",
+        "closed": "Monday / Tuesday",
+        "festival": "Closed (except exception festivals)",
+        "checkup": "Fall 18 / Winter 18"
+      },
+      "oasis": {
+        "name": "Oasis & Casino",
+        "open": "9 AM – 11:50 PM",
+        "key": "No change",
+        "closed": "Fall 15 after 1 PM (Oasis)",
+        "festival": "Closed except Winter 25 (Feast of the Winter Star)",
+        "checkup": "None",
+        "note": "On Spring 25 (Pam's checkup) use Warp Totem: Desert or the Desert Obelisk."
+      },
+      "pierre": {
+        "name": "Pierre's General Store",
+        "open": "9 AM – 5 PM",
+        "key": "6–7 AM / 8:30 AM–5 PM",
+        "closed": "Wednesday (before Community Center restored)",
+        "festival": "Closed (except exception festivals)",
+        "checkup": "None"
+      },
+      "saloon": {
+        "name": "Stardrop Saloon",
+        "open": "12 PM – 12 AM",
+        "key": "No change",
+        "closed": "None",
+        "festival": "Closed (except exception festivals)",
+        "checkup": "Fall 4",
+        "note": "On Fall 4 (Gus's checkup) opens at 12 PM but usable only after Gus returns at 4:30 PM."
+      },
+      "travelingCart": {
+        "name": "Traveling Cart",
+        "open": "6 AM – 8 PM",
+        "key": "No change",
+        "closed": "Mon–Thu / Saturday",
+        "festival": "None",
+        "checkup": "None"
+      },
+      "wizardTower": {
+        "name": "Wizard's Tower",
+        "open": "6 AM – 11 PM",
+        "key": "6 AM – 2 AM",
+        "closed": "None",
+        "festival": "Spring 24 (Flower Dance), Winter 8 (Festival of Ice)",
+        "checkup": "None",
+        "note": "Accessible after 11 PM via the Witch's Hut."
+      },
+      "desertTrader": {
+        "name": "Desert Trader",
+        "open": "6 AM – 2 AM",
+        "key": "No change",
+        "closed": "None",
+        "festival": "Winter 15–17 (Night Market)",
+        "checkup": "None",
+        "note": "On Spring 25 (Pam's checkup) use Warp Totem: Desert or the Desert Obelisk."
+      },
+      "movieTheater": {
+        "name": "Movie Theater",
+        "open": "9 AM – 9 PM",
+        "key": "No change",
+        "closed": "None",
+        "festival": "None",
+        "checkup": "None"
+      }
+    }
+  },
   "character": {
-    "title": "Character info",
+    "title": "Character settings",
     "short": "Character",
-    "open": "Open character info",
+    "open": "Open character settings",
     "hint": "Used for growth and quality in seed efficiency.",
     "farmingLevel": "Farming level",
     "foragingLevel": "Foraging level",
@@ -722,8 +873,8 @@
       "detail": "Pet, feed, and collect produce to keep friendship and quality up"
     },
     "farmCave": {
-      "title": "Farm Cave foraging",
-      "detail": "Collect mushrooms / fruit from the Farm Cave"
+      "title": "Mushroom cave harvest",
+      "detail": "Mushrooms regrow daily at 3:40 PM, harvest after that. Available daily (unlike the fruit cave, which doesn't generate daily)"
     },
     "hardwood": {
       "title": "Harvest hardwood",
@@ -2123,7 +2274,7 @@
   "logic": {
     "weatherFortune": "매일 · 당일 끝남(안 보면 다음 날 새 날씨·운세). 완료 안 해도 다음 날 새로 생성.",
     "animalCare": "매일 · 당일 끝남. 매일 새로 진행해야 함.",
-    "farmCave": "무기한 · 안 하면 미뤄짐(완료까지 표시).",
+    "farmCave": "매일 오후 3시 40분 버섯 리젠 · 수거 전까지 누적(미루기).",
     "hardwood": "매일 · 당일 끝남(비밀의 숲 그루터기).",
     "travelingCart": "매주 금·일(+야시장 매일) · 그날 안 하면 사라짐.",
     "krobusSprinkler": "매주 금요일 · 그날 안 하면 사라짐. 축제일 제외.",

@@ -8,6 +8,8 @@
   --sv-ink-muted: #8b7355;
   --sv-border: #b07a3c;
   --sv-accent: #5a8f3c;
+  --sv-danger: #b3402f; /* 휴무/경고(빨강) */
+  --sv-warn: #d98b29; /* 일부 휴무(주황) */
 
   /* 나무 프레임 테마 */
   --sv-wood: #8a5a2b;

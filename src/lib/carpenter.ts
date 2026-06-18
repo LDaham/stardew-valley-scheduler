@@ -4,18 +4,15 @@
 // 건설: 주문 다음날부터 시작, 축제일에는 로빈이 작업하지 않아 그만큼 지연. 오두막·배송 상자는 즉시.
 
 import { addDays, getWeekday, type SDate } from "@/lib/calendar";
-import { getEventsOn } from "@/lib/events";
+import { festivalLocksShops } from "@/lib/events";
 import type { BuildingDef } from "@/data/buildings";
 
 export type CarpenterClosure = "tuesday" | "festival" | "checkup";
 
-function isFestival(date: SDate): boolean {
-  return getEventsOn(date).some((e) => e.type === "festival");
-}
-
 // 해당 날짜에 목공 작업실(주문)이 닫혀 있으면 사유, 열려 있으면 null.
 export function carpenterClosureOn(date: SDate): CarpenterClosure | null {
-  if (isFestival(date)) return "festival";
+  // 축제 휴무(사막 축제·송어 시합·오징어 축제·야시장·저녁 축제 등 예외 제외)
+  if (festivalLocksShops(date)) return "festival";
   if (date.season === "summer" && date.day === 18) return "checkup"; // 로빈 병원 검진
   if (getWeekday(date.day) === "tue") return "tuesday";
   return null;
@@ -53,7 +50,8 @@ export function planBuilding(requestDate: SDate, def: BuildingDef): BuildPlan {
   let lastWorkDay = cur;
   let remaining = def.buildDays;
   for (let i = 0; i < MAX_LOOK && remaining > 0; i++) {
-    if (!isFestival(cur)) {
+    // 로빈은 가게가 잠기는 축제일에만 작업을 쉰다(예외 축제는 정상 작업).
+    if (!festivalLocksShops(cur)) {
       remaining--;
       lastWorkDay = cur;
     }

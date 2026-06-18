@@ -136,7 +136,7 @@
   "blacksmith": {
     "pickupWarn": "완성 예정일 {ready}은 대장간 휴무({reason})라 다음 영업일에 수령합니다",
     "festival": "축제 휴무",
-    "checkup": "클린트 검진(겨울 16일)",
+    "checkup": "클린트 검진",
     "friday": "금요일 휴무(마을 회관 복구 후)"
   },
   "carpenter": {
@@ -410,10 +410,6 @@
   "addTask": {
     "title": "할 일 추가",
     "titleWithDay": "{day} 할 일 추가",
-    "offCategoryTitle": "표시 꺼짐 종류",
-    "offCategoryBody": "{category} 종류는 스케줄러 설정에서 꺼져 있어 할 일 목록에 표시되지 않습니다. 켜시겠습니까?",
-    "offCategoryEnable": "켜기",
-    "offCategoryKeep": "끈 채로 두기",
     "tool": "도구 업그레이드",
     "seed": "작물 재배",
     "machine": "장인 장비 사용",
@@ -570,7 +566,7 @@
     "raw": "원물 판매",
     "keg": "술통 가공",
     "jar": "절임통 가공",
-    "qualityHint": "작물 등급은 수확일에 결정됩니다 - 수확일에 농사 버프 음식을 먹으면 품질이 올라갑니다. 농사·채집 레벨과 스킬은 캐릭터 정보에서 설정하세요.",
+    "qualityHint": "작물 등급은 수확일에 결정됩니다 - 수확일에 농사 버프 음식을 먹으면 품질이 올라갑니다. 농사·채집 레벨과 스킬은 캐릭터 설정에서 설정하세요.",
     "detail": "{profit}g · {harvests}회 수확 · 일 {perDay}g",
     "rawFallback": "가공 불가 → 원물",
     "note": "상대 수익(최대=100%) 기준. 계절·가공·비료·음식·캐릭터(레벨·스킬)를 반영하며, 씨앗 비용·구매처·가공 시간은 반영하지 않습니다. 술통·절임통 가공물은 품질·경작인을 적용하지 않습니다."
@@ -593,10 +589,165 @@
     "tomKhaSoup": "톰 카 수프 (+2)",
     "farmersLunch": "농부의 점심 (+3)"
   },
+  "shopSchedule": {
+    "title": "가게 일정",
+    "short": "가게 일정",
+    "open": "가게 일정 열기",
+    "selectShop": "가게 선택",
+    "ruleFestival": "예외 축제: 영령의 전야제·달빛 해파리들의 춤·사막 축제·송어 시합·오징어 축제·야시장.",
+    "ruleKey": "마을의 열쇠: 획득 후 가게별로 이용 시간이 확장됩니다.",
+    "keyToggle": "마을의 열쇠",
+    "ccToggle": "마을회관 복구",
+    "festivalToggle": "축제날",
+    "statusOpen": "정상 영업",
+    "statusClosed": "축제 휴무",
+    "statusPartial": "특정 축제 휴무",
+    "statusPermanent": "영구 폐점",
+    "legendOpen": "영업",
+    "legendClosed": "휴무",
+    "pin": "고정",
+    "source": "출처: Stardew Valley Wiki - 가게 일정표 (CC BY-NC-SA 3.0)",
+    "colOpen": "개점 시간",
+    "colKey": "열쇠 시간",
+    "colClosed": "정규 폐점일",
+    "colFestival": "축제 휴무",
+    "colCheckup": "정기 휴무",
+    "colNote": "메모",
+    "shops": {
+      "adventurersGuild": {
+        "name": "모험가의 길드",
+        "open": "오후 2시 – 오후 10시",
+        "key": "오전 6시 – 오후 2시",
+        "closed": "없음",
+        "festival": "모두 닫음(예외 축제 제외)",
+        "checkup": "없음"
+      },
+      "blacksmith": {
+        "name": "대장간",
+        "open": "오전 9시 – 오후 4시",
+        "key": "오전 6시 – 오후 7시",
+        "closed": "금요일 (마을 회관 복구 이후)",
+        "festival": "모두 닫음(예외 축제 제외)",
+        "checkup": "겨울 16일"
+      },
+      "carpenter": {
+        "name": "목공 작업실",
+        "open": "오전 9시 – 오후 5시",
+        "key": "오전 8시 20분 – 오후 5시",
+        "closed": "화요일",
+        "festival": "모두 닫음(예외 축제 제외)",
+        "checkup": "여름 18일"
+      },
+      "fishShop": {
+        "name": "생선 가게",
+        "open": "오전 9시 – 오후 5시",
+        "key": "변동 없음",
+        "closed": "토요일 (비 안 올 때)",
+        "festival": "모두 닫음(예외 축제 제외)",
+        "checkup": "봄 9일",
+        "note": "봄 9일에는 오전 9–10시에만 개점. 진저섬 배 수리 후 8시 개점."
+      },
+      "clinic": {
+        "name": "하비의 병원",
+        "open": "오전 9시 – 오후 3시",
+        "key": "변동 없음",
+        "closed": "없음",
+        "festival": "모두 닫음(예외 축제 제외)",
+        "checkup": "없음",
+        "note": "화·목은 오후 2시까지만 이용 가능."
+      },
+      "iceCreamStand": {
+        "name": "아이스크림 가판대",
+        "open": "오후 1시 – 오후 5시",
+        "key": "변동 없음",
+        "closed": "수요일 / 비 오는 날",
+        "festival": "없음",
+        "checkup": "여름 16일",
+        "note": "여름 시즌에만 운영."
+      },
+      "joja": {
+        "name": "조자마트",
+        "open": "오전 9시 – 오후 11시",
+        "key": "오전 6시 – 오전 2시",
+        "closed": "없음",
+        "festival": "모두 닫음(예외 축제 제외)",
+        "checkup": "없음",
+        "note": "마을 회관 꾸러미 완료 후 영구 폐점."
+      },
+      "ranch": {
+        "name": "마니의 목장",
+        "open": "오전 9시 – 오후 4시",
+        "key": "오전 6시–8시 30분 / 오전 9시–오후 5시",
+        "closed": "월요일 / 화요일",
+        "festival": "모두 닫음(예외 축제 제외)",
+        "checkup": "가을 18일 / 겨울 18일"
+      },
+      "oasis": {
+        "name": "오아시스와 카지노",
+        "open": "오전 9시 – 오후 11시 50분",
+        "key": "변동 없음",
+        "closed": "가을 15일 오후 1시 이후 (오아시스)",
+        "festival": "겨울 25일(겨울 별의 만찬) 제외 모두 닫음",
+        "checkup": "없음",
+        "note": "봄 25일에는 워프 토템 이용."
+      },
+      "pierre": {
+        "name": "피에르네 잡화점",
+        "open": "오전 9시 – 오후 5시",
+        "key": "오전 6–7시 / 오전 8시 30분–오후 5시",
+        "closed": "수요일 (마을 회관 복구 이전)",
+        "festival": "모두 닫음(예외 축제 제외)",
+        "checkup": "없음"
+      },
+      "saloon": {
+        "name": "스타드롭 주점",
+        "open": "오후 12시 – 오전 12시",
+        "key": "변동 없음",
+        "closed": "없음",
+        "festival": "모두 닫음(예외 축제 제외)",
+        "checkup": "가을 4일",
+        "note": "가을 4일에는 오후 4시 30분 부터 이용."
+      },
+      "travelingCart": {
+        "name": "여행 카트",
+        "open": "오전 6시 – 오후 8시",
+        "key": "변동 없음",
+        "closed": "월–목 / 토요일",
+        "festival": "없음",
+        "checkup": "없음"
+      },
+      "wizardTower": {
+        "name": "마법사의 탑",
+        "open": "오전 6시 – 오후 11시",
+        "key": "오전 6시 – 오전 2시",
+        "closed": "없음",
+        "festival": "봄 24일(봄꽃 무도회), 겨울 8일(얼음 축제)",
+        "checkup": "없음",
+        "note": "마녀 오두막을 통하면 오후 11시 이후에도 이용 가능."
+      },
+      "desertTrader": {
+        "name": "사막 상인",
+        "open": "오전 6시 – 오전 2시",
+        "key": "변동 없음",
+        "closed": "없음",
+        "festival": "겨울 15–17일 (야시장)",
+        "checkup": "없음",
+        "note": "봄 25일에는 워프 토템 이용."
+      },
+      "movieTheater": {
+        "name": "영화관",
+        "open": "오전 9시 – 오후 9시",
+        "key": "변동 없음",
+        "closed": "없음",
+        "festival": "없음",
+        "checkup": "없음"
+      }
+    }
+  },
   "character": {
-    "title": "캐릭터 정보",
+    "title": "캐릭터 설정",
     "short": "캐릭터",
-    "open": "캐릭터 정보 열기",
+    "open": "캐릭터 설정 열기",
     "hint": "씨앗 효율의 성장·품질 계산에 사용됩니다.",
     "farmingLevel": "농사 레벨",
     "foragingLevel": "채집 레벨",
@@ -722,8 +873,8 @@
       "detail": "쓰다듬기·먹이 주기·생산물 수거로 친밀도와 품질 관리"
     },
     "farmCave": {
-      "title": "농장 동굴 채집",
-      "detail": "농장 동굴에서 버섯/열매 채집하기"
+      "title": "버섯 동굴 채집",
+      "detail": "버섯 동굴은 매일 오후 3시 40분에 버섯이 다시 차므로 그 이후 수확. 과일 동굴과 달리 매일 채집 가능"
     },
     "hardwood": {
       "title": "단단한 나무 캐기",
@@ -2123,7 +2274,7 @@
   "logic": {
     "weatherFortune": "매일 · 당일 끝남(안 보면 다음 날 새 날씨·운세). 완료 안 해도 다음 날 새로 생성.",
     "animalCare": "매일 · 당일 끝남. 매일 새로 진행해야 함.",
-    "farmCave": "무기한 · 안 하면 미뤄짐(완료까지 표시).",
+    "farmCave": "매일 오후 3시 40분 버섯 리젠 · 수거 전까지 누적(미루기).",
     "hardwood": "매일 · 당일 끝남(비밀의 숲 그루터기).",
     "travelingCart": "매주 금·일(+야시장 매일) · 그날 안 하면 사라짐.",
     "krobusSprinkler": "매주 금요일 · 그날 안 하면 사라짐. 축제일 제외.",

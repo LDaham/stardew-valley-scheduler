@@ -74,7 +74,6 @@ export default function Dashboard() {
     eventFilters,
     reminderToggles,
     todoOrder,
-    memoCategoryToggles,
     rainDays,
     wateringCanUpgrades,
     setRainDay,
@@ -96,10 +95,10 @@ export default function Dashboard() {
   const atStart =
     year === 1 && currentDate.season === "spring" && currentDate.day === 1;
 
-  // 비 오는 날에만 구할 수 있는, 아직 필요한 번들 품목(중복 id 제거)
+  // 비 오는 날에만 구할 수 있는, 아직 필요한 번들 품목(중복 id 제거) + 구할 수 있는 계절
   const rainBundleItems = (() => {
     const seen = new Set<string>();
-    const out: { id: string; name: string }[] = [];
+    const out: { id: string; name: string; seasons: string[] }[] = [];
     for (const b of BUNDLES) {
       const done = b.items.filter(
         (i) => bundleItemsDone[bundleItemKey(b.id, i.id)],
@@ -110,7 +109,7 @@ export default function Dashboard() {
         if (bundleItemsDone[bundleItemKey(b.id, i.id)]) continue;
         if (seen.has(i.id)) continue;
         seen.add(i.id);
-        out.push({ id: i.id, name: t(i.nameKey) });
+        out.push({ id: i.id, name: t(i.nameKey), seasons: i.seasons });
       }
     }
     return out;
@@ -344,7 +343,6 @@ export default function Dashboard() {
     const memoGroups = new Map<string, typeof memos>();
     const memoGroupOrder: string[] = [];
     for (const m of activeMemosOn(date)) {
-      if (m.category && !memoCategoryToggles[m.category]) continue;
       if (m.category === "watering") {
         if (isRain) continue;
         wateringMemos.push(m);
@@ -663,12 +661,22 @@ export default function Dashboard() {
                 {t("dashboard.rainBundleItems")}
               </p>
               <ul className="mb-2 flex flex-wrap gap-x-3 gap-y-1">
-                {rainBundleItems.map((i) => (
-                  <li key={i.id} className="flex items-center gap-1 text-base">
-                    <PixelIcon src={`/icons/bundleItems/${i.id}.png`} size={16} />
-                    {i.name}
-                  </li>
-                ))}
+                {rainBundleItems.map((i) => {
+                  // 구할 수 있는 계절(상시/사계절이면 '상시')
+                  const seasonText =
+                    i.seasons.length === 0 || i.seasons.length === 4
+                      ? t("seasonFilter.all")
+                      : i.seasons.map((s) => t(`seasons.${s}`)).join("·");
+                  return (
+                    <li key={i.id} className="flex items-center gap-1 text-base">
+                      <PixelIcon src={`/icons/bundleItems/${i.id}.png`} size={16} />
+                      {i.name}
+                      <span className="text-xs text-[var(--sv-ink-muted)]">
+                        ({seasonText})
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
               <button
                 onClick={() => {

@@ -1,7 +1,7 @@
 import type { Season } from "@/lib/calendar";
 import type { EventFilters } from "@/lib/events";
 import type { ReminderId } from "@/data/reminders";
-import type { MemoCategory, VisibleMemoCategory } from "@/lib/todoOrder";
+import type { MemoCategory } from "@/lib/todoOrder";
 import type { Fertilizer } from "@/lib/growth";
 
 // 씨앗 심기 선택지 기본값(다음 심기에도 재사용되도록 영속).
@@ -13,9 +13,6 @@ export interface SeedDefaults {
   harvest: boolean; // 수확 생성
   eatFood: boolean; // 수확일 음식 먹기 생성
 }
-
-// 토글은 설정에 노출되는 카테고리만 대상(buySeed 제외 — buySeeds 리마인더와 통합)
-export type MemoCategoryToggles = Record<VisibleMemoCategory, boolean>;
 
 // 캐릭터 정보(씨앗 효율 품질·성장 계산에 사용). 효율 팝업 밖에서 입력·영속.
 export interface CharacterInfo {
@@ -105,8 +102,6 @@ export interface ScheduleState {
   taskDone: Record<string, boolean>;
   // To Do List 표시 순서(엔트리 키 배열). 비면 기본 순서 사용.
   todoOrder: string[];
-  // 사용자 메모 카테고리(수확/물주기/도구/장비)별 표시 여부. 기본 전부 표시.
-  memoCategoryToggles: MemoCategoryToggles;
   // 비 예보. 키=yearDay, 값=true면 그날 비 → 물주기 숨김.
   rainDays: Record<string, boolean>;
   // 물뿌리개 업그레이드 누적 횟수(이 수에 도달하면 비 오는 날 업그레이드 제안 중단).
@@ -156,4 +151,8 @@ export interface DialogFilters {
   seedSeason?: string; // 작물 효율 계절 필터(없으면 현재 계절)
   trackerSeasons?: string[]; // 꾸러미 추적의 계절 필터(없으면 현재 계절+상시)
   trackerOnlyIncomplete: boolean; // 꾸러미 추적에서 완료되지 않은 물품만 보기
+  shopKeyApplied: boolean; // 가게 일정: 마을의 열쇠 적용
+  shopCcRestored: boolean; // 가게 일정: 마을회관 복구
+  shopFestivalOn: boolean; // 가게 일정: 축제날 가정
+  shopPinned: string[]; // 가게 일정: 고정(핀)된 가게 id 목록(우선 표시)
 }

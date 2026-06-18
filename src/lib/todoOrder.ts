@@ -50,23 +50,23 @@ export const DEFAULT_TODO_ORDER: string[] = [
   // 할 일
   "reminder:weatherFortune", // 날씨·운세 확인
   "reminder:queenOfSauceNew", // 소스의 여왕(재방송 포함)
+  "event:birthday", // 생일 선물 전달
   "memo:plant", // 씨앗 심기(물주기·수확·음식 그룹)
   "memo:watering",
   "memo:harvest",
   "memo:eatFood",
   "reminder:animalCare", // 동물 돌보기
-  "memo:fruit", // 과일나무 수확
-  "reminder:farmCave", // 농장 동굴 채집
-  "memo:machine", // 장인/정제 장비 사용
   "reminder:forageWeekly", // 채집물 채집(토요일)
+  "memo:fruit", // 과일나무 수확
+  "memo:machine", // 장인/정제 장비 사용
   "memo:build", // 건물 건설
   "memo:tool", // 도구 업그레이드
-  "event:birthday", // 생일 선물 전달
   "reminder:helpWanted", // 구인 광고 확인
   "reminder:specialOrders", // 특별 주문 게시판 확인
   "reminder:krobusSprinkler", // 이리듐 스프링클러 구매
   "reminder:travelingCart", // 여행 상인 물품 확인
   "reminder:desertTraderStaircase", // 계단 구매
+  "reminder:farmCave", // 버섯 동굴 채집
   "reminder:pondCheck", // 물고기 연못 확인
   "reminder:crabPot", // 통발 확인
   "reminder:hardwood", // 단단한 나무 캐기

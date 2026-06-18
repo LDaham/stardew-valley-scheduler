@@ -97,6 +97,33 @@ export function getEventsOn(date: SDate): FixedEvent[] {
   });
 }
 
+// 건물·상점이 잠기지 않는 축제(이 날에는 상점·집이 정상 영업):
+// - 저녁 시작: 영령의 전야제, 달빛 해파리들의 춤(낮에는 상점 열림)
+// - 전체 예외: 사막 축제, 송어 시합, 오징어 축제, 야시장(상점·집 항상 열림, 시간도 흐름)
+// 출처: 가게 일정표 위키(progress/가게-일정표-정리.md). 가게 휴무·리마인더 억제 판정의 단일 기준.
+export const NON_LOCKING_FESTIVALS = new Set([
+  "spiritsEve",
+  "moonlightJellies",
+  "desertFestival",
+  "troutDerby",
+  "squidFest",
+  "nightMarket",
+]);
+
+// 그날 상점·집을 잠그는 축제(있으면 그 축제 이벤트, 없으면 null).
+export function lockingFestivalOn(date: SDate): FixedEvent | null {
+  return (
+    getEventsOn(date).find(
+      (e) => e.type === "festival" && !NON_LOCKING_FESTIVALS.has(e.refId),
+    ) ?? null
+  );
+}
+
+// 그날 상점이 축제로 잠기는지
+export function festivalLocksShops(date: SDate): boolean {
+  return lockingFestivalOn(date) !== null;
+}
+
 export interface UpcomingEvent {
   event: FixedEvent;
   daysAway: number; // 0 = 오늘

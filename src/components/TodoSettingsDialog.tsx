@@ -89,8 +89,6 @@ export default function TodoSettingsDialog({
     setEventFilter,
     reminderToggles,
     setReminderToggle,
-    memoCategoryToggles,
-    setMemoCategoryToggle,
     todoOrder,
     setTodoOrder,
     bundleTrackerShown,
@@ -151,14 +149,6 @@ export default function TodoSettingsDialog({
     return Number.isNaN(idx) ? null : idx;
   };
 
-  // 그룹 체크박스 상태: 전부 켜짐=체크, 일부만 켜짐=부분 선택(indeterminate), 전부 꺼짐=빈칸.
-  const cropGroupOn = CROP_GROUP_CATS.every((c) => memoCategoryToggles[c]);
-  const cropGroupSome = CROP_GROUP_CATS.some((c) => memoCategoryToggles[c]);
-  const cropGroupIndeterminate = cropGroupSome && !cropGroupOn;
-  // 부분 선택 상태에서 누르면 전체 켜기, 전부 켜진 상태에서 누르면 전체 끄기.
-  const setCropGroup = (val: boolean) =>
-    CROP_GROUP_CATS.forEach((c) => setMemoCategoryToggle(c, val));
-
   // 한 항목의 컨트롤·아이콘·라벨 구성
   const rowParts = (item: DisplayItem) => {
     let control: React.ReactNode = null;
@@ -166,17 +156,7 @@ export default function TodoSettingsDialog({
     let label: React.ReactNode = null;
 
     if (item.id === CROP_GROUP_ID) {
-      control = (
-        <input
-          type="checkbox"
-          checked={cropGroupOn}
-          ref={(el) => {
-            if (el) el.indeterminate = cropGroupIndeterminate;
-          }}
-          onChange={(e) => setCropGroup(e.target.checked)}
-          className="mt-0.5 size-4 shrink-0 accent-[var(--sv-accent)]"
-        />
-      );
+      // 사용자 추가 항목은 표시 토글 없이 순서 변경(드래그)만 제공
       icon = <PixelImage src="/icons/addTask/seed.png" />;
       label = (
         <span>
@@ -252,15 +232,8 @@ export default function TodoSettingsDialog({
         </span>
       );
     } else {
+      // 사용자 추가 메모 카테고리: 표시 토글 없이 순서 변경(드래그)만 제공
       const cat = entry.ref as VisibleMemoCategory;
-      control = (
-        <input
-          type="checkbox"
-          checked={memoCategoryToggles[cat]}
-          onChange={(e) => setMemoCategoryToggle(cat, e.target.checked)}
-          className="mt-0.5 size-4 shrink-0 accent-[var(--sv-accent)]"
-        />
-      );
       icon = <PixelImage src={MEMO_ICON[cat]} />;
       label = (
         <span className="flex items-center gap-1.5">
@@ -320,7 +293,8 @@ export default function TodoSettingsDialog({
               isOver ? "border-[var(--sv-accent)]" : "border-transparent"
             } ${isDragging ? "opacity-40" : ""}`}
           >
-            {parts.control}
+            {/* 체크박스 없는(사용자 추가) 항목은 같은 너비의 빈 자리로 정렬을 맞춘다 */}
+            {parts.control ?? <span aria-hidden className="size-4 shrink-0" />}
             <span className="mt-0.5">{parts.icon}</span>
             <span className="flex-1">{parts.label}</span>
             {renderHandle(section, i)}

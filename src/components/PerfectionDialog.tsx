@@ -40,24 +40,33 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
     return s + c.weight * (total ? done / total : 0);
   }, 0);
 
-  const catComplete = (c: PerfCategory) => {
-    const { done, total } = progress(c);
-    return total > 0 && done >= total;
+  // 펼친 범주 내부의 물품 표시 순서(미완료 먼저). 물품 완료를 눌러도 즉시 재정렬하지
+  // 않고, 필터를 바꾸거나 범주를 접었다 펼 때만 다시 계산해 실수 클릭을 되돌릴 여지를 둔다.
+  const itemOrder = (c: PerfCategory, incFirst: boolean): string[] => {
+    const items = c.items ?? [];
+    if (!incFirst) return items.map((it) => it.id);
+    return [...items]
+      .sort(
+        (a, b) =>
+          Number(!!perfectionChecks[perfKey(c.id, a.id)]) -
+          Number(!!perfectionChecks[perfKey(c.id, b.id)]),
+      )
+      .map((it) => it.id);
   };
-  // 정렬은 '열 때 / 필터 변경 시'에만 다시 계산(체크 직후 즉시 재정렬하지 않아,
-  // 실수로 누른 항목을 그 자리에서 다시 해제하기 쉽게 한다).
-  const computeOrder = (incFirst: boolean) =>
-    incFirst
-      ? [...PERFECTION].sort(
-          (a, b) => Number(catComplete(a)) - Number(catComplete(b)),
-        )
-      : PERFECTION;
-  const [orderedCats, setOrderedCats] = useState(() =>
-    computeOrder(incompleteFirst),
-  );
+  // 현재 펼친 범주의 물품 순서 스냅샷(범주를 펼칠 때·필터 변경 시에만 계산)
+  const [openOrder, setOpenOrder] = useState<string[] | null>(null);
+  const openCategory = (id: string | null) => {
+    setOpen(id);
+    const c = id ? PERFECTION.find((x) => x.id === id) : null;
+    setOpenOrder(
+      c && c.kind === "checklist" ? itemOrder(c, incompleteFirst) : null,
+    );
+  };
   const setIncompleteFirst = (v: boolean) => {
     setDialogFilters({ perfectionIncompleteFirst: v });
-    setOrderedCats(computeOrder(v));
+    // 펼쳐진 범주가 있으면 그 범주의 물품 순서만 다시 계산
+    const c = open ? PERFECTION.find((x) => x.id === open) : null;
+    setOpenOrder(c && c.kind === "checklist" ? itemOrder(c, v) : null);
   };
 
   const itemName = (c: PerfCategory, id: string) =>
@@ -100,17 +109,25 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
       </label>
 
       <div className="flex flex-col gap-2">
-        {orderedCats.map((c) => {
+        {PERFECTION.map((c) => {
           const { done, total } = progress(c);
           const complete = total > 0 && done >= total;
           const isOpen = open === c.id;
+          // 펼친 체크리스트 범주의 물품을 스냅샷 순서로(없으면 원래 순서)
+          const items = c.items ?? [];
+          const orderedItems =
+            isOpen && openOrder
+              ? openOrder
+                  .map((id) => items.find((it) => it.id === id))
+                  .filter((it): it is (typeof items)[number] => !!it)
+              : items;
           return (
             <section
               key={c.id}
               className="overflow-hidden rounded-md border border-[var(--sv-border)]"
             >
               <button
-                onClick={() => setOpen(isOpen ? null : c.id)}
+                onClick={() => openCategory(isOpen ? null : c.id)}
                 className="flex w-full items-center gap-2 px-2.5 py-2 text-left hover:bg-[var(--sv-bg)]"
               >
                 <span className="text-xs text-[var(--sv-ink-muted)]">
@@ -177,51 +194,50 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
               )}
 
               {isOpen && c.kind === "checklist" && (
-                <ul className="flex flex-col gap-0.5 border-t border-[var(--sv-border)] p-1.5">
-                  {(c.items ?? []).map((it) => {
+                // 물품을 클릭하면 완료 토글되는 박스(칩)로 행 나열(넘치면 다음 줄).
+                // 요리·제작은 칩 안 2번째 줄에 조합법(재료)을 표시.
+                <ul className="flex flex-wrap gap-1.5 border-t border-[var(--sv-border)] p-1.5">
+                  {orderedItems.map((it) => {
                     const key = perfKey(c.id, it.id);
                     const checked = !!perfectionChecks[key];
-                    // 요리·제작은 조합법(재료)을 이름 아래 인라인 표시
+                    const name = itemName(c, it.id);
                     const recipe =
                       c.id === "cooking" || c.id === "crafting"
                         ? t(`recipe.${c.id}.${it.id}`)
                         : "";
                     return (
                       <li key={it.id}>
-                        <div className="flex items-center gap-2 rounded-md px-2 py-1 text-sm hover:bg-[var(--sv-bg)]">
-                          <input
-                            type="checkbox"
-                            checked={checked}
-                            onChange={() => togglePerfCheck(key)}
-                            aria-label={itemName(c, it.id)}
-                            className="size-4 shrink-0 accent-[var(--sv-accent)]"
-                          />
+                        <button
+                          type="button"
+                          onClick={() => togglePerfCheck(key)}
+                          aria-pressed={checked}
+                          aria-label={name}
+                          className={`inline-flex items-start gap-1.5 rounded border px-2 py-1 text-left text-xs ${
+                            checked
+                              ? "border-[var(--sv-accent)] bg-[#5a8f3c26] text-[var(--sv-ink-muted)]"
+                              : "border-[var(--sv-border)] bg-[var(--sv-panel)] hover:bg-[var(--sv-bg)]"
+                          }`}
+                        >
                           <Image
                             src={asset(it.icon)}
                             alt=""
-                            width={18}
-                            height={18}
+                            width={16}
+                            height={16}
                             unoptimized
-                            className="shrink-0"
+                            className="mt-0.5 shrink-0"
                             style={{ imageRendering: "pixelated" }}
                           />
-                          <span className="flex-1">
-                            <span
-                              className={
-                                checked
-                                  ? "text-[var(--sv-ink-muted)] line-through"
-                                  : ""
-                              }
-                            >
-                              {itemName(c, it.id)}
+                          <span>
+                            <span className={checked ? "line-through" : ""}>
+                              {name}
                             </span>
                             {recipe && (
-                              <span className="block text-[11px] leading-tight text-[var(--sv-ink-muted)]">
+                              <span className="block text-[10px] leading-tight text-[var(--sv-ink-muted)]">
                                 {recipe}
                               </span>
                             )}
                           </span>
-                        </div>
+                        </button>
                       </li>
                     );
                   })}

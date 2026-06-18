@@ -6,12 +6,7 @@ import { fromYearDay, normalizeYearDay, DAYS_PER_YEAR } from "@/lib/calendar";
 import { chainSpawn, spawnYearlyFruitHarvests } from "@/lib/chains";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import { DEFAULT_REMINDER_TOGGLES, type ReminderId } from "@/data/reminders";
-import {
-  DEFAULT_TODO_ORDER,
-  MEMO_CATEGORIES,
-  reconcileTodoOrder,
-  type MemoCategory,
-} from "@/lib/todoOrder";
+import { DEFAULT_TODO_ORDER, reconcileTodoOrder } from "@/lib/todoOrder";
 import {
   DEFAULT_ADD_TASK_ORDER,
   ADD_TASK_CHILDREN,
@@ -23,7 +18,6 @@ import type {
   CharacterInfo,
   DialogFilters,
   Memo,
-  MemoCategoryToggles,
   ScheduleState,
   SeedDefaults,
 } from "@/types/schedule";
@@ -46,16 +40,6 @@ const DEFAULT_SEED_DEFAULTS: SeedDefaults = {
   eatFood: false,
 };
 
-// 기본으로 꺼진 메모 카테고리: 과일나무 수확·장인/정제 장비 사용.
-const MEMO_OFF_BY_DEFAULT = new Set<string>(["fruit", "machine"]);
-const DEFAULT_MEMO_CATEGORY_TOGGLES: MemoCategoryToggles = MEMO_CATEGORIES.reduce(
-  (acc, c) => {
-    acc[c] = !MEMO_OFF_BY_DEFAULT.has(c);
-    return acc;
-  },
-  {} as MemoCategoryToggles,
-);
-
 // 다이얼로그 필터 기본값(계절 필터는 undefined → 컴포넌트에서 계절 기반 기본값 사용)
 const DEFAULT_DIALOG_FILTERS: DialogFilters = {
   bundleIncompleteFirst: false,
@@ -68,6 +52,11 @@ const DEFAULT_DIALOG_FILTERS: DialogFilters = {
   // 꾸러미 추적 기본: 봄만 선택, 완료되지 않은 물품만 보기
   trackerSeasons: ["spring"],
   trackerOnlyIncomplete: true,
+  // 가게 일정 시나리오 토글 기본값(모두 꺼짐)
+  shopKeyApplied: false,
+  shopCcRestored: false,
+  shopFestivalOn: false,
+  shopPinned: [],
 };
 
 const STORAGE_KEY = "svs:schedule";
@@ -100,7 +89,6 @@ const DEFAULT_STATE: ScheduleState = {
   reminderToggles: DEFAULT_REMINDER_TOGGLES,
   taskDone: {},
   todoOrder: DEFAULT_TODO_ORDER,
-  memoCategoryToggles: DEFAULT_MEMO_CATEGORY_TOGGLES,
   rainDays: {},
   wateringCanUpgrades: 0,
   bundleItemsDone: {},
@@ -139,10 +127,6 @@ function ensureLoaded(): void {
     },
     taskDone: { ...DEFAULT_STATE.taskDone, ...saved.taskDone },
     todoOrder: reconcileTodoOrder(saved.todoOrder),
-    memoCategoryToggles: {
-      ...DEFAULT_MEMO_CATEGORY_TOGGLES,
-      ...saved.memoCategoryToggles,
-    },
     rainDays: saved.rainDays ?? {},
     wateringCanUpgrades: saved.wateringCanUpgrades ?? 0,
     bundleItemsDone: saved.bundleItemsDone ?? {},
@@ -366,16 +350,6 @@ export const scheduleActions = {
   setTodoOrder(order: string[]) {
     commit({ ...state, todoOrder: order });
   },
-  // 메모 카테고리 표시 토글
-  setMemoCategoryToggle(category: MemoCategory, value: boolean) {
-    commit({
-      ...state,
-      memoCategoryToggles: {
-        ...state.memoCategoryToggles,
-        [category]: value,
-      },
-    });
-  },
   // 특정 날(yearDay)의 비 예보 설정
   setRainDay(yearDay: number, value: boolean) {
     commit({
@@ -414,7 +388,6 @@ export const scheduleActions = {
       reminderToggles: { ...DEFAULT_REMINDER_TOGGLES },
       taskDone: {},
       todoOrder: [...DEFAULT_TODO_ORDER],
-      memoCategoryToggles: { ...DEFAULT_MEMO_CATEGORY_TOGGLES },
       rainDays: {},
       wateringCanUpgrades: 0,
       bundleItemsDone: {},
