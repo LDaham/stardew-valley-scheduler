@@ -9,7 +9,6 @@ import {
   type SDate,
 } from "@/lib/calendar";
 import { CROPS } from "@/data/game-data";
-import { computeHarvest } from "@/lib/growth";
 import { toolPickup } from "@/lib/blacksmith";
 import {
   FRUIT_TREES,
@@ -43,7 +42,7 @@ function cropWaterMemo(
   };
 }
 
-// 수확(+선택 시 수확일 음식) 메모 생성. 재파종 작물이면 수확에 replant 체인을 단다.
+// 수확(+선택 시 수확일 음식) 메모 생성.
 function cropHarvestMemos(
   date: SDate,
   memo: Memo,
@@ -65,9 +64,6 @@ function cropHarvestMemos(
     // 재수확 작물: 수확 완료 시 재성장 물주기(regrowDays회)를 거쳐 다시 수확(반복).
     // 비온실은 deadlineYearDay로, 온실은 무기한 반복.
     harvest.chain = { ...chain, stage: "regrow", remaining: crop.regrowDays };
-  } else if (chain.replant) {
-    // 재수확 작물이 아니고 재파종 선택 시 수확 완료 → 씨앗 구매(재파종) 생성
-    harvest.chain = { kind: "replant", buySeedText: chain.buySeedText };
   }
   const out: NewMemo[] = [harvest];
   if (chain.eatFood) {
@@ -304,21 +300,5 @@ export function chainSpawn(
     return fruitPlantSpawn(memo, chain, today, year);
   }
 
-  // replant: 작물 수확 완료 → 재수확 아님 + 지금 심어도 수확 가능할 때만 씨앗 구매 생성
-  const crop = CROPS.find((c) => c.id === memo.cropId);
-  if (!crop || crop.regrowDays) return [];
-  const willWilt = computeHarvest(today, crop, false, "none").willWilt;
-  if (willWilt && !memo.greenhouse) return [];
-  return [
-    {
-      season: today.season,
-      day: today.day,
-      text: chain.buySeedText,
-      reminderDaysBefore: 0,
-      category: "buySeed",
-      cropId: memo.cropId,
-      greenhouse: memo.greenhouse,
-      groupId: memo.groupId,
-    },
-  ];
+  return [];
 }

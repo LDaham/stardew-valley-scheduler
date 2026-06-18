@@ -129,14 +129,17 @@ export default function BundleTrackerBox() {
             : t("bundleTracker.empty")}
         </p>
       ) : (
-        <div className="flex flex-col gap-3">
+        <div className="grid grid-cols-2 gap-2">
           {snapshot.map(({ bundle: b, items }) => {
             // 필터로 표시할 물품이 없으면 해당 꾸러미는 숨김
             if (items.length === 0) return null;
             const done = doneCount(b);
             const complete = done >= b.needed;
             return (
-              <section key={b.id}>
+              <section
+                key={b.id}
+                className="rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] p-2"
+              >
                 <div className="mb-1 flex items-baseline justify-between gap-2">
                   <h3 className="text-sm font-semibold">
                     <span className="text-[10px] text-[var(--sv-ink-muted)]">

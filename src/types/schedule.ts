@@ -9,7 +9,6 @@ export interface SeedDefaults {
   fertilizer: Fertilizer;
   noWatering: boolean;
   eatFood: boolean;
-  replant: boolean;
 }
 
 // 토글은 설정에 노출되는 카테고리만 대상(buySeed 제외 — buySeeds 리마인더와 통합)
@@ -31,7 +30,6 @@ export interface CharacterInfo {
 // - tool: 도구 업그레이드 완료 → 수령 생성
 // - machine: 장비 사용 완료 → 수령 생성 / 수령 완료 → (반복 시) 사용 재생성
 // - fruitPlant: 묘목 심기 완료 → 수확 일정 생성
-// - replant: 작물 수확 완료 → (재수확 아님·수확 가능 시) 씨앗 구매(재파종) 생성
 export type MemoChain =
   | { kind: "tool"; pickupText: string }
   | {
@@ -43,8 +41,7 @@ export type MemoChain =
       repeat: boolean;
     }
   | { kind: "fruitPlant"; harvestText: string; repeatYearly: boolean }
-  | { kind: "replant"; buySeedText: string }
-  // 작물 생명주기 순차 체인: 씨앗 심기 → 물주기 ×K → 수확(+음식/재파종).
+  // 작물 생명주기 순차 체인: 씨앗 심기 → 물주기 ×K → 수확(+음식).
   // 상위 단계를 완료해야 하위 단계가 생성된다(미완료는 미루기로 그날 계속 표시).
   // stage=plant: 완료 시 물주기 #1(remaining=K) 당일 생성(noWatering이면 수확을 +K일에 생성).
   // stage=water: 완료 시 remaining-1>0이면 다음 물주기를 다음 날, 0이면 수확을 다음 날 생성.
@@ -56,11 +53,9 @@ export type MemoChain =
       remaining: number; // 남은 물주기 수(plant 단계에선 총 K)
       noWatering: boolean;
       eatFood: boolean;
-      replant: boolean;
       waterText: string;
       harvestText: string;
       eatFoodText: string;
-      buySeedText: string;
     };
 
 // 순환 메모 1건. (계절,일)에 귀속되어 매 순환마다 반복 표시된다.

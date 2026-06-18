@@ -82,7 +82,6 @@
     "deleteCat_plant": "Plant seeds",
     "deleteCat_watering": "Crop watering",
     "deleteCat_harvest": "Crop harvest",
-    "deleteCat_buySeed": "Buy seeds",
     "dDay": "D-{days}",
     "deleteCat_eatFood": "Eat food on harvest day",
     "deleteCat_fruit": "Fruit harvest",
@@ -130,7 +129,7 @@
     "reorder": "Drag to reorder",
     "userAdded": "User-added",
     "cropGroup": "Plant seeds",
-    "cropGroupNote": "Plant → water → harvest → eat/replant. Each step appears only after the previous is done.",
+    "cropGroupNote": "Plant → water → harvest → eat. Each step appears only after the previous is done.",
     "bundleTracker": "Bundle tracker",
     "bundleTrackerNote": "Shows the bundle tracker box at the top of the main screen."
   },
@@ -446,7 +445,6 @@
     "wateringMemo": "Water {crop}",
     "wateringNote": "Daily watering items are auto-added until harvest (regrow crops: until season end)",
     "machineMemo": "{output} ready",
-    "buySeedMemo": "Buy {crop} seeds (replant)",
     "eatFoodOption": "Add eat-food on harvest day",
     "eatFoodNote": "Adds a reminder to eat a Farming-buff food on harvest day for higher quality",
     "eatFoodMemo": "Eat food on {crop} harvest day (quality buff)",
@@ -460,8 +458,6 @@
     "buildReadyPreview": "Ready: {date}",
     "noWateringOption": "Don't add watering",
     "noWateringNote": "Skip watering tasks (e.g. when using sprinklers).",
-    "replantOption": "Add replant task",
-    "replantNote": "Add a buy-seed task on harvest day for replanting.",
     "selectMachineCategory": "Equipment type",
     "sameDay": "Same day",
     "fruit": "Plant sapling",
@@ -2145,7 +2141,6 @@
     "mining": "무기한 · 안 하면 미뤄짐.",
     "fishing": "무기한 · 안 하면 미뤄짐.",
     "misc": "무기한 · 안 하면 미뤄짐(정동석·박물관).",
-    "eatFood": "수확일 · 수확 전에 먹어야 함. 작물 수확을 먼저 체크하면 자동 삭제.",
-    "buySeed": "수확 완료 시 생성(재수확 작물 제외) · 수확 불가하면 생성 안 함."
+    "eatFood": "수확일 · 수확 전에 먹어야 함. 작물 수확을 먼저 체크하면 자동 삭제."
   }
 }

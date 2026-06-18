@@ -42,7 +42,6 @@ const DEFAULT_SEED_DEFAULTS: SeedDefaults = {
   fertilizer: "none",
   noWatering: false,
   eatFood: false,
-  replant: true,
 };
 
 // 기본으로 꺼진 메모 카테고리: 과일나무 수확·장인/정제 장비 사용.

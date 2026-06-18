@@ -33,8 +33,8 @@ const MAX_WATERING_CAN_UPGRADES = 4;
 // 미루기(rollover) 분류
 // - 당일만(미루기 없음): 수확일 음식(수확 전에 먹어야 의미 있음)
 const NO_ROLLOVER = new Set(["eatFood"]);
-// - 자체 계절 끝 만료: 과일 수확·재파종 씨앗 구매(온실 아니면 그 계절 끝나면 사라짐)
-const SEASON_EXPIRE = new Set(["fruit", "buySeed"]);
+// - 자체 계절 끝 만료: 과일 수확(온실 아니면 그 계절 끝나면 사라짐)
+const SEASON_EXPIRE = new Set(["fruit"]);
 // 작물 생명주기(씨앗 심기·물주기·수확)는 deadlineYearDay로 만료(비온실).
 // 그 외(도구·장비·건설·채굴·낚시·정동석 등)는 무기한 → 완료까지 매일 표시(미루기)
 
@@ -201,7 +201,7 @@ export default function Dashboard() {
       // 작물 생명주기: 수확 마감(deadlineYearDay)을 넘기면 비온실은 소멸.
       if (m.deadlineYearDay != null && !m.greenhouse && d > m.deadlineYearDay)
         return false;
-      // 과일 수확·재파종: 자체 계절 끝 만료(비온실). 묘목 심기(fruitPlant)는 제외.
+      // 과일 수확: 자체 계절 끝 만료(비온실). 묘목 심기(fruitPlant)는 제외.
       if (
         m.category &&
         SEASON_EXPIRE.has(m.category) &&
@@ -338,25 +338,22 @@ export default function Dashboard() {
     }
 
     // 메모: 작물 물주기는 한 줄로 묶고, 나머지도 같은 날 같은 카테고리·내용이면
-    // 한 번만 표시한다(같은 작물을 여러 번 심어 수확·재파종 등이 겹치는 경우).
+    // 한 번만 표시한다(같은 작물을 여러 번 심어 수확 등이 겹치는 경우).
     const wateringMemos: typeof memos = [];
     const fruitMemos: typeof memos = [];
     const memoGroups = new Map<string, typeof memos>();
     const memoGroupOrder: string[] = [];
     for (const m of activeMemosOn(date)) {
-      // 재파종(buySeed)은 별도 토글 없이 항상 표시. 그 외만 카테고리 토글/그룹 처리.
-      if (m.category !== "buySeed") {
-        if (m.category && !memoCategoryToggles[m.category]) continue;
-        if (m.category === "watering") {
-          if (isRain) continue;
-          wateringMemos.push(m);
-          continue;
-        }
-        // 과일 수확만 한 줄로 묶는다(물주기와 동일). 묘목 심기(fruitPlant)는 개별 표시.
-        if (m.category === "fruit" && m.chain?.kind !== "fruitPlant") {
-          fruitMemos.push(m);
-          continue;
-        }
+      if (m.category && !memoCategoryToggles[m.category]) continue;
+      if (m.category === "watering") {
+        if (isRain) continue;
+        wateringMemos.push(m);
+        continue;
+      }
+      // 과일 수확만 한 줄로 묶는다(물주기와 동일). 묘목 심기(fruitPlant)는 개별 표시.
+      if (m.category === "fruit" && m.chain?.kind !== "fruitPlant") {
+        fruitMemos.push(m);
+        continue;
       }
       const gk = `${m.category ?? ""}|${m.text}`;
       if (!memoGroups.has(gk)) {
@@ -371,20 +368,6 @@ export default function Dashboard() {
       const ids = list.map((x) => x.id);
       const allDone = list.every((x) => x.done);
       const onDelete = memoGroupDelete(list);
-      if (m.category === "buySeed") {
-        rows.push({
-          key: `memo-${m.id}`,
-          orderKey: "reminder:buySeeds",
-          icon: <ReminderIcon id="buySeeds" size={16} />,
-          label: m.text,
-          done: allDone,
-          onToggle: () => setDoneMany(ids, !allDone),
-          onDelete,
-          logic: t("logic.buySeed"),
-          rolled: list.some(isRolled),
-        });
-        continue;
-      }
       const icon =
         (m.category === "harvest" || m.category === "plant") && m.cropId ? (
           <PixelIcon src={`/icons/seeds/${m.cropId}.png`} />
@@ -822,7 +805,7 @@ function DeleteBtn({
 }
 
 // 씨앗 심기·과일나무 한 번에서 파생되는 할 일들(같은 작물·나무). 삭제 창에서 묶어 관리한다.
-const DELETE_CATS = ["plant", "watering", "eatFood", "harvest", "buySeed", "fruit"] as const;
+const DELETE_CATS = ["plant", "watering", "eatFood", "harvest", "fruit"] as const;
 
 // 관련 할 일 삭제 팝업: 작물별로 카테고리(물주기/수확/씨앗구매) 전체 삭제.
 // 카테고리를 지워도 닫지 않고, 삭제 가능한 항목이 남으면 계속 표시한다.

@@ -151,8 +151,11 @@ export default function TodoSettingsDialog({
     return Number.isNaN(idx) ? null : idx;
   };
 
-  // 그룹 체크박스 상태: 4개 카테고리 모두 켜져 있을 때만 체크
+  // 그룹 체크박스 상태: 전부 켜짐=체크, 일부만 켜짐=부분 선택(indeterminate), 전부 꺼짐=빈칸.
   const cropGroupOn = CROP_GROUP_CATS.every((c) => memoCategoryToggles[c]);
+  const cropGroupSome = CROP_GROUP_CATS.some((c) => memoCategoryToggles[c]);
+  const cropGroupIndeterminate = cropGroupSome && !cropGroupOn;
+  // 부분 선택 상태에서 누르면 전체 켜기, 전부 켜진 상태에서 누르면 전체 끄기.
   const setCropGroup = (val: boolean) =>
     CROP_GROUP_CATS.forEach((c) => setMemoCategoryToggle(c, val));
 
@@ -167,6 +170,9 @@ export default function TodoSettingsDialog({
         <input
           type="checkbox"
           checked={cropGroupOn}
+          ref={(el) => {
+            if (el) el.indeterminate = cropGroupIndeterminate;
+          }}
           onChange={(e) => setCropGroup(e.target.checked)}
           className="mt-0.5 size-4 shrink-0 accent-[var(--sv-accent)]"
         />
@@ -179,6 +185,21 @@ export default function TodoSettingsDialog({
           </span>
           <span className="block text-xs text-[var(--sv-ink-muted)]">
             {t("settings.cropGroupNote")}
+          </span>
+          {/* 하위 단계 개별 토글(심기·물주기·수확·음식). 체크박스로만 토글되도록 span 사용 */}
+          <span className="mt-1.5 flex flex-col gap-1 border-l-2 border-[var(--sv-border)] pl-2">
+            {CROP_GROUP_CATS.map((c) => (
+              <span key={c} className="flex items-center gap-1.5 text-xs">
+                <input
+                  type="checkbox"
+                  checked={memoCategoryToggles[c]}
+                  onChange={(e) => setMemoCategoryToggle(c, e.target.checked)}
+                  className="size-3.5 shrink-0 accent-[var(--sv-accent)]"
+                />
+                <PixelImage src={MEMO_ICON[c]} size={14} />
+                <span>{t(`todoCategory.${c}`)}</span>
+              </span>
+            ))}
           </span>
         </span>
       );
@@ -216,24 +237,26 @@ export default function TodoSettingsDialog({
           <span className="block text-xs text-[var(--sv-ink-muted)]">
             {t(`reminders.${id}.detail`)}
           </span>
-          {/* 소스의 여왕 재방송: 신규 방영의 하위 토글(순서는 함께 이동) */}
+          {/* 소스의 여왕 재방송: 신규 방영의 하위 토글(순서는 함께 이동).
+              신규 방영과 시각적으로 떨어뜨리고(들여쓰기·여백), 체크박스로만 토글되도록
+              label이 아닌 span으로 감싼다. */}
           {id === "queenOfSauceNew" && (
-            <label className="mt-1 flex cursor-pointer items-center gap-1.5 text-xs">
-              <input
-                type="checkbox"
-                checked={reminderToggles.queenOfSauceRerun}
-                onChange={(e) =>
-                  setReminderToggle("queenOfSauceRerun", e.target.checked)
-                }
-                className="size-3.5 accent-[var(--sv-accent)]"
-              />
-              <ReminderIcon id="queenOfSauceRerun" size={14} />
-              <span>{t("reminders.queenOfSauceRerun.title")}</span>
-            </label>
-          )}
-          {id === "queenOfSauceNew" && (
-            <span className="mt-0.5 block text-[10px] text-[var(--sv-ink-muted)]">
-              {t("reminders.queenOfSauceRerun.note")}
+            <span className="mt-2 block border-l-2 border-[var(--sv-border)] pl-2">
+              <span className="flex items-center gap-1.5 text-xs">
+                <input
+                  type="checkbox"
+                  checked={reminderToggles.queenOfSauceRerun}
+                  onChange={(e) =>
+                    setReminderToggle("queenOfSauceRerun", e.target.checked)
+                  }
+                  className="size-3.5 shrink-0 accent-[var(--sv-accent)]"
+                />
+                <ReminderIcon id="queenOfSauceRerun" size={14} />
+                <span>{t("reminders.queenOfSauceRerun.title")}</span>
+              </span>
+              <span className="mt-0.5 block text-[10px] text-[var(--sv-ink-muted)]">
+                {t("reminders.queenOfSauceRerun.note")}
+              </span>
             </span>
           )}
         </span>

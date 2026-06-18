@@ -14,7 +14,6 @@ function iconSrc(m: Memo): string {
     return `/icons/seeds/${m.cropId}.png`;
   if (m.category === "fruit" && m.cropId) return `/icons/fruitTrees/${m.cropId}.png`;
   if (m.category === "watering") return "/icons/reminders/watering.png";
-  if (m.category === "buySeed") return "/icons/reminders/buySeeds.png";
   if (m.category === "eatFood") return "/icons/ui/food.png";
   if (m.category === "mining") return "/icons/tools/pickaxe.png";
   if (m.category === "fishing") return "/icons/addTask/fishing.png";

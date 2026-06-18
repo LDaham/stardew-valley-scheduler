@@ -127,14 +127,13 @@ export default function AddTaskDialog({
   };
 
   // 씨앗 심기: 당일 '씨앗 심기' 1건만 생성한다(순차 체인).
-  // 완료하면 물주기 ×K → 수확 → (음식/재파종)이 차례로 생성되고,
+  // 완료하면 물주기 ×K → 수확 → (음식)이 차례로 생성되고,
   // 한 단계가 밀리면 하위 단계가 그만큼 늦게 생긴다(미루기·cascade).
   const addSeed = (
     cropId: string,
     fert: Fertilizer,
     eatFood: boolean,
     noWatering: boolean,
-    replant: boolean,
     greenhouse: boolean,
   ) => {
     const crop = CROPS.find((c) => c.id === cropId);
@@ -169,15 +168,13 @@ export default function AddTaskDialog({
         remaining: K,
         noWatering,
         eatFood: eatFood && !willWilt,
-        replant,
         waterText: t("addTask.wateringMemo", { crop: cropName }),
         harvestText: t("addTask.harvestMemo", { crop: cropName }),
         eatFoodText: t("addTask.eatFoodMemo", { crop: cropName }),
-        buySeedText: t("addTask.buySeedMemo", { crop: cropName }),
       },
     });
     // 선택지를 기본값으로 저장(다음 심기에 재사용)
-    setSeedDefaults({ fertilizer: fert, eatFood, noWatering, replant });
+    setSeedDefaults({ fertilizer: fert, eatFood, noWatering });
     afterAdd("plant");
   };
 
@@ -518,7 +515,6 @@ function SeedForm({
     fert: Fertilizer,
     eatFood: boolean,
     noWatering: boolean,
-    replant: boolean,
     greenhouse: boolean,
   ) => void;
 }) {
@@ -532,7 +528,6 @@ function SeedForm({
   const [fert, setFert] = useState<Fertilizer>(defaults.fertilizer);
   const [eatFood, setEatFood] = useState(defaults.eatFood);
   const [noWatering, setNoWatering] = useState(defaults.noWatering);
-  const [replant, setReplant] = useState(defaults.replant);
 
   const crop = seasonCrops.find((c) => c.id === cropId);
   const rawHarvest = crop ? computeHarvest(plantDate, crop, agri, fert) : null;
@@ -662,28 +657,10 @@ function SeedForm({
         </span>
       </label>
 
-      {/* 재파종(수확일 씨앗 구매) 메모 추가 여부 — 재수확/시들 작물은 해당 없음 */}
-      {crop && !crop.regrowDays && harvest && !harvest.willWilt && (
-        <label className="flex cursor-pointer items-start gap-2 text-sm">
-          <input
-            type="checkbox"
-            checked={replant}
-            onChange={(e) => setReplant(e.target.checked)}
-            className="mt-0.5 size-4 accent-[var(--sv-accent)]"
-          />
-          <span>
-            {t("addTask.replantOption")}
-            <span className="block text-xs text-[var(--sv-ink-muted)]">
-              {t("addTask.replantNote")}
-            </span>
-          </span>
-        </label>
-      )}
-
       <FormFooter
         onBack={onBack}
         onAdd={() =>
-          crop && onAdd(cropId, fert, eatFood, noWatering, replant, greenhouse)
+          crop && onAdd(cropId, fert, eatFood, noWatering, greenhouse)
         }
         addDisabled={!crop}
       />

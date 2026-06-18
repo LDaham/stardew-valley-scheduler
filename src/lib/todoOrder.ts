@@ -19,9 +19,7 @@ export const EVENT_TYPES = ["festival", "birthday", "cropDeadline", "foraging"] 
 export const MEMO_CATEGORIES = ["plant", "harvest", "watering", "fruit", "tool", "machine", "build", "mining", "fishing", "misc", "eatFood"] as const;
 // 설정·순서에 노출되는 카테고리(토글/정렬 대상)
 export type VisibleMemoCategory = (typeof MEMO_CATEGORIES)[number];
-// buySeed: 수확일 씨앗 구매 메모. 순서·토글은 buySeeds 리마인더와 통합되어
-// 별도 카테고리로 노출하지 않으므로 MEMO_CATEGORIES에는 포함하지 않는다.
-export type MemoCategory = VisibleMemoCategory | "buySeed";
+export type MemoCategory = VisibleMemoCategory;
 
 // queenOfSauceRerun은 신규 방영(queenOfSauceNew)의 하위 항목으로 함께 움직이므로
 // 별도 순서 엔트리로 노출하지 않는다.

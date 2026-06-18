@@ -82,7 +82,6 @@
     "deleteCat_plant": "씨앗 심기",
     "deleteCat_watering": "작물 물주기",
     "deleteCat_harvest": "작물 수확",
-    "deleteCat_buySeed": "씨앗 구매",
     "dDay": "D-{days}",
     "deleteCat_eatFood": "수확일 음식 먹기",
     "deleteCat_fruit": "과일 수확",
@@ -130,7 +129,7 @@
     "reorder": "드래그하여 순서 변경",
     "userAdded": "사용자 추가",
     "cropGroup": "씨앗 심기",
-    "cropGroupNote": "심기 → 물주기 → 수확 → 음식/재파종 순서. 상위를 완료해야 하위 할 일이 생깁니다.",
+    "cropGroupNote": "심기 → 물주기 → 수확 → 음식 순서. 상위를 완료해야 하위 할 일이 생깁니다.",
     "bundleTracker": "꾸러미 추적",
     "bundleTrackerNote": "메인 화면 상단에 꾸러미 추적 박스가 함께 표시됩니다."
   },
@@ -446,7 +445,6 @@
     "wateringMemo": "{crop} 물주기",
     "wateringNote": "수확 전까지 매일 물주기 항목이 자동 추가됩니다 (재수확 작물은 계절 끝까지)",
     "machineMemo": "{output} 완성",
-    "buySeedMemo": "{crop} 씨앗 구매(재파종)",
     "eatFoodOption": "수확일에 음식 먹기 추가",
     "eatFoodNote": "수확일에 농사 버프 음식을 먹어 품질을 올리도록 알림 추가",
     "eatFoodMemo": "{crop} 수확일 음식 먹기(품질 버프)",
@@ -460,8 +458,6 @@
     "buildReadyPreview": "완성 예정: {date}",
     "noWateringOption": "물주기 추가 안 함",
     "noWateringNote": "스프링클러 사용 등으로 물주기 할 일을 만들지 않습니다.",
-    "replantOption": "재파종 일정 추가",
-    "replantNote": "수확일에 다시 심을 씨앗 구매 할 일을 추가합니다.",
     "selectMachineCategory": "장비 종류",
     "sameDay": "당일 완성",
     "fruit": "묘목 심기",
@@ -2145,7 +2141,6 @@
     "mining": "무기한 · 안 하면 미뤄짐.",
     "fishing": "무기한 · 안 하면 미뤄짐.",
     "misc": "무기한 · 안 하면 미뤄짐(정동석·박물관).",
-    "eatFood": "수확일 · 수확 전에 먹어야 함. 작물 수확을 먼저 체크하면 자동 삭제.",
-    "buySeed": "수확 완료 시 생성(재수확 작물 제외) · 수확 불가하면 생성 안 함."
+    "eatFood": "수확일 · 수확 전에 먹어야 함. 작물 수확을 먼저 체크하면 자동 삭제."
   }
 }
