@@ -503,7 +503,11 @@
     "open": "정보 열기",
     "back": "이전",
     "birthdayGift": "생일 선물",
-    "birthdayGiftHint": "주민을 선택하면 좋아하는 선물을 볼 수 있어요."
+    "birthdayGiftHint": "주민을 선택하면 좋아하는 선물을 볼 수 있어요.",
+    "npcLocation": "NPC 위치",
+    "npcLocationHint": "주민을 선택하면 계절·요일·날씨별 일정(위치)을 볼 수 있어요.",
+    "npcNoSchedule": "이 조건의 일정 정보가 없습니다.",
+    "npcSource": "출처: Stardew Valley Wiki 주민 일정 (CC BY-NC-SA 3.0)"
   },
   "fish": {
     "title": "생선 정보",

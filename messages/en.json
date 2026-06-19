@@ -503,7 +503,11 @@
     "open": "Open info",
     "back": "Back",
     "birthdayGift": "Birthday gifts",
-    "birthdayGiftHint": "Pick a villager to see their favorite gifts."
+    "birthdayGiftHint": "Pick a villager to see their favorite gifts.",
+    "npcLocation": "NPC locations",
+    "npcLocationHint": "Pick a villager to see their schedule (location) by season, day, and weather.",
+    "npcNoSchedule": "No schedule for this condition.",
+    "npcSource": "Source: Stardew Valley Wiki villager schedules (CC BY-NC-SA 3.0)"
   },
   "fish": {
     "title": "Fish info",
