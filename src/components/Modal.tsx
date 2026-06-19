@@ -68,9 +68,9 @@ export default function Modal({
               <button
                 onClick={onBack}
                 aria-label={t("info.back")}
-                className="flex shrink-0 items-center gap-0.5 rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] px-2 py-1 text-sm hover:bg-[var(--sv-bg)]"
+                className="-ml-1 shrink-0 px-1 text-3xl leading-none text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
               >
-                ‹ {t("info.back")}
+                ‹
               </button>
             )}
             <h2 className="truncate text-lg font-bold">{title}</h2>

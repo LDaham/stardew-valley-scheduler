@@ -246,6 +246,37 @@ export default function ShopScheduleDialog({
     ...SHOP_SCHEDULE.filter((s) => !isPinned(s.id)),
   ];
 
+  // PC 카드 한 장.
+  const renderCard = (s: ShopScheduleEntry) => (
+    <section
+      key={s.id}
+      className="rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] p-3"
+    >
+      <div className="mb-2 flex items-center gap-2">
+        <PixelIcon src={`/icons/shops/${s.id}.png`} size={20} />
+        <h3 className="flex-1 text-base font-bold">
+          {t(`shopSchedule.shops.${s.id}.name`)}
+        </h3>
+        <PinButton
+          pinned={isPinned(s.id)}
+          onToggle={() => togglePin(s.id)}
+          label={t("shopSchedule.pin")}
+        />
+      </div>
+      <ShopBody entry={s} scenario={scenario} />
+    </section>
+  );
+
+  // PC 2열 메이슨리: 우선순위 순으로 더 짧은 열에 배치(동률은 왼쪽).
+  // 높이는 내용량(메모·정기 휴무 유무)으로 근사 → 박스는 자기 내용 높이만큼만.
+  const cols: ShopScheduleEntry[][] = [[], []];
+  const heights = [0, 0];
+  for (const s of orderedShops) {
+    const c = heights[0] <= heights[1] ? 0 : 1;
+    cols[c].push(s);
+    heights[c] += 2 + (s.hasCheckup ? 1 : 0) + (s.hasNote ? 2 : 0);
+  }
+
   return (
     <Modal title={t("shopSchedule.title")} onClose={onClose} onBack={onBack}>
       {/* 시나리오 토글: 내 상황(열쇠·복구·축제)에 맞춰 일정 표시를 전환 */}
@@ -305,26 +336,12 @@ export default function ShopScheduleDialog({
         </div>
       </div>
 
-      {/* PC: 카드 그리드(2열). 핀된 가게 우선 표시 */}
-      <div className="hidden gap-2 sm:grid sm:grid-cols-2">
-        {orderedShops.map((s) => (
-          <section
-            key={s.id}
-            className="rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] p-3"
-          >
-            <div className="mb-2 flex items-center gap-2">
-              <PixelIcon src={`/icons/shops/${s.id}.png`} size={20} />
-              <h3 className="flex-1 text-base font-bold">
-                {t(`shopSchedule.shops.${s.id}.name`)}
-              </h3>
-              <PinButton
-                pinned={isPinned(s.id)}
-                onToggle={() => togglePin(s.id)}
-                label={t("shopSchedule.pin")}
-              />
-            </div>
-            <ShopBody entry={s} scenario={scenario} />
-          </section>
+      {/* PC: 2열 메이슨리(더 짧은 열에 배치, 박스는 내용 높이만큼만). 핀된 가게 우선 */}
+      <div className="hidden gap-2 sm:flex sm:items-start">
+        {cols.map((col, i) => (
+          <div key={i} className="flex flex-1 flex-col gap-2">
+            {col.map(renderCard)}
+          </div>
         ))}
       </div>
 

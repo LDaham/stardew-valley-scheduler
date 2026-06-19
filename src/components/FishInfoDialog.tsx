@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, type ReactNode } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
@@ -30,6 +30,104 @@ const CAT_LABEL: Record<FishCategory | "normal", string> = {
   legendaryII: "catLegendaryII",
 };
 
+// 날씨·시간 필터 칩(토글). 활성=강조색.
+function FilterChip({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: ReactNode;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      aria-pressed={active}
+      className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+        active
+          ? "bg-[var(--sv-accent)] text-white"
+          : "border border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
+
+function FilterGroup({
+  label,
+  children,
+}: {
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="flex flex-wrap items-center gap-1.5">
+      <span className="text-xs font-semibold text-[var(--sv-ink-muted)]">
+        {label}
+      </span>
+      {children}
+    </div>
+  );
+}
+
+// 시간대 그래프: 가로축 오전 6시(6) → 다음날 오전 2시(26). 잡히는 시간 창만 색칠.
+const TL_START = 6;
+const TL_END = 26;
+const TL_TICKS = [6, 12, 18, 24, 26];
+function TimelineBar({ windows }: { windows: number[][] }) {
+  const span = TL_END - TL_START;
+  const pos = (h: number) => ((h - TL_START) / span) * 100;
+  const color = "var(--sv-accent)";
+  const tickLabel = (h: number) => (h === 24 ? "0" : h === 26 ? "2" : String(h));
+  return (
+    <div>
+      <div className="relative h-2.5 w-full overflow-hidden rounded-full border border-[var(--sv-border)] bg-[var(--sv-panel)]">
+        {/* 정오·자정 등 눈금선 */}
+        {TL_TICKS.slice(1, -1).map((h) => (
+          <div
+            key={h}
+            className="absolute inset-y-0 w-px bg-[var(--sv-border)]"
+            style={{ left: `${pos(h)}%` }}
+          />
+        ))}
+        {/* 잡히는 시간 창 */}
+        {windows.map((w, i) => (
+          <div
+            key={i}
+            className="absolute inset-y-0"
+            style={{
+              left: `${pos(w[0])}%`,
+              width: `${pos(w[1]) - pos(w[0])}%`,
+              background: color,
+            }}
+          />
+        ))}
+      </div>
+      <div className="relative mt-0.5 h-3 text-[8px] leading-none text-[var(--sv-ink-muted)]">
+        {TL_TICKS.map((h) => (
+          <span
+            key={h}
+            className="absolute"
+            style={{
+              left: `${pos(h)}%`,
+              transform:
+                h === TL_START
+                  ? "none"
+                  : h === TL_END
+                    ? "translateX(-100%)"
+                    : "translateX(-50%)",
+            }}
+          >
+            {tickLabel(h)}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // 생선 정보: 도구(낚싯대/통발)·분류(야시장/전설/전설 II)로 묶어 위치·계절·시간·날씨 표시.
 export default function FishInfoDialog({
   season,
@@ -57,86 +155,106 @@ export default function FishInfoDialog({
     setDialogFilters({ fishSeasons: [...next] });
   };
 
-  // 계절 필터 통과 + 이번 계절 우선 정렬
+  // 날씨 필터(없으면 전체 선택 = 필터 없음). 마지막 선택 영속.
+  const WEATHER_TOKENS = ["any", "sun", "rain"];
+  const weatherSel = new Set(dialogFilters.fishWeather ?? WEATHER_TOKENS);
+  const toggleWeather = (v: string) => {
+    const base = new Set(dialogFilters.fishWeather ?? WEATHER_TOKENS);
+    if (base.has(v)) base.delete(v);
+    else base.add(v);
+    setDialogFilters({ fishWeather: [...base] });
+  };
+  const matchWeather = (f: FishInfo) => weatherSel.has(f.weather);
+
+  // 유형 필터: 낚싯대(일반)·낚싯대(전설)·게잡이 통발.
+  const TYPE_TOKENS = [
+    "rodNormal",
+    "rodNightMarket",
+    "rodLegendary",
+    "crabpot",
+  ];
+  const typeSel = new Set(dialogFilters.fishType ?? TYPE_TOKENS);
+  const toggleType = (v: string) => {
+    const base = new Set(dialogFilters.fishType ?? TYPE_TOKENS);
+    if (base.has(v)) base.delete(v);
+    else base.add(v);
+    setDialogFilters({ fishType: [...base] });
+  };
+  const typeOf = (f: FishInfo) =>
+    f.tool === "crabpot"
+      ? "crabpot"
+      : f.category === "legendary" || f.category === "legendaryII"
+        ? "rodLegendary"
+        : f.category === "nightMarket"
+          ? "rodNightMarket"
+          : "rodNormal";
+  const matchType = (f: FishInfo) => typeSel.has(typeOf(f));
+
+  // 계절·날씨·유형 필터 통과 + 이번 계절 우선 정렬
   const sortCur = (list: FishInfo[]) =>
     [...list].sort(
       (a, b) =>
         Number(b.seasons.includes(season)) - Number(a.seasons.includes(season)),
     );
-  const visible = FISH.filter((f) => matchesSeason(f.seasons, selected));
+  const visible = FISH.filter(
+    (f) =>
+      matchesSeason(f.seasons, selected) && matchWeather(f) && matchType(f),
+  );
   const rod = sortCur(visible.filter((f) => f.tool === "rod"));
   const crab = sortCur(visible.filter((f) => f.tool === "crabpot"));
 
-  // 계절별 고유 색(꾸러미·필터와 동일). 이번 계절은 외곽선으로 강조.
-  const SEASON_BG: Record<Season, string> = {
-    spring: "var(--season-spring)",
-    summer: "var(--season-summer)",
-    fall: "var(--season-fall)",
-    winter: "var(--season-winter)",
-  };
-  const seasonChip = (s: Season, active: boolean) => (
-    <span
-      key={s}
-      style={{ background: SEASON_BG[s] }}
-      className={`shrink-0 rounded px-1 py-0.5 text-[10px] font-semibold text-[var(--sv-ink)] ${
-        active ? "ring-1 ring-[var(--sv-ink)]" : ""
-      }`}
+  // 박스 안 생선 한 마리: 이미지 + 이름 + 위치만 표시. 내용 폭만큼만 차지(빈 공간 없음).
+  const fishItem = (f: FishInfo) => (
+    <li
+      key={f.id}
+      className="flex max-w-full items-center gap-2 rounded-md border border-[var(--sv-border)] bg-[var(--sv-bg)] px-2 py-1.5"
     >
-      {t(`seasons.${s}`)}
-    </span>
+      <Image
+        src={asset(`/icons/fish/${f.id}.png`)}
+        alt=""
+        width={24}
+        height={24}
+        unoptimized
+        className="shrink-0"
+        style={{ imageRendering: "pixelated" }}
+      />
+      <div className="min-w-0">
+        <div className="text-sm font-semibold">{t(`fishInfo.${f.id}.name`)}</div>
+        <div className="text-[11px] text-[var(--sv-ink-muted)]">
+          {t(`fishInfo.${f.id}.location`)}
+        </div>
+      </div>
+    </li>
   );
 
-  const fishRow = (f: FishInfo) => {
-    const allSeasons = f.seasons.length === 4;
-    return (
-      <li
-        key={f.id}
-        className="flex items-start gap-2 rounded-md bg-[var(--sv-bg)] px-2 py-1.5"
-      >
-        <Image
-          src={asset(`/icons/fish/${f.id}.png`)}
-          alt=""
-          width={24}
-          height={24}
-          unoptimized
-          className="mt-0.5 shrink-0"
-          style={{ imageRendering: "pixelated" }}
-        />
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-sm font-semibold">
-              {t(`fishInfo.${f.id}.name`)}
-            </span>
-            {allSeasons ? (
-              <span className="shrink-0 rounded bg-[var(--sv-border)] px-1 py-0.5 text-[10px] font-semibold text-[var(--sv-ink-muted)]">
-                {t("fish.allSeasons")}
-              </span>
-            ) : (
-              f.seasons.map((s) => seasonChip(s, s === season))
-            )}
-            {f.weather === "rain" && (
-              <span className="flex shrink-0 items-center gap-0.5 rounded bg-[var(--season-winter)] px-1 py-0.5 text-[10px] font-semibold text-[var(--sv-ink)]">
-                <PixelIcon src="/icons/ui/rain.png" size={10} />
-                {t("fish.weatherRain")}
-              </span>
-            )}
-            {f.weather === "sun" && (
-              <span className="shrink-0 rounded bg-[var(--season-summer)] px-1 py-0.5 text-[10px] font-semibold text-[var(--sv-ink)]">
-                {t("fish.weatherSun")}
-              </span>
-            )}
-          </div>
-          <div className="text-xs text-[var(--sv-ink-muted)]">
-            {t("fish.location")}: {t(`fishInfo.${f.id}.location`)}
-          </div>
-          <div className="flex items-center gap-1 text-xs text-[var(--sv-ink-muted)]">
-            <TimeIcon size={12} />
-            {t(`fishInfo.${f.id}.time`)}
-          </div>
-        </div>
-      </li>
+  // 같은 시간 창끼리 묶기(시작 시각 → 끝 시각 순). 같은 창이면 시간 문자열도 동일.
+  const groupByWindow = (list: FishInfo[]) => {
+    const map = new Map<string, { windows: number[][]; fish: FishInfo[] }>();
+    for (const f of list) {
+      const key = JSON.stringify(f.windows);
+      if (!map.has(key)) map.set(key, { windows: f.windows, fish: [] });
+      map.get(key)!.fish.push(f);
+    }
+    return [...map.values()].sort(
+      (a, b) =>
+        a.windows[0][0] - b.windows[0][0] || a.windows[0][1] - b.windows[0][1],
     );
   };
+
+  // 시간대 박스: 헤더(시간 라벨 + 시간 막대) + 해당 시간대 생선 목록.
+  const timeBox = (g: { windows: number[][]; fish: FishInfo[] }) => (
+    <div
+      key={JSON.stringify(g.windows)}
+      className="mb-2 rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] p-2"
+    >
+      <div className="mb-1 flex items-center gap-1 text-xs font-semibold text-[var(--sv-ink-muted)]">
+        <TimeIcon size={12} />
+        {t(`fishInfo.${g.fish[0].id}.time`)}
+      </div>
+      <TimelineBar windows={g.windows} />
+      <ul className="mt-2 flex flex-wrap gap-1.5">{g.fish.map(fishItem)}</ul>
+    </div>
+  );
 
   const toolHeader = (icon: string, label: string) => (
     <h3 className="mb-1.5 flex items-center gap-1.5 border-b border-[var(--sv-border)] pb-1 text-sm font-bold">
@@ -147,8 +265,48 @@ export default function FishInfoDialog({
 
   return (
     <Modal title={t("fish.title")} onClose={onClose} onBack={onBack}>
-      <div className="mb-3">
+      <div className="mb-3 flex flex-col gap-2">
         <SeasonFilter selected={selected} onToggle={toggleToken} />
+        {/* 날씨 필터(토글) */}
+        <FilterGroup label={t("fish.weather")}>
+          {(["any", "sun", "rain"] as const).map((w) => (
+            <FilterChip
+              key={w}
+              active={weatherSel.has(w)}
+              onClick={() => toggleWeather(w)}
+            >
+              {t(
+                w === "any"
+                  ? "fish.weatherAny"
+                  : w === "sun"
+                    ? "fish.weatherSun"
+                    : "fish.weatherRain",
+              )}
+            </FilterChip>
+          ))}
+        </FilterGroup>
+        {/* 유형 필터(토글) */}
+        <FilterGroup label={t("fish.type")}>
+          {(
+            ["rodNormal", "rodNightMarket", "rodLegendary", "crabpot"] as const
+          ).map((tp) => (
+            <FilterChip
+              key={tp}
+              active={typeSel.has(tp)}
+              onClick={() => toggleType(tp)}
+            >
+              {t(
+                tp === "rodNormal"
+                  ? "fish.typeRodNormal"
+                  : tp === "rodNightMarket"
+                    ? "fish.typeRodNightMarket"
+                    : tp === "rodLegendary"
+                      ? "fish.typeRodLegendary"
+                      : "fish.typeCrabpot",
+              )}
+            </FilterChip>
+          ))}
+        </FilterGroup>
       </div>
 
       {/* 낚싯대 */}
@@ -163,7 +321,7 @@ export default function FishInfoDialog({
                 <h4 className="mb-1 text-xs font-semibold text-[var(--sv-ink-muted)]">
                   {t(`fish.${CAT_LABEL[cat]}`)}
                 </h4>
-                <ul className="flex flex-col gap-1.5">{list.map(fishRow)}</ul>
+                {groupByWindow(list).map(timeBox)}
               </div>
             );
           })}
@@ -174,7 +332,7 @@ export default function FishInfoDialog({
       {crab.length > 0 && (
         <section>
           {toolHeader("/icons/tools/crabPot.png", t("fish.toolCrabpot"))}
-          <ul className="flex flex-col gap-1.5">{crab.map(fishRow)}</ul>
+          {groupByWindow(crab).map(timeBox)}
         </section>
       )}
     </Modal>

@@ -42,6 +42,7 @@ export default function BundleTrackerBox() {
   const season = currentDate.season;
   const trackerSeasons = dialogFilters.trackerSeasons;
   const onlyIncomplete = dialogFilters.trackerOnlyIncomplete;
+  const grouped = dialogFilters.trackerGrouped;
   // 날짜 키: 바뀌면 스냅샷을 다시 계산(완료된 물품을 다시 걸러냄)
   const dayKey = `${year}-${currentDate.season}-${currentDate.day}`;
 
@@ -98,6 +99,71 @@ export default function BundleTrackerBox() {
   const doneCount = (b: Bundle) =>
     b.items.filter((i) => bundleItemsDone[bundleItemKey(b.id, i.id)]).length;
 
+  // 표시할 꾸러미(필터로 물품이 0이면 숨김). 우선순위 = 스냅샷 순서.
+  const visible = snapshot.filter(({ items }) => items.length > 0);
+
+  // 데스크톱 2열 배치: 우선순위 순으로 더 짧은 열에 넣는다(동률은 왼쪽).
+  // 높이는 물품 수로 근사 → 박스마다 자기 내용 높이만큼만 차지(행 늘어남 없음).
+  const cols: { bundle: Bundle; items: BundleItem[] }[][] = [[], []];
+  const heights = [0, 0];
+  for (const entry of visible) {
+    const c = heights[0] <= heights[1] ? 0 : 1;
+    cols[c].push(entry);
+    heights[c] += entry.items.length + 2; // +2 ≈ 헤더 높이
+  }
+
+  const renderBox = ({
+    bundle: b,
+    items,
+  }: {
+    bundle: Bundle;
+    items: BundleItem[];
+  }) => {
+    const done = doneCount(b);
+    const complete = done >= b.needed;
+    return (
+      <section
+        key={b.id}
+        className="rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] p-2"
+      >
+        <div className="mb-1 flex items-baseline justify-between gap-2">
+          <h3 className="text-sm font-semibold">
+            <span className="text-[10px] text-[var(--sv-ink-muted)]">
+              {t(`bundleRoom.${b.roomKey}`)}
+            </span>{" "}
+            {t(`bundle.${b.id}`)}
+          </h3>
+          <span
+            className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold ${
+              complete
+                ? "bg-[var(--sv-accent)] text-white"
+                : "bg-[var(--sv-ink)] text-white"
+            }`}
+          >
+            {complete ? t("bundle.complete") : `${done}/${b.needed}`}
+          </span>
+        </div>
+        {/* 물품: 클릭하면 완료 토글되는 칩을 행으로 나열(넘치면 다음 줄) */}
+        <ul className="flex flex-wrap gap-1.5">
+          {items.map((i) => {
+            const key = bundleItemKey(b.id, i.id);
+            return (
+              <li key={i.id}>
+                <BundleItemChip
+                  item={i}
+                  checked={!!bundleItemsDone[key]}
+                  onToggle={() => toggleBundleItem(key)}
+                  disabled={complete && !bundleItemsDone[key]}
+                  gold={b.quality === "gold"}
+                />
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    );
+  };
+
   return (
     <div className="sv-box p-3">
       {/* 헤더: 제목 + 오른쪽 인라인 필터(계절·비·상시 + 완료되지 않은 물품만) */}
@@ -119,6 +185,17 @@ export default function BundleTrackerBox() {
             />
             {t("bundleTracker.onlyIncomplete")}
           </label>
+          <label className="flex cursor-pointer items-center gap-1.5 text-xs">
+            <input
+              type="checkbox"
+              checked={grouped}
+              onChange={(e) =>
+                setDialogFilters({ trackerGrouped: e.target.checked })
+              }
+              className="size-4 accent-[var(--sv-accent)]"
+            />
+            {t("bundleTracker.grouped")}
+          </label>
         </div>
       </div>
 
@@ -128,60 +205,42 @@ export default function BundleTrackerBox() {
             ? t("bundleTracker.emptyRemix")
             : t("bundleTracker.empty")}
         </p>
+      ) : grouped ? (
+        <>
+          {/* 모바일: 1열(우선순위 순) */}
+          <div className="flex flex-col gap-2 sm:hidden">
+            {visible.map(renderBox)}
+          </div>
+          {/* 데스크톱: 2열(더 짧은 열에 배치, 박스는 내용 높이만큼만) */}
+          <div className="hidden gap-2 sm:flex sm:items-start">
+            {cols.map((col, i) => (
+              <div key={i} className="flex flex-1 flex-col gap-2">
+                {col.map(renderBox)}
+              </div>
+            ))}
+          </div>
+        </>
       ) : (
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-          {snapshot.map(({ bundle: b, items }) => {
-            // 필터로 표시할 물품이 없으면 해당 꾸러미는 숨김
-            if (items.length === 0) return null;
-            const done = doneCount(b);
-            const complete = done >= b.needed;
-            return (
-              <section
-                key={b.id}
-                className="rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] p-2"
-              >
-                <div className="mb-1 flex items-baseline justify-between gap-2">
-                  <h3 className="text-sm font-semibold">
-                    <span className="text-[10px] text-[var(--sv-ink-muted)]">
-                      {t(`bundleRoom.${b.roomKey}`)}
-                    </span>{" "}
-                    {t(`bundle.${b.id}`)}
-                  </h3>
-                  <span
-                    className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold ${
-                      complete
-                        ? "bg-[var(--sv-accent)] text-white"
-                        : "bg-[var(--sv-ink)] text-white"
-                    }`}
-                  >
-                    {complete ? t("bundle.complete") : `${done}/${b.needed}`}
-                  </span>
-                </div>
-                {b.quality === "gold" && (
-                  <p className="mb-1 rounded bg-[#fff3d6] px-2 py-1 text-[11px] font-semibold text-[#b8860b]">
-                    {t("bundle.qualityGoldNote")}
-                  </p>
-                )}
-                {/* 물품: 클릭하면 완료 토글되는 칩을 행으로 나열(넘치면 다음 줄) */}
-                <ul className="flex flex-wrap gap-1.5">
-                  {items.map((i) => {
-                    const key = bundleItemKey(b.id, i.id);
-                    return (
-                      <li key={i.id}>
-                        <BundleItemChip
-                          item={i}
-                          checked={!!bundleItemsDone[key]}
-                          onToggle={() => toggleBundleItem(key)}
-                          disabled={complete && !bundleItemsDone[key]}
-                        />
-                      </li>
-                    );
-                  })}
-                </ul>
-              </section>
-            );
+        /* 묶어서 보기 해제: 꾸러미 박스 없이 물품만 평면 나열 */
+        <ul className="flex flex-wrap gap-1.5">
+          {visible.flatMap(({ bundle: b, items }) => {
+            const complete = doneCount(b) >= b.needed;
+            return items.map((i) => {
+              const key = bundleItemKey(b.id, i.id);
+              return (
+                <li key={key}>
+                  <BundleItemChip
+                    item={i}
+                    checked={!!bundleItemsDone[key]}
+                    onToggle={() => toggleBundleItem(key)}
+                    disabled={complete && !bundleItemsDone[key]}
+                    gold={b.quality === "gold"}
+                  />
+                </li>
+              );
+            });
           })}
-        </div>
+        </ul>
       )}
     </div>
   );

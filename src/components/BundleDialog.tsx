@@ -116,11 +116,6 @@ export default function BundleDialog({
             {complete ? t("bundle.complete") : `${done}/${b.needed}`}
           </span>
         </div>
-        {b.quality === "gold" && (
-          <p className="mb-1 rounded bg-[#fff3d6] px-2 py-1 text-[11px] font-semibold text-[#b8860b]">
-            {t("bundle.qualityGoldNote")}
-          </p>
-        )}
         {/* 물품: 클릭하면 완료 토글되는 칩을 행으로 나열(넘치면 다음 줄) */}
         <ul className="flex flex-wrap gap-1.5">
           {visible.map((i) => (
@@ -130,6 +125,7 @@ export default function BundleDialog({
                 checked={isDone(b, i.id)}
                 onToggle={() => toggleBundleItem(bundleItemKey(b.id, i.id))}
                 disabled={complete && !isDone(b, i.id)}
+                gold={b.quality === "gold"}
               />
             </li>
           ))}

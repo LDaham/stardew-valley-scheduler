@@ -52,6 +52,7 @@ const DEFAULT_DIALOG_FILTERS: DialogFilters = {
   // 꾸러미 추적 기본: 봄만 선택, 완료되지 않은 물품만 보기
   trackerSeasons: ["spring"],
   trackerOnlyIncomplete: true,
+  trackerGrouped: true,
   // 가게 일정 시나리오 토글 기본값(모두 꺼짐)
   shopKeyApplied: false,
   shopCcRestored: false,

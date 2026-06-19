@@ -142,6 +142,8 @@ export interface DialogFilters {
   bundleSeasons?: string[];
   bundleIncompleteFirst: boolean;
   fishSeasons?: string[];
+  fishWeather?: string[]; // 생선 날씨 필터(없으면 전체). 값: "any" | "sun" | "rain"
+  fishType?: string[]; // 생선 유형 필터(없으면 전체). 값: "rodNormal" | "rodLegendary" | "crabpot"
   perfectionIncompleteFirst: boolean;
   achievementIncompleteFirst: boolean;
   seedCrossSeason: boolean;
@@ -151,6 +153,7 @@ export interface DialogFilters {
   seedSeason?: string; // 작물 효율 계절 필터(없으면 현재 계절)
   trackerSeasons?: string[]; // 꾸러미 추적의 계절 필터(없으면 현재 계절+상시)
   trackerOnlyIncomplete: boolean; // 꾸러미 추적에서 완료되지 않은 물품만 보기
+  trackerGrouped: boolean; // 꾸러미 단위 박스로 묶어서 보기(끄면 물품만 평면 표시)
   shopKeyApplied: boolean; // 가게 일정: 마을의 열쇠 적용
   shopCcRestored: boolean; // 가게 일정: 마을회관 복구
   shopFestivalOn: boolean; // 가게 일정: 축제날 가정

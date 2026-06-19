@@ -15,18 +15,19 @@ export default function BundleItemChip({
   checked,
   onToggle,
   disabled = false,
+  gold = false,
 }: {
   item: BundleItem;
   checked: boolean;
   onToggle?: () => void;
   disabled?: boolean;
+  gold?: boolean; // 금 등급(★) 이상 제출 꾸러미: 이름 뒤에 노란 ★ 표기
 }) {
   const t = useTranslations();
-  // 여러 개 제출해야 하면 이름 뒤에 "(개수)" 표기
-  const name =
-    item.qty && item.qty > 1
-      ? `${t(item.nameKey)} (${item.qty})`
-      : t(item.nameKey);
+  // 여러 개 제출해야 하면 이름 뒤에 "(개수)" 표기. 금 등급이면 이름 뒤 ★.
+  const baseName = t(item.nameKey);
+  const qtyText = item.qty && item.qty > 1 ? ` (${item.qty})` : "";
+  const name = `${baseName}${gold ? "★" : ""}${qtyText}`;
 
   const base = `inline-flex items-center gap-1.5 rounded border px-2 py-1 text-xs ${
     checked
@@ -45,7 +46,11 @@ export default function BundleItemChip({
         className="shrink-0"
         style={{ imageRendering: "pixelated" }}
       />
-      <span className={checked ? "line-through" : ""}>{name}</span>
+      <span className={checked ? "line-through" : ""}>
+        {baseName}
+        {gold && <span className="font-bold text-[#f4c430]">★</span>}
+        {qtyText}
+      </span>
       {/* 비 오는 날에만 얻는 물품 표시 */}
       {item.rainy && <PixelIcon src="/icons/ui/rain.png" size={11} />}
     </>

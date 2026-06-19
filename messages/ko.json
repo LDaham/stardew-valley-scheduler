@@ -255,6 +255,7 @@
   "bundleTracker": {
     "title": "꾸러미 추적",
     "onlyIncomplete": "완료되지 않은 물품만 보기",
+    "grouped": "꾸러미 묶어서 보기",
     "empty": "표시할 꾸러미가 없습니다.",
     "emptyRemix": "선택된 무작위 꾸러미가 없습니다. 리믹스 탭에서 꾸러미를 선택하세요."
   },
@@ -513,8 +514,17 @@
     "weatherAny": "아무때나",
     "weatherSun": "맑음",
     "weatherRain": "비",
+    "time": "시간",
+    "timeAny": "아무때나",
+    "timeDay": "낮",
+    "timeNight": "밤",
     "toolRod": "낚싯대",
     "toolCrabpot": "게잡이 통발",
+    "type": "유형",
+    "typeRodNormal": "낚싯대(일반)",
+    "typeRodNightMarket": "낚싯대(야시장)",
+    "typeRodLegendary": "낚싯대(전설)",
+    "typeCrabpot": "게잡이 통발",
     "catNormal": "일반",
     "catNightMarket": "야시장",
     "catLegendary": "전설 생선",
@@ -587,7 +597,7 @@
     "qualityHint": "작물 등급은 수확일에 결정됩니다 - 수확일에 농사 버프 음식을 먹으면 품질이 올라갑니다. 농사·채집 레벨과 스킬은 캐릭터 설정에서 설정하세요.",
     "detail": "{profit}g · {harvests}회 수확 · 일 {perDay}g",
     "rawFallback": "가공 불가 → 원물",
-    "note": "상대 수익(최대=100%) 기준. 계절·가공·비료·음식·캐릭터(레벨·스킬)를 반영하며, 씨앗 비용·구매처·가공 시간은 반영하지 않습니다. 술통·절임통 가공물은 품질·경작인을 적용하지 않습니다."
+    "note": "상대 수익(최대=100%) 기준. 계절·가공·비료·음식·캐릭터(레벨·스킬)를 반영하며, 씨앗 비용·구매처·가공 시간은 반영하지 않습니다."
   },
   "profitFertilizer": {
     "none": "없음",
