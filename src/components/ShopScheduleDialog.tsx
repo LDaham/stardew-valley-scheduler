@@ -103,7 +103,7 @@ function ShopBody({
             <dt className="font-semibold text-[var(--sv-ink-muted)]">
               {t("shopSchedule.colNote")}
             </dt>
-            <dd className="text-[var(--sv-ink-muted)]">
+            <dd className="whitespace-pre-line text-[var(--sv-ink-muted)]">
               {t(`shopSchedule.shops.${entry.id}.note`)}
             </dd>
           </>
@@ -135,17 +135,19 @@ function Badge({
   );
 }
 
-// 상단 시나리오 토글 버튼.
+// 상단 시나리오 토글 버튼. info가 있으면 라벨 오른쪽(버튼 안)에 정보 툴팁(i) 표시.
 function ScenarioToggle({
   icon,
   label,
   active,
   onToggle,
+  info,
 }: {
   icon: string;
   label: string;
   active: boolean;
   onToggle: () => void;
+  info?: string;
 }) {
   return (
     <button
@@ -157,27 +159,25 @@ function ScenarioToggle({
     >
       <PixelIcon src={icon} size={16} />
       {label}
+      {info && <InfoTooltip text={info} />}
     </button>
   );
 }
 
-// 정보 툴팁(i). hover/focus 시 설명 표시. 게임 에셋이 없어 인라인 SVG 사용(이모지 아님).
+// 정보 툴팁(i). PC에서 마우스를 올렸을 때만 설명 표시. 게임 에셋이 없어 인라인 SVG 사용(이모지 아님).
 function InfoTooltip({ text }: { text: string }) {
   return (
-    <span className="group relative inline-flex">
-      <span
-        tabIndex={0}
-        role="img"
-        aria-label={text}
-        className="flex size-4 cursor-help items-center justify-center text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
+    <span className="group/info relative inline-flex" aria-label={text}>
+      <svg
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        className="size-4 text-[var(--sv-ink-muted)]"
       >
-        <svg viewBox="0 0 24 24" fill="currentColor" className="size-4">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
-        </svg>
-      </span>
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+      </svg>
       <span
         role="tooltip"
-        className="pointer-events-none absolute right-0 top-full z-10 mt-1 w-60 rounded-md bg-[var(--sv-ink)] px-2 py-1.5 text-xs leading-relaxed text-[var(--sv-panel)] opacity-0 shadow-md transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
+        className="pointer-events-none absolute right-0 top-full z-10 mt-1 w-60 rounded-md bg-[var(--sv-ink)] px-2 py-1.5 text-left text-xs font-normal leading-relaxed text-[var(--sv-panel)] opacity-0 shadow-md transition-opacity group-hover/info:opacity-100"
       >
         {text}
       </span>
@@ -216,8 +216,10 @@ function PinButton({
 
 export default function ShopScheduleDialog({
   onClose,
+  onBack,
 }: {
   onClose: () => void;
+  onBack?: () => void;
 }) {
   const t = useTranslations();
   const { dialogFilters, setDialogFilters } = useSchedule();
@@ -245,20 +247,18 @@ export default function ShopScheduleDialog({
   ];
 
   return (
-    <Modal title={t("shopSchedule.title")} onClose={onClose}>
+    <Modal title={t("shopSchedule.title")} onClose={onClose} onBack={onBack}>
       {/* 시나리오 토글: 내 상황(열쇠·복구·축제)에 맞춰 일정 표시를 전환 */}
       <div className="mb-3 flex flex-wrap items-center justify-end gap-2">
-        <span className="flex items-center gap-1">
-          <ScenarioToggle
-            icon="/icons/ui/key.png"
-            label={t("shopSchedule.keyToggle")}
-            active={scenario.keyApplied}
-            onToggle={() =>
-              setDialogFilters({ shopKeyApplied: !scenario.keyApplied })
-            }
-          />
-          <InfoTooltip text={t("shopSchedule.ruleKey")} />
-        </span>
+        <ScenarioToggle
+          icon="/icons/ui/key.png"
+          label={t("shopSchedule.keyToggle")}
+          active={scenario.keyApplied}
+          onToggle={() =>
+            setDialogFilters({ shopKeyApplied: !scenario.keyApplied })
+          }
+          info={t("shopSchedule.ruleKey")}
+        />
         <ScenarioToggle
           icon="/icons/ui/bundle.png"
           label={t("shopSchedule.ccToggle")}
@@ -267,17 +267,15 @@ export default function ShopScheduleDialog({
             setDialogFilters({ shopCcRestored: !scenario.ccRestored })
           }
         />
-        <span className="flex items-center gap-1">
-          <ScenarioToggle
-            icon="/icons/festival/flag.png"
-            label={t("shopSchedule.festivalToggle")}
-            active={scenario.festivalOn}
-            onToggle={() =>
-              setDialogFilters({ shopFestivalOn: !scenario.festivalOn })
-            }
-          />
-          <InfoTooltip text={t("shopSchedule.ruleFestival")} />
-        </span>
+        <ScenarioToggle
+          icon="/icons/festival/flag.png"
+          label={t("shopSchedule.festivalToggle")}
+          active={scenario.festivalOn}
+          onToggle={() =>
+            setDialogFilters({ shopFestivalOn: !scenario.festivalOn })
+          }
+          info={t("shopSchedule.ruleFestival")}
+        />
       </div>
 
       {/* 모바일: 가게 드롭다운 + 세로 카드 */}

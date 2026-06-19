@@ -496,11 +496,29 @@
     "repeatOption": "해당 산출물 반복 제작",
     "repeatNote": "수령을 완료하면 같은 가동 일정을 그날 다시 추가합니다."
   },
+  "info": {
+    "title": "정보",
+    "short": "정보",
+    "open": "정보 열기",
+    "back": "이전",
+    "birthdayGift": "생일 선물",
+    "birthdayGiftHint": "주민을 선택하면 좋아하는 선물을 볼 수 있어요."
+  },
   "fish": {
     "title": "생선 정보",
     "excludeUnobtainable": "이번 계절에 잡을 수 없는 생선 제외",
     "location": "위치",
-    "allSeasons": "상시"
+    "allSeasons": "상시",
+    "weather": "날씨",
+    "weatherAny": "아무때나",
+    "weatherSun": "맑음",
+    "weatherRain": "비",
+    "toolRod": "낚싯대",
+    "toolCrabpot": "게잡이 통발",
+    "catNormal": "일반",
+    "catNightMarket": "야시장",
+    "catLegendary": "전설 생선",
+    "catLegendaryII": "전설 생선 II"
   },
   "fruitTrees": {
     "apricot": "살구",
@@ -636,7 +654,8 @@
         "key": "오전 8시 20분 – 오후 5시",
         "closed": "화요일",
         "festival": "모두 닫음(예외 축제 제외)",
-        "checkup": "여름 18일"
+        "checkup": "여름 18일",
+        "note": "금요일 오후 4:00 폐점."
       },
       "fishShop": {
         "name": "생선 가게",
@@ -645,16 +664,16 @@
         "closed": "토요일 (비 안 올 때)",
         "festival": "모두 닫음(예외 축제 제외)",
         "checkup": "봄 9일",
-        "note": "봄 9일에는 오전 9–10시에만 개점. 진저섬 배 수리 후 8시 개점."
+        "note": "비가 오는 토요일에는 개점.\n봄 9일에는 오전 9–10시에만 개점.\n진저섬 배 수리 후 8시 개점."
       },
       "clinic": {
         "name": "하비의 병원",
-        "open": "오전 9시 – 오후 3시",
+        "open": "오전 9시 – 오후 12시",
         "key": "변동 없음",
         "closed": "없음",
         "festival": "모두 닫음(예외 축제 제외)",
         "checkup": "없음",
-        "note": "화·목은 오후 2시까지만 이용 가능."
+        "note": "화·목은 오후 2시 폐점."
       },
       "iceCreamStand": {
         "name": "아이스크림 가판대",
@@ -663,7 +682,7 @@
         "closed": "수요일 / 비 오는 날",
         "festival": "없음",
         "checkup": "여름 16일",
-        "note": "여름 시즌에만 운영."
+        "note": "여름에만 운영."
       },
       "joja": {
         "name": "조자마트",
@@ -706,7 +725,7 @@
         "closed": "없음",
         "festival": "모두 닫음(예외 축제 제외)",
         "checkup": "가을 4일",
-        "note": "가을 4일에는 오후 4시 30분 부터 이용."
+        "note": "가을 4일에는 오후 4시 30분 부터 개점."
       },
       "travelingCart": {
         "name": "여행 카트",
@@ -723,7 +742,7 @@
         "closed": "없음",
         "festival": "봄 24일(봄꽃 무도회), 겨울 8일(얼음 축제)",
         "checkup": "없음",
-        "note": "마녀 오두막을 통하면 오후 11시 이후에도 이용 가능."
+        "note": "마녀 오두막을 통해서 오후 11시 이후에도 이용 가능."
       },
       "desertTrader": {
         "name": "사막 상인",
@@ -740,6 +759,14 @@
         "key": "변동 없음",
         "closed": "없음",
         "festival": "없음",
+        "checkup": "없음"
+      },
+      "museum": {
+        "name": "박물관",
+        "open": "오전 8시 – 오후 6시",
+        "key": "변동 없음",
+        "closed": "없음",
+        "festival": "모두 닫음(예외 축제 제외)",
         "checkup": "없음"
       }
     }
@@ -1847,6 +1874,71 @@
     "radioactiveCarp": {
       "name": "방사능 잉어",
       "location": "하수도",
+      "time": "아무때나"
+    },
+    "midnightSquid": {
+      "name": "한밤의 오징어",
+      "location": "잠수함(야시장)",
+      "time": "오후 5시 – 오전 2시"
+    },
+    "spookFish": {
+      "name": "도깨비 물고기",
+      "location": "잠수함(야시장)",
+      "time": "오후 5시 – 오전 2시"
+    },
+    "blobfish": {
+      "name": "블롭피쉬",
+      "location": "잠수함(야시장)",
+      "time": "오후 5시 – 오전 2시"
+    },
+    "lobster": {
+      "name": "바닷가재",
+      "location": "바다",
+      "time": "아무때나"
+    },
+    "crab": {
+      "name": "게",
+      "location": "바다",
+      "time": "아무때나"
+    },
+    "shrimp": {
+      "name": "새우",
+      "location": "바다",
+      "time": "아무때나"
+    },
+    "cockle": {
+      "name": "새조개",
+      "location": "바다",
+      "time": "아무때나"
+    },
+    "mussel": {
+      "name": "홍합",
+      "location": "바다",
+      "time": "아무때나"
+    },
+    "oyster": {
+      "name": "굴",
+      "location": "바다",
+      "time": "아무때나"
+    },
+    "clam": {
+      "name": "조개",
+      "location": "바다",
+      "time": "아무때나"
+    },
+    "crayfish": {
+      "name": "가재",
+      "location": "민물(강·호수)",
+      "time": "아무때나"
+    },
+    "snail": {
+      "name": "달팽이",
+      "location": "민물(강·호수)",
+      "time": "아무때나"
+    },
+    "periwinkle": {
+      "name": "경단고둥",
+      "location": "민물(강·호수)",
       "time": "아무때나"
     }
   },

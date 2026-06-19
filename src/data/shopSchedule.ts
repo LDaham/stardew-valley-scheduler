@@ -43,6 +43,7 @@ export const SHOP_SCHEDULE: ShopScheduleEntry[] = [
   },
   {
     id: "carpenter",
+    hasNote: true,
     hasCheckup: true,
     keyChanges: true,
     festivalClose: "all",
@@ -70,7 +71,6 @@ export const SHOP_SCHEDULE: ShopScheduleEntry[] = [
     festivalClose: "all",
     closedDays: ["mon", "tue"],
   },
-  { id: "clinic", hasNote: true, festivalClose: "all", closedDays: ["sat"] },
   {
     id: "saloon",
     hasNote: true,
@@ -79,6 +79,8 @@ export const SHOP_SCHEDULE: ShopScheduleEntry[] = [
     closedDays: [],
   },
   { id: "adventurersGuild", keyChanges: true, festivalClose: "all", closedDays: [] },
+  { id: "clinic", hasNote: true, festivalClose: "all", closedDays: ["sat"] },
+  { id: "museum", festivalClose: "all", closedDays: [] },
   { id: "wizardTower", hasNote: true, keyChanges: true, festivalClose: "some", closedDays: [] },
   {
     id: "travelingCart",

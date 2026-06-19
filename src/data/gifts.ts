@@ -22,6 +22,9 @@ const gifts = giftsData as Record<string, VillagerGifts>;
 
 const EMPTY: VillagerGifts = { loves: [], likes: [], neutral: [], avoidEn: [] };
 
+// 선물 데이터를 가진 전체 주민 id 목록(생일 선물 목록 등에서 사용).
+export const GIFT_VILLAGERS: string[] = Object.keys(gifts);
+
 export function getVillagerGifts(villagerId: string): VillagerGifts {
   return gifts[villagerId] ?? EMPTY;
 }

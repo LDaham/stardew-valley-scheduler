@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { SEASONS, type Season } from "@/lib/calendar";
 import { asset } from "@/lib/asset";
+import type { CharacterInfo } from "@/types/schedule";
 import {
   seasonSeedProfits,
   FERTILIZER_IDS,
@@ -25,15 +27,23 @@ const PRODUCE_ICON: Record<Produce, string> = {
   jar: "/icons/machines/preservesJar.png",
 };
 
+// 농사 10레벨 전문직(상호 배타): 농업 전문가 / 장인 (체크박스로 택1)
+type Profession = "agriculturist" | "artisan";
+
 export default function SeedEfficiencyDialog({
   season,
   onClose,
+  onBack,
 }: {
   season: Season;
   onClose: () => void;
+  onBack?: () => void;
 }) {
   const t = useTranslations();
-  const { character, dialogFilters, setDialogFilters } = useSchedule();
+  const { character, setCharacter, dialogFilters, setDialogFilters } =
+    useSchedule();
+  // 캐릭터 설정(레벨·스킬)은 효율에 영향을 주는 보조 설정이라 아코디언으로 접어 둔다.
+  const [charOpen, setCharOpen] = useState(false);
   // 보고 있는 계절(저장값 없으면 현재 계절). 닫았다 열어도 마지막 선택 유지.
   const viewSeason = (dialogFilters.seedSeason as Season) ?? season;
   const setViewSeason = (s: Season) => setDialogFilters({ seedSeason: s });
@@ -48,6 +58,55 @@ export default function SeedEfficiencyDialog({
   const setProduce = (v: Produce) => setDialogFilters({ seedProduce: v });
   const food = dialogFilters.seedFood as FoodId;
   const setFood = (v: FoodId) => setDialogFilters({ seedFood: v });
+
+  // ── 캐릭터 설정(캐릭터 설정 탭에서 이동) ─────────────────────────────
+  const setLevel = (key: "farmingLevel" | "foragingLevel", n: number) =>
+    setCharacter({
+      [key]: Math.max(0, Math.min(10, n)),
+    } as Partial<CharacterInfo>);
+  // 체크박스 택1: 하나를 켜면 나머지는 꺼지고, 끄면 둘 다 해제(전문직 없음)
+  const toggleProfession = (p: Profession, checked: boolean) =>
+    setCharacter({
+      agriculturist: checked && p === "agriculturist",
+      artisan: checked && p === "artisan",
+    });
+  const stepBtn =
+    "flex size-7 shrink-0 items-center justify-center rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] text-base font-bold leading-none hover:bg-[var(--sv-bg)] disabled:opacity-40";
+  const levelInput = (key: "farmingLevel" | "foragingLevel") => (
+    <div>
+      <label className="mb-1 block text-xs font-semibold text-[var(--sv-ink-muted)]">
+        {t(`character.${key}`)}
+      </label>
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          aria-label="−"
+          disabled={character[key] <= 0}
+          onClick={() => setLevel(key, character[key] - 1)}
+          className={stepBtn}
+        >
+          −
+        </button>
+        <input
+          type="number"
+          min={0}
+          max={10}
+          value={character[key]}
+          onChange={(e) => setLevel(key, Number(e.target.value) || 0)}
+          className="w-10 rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] py-1 text-center text-sm [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+        />
+        <button
+          type="button"
+          aria-label="+"
+          disabled={character[key] >= 10}
+          onClick={() => setLevel(key, character[key] + 1)}
+          className={stepBtn}
+        >
+          +
+        </button>
+      </div>
+    </div>
+  );
 
   const opt: ProfitOptions = {
     crossSeason,
@@ -69,6 +128,7 @@ export default function SeedEfficiencyDialog({
     <Modal
       title={`${t(`seasons.${viewSeason}`)} · ${t("seedEfficiency.title")}`}
       onClose={onClose}
+      onBack={onBack}
     >
       {/* 계절 선택(꾸러미 계절 필터와 동일한 스타일, 단일 선택) */}
       <div className="mb-3 flex flex-wrap gap-1.5">
@@ -89,6 +149,97 @@ export default function SeedEfficiencyDialog({
           );
         })}
       </div>
+
+      {/* 캐릭터 설정(레벨·스킬) 아코디언 */}
+      <section className="mb-3 overflow-hidden rounded-md border border-[var(--sv-border)]">
+        <button
+          onClick={() => setCharOpen((o) => !o)}
+          aria-expanded={charOpen}
+          className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm font-semibold hover:bg-[var(--sv-bg)]"
+        >
+          <span className="text-xs text-[var(--sv-ink-muted)]">
+            {charOpen ? "▾" : "▸"}
+          </span>
+          <span className="flex-1">{t("character.title")}</span>
+        </button>
+        {charOpen && (
+          <div className="flex flex-col gap-3 border-t border-[var(--sv-border)] p-3">
+            <div className="grid grid-cols-2 gap-2">
+              {levelInput("farmingLevel")}
+              {levelInput("foragingLevel")}
+            </div>
+
+            {/* 경작인 */}
+            <label className="flex cursor-pointer items-start gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={character.tiller}
+                onChange={(e) => setCharacter({ tiller: e.target.checked })}
+                className="mt-0.5 size-4 accent-[var(--sv-accent)]"
+              />
+              <span>
+                <span className="font-semibold">{t("character.tiller")}</span>
+                <span className="block text-xs text-[var(--sv-ink-muted)]">
+                  {t("character.tillerDesc")}
+                </span>
+              </span>
+            </label>
+
+            {/* 농사 10레벨 전문직: 농업 전문가 ↔ 장인 (체크박스 택1) */}
+            <div className="rounded-md border border-[var(--sv-border)] p-2">
+              <p className="mb-1 text-xs font-semibold text-[var(--sv-ink-muted)]">
+                {t("character.profession")}
+              </p>
+              {(["agriculturist", "artisan"] as Profession[]).map((p) => (
+                <label
+                  key={p}
+                  className="flex cursor-pointer items-start gap-2 py-0.5 text-sm"
+                >
+                  <input
+                    type="checkbox"
+                    checked={character[p] as boolean}
+                    onChange={(e) => toggleProfession(p, e.target.checked)}
+                    className="mt-0.5 size-4 accent-[var(--sv-accent)]"
+                  />
+                  <span>
+                    <span className="font-semibold">
+                      {t(`character.profession_${p}`)}
+                    </span>
+                    <span className="block text-xs text-[var(--sv-ink-muted)]">
+                      {t(`character.${p}Desc`)}
+                    </span>
+                  </span>
+                </label>
+              ))}
+            </div>
+
+            {/* 채집가 · 식물학자 */}
+            {(["gatherer", "botanist"] as (keyof CharacterInfo)[]).map((s) => (
+              <label
+                key={s}
+                className="flex cursor-pointer items-start gap-2 text-sm"
+              >
+                <input
+                  type="checkbox"
+                  checked={character[s] as boolean}
+                  onChange={(e) =>
+                    setCharacter({
+                      [s]: e.target.checked,
+                    } as Partial<CharacterInfo>)
+                  }
+                  className="mt-0.5 size-4 accent-[var(--sv-accent)]"
+                />
+                <span>
+                  <span className="font-semibold">{t(`character.${s}`)}</span>
+                  <span className="block text-xs text-[var(--sv-ink-muted)]">
+                    {t(`character.${s}Desc`)}
+                  </span>
+                </span>
+              </label>
+            ))}
+          </div>
+        )}
+      </section>
 
       {/* 품질 안내 */}
       <p className="mb-3 rounded-md bg-[var(--sv-bg)] px-3 py-2 text-xs text-[var(--sv-ink-muted)]">
@@ -143,15 +294,16 @@ export default function SeedEfficiencyDialog({
               ariaLabel={t("seedEfficiency.food")}
             />
           </div>
-          <label className="flex cursor-pointer items-end gap-1.5 pb-2 text-sm">
+          {/* 다계절 포함: 체크박스로만 토글(라벨 클릭으로 토글되지 않도록 label 미사용) */}
+          <div className="flex items-end gap-1.5 pb-2 text-sm">
             <input
               type="checkbox"
               checked={crossSeason}
               onChange={(e) => setCrossSeason(e.target.checked)}
-              className="size-4 accent-[var(--sv-accent)]"
+              className="size-4 cursor-pointer accent-[var(--sv-accent)]"
             />
-            {t("seedEfficiency.crossSeason")}
-          </label>
+            <span>{t("seedEfficiency.crossSeason")}</span>
+          </div>
         </div>
       </div>
 

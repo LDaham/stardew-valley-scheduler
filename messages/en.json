@@ -496,11 +496,29 @@
     "repeatOption": "Repeat this output",
     "repeatNote": "When collected, re-adds the same start task that day."
   },
+  "info": {
+    "title": "Info",
+    "short": "Info",
+    "open": "Open info",
+    "back": "Back",
+    "birthdayGift": "Birthday gifts",
+    "birthdayGiftHint": "Pick a villager to see their favorite gifts."
+  },
   "fish": {
     "title": "Fish info",
     "excludeUnobtainable": "Exclude fish not catchable this season",
     "location": "Location",
-    "allSeasons": "All seasons"
+    "allSeasons": "All seasons",
+    "weather": "Weather",
+    "weatherAny": "Any",
+    "weatherSun": "Sun",
+    "weatherRain": "Rain",
+    "toolRod": "Fishing Rod",
+    "toolCrabpot": "Crab Pot",
+    "catNormal": "Normal",
+    "catNightMarket": "Night Market",
+    "catLegendary": "Legendary",
+    "catLegendaryII": "Legendary II"
   },
   "fruitTrees": {
     "apricot": "Apricot",
@@ -636,7 +654,8 @@
         "key": "8:20 AM – 5 PM",
         "closed": "Tuesday",
         "festival": "Closed (except exception festivals)",
-        "checkup": "Summer 18"
+        "checkup": "Summer 18",
+        "note": "Closes at 4:00 PM on Friday."
       },
       "fishShop": {
         "name": "Fish Shop",
@@ -645,7 +664,7 @@
         "closed": "Saturday (when not raining)",
         "festival": "Closed (except exception festivals)",
         "checkup": "Spring 9",
-        "note": "On Spring 9 (Willy's checkup) only 9–10 AM before he leaves. Opens at 8 AM after the Ginger Island boat repair, but Willy's schedule is unchanged."
+        "note": "Open on rainy Saturdays.\nOnly 9–10 AM on Spring 9.\nOpens at 8 AM after the Ginger Island boat repair."
       },
       "clinic": {
         "name": "Harvey's Clinic",
@@ -740,6 +759,14 @@
         "key": "No change",
         "closed": "None",
         "festival": "None",
+        "checkup": "None"
+      },
+      "museum": {
+        "name": "Museum",
+        "open": "8 AM – 6 PM",
+        "key": "No change",
+        "closed": "None",
+        "festival": "Closed (except exception festivals)",
         "checkup": "None"
       }
     }
@@ -1848,6 +1875,71 @@
       "name": "Radioactive Carp",
       "location": "하수도",
       "time": "아무때나"
+    },
+    "midnightSquid": {
+      "name": "Midnight Squid",
+      "location": "Submarine (Night Market)",
+      "time": "5 PM – 2 AM"
+    },
+    "spookFish": {
+      "name": "Spook Fish",
+      "location": "Submarine (Night Market)",
+      "time": "5 PM – 2 AM"
+    },
+    "blobfish": {
+      "name": "Blobfish",
+      "location": "Submarine (Night Market)",
+      "time": "5 PM – 2 AM"
+    },
+    "lobster": {
+      "name": "Lobster",
+      "location": "Ocean",
+      "time": "Anytime"
+    },
+    "crab": {
+      "name": "Crab",
+      "location": "Ocean",
+      "time": "Anytime"
+    },
+    "shrimp": {
+      "name": "Shrimp",
+      "location": "Ocean",
+      "time": "Anytime"
+    },
+    "cockle": {
+      "name": "Cockle",
+      "location": "Ocean",
+      "time": "Anytime"
+    },
+    "mussel": {
+      "name": "Mussel",
+      "location": "Ocean",
+      "time": "Anytime"
+    },
+    "oyster": {
+      "name": "Oyster",
+      "location": "Ocean",
+      "time": "Anytime"
+    },
+    "clam": {
+      "name": "Clam",
+      "location": "Ocean",
+      "time": "Anytime"
+    },
+    "crayfish": {
+      "name": "Crayfish",
+      "location": "Freshwater (river/lake)",
+      "time": "Anytime"
+    },
+    "snail": {
+      "name": "Snail",
+      "location": "Freshwater (river/lake)",
+      "time": "Anytime"
+    },
+    "periwinkle": {
+      "name": "Periwinkle",
+      "location": "Freshwater (river/lake)",
+      "time": "Anytime"
     }
   },
   "recipe": {

@@ -9,10 +9,9 @@ import SettingsDialog from "@/components/SettingsDialog";
 import TodoSettingsDialog from "@/components/TodoSettingsDialog";
 import BundleDialog from "@/components/BundleDialog";
 import PerfectionDialog from "@/components/PerfectionDialog";
-import ShopScheduleDialog from "@/components/ShopScheduleDialog";
+import InfoHubDialog from "@/components/InfoHubDialog";
 import CharacterDialog from "@/components/CharacterDialog";
 import AchievementDialog from "@/components/AchievementDialog";
-import SeedEfficiencyDialog from "@/components/SeedEfficiencyDialog";
 import PixelIcon from "@/components/PixelIcon";
 
 function AppShell() {
@@ -22,10 +21,9 @@ function AppShell() {
   const [todoSettingsOpen, setTodoSettingsOpen] = useState(false);
   const [bundleOpen, setBundleOpen] = useState(false);
   const [perfectionOpen, setPerfectionOpen] = useState(false);
-  const [shopScheduleOpen, setShopScheduleOpen] = useState(false);
+  const [infoOpen, setInfoOpen] = useState(false);
   const [characterOpen, setCharacterOpen] = useState(false);
   const [achievementOpen, setAchievementOpen] = useState(false);
-  const [seedEffOpen, setSeedEffOpen] = useState(false);
 
   return (
     <div className="sv-frame mx-auto my-4 flex w-full max-w-5xl flex-col gap-4 p-4 sm:p-6">
@@ -47,7 +45,7 @@ function AppShell() {
           </button>
         </div>
         <div className="flex flex-wrap items-center justify-between gap-2">
-          {/* 좌측: 꾸러미 · 완벽 · 업적 · 작물 효율 */}
+          {/* 좌측: 꾸러미 · 완벽 · 업적 · 정보 */}
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setBundleOpen(true)}
@@ -71,18 +69,11 @@ function AppShell() {
               <PixelIcon src="/icons/ui/achievement.jpg" size={18} /> {t("achievement.short")}
             </button>
             <button
-              onClick={() => setShopScheduleOpen(true)}
-              aria-label={t("shopSchedule.open")}
+              onClick={() => setInfoOpen(true)}
+              aria-label={t("info.open")}
               className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
             >
-              <PixelIcon src="/icons/ui/time.png" size={18} /> {t("shopSchedule.short")}
-            </button>
-            <button
-              onClick={() => setSeedEffOpen(true)}
-              aria-label={t("seedEfficiency.title")}
-              className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
-            >
-              <PixelIcon src="/icons/ui/corn.png" size={18} /> {t("seedEfficiency.short")}
+              <PixelIcon src="/icons/ui/globe.png" size={18} /> {t("info.short")}
             </button>
           </div>
           {/* 우측: 캐릭터 · 스케줄러 설정 */}
@@ -115,20 +106,17 @@ function AppShell() {
       {perfectionOpen && (
         <PerfectionDialog onClose={() => setPerfectionOpen(false)} />
       )}
-      {shopScheduleOpen && (
-        <ShopScheduleDialog onClose={() => setShopScheduleOpen(false)} />
+      {infoOpen && (
+        <InfoHubDialog
+          season={currentDate.season}
+          onClose={() => setInfoOpen(false)}
+        />
       )}
       {characterOpen && (
         <CharacterDialog onClose={() => setCharacterOpen(false)} />
       )}
       {achievementOpen && (
         <AchievementDialog onClose={() => setAchievementOpen(false)} />
-      )}
-      {seedEffOpen && (
-        <SeedEfficiencyDialog
-          season={currentDate.season}
-          onClose={() => setSeedEffOpen(false)}
-        />
       )}
     </div>
   );

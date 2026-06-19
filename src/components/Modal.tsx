@@ -12,10 +12,12 @@ let savedBodyOverflow = "";
 export default function Modal({
   title,
   onClose,
+  onBack,
   children,
 }: {
   title: string;
   onClose: () => void;
+  onBack?: () => void; // 있으면 좌상단에 '이전'(허브 복귀) 버튼 표시
   children: ReactNode;
 }) {
   const t = useTranslations();
@@ -60,12 +62,23 @@ export default function Modal({
         role="dialog"
         aria-modal="true"
       >
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-bold">{title}</h2>
+        <div className="mb-4 flex items-center justify-between gap-2">
+          <div className="flex min-w-0 items-center gap-2">
+            {onBack && (
+              <button
+                onClick={onBack}
+                aria-label={t("info.back")}
+                className="flex shrink-0 items-center gap-0.5 rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] px-2 py-1 text-sm hover:bg-[var(--sv-bg)]"
+              >
+                ‹ {t("info.back")}
+              </button>
+            )}
+            <h2 className="truncate text-lg font-bold">{title}</h2>
+          </div>
           <button
             onClick={onClose}
             aria-label={t("gift.close")}
-            className="text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
+            className="shrink-0 text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
           >
             ✕
           </button>
