@@ -43,7 +43,7 @@
   },
   "eventType": {
     "festival": "Festival",
-    "birthday": "Deliver birthday gift",
+    "birthday": "Birthday",
     "cropDeadline": "Crop planting deadline",
     "foraging": "Seasonal foraging event"
   },
@@ -130,8 +130,11 @@
     "userAdded": "User-added",
     "cropGroup": "Plant seeds",
     "cropGroupNote": "Plant → water → harvest → eat. Each step appears only after the previous is done.",
-    "bundleTracker": "Bundle tracker",
-    "bundleTrackerNote": "Shows the bundle tracker box at the top of the main screen."
+    "mainTitle": "Main",
+    "bundleTracker": "Show bundles",
+    "bundleTrackerNote": "Shows the bundle tracker box at the top of the main screen.",
+    "shopScheduleShow": "Show shop schedule",
+    "shopScheduleShowNote": "Shows schedules pinned in Info - Shop schedule at the top of the main screen."
   },
   "blacksmith": {
     "pickupWarn": "Blacksmith is closed on the ready day {ready} ({reason}); you'll pick it up the next open day",
@@ -504,10 +507,16 @@
     "back": "Back",
     "birthdayGift": "Birthday gifts",
     "birthdayGiftHint": "Pick a villager to see their favorite gifts.",
-    "npcLocation": "NPC locations",
-    "npcLocationHint": "Pick a villager to see their schedule (location) by season, day, and weather.",
-    "npcNoSchedule": "No schedule for this condition.",
-    "npcSource": "Source: Stardew Valley Wiki villager schedules (CC BY-NC-SA 3.0)"
+    "moviePref": "Movie preferences",
+    "moviePrefHint": "Pick a villager to see their favorite movies and snacks."
+  },
+  "movie": {
+    "lovedMovies": "Loved movies",
+    "likedMovies": "Liked movies",
+    "lovedSnacks": "Loved snacks",
+    "likedSnacks": "Liked snacks",
+    "none": "No preference data.",
+    "source": "Source: Stardew Valley Wiki Movie Theater (CC BY-NC-SA 3.0)"
   },
   "fish": {
     "title": "Fish info",
@@ -638,6 +647,7 @@
     "legendOpen": "Open",
     "legendClosed": "Closed",
     "pin": "Pin",
+    "boxEmpty": "Pin schedules in Info → Shop schedule to show them here.",
     "source": "Source: Stardew Valley Wiki - Shop Schedules (CC BY-NC-SA 3.0)",
     "colOpen": "Open hours",
     "colKey": "Key hours",

@@ -42,15 +42,25 @@ const CROP_GROUP_ID = "group:crop";
 const INFO_KEYS = new Set<string>([
   "reminder:buySeeds", // 새 계절
   "event:festival", // 축제
+  "event:birthday", // 생일
   "event:cropDeadline", // 작물 심기 마감
   "event:foraging", // 계절 채집 이벤트
+  "reminder:krobusSprinkler", // 이리듐 스프링클러 판매
+  "reminder:travelingCart", // 여행 상인 등장
+  "reminder:desertTraderStaircase", // 계단 판매
 ]);
 
-type Section = "info" | "todo";
+type Section = "main" | "info" | "todo";
 interface DisplayItem {
   id: string;
   keys: string[];
 }
+
+// 메인 상단 박스 항목의 표시 아이콘.
+const MAIN_ICON: Record<string, string> = {
+  shopSchedule: "/icons/ui/time.png",
+  bundleTracker: "/icons/ui/bundle.png",
+};
 
 function move<T>(arr: T[], from: number, to: number): T[] {
   const next = [...arr];
@@ -93,6 +103,10 @@ export default function TodoSettingsDialog({
     setTodoOrder,
     bundleTrackerShown,
     setBundleTrackerShown,
+    shopScheduleShown,
+    setShopScheduleShown,
+    mainOrder,
+    setMainOrder,
   } = useSchedule();
 
   // 씨앗 심기(plant/watering/harvest/eatFood)는 한 그룹으로 접어 표시한다.
@@ -113,6 +127,12 @@ export default function TodoSettingsDialog({
     return items;
   }, [todoOrder]);
 
+  // 메인 상단 박스 항목(가게 일정·꾸러미 추적): mainOrder 순서.
+  const mainItems = useMemo<DisplayItem[]>(
+    () => mainOrder.map((id) => ({ id, keys: [id] })),
+    [mainOrder],
+  );
+
   // 정보 항목 / 할 일 항목으로 분리(각각 todoOrder 상대 순서 유지).
   const infoItems = displayItems.filter((it) => INFO_KEYS.has(it.id));
   const todoItems = displayItems.filter((it) => !INFO_KEYS.has(it.id));
@@ -128,6 +148,11 @@ export default function TodoSettingsDialog({
   };
   const drop = (section: Section, to: number) => {
     if (!drag || drag.section !== section || drag.from === to) {
+      resetDrag();
+      return;
+    }
+    if (section === "main") {
+      setMainOrder(move(mainOrder, drag.from, to));
       resetDrag();
       return;
     }
@@ -154,6 +179,35 @@ export default function TodoSettingsDialog({
     let control: React.ReactNode = null;
     let icon: React.ReactNode = null;
     let label: React.ReactNode = null;
+
+    // 메인 상단 박스 항목(가게 일정 표시·꾸러미 추적): 체크박스(만)로 표시 토글 + 드래그 정렬.
+    if (item.id === "shopSchedule" || item.id === "bundleTracker") {
+      const isShop = item.id === "shopSchedule";
+      const shown = isShop ? shopScheduleShown : bundleTrackerShown;
+      const setShown = isShop ? setShopScheduleShown : setBundleTrackerShown;
+      const titleKey = isShop ? "settings.shopScheduleShow" : "settings.bundleTracker";
+      const noteKey = isShop
+        ? "settings.shopScheduleShowNote"
+        : "settings.bundleTrackerNote";
+      control = (
+        <input
+          type="checkbox"
+          checked={shown}
+          onChange={(e) => setShown(e.target.checked)}
+          className="mt-0.5 size-4 shrink-0 accent-[var(--sv-accent)]"
+        />
+      );
+      icon = <PixelImage src={MAIN_ICON[item.id]} />;
+      label = (
+        <span>
+          <span className="text-sm font-semibold">{t(titleKey)}</span>
+          <span className="block text-xs text-[var(--sv-ink-muted)]">
+            {t(noteKey)}
+          </span>
+        </span>
+      );
+      return { control, icon, label };
+    }
 
     if (item.id === CROP_GROUP_ID) {
       // 사용자 추가 항목은 표시 토글 없이 순서 변경(드래그)만 제공
@@ -306,30 +360,18 @@ export default function TodoSettingsDialog({
 
   return (
     <Modal title={t("settings.todoSettings")} onClose={onClose}>
-      {/* 최상단 고정: 메인 화면 꾸러미 추적 박스 표시 토글(순서 변경 대상 아님) */}
-      <label className="mb-3 flex cursor-pointer items-start gap-2 rounded-md border border-[var(--sv-border)] bg-[var(--sv-bg)] px-2 py-2">
-        <input
-          type="checkbox"
-          checked={bundleTrackerShown}
-          onChange={(e) => setBundleTrackerShown(e.target.checked)}
-          className="mt-0.5 size-4 shrink-0 accent-[var(--sv-accent)]"
-        />
-        <span className="mt-0.5">
-          <PixelImage src="/icons/ui/bundle.png" />
-        </span>
-        <span className="flex-1">
-          <span className="text-sm font-semibold">
-            {t("settings.bundleTracker")}
-          </span>
-          <span className="block text-xs text-[var(--sv-ink-muted)]">
-            {t("settings.bundleTrackerNote")}
-          </span>
-        </span>
-      </label>
-
       <p className="mb-2 text-xs text-[var(--sv-ink-muted)]">
         {t("settings.orderHint")}
       </p>
+
+      {/* 메인 상단 박스(가게 일정 표시·꾸러미 추적) */}
+      <h3 className="mb-1 text-xs font-bold text-[var(--sv-ink-muted)]">
+        {t("settings.mainTitle")}
+      </h3>
+      {renderSection("main", mainItems)}
+
+      {/* 메인 ↔ 정보 구분선 */}
+      <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
 
       {/* 정보 항목 */}
       <h3 className="mb-1 text-xs font-bold text-[var(--sv-ink-muted)]">

@@ -4,6 +4,7 @@ import { Fragment, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
+import TitleToggle from "@/components/TitleToggle";
 import Dropdown from "@/components/Dropdown";
 import PixelIcon from "@/components/PixelIcon";
 import {
@@ -13,14 +14,14 @@ import {
   type ShopScheduleEntry,
 } from "@/data/shopSchedule";
 
-interface Scenario {
+export interface Scenario {
   keyApplied: boolean;
   ccRestored: boolean;
   festivalOn: boolean;
 }
 
 // 가게 한 곳의 현재 상태(요일 배지 또는 축제·영구폐점 배지) + 상세 행. 모바일·PC 공용.
-function ShopBody({
+export function ShopBody({
   entry,
   scenario,
 }: {
@@ -222,7 +223,8 @@ export default function ShopScheduleDialog({
   onBack?: () => void;
 }) {
   const t = useTranslations();
-  const { dialogFilters, setDialogFilters } = useSchedule();
+  const { dialogFilters, setDialogFilters, shopScheduleShown, setShopScheduleShown } =
+    useSchedule();
   const [selected, setSelected] = useState(SHOP_SCHEDULE[0].id);
   // 시나리오 토글은 스토어(dialogFilters)에 저장 → 탭을 닫아도 유지된다.
   const scenario: Scenario = {
@@ -278,7 +280,18 @@ export default function ShopScheduleDialog({
   }
 
   return (
-    <Modal title={t("shopSchedule.title")} onClose={onClose} onBack={onBack}>
+    <Modal
+      title={t("shopSchedule.title")}
+      onClose={onClose}
+      onBack={onBack}
+      titleAfter={
+        <TitleToggle
+          checked={shopScheduleShown}
+          onChange={setShopScheduleShown}
+          label={t("settings.shopScheduleShow")}
+        />
+      }
+    >
       {/* 시나리오 토글: 내 상황(열쇠·복구·축제)에 맞춰 일정 표시를 전환 */}
       <div className="mb-3 flex flex-wrap items-center justify-end gap-2">
         <ScenarioToggle

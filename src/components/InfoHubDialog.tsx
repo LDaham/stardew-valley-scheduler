@@ -8,10 +8,10 @@ import ShopScheduleDialog from "@/components/ShopScheduleDialog";
 import SeedEfficiencyDialog from "@/components/SeedEfficiencyDialog";
 import FishInfoDialog from "@/components/FishInfoDialog";
 import BirthdayGiftDialog from "@/components/BirthdayGiftDialog";
-import NpcLocationDialog from "@/components/NpcLocationDialog";
+import MoviePreferenceDialog from "@/components/MoviePreferenceDialog";
 import type { Season } from "@/lib/calendar";
 
-type View = "hub" | "shop" | "seed" | "fish" | "gift" | "npc";
+type View = "hub" | "shop" | "seed" | "fish" | "gift" | "movie";
 
 // 정보 허브: 가게 일정·작물 효율·생선 정보·생일 선물 진입점.
 // 항목 선택 시 해당 다이얼로그로 전환되고, 좌상단 '이전'으로 허브 복귀.
@@ -36,15 +36,19 @@ export default function InfoHubDialog({
     return <FishInfoDialog season={season} onClose={onClose} onBack={back} />;
   if (view === "gift")
     return <BirthdayGiftDialog onClose={onClose} onBack={back} />;
-  if (view === "npc")
-    return <NpcLocationDialog onClose={onClose} onBack={back} />;
+  if (view === "movie")
+    return <MoviePreferenceDialog onClose={onClose} onBack={back} />;
 
   const items: { key: View; icon: string; label: string }[] = [
     { key: "shop", icon: "/icons/ui/time.png", label: t("shopSchedule.short") },
     { key: "seed", icon: "/icons/ui/corn.png", label: t("seedEfficiency.short") },
     { key: "fish", icon: "/icons/tools/fishingRod.png", label: t("fish.title") },
     { key: "gift", icon: "/icons/ui/gift.png", label: t("info.birthdayGift") },
-    { key: "npc", icon: "/icons/ui/character.png", label: t("info.npcLocation") },
+    {
+      key: "movie",
+      icon: "/icons/shops/movieTheater.png",
+      label: t("info.moviePref"),
+    },
   ];
 
   return (

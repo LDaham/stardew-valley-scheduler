@@ -1,0 +1,3897 @@
+{
+ "abigail": {
+  "lovedMovies": [
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "alex": {
+  "lovedMovies": [
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "caroline": {
+  "lovedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   }
+  ]
+ },
+ "clint": {
+  "lovedMovies": [],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "demetrius": {
+  "lovedMovies": [
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "dwarf": {
+  "lovedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "likedMovies": [],
+  "lovedSnacks": [
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   }
+  ]
+ },
+ "elliott": {
+  "lovedMovies": [
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   }
+  ]
+ },
+ "emily": {
+  "lovedMovies": [
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "evelyn": {
+  "lovedMovies": [
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   }
+  ]
+ },
+ "george": {
+  "lovedMovies": [
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "검은 감초 사탕",
+    "en": "Black Licorice",
+    "icon": "/icons/snacks/Black_Licorice.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "gus": {
+  "lovedMovies": [
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   }
+  ]
+ },
+ "haley": {
+  "lovedMovies": [],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   }
+  ]
+ },
+ "harvey": {
+  "lovedMovies": [
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "jas": {
+  "lovedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   }
+  ]
+ },
+ "jodi": {
+  "lovedMovies": [
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   }
+  ]
+ },
+ "kent": {
+  "lovedMovies": [],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "krobus": {
+  "lovedMovies": [],
+  "likedMovies": [
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "검은 감초 사탕",
+    "en": "Black Licorice",
+    "icon": "/icons/snacks/Black_Licorice.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "leah": {
+  "lovedMovies": [
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "leo": {
+  "lovedMovies": [],
+  "likedMovies": [],
+  "lovedSnacks": [],
+  "likedSnacks": [
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ]
+ },
+ "lewis": {
+  "lovedMovies": [
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "linus": {
+  "lovedMovies": [],
+  "likedMovies": [],
+  "lovedSnacks": [
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "marnie": {
+  "lovedMovies": [
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   }
+  ]
+ },
+ "maru": {
+  "lovedMovies": [
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "pam": {
+  "lovedMovies": [],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "조자 콜라",
+    "en": "Joja Cola (large)",
+    "icon": "/icons/snacks/Joja_Cola_(large).png"
+   },
+   {
+    "ko": "조자콘",
+    "en": "JojaCorn",
+    "icon": "/icons/snacks/JojaCorn.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "penny": {
+  "lovedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "pierre": {
+  "lovedMovies": [
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "robin": {
+  "lovedMovies": [
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "sam": {
+  "lovedMovies": [
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "조자 콜라",
+    "en": "Joja Cola (large)",
+    "icon": "/icons/snacks/Joja_Cola_(large).png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   }
+  ]
+ },
+ "sandy": {
+  "lovedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "likedMovies": [],
+  "lovedSnacks": [
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "케일 스무디",
+    "en": "Kale Smoothie",
+    "icon": "/icons/snacks/Kale_Smoothie.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "팡젤넬라 샐러드",
+    "en": "Panzanella Salad",
+    "icon": "/icons/snacks/Panzanella_Salad.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "sebastian": {
+  "lovedMovies": [
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "shane": {
+  "lovedMovies": [
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   }
+  ],
+  "likedMovies": [
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "후무스 스낵 모음",
+    "en": "Hummus Snack Pack",
+    "icon": "/icons/snacks/Hummus_Snack_Pack.png"
+   },
+   {
+    "ko": "조자 콜라",
+    "en": "Joja Cola (large)",
+    "icon": "/icons/snacks/Joja_Cola_(large).png"
+   },
+   {
+    "ko": "조자콘",
+    "en": "JojaCorn",
+    "icon": "/icons/snacks/JojaCorn.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   }
+  ]
+ },
+ "vincent": {
+  "lovedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   }
+  ],
+  "likedMovies": [],
+  "lovedSnacks": [
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "사과 조각",
+    "en": "Apple Slices",
+    "icon": "/icons/snacks/Apple_Slices.png"
+   },
+   {
+    "ko": "카푸치노 무스 케이크",
+    "en": "Cappuccino Mousse Cake",
+    "icon": "/icons/snacks/Cappuccino_Mousse_Cake.png"
+   },
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   }
+  ]
+ },
+ "willy": {
+  "lovedMovies": [],
+  "likedMovies": [
+   {
+    "ko": "용감한 작고 어린 나무",
+    "en": "The Brave Little Sapling",
+    "icon": "/icons/movies/The_Brave_Little_Sapling.png"
+   },
+   {
+    "ko": "대초원의 왕의 모험: 극장판",
+    "en": "Journey Of The Prairie King The Motion Picture",
+    "icon": "/icons/movies/Journey_Of_The_Prairie_King_The_Motion_Picture.png"
+   },
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   },
+   {
+    "ko": "콜드스타 목장의 기적",
+    "en": "The Miracle At Coldstar Ranch",
+    "icon": "/icons/movies/The_Miracle_At_Coldstar_Ranch.png"
+   },
+   {
+    "ko": "자연의 신비: 생기 넘치는 세상의 탐험",
+    "en": "Natural Wonders Exploring Our Vibrant World",
+    "icon": "/icons/movies/Natural_Wonders_Exploring_Our_Vibrant_World.png"
+   },
+   {
+    "ko": "웜버스",
+    "en": "Wumbus",
+    "icon": "/icons/movies/Wumbus.png"
+   },
+   {
+    "ko": "빗속의 울부짖음",
+    "en": "It Howls In The Rain",
+    "icon": "/icons/movies/It_Howls_In_The_Rain.png"
+   },
+   {
+    "ko": "주주 시티 급행열차",
+    "en": "The Zuzu City Express",
+    "icon": "/icons/movies/The_Zuzu_City_Express.png"
+   }
+  ],
+  "lovedSnacks": [
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "초콜릿 팝콘",
+    "en": "Chocolate Popcorn",
+    "icon": "/icons/snacks/Chocolate_Popcorn.png"
+   },
+   {
+    "ko": "감자튀김",
+    "en": "Fries",
+    "icon": "/icons/snacks/Fries.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "나초",
+    "en": "Nachos",
+    "icon": "/icons/snacks/Nachos.png"
+   },
+   {
+    "ko": "1인용 피자",
+    "en": "Personal Pizza",
+    "icon": "/icons/snacks/Personal_Pizza.png"
+   },
+   {
+    "ko": "팝콘",
+    "en": "Popcorn",
+    "icon": "/icons/snacks/Popcorn.png"
+   },
+   {
+    "ko": "소금을 뿌린 땅콩",
+    "en": "Salted Peanuts",
+    "icon": "/icons/snacks/Salted_Peanuts.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "트러플 팝콘",
+    "en": "Truffle Popcorn",
+    "icon": "/icons/snacks/Truffle_Popcorn.png"
+   }
+  ]
+ },
+ "wizard": {
+  "lovedMovies": [
+   {
+    "ko": "미스테리움",
+    "en": "Mysterium",
+    "icon": "/icons/movies/Mysterium.png"
+   }
+  ],
+  "likedMovies": [],
+  "lovedSnacks": [
+   {
+    "ko": "검은 감초 사탕",
+    "en": "Black Licorice",
+    "icon": "/icons/snacks/Black_Licorice.png"
+   },
+   {
+    "ko": "스타 쿠키",
+    "en": "Star Cookie",
+    "icon": "/icons/snacks/Star_Cookie.png"
+   },
+   {
+    "ko": "별방울 소르베",
+    "en": "Stardrop Sorbet",
+    "icon": "/icons/snacks/Stardrop_Sorbet.png"
+   }
+  ],
+  "likedSnacks": [
+   {
+    "ko": "솜사탕",
+    "en": "Cotton Candy",
+    "icon": "/icons/snacks/Cotton_Candy.png"
+   },
+   {
+    "ko": "아이스크림 샌드위치",
+    "en": "Ice Cream Sandwich",
+    "icon": "/icons/snacks/Ice_Cream_Sandwich.png"
+   },
+   {
+    "ko": "자스민 차",
+    "en": "Jasmine Tea",
+    "icon": "/icons/snacks/Jasmine_Tea.png"
+   },
+   {
+    "ko": "돌사탕",
+    "en": "Jawbreaker",
+    "icon": "/icons/snacks/Jawbreaker.png"
+   },
+   {
+    "ko": "얼음 사탕",
+    "en": "Rock Candy",
+    "icon": "/icons/snacks/Rock_Candy.png"
+   },
+   {
+    "ko": "연어 버거",
+    "en": "Salmon Burger",
+    "icon": "/icons/snacks/Salmon_Burger.png"
+   },
+   {
+    "ko": "새콤 슬라임",
+    "en": "Sour Slimes",
+    "icon": "/icons/snacks/Sour_Slimes.png"
+   }
+  ]
+ }
+}

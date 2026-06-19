@@ -14,6 +14,7 @@ import ReminderIcon from "@/components/ReminderIcon";
 import AddTaskDialog from "@/components/AddTaskDialog";
 import BundleDialog from "@/components/BundleDialog";
 import BundleTrackerBox from "@/components/BundleTrackerBox";
+import ShopScheduleBox from "@/components/ShopScheduleBox";
 import FishInfoDialog from "@/components/FishInfoDialog";
 import MiniCalendarDialog from "@/components/MiniCalendarDialog";
 import MyTasksDialog from "@/components/MyTasksDialog";
@@ -35,6 +36,12 @@ const MAX_WATERING_CAN_UPGRADES = 4;
 const NO_ROLLOVER = new Set(["eatFood"]);
 // - 자체 계절 끝 만료: 과일 수확(온실 아니면 그 계절 끝나면 사라짐)
 const SEASON_EXPIRE = new Set(["fruit"]);
+// 상점 등장 알림(이리듐 스프링클러·여행 상인·계단 판매)은 할 일이 아니라 정보 영역에 표시(완료 체크 없음).
+const INFO_REMINDER_IDS = new Set<string>([
+  "krobusSprinkler",
+  "travelingCart",
+  "desertTraderStaircase",
+]);
 // 작물 생명주기(씨앗 심기·물주기·수확)는 deadlineYearDay로 만료(비온실).
 // 그 외(도구·장비·건설·채굴·낚시·정동석 등)는 무기한 → 완료까지 매일 표시(미루기)
 
@@ -80,6 +87,7 @@ export default function Dashboard() {
     incWateringCanUpgrades,
     addMemo,
     bundleItemsDone,
+    mainOrder,
   } = useSchedule();
   const openGifts = useGiftDialog();
   const [addTarget, setAddTarget] = useState<"today" | "tomorrow" | null>(null);
@@ -248,7 +256,8 @@ export default function Dashboard() {
     for (const e of filterEvents(getEventsOn(date), eventFilters)) {
       const key = `${yd}:event-${e.type}-${e.refId}`;
       if (e.type === "birthday") {
-        rows.push({
+        // 생일은 정보 영역에 표시(완료 체크 없음). 선물 보기 액션은 유지.
+        info.push({
           key,
           orderKey: `event:${e.type}`,
           icon: <EventIcon event={e} size={16} />,
@@ -259,8 +268,8 @@ export default function Dashboard() {
               label={t("gift.viewGifts")}
             />
           ),
-          done: !!taskDone[key],
-          onToggle: () => toggleTask(key),
+          done: false,
+          onToggle: () => {},
           logic: t("logic.birthday"),
         });
       } else {
@@ -324,6 +333,20 @@ export default function Dashboard() {
         r.id === "queenOfSauceRerun"
           ? "reminder:queenOfSauceNew"
           : `reminder:${r.id}`;
+      // 상점 등장 알림은 정보 영역에 표시(완료 체크 없음).
+      if (INFO_REMINDER_IDS.has(r.id)) {
+        info.push({
+          key,
+          orderKey,
+          icon: <ReminderIcon id={r.id} size={16} />,
+          label: t(`reminders.${r.id}.title`),
+          rightBadge,
+          done: false,
+          onToggle: () => {},
+          logic: t(`logic.${r.id}`),
+        });
+        continue;
+      }
       rows.push({
         key,
         orderKey,
@@ -498,8 +521,14 @@ export default function Dashboard() {
 
   return (
     <section className="flex flex-col gap-3">
-      {/* 꾸러미 추적 박스(옵션 켜짐 시 날짜 이동 위에 표시) */}
-      <BundleTrackerBox />
+      {/* 메인 상단 박스(가게 일정·꾸러미 추적): 설정의 메인 순서대로, 각 토글 켜짐 시 표시 */}
+      {mainOrder.map((k) =>
+        k === "shopSchedule" ? (
+          <ShopScheduleBox key={k} />
+        ) : (
+          <BundleTrackerBox key={k} />
+        ),
+      )}
 
       {/* 날짜 이동 버튼 (박스 밖) */}
       <div className="flex items-center justify-between gap-2">

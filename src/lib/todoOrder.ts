@@ -45,12 +45,15 @@ export const DEFAULT_TODO_ORDER: string[] = [
   // 정보
   "reminder:buySeeds", // 새 계절
   "event:festival", // 축제
+  "event:birthday", // 생일(축제 하단, 기본 켜짐)
   "event:cropDeadline", // 작물 심기 마감
   "event:foraging", // 계절 채집 이벤트(새먼베리철 등)
+  "reminder:krobusSprinkler", // 이리듐 스프링클러 판매(채집 이벤트 하단, 기본 꺼짐)
+  "reminder:travelingCart", // 여행 상인 등장(기본 켜짐)
+  "reminder:desertTraderStaircase", // 계단 판매(기본 꺼짐)
   // 할 일
   "reminder:weatherFortune", // 날씨·운세 확인
   "reminder:queenOfSauceNew", // 소스의 여왕(재방송 포함)
-  "event:birthday", // 생일 선물 전달
   "memo:plant", // 씨앗 심기(물주기·수확·음식 그룹)
   "memo:watering",
   "memo:harvest",
@@ -63,9 +66,6 @@ export const DEFAULT_TODO_ORDER: string[] = [
   "memo:tool", // 도구 업그레이드
   "reminder:helpWanted", // 구인 광고 확인
   "reminder:specialOrders", // 특별 주문 게시판 확인
-  "reminder:krobusSprinkler", // 이리듐 스프링클러 구매
-  "reminder:travelingCart", // 여행 상인 물품 확인
-  "reminder:desertTraderStaircase", // 계단 구매
   "reminder:farmCave", // 버섯 동굴 채집
   "reminder:pondCheck", // 물고기 연못 확인
   "reminder:crabPot", // 통발 확인

@@ -60,6 +60,19 @@ const DEFAULT_DIALOG_FILTERS: DialogFilters = {
   shopPinned: [],
 };
 
+// 메인 상단 박스 종류·기본 순서(가게 일정이 꾸러미 추적 위).
+const MAIN_ORDER_IDS = ["shopSchedule", "bundleTracker"];
+const DEFAULT_MAIN_ORDER = ["shopSchedule", "bundleTracker"];
+// 저장된 순서를 알려진 id로 정리(중복 제거 + 누락분 기본 순서로 보충).
+function reconcileMainOrder(saved?: string[]): string[] {
+  if (!saved) return [...DEFAULT_MAIN_ORDER];
+  const out: string[] = [];
+  for (const k of saved)
+    if (MAIN_ORDER_IDS.includes(k) && !out.includes(k)) out.push(k);
+  for (const k of DEFAULT_MAIN_ORDER) if (!out.includes(k)) out.push(k);
+  return out;
+}
+
 const STORAGE_KEY = "svs:schedule";
 // v2: 할 일 추가 메뉴/장비 기본 순서 개편 → 기존 저장 순서를 1회 새 기본값으로 재설정.
 const STATE_VERSION = 2;
@@ -105,6 +118,8 @@ const DEFAULT_STATE: ScheduleState = {
   character: DEFAULT_CHARACTER,
   dialogFilters: DEFAULT_DIALOG_FILTERS,
   bundleTrackerShown: true,
+  shopScheduleShown: false,
+  mainOrder: DEFAULT_MAIN_ORDER,
 };
 
 let state: ScheduleState = DEFAULT_STATE;
@@ -147,6 +162,8 @@ function ensureLoaded(): void {
     character: { ...DEFAULT_CHARACTER, ...saved.character },
     dialogFilters: { ...DEFAULT_DIALOG_FILTERS, ...saved.dialogFilters },
     bundleTrackerShown: saved.bundleTrackerShown ?? true,
+    shopScheduleShown: saved.shopScheduleShown ?? false,
+    mainOrder: reconcileMainOrder(saved.mainOrder),
     year: saved.year ?? 1,
     version: STATE_VERSION,
   };
@@ -378,6 +395,14 @@ export const scheduleActions = {
   setBundleTrackerShown(v: boolean) {
     commit({ ...state, bundleTrackerShown: v });
   },
+  // 메인 화면 가게 일정 박스 표시 여부
+  setShopScheduleShown(v: boolean) {
+    commit({ ...state, shopScheduleShown: v });
+  },
+  // 메인 상단 박스 표시 순서 설정
+  setMainOrder(order: string[]) {
+    commit({ ...state, mainOrder: order });
+  },
   // 저장된 모든 설정 초기화(번들·캐릭터·메모·순서·토글 등 전부 기본값으로)
   resetAll() {
     commit({
@@ -404,6 +429,8 @@ export const scheduleActions = {
       character: { ...DEFAULT_CHARACTER },
       dialogFilters: { ...DEFAULT_DIALOG_FILTERS },
       bundleTrackerShown: true,
+      shopScheduleShown: false,
+      mainOrder: [...DEFAULT_MAIN_ORDER],
     });
   },
   // 번들 품목 기증 토글

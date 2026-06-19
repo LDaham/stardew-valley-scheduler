@@ -130,8 +130,12 @@ export interface ScheduleState {
   character: CharacterInfo;
   // 다이얼로그 필터(꾸러미·완벽·업적·생선·씨앗 효율)의 마지막 선택값. 다시 열 때 복원.
   dialogFilters: DialogFilters;
-  // 메인 화면 상단 꾸러미 추적 박스 표시 여부(스케줄러 설정 최상단의 "꾸러미 추적" 토글).
+  // 메인 화면 상단 꾸러미 추적 박스 표시 여부(스케줄러 설정 "메인" 섹션의 "꾸러미 추적" 토글).
   bundleTrackerShown: boolean;
+  // 메인 화면 상단 가게 일정 박스 표시 여부(정보-가게 일정 탭에서 고정한 일정 표시).
+  shopScheduleShown: boolean;
+  // 메인 상단 박스 표시 순서(가게 일정·꾸러미 추적). 값: "shopSchedule" | "bundleTracker".
+  mainOrder: string[];
 }
 
 export type BundleMode = "standard" | "remix";

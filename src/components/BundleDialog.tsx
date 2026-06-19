@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
+import TitleToggle from "@/components/TitleToggle";
 import BundleItemChip from "@/components/BundleItemChip";
 import {
   BUNDLES,
@@ -43,6 +44,8 @@ export default function BundleDialog({
     setRemixChoice,
     dialogFilters,
     setDialogFilters,
+    bundleTrackerShown,
+    setBundleTrackerShown,
   } = useSchedule();
   const season = currentDate.season;
   // 계절 필터(상시·봄·여름·가을·겨울). 저장값 없으면 이번 계절+상시. 마지막 선택값 영속.
@@ -200,7 +203,17 @@ export default function BundleDialog({
   };
 
   return (
-    <Modal title={t("bundle.title")} onClose={onClose}>
+    <Modal
+      title={t("bundle.title")}
+      onClose={onClose}
+      titleAfter={
+        <TitleToggle
+          checked={bundleTrackerShown}
+          onChange={setBundleTrackerShown}
+          label={t("settings.bundleTracker")}
+        />
+      }
+    >
       {/* 표준/리믹스 모드 전환 */}
       <div className="mb-3 flex gap-1 rounded-lg bg-[var(--sv-bg)] p-1">
         {(["standard", "remix"] as const).map((m) => (

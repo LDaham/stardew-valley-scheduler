@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { useSchedule } from "@/components/ScheduleProvider";
 import PixelIcon from "@/components/PixelIcon";
+import MasonryColumns from "@/components/MasonryColumns";
 import BundleItemChip from "@/components/BundleItemChip";
 import {
   BUNDLES,
@@ -101,16 +102,6 @@ export default function BundleTrackerBox() {
 
   // 표시할 꾸러미(필터로 물품이 0이면 숨김). 우선순위 = 스냅샷 순서.
   const visible = snapshot.filter(({ items }) => items.length > 0);
-
-  // 데스크톱 2열 배치: 우선순위 순으로 더 짧은 열에 넣는다(동률은 왼쪽).
-  // 높이는 물품 수로 근사 → 박스마다 자기 내용 높이만큼만 차지(행 늘어남 없음).
-  const cols: { bundle: Bundle; items: BundleItem[] }[][] = [[], []];
-  const heights = [0, 0];
-  for (const entry of visible) {
-    const c = heights[0] <= heights[1] ? 0 : 1;
-    cols[c].push(entry);
-    heights[c] += entry.items.length + 2; // +2 ≈ 헤더 높이
-  }
 
   const renderBox = ({
     bundle: b,
@@ -211,13 +202,13 @@ export default function BundleTrackerBox() {
           <div className="flex flex-col gap-2 sm:hidden">
             {visible.map(renderBox)}
           </div>
-          {/* 데스크톱: 2열(더 짧은 열에 배치, 박스는 내용 높이만큼만) */}
-          <div className="hidden gap-2 sm:flex sm:items-start">
-            {cols.map((col, i) => (
-              <div key={i} className="flex flex-1 flex-col gap-2">
-                {col.map(renderBox)}
-              </div>
-            ))}
+          {/* 데스크톱: 2열 메이슨리(실제 높이 측정 → 먼저 끝난 열에 다음 박스) */}
+          <div className="hidden sm:block">
+            <MasonryColumns
+              items={visible}
+              getKey={(e) => e.bundle.id}
+              render={renderBox}
+            />
           </div>
         </>
       ) : (

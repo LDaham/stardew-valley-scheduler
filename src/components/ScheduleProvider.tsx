@@ -47,6 +47,8 @@ export function useSchedule() {
     character: state.character,
     dialogFilters: state.dialogFilters,
     bundleTrackerShown: state.bundleTrackerShown,
+    shopScheduleShown: state.shopScheduleShown,
+    mainOrder: state.mainOrder,
     memosOn: (date: SDate): Memo[] =>
       state.memos.filter(
         (m) => m.season === date.season && m.day === date.day,
@@ -84,6 +86,8 @@ export function useSchedule() {
     setCharacter: scheduleActions.setCharacter,
     setDialogFilters: scheduleActions.setDialogFilters,
     setBundleTrackerShown: scheduleActions.setBundleTrackerShown,
+    setShopScheduleShown: scheduleActions.setShopScheduleShown,
+    setMainOrder: scheduleActions.setMainOrder,
     resetAll: scheduleActions.resetAll,
   };
 }

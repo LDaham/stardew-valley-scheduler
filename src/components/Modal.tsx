@@ -13,11 +13,13 @@ export default function Modal({
   title,
   onClose,
   onBack,
+  titleAfter,
   children,
 }: {
   title: string;
   onClose: () => void;
   onBack?: () => void; // 있으면 좌상단에 '이전'(허브 복귀) 버튼 표시
+  titleAfter?: ReactNode; // 제목 오른쪽에 붙는 보조 컨트롤(예: 표시 토글)
   children: ReactNode;
 }) {
   const t = useTranslations();
@@ -74,6 +76,7 @@ export default function Modal({
               </button>
             )}
             <h2 className="truncate text-lg font-bold">{title}</h2>
+            {titleAfter && <div className="shrink-0">{titleAfter}</div>}
           </div>
           <button
             onClick={onClose}

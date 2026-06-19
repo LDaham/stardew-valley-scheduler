@@ -43,7 +43,7 @@
   },
   "eventType": {
     "festival": "축제",
-    "birthday": "생일 선물 전달",
+    "birthday": "생일",
     "cropDeadline": "작물 심기 마감",
     "foraging": "계절 채집 이벤트"
   },
@@ -66,7 +66,7 @@
     "rainPromptSkip": "아니요",
     "rainBundleItems": "비 오는 날에만 구할 수 있는 꾸러미 품목",
     "rainBundleOpen": "꾸러미 채우기 열기",
-    "birthdayOf": "{name} 생일 선물 전달",
+    "birthdayOf": "{name} 생일",
     "plantDeadline": "{crop} 심기 마지막 날",
     "deadlineShift": "(내일 휴무로 미리 표시)",
     "wateringGroup": "작물 물주기",
@@ -130,8 +130,11 @@
     "userAdded": "사용자 추가",
     "cropGroup": "씨앗 심기",
     "cropGroupNote": "심기 → 물주기 → 수확 → 음식 순서. 상위를 완료해야 하위 할 일이 생깁니다.",
-    "bundleTracker": "꾸러미 추적",
-    "bundleTrackerNote": "메인 화면 상단에 꾸러미 추적 박스가 함께 표시됩니다."
+    "mainTitle": "메인",
+    "bundleTracker": "꾸러미 표시",
+    "bundleTrackerNote": "메인 화면 상단에 꾸러미 추적 박스가 함께 표시됩니다.",
+    "shopScheduleShow": "가게 일정 표시",
+    "shopScheduleShowNote": "정보 - 가게 일정 탭에서 고정(핀)한 일정을 메인 화면 상단에 표시합니다."
   },
   "blacksmith": {
     "pickupWarn": "완성 예정일 {ready}은 대장간 휴무({reason})라 다음 영업일에 수령합니다",
@@ -504,10 +507,16 @@
     "back": "이전",
     "birthdayGift": "생일 선물",
     "birthdayGiftHint": "주민을 선택하면 좋아하는 선물을 볼 수 있어요.",
-    "npcLocation": "NPC 위치",
-    "npcLocationHint": "주민을 선택하면 계절·요일·날씨별 일정(위치)을 볼 수 있어요.",
-    "npcNoSchedule": "이 조건의 일정 정보가 없습니다.",
-    "npcSource": "출처: Stardew Valley Wiki 주민 일정 (CC BY-NC-SA 3.0)"
+    "moviePref": "영화 선호",
+    "moviePrefHint": "주민을 선택하면 좋아하는 영화·간식을 볼 수 있어요."
+  },
+  "movie": {
+    "lovedMovies": "사랑하는 영화 (+200)",
+    "likedMovies": "좋아하는 영화 (+100)",
+    "lovedSnacks": "사랑하는 간식 (+50)",
+    "likedSnacks": "좋아하는 간식 (+25)",
+    "none": "선호 정보가 없습니다.",
+    "source": "출처: Stardew Valley Wiki 영화관 (CC BY-NC-SA 3.0)"
   },
   "fish": {
     "title": "생선 정보",
@@ -638,6 +647,7 @@
     "legendOpen": "영업",
     "legendClosed": "휴무",
     "pin": "고정",
+    "boxEmpty": "정보 → 가게 일정에서 일정을 고정(핀)하면 여기에 표시됩니다.",
     "source": "출처: Stardew Valley Wiki - 가게 일정표 (CC BY-NC-SA 3.0)",
     "colOpen": "개점 시간",
     "colKey": "열쇠 시간",
@@ -922,15 +932,15 @@
       "detail": "비밀의 숲에서 단단한 나무 그루터기 채집"
     },
     "travelingCart": {
-      "title": "여행 상인 물품 확인하기",
+      "title": "여행 상인 등장",
       "detail": "금·일 오전 6시~오후 8시 / 야시장(겨울 15~17일) 매일 오후 5시~오전 2시"
     },
     "krobusSprinkler": {
-      "title": "이리듐 스프링클러 구매(크로버스)",
-      "detail": "금요일, 하수도에서 자동화용 이리듐 스프링클러 구매 (축제일 제외)"
+      "title": "이리듐 스프링클러 판매(크로버스)",
+      "detail": "금요일, 하수도에서 자동화용 이리듐 스프링클러 판매 (축제일 제외)"
     },
     "desertTraderStaircase": {
-      "title": "계단 구매(사막 상인)",
+      "title": "계단 판매(사막 상인)",
       "detail": "일요일, 해골 동굴 탐험 대비 비취를 계단과 교환"
     },
     "buySeeds": {
