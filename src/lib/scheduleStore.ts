@@ -60,9 +60,9 @@ const DEFAULT_DIALOG_FILTERS: DialogFilters = {
   shopPinned: [],
 };
 
-// 메인 상단 박스 종류·기본 순서(가게 일정이 꾸러미 추적 위).
-const MAIN_ORDER_IDS = ["shopSchedule", "bundleTracker"];
-const DEFAULT_MAIN_ORDER = ["shopSchedule", "bundleTracker"];
+// 메인 상단 박스 종류·기본 순서(가게 일정 → 꾸러미 추적 → 비 생선).
+const MAIN_ORDER_IDS = ["shopSchedule", "bundleTracker", "rainFish"];
+const DEFAULT_MAIN_ORDER = ["shopSchedule", "bundleTracker", "rainFish"];
 // 저장된 순서를 알려진 id로 정리(중복 제거 + 누락분 기본 순서로 보충).
 function reconcileMainOrder(saved?: string[]): string[] {
   if (!saved) return [...DEFAULT_MAIN_ORDER];
@@ -104,7 +104,6 @@ const DEFAULT_STATE: ScheduleState = {
   taskDone: {},
   todoOrder: DEFAULT_TODO_ORDER,
   rainDays: {},
-  wateringCanUpgrades: 0,
   bundleItemsDone: {},
   bundleMode: "standard",
   remixChoices: {},
@@ -119,6 +118,7 @@ const DEFAULT_STATE: ScheduleState = {
   dialogFilters: DEFAULT_DIALOG_FILTERS,
   bundleTrackerShown: true,
   shopScheduleShown: false,
+  rainFishShown: false,
   mainOrder: DEFAULT_MAIN_ORDER,
 };
 
@@ -144,7 +144,6 @@ function ensureLoaded(): void {
     taskDone: { ...DEFAULT_STATE.taskDone, ...saved.taskDone },
     todoOrder: reconcileTodoOrder(saved.todoOrder),
     rainDays: saved.rainDays ?? {},
-    wateringCanUpgrades: saved.wateringCanUpgrades ?? 0,
     bundleItemsDone: saved.bundleItemsDone ?? {},
     bundleMode: saved.bundleMode ?? "standard",
     remixChoices: saved.remixChoices ?? {},
@@ -163,6 +162,7 @@ function ensureLoaded(): void {
     dialogFilters: { ...DEFAULT_DIALOG_FILTERS, ...saved.dialogFilters },
     bundleTrackerShown: saved.bundleTrackerShown ?? true,
     shopScheduleShown: saved.shopScheduleShown ?? false,
+    rainFishShown: saved.rainFishShown ?? false,
     mainOrder: reconcileMainOrder(saved.mainOrder),
     year: saved.year ?? 1,
     version: STATE_VERSION,
@@ -375,14 +375,6 @@ export const scheduleActions = {
       rainDays: { ...state.rainDays, [yearDay]: value },
     });
   },
-  // 물뿌리개 업그레이드 횟수 +1
-  incWateringCanUpgrades() {
-    commit({ ...state, wateringCanUpgrades: state.wateringCanUpgrades + 1 });
-  },
-  // 도구 등급 직접 설정(캐릭터 창의 등급 선택). 0(기본)~4(이리듐)로 제한.
-  setWateringCanUpgrades(n: number) {
-    commit({ ...state, wateringCanUpgrades: Math.max(0, Math.min(4, n)) });
-  },
   // 캐릭터 정보 부분 갱신
   setCharacter(patch: Partial<CharacterInfo>) {
     commit({ ...state, character: { ...state.character, ...patch } });
@@ -398,6 +390,10 @@ export const scheduleActions = {
   // 메인 화면 가게 일정 박스 표시 여부
   setShopScheduleShown(v: boolean) {
     commit({ ...state, shopScheduleShown: v });
+  },
+  // 메인 화면 비 생선 박스 표시 여부
+  setRainFishShown(v: boolean) {
+    commit({ ...state, rainFishShown: v });
   },
   // 메인 상단 박스 표시 순서 설정
   setMainOrder(order: string[]) {
@@ -415,7 +411,6 @@ export const scheduleActions = {
       taskDone: {},
       todoOrder: [...DEFAULT_TODO_ORDER],
       rainDays: {},
-      wateringCanUpgrades: 0,
       bundleItemsDone: {},
       bundleMode: "standard",
       remixChoices: {},
@@ -430,6 +425,7 @@ export const scheduleActions = {
       dialogFilters: { ...DEFAULT_DIALOG_FILTERS },
       bundleTrackerShown: true,
       shopScheduleShown: false,
+      rainFishShown: false,
       mainOrder: [...DEFAULT_MAIN_ORDER],
     });
   },

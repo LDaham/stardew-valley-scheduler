@@ -11,6 +11,15 @@ import {
   type PrefItem,
 } from "@/data/moviePrefs";
 
+// 주민 표시 순서(총각 → 총각녀 → 그 외, 사용자 지정).
+const NPC_ORDER = [
+  "sam", "sebastian", "shane", "alex", "elliott", "harvey",
+  "leah", "maru", "abigail", "emily", "penny", "haley",
+  "gus", "demetrius", "dwarf", "linus", "leo", "robin", "lewis",
+  "marnie", "wizard", "vincent", "sandy", "evelyn", "willy", "jas",
+  "jodi", "george", "caroline", "kent", "krobus", "clint", "pam", "pierre",
+];
+
 // 영화 선호: 주민 목록 → 클릭 시 사랑/좋아하는 영화·간식 표시.
 export default function MoviePreferenceDialog({
   onClose,
@@ -22,10 +31,12 @@ export default function MoviePreferenceDialog({
   const t = useTranslations();
   const [selected, setSelected] = useState<string | null>(null);
 
-  // 선호 데이터가 있는 주민: 이름순
-  const npcs = [...MOVIE_PREF_VILLAGERS].sort((a, b) =>
-    t(`villagers.${a}`).localeCompare(t(`villagers.${b}`)),
-  );
+  // 선호 데이터가 있는 주민: 지정 순서(미지정은 뒤)
+  const rank = (id: string) => {
+    const i = NPC_ORDER.indexOf(id);
+    return i < 0 ? Number.MAX_SAFE_INTEGER : i;
+  };
+  const npcs = [...MOVIE_PREF_VILLAGERS].sort((a, b) => rank(a) - rank(b));
 
   if (selected) {
     return (
@@ -88,7 +99,11 @@ function MovieDetailView({
   const hasAny = sections.some((s) => s.items.length > 0);
 
   return (
-    <Modal title={t(`villagers.${id}`)} onClose={onClose} onBack={onBack}>
+    <Modal
+      title={t("movie.prefBy", { name: t(`villagers.${id}`) })}
+      onClose={onClose}
+      onBack={onBack}
+    >
       <div className="mb-3 flex items-center gap-2">
         <Image
           src={asset(`/icons/villagers/${id}.png`)}
@@ -99,7 +114,9 @@ function MovieDetailView({
           className="shrink-0"
           style={{ imageRendering: "pixelated" }}
         />
-        <h3 className="text-base font-bold">{t(`villagers.${id}`)}</h3>
+        <h3 className="text-base font-bold">
+          {t("movie.prefBy", { name: t(`villagers.${id}`) })}
+        </h3>
       </div>
 
       {hasAny ? (

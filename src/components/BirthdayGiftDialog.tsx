@@ -1,15 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
 import Modal from "@/components/Modal";
-import { useGiftDialog } from "@/components/GiftDialogProvider";
+import GiftSections from "@/components/GiftSections";
 import { GIFT_VILLAGERS } from "@/data/gifts";
 import { BIRTHDAYS, type Birthday } from "@/data/game-data";
 import { SEASONS } from "@/lib/calendar";
 
-// 생일 선물: 전체 주민 목록(생일 순). 주민 클릭 시 해당 주민 선물 다이얼로그를 연다.
+// 생일 선물: 전체 주민 목록(생일 순). 주민 클릭 시 같은 크기 창으로 선물 반응을 보여주고
+// 좌상단 '‹'로 목록으로 돌아온다(영화 선호 탭과 동일한 동작).
 export default function BirthdayGiftDialog({
   onClose,
   onBack,
@@ -18,7 +20,7 @@ export default function BirthdayGiftDialog({
   onBack?: () => void;
 }) {
   const t = useTranslations();
-  const openGifts = useGiftDialog();
+  const [selected, setSelected] = useState<string | null>(null);
   const bday = new Map<string, Birthday>(BIRTHDAYS.map((b) => [b.villager, b]));
   const yearDay = (b: Birthday) => SEASONS.indexOf(b.season) * 28 + b.day;
   // 생일 있는 주민은 달력 순, 생일 없는 주민은 이름순으로 뒤에.
@@ -31,6 +33,33 @@ export default function BirthdayGiftDialog({
     return t(`villagers.${a}`).localeCompare(t(`villagers.${b}`));
   });
 
+  // 상세: 주민 선물 반응(목록과 같은 크기 창, '‹'로 복귀)
+  if (selected) {
+    return (
+      <Modal
+        title={t("gift.prefBy", { name: t(`villagers.${selected}`) })}
+        onClose={onClose}
+        onBack={() => setSelected(null)}
+      >
+        <div className="mb-3 flex items-center gap-2">
+          <Image
+            src={asset(`/icons/villagers/${selected}.png`)}
+            alt=""
+            width={28}
+            height={28}
+            unoptimized
+            className="shrink-0"
+            style={{ imageRendering: "pixelated" }}
+          />
+          <h3 className="text-base font-bold">
+            {t("gift.prefBy", { name: t(`villagers.${selected}`) })}
+          </h3>
+        </div>
+        <GiftSections villagerId={selected} />
+      </Modal>
+    );
+  }
+
   return (
     <Modal title={t("info.birthdayGift")} onClose={onClose} onBack={onBack}>
       <p className="mb-3 text-xs text-[var(--sv-ink-muted)]">
@@ -42,8 +71,8 @@ export default function BirthdayGiftDialog({
           return (
             <li key={id}>
               <button
-                onClick={() => openGifts(id)}
-                className="flex w-full items-center gap-2 rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] px-2 py-2 text-left text-sm hover:bg-[var(--sv-bg)]"
+                onClick={() => setSelected(id)}
+                className="flex w-full cursor-pointer items-center gap-2 rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] px-2 py-2 text-left text-sm hover:bg-[var(--sv-bg)]"
               >
                 <Image
                   src={asset(`/icons/villagers/${id}.png`)}

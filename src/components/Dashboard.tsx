@@ -12,24 +12,20 @@ import { useGiftDialog } from "@/components/GiftDialogProvider";
 import EventIcon from "@/components/EventIcon";
 import ReminderIcon from "@/components/ReminderIcon";
 import AddTaskDialog from "@/components/AddTaskDialog";
-import BundleDialog from "@/components/BundleDialog";
 import BundleTrackerBox from "@/components/BundleTrackerBox";
 import ShopScheduleBox from "@/components/ShopScheduleBox";
+import RainFishBox from "@/components/RainFishBox";
 import FishInfoDialog from "@/components/FishInfoDialog";
 import MiniCalendarDialog from "@/components/MiniCalendarDialog";
 import MyTasksDialog from "@/components/MyTasksDialog";
 import SeedEfficiencyDialog from "@/components/SeedEfficiencyDialog";
 import Modal from "@/components/Modal";
-import TimeIcon from "@/components/TimeIcon";
 import PixelIcon from "@/components/PixelIcon";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
-import { toolPickup, blacksmithClosureOn } from "@/lib/blacksmith";
+import { blacksmithClosureOn } from "@/lib/blacksmith";
 import { carpenterClosureOn } from "@/lib/carpenter";
 import type { Memo } from "@/types/schedule";
 import type { ReactNode } from "react";
-
-// 물뿌리개 업그레이드 제안을 멈출 누적 횟수(기본→구리→강철→황금→이리듐 = 4단계)
-const MAX_WATERING_CAN_UPGRADES = 4;
 
 // 미루기(rollover) 분류
 // - 당일만(미루기 없음): 수확일 음식(수확 전에 먹어야 의미 있음)
@@ -82,18 +78,13 @@ export default function Dashboard() {
     reminderToggles,
     todoOrder,
     rainDays,
-    wateringCanUpgrades,
     setRainDay,
-    incWateringCanUpgrades,
-    addMemo,
     bundleItemsDone,
     mainOrder,
   } = useSchedule();
   const openGifts = useGiftDialog();
   const [addTarget, setAddTarget] = useState<"today" | "tomorrow" | null>(null);
   const [seedEffOpen, setSeedEffOpen] = useState(false);
-  const [rainPromptOpen, setRainPromptOpen] = useState(false);
-  const [bundleFillOpen, setBundleFillOpen] = useState(false);
   const [fishInfoOpen, setFishInfoOpen] = useState(false);
   const [miniCalOpen, setMiniCalOpen] = useState(false);
   const [myTasksOpen, setMyTasksOpen] = useState(false);
@@ -103,63 +94,18 @@ export default function Dashboard() {
   const atStart =
     year === 1 && currentDate.season === "spring" && currentDate.day === 1;
 
-  // 비 오는 날에만 구할 수 있는, 아직 필요한 번들 품목(중복 id 제거) + 구할 수 있는 계절
-  const rainBundleItems = (() => {
-    const seen = new Set<string>();
-    const out: { id: string; name: string; seasons: string[] }[] = [];
-    for (const b of BUNDLES) {
-      const done = b.items.filter(
-        (i) => bundleItemsDone[bundleItemKey(b.id, i.id)],
-      ).length;
-      if (done >= b.needed) continue;
-      for (const i of b.items) {
-        if (!i.rainy) continue;
-        if (bundleItemsDone[bundleItemKey(b.id, i.id)]) continue;
-        if (seen.has(i.id)) continue;
-        seen.add(i.id);
-        out.push({ id: i.id, name: t(i.nameKey), seasons: i.seasons });
-      }
-    }
-    return out;
-  })();
-
   const tomorrow = addDays(currentDate, 1);
   const tomorrowYd = toYearDay(tomorrow);
   const rainTomorrow = !!rainDays[tomorrowYd];
-
-  const dateLabel = (d: SDate) =>
-    t("addTask.dateLabel", { season: t(`seasons.${d.season}`), day: d.day });
 
   const ccCompleted = BUNDLES.every(
     (b) =>
       b.items.filter((i) => bundleItemsDone[bundleItemKey(b.id, i.id)]).length >=
       b.needed,
   );
-  const wateringPickup = toolPickup(currentDate, ccCompleted);
 
-  const toggleRainTomorrow = () => {
-    const next = !rainTomorrow;
-    setRainDay(tomorrowYd, next);
-    if (next && wateringCanUpgrades < MAX_WATERING_CAN_UPGRADES) {
-      setRainPromptOpen(true);
-    }
-  };
-
-  const addWateringCanUpgrade = () => {
-    // 당일에 '업그레이드 맡기기'를 추가(완료하면 수령 일정이 생성됨)
-    const toolName = t("tools.wateringCan");
-    addMemo({
-      season: currentDate.season,
-      day: currentDate.day,
-      text: t("addTask.toolUpgradeMemo", { tool: toolName }),
-      reminderDaysBefore: 0,
-      category: "tool",
-      toolId: "wateringCan",
-      chain: { kind: "tool", pickupText: t("addTask.toolMemo", { tool: toolName }) },
-    });
-    incWateringCanUpgrades();
-    setRainPromptOpen(false);
-  };
+  // 내일 비 예보 토글(정보의 비 오는 날 표시 + 비 생선 박스 연동)
+  const toggleRainTomorrow = () => setRainDay(tomorrowYd, !rainTomorrow);
 
   const fixedLabel = (e: FixedEvent): string => {
     if (e.type === "festival") return t(`festivals.${e.refId}`);
@@ -521,10 +467,12 @@ export default function Dashboard() {
 
   return (
     <section className="flex flex-col gap-3">
-      {/* 메인 상단 박스(가게 일정·꾸러미 추적): 설정의 메인 순서대로, 각 토글 켜짐 시 표시 */}
+      {/* 메인 상단 박스(가게 일정·꾸러미 추적·비 생선): 설정의 메인 순서대로, 각 토글 켜짐 시 표시 */}
       {mainOrder.map((k) =>
         k === "shopSchedule" ? (
           <ShopScheduleBox key={k} />
+        ) : k === "rainFish" ? (
+          <RainFishBox key={k} />
         ) : (
           <BundleTrackerBox key={k} />
         ),
@@ -658,88 +606,6 @@ export default function Dashboard() {
           memos={memos}
           onClose={() => setDeleteTarget(null)}
           deleteMemos={deleteMemos}
-        />
-      )}
-
-      {rainPromptOpen && (
-        <Modal
-          title={t("dashboard.rainPromptTitle")}
-          onClose={() => setRainPromptOpen(false)}
-        >
-          <p className="mb-2 text-base">{t("dashboard.rainPromptBody")}</p>
-
-          {/* 도구 수령일 + 대장간 휴무 경고 */}
-          <p className="mb-3 flex items-center gap-1.5 text-sm text-[var(--sv-ink-muted)]">
-            <TimeIcon size={14} />
-            {t("addTask.pickupPreview", { date: dateLabel(wateringPickup.pickup) })}
-          </p>
-          {wateringPickup.closure && (
-            <p className="mb-3 rounded-md bg-[#fbeaea] px-3 py-2 text-sm font-semibold text-[#b02a2a]">
-              ⚠ {t("blacksmith.pickupWarn", {
-                ready: dateLabel(wateringPickup.ready),
-                reason: t(`blacksmith.${wateringPickup.closure}`),
-              })}
-            </p>
-          )}
-
-          {/* 비 오는 날에만 구할 수 있는 번들 품목(이미지 포함) */}
-          {rainBundleItems.length > 0 && (
-            <div className="mb-3 rounded-md bg-[var(--sv-bg)] p-3">
-              <p className="mb-2 flex items-center gap-1 text-sm font-semibold">
-                <PixelIcon src="/icons/ui/rain.png" size={14} />
-                {t("dashboard.rainBundleItems")}
-              </p>
-              <ul className="mb-2 flex flex-wrap gap-x-3 gap-y-1">
-                {rainBundleItems.map((i) => {
-                  // 구할 수 있는 계절(상시/사계절이면 '상시')
-                  const seasonText =
-                    i.seasons.length === 0 || i.seasons.length === 4
-                      ? t("seasonFilter.all")
-                      : i.seasons.map((s) => t(`seasons.${s}`)).join("·");
-                  return (
-                    <li key={i.id} className="flex items-center gap-1 text-base">
-                      <PixelIcon src={`/icons/bundleItems/${i.id}.png`} size={16} />
-                      {i.name}
-                      <span className="text-xs text-[var(--sv-ink-muted)]">
-                        ({seasonText})
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-              <button
-                onClick={() => {
-                  setRainPromptOpen(false);
-                  setBundleFillOpen(true);
-                }}
-                className="rounded-lg border border-[var(--sv-accent)] px-3 py-1 text-sm font-semibold text-[var(--sv-accent)] hover:bg-[var(--sv-panel)]"
-              >
-                {t("dashboard.rainBundleOpen")}
-              </button>
-            </div>
-          )}
-
-          <div className="flex justify-end gap-2">
-            <button
-              onClick={() => setRainPromptOpen(false)}
-              className="rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-base hover:bg-[var(--sv-bg)]"
-            >
-              {t("dashboard.rainPromptSkip")}
-            </button>
-            <button
-              onClick={addWateringCanUpgrade}
-              className="rounded-lg bg-[var(--sv-accent)] px-4 py-1.5 text-base font-semibold text-white"
-            >
-              {t("dashboard.rainPromptAdd")}
-            </button>
-          </div>
-        </Modal>
-      )}
-
-      {bundleFillOpen && (
-        <BundleDialog
-          initialMode="fill"
-          onClose={() => setBundleFillOpen(false)}
         />
       )}
 
@@ -940,7 +806,7 @@ function DeleteTaskDialog({
           onClick={onClose}
           className="mt-1 rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-base hover:bg-[var(--sv-bg)]"
         >
-          {t("dashboard.rainPromptSkip")}
+          {t("common.cancel")}
         </button>
       </div>
     </Modal>

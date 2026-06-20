@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
+import TitleToggle from "@/components/TitleToggle";
 import PixelIcon from "@/components/PixelIcon";
 import TimeIcon from "@/components/TimeIcon";
 import SeasonFilter, {
@@ -139,7 +140,8 @@ export default function FishInfoDialog({
   onBack?: () => void;
 }) {
   const t = useTranslations();
-  const { dialogFilters, setDialogFilters } = useSchedule();
+  const { dialogFilters, setDialogFilters, rainFishShown, setRainFishShown } =
+    useSchedule();
   // 저장값 없으면 이번 계절+상시. 마지막 선택값 영속.
   const selected = useMemo(
     () =>
@@ -264,7 +266,18 @@ export default function FishInfoDialog({
   );
 
   return (
-    <Modal title={t("fish.title")} onClose={onClose} onBack={onBack}>
+    <Modal
+      title={t("fish.title")}
+      onClose={onClose}
+      onBack={onBack}
+      titleAfter={
+        <TitleToggle
+          checked={rainFishShown}
+          onChange={setRainFishShown}
+          label={t("fish.rainOnlyToggle")}
+        />
+      }
+    >
       <div className="mb-3 flex flex-col gap-2">
         <SeasonFilter selected={selected} onToggle={toggleToken} />
         {/* 날씨 필터(토글) */}

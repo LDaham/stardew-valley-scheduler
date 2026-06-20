@@ -60,12 +60,6 @@
     "todoList": "To Do List",
     "noTasks": "할 일이 없습니다",
     "rainTomorrow": "내일 비",
-    "rainPromptTitle": "내일 비 예보",
-    "rainPromptBody": "내일 비가 와서 물을 줄 필요가 없어요. 오늘 물뿌리개 업그레이드를 추가할까요?",
-    "rainPromptAdd": "추가",
-    "rainPromptSkip": "아니요",
-    "rainBundleItems": "비 오는 날에만 구할 수 있는 꾸러미 품목",
-    "rainBundleOpen": "꾸러미 채우기 열기",
     "birthdayOf": "{name} 생일",
     "plantDeadline": "{crop} 심기 마지막 날",
     "deadlineShift": "(내일 휴무로 미리 표시)",
@@ -134,7 +128,9 @@
     "bundleTracker": "꾸러미 표시",
     "bundleTrackerNote": "메인 화면 상단에 꾸러미 추적 박스가 함께 표시됩니다.",
     "shopScheduleShow": "가게 일정 표시",
-    "shopScheduleShowNote": "정보 - 가게 일정 탭에서 고정(핀)한 일정을 메인 화면 상단에 표시합니다."
+    "shopScheduleShowNote": "정보 - 가게 일정 탭에서 고정(핀)한 일정을 메인 화면 상단에 표시합니다.",
+    "rainFishShow": "비 생선 표시",
+    "rainFishShowNote": "비 예보가 있는 날, 그 계절에 비 오는 날에만 잡히는 생선을 메인 화면 상단에 표시합니다."
   },
   "blacksmith": {
     "pickupWarn": "완성 예정일 {ready}은 대장간 휴무({reason})라 다음 영업일에 수령합니다",
@@ -511,6 +507,7 @@
     "moviePrefHint": "주민을 선택하면 좋아하는 영화·간식을 볼 수 있어요."
   },
   "movie": {
+    "prefBy": "{name}의 영화 선호",
     "lovedMovies": "사랑하는 영화 (+200)",
     "likedMovies": "좋아하는 영화 (+100)",
     "lovedSnacks": "사랑하는 간식 (+50)",
@@ -518,8 +515,13 @@
     "none": "선호 정보가 없습니다.",
     "source": "출처: Stardew Valley Wiki 영화관 (CC BY-NC-SA 3.0)"
   },
+  "rainFish": {
+    "title": "비 오는 날 생선",
+    "empty": "이 계절에는 비 오는 날에만 잡히는 생선이 없습니다."
+  },
   "fish": {
     "title": "생선 정보",
+    "rainOnlyToggle": "비 오는 날에만 구할 수 있는 생선 표시",
     "excludeUnobtainable": "이번 계절에 잡을 수 없는 생선 제외",
     "location": "위치",
     "allSeasons": "상시",
@@ -797,8 +799,6 @@
   },
   "character": {
     "title": "캐릭터 설정",
-    "short": "캐릭터",
-    "open": "캐릭터 설정 열기",
     "hint": "씨앗 효율의 성장·품질 계산에 사용됩니다.",
     "farmingLevel": "농사 레벨",
     "foragingLevel": "채집 레벨",
@@ -814,14 +814,7 @@
     "gatherer": "채집가",
     "gathererDesc": "야생 씨앗 수확량 +20%",
     "botanist": "식물학자",
-    "botanistDesc": "야생 씨앗 항상 이리듐 품질",
-    "toolTier": "물뿌리개 등급",
-    "toolTierDesc": "비 예보 시 물뿌리개 업그레이드 제안 여부에 사용됩니다(이리듐이면 제안 안 함).",
-    "toolTier_0": "물뿌리개",
-    "toolTier_1": "구리 물뿌리개",
-    "toolTier_2": "강철 물뿌리개",
-    "toolTier_3": "황금 물뿌리개",
-    "toolTier_4": "이리듐 물뿌리개"
+    "botanistDesc": "야생 씨앗 항상 이리듐 품질"
   },
   "myTasks": {
     "title": "내가 추가한 할 일",
@@ -966,7 +959,7 @@
     },
     "specialOrders": {
       "title": "특별 주문 게시판 확인",
-      "detail": "월요일, 루이스의 집 앞 특별 주문 게시판에서 새 특별 주문 수락"
+      "detail": "월요일, 루이스의 집 앞 특별 주문 게시판에서 새 특별 주문 수락 (1년차 가을 2일부터)"
     },
     "queenOfSauceNew": {
       "title": "소스의 여왕 (신규 방영)",
@@ -2418,5 +2411,18 @@
     "fishing": "무기한 · 안 하면 미뤄짐.",
     "misc": "무기한 · 안 하면 미뤄짐(정동석·박물관).",
     "eatFood": "수확일 · 수확 전에 먹어야 함. 작물 수확을 먼저 체크하면 자동 삭제."
+  },
+  "costMaterials": {
+    "title": "비용 및 재료",
+    "hint": "가게를 선택하면 판매 물품의 비용과 재료를 볼 수 있어요.",
+    "gold": "골드",
+    "free": "무료",
+    "source": "출처: Stardew Valley Wiki (CC BY-NC-SA 3.0)",
+    "shops": {
+      "carpenter": "목공 작업실",
+      "blacksmith": "대장간",
+      "wizard": "마법사의 탑",
+      "desertTrader": "사막 상인"
+    }
   }
 }

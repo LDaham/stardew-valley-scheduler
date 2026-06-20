@@ -60,12 +60,6 @@
     "todoList": "To Do List",
     "noTasks": "No tasks",
     "rainTomorrow": "Rain tmrw",
-    "rainPromptTitle": "Rain forecast tomorrow",
-    "rainPromptBody": "It rains tomorrow, so no watering needed. Add a watering can upgrade today?",
-    "rainPromptAdd": "Add",
-    "rainPromptSkip": "No",
-    "rainBundleItems": "Bundle items only obtainable on rainy days",
-    "rainBundleOpen": "Open bundle tracker",
     "birthdayOf": "Deliver gift to {name}",
     "plantDeadline": "Last day to plant {crop}",
     "deadlineShift": "(shown early - shop closed tomorrow)",
@@ -134,7 +128,9 @@
     "bundleTracker": "Show bundles",
     "bundleTrackerNote": "Shows the bundle tracker box at the top of the main screen.",
     "shopScheduleShow": "Show shop schedule",
-    "shopScheduleShowNote": "Shows schedules pinned in Info - Shop schedule at the top of the main screen."
+    "shopScheduleShowNote": "Shows schedules pinned in Info - Shop schedule at the top of the main screen.",
+    "rainFishShow": "Show rain fish",
+    "rainFishShowNote": "On days with a rain forecast, shows fish catchable only in the rain for that season at the top of the main screen."
   },
   "blacksmith": {
     "pickupWarn": "Blacksmith is closed on the ready day {ready} ({reason}); you'll pick it up the next open day",
@@ -511,6 +507,7 @@
     "moviePrefHint": "Pick a villager to see their favorite movies and snacks."
   },
   "movie": {
+    "prefBy": "{name}'s movie tastes",
     "lovedMovies": "Loved movies",
     "likedMovies": "Liked movies",
     "lovedSnacks": "Loved snacks",
@@ -518,8 +515,13 @@
     "none": "No preference data.",
     "source": "Source: Stardew Valley Wiki Movie Theater (CC BY-NC-SA 3.0)"
   },
+  "rainFish": {
+    "title": "Rainy-day fish",
+    "empty": "No fish are catchable only in the rain this season."
+  },
   "fish": {
     "title": "Fish info",
+    "rainOnlyToggle": "Show fish catchable only on rainy days",
     "excludeUnobtainable": "Exclude fish not catchable this season",
     "location": "Location",
     "allSeasons": "All seasons",
@@ -797,8 +799,6 @@
   },
   "character": {
     "title": "Character settings",
-    "short": "Character",
-    "open": "Open character settings",
     "hint": "Used for growth and quality in seed efficiency.",
     "farmingLevel": "Farming level",
     "foragingLevel": "Foraging level",
@@ -814,14 +814,7 @@
     "gatherer": "Gatherer",
     "gathererDesc": "+20% wild seed yield",
     "botanist": "Botanist",
-    "botanistDesc": "Wild seeds always iridium quality",
-    "toolTier": "Watering Can tier",
-    "toolTierDesc": "Used to decide whether to suggest a Watering Can upgrade on rainy forecasts (no suggestion at Iridium).",
-    "toolTier_0": "Watering Can",
-    "toolTier_1": "Copper Watering Can",
-    "toolTier_2": "Steel Watering Can",
-    "toolTier_3": "Gold Watering Can",
-    "toolTier_4": "Iridium Watering Can"
+    "botanistDesc": "Wild seeds always iridium quality"
   },
   "myTasks": {
     "title": "My added tasks",
@@ -2418,5 +2411,18 @@
     "fishing": "무기한 · 안 하면 미뤄짐.",
     "misc": "무기한 · 안 하면 미뤄짐(정동석·박물관).",
     "eatFood": "수확일 · 수확 전에 먹어야 함. 작물 수확을 먼저 체크하면 자동 삭제."
+  },
+  "costMaterials": {
+    "title": "Cost & materials",
+    "hint": "Pick a shop to see each item's cost and materials.",
+    "gold": "g",
+    "free": "Free",
+    "source": "Source: Stardew Valley Wiki (CC BY-NC-SA 3.0)",
+    "shops": {
+      "carpenter": "Carpenter's Shop",
+      "blacksmith": "Blacksmith",
+      "wizard": "Wizard's Tower",
+      "desertTrader": "Desert Trader"
+    }
   }
 }

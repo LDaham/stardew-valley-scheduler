@@ -16,10 +16,11 @@ export const EVENT_TYPES = ["festival", "birthday", "cropDeadline", "foraging"] 
 // harvest=작물 수확, watering=작물별 물주기(사용자 추가), tool=도구 업그레이드,
 // machine=장인 제작품, build=농장 건물 건설·농가 업그레이드, misc=정동석 깨기·박물관 기증,
 // eatFood=수확일 음식 먹기(품질 버프), fruit=과일나무 수확, mining=채굴, fishing=낚시
-export const MEMO_CATEGORIES = ["plant", "harvest", "watering", "fruit", "tool", "machine", "build", "mining", "fishing", "misc", "eatFood"] as const;
+export const MEMO_CATEGORIES = ["plant", "harvest", "watering", "fruit", "machine", "mining", "fishing", "misc", "eatFood"] as const;
 // 설정·순서에 노출되는 카테고리(토글/정렬 대상)
 export type VisibleMemoCategory = (typeof MEMO_CATEGORIES)[number];
-export type MemoCategory = VisibleMemoCategory;
+// 도구 업그레이드·건물 건설 기능은 제거됨. 기존에 추가해 둔 메모(레거시)만 표시 호환을 위해 타입에 남긴다.
+export type MemoCategory = VisibleMemoCategory | "tool" | "build";
 
 // queenOfSauceRerun은 신규 방영(queenOfSauceNew)의 하위 항목으로 함께 움직이므로
 // 별도 순서 엔트리로 노출하지 않는다.
@@ -62,8 +63,6 @@ export const DEFAULT_TODO_ORDER: string[] = [
   "reminder:forageWeekly", // 채집물 채집(토요일)
   "memo:fruit", // 과일나무 수확
   "memo:machine", // 장인/정제 장비 사용
-  "memo:build", // 건물 건설
-  "memo:tool", // 도구 업그레이드
   "reminder:helpWanted", // 구인 광고 확인
   "reminder:specialOrders", // 특별 주문 게시판 확인
   "reminder:farmCave", // 버섯 동굴 채집

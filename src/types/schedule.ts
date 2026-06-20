@@ -104,8 +104,6 @@ export interface ScheduleState {
   todoOrder: string[];
   // 비 예보. 키=yearDay, 값=true면 그날 비 → 물주기 숨김.
   rainDays: Record<string, boolean>;
-  // 물뿌리개 업그레이드 누적 횟수(이 수에 도달하면 비 오는 날 업그레이드 제안 중단).
-  wateringCanUpgrades: number;
   // 마을회관 번들 품목 기증 여부. 키=`${bundleId}:${itemId}`.
   bundleItemsDone: Record<string, boolean>;
   // 꾸러미 추적 모드: 표준(고정) / 리믹스(무작위).
@@ -134,7 +132,9 @@ export interface ScheduleState {
   bundleTrackerShown: boolean;
   // 메인 화면 상단 가게 일정 박스 표시 여부(정보-가게 일정 탭에서 고정한 일정 표시).
   shopScheduleShown: boolean;
-  // 메인 상단 박스 표시 순서(가게 일정·꾸러미 추적). 값: "shopSchedule" | "bundleTracker".
+  // 메인 화면 상단 비 생선 박스 표시 여부(비 예보가 있는 날 그 계절의 비 전용 생선 표시).
+  rainFishShown: boolean;
+  // 메인 상단 박스 표시 순서. 값: "shopSchedule" | "bundleTracker" | "rainFish".
   mainOrder: string[];
 }
 

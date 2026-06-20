@@ -60,6 +60,22 @@ interface DisplayItem {
 const MAIN_ICON: Record<string, string> = {
   shopSchedule: "/icons/ui/time.png",
   bundleTracker: "/icons/ui/bundle.png",
+  rainFish: "/icons/ui/rain.png",
+};
+// 메인 항목 id → 라벨/설명 메시지 키
+const MAIN_LABEL: Record<string, { title: string; note: string }> = {
+  shopSchedule: {
+    title: "settings.shopScheduleShow",
+    note: "settings.shopScheduleShowNote",
+  },
+  bundleTracker: {
+    title: "settings.bundleTracker",
+    note: "settings.bundleTrackerNote",
+  },
+  rainFish: {
+    title: "settings.rainFishShow",
+    note: "settings.rainFishShowNote",
+  },
 };
 
 function move<T>(arr: T[], from: number, to: number): T[] {
@@ -105,6 +121,8 @@ export default function TodoSettingsDialog({
     setBundleTrackerShown,
     shopScheduleShown,
     setShopScheduleShown,
+    rainFishShown,
+    setRainFishShown,
     mainOrder,
     setMainOrder,
   } = useSchedule();
@@ -180,15 +198,20 @@ export default function TodoSettingsDialog({
     let icon: React.ReactNode = null;
     let label: React.ReactNode = null;
 
-    // 메인 상단 박스 항목(가게 일정 표시·꾸러미 추적): 체크박스(만)로 표시 토글 + 드래그 정렬.
-    if (item.id === "shopSchedule" || item.id === "bundleTracker") {
-      const isShop = item.id === "shopSchedule";
-      const shown = isShop ? shopScheduleShown : bundleTrackerShown;
-      const setShown = isShop ? setShopScheduleShown : setBundleTrackerShown;
-      const titleKey = isShop ? "settings.shopScheduleShow" : "settings.bundleTracker";
-      const noteKey = isShop
-        ? "settings.shopScheduleShowNote"
-        : "settings.bundleTrackerNote";
+    // 메인 상단 박스 항목(가게 일정·꾸러미·비 생선): 체크박스(만)로 표시 토글 + 드래그 정렬.
+    if (MAIN_LABEL[item.id]) {
+      const shown =
+        item.id === "shopSchedule"
+          ? shopScheduleShown
+          : item.id === "rainFish"
+            ? rainFishShown
+            : bundleTrackerShown;
+      const setShown =
+        item.id === "shopSchedule"
+          ? setShopScheduleShown
+          : item.id === "rainFish"
+            ? setRainFishShown
+            : setBundleTrackerShown;
       control = (
         <input
           type="checkbox"
@@ -200,9 +223,11 @@ export default function TodoSettingsDialog({
       icon = <PixelImage src={MAIN_ICON[item.id]} />;
       label = (
         <span>
-          <span className="text-sm font-semibold">{t(titleKey)}</span>
+          <span className="text-sm font-semibold">
+            {t(MAIN_LABEL[item.id].title)}
+          </span>
           <span className="block text-xs text-[var(--sv-ink-muted)]">
-            {t(noteKey)}
+            {t(MAIN_LABEL[item.id].note)}
           </span>
         </span>
       );

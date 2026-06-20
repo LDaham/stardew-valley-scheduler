@@ -33,7 +33,6 @@ export function useSchedule() {
     taskDone: state.taskDone,
     todoOrder: state.todoOrder,
     rainDays: state.rainDays,
-    wateringCanUpgrades: state.wateringCanUpgrades,
     bundleItemsDone: state.bundleItemsDone,
     bundleMode: state.bundleMode,
     remixChoices: state.remixChoices,
@@ -48,6 +47,7 @@ export function useSchedule() {
     dialogFilters: state.dialogFilters,
     bundleTrackerShown: state.bundleTrackerShown,
     shopScheduleShown: state.shopScheduleShown,
+    rainFishShown: state.rainFishShown,
     mainOrder: state.mainOrder,
     memosOn: (date: SDate): Memo[] =>
       state.memos.filter(
@@ -71,8 +71,6 @@ export function useSchedule() {
     toggleTask: scheduleActions.toggleTask,
     setTodoOrder: scheduleActions.setTodoOrder,
     setRainDay: scheduleActions.setRainDay,
-    incWateringCanUpgrades: scheduleActions.incWateringCanUpgrades,
-    setWateringCanUpgrades: scheduleActions.setWateringCanUpgrades,
     toggleBundleItem: scheduleActions.toggleBundleItem,
     setBundleMode: scheduleActions.setBundleMode,
     setRemixChoice: scheduleActions.setRemixChoice,
@@ -87,6 +85,7 @@ export function useSchedule() {
     setDialogFilters: scheduleActions.setDialogFilters,
     setBundleTrackerShown: scheduleActions.setBundleTrackerShown,
     setShopScheduleShown: scheduleActions.setShopScheduleShown,
+    setRainFishShown: scheduleActions.setRainFishShown,
     setMainOrder: scheduleActions.setMainOrder,
     resetAll: scheduleActions.resetAll,
   };

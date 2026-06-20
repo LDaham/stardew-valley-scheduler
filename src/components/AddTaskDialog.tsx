@@ -7,19 +7,9 @@ import { addDays, SEASONS, toYearDay, type SDate } from "@/lib/calendar";
 import { CROPS } from "@/data/game-data";
 import { MACHINES, type MachineCategory } from "@/data/machines";
 import { computeHarvest, type Fertilizer } from "@/lib/growth";
-import { toolPickup, type ToolPickup } from "@/lib/blacksmith";
-import {
-  BUILDINGS,
-  BUILDING_CATEGORIES,
-  type BuildingCategory,
-  type BuildingDef,
-} from "@/data/buildings";
-import { planBuilding } from "@/lib/carpenter";
 import { FRUIT_TREES, FRUIT_TREE_MATURE_DAYS } from "@/data/fruitTrees";
-import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import { ADD_TASK_CHILDREN, orderBy } from "@/lib/addTaskOrder";
 import { seedSkipPlantMemos } from "@/lib/chains";
-import type { MemoCategory } from "@/lib/todoOrder";
 import type { SeedDefaults } from "@/types/schedule";
 import { asset } from "@/lib/asset";
 import { useSchedule } from "@/components/ScheduleProvider";
@@ -30,12 +20,10 @@ import PixelIcon from "@/components/PixelIcon";
 
 type Mode =
   | "menu"
-  | "tool"
   | "seed"
   | "fruit"
   | "artisanMachine"
   | "refiningMachine"
-  | "build"
   | "options";
 
 // 비온실 작물의 수확 마감(yearDay): 심은 계절부터 작물이 자라는 마지막 연속 계절의 28일.
@@ -53,15 +41,12 @@ function cropDeadlineYearDay(
 // 메뉴 항목 아이콘(없는 것은 기존 도구·장비·건물 아이콘 재사용).
 // 표시 순서·표시 여부는 사용자 설정(addTaskOrder/hiddenItems)을 따른다.
 const MENU_ICONS: Record<string, string> = {
-  tool: "/icons/addTask/tool.png",
   seed: "/icons/addTask/seed.png",
   fruit: "/icons/addTask/fruit.png",
   artisanMachine: "/icons/machines/keg.png",
   refiningMachine: "/icons/machines/furnace.png",
-  build: "/icons/addTask/build.png",
 };
 
-const TOOLS = ["axe", "pickaxe", "hoe", "wateringCan", "trashCan"] as const;
 const FERTILIZERS: Fertilizer[] = ["none", "speedGro", "deluxe", "hyper"];
 
 export default function AddTaskDialog({
@@ -78,7 +63,6 @@ export default function AddTaskDialog({
     addMemo,
     addMemos,
     year,
-    bundleItemsDone,
     character,
     seedDefaults,
     setSeedDefaults,
@@ -91,27 +75,8 @@ export default function AddTaskDialog({
   } = useSchedule();
   const [mode, setMode] = useState<Mode>("menu");
 
-  // 마을 회관 완료 여부 → 대장간 금요일 휴무 판단
-  const ccCompleted = BUNDLES.every(
-    (b) =>
-      b.items.filter((i) => bundleItemsDone[bundleItemKey(b.id, i.id)]).length >=
-      b.needed,
-  );
-  const pickup = toolPickup(baseDate, ccCompleted);
-
   const dateLabel = (d: SDate) =>
     t("addTask.dateLabel", { season: t(`seasons.${d.season}`), day: d.day });
-
-  const addAndClose = (date: SDate, text: string, category: MemoCategory) => {
-    addMemo({
-      season: date.season,
-      day: date.day,
-      text,
-      reminderDaysBefore: 0,
-      category,
-    });
-    onClose();
-  };
 
   // 작물 재배: 단계별 토글(심기·물주기·수확·음식)에 따라 메모를 생성한다.
   // 심기 ON: 당일 '씨앗 심기' 1건 생성 → 완료 시 물주기 ×K → 수확 → (음식) cascade.
@@ -205,21 +170,6 @@ export default function AddTaskDialog({
         harvestText: t("addTask.fruitHarvestMemo", { fruit: fruitName }),
         repeatYearly,
       },
-    });
-    onClose();
-  };
-
-  // 도구 업그레이드: 당일에 '업그레이드 맡기기'를 추가. 완료하면 수령 일정이 생성된다.
-  const addToolUpgrade = (toolId: string) => {
-    const toolName = t(`tools.${toolId}`);
-    addMemo({
-      season: baseDate.season,
-      day: baseDate.day,
-      text: t("addTask.toolUpgradeMemo", { tool: toolName }),
-      reminderDaysBefore: 0,
-      category: "tool",
-      toolId,
-      chain: { kind: "tool", pickupText: t("addTask.toolMemo", { tool: toolName }) },
     });
     onClose();
   };
@@ -339,15 +289,6 @@ export default function AddTaskDialog({
           onAdd={addFruitPlant}
         />
       )}
-      {mode === "tool" && (
-        <ToolForm
-          dateLabel={dateLabel}
-          pickup={pickup}
-          onBack={() => setMode("menu")}
-          onAdd={addToolUpgrade}
-        />
-      )}
-
       {mode === "seed" && (
         <SeedForm
           plantDate={baseDate}
@@ -371,16 +312,6 @@ export default function AddTaskDialog({
         />
       )}
 
-      {mode === "build" && (
-        <BuildForm
-          requestDate={baseDate}
-          dateLabel={dateLabel}
-          hiddenItems={hiddenItems}
-          childOrder={addTaskChildOrder.build ?? []}
-          onBack={() => setMode("menu")}
-          onAdd={(date, text) => addAndClose(date, text, "build")}
-        />
-      )}
     </Modal>
   );
 }
@@ -452,51 +383,6 @@ function StageCheckbox({
         )}
       </span>
     </label>
-  );
-}
-
-function ToolForm({
-  dateLabel,
-  pickup,
-  onBack,
-  onAdd,
-}: {
-  dateLabel: (d: SDate) => string;
-  pickup: ToolPickup;
-  onBack: () => void;
-  onAdd: (toolId: string) => void;
-}) {
-  const t = useTranslations();
-  const [tool, setTool] = useState<string>(TOOLS[0]);
-  const options = TOOLS.map((id) => ({
-    value: id,
-    label: t(`tools.${id}`),
-    icon: `/icons/tools/${id}.png`,
-  }));
-  return (
-    <div>
-      <FieldLabel>{t("addTask.selectTool")}</FieldLabel>
-      <Dropdown
-        value={tool}
-        options={options}
-        onChange={setTool}
-        ariaLabel={t("addTask.selectTool")}
-      />
-      <p className="mt-3 flex items-center gap-1.5 rounded-md bg-[var(--sv-bg)] px-3 py-2 text-sm">
-        <TimeIcon />
-        {t("addTask.pickupPreview", { date: dateLabel(pickup.pickup) })}
-      </p>
-      {pickup.closure && (
-        <p className="mt-2 rounded-md bg-[#fbeaea] px-3 py-2 text-xs font-semibold text-[#b02a2a]">
-          ⚠{" "}
-          {t("blacksmith.pickupWarn", {
-            ready: dateLabel(pickup.ready),
-            reason: t(`blacksmith.${pickup.closure}`),
-          })}
-        </p>
-      )}
-      <FormFooter onBack={onBack} onAdd={() => onAdd(tool)} />
-    </div>
   );
 }
 
@@ -804,138 +690,6 @@ function MachineForm({
       <FormFooter
         onBack={onBack}
         onAdd={() => onAdd(machine.id, recipe.id, recipe.days, repeat)}
-      />
-    </div>
-  );
-}
-
-function BuildForm({
-  requestDate,
-  dateLabel,
-  hiddenItems,
-  childOrder,
-  onBack,
-  onAdd,
-}: {
-  requestDate: SDate;
-  dateLabel: (d: SDate) => string;
-  hiddenItems: Record<string, boolean>;
-  childOrder: string[];
-  onBack: () => void;
-  onAdd: (orderDate: SDate, text: string) => void;
-}) {
-  const t = useTranslations();
-  const [category, setCategory] = useState<BuildingCategory>("animal");
-  // 상세 옵션으로 숨기지 않은 건물만(사용자 순서 적용)
-  const buildingsIn = (c: BuildingCategory) =>
-    orderBy(
-      BUILDINGS.filter((b) => b.category === c && !hiddenItems[`building:${b.id}`]),
-      (b) => b.id,
-      childOrder,
-    );
-  const inCategory = buildingsIn(category);
-  const [buildingId, setBuildingId] = useState<string>(inCategory[0]?.id ?? "");
-
-  const def: BuildingDef | undefined =
-    inCategory.find((b) => b.id === buildingId) ?? inCategory[0];
-  const plan = def ? planBuilding(requestDate, def) : null;
-
-  // 카테고리 변경 시 해당 카테고리 첫(숨기지 않은) 건물로 선택 초기화
-  const changeCategory = (c: BuildingCategory) => {
-    setCategory(c);
-    setBuildingId(buildingsIn(c)[0]?.id ?? "");
-  };
-
-  // 메모 텍스트: "{건물} 건설 (재료: 10,000g · 나무 450)" / 재료 없으면 골드만
-  const buildMemoText = (b: BuildingDef): string => {
-    const goldStr = `${b.gold.toLocaleString()}g`;
-    const matStr = b.materials
-      .map((m) => `${t(`materials.${m.id}`)} ${m.qty}`)
-      .join(" · ");
-    const cost = matStr ? `${goldStr} · ${matStr}` : goldStr;
-    return t("addTask.buildMemo", { building: t(`buildings.${b.id}`), cost });
-  };
-
-  return (
-    <div className="flex flex-col gap-3">
-      <div>
-        <FieldLabel>{t("addTask.selectBuildCategory")}</FieldLabel>
-        <Dropdown
-          value={category}
-          options={BUILDING_CATEGORIES.map((c) => ({
-            value: c,
-            label: t(`buildingCategory.${c}`),
-          }))}
-          onChange={(v) => changeCategory(v as BuildingCategory)}
-          ariaLabel={t("addTask.selectBuildCategory")}
-        />
-      </div>
-
-      <div>
-        <FieldLabel>{t("addTask.selectBuilding")}</FieldLabel>
-        <Dropdown
-          value={buildingId}
-          options={inCategory.map((b) => ({
-            value: b.id,
-            label: t(`buildings.${b.id}`),
-            icon: `/icons/buildings/${b.id}.png`,
-          }))}
-          onChange={setBuildingId}
-          ariaLabel={t("addTask.selectBuilding")}
-        />
-      </div>
-
-      {def && plan && (
-        <div className="rounded-md bg-[var(--sv-bg)] px-3 py-2 text-sm">
-          {/* 비용·재료 */}
-          <p className="font-semibold">
-            {def.gold.toLocaleString()}g
-          </p>
-          {def.materials.length > 0 && (
-            <ul className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
-              {def.materials.map((m) => (
-                <li key={m.id} className="flex items-center gap-1 text-sm">
-                  <PixelIcon src={`/icons/materials/${m.id}.png`} size={16} />
-                  {t(`materials.${m.id}`)} {m.qty}
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {/* 선행 건물 안내 */}
-          {def.requires && (
-            <p className="mt-1.5 text-xs text-[var(--sv-ink-muted)]">
-              {t("addTask.buildRequires", {
-                building: t(`buildings.${def.requires}`),
-              })}
-            </p>
-          )}
-
-          {/* 주문일 휴무 이동 안내 */}
-          {plan.orderClosure && (
-            <p className="mt-2 rounded-md bg-[#fbeaea] px-2 py-1.5 text-xs font-semibold text-[#b02a2a]">
-              ⚠{" "}
-              {t("addTask.buildClosureWarn", {
-                reason: t(`carpenter.${plan.orderClosure}`),
-                date: dateLabel(plan.order),
-              })}
-            </p>
-          )}
-
-          {/* 완성 예정일 */}
-          <p className="mt-2 flex items-center gap-1.5">
-            <TimeIcon />
-            {def.buildDays === 0
-              ? t("addTask.buildInstant")
-              : t("addTask.buildReadyPreview", { date: dateLabel(plan.ready) })}
-          </p>
-        </div>
-      )}
-
-      <FormFooter
-        onBack={onBack}
-        onAdd={() => def && plan && onAdd(plan.order, buildMemoText(def))}
-        addDisabled={!def}
       />
     </div>
   );

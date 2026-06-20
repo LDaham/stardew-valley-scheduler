@@ -1,7 +1,6 @@
 // 할 일 추가(AddTask) 메뉴의 표시 순서 + 하위 항목(장비·건물·과일나무) 순서 정의.
 // 스케줄러 설정처럼 사용자가 상세 옵션에서 드래그로 순서를 바꿀 수 있다.
 
-import { BUILDINGS } from "@/data/buildings";
 import { FRUIT_TREES } from "@/data/fruitTrees";
 
 // 상위 메뉴 기본 순서(= 할 일 추가에서 보여지는 순서).
@@ -9,8 +8,6 @@ import { FRUIT_TREES } from "@/data/fruitTrees";
 export const DEFAULT_ADD_TASK_ORDER: string[] = [
   "seed", // 씨앗 심기
   "fruit", // 묘목 심기(과일나무)
-  "tool", // 도구 업그레이드
-  "build", // 건물 건설
   "artisanMachine", // 장인 장비 사용
   "refiningMachine", // 정제 장비 사용
 ];
@@ -47,13 +44,6 @@ export const ADD_TASK_CHILDREN: Record<string, ChildGroup> = {
     ],
     icon: (id) => `/icons/machines/${id}.png`,
     labelKey: (id) => `machines.${id}`,
-  },
-  build: {
-    parent: "build",
-    hiddenPrefix: "building",
-    defaultIds: BUILDINGS.map((b) => b.id),
-    icon: (id) => `/icons/buildings/${id}.png`,
-    labelKey: (id) => `buildings.${id}`,
   },
   fruit: {
     parent: "fruit",

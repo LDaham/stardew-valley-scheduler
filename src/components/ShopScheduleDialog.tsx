@@ -187,7 +187,7 @@ function InfoTooltip({ text }: { text: string }) {
 }
 
 // 고정(핀) 토글 버튼. 활성 시 색으로 구분. 게임 핀 에셋이 없어 인라인 SVG 사용(이모지 아님).
-function PinButton({
+export function PinButton({
   pinned,
   onToggle,
   label,

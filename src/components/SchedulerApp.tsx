@@ -10,7 +10,6 @@ import TodoSettingsDialog from "@/components/TodoSettingsDialog";
 import BundleDialog from "@/components/BundleDialog";
 import PerfectionDialog from "@/components/PerfectionDialog";
 import InfoHubDialog from "@/components/InfoHubDialog";
-import CharacterDialog from "@/components/CharacterDialog";
 import AchievementDialog from "@/components/AchievementDialog";
 import PixelIcon from "@/components/PixelIcon";
 
@@ -22,7 +21,6 @@ function AppShell() {
   const [bundleOpen, setBundleOpen] = useState(false);
   const [perfectionOpen, setPerfectionOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
-  const [characterOpen, setCharacterOpen] = useState(false);
   const [achievementOpen, setAchievementOpen] = useState(false);
 
   return (
@@ -76,15 +74,8 @@ function AppShell() {
               <PixelIcon src="/icons/ui/globe.png" size={18} /> {t("info.short")}
             </button>
           </div>
-          {/* 우측: 캐릭터 · 스케줄러 설정 */}
+          {/* 우측: 스케줄러 설정 */}
           <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => setCharacterOpen(true)}
-              aria-label={t("character.open")}
-              className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
-            >
-              <PixelIcon src="/icons/ui/character.png" size={18} /> {t("character.short")}
-            </button>
             <button
               onClick={() => setTodoSettingsOpen(true)}
               aria-label={t("settings.openTodo")}
@@ -111,9 +102,6 @@ function AppShell() {
           season={currentDate.season}
           onClose={() => setInfoOpen(false)}
         />
-      )}
-      {characterOpen && (
-        <CharacterDialog onClose={() => setCharacterOpen(false)} />
       )}
       {achievementOpen && (
         <AchievementDialog onClose={() => setAchievementOpen(false)} />

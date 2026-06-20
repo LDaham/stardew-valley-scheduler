@@ -9,9 +9,10 @@ import SeedEfficiencyDialog from "@/components/SeedEfficiencyDialog";
 import FishInfoDialog from "@/components/FishInfoDialog";
 import BirthdayGiftDialog from "@/components/BirthdayGiftDialog";
 import MoviePreferenceDialog from "@/components/MoviePreferenceDialog";
+import CostMaterialsDialog from "@/components/CostMaterialsDialog";
 import type { Season } from "@/lib/calendar";
 
-type View = "hub" | "shop" | "seed" | "fish" | "gift" | "movie";
+type View = "hub" | "shop" | "seed" | "fish" | "gift" | "movie" | "cost";
 
 // 정보 허브: 가게 일정·작물 효율·생선 정보·생일 선물 진입점.
 // 항목 선택 시 해당 다이얼로그로 전환되고, 좌상단 '이전'으로 허브 복귀.
@@ -38,6 +39,8 @@ export default function InfoHubDialog({
     return <BirthdayGiftDialog onClose={onClose} onBack={back} />;
   if (view === "movie")
     return <MoviePreferenceDialog onClose={onClose} onBack={back} />;
+  if (view === "cost")
+    return <CostMaterialsDialog onClose={onClose} onBack={back} />;
 
   const items: { key: View; icon: string; label: string }[] = [
     { key: "shop", icon: "/icons/ui/time.png", label: t("shopSchedule.short") },
@@ -48,6 +51,11 @@ export default function InfoHubDialog({
       key: "movie",
       icon: "/icons/shops/movieTheater.png",
       label: t("info.moviePref"),
+    },
+    {
+      key: "cost",
+      icon: "/icons/shops/carpenter.png",
+      label: t("costMaterials.title"),
     },
   ];
 

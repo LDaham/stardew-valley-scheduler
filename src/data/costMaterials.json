@@ -1,0 +1,975 @@
+[
+ {
+  "id": "carpenter",
+  "offers": [
+   {
+    "ko": "외양간",
+    "en": "Barn",
+    "icon": "/icons/costMaterials/Barn.png",
+    "gold": 6000,
+    "materials": [
+     {
+      "ko": "나무",
+      "en": "Wood",
+      "icon": "/icons/costMaterials/Wood.png",
+      "qty": 350
+     },
+     {
+      "ko": "돌",
+      "en": "Stone",
+      "icon": "/icons/costMaterials/Stone.png",
+      "qty": 150
+     }
+    ]
+   },
+   {
+    "ko": "큰 외양간",
+    "en": "Big Barn",
+    "icon": "/icons/costMaterials/Big_Barn.png",
+    "gold": 12000,
+    "materials": [
+     {
+      "ko": "나무",
+      "en": "Wood",
+      "icon": "/icons/costMaterials/Wood.png",
+      "qty": 450
+     },
+     {
+      "ko": "돌",
+      "en": "Stone",
+      "icon": "/icons/costMaterials/Stone.png",
+      "qty": 200
+     }
+    ]
+   },
+   {
+    "ko": "디럭스 외양간",
+    "en": "Deluxe Barn",
+    "icon": "/icons/costMaterials/Deluxe_Barn.png",
+    "gold": 25000,
+    "materials": [
+     {
+      "ko": "나무",
+      "en": "Wood",
+      "icon": "/icons/costMaterials/Wood.png",
+      "qty": 550
+     },
+     {
+      "ko": "돌",
+      "en": "Stone",
+      "icon": "/icons/costMaterials/Stone.png",
+      "qty": 300
+     }
+    ]
+   },
+   {
+    "ko": "닭장",
+    "en": "Coop",
+    "icon": "/icons/costMaterials/Coop.png",
+    "gold": 4000,
+    "materials": [
+     {
+      "ko": "나무",
+      "en": "Wood",
+      "icon": "/icons/costMaterials/Wood.png",
+      "qty": 300
+     },
+     {
+      "ko": "돌",
+      "en": "Stone",
+      "icon": "/icons/costMaterials/Stone.png",
+      "qty": 100
+     }
+    ]
+   },
+   {
+    "ko": "큰 닭장",
+    "en": "Big Coop",
+    "icon": "/icons/costMaterials/Big_Coop.png",
+    "gold": 10000,
+    "materials": [
+     {
+      "ko": "나무",
+      "en": "Wood",
+      "icon": "/icons/costMaterials/Wood.png",
+      "qty": 400
+     },
+     {
+      "ko": "돌",
+      "en": "Stone",
+      "icon": "/icons/costMaterials/Stone.png",
+      "qty": 150
+     }
+    ]
+   },
+   {
+    "ko": "디럭스 닭장",
+    "en": "Deluxe Coop",
+    "icon": "/icons/costMaterials/Deluxe_Coop.png",
+    "gold": 20000,
+    "materials": [
+     {
+      "ko": "나무",
+      "en": "Wood",
+      "icon": "/icons/costMaterials/Wood.png",
+      "qty": 500
+     },
+     {
+      "ko": "돌",
+      "en": "Stone",
+      "icon": "/icons/costMaterials/Stone.png",
+      "qty": 200
+     }
+    ]
+   },
+   {
+    "ko": "물고기 연못",
+    "en": "Fish Pond",
+    "icon": "/icons/costMaterials/Fish_Pond.png",
+    "gold": 5000,
+    "materials": [
+     {
+      "ko": "돌",
+      "en": "Stone",
+      "icon": "/icons/costMaterials/Stone.png",
+      "qty": 200
+     },
+     {
+      "ko": "해초",
+      "en": "Seaweed",
+      "icon": "/icons/costMaterials/Seaweed.png",
+      "qty": 5
+     },
+     {
+      "ko": "녹조류",
+      "en": "Green Algae",
+      "icon": "/icons/costMaterials/Green_Algae.png",
+      "qty": 5
+     }
+    ]
+   },
+   {
+    "ko": "풍차",
+    "en": "Mill",
+    "icon": "/icons/costMaterials/Mill.png",
+    "gold": 2500,
+    "materials": [
+     {
+      "ko": "돌",
+      "en": "Stone",
+      "icon": "/icons/costMaterials/Stone.png",
+      "qty": 50
+     },
+     {
+      "ko": "나무",
+      "en": "Wood",
+      "icon": "/icons/costMaterials/Wood.png",
+      "qty": 150
+     },
+     {
+      "ko": "옷감",
+      "en": "Cloth",
+      "icon": "/icons/costMaterials/Cloth.png",
+      "qty": 4
+     }
+    ]
+   },
+   {
+    "ko": "헛간",
+    "en": "Shed",
+    "icon": "/icons/costMaterials/Shed.png",
+    "gold": 15000,
+    "materials": [
+     {
+      "ko": "나무",
+      "en": "Wood",
+      "icon": "/icons/costMaterials/Wood.png",
+      "qty": 300
+     }
+    ]
+   },
+   {
+    "ko": "큰 헛간",
+    "en": "Big Shed",
+    "icon": "/icons/costMaterials/Big_Shed.png",
+    "gold": 20000,
+    "materials": [
+     {
+      "ko": "나무",
+      "en": "Wood",
+      "icon": "/icons/costMaterials/Wood.png",
+      "qty": 550
+     },
+     {
+      "ko": "돌",
+      "en": "Stone",
+      "icon": "/icons/costMaterials/Stone.png",
+      "qty": 300
+     }
+    ]
+   },
+   {
+    "ko": "저장고",
+    "en": "Silo",
+    "icon": "/icons/costMaterials/Silo.png",
+    "gold": 100,
+    "materials": [
+     {
+      "ko": "돌",
+      "en": "Stone",
+      "icon": "/icons/costMaterials/Stone.png",
+      "qty": 100
+     },
+     {
+      "ko": "점토",
+      "en": "Clay",
+      "icon": "/icons/costMaterials/Clay.png",
+      "qty": 10
+     },
+     {
+      "ko": "구리 주괴",
+      "en": "Copper Bar",
+      "icon": "/icons/costMaterials/Copper_Bar.png",
+      "qty": 5
+     }
+    ]
+   },
+   {
+    "ko": "슬라임 장",
+    "en": "Slime Hutch",
+    "icon": "/icons/costMaterials/Slime_Hutch.png",
+    "gold": 10000,
+    "materials": [
+     {
+      "ko": "돌",
+      "en": "Stone",
+      "icon": "/icons/costMaterials/Stone.png",
+      "qty": 500
+     },
+     {
+      "ko": "정제된 석영",
+      "en": "Refined Quartz",
+      "icon": "/icons/costMaterials/Refined_Quartz.png",
+      "qty": 10
+     },
+     {
+      "ko": "이리듐 주괴",
+      "en": "Iridium Bar",
+      "icon": "/icons/costMaterials/Iridium_Bar.png",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "ko": "마굿간",
+    "en": "Horse Stable",
+    "icon": "/icons/costMaterials/Horse_Stable.png",
+    "gold": 10000,
+    "materials": [
+     {
+      "ko": "단단한 나무",
+      "en": "Hardwood",
+      "icon": "/icons/costMaterials/Hardwood.png",
+      "qty": 100
+     },
+     {
+      "ko": "철 주괴",
+      "en": "Iron Bar",
+      "icon": "/icons/costMaterials/Iron_Bar.png",
+      "qty": 5
+     }
+    ]
+   },
+   {
+    "ko": "우물",
+    "en": "Well",
+    "icon": "/icons/costMaterials/Well.png",
+    "gold": 1000,
+    "materials": [
+     {
+      "ko": "돌",
+      "en": "Stone",
+      "icon": "/icons/costMaterials/Stone.png",
+      "qty": 75
+     }
+    ]
+   },
+   {
+    "ko": "돌 오두막",
+    "en": "Stone Cabin Stage 1",
+    "icon": "/icons/costMaterials/Stone_Cabin_Stage_1.png",
+    "gold": 100,
+    "materials": [
+     {
+      "ko": "돌",
+      "en": "Stone",
+      "icon": "/icons/costMaterials/Stone.png",
+      "qty": 10
+     }
+    ]
+   },
+   {
+    "ko": "널빤지 오두막",
+    "en": "Plank Cabin Stage 1",
+    "icon": "/icons/costMaterials/Plank_Cabin_Stage_1.png",
+    "gold": 100,
+    "materials": [
+     {
+      "ko": "나무",
+      "en": "Wood",
+      "icon": "/icons/costMaterials/Wood.png",
+      "qty": 5
+     },
+     {
+      "ko": "섬유",
+      "en": "Fiber",
+      "icon": "/icons/costMaterials/Fiber.png",
+      "qty": 10
+     }
+    ]
+   },
+   {
+    "ko": "통나무 오두막",
+    "en": "Log Cabin Stage 1",
+    "icon": "/icons/costMaterials/Log_Cabin_Stage_1.png",
+    "gold": 100,
+    "materials": [
+     {
+      "ko": "나무",
+      "en": "Wood",
+      "icon": "/icons/costMaterials/Wood.png",
+      "qty": 10
+     }
+    ]
+   },
+   {
+    "ko": "배송 상자",
+    "en": "ShippingBox",
+    "icon": "/icons/costMaterials/ShippingBox.png",
+    "gold": 250,
+    "materials": [
+     {
+      "ko": "나무",
+      "en": "Wood",
+      "icon": "/icons/costMaterials/Wood.png",
+      "qty": 150
+     }
+    ]
+   },
+   {
+    "ko": "농가 업그레이드 1",
+    "en": "House (tier 2)",
+    "icon": "/icons/costMaterials/House_(tier_2).png",
+    "gold": 10000,
+    "materials": [
+     {
+      "ko": "나무",
+      "en": "Wood",
+      "icon": "/icons/costMaterials/Wood.png",
+      "qty": 450
+     }
+    ]
+   },
+   {
+    "ko": "농가 업그레이드 2",
+    "en": "House (tier 3)",
+    "icon": "/icons/costMaterials/House_(tier_3).png",
+    "gold": 65000,
+    "materials": [
+     {
+      "ko": "단단한 나무",
+      "en": "Hardwood",
+      "icon": "/icons/costMaterials/Hardwood.png",
+      "qty": 100
+     }
+    ]
+   },
+   {
+    "ko": "농가 업그레이드 3",
+    "en": "House (tier 3)",
+    "icon": "/icons/costMaterials/House_(tier_3).png",
+    "gold": 100000,
+    "materials": []
+   }
+  ]
+ },
+ {
+  "id": "blacksmith",
+  "offers": [
+   {
+    "ko": "구리 도구",
+    "en": "Copper Tools",
+    "icon": "/icons/costMaterials/Copper_Hoe.png",
+    "gold": 2000,
+    "materials": [
+     {
+      "ko": "구리 주괴",
+      "en": "Copper Bar",
+      "icon": "/icons/costMaterials/Copper_Bar.png",
+      "qty": 5
+     }
+    ]
+   },
+   {
+    "ko": "강철 도구",
+    "en": "Steel Tools",
+    "icon": "/icons/costMaterials/Steel_Hoe.png",
+    "gold": 5000,
+    "materials": [
+     {
+      "ko": "철 주괴",
+      "en": "Iron Bar",
+      "icon": "/icons/costMaterials/Iron_Bar.png",
+      "qty": 5
+     }
+    ]
+   },
+   {
+    "ko": "황금 도구",
+    "en": "Gold Tools",
+    "icon": "/icons/costMaterials/Gold_Hoe.png",
+    "gold": 10000,
+    "materials": [
+     {
+      "ko": "금 주괴",
+      "en": "Gold Bar",
+      "icon": "/icons/costMaterials/Gold_Bar.png",
+      "qty": 5
+     }
+    ]
+   },
+   {
+    "ko": "이리듐 도구",
+    "en": "Iridium Tools",
+    "icon": "/icons/costMaterials/Iridium_Hoe.png",
+    "gold": 25000,
+    "materials": [
+     {
+      "ko": "이리듐 주괴",
+      "en": "Iridium Bar",
+      "icon": "/icons/costMaterials/Iridium_Bar.png",
+      "qty": 5
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "wizard",
+  "offers": [
+   {
+    "ko": "대지의 오벨리스크",
+    "en": "Earth Obelisk",
+    "icon": "/icons/costMaterials/Earth_Obelisk.png",
+    "gold": 500000,
+    "materials": [
+     {
+      "ko": "이리듐 주괴",
+      "en": "Iridium Bar",
+      "icon": "/icons/costMaterials/Iridium_Bar.png",
+      "qty": 10
+     },
+     {
+      "ko": "땅의 수정",
+      "en": "Earth Crystal",
+      "icon": "/icons/costMaterials/Earth_Crystal.png",
+      "qty": 10
+     }
+    ]
+   },
+   {
+    "ko": "물의 오벨리스크",
+    "en": "Water Obelisk",
+    "icon": "/icons/costMaterials/Water_Obelisk.png",
+    "gold": 500000,
+    "materials": [
+     {
+      "ko": "이리듐 주괴",
+      "en": "Iridium Bar",
+      "icon": "/icons/costMaterials/Iridium_Bar.png",
+      "qty": 5
+     },
+     {
+      "ko": "조개",
+      "en": "Clam",
+      "icon": "/icons/costMaterials/Clam.png",
+      "qty": 10
+     },
+     {
+      "ko": "산호",
+      "en": "Coral",
+      "icon": "/icons/costMaterials/Coral.png",
+      "qty": 10
+     }
+    ]
+   },
+   {
+    "ko": "사막의 오벨리스크",
+    "en": "Desert Obelisk",
+    "icon": "/icons/costMaterials/Desert_Obelisk.png",
+    "gold": 1000000,
+    "materials": [
+     {
+      "ko": "이리듐 주괴",
+      "en": "Iridium Bar",
+      "icon": "/icons/costMaterials/Iridium_Bar.png",
+      "qty": 20
+     },
+     {
+      "ko": "코코넛",
+      "en": "Coconut",
+      "icon": "/icons/costMaterials/Coconut.png",
+      "qty": 10
+     },
+     {
+      "ko": "선인장 열매",
+      "en": "Cactus Fruit",
+      "icon": "/icons/costMaterials/Cactus_Fruit.png",
+      "qty": 10
+     }
+    ]
+   },
+   {
+    "ko": "섬의 오벨리스크",
+    "en": "Island Obelisk",
+    "icon": "/icons/costMaterials/Island_Obelisk.png",
+    "gold": 1000000,
+    "materials": [
+     {
+      "ko": "이리듐 주괴",
+      "en": "Iridium Bar",
+      "icon": "/icons/costMaterials/Iridium_Bar.png",
+      "qty": 10
+     },
+     {
+      "ko": "용의 이빨",
+      "en": "Dragon Tooth",
+      "icon": "/icons/costMaterials/Dragon_Tooth.png",
+      "qty": 10
+     },
+     {
+      "ko": "바나나",
+      "en": "Banana",
+      "icon": "/icons/costMaterials/Banana.png",
+      "qty": 10
+     }
+    ]
+   },
+   {
+    "ko": "주니모 오두막",
+    "en": "Junimo Hut",
+    "icon": "/icons/costMaterials/Junimo_Hut.png",
+    "gold": 20000,
+    "materials": [
+     {
+      "ko": "돌",
+      "en": "Stone",
+      "icon": "/icons/costMaterials/Stone.png",
+      "qty": 200
+     },
+     {
+      "ko": "스타프루트",
+      "en": "Starfruit",
+      "icon": "/icons/costMaterials/Starfruit.png",
+      "qty": 9
+     },
+     {
+      "ko": "섬유",
+      "en": "Fiber",
+      "icon": "/icons/costMaterials/Fiber.png",
+      "qty": 100
+     }
+    ]
+   },
+   {
+    "ko": "황금 시계",
+    "en": "Gold Clock",
+    "icon": "/icons/costMaterials/Gold_Clock.png",
+    "gold": 10000000,
+    "materials": []
+   }
+  ]
+ },
+ {
+  "id": "desertTrader",
+  "offers": [
+   {
+    "ko": "유물 상자",
+    "en": "Artifact Trove",
+    "icon": "/icons/costMaterials/Artifact_Trove.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "전 정동석",
+      "en": "Omni Geode",
+      "icon": "/icons/costMaterials/Omni_Geode.png",
+      "qty": 5
+     }
+    ]
+   },
+   {
+    "ko": "워프 토템: 사막",
+    "en": "Warp Totem Desert",
+    "icon": "/icons/costMaterials/Warp_Totem_Desert.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "전 정동석",
+      "en": "Omni Geode",
+      "icon": "/icons/costMaterials/Omni_Geode.png",
+      "qty": 3
+     }
+    ]
+   },
+   {
+    "ko": "트리플 샷 에스프레소",
+    "en": "Triple Shot Espresso",
+    "icon": "/icons/costMaterials/Triple_Shot_Espresso.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "다이아몬드",
+      "en": "Diamond",
+      "icon": "/icons/costMaterials/Diamond.png",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "ko": "매콤한 장어",
+    "en": "Spicy Eel",
+    "icon": "/icons/costMaterials/Spicy_Eel.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "루비",
+      "en": "Ruby",
+      "icon": "/icons/costMaterials/Ruby.png",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "ko": "거대 폭탄",
+    "en": "Mega Bomb",
+    "icon": "/icons/costMaterials/Mega_Bomb.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "이리듐광석",
+      "en": "Iridium Ore",
+      "icon": "/icons/costMaterials/Iridium_Ore.png",
+      "qty": 5
+     }
+    ]
+   },
+   {
+    "ko": "폭탄",
+    "en": "Bomb",
+    "icon": "/icons/costMaterials/Bomb.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "석영",
+      "en": "Quartz",
+      "icon": "/icons/costMaterials/Quartz.png",
+      "qty": 5
+     }
+    ]
+   },
+   {
+    "ko": "워프 토템: 사막 제작법",
+    "en": "워프 토템: 사막 제작법",
+    "icon": "/icons/costMaterials/Warp_Totem_Desert.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "이리듐 주괴",
+      "en": "Iridium Bar",
+      "icon": "/icons/costMaterials/Iridium_Bar.png",
+      "qty": 10
+     }
+    ]
+   },
+   {
+    "ko": "나비장",
+    "en": "Butterfly Hutch",
+    "icon": "/icons/costMaterials/Butterfly_Hutch.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "박쥐 날개",
+      "en": "Bat Wing",
+      "icon": "/icons/costMaterials/Bat_Wing.png",
+      "qty": 200
+     }
+    ]
+   },
+   {
+    "ko": "녹색 터번",
+    "en": "Green Turban",
+    "icon": "/icons/costMaterials/Green_Turban.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "전 정동석",
+      "en": "Omni Geode",
+      "icon": "/icons/costMaterials/Omni_Geode.png",
+      "qty": 50
+     }
+    ]
+   },
+   {
+    "ko": "자작나무 더블 침대",
+    "en": "Birch Double Bed",
+    "icon": "/icons/costMaterials/Birch_Double_Bed.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "진주",
+      "en": "Pearl",
+      "icon": "/icons/costMaterials/Pearl.png",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "ko": "자정 해변 침대",
+    "en": "Midnight Beach Bed",
+    "icon": "/icons/costMaterials/Midnight_Beach_Bed.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "이리듐 주괴",
+      "en": "Iridium Bar",
+      "icon": "/icons/costMaterials/Iridium_Bar.png",
+      "qty": 15
+     }
+    ]
+   },
+   {
+    "ko": "자정 해변 더블침대",
+    "en": "Midnight Beach Double Bed",
+    "icon": "/icons/costMaterials/Midnight_Beach_Double_Bed.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "이리듐 주괴",
+      "en": "Iridium Bar",
+      "icon": "/icons/costMaterials/Iridium_Bar.png",
+      "qty": 30
+     }
+    ]
+   },
+   {
+    "ko": "어두운 피아노",
+    "en": "Dark Piano",
+    "icon": "/icons/costMaterials/Dark_Piano.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "석탄",
+      "en": "Coal",
+      "icon": "/icons/costMaterials/Coal.png",
+      "qty": 999
+     }
+    ]
+   },
+   {
+    "ko": "건초 (x3)",
+    "en": "Hay",
+    "icon": "/icons/costMaterials/Hay.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "전 정동석",
+      "en": "Omni Geode",
+      "icon": "/icons/costMaterials/Omni_Geode.png",
+      "qty": 1
+     }
+    ],
+    "day": "월요일"
+   },
+   {
+    "ko": "섬유",
+    "en": "Fiber",
+    "icon": "/icons/costMaterials/Fiber.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "돌",
+      "en": "Stone",
+      "icon": "/icons/costMaterials/Stone.png",
+      "qty": 5
+     }
+    ],
+    "day": "화요일"
+   },
+   {
+    "ko": "옷감",
+    "en": "Cloth",
+    "icon": "/icons/costMaterials/Cloth.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "아쿠아마린",
+      "en": "Aquamarine",
+      "icon": "/icons/costMaterials/Aquamarine.png",
+      "qty": 3
+     }
+    ],
+    "day": "수요일"
+   },
+   {
+    "ko": "마법 얼음사탕",
+    "en": "Magic Rock Candy",
+    "icon": "/icons/costMaterials/Magic_Rock_Candy.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "무지갯빛 파편",
+      "en": "Prismatic Shard",
+      "icon": "/icons/costMaterials/Prismatic_Shard.png",
+      "qty": 3
+     }
+    ],
+    "day": "목요일"
+   },
+   {
+    "ko": "치즈",
+    "en": "Cheese",
+    "icon": "/icons/costMaterials/Cheese.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "에메랄드",
+      "en": "Emerald",
+      "icon": "/icons/costMaterials/Emerald.png",
+      "qty": 1
+     }
+    ],
+    "day": "금요일"
+   },
+   {
+    "ko": "봄 씨앗 모음",
+    "en": "Spring Seeds",
+    "icon": "/icons/costMaterials/Spring_Seeds.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "여름 씨앗 모음",
+      "en": "Summer Seeds",
+      "icon": "/icons/costMaterials/Summer_Seeds.png",
+      "qty": 2
+     }
+    ],
+    "day": "토요일"
+   },
+   {
+    "ko": "여름 씨앗 모음",
+    "en": "Summer Seeds",
+    "icon": "/icons/costMaterials/Summer_Seeds.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "가을 씨앗 모음",
+      "en": "Fall Seeds",
+      "icon": "/icons/costMaterials/Fall_Seeds.png",
+      "qty": 2
+     }
+    ],
+    "day": "토요일"
+   },
+   {
+    "ko": "가을 씨앗 모음",
+    "en": "Fall Seeds",
+    "icon": "/icons/costMaterials/Fall_Seeds.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "겨울 씨앗 모음",
+      "en": "Winter Seeds",
+      "icon": "/icons/costMaterials/Winter_Seeds.png",
+      "qty": 2
+     }
+    ],
+    "day": "토요일"
+   },
+   {
+    "ko": "겨울 씨앗 모음",
+    "en": "Winter Seeds",
+    "icon": "/icons/costMaterials/Winter_Seeds.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "봄 씨앗 모음",
+      "en": "Spring Seeds",
+      "icon": "/icons/costMaterials/Spring_Seeds.png",
+      "qty": 2
+     }
+    ],
+    "day": "토요일"
+   },
+   {
+    "ko": "계단",
+    "en": "Staircase",
+    "icon": "/icons/costMaterials/Staircase.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "옥",
+      "en": "Jade",
+      "icon": "/icons/costMaterials/Jade.png",
+      "qty": 1
+     }
+    ],
+    "day": "일요일"
+   },
+   {
+    "ko": "마법 터번",
+    "en": "Magic Turban",
+    "icon": "/icons/costMaterials/Magic_Turban.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "전 정동석",
+      "en": "Omni Geode",
+      "icon": "/icons/costMaterials/Omni_Geode.png",
+      "qty": 333
+     }
+    ],
+    "day": "짝수 날"
+   },
+   {
+    "ko": "마법 카우보이 모자",
+    "en": "Magic Cowboy Hat",
+    "icon": "/icons/costMaterials/Magic_Cowboy_Hat.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "전 정동석",
+      "en": "Omni Geode",
+      "icon": "/icons/costMaterials/Omni_Geode.png",
+      "qty": 333
+     }
+    ],
+    "day": "홀수 날"
+   },
+   {
+    "ko": "공허 유령 펜던트",
+    "en": "Void Ghost Pendant",
+    "icon": "/icons/costMaterials/Void_Ghost_Pendant.png",
+    "gold": 0,
+    "materials": [
+     {
+      "ko": "공허 정수",
+      "en": "Void Essence",
+      "icon": "/icons/costMaterials/Void_Essence.png",
+      "qty": 200
+     }
+    ],
+    "note": "크로버스 하트가 최대치일 때 · 아직 결혼하지 않았을 때 단 1개만 구매가능"
+   }
+  ]
+ }
+]
