@@ -170,7 +170,7 @@ export default function SeedEfficiencyDialog({
             </div>
 
             {/* 경작인 */}
-            <label className="flex cursor-pointer items-start gap-2 text-sm">
+            <div className="flex items-start gap-2 text-sm">
               <input
                 type="checkbox"
                 checked={character.tiller}
@@ -183,7 +183,7 @@ export default function SeedEfficiencyDialog({
                   {t("character.tillerDesc")}
                 </span>
               </span>
-            </label>
+            </div>
 
             {/* 농사 10레벨 전문직: 농업 전문가 ↔ 장인 (체크박스 택1) */}
             <div className="rounded-md border border-[var(--sv-border)] p-2">
@@ -191,9 +191,9 @@ export default function SeedEfficiencyDialog({
                 {t("character.profession")}
               </p>
               {(["agriculturist", "artisan"] as Profession[]).map((p) => (
-                <label
+                <div
                   key={p}
-                  className="flex cursor-pointer items-start gap-2 py-0.5 text-sm"
+                  className="flex items-start gap-2 py-0.5 text-sm"
                 >
                   <input
                     type="checkbox"
@@ -209,15 +209,15 @@ export default function SeedEfficiencyDialog({
                       {t(`character.${p}Desc`)}
                     </span>
                   </span>
-                </label>
+                </div>
               ))}
             </div>
 
             {/* 채집가 · 식물학자 */}
             {(["gatherer", "botanist"] as (keyof CharacterInfo)[]).map((s) => (
-              <label
+              <div
                 key={s}
-                className="flex cursor-pointer items-start gap-2 text-sm"
+                className="flex items-start gap-2 text-sm"
               >
                 <input
                   type="checkbox"
@@ -235,7 +235,7 @@ export default function SeedEfficiencyDialog({
                     {t(`character.${s}Desc`)}
                   </span>
                 </span>
-              </label>
+              </div>
             ))}
           </div>
         )}

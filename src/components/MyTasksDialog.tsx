@@ -162,7 +162,7 @@ export default function MyTasksDialog({ onClose }: { onClose: () => void }) {
   return (
     <Modal title={t("myTasks.title")} onClose={onClose}>
       {/* 이후 할 일 필터 */}
-      <label className="mb-3 flex cursor-pointer items-center gap-2 text-sm">
+      <span className="mb-3 flex items-center gap-2 text-sm">
         <input
           type="checkbox"
           checked={futureOnly}
@@ -170,7 +170,7 @@ export default function MyTasksDialog({ onClose }: { onClose: () => void }) {
           className="size-4 accent-[var(--sv-accent)]"
         />
         {t("myTasks.futureOnly")}
-      </label>
+      </span>
 
       {visible.length === 0 ? (
         <p className="text-sm text-[var(--sv-ink-muted)]">

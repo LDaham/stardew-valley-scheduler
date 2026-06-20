@@ -235,7 +235,7 @@ export default function BundleDialog({
       <div className="mb-2">
         <SeasonFilter selected={selected} onToggle={toggleToken} />
       </div>
-      <label className="mb-4 flex cursor-pointer items-center gap-2 text-sm">
+      <span className="mb-4 flex items-center gap-2 text-sm">
         <input
           type="checkbox"
           checked={incompleteFirst}
@@ -243,7 +243,7 @@ export default function BundleDialog({
           className="size-4 accent-[var(--sv-accent)]"
         />
         {t("common.incompleteFirst")}
-      </label>
+      </span>
 
       {bundleMode === "remix" && (
         <p className="mb-3 text-[11px] leading-relaxed text-[var(--sv-ink-muted)]">

@@ -98,7 +98,7 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
         </div>
       </div>
 
-      <label className="mb-3 flex cursor-pointer items-center gap-2 text-sm">
+      <span className="mb-3 flex items-center gap-2 text-sm">
         <input
           type="checkbox"
           checked={incompleteFirst}
@@ -106,7 +106,7 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
           className="size-4 accent-[var(--sv-accent)]"
         />
         {t("common.incompleteFirst")}
-      </label>
+      </span>
 
       <div className="flex flex-col gap-2">
         {PERFECTION.map((c) => {

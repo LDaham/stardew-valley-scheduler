@@ -165,7 +165,7 @@ export default function BundleTrackerBox() {
         </h2>
         <div className="flex flex-wrap items-center gap-2">
           <SeasonFilter selected={selectedSeasons} onToggle={toggleSeason} />
-          <label className="flex cursor-pointer items-center gap-1.5 text-xs">
+          <span className="flex items-center gap-1.5 text-xs">
             <input
               type="checkbox"
               checked={onlyIncomplete}
@@ -175,8 +175,8 @@ export default function BundleTrackerBox() {
               className="size-4 accent-[var(--sv-accent)]"
             />
             {t("bundleTracker.onlyIncomplete")}
-          </label>
-          <label className="flex cursor-pointer items-center gap-1.5 text-xs">
+          </span>
+          <span className="flex items-center gap-1.5 text-xs">
             <input
               type="checkbox"
               checked={grouped}
@@ -186,7 +186,7 @@ export default function BundleTrackerBox() {
               className="size-4 accent-[var(--sv-accent)]"
             />
             {t("bundleTracker.grouped")}
-          </label>
+          </span>
         </div>
       </div>
 

@@ -54,18 +54,27 @@ export default function Dropdown({
         return;
       setOpen(false);
     };
-    const onScrollOrResize = () => setOpen(false);
+    // 목록 내부 스크롤(overflow-y-auto)은 무시 — 외부(페이지·모달) 스크롤만 좌표가 어긋나므로 닫는다.
+    const onScroll = (e: Event) => {
+      if (
+        e.target instanceof Node &&
+        listRef.current?.contains(e.target)
+      )
+        return;
+      setOpen(false);
+    };
+    const onResize = () => setOpen(false);
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
     window.addEventListener("pointerdown", onDown, true);
-    window.addEventListener("scroll", onScrollOrResize, true);
-    window.addEventListener("resize", onScrollOrResize);
+    window.addEventListener("scroll", onScroll, true);
+    window.addEventListener("resize", onResize);
     window.addEventListener("keydown", onKey);
     return () => {
       window.removeEventListener("pointerdown", onDown, true);
-      window.removeEventListener("scroll", onScrollOrResize, true);
-      window.removeEventListener("resize", onScrollOrResize);
+      window.removeEventListener("scroll", onScroll, true);
+      window.removeEventListener("resize", onResize);
       window.removeEventListener("keydown", onKey);
     };
   }, [open]);

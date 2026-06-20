@@ -353,7 +353,7 @@ function StageCheckbox({
   note?: string;
 }) {
   return (
-    <label className="flex cursor-pointer items-start gap-2 text-sm">
+    <div className="flex items-start gap-2 text-sm">
       <input
         type="checkbox"
         checked={on}
@@ -367,7 +367,7 @@ function StageCheckbox({
           <span className="block text-xs text-[var(--sv-ink-muted)]">{note}</span>
         )}
       </span>
-    </label>
+    </div>
   );
 }
 
@@ -431,7 +431,7 @@ function SeedForm({
   return (
     <div className="flex flex-col gap-3">
       {/* 온실: 모든 계절 작물 등장, 시듦/계절 제약 없음 */}
-      <label className="flex cursor-pointer items-start gap-2 text-sm">
+      <div className="flex items-start gap-2 text-sm">
         <input
           type="checkbox"
           checked={greenhouse}
@@ -444,7 +444,7 @@ function SeedForm({
             {t("addTask.greenhouseNote")}
           </span>
         </span>
-      </label>
+      </div>
 
       <div>
         <FieldLabel>{t("addTask.selectCrop")}</FieldLabel>
@@ -652,7 +652,7 @@ function MachineForm({
       </p>
 
       {/* 반복 제작 */}
-      <label className="flex cursor-pointer items-start gap-2 text-sm">
+      <div className="flex items-start gap-2 text-sm">
         <input
           type="checkbox"
           checked={repeat}
@@ -665,7 +665,7 @@ function MachineForm({
             {t("addTask.repeatNote")}
           </span>
         </span>
-      </label>
+      </div>
 
       <FormFooter
         onAdd={() => onAdd(machine.id, recipe.id, recipe.days, repeat)}
@@ -720,7 +720,7 @@ function FruitForm({
       </p>
 
       {/* 온실: 연중 열매 */}
-      <label className="flex cursor-pointer items-start gap-2 text-sm">
+      <div className="flex items-start gap-2 text-sm">
         <input
           type="checkbox"
           checked={greenhouse}
@@ -733,7 +733,7 @@ function FruitForm({
             {t("addTask.fruitGreenhouseNote")}
           </span>
         </span>
-      </label>
+      </div>
 
       <div>
         <FieldLabel>{t("addTask.selectFruitTree")}</FieldLabel>
@@ -768,7 +768,7 @@ function FruitForm({
       </div>
 
       {/* 매년 수확 알림 반복 */}
-      <label className="flex cursor-pointer items-start gap-2 text-sm">
+      <div className="flex items-start gap-2 text-sm">
         <input
           type="checkbox"
           checked={repeatYearly}
@@ -781,7 +781,7 @@ function FruitForm({
             {t("addTask.fruitRepeatYearlyNote")}
           </span>
         </span>
-      </label>
+      </div>
 
       <FormFooter
         onAdd={() => onAdd(treeId, greenhouse, repeatYearly)}

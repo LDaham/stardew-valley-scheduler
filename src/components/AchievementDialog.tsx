@@ -46,7 +46,7 @@ export default function AchievementDialog({ onClose }: { onClose: () => void }) 
         />
       </div>
 
-      <label className="mb-3 flex cursor-pointer items-center gap-2 text-sm">
+      <span className="mb-3 flex items-center gap-2 text-sm">
         <input
           type="checkbox"
           checked={incompleteFirst}
@@ -54,7 +54,7 @@ export default function AchievementDialog({ onClose }: { onClose: () => void }) 
           className="size-4 accent-[var(--sv-accent)]"
         />
         {t("common.incompleteFirst")}
-      </label>
+      </span>
 
       <ul className="flex flex-col gap-1.5">
         {list.map((a) => {
