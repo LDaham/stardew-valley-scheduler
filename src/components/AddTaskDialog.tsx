@@ -7,9 +7,9 @@ import { addDays, SEASONS, toYearDay, type SDate } from "@/lib/calendar";
 import { CROPS } from "@/data/game-data";
 import { MACHINES, type MachineCategory } from "@/data/machines";
 import { computeHarvest, type Fertilizer } from "@/lib/growth";
-import { FRUIT_TREES, FRUIT_TREE_MATURE_DAYS } from "@/data/fruitTrees";
+import { FRUIT_TREES } from "@/data/fruitTrees";
 import { ADD_TASK_CHILDREN, orderBy } from "@/lib/addTaskOrder";
-import { seedSkipPlantMemos } from "@/lib/chains";
+import { seedSkipPlantMemos, matureFruitHarvestMemos } from "@/lib/chains";
 import type { SeedDefaults } from "@/types/schedule";
 import { asset } from "@/lib/asset";
 import { useSchedule } from "@/components/ScheduleProvider";
@@ -143,9 +143,9 @@ export default function AddTaskDialog({
     onClose();
   };
 
-  // 과일 묘목 심기: 당일에 '묘목 심기' 할 일을 추가하고,
-  // 심기를 완료하면 수확 일정(성숙 후 3일마다)이 생성된다.
-  const addFruitPlant = (
+  // 과일 수확: 이미 다 자란 나무로 보고 수확 일정(계절 동안 3일마다)을 baseDate부터 직접 생성.
+  // 매년 반복이면 연도 이동 시 그 해 배치가 자동 보충된다(수확 메모의 repeatYearly로 탐지).
+  const addFruitHarvest = (
     treeId: string,
     greenhouse: boolean,
     repeatYearly: boolean,
@@ -154,23 +154,18 @@ export default function AddTaskDialog({
     const groupId = `${treeId}-${Date.now().toString(36)}-${Math.random()
       .toString(36)
       .slice(2, 6)}`;
-    addMemo({
-      season: baseDate.season,
-      day: baseDate.day,
-      text: t("addTask.fruitPlantMemo", { fruit: fruitName }),
-      reminderDaysBefore: 0,
-      category: "fruit",
-      cropId: treeId,
-      greenhouse,
-      groupId,
-      // 묘목 심기 메모는 심은 연도에만 표시(매년 반복되지 않도록)
-      year,
-      chain: {
-        kind: "fruitPlant",
-        harvestText: t("addTask.fruitHarvestMemo", { fruit: fruitName }),
+    const ms = matureFruitHarvestMemos(
+      {
+        treeId,
+        greenhouse,
         repeatYearly,
+        groupId,
+        harvestText: t("addTask.fruitHarvestMemo", { fruit: fruitName }),
       },
-    });
+      baseDate,
+      year,
+    );
+    if (ms.length) addMemos(ms);
     onClose();
   };
 
@@ -246,6 +241,8 @@ export default function AddTaskDialog({
           : t(`addTask.${mode}`)
       }
       onClose={onClose}
+      // 하위 탭(작물·묘목·장비·옵션)에서는 좌상단 '‹'로 메뉴 복귀
+      onBack={mode === "menu" ? undefined : () => setMode("menu")}
     >
       {mode === "menu" && (
         <>
@@ -276,17 +273,15 @@ export default function AddTaskDialog({
           setOrder={setAddTaskOrder}
           childOrder={addTaskChildOrder}
           setChildOrder={setAddTaskChildOrder}
-          onBack={() => setMode("menu")}
         />
       )}
 
       {mode === "fruit" && (
         <FruitForm
-          plantDate={baseDate}
+          baseDate={baseDate}
           hiddenItems={hiddenItems}
           childOrder={addTaskChildOrder.fruit ?? []}
-          onBack={() => setMode("menu")}
-          onAdd={addFruitPlant}
+          onAdd={addFruitHarvest}
         />
       )}
       {mode === "seed" && (
@@ -295,7 +290,6 @@ export default function AddTaskDialog({
           dateLabel={dateLabel}
           agri={character.agriculturist}
           defaults={seedDefaults}
-          onBack={() => setMode("menu")}
           onAdd={addSeed}
         />
       )}
@@ -307,7 +301,6 @@ export default function AddTaskDialog({
           fixedCategory={mode === "artisanMachine" ? "artisan" : "refining"}
           hiddenItems={hiddenItems}
           childOrder={addTaskChildOrder[mode] ?? []}
-          onBack={() => setMode("menu")}
           onAdd={addMachineUse}
         />
       )}
@@ -317,23 +310,15 @@ export default function AddTaskDialog({
 }
 
 function FormFooter({
-  onBack,
   onAdd,
   addDisabled,
 }: {
-  onBack: () => void;
   onAdd: () => void;
   addDisabled?: boolean;
 }) {
   const t = useTranslations();
   return (
-    <div className="mt-4 flex items-center justify-between">
-      <button
-        onClick={onBack}
-        className="rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm hover:bg-[var(--sv-bg)]"
-      >
-        ← {t("addTask.back")}
-      </button>
+    <div className="mt-4 flex justify-end">
       <button
         onClick={onAdd}
         disabled={addDisabled}
@@ -391,14 +376,12 @@ function SeedForm({
   dateLabel,
   agri,
   defaults,
-  onBack,
   onAdd,
 }: {
   plantDate: SDate;
   dateLabel: (d: SDate) => string;
   agri: boolean; // 농업 전문가 여부(캐릭터 정보에서 전달)
   defaults: SeedDefaults; // 지난번 선택지 기본값
-  onBack: () => void;
   onAdd: (
     cropId: string,
     fert: Fertilizer,
@@ -440,7 +423,7 @@ function SeedForm({
         <p className="text-sm text-[var(--sv-ink-muted)]">
           {t("addTask.noSeasonCrops")}
         </p>
-        <FormFooter onBack={onBack} onAdd={() => {}} addDisabled />
+        <FormFooter onAdd={() => {}} addDisabled />
       </div>
     );
   }
@@ -521,7 +504,7 @@ function SeedForm({
         <StageCheckbox
           on={plant}
           onChange={setPlant}
-          icon="/icons/addTask/seed.png"
+          icon="/icons/seeds/parsnip.png"
           label={t("addTask.stagePlant")}
           note={t("addTask.stagePlantNote")}
         />
@@ -535,7 +518,7 @@ function SeedForm({
         <StageCheckbox
           on={harvestOn}
           onChange={setHarvestOn}
-          icon={cropId ? `/icons/seeds/${cropId}.png` : "/icons/addTask/seed.png"}
+          icon="/icons/bundleItems/parsnip.png"
           label={t("addTask.stageHarvest")}
           note={t("addTask.stageHarvestNote")}
         />
@@ -549,7 +532,6 @@ function SeedForm({
       </div>
 
       <FormFooter
-        onBack={onBack}
         onAdd={() =>
           crop &&
           onAdd(
@@ -572,7 +554,6 @@ function MachineForm({
   fixedCategory,
   hiddenItems,
   childOrder,
-  onBack,
   onAdd,
 }: {
   startDate: SDate;
@@ -580,7 +561,6 @@ function MachineForm({
   fixedCategory: MachineCategory;
   hiddenItems: Record<string, boolean>;
   childOrder: string[];
-  onBack: () => void;
   onAdd: (
     machineId: string,
     outputId: string,
@@ -618,7 +598,7 @@ function MachineForm({
         <p className="text-sm text-[var(--sv-ink-muted)]">
           {t("addTask.allHidden")}
         </p>
-        <FormFooter onBack={onBack} onAdd={() => {}} addDisabled />
+        <FormFooter onAdd={() => {}} addDisabled />
       </div>
     );
   }
@@ -688,7 +668,6 @@ function MachineForm({
       </label>
 
       <FormFooter
-        onBack={onBack}
         onAdd={() => onAdd(machine.id, recipe.id, recipe.days, repeat)}
       />
     </div>
@@ -696,16 +675,14 @@ function MachineForm({
 }
 
 function FruitForm({
-  plantDate,
+  baseDate,
   hiddenItems,
   childOrder,
-  onBack,
   onAdd,
 }: {
-  plantDate: SDate;
+  baseDate: SDate;
   hiddenItems: Record<string, boolean>;
   childOrder: string[];
-  onBack: () => void;
   onAdd: (treeId: string, greenhouse: boolean, repeatYearly: boolean) => void;
 }) {
   const t = useTranslations();
@@ -721,23 +698,27 @@ function FruitForm({
   const [treeId, setTreeId] = useState<string>(trees[0]?.id ?? "");
   const tree = trees.find((f) => f.id === treeId) ?? trees[0];
 
-  const dateLabel = (d: SDate) =>
-    t("addTask.dateLabel", { season: t(`seasons.${d.season}`), day: d.day });
-  const mature = addDays(plantDate, FRUIT_TREE_MATURE_DAYS);
-
   if (!tree) {
     return (
       <div>
         <p className="text-sm text-[var(--sv-ink-muted)]">
           {t("addTask.allHidden")}
         </p>
-        <FormFooter onBack={onBack} onAdd={() => {}} addDisabled />
+        <FormFooter onAdd={() => {}} addDisabled />
       </div>
     );
   }
 
+  // 비온실 나무가 baseDate 계절에 열매를 맺지 않으면 다음 결실 계절을 안내
+  const fruitsThisSeason = greenhouse || tree.season === baseDate.season;
+
   return (
     <div className="flex flex-col gap-3">
+      {/* 이미 다 자란 나무 기준 안내 */}
+      <p className="text-xs text-[var(--sv-ink-muted)]">
+        {t("addTask.fruitHarvestIntro")}
+      </p>
+
       {/* 온실: 연중 열매 */}
       <label className="flex cursor-pointer items-start gap-2 text-sm">
         <input
@@ -771,15 +752,19 @@ function FruitForm({
       <div className="rounded-md bg-[var(--sv-bg)] px-3 py-2 text-sm">
         <p className="flex items-center gap-1.5">
           <TimeIcon />
-          {t("addTask.fruitMatureNote", { date: dateLabel(mature) })}
-        </p>
-        <p className="text-xs text-[var(--sv-ink-muted)]">
           {greenhouse
             ? t("addTask.fruitHarvestGreenhouseHint")
             : t("addTask.fruitHarvestHint", {
                 season: t(`seasons.${tree.season}`),
               })}
         </p>
+        {!fruitsThisSeason && (
+          <p className="text-xs text-[var(--sv-ink-muted)]">
+            {t("addTask.fruitNextSeasonNote", {
+              season: t(`seasons.${tree.season}`),
+            })}
+          </p>
+        )}
       </div>
 
       {/* 매년 수확 알림 반복 */}
@@ -799,7 +784,6 @@ function FruitForm({
       </label>
 
       <FormFooter
-        onBack={onBack}
         onAdd={() => onAdd(treeId, greenhouse, repeatYearly)}
       />
     </div>
@@ -814,7 +798,6 @@ function OptionsPanel({
   setOrder,
   childOrder,
   setChildOrder,
-  onBack,
 }: {
   hiddenItems: Record<string, boolean>;
   setHiddenItem: (key: string, hidden: boolean) => void;
@@ -822,7 +805,6 @@ function OptionsPanel({
   setOrder: (order: string[]) => void;
   childOrder: Record<string, string[]>;
   setChildOrder: (parent: string, order: string[]) => void;
-  onBack: () => void;
 }) {
   const t = useTranslations();
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
@@ -1009,12 +991,6 @@ function OptionsPanel({
           );
         })}
       </ul>
-
-      <div className="mt-1 flex justify-start">
-        <button onClick={onBack} className="sv-btn px-3 py-1.5 text-sm">
-          ← {t("addTask.back")}
-        </button>
-      </div>
     </div>
   );
 }

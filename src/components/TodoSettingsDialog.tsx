@@ -290,15 +290,22 @@ export default function TodoSettingsDialog({
               신규 방영과 시각적으로 떨어뜨리고(들여쓰기·여백), 체크박스로만 토글되도록
               label이 아닌 span으로 감싼다. */}
           {id === "queenOfSauceNew" && (
-            <span className="mt-2 block border-l-2 border-[var(--sv-border)] pl-2">
+            <span
+              className={`mt-2 block border-l-2 border-[var(--sv-border)] pl-2 ${
+                reminderToggles.queenOfSauceNew ? "" : "opacity-50"
+              }`}
+            >
               <span className="flex items-center gap-1.5 text-xs">
                 <input
                   type="checkbox"
+                  // 저장값(사용자 선택)은 유지하고, 신규 방영이 꺼져 있으면 잠근다.
+                  // → 신규 방영을 다시 켜면 이전 재방송 설정이 그대로 복원된다.
                   checked={reminderToggles.queenOfSauceRerun}
+                  disabled={!reminderToggles.queenOfSauceNew}
                   onChange={(e) =>
                     setReminderToggle("queenOfSauceRerun", e.target.checked)
                   }
-                  className="size-3.5 shrink-0 accent-[var(--sv-accent)]"
+                  className="size-3.5 shrink-0 accent-[var(--sv-accent)] disabled:cursor-not-allowed"
                 />
                 <ReminderIcon id="queenOfSauceRerun" size={14} />
                 <span>{t("reminders.queenOfSauceRerun.title")}</span>

@@ -51,7 +51,6 @@ interface TaskRow {
   done: boolean;
   onToggle: () => void;
   onDelete?: () => void; // 사용자 메모만 삭제 가능
-  logic?: string; // 표시 로직 설명(ⓘ로 펼침, 개발 확인용)
   blocked?: string; // 오늘 해당 가게 휴무로 불가능할 때 사유(빨간색 표시)
   rolled?: boolean; // 이전 날에서 미뤄진 할 일([미뤄짐] 표시)
 }
@@ -215,9 +214,7 @@ export default function Dashboard() {
             />
           ),
           done: false,
-          onToggle: () => {},
-          logic: t("logic.birthday"),
-        });
+          onToggle: () => {},        });
       } else {
         info.push({
           key,
@@ -225,9 +222,7 @@ export default function Dashboard() {
           icon: <EventIcon event={e} size={16} />,
           label: fixedLabel(e),
           done: false,
-          onToggle: () => {},
-          logic: t(`logic.${e.type}`),
-        });
+          onToggle: () => {},        });
       }
     }
 
@@ -236,6 +231,8 @@ export default function Dashboard() {
       const key = `${yd}:reminder-${r.id}`;
       // 소스의 여왕 재방송: 직전 일요일 신규 방영을 봤으면(체크) 생략.
       if (r.id === "queenOfSauceRerun") {
+        // 재방송은 신규 방영의 하위 기능: 신규 방영 토글이 꺼져 있으면 표시하지 않는다.
+        if (!reminderToggles.queenOfSauceNew) continue;
         const sunYd = toYearDay(addDays(date, -3));
         if (taskDone[`${sunYd}:reminder-queenOfSauceNew`]) continue;
       }
@@ -268,9 +265,7 @@ export default function Dashboard() {
             />
           ),
           done: false,
-          onToggle: () => {},
-          logic: t("logic.newSeason"),
-        });
+          onToggle: () => {},        });
         continue;
       }
       const rightBadge = reminderBadge(r.badge);
@@ -288,9 +283,7 @@ export default function Dashboard() {
           label: t(`reminders.${r.id}.title`),
           rightBadge,
           done: false,
-          onToggle: () => {},
-          logic: t(`logic.${r.id}`),
-        });
+          onToggle: () => {},        });
         continue;
       }
       rows.push({
@@ -300,9 +293,7 @@ export default function Dashboard() {
         label: t(`reminders.${r.id}.title`),
         rightBadge,
         done: !!taskDone[key],
-        onToggle: () => toggleTask(key),
-        logic: t(`logic.${r.id}`),
-      });
+        onToggle: () => toggleTask(key),      });
     }
 
     // 메모: 작물 물주기는 한 줄로 묶고, 나머지도 같은 날 같은 카테고리·내용이면
@@ -375,9 +366,7 @@ export default function Dashboard() {
           ) : undefined,
         done: allDone,
         onToggle: () => setDoneMany(ids, !allDone),
-        onDelete,
-        logic: t(`logic.${m.category ?? "machine"}`),
-        blocked: blockedReason(date, m.category),
+        onDelete,        blocked: blockedReason(date, m.category),
         rolled: list.some(isRolled),
       });
     }
@@ -404,9 +393,7 @@ export default function Dashboard() {
         label: `${t("dashboard.wateringGroup")}(${names.join(", ")})`,
         done: allDone,
         onToggle: () => setDoneMany(ids, !allDone),
-        onDelete: () => setDeleteTarget({ cropIds }),
-        logic: t("logic.watering"),
-        rolled: wateringMemos.some(isRolled),
+        onDelete: () => setDeleteTarget({ cropIds }),        rolled: wateringMemos.some(isRolled),
       });
     }
     // 과일 수확 묶음: "과일 수확하기(살구, 체리)" — 같은 나무는 한 번만
@@ -432,9 +419,7 @@ export default function Dashboard() {
         label: `${t("dashboard.fruitGroup")}(${names.join(", ")})`,
         done: allDone,
         onToggle: () => setDoneMany(ids, !allDone),
-        onDelete: () => setDeleteTarget({ cropIds }),
-        logic: t("logic.fruit"),
-        rolled: fruitMemos.some(isRolled),
+        onDelete: () => setDeleteTarget({ cropIds }),        rolled: fruitMemos.some(isRolled),
       });
     }
 
@@ -829,14 +814,6 @@ function TaskList({
   hideCheckbox?: boolean;
 }) {
   const t = useTranslations();
-  const [openLogic, setOpenLogic] = useState<Set<string>>(new Set());
-  const toggleLogic = (key: string) =>
-    setOpenLogic((prev) => {
-      const next = new Set(prev);
-      if (next.has(key)) next.delete(key);
-      else next.add(key);
-      return next;
-    });
 
   if (rows.length === 0) {
     return <p className="text-base text-[var(--sv-ink-muted)]">{emptyText}</p>;
@@ -876,16 +853,6 @@ function TaskList({
               </span>
             </div>
             {row.rightBadge}
-            {row.logic && (
-              <button
-                type="button"
-                onClick={() => toggleLogic(row.key)}
-                aria-label="표시 로직"
-                className="shrink-0 text-sm font-bold text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
-              >
-                ⓘ
-              </button>
-            )}
             {row.onDelete && (
               <button
                 type="button"
@@ -904,11 +871,6 @@ function TaskList({
           {row.blocked && !row.done && (
             <p className="mx-2 mb-1 mt-0.5 rounded bg-[#fbeaea] px-2 py-1 text-[13px] font-semibold leading-snug text-[#b02a2a]">
               ⚠ {row.blocked}
-            </p>
-          )}
-          {row.logic && openLogic.has(row.key) && (
-            <p className="mx-2 mb-1 mt-0.5 rounded bg-[var(--sv-bg)] px-2 py-1 text-[13px] leading-snug text-[var(--sv-ink-muted)]">
-              {row.logic}
             </p>
           )}
         </li>

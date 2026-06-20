@@ -102,12 +102,13 @@ export function seedSkipPlantMemos(
   return [cropWaterMemo(baseDate, parent, chain, chain.remaining)];
 }
 
-// 과일나무 수확 공통 정보(텍스트·작물·온실·묶음)
+// 과일나무 수확 공통 정보(텍스트·작물·온실·묶음·매년 반복)
 interface FruitBatchBase {
   text: string;
   cropId: string;
   greenhouse: boolean;
   groupId?: string;
+  repeatYearly?: boolean; // 매년 반복 대상 표시(연도 이동 시 보충 탐지에 사용)
 }
 
 // 수확 메모 1건(특정 연도 스탬프)
@@ -126,6 +127,7 @@ function fruitHarvestMemo(
     greenhouse: base.greenhouse,
     groupId: base.groupId,
     year,
+    repeatYearly: base.repeatYearly,
   };
 }
 
@@ -197,6 +199,43 @@ function fruitPlantSpawn(
   return [];
 }
 
+// 과일 수확 탭: 이미 다 자란 나무로 보고 baseDate(추가한 날)부터 첫 결실 배치를 생성한다.
+// 성숙(+28) 없이 현재 계절부터 바로 수확. 비온실은 나무 계절을 만날 때까지 연도를 탐색.
+export function matureFruitHarvestMemos(
+  params: {
+    treeId: string;
+    greenhouse: boolean;
+    harvestText: string;
+    groupId?: string;
+    repeatYearly: boolean;
+  },
+  baseDate: SDate,
+  year: number,
+): NewMemo[] {
+  const tree = FRUIT_TREES.find((f) => f.id === params.treeId);
+  if (!tree) return [];
+  const base: FruitBatchBase = {
+    text: params.harvestText,
+    cropId: params.treeId,
+    greenhouse: params.greenhouse,
+    groupId: params.groupId,
+    repeatYearly: params.repeatYearly,
+  };
+  const absBase = toAbsDay(baseDate, year);
+  if (params.greenhouse) {
+    // 연중 결실: 3개 누적(+2일) 시점부터 3일 주기.
+    const anchor = absBase + 2;
+    const firstYear = Math.floor((anchor - 1) / DAYS_PER_YEAR) + 1;
+    return greenhouseFruitBatch(anchor, firstYear, base);
+  }
+  // 비온실: 성숙 보정 없이 absBase를 성숙일로 사용 → 나무 계절을 만나는 첫 연도의 배치.
+  for (let y = year; y <= year + 2; y++) {
+    const batch = nonGreenhouseFruitBatch(tree, absBase, y, base);
+    if (batch.length) return batch;
+  }
+  return [];
+}
+
 // 연도 이동 시: 반복 설정된 과일나무에 targetYear 수확 배치가 없으면 생성.
 // 첫 결실 연도·온실 주기는 기존 수확 메모(같은 groupId, 연도 스탬프)에서 역산하므로
 // 묘목 심기 메모에 별도 데이터를 저장하지 않는다. 같은 연도 중복 생성하지 않음(idempotent).
@@ -205,29 +244,41 @@ export function spawnYearlyFruitHarvests(
   targetYear: number,
 ): NewMemo[] {
   const out: NewMemo[] = [];
-  for (const p of memos) {
-    if (p.chain?.kind !== "fruitPlant" || !p.chain.repeatYearly) continue;
-    if (!p.spawned || !p.groupId || !p.cropId) continue;
-    const tree = FRUIT_TREES.find((f) => f.id === p.cropId);
-    if (!tree) continue;
+  // 반복 대상 groupId 수집:
+  // - (신)과일 수확 탭: 수확 메모 자체의 repeatYearly 플래그
+  // - (구)묘목 심기: 완료된(spawned) fruitPlant 부모의 repeatYearly
+  const repeatGroups = new Set<string>();
+  for (const m of memos) {
+    if (m.category === "fruit" && !m.chain && m.repeatYearly && m.groupId)
+      repeatGroups.add(m.groupId);
+    else if (
+      m.chain?.kind === "fruitPlant" &&
+      m.chain.repeatYearly &&
+      m.spawned &&
+      m.groupId
+    )
+      repeatGroups.add(m.groupId);
+  }
+  for (const groupId of repeatGroups) {
     const existing = memos.filter(
       (m) =>
-        m.category === "fruit" &&
-        !m.chain &&
-        m.groupId === p.groupId &&
-        m.year != null,
+        m.category === "fruit" && !m.chain && m.groupId === groupId && m.year != null,
     );
     if (existing.length === 0) continue; // 첫 배치 없음(미완료/삭제)
+    const sample = existing[0];
+    const tree = FRUIT_TREES.find((f) => f.id === sample.cropId);
+    if (!tree || !sample.cropId) continue;
     const years = existing.map((m) => m.year!);
     const firstYear = Math.min(...years);
     if (targetYear <= firstYear || years.includes(targetYear)) continue;
     const base: FruitBatchBase = {
-      text: p.chain.harvestText,
-      cropId: p.cropId,
-      greenhouse: !!p.greenhouse,
-      groupId: p.groupId,
+      text: sample.text,
+      cropId: sample.cropId,
+      greenhouse: !!sample.greenhouse,
+      groupId,
+      repeatYearly: true,
     };
-    if (p.greenhouse) {
+    if (sample.greenhouse) {
       const anchorAbs = Math.min(
         ...existing.map((m) =>
           toAbsDay({ season: m.season, day: m.day }, m.year!),

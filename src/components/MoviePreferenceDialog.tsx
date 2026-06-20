@@ -161,8 +161,8 @@ function PrefChip({ item }: { item: PrefItem }) {
       <Image
         src={asset(item.icon)}
         alt=""
-        width={22}
-        height={22}
+        width={20}
+        height={20}
         unoptimized
         className="shrink-0"
         style={{ imageRendering: "pixelated" }}

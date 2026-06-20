@@ -82,6 +82,8 @@ export interface Memo {
   greenhouse?: boolean;
   // 특정 연도에만 표시할 메모(과일나무 연차별 수확). 없으면 매년 순환 표시.
   year?: number;
+  // 과일 수확 메모의 '매년 반복' 여부(연도 이동 시 그 해 배치 자동 보충 대상 표시).
+  repeatYearly?: boolean;
   // 작물 생명주기 메모의 수확 마감(yearDay). 비온실에서 이 날을 넘기면 통째로 소멸.
   deadlineYearDay?: number;
   // 완료 시 후속 할 일을 생성하는 체인. spawned=이미 생성 완료(재체크 시 중복 방지).
