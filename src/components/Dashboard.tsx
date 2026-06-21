@@ -799,7 +799,7 @@ function DeleteTaskDialog({
 }
 
 // 왼쪽 체크박스 + 완료 시 줄긋기·희미 처리. 모든 항목(이벤트/리마인더/메모) 공통 렌더.
-// hideCheckbox=정보(info) 항목(완료 표시 없음). ⓘ로 표시 로직 펼침.
+// hideCheckbox=정보(info) 항목(완료 표시 없음).
 function TaskList({
   rows,
   emptyText,

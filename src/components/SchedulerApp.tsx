@@ -9,9 +9,17 @@ import SettingsDialog from "@/components/SettingsDialog";
 import TodoSettingsDialog from "@/components/TodoSettingsDialog";
 import BundleDialog from "@/components/BundleDialog";
 import PerfectionDialog from "@/components/PerfectionDialog";
-import InfoHubDialog from "@/components/InfoHubDialog";
 import AchievementDialog from "@/components/AchievementDialog";
+import ShopScheduleDialog from "@/components/ShopScheduleDialog";
+import SeedEfficiencyDialog from "@/components/SeedEfficiencyDialog";
+import FishInfoDialog from "@/components/FishInfoDialog";
+import BirthdayGiftDialog from "@/components/BirthdayGiftDialog";
+import MoviePreferenceDialog from "@/components/MoviePreferenceDialog";
+import CostMaterialsDialog from "@/components/CostMaterialsDialog";
 import PixelIcon from "@/components/PixelIcon";
+
+// 메인 헤더의 참고 도구(정보 허브를 펼쳐 한 번에 진입). 각 항목은 모달로 열린다.
+type InfoView = "shop" | "seed" | "fish" | "gift" | "movie" | "cost";
 
 function AppShell() {
   const t = useTranslations();
@@ -20,8 +28,26 @@ function AppShell() {
   const [todoSettingsOpen, setTodoSettingsOpen] = useState(false);
   const [bundleOpen, setBundleOpen] = useState(false);
   const [perfectionOpen, setPerfectionOpen] = useState(false);
-  const [infoOpen, setInfoOpen] = useState(false);
   const [achievementOpen, setAchievementOpen] = useState(false);
+  const [openInfo, setOpenInfo] = useState<InfoView | null>(null);
+
+  // 헤더 참고 도구 줄(아이콘·라벨은 기존 정보 허브와 동일)
+  const infoItems: { key: InfoView; icon: string; label: string }[] = [
+    { key: "seed", icon: "/icons/ui/corn.png", label: t("seedEfficiency.short") },
+    { key: "fish", icon: "/icons/tools/fishingRod.png", label: t("fish.title") },
+    { key: "shop", icon: "/icons/ui/time.png", label: t("shopSchedule.short") },
+    {
+      key: "cost",
+      icon: "/icons/shops/carpenter.png",
+      label: t("costMaterials.title"),
+    },
+    { key: "gift", icon: "/icons/ui/gift.png", label: t("info.birthdayGift") },
+    {
+      key: "movie",
+      icon: "/icons/shops/movieTheater.png",
+      label: t("info.moviePref"),
+    },
+  ];
 
   return (
     <div className="sv-frame mx-auto my-4 flex w-full max-w-5xl flex-col gap-4 p-4 sm:p-6">
@@ -66,13 +92,6 @@ function AppShell() {
             >
               <PixelIcon src="/icons/ui/achievement.jpg" size={18} /> {t("achievement.short")}
             </button>
-            <button
-              onClick={() => setInfoOpen(true)}
-              aria-label={t("info.open")}
-              className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
-            >
-              <PixelIcon src="/icons/ui/globe.png" size={18} /> {t("info.short")}
-            </button>
           </div>
           {/* 우측: 스케줄러 설정 */}
           <div className="flex flex-wrap gap-2">
@@ -84,6 +103,19 @@ function AppShell() {
               <PixelIcon src="/icons/ui/note.png" size={18} /> {t("settings.todoSettings")}
             </button>
           </div>
+        </div>
+
+        {/* 참고 도구 전용 줄: 가게 일정·작물 효율·생선·생일 선물·영화·비용(각각 모달) */}
+        <div className="flex flex-wrap gap-2 border-t border-[var(--sv-border)] pt-3">
+          {infoItems.map((it) => (
+            <button
+              key={it.key}
+              onClick={() => setOpenInfo(it.key)}
+              className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
+            >
+              <PixelIcon src={it.icon} size={18} /> {it.label}
+            </button>
+          ))}
         </div>
       </header>
 
@@ -97,14 +129,34 @@ function AppShell() {
       {perfectionOpen && (
         <PerfectionDialog onClose={() => setPerfectionOpen(false)} />
       )}
-      {infoOpen && (
-        <InfoHubDialog
-          season={currentDate.season}
-          onClose={() => setInfoOpen(false)}
-        />
-      )}
       {achievementOpen && (
         <AchievementDialog onClose={() => setAchievementOpen(false)} />
+      )}
+
+      {/* 참고 도구 모달(허브 없이 메인에서 바로 진입 — onBack 없음) */}
+      {openInfo === "shop" && (
+        <ShopScheduleDialog onClose={() => setOpenInfo(null)} />
+      )}
+      {openInfo === "seed" && (
+        <SeedEfficiencyDialog
+          season={currentDate.season}
+          onClose={() => setOpenInfo(null)}
+        />
+      )}
+      {openInfo === "fish" && (
+        <FishInfoDialog
+          season={currentDate.season}
+          onClose={() => setOpenInfo(null)}
+        />
+      )}
+      {openInfo === "gift" && (
+        <BirthdayGiftDialog onClose={() => setOpenInfo(null)} />
+      )}
+      {openInfo === "movie" && (
+        <MoviePreferenceDialog onClose={() => setOpenInfo(null)} />
+      )}
+      {openInfo === "cost" && (
+        <CostMaterialsDialog onClose={() => setOpenInfo(null)} />
       )}
     </div>
   );
