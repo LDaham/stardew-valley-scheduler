@@ -28,8 +28,8 @@ export default function CostMaterialsDialog({
 
   return (
     <Modal title={t("costMaterials.title")} onClose={onClose} onBack={onBack}>
-      {/* 상단 가게 레이블(탭): 클릭 시 아래 패널이 해당 가게로 전환 */}
-      <div className="mb-3 flex flex-wrap gap-1.5">
+      {/* 상단 가게 탭(밑줄형 — 필터 칩과 구분): 클릭 시 아래 패널 전환 */}
+      <div className="mb-3 flex flex-wrap gap-1 border-b border-[var(--sv-border)]">
         {COST_SHOPS.map((s) => {
           const active = s.id === selected;
           return (
@@ -37,10 +37,10 @@ export default function CostMaterialsDialog({
               key={s.id}
               onClick={() => setSelected(s.id)}
               aria-pressed={active}
-              className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${
+              className={`-mb-px flex items-center gap-1.5 border-b-2 px-3 py-1.5 text-base font-semibold transition-transform ${
                 active
-                  ? "bg-[var(--sv-accent)] text-white"
-                  : "border border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
+                  ? "-translate-y-0.5 border-[var(--sv-accent)] text-[var(--sv-ink)]"
+                  : "border-transparent text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
               }`}
             >
               <PixelIcon src={`/icons/shops/${COST_SHOP_ICON[s.id]}.png`} size={16} />

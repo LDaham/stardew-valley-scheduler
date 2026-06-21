@@ -417,9 +417,9 @@ export default function TodoSettingsDialog({
               key={section}
               onClick={() => setActive(section)}
               aria-pressed={isActive}
-              className={`-mb-px flex items-center gap-1.5 border-b-2 px-3 py-1.5 text-sm font-semibold ${
+              className={`-mb-px flex items-center gap-1.5 border-b-2 px-3 py-1.5 text-base font-semibold transition-transform ${
                 isActive
-                  ? "border-[var(--sv-accent)] text-[var(--sv-ink)]"
+                  ? "-translate-y-0.5 border-[var(--sv-accent)] text-[var(--sv-ink)]"
                   : "border-transparent text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
               }`}
             >

@@ -219,8 +219,8 @@ export default function AddTaskDialog({
         />
       ) : (
         <>
-          {/* 상단 카테고리 레이블(탭) + 우측 상세 옵션 버튼 */}
-          <div className="mb-3 flex flex-wrap items-center gap-1.5">
+          {/* 상단 카테고리 탭(밑줄형 — 필터 칩과 구분) + 우측 상세 옵션 버튼(액션) */}
+          <div className="mb-3 flex flex-wrap items-center gap-1 border-b border-[var(--sv-border)]">
             {visibleItems.map((m) => {
               const isActive = m === current;
               return (
@@ -228,10 +228,10 @@ export default function AddTaskDialog({
                   key={m}
                   onClick={() => setActive(m)}
                   aria-pressed={isActive}
-                  className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${
+                  className={`-mb-px flex items-center gap-1.5 border-b-2 px-3 py-1.5 text-base font-semibold transition-transform ${
                     isActive
-                      ? "bg-[var(--sv-accent)] text-white"
-                      : "border border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
+                      ? "-translate-y-0.5 border-[var(--sv-accent)] text-[var(--sv-ink)]"
+                      : "border-transparent text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
                   }`}
                 >
                   <PixelIcon src={MENU_ICONS[m]} size={16} />
@@ -242,7 +242,7 @@ export default function AddTaskDialog({
             <button
               onClick={() => setOptionsOpen(true)}
               aria-label={t("addTask.options")}
-              className="ml-auto flex items-center gap-1.5 rounded-full border border-[var(--sv-border)] px-2.5 py-1 text-xs text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
+              className="mb-1 ml-auto flex items-center gap-1.5 rounded-md border border-[var(--sv-border)] px-2.5 py-1 text-xs text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
             >
               <PixelIcon src="/icons/ui/settings.png" size={14} />
               {t("addTask.options")}
