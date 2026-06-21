@@ -10,7 +10,7 @@ import { GIFT_VILLAGERS } from "@/data/gifts";
 import { BIRTHDAYS, type Birthday } from "@/data/game-data";
 import { SEASONS } from "@/lib/calendar";
 
-// 생일 선물: 전체 주민 목록(생일 순). 주민 클릭 시 같은 크기 창으로 선물 반응을 보여주고
+// 선물 선호: 전체 주민 목록(생일 순). 주민 클릭 시 같은 크기 창으로 선물 반응을 보여주고
 // 좌상단 '‹'로 목록으로 돌아온다(영화 선호 탭과 동일한 동작).
 export default function BirthdayGiftDialog({
   onClose,
@@ -33,7 +33,7 @@ export default function BirthdayGiftDialog({
     return t(`villagers.${a}`).localeCompare(t(`villagers.${b}`));
   });
 
-  // 상세: 주민 선물 반응(목록과 같은 크기 창, '‹'로 복귀)
+  // 상세: 주민 선물 선호(목록과 같은 크기 창, '‹'로 복귀)
   if (selected) {
     return (
       <Modal

@@ -14,7 +14,7 @@ import {
   type CostOffer,
 } from "@/data/costMaterials";
 
-// 비용 및 재료: 가게 선택 → 판매 물품의 비용(골드)·재료 표시.
+// 비용 및 재료: 상단 레이블(탭)로 가게 선택 → 해당 가게의 비용(골드)·재료 패널 표시.
 export default function CostMaterialsDialog({
   onClose,
   onBack,
@@ -23,63 +23,48 @@ export default function CostMaterialsDialog({
   onBack?: () => void;
 }) {
   const t = useTranslations();
-  const [selected, setSelected] = useState<string | null>(null);
-
-  if (selected) {
-    return (
-      <ShopOffersView
-        id={selected}
-        onClose={onClose}
-        onBack={() => setSelected(null)}
-      />
-    );
-  }
+  // 기본 선택: 첫 가게(탭 형태라 항상 하나가 열려 있다)
+  const [selected, setSelected] = useState<string>(COST_SHOPS[0].id);
 
   return (
     <Modal title={t("costMaterials.title")} onClose={onClose} onBack={onBack}>
-      <p className="mb-3 text-xs text-[var(--sv-ink-muted)]">
-        {t("costMaterials.hint")}
-      </p>
-      <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-        {COST_SHOPS.map((s) => (
-          <li key={s.id}>
+      {/* 상단 가게 레이블(탭): 클릭 시 아래 패널이 해당 가게로 전환 */}
+      <div className="mb-3 flex flex-wrap gap-1.5">
+        {COST_SHOPS.map((s) => {
+          const active = s.id === selected;
+          return (
             <button
+              key={s.id}
               onClick={() => setSelected(s.id)}
-              className="flex w-full cursor-pointer items-center gap-2 rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] px-3 py-3 text-left text-sm font-semibold hover:bg-[var(--sv-bg)]"
+              aria-pressed={active}
+              className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${
+                active
+                  ? "bg-[var(--sv-accent)] text-white"
+                  : "border border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
+              }`}
             >
-              <PixelIcon src={`/icons/shops/${COST_SHOP_ICON[s.id]}.png`} size={20} />
+              <PixelIcon src={`/icons/shops/${COST_SHOP_ICON[s.id]}.png`} size={16} />
               {t(`costMaterials.shops.${s.id}`)}
             </button>
-          </li>
-        ))}
-      </ul>
+          );
+        })}
+      </div>
+
+      <ShopOffersPanel id={selected} />
+
+      <p className="mt-3 text-[10px] text-[var(--sv-ink-muted)]">
+        {t("costMaterials.source")}
+      </p>
     </Modal>
   );
 }
 
-function ShopOffersView({
-  id,
-  onClose,
-  onBack,
-}: {
-  id: string;
-  onClose: () => void;
-  onBack: () => void;
-}) {
-  const t = useTranslations();
+// 선택된 가게의 판매 물품 패널(모달 래퍼 없이 본문만).
+function ShopOffersPanel({ id }: { id: string }) {
   const shop = getCostShop(id);
 
   return (
-    <Modal
-      title={t(`costMaterials.shops.${id}`)}
-      onClose={onClose}
-      onBack={onBack}
-    >
-      <div className="mb-3 flex items-center gap-2">
-        <PixelIcon src={`/icons/shops/${COST_SHOP_ICON[id]}.png`} size={22} />
-        <h3 className="text-base font-bold">{t(`costMaterials.shops.${id}`)}</h3>
-      </div>
-
+    <>
       {/* 모바일: 1열 */}
       <div className="flex flex-col gap-2 sm:hidden">
         {shop?.offers.map((o, i) => (
@@ -94,11 +79,7 @@ function ShopOffersView({
           render={(o) => <OfferRow offer={o} />}
         />
       </div>
-
-      <p className="mt-3 text-[10px] text-[var(--sv-ink-muted)]">
-        {t("costMaterials.source")}
-      </p>
-    </Modal>
+    </>
   );
 }
 

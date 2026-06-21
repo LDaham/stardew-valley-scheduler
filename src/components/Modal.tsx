@@ -14,12 +14,16 @@ export default function Modal({
   onClose,
   onBack,
   titleAfter,
+  maxWidthClass = "max-w-3xl",
+  center = false,
   children,
 }: {
   title: string;
   onClose: () => void;
   onBack?: () => void; // 있으면 좌상단에 '이전'(허브 복귀) 버튼 표시
   titleAfter?: ReactNode; // 제목 오른쪽에 붙는 보조 컨트롤(예: 표시 토글)
+  maxWidthClass?: string; // 모달 최대 너비(기본 max-w-3xl, 확인창 등은 더 좁게)
+  center?: boolean; // 세로 중앙 정렬(기본은 상단 고정). 중첩 확인창 등에서 사용
   children: ReactNode;
 }) {
   const t = useTranslations();
@@ -50,7 +54,9 @@ export default function Modal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center bg-black/40 p-4 pt-[7.5vh]"
+      className={`fixed inset-0 z-50 flex justify-center bg-black/40 p-4 ${
+        center ? "items-center" : "items-start pt-[7.5vh]"
+      }`}
       onMouseDown={(e) => {
         pressedOnBackdrop.current = e.target === e.currentTarget;
       }}
@@ -60,7 +66,7 @@ export default function Modal({
       role="presentation"
     >
       <div
-        className="max-h-[85vh] w-full max-w-3xl overflow-y-auto rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-5 shadow-xl"
+        className={`relative max-h-[85vh] w-full ${maxWidthClass} overflow-y-auto rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-5 shadow-xl`}
         role="dialog"
         aria-modal="true"
       >

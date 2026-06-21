@@ -53,20 +53,12 @@ function AppShell() {
     <div className="sv-frame mx-auto my-4 flex w-full max-w-5xl flex-col gap-4 p-4 sm:p-6">
       {/* 헤더: 타이틀 배너(중앙, 우측에 설정 버튼) + 좌/우 버튼 그룹 */}
       <header className="flex flex-col gap-3">
-        <div className="relative flex items-center justify-center">
+        <div className="flex items-center justify-center">
           <div className="sv-banner px-6 py-2 text-center">
             <h1 className="text-xl font-bold tracking-wide text-[var(--sv-ink)]">
               {t("common.appName")}
             </h1>
           </div>
-          {/* 설정 버튼: 타이틀 라인 우측으로 이동 */}
-          <button
-            onClick={() => setSettingsOpen(true)}
-            aria-label={t("settings.open")}
-            className="sv-btn absolute right-0 flex items-center gap-1.5 px-3 py-2 text-sm"
-          >
-            <PixelIcon src="/icons/ui/settings.png" size={18} /> {t("settings.title")}
-          </button>
         </div>
         <div className="flex flex-wrap items-center justify-between gap-2">
           {/* 좌측: 꾸러미 · 완벽 · 업적 · 정보 */}
@@ -93,19 +85,19 @@ function AppShell() {
               <PixelIcon src="/icons/ui/achievement.jpg" size={18} /> {t("achievement.short")}
             </button>
           </div>
-          {/* 우측: 스케줄러 설정 */}
+          {/* 우측: 설정(메인화면 설정은 이 안으로 진입) */}
           <div className="flex flex-wrap gap-2">
             <button
-              onClick={() => setTodoSettingsOpen(true)}
-              aria-label={t("settings.openTodo")}
+              onClick={() => setSettingsOpen(true)}
+              aria-label={t("settings.open")}
               className="sv-btn flex items-center gap-1.5 px-3 py-2 text-sm"
             >
-              <PixelIcon src="/icons/ui/note.png" size={18} /> {t("settings.todoSettings")}
+              <PixelIcon src="/icons/ui/settings.png" size={18} /> {t("settings.title")}
             </button>
           </div>
         </div>
 
-        {/* 참고 도구 전용 줄: 가게 일정·작물 효율·생선·생일 선물·영화·비용(각각 모달) */}
+        {/* 참고 도구 전용 줄: 가게 일정·작물 효율·생선·선물 선호·영화·비용(각각 모달) */}
         <div className="flex flex-wrap gap-2 border-t border-[var(--sv-border)] pt-3">
           {infoItems.map((it) => (
             <button
@@ -121,9 +113,23 @@ function AppShell() {
 
       <Dashboard />
 
-      {settingsOpen && <SettingsDialog onClose={() => setSettingsOpen(false)} />}
+      {settingsOpen && (
+        <SettingsDialog
+          onClose={() => setSettingsOpen(false)}
+          onOpenTodoSettings={() => {
+            setSettingsOpen(false);
+            setTodoSettingsOpen(true);
+          }}
+        />
+      )}
       {todoSettingsOpen && (
-        <TodoSettingsDialog onClose={() => setTodoSettingsOpen(false)} />
+        <TodoSettingsDialog
+          onClose={() => setTodoSettingsOpen(false)}
+          onBack={() => {
+            setTodoSettingsOpen(false);
+            setSettingsOpen(true);
+          }}
+        />
       )}
       {bundleOpen && <BundleDialog onClose={() => setBundleOpen(false)} />}
       {perfectionOpen && (

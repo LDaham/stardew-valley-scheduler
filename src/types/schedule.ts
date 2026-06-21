@@ -138,6 +138,8 @@ export interface ScheduleState {
   rainFishShown: boolean;
   // 메인 상단 박스 표시 순서. 값: "shopSchedule" | "bundleTracker" | "rainFish".
   mainOrder: string[];
+  // 메인 메모장 텍스트(할 일 목록 오른쪽). 자유 입력 메모.
+  notepadText: string;
 }
 
 export type BundleMode = "standard" | "remix";
@@ -162,6 +164,7 @@ export interface DialogFilters {
   trackerGrouped: boolean; // 꾸러미 단위 박스로 묶어서 보기(끄면 물품만 평면 표시)
   shopKeyApplied: boolean; // 가게 일정: 마을의 열쇠 적용
   shopCcRestored: boolean; // 가게 일정: 마을회관 복구
-  shopFestivalOn: boolean; // 가게 일정: 축제날 가정
+  shopFestivalOn: boolean; // 가게 일정 탭 전용: 축제날 가정(메인 박스는 당일 날짜로 자동 판정)
+  shopBoatRepaired: boolean; // 가게 일정: 진저섬 배 수리(생선 가게 8시 개점)
   shopPinned: string[]; // 가게 일정: 고정(핀)된 가게 id 목록(우선 표시)
 }

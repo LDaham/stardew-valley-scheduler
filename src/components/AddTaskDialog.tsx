@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { addDays, SEASONS, toYearDay, type SDate } from "@/lib/calendar";
 import { CROPS } from "@/data/game-data";
@@ -11,20 +10,14 @@ import { FRUIT_TREES } from "@/data/fruitTrees";
 import { ADD_TASK_CHILDREN, orderBy } from "@/lib/addTaskOrder";
 import { seedSkipPlantMemos, matureFruitHarvestMemos } from "@/lib/chains";
 import type { SeedDefaults } from "@/types/schedule";
-import { asset } from "@/lib/asset";
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
 import Dropdown from "@/components/Dropdown";
 import TimeIcon from "@/components/TimeIcon";
 import PixelIcon from "@/components/PixelIcon";
 
-type Mode =
-  | "menu"
-  | "seed"
-  | "fruit"
-  | "artisanMachine"
-  | "refiningMachine"
-  | "options";
+// 카테고리 탭 식별자(상단 레이블). options는 별도 상세 설정 화면.
+type Category = "seed" | "fruit" | "artisanMachine" | "refiningMachine";
 
 // 비온실 작물의 수확 마감(yearDay): 심은 계절부터 작물이 자라는 마지막 연속 계절의 28일.
 // 이 날을 넘기면(미루기로 밀려서) 작물이 시들어 사라진다.
@@ -73,7 +66,15 @@ export default function AddTaskDialog({
     setAddTaskOrder,
     setAddTaskChildOrder,
   } = useSchedule();
-  const [mode, setMode] = useState<Mode>("menu");
+  // 표시할 카테고리(상세 옵션에서 숨기지 않은 것, 사용자 순서)
+  const visibleItems = addTaskOrder.filter(
+    (m) => !hiddenItems[`menu:${m}`],
+  ) as Category[];
+  const [active, setActive] = useState<Category>(visibleItems[0] ?? "seed");
+  // 상세 옵션(표시·순서) 화면 전환
+  const [optionsOpen, setOptionsOpen] = useState(false);
+  // 숨김 변경 등으로 현재 탭이 사라지면 첫 탭으로 보정
+  const current = visibleItems.includes(active) ? active : visibleItems[0];
 
   const dateLabel = (d: SDate) =>
     t("addTask.dateLabel", { season: t(`seasons.${d.season}`), day: d.day });
@@ -196,76 +197,18 @@ export default function AddTaskDialog({
     onClose();
   };
 
-  // 메뉴 항목 클릭 동작(모든 항목이 상세 폼 모드로 전환)
-  const menuAction = (m: string): (() => void) => () => setMode(m as Mode);
-
-  // 메뉴 항목 렌더(아이콘 + 라벨 + 클릭 동작 공통). aside는 우측 보조 버튼.
-  const renderMenuItem = (
-    m: string,
-    onClick: () => void,
-    aside?: React.ReactNode,
-  ) => (
-    <li key={m}>
-      <div className="flex items-center gap-2">
-        <button
-          onClick={onClick}
-          className="flex flex-1 items-center gap-3 rounded-lg border border-[var(--sv-border)] px-3 py-3 text-left text-sm font-semibold hover:bg-[var(--sv-bg)]"
-        >
-          <Image
-            src={asset(MENU_ICONS[m as keyof typeof MENU_ICONS])}
-            alt=""
-            width={28}
-            height={28}
-            unoptimized
-            className="shrink-0"
-            // 크기 고정(+object-contain): 비정사각형 아이콘이 메뉴 행을 늘리지 않도록
-            style={{
-              width: 28,
-              height: 28,
-              objectFit: "contain",
-              imageRendering: "pixelated",
-            }}
-          />
-          {t(`addTask.${m}`)}
-        </button>
-        {aside}
-      </div>
-    </li>
-  );
-
   return (
     <Modal
       title={
-        mode === "menu"
-          ? t("addTask.titleWithDay", { day: dayLabel })
-          : t(`addTask.${mode}`)
+        optionsOpen
+          ? t("addTask.options")
+          : t("addTask.titleWithDay", { day: dayLabel })
       }
       onClose={onClose}
-      // 하위 탭(작물·묘목·장비·옵션)에서는 좌상단 '‹'로 메뉴 복귀
-      onBack={mode === "menu" ? undefined : () => setMode("menu")}
+      // 상세 옵션 화면에서는 좌상단 '‹'로 탭 목록 복귀
+      onBack={optionsOpen ? () => setOptionsOpen(false) : undefined}
     >
-      {mode === "menu" && (
-        <>
-          {/* 상세 옵션(보고 싶지 않은 항목 숨기기) */}
-          <div className="mb-2 flex justify-end">
-            <button
-              onClick={() => setMode("options")}
-              aria-label={t("addTask.options")}
-              className="flex items-center gap-1.5 rounded-lg border border-[var(--sv-border)] px-2.5 py-1 text-xs text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
-            >
-              <PixelIcon src="/icons/ui/settings.png" size={14} />
-              {t("addTask.options")}
-            </button>
-          </div>
-          <ul className="flex flex-col gap-2">
-            {addTaskOrder
-              .filter((m) => !hiddenItems[`menu:${m}`])
-              .map((m) => renderMenuItem(m, menuAction(m)))}
-          </ul>
-        </>
-      )}
-
-      {mode === "options" && (
+      {optionsOpen ? (
         <OptionsPanel
           hiddenItems={hiddenItems}
           setHiddenItem={setHiddenItem}
@@ -274,37 +217,69 @@ export default function AddTaskDialog({
           childOrder={addTaskChildOrder}
           setChildOrder={setAddTaskChildOrder}
         />
-      )}
+      ) : (
+        <>
+          {/* 상단 카테고리 레이블(탭) + 우측 상세 옵션 버튼 */}
+          <div className="mb-3 flex flex-wrap items-center gap-1.5">
+            {visibleItems.map((m) => {
+              const isActive = m === current;
+              return (
+                <button
+                  key={m}
+                  onClick={() => setActive(m)}
+                  aria-pressed={isActive}
+                  className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${
+                    isActive
+                      ? "bg-[var(--sv-accent)] text-white"
+                      : "border border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
+                  }`}
+                >
+                  <PixelIcon src={MENU_ICONS[m]} size={16} />
+                  {t(`addTask.${m}`)}
+                </button>
+              );
+            })}
+            <button
+              onClick={() => setOptionsOpen(true)}
+              aria-label={t("addTask.options")}
+              className="ml-auto flex items-center gap-1.5 rounded-full border border-[var(--sv-border)] px-2.5 py-1 text-xs text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
+            >
+              <PixelIcon src="/icons/ui/settings.png" size={14} />
+              {t("addTask.options")}
+            </button>
+          </div>
 
-      {mode === "fruit" && (
-        <FruitForm
-          baseDate={baseDate}
-          hiddenItems={hiddenItems}
-          childOrder={addTaskChildOrder.fruit ?? []}
-          onAdd={addFruitHarvest}
-        />
+          {/* 선택된 카테고리 패널 */}
+          {current === "seed" && (
+            <SeedForm
+              plantDate={baseDate}
+              dateLabel={dateLabel}
+              agri={character.agriculturist}
+              defaults={seedDefaults}
+              onAdd={addSeed}
+            />
+          )}
+          {current === "fruit" && (
+            <FruitForm
+              baseDate={baseDate}
+              hiddenItems={hiddenItems}
+              childOrder={addTaskChildOrder.fruit ?? []}
+              onAdd={addFruitHarvest}
+            />
+          )}
+          {(current === "artisanMachine" ||
+            current === "refiningMachine") && (
+            <MachineForm
+              startDate={baseDate}
+              dateLabel={dateLabel}
+              fixedCategory={current === "artisanMachine" ? "artisan" : "refining"}
+              hiddenItems={hiddenItems}
+              childOrder={addTaskChildOrder[current] ?? []}
+              onAdd={addMachineUse}
+            />
+          )}
+        </>
       )}
-      {mode === "seed" && (
-        <SeedForm
-          plantDate={baseDate}
-          dateLabel={dateLabel}
-          agri={character.agriculturist}
-          defaults={seedDefaults}
-          onAdd={addSeed}
-        />
-      )}
-
-      {(mode === "artisanMachine" || mode === "refiningMachine") && (
-        <MachineForm
-          startDate={baseDate}
-          dateLabel={dateLabel}
-          fixedCategory={mode === "artisanMachine" ? "artisan" : "refining"}
-          hiddenItems={hiddenItems}
-          childOrder={addTaskChildOrder[mode] ?? []}
-          onAdd={addMachineUse}
-        />
-      )}
-
     </Modal>
   );
 }

@@ -18,6 +18,7 @@ export interface Scenario {
   keyApplied: boolean;
   ccRestored: boolean;
   festivalOn: boolean;
+  boatRepaired: boolean;
 }
 
 // 가게 한 곳의 현재 상태(요일 배지 또는 축제·영구폐점 배지) + 상세 행. 모바일·PC 공용.
@@ -29,12 +30,14 @@ export function ShopBody({
   scenario: Scenario;
 }) {
   const t = useTranslations();
-  const { keyApplied, ccRestored, festivalOn } = scenario;
+  const { keyApplied, ccRestored, festivalOn, boatRepaired } = scenario;
 
-  // 영업 시간: 열쇠 적용 + 열쇠로 시간이 달라지는 가게만 열쇠 시간, 그 외엔 개점 시간.
-  const hoursField = keyApplied && entry.keyChanges ? "key" : "open";
+  // 영업 시간: 열쇠 적용 시 열쇠 시간, 진저섬 배 수리 시 배 시간(생선 가게 8시), 그 외엔 개점 시간.
+  let hoursField = "open";
+  if (keyApplied && entry.keyChanges) hoursField = "key";
+  if (boatRepaired && entry.boatChanges) hoursField = "boat";
 
-  // 상태 배지 영역: 축제날 > 영구 폐점 > 평상시 요일 배지 순으로 표시.
+  // 상태 배지 영역: 축제날(탭 가정) > 영구 폐점 > 평상시 요일 배지 순으로 표시.
   let statusArea;
   if (festivalOn) {
     if (entry.festivalClose === "none") {
@@ -136,53 +139,70 @@ function Badge({
   );
 }
 
-// 상단 시나리오 토글 버튼. info가 있으면 라벨 오른쪽(버튼 안)에 정보 툴팁(i) 표시.
+// 상단 시나리오 토글(작물 효율·생선 정보 탭처럼 작은 텍스트 칩).
 function ScenarioToggle({
-  icon,
   label,
   active,
   onToggle,
-  info,
 }: {
-  icon: string;
   label: string;
   active: boolean;
   onToggle: () => void;
-  info?: string;
 }) {
   return (
     <button
       onClick={onToggle}
       aria-pressed={active}
-      className={`sv-btn flex items-center gap-1.5 px-2.5 py-1.5 text-sm ${
-        active ? "ring-2 ring-[var(--sv-accent)]" : "opacity-70"
+      className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+        active
+          ? "bg-[var(--sv-accent)] text-white"
+          : "border border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
       }`}
     >
-      <PixelIcon src={icon} size={16} />
       {label}
-      {info && <InfoTooltip text={info} />}
     </button>
   );
 }
 
-// 정보 툴팁(i). PC에서 마우스를 올렸을 때만 설명 표시. 게임 에셋이 없어 인라인 SVG 사용(이모지 아님).
-function InfoTooltip({ text }: { text: string }) {
+// 시나리오 필터(열쇠·복구·[축제]·배 수리). dialogFilters를 읽고 쓰므로
+// 가게 일정 탭과 메인 박스가 같은 상태를 공유한다(한쪽에서 켜면 다른 쪽도 적용).
+// 단, 축제 토글은 가게 일정 탭 전용(includeFestival)이며 메인 박스는 당일 날짜로 자동 판정한다.
+// fragment를 반환하므로 감싸는 컨테이너(정렬)는 호출부가 제공한다.
+export function ShopScenarioFilters({
+  includeFestival = false,
+}: {
+  includeFestival?: boolean;
+}) {
+  const t = useTranslations();
+  const { dialogFilters, setDialogFilters } = useSchedule();
+  const s = dialogFilters;
   return (
-    <span className="group/info relative inline-flex" aria-label={text}>
-      <svg
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        className="size-4 text-[var(--sv-ink-muted)]"
-      >
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
-      </svg>
-      <span
-        role="tooltip"
-        className="pointer-events-none absolute right-0 top-full z-10 mt-1 w-60 rounded-md bg-[var(--sv-ink)] px-2 py-1.5 text-left text-xs font-normal leading-relaxed text-[var(--sv-panel)] opacity-0 shadow-md transition-opacity group-hover/info:opacity-100"
-      >
-        {text}
-      </span>
-    </span>
+    <>
+      <ScenarioToggle
+        label={t("shopSchedule.keyToggle")}
+        active={s.shopKeyApplied}
+        onToggle={() => setDialogFilters({ shopKeyApplied: !s.shopKeyApplied })}
+      />
+      <ScenarioToggle
+        label={t("shopSchedule.ccToggle")}
+        active={s.shopCcRestored}
+        onToggle={() => setDialogFilters({ shopCcRestored: !s.shopCcRestored })}
+      />
+      {includeFestival && (
+        <ScenarioToggle
+          label={t("shopSchedule.festivalToggle")}
+          active={s.shopFestivalOn}
+          onToggle={() => setDialogFilters({ shopFestivalOn: !s.shopFestivalOn })}
+        />
+      )}
+      <ScenarioToggle
+        label={t("shopSchedule.boatToggle")}
+        active={s.shopBoatRepaired}
+        onToggle={() =>
+          setDialogFilters({ shopBoatRepaired: !s.shopBoatRepaired })
+        }
+      />
+    </>
   );
 }
 
@@ -231,6 +251,7 @@ export default function ShopScheduleDialog({
     keyApplied: dialogFilters.shopKeyApplied,
     ccRestored: dialogFilters.shopCcRestored,
     festivalOn: dialogFilters.shopFestivalOn,
+    boatRepaired: dialogFilters.shopBoatRepaired,
   };
   const sel = SHOP_SCHEDULE.find((s) => s.id === selected) ?? SHOP_SCHEDULE[0];
 
@@ -292,34 +313,9 @@ export default function ShopScheduleDialog({
         />
       }
     >
-      {/* 시나리오 토글: 내 상황(열쇠·복구·축제)에 맞춰 일정 표시를 전환 */}
-      <div className="mb-3 flex flex-wrap items-center justify-end gap-2">
-        <ScenarioToggle
-          icon="/icons/ui/key.png"
-          label={t("shopSchedule.keyToggle")}
-          active={scenario.keyApplied}
-          onToggle={() =>
-            setDialogFilters({ shopKeyApplied: !scenario.keyApplied })
-          }
-          info={t("shopSchedule.ruleKey")}
-        />
-        <ScenarioToggle
-          icon="/icons/ui/bundle.png"
-          label={t("shopSchedule.ccToggle")}
-          active={scenario.ccRestored}
-          onToggle={() =>
-            setDialogFilters({ shopCcRestored: !scenario.ccRestored })
-          }
-        />
-        <ScenarioToggle
-          icon="/icons/festival/flag.png"
-          label={t("shopSchedule.festivalToggle")}
-          active={scenario.festivalOn}
-          onToggle={() =>
-            setDialogFilters({ shopFestivalOn: !scenario.festivalOn })
-          }
-          info={t("shopSchedule.ruleFestival")}
-        />
+      {/* 시나리오 토글: 내 상황(열쇠·복구·축제·배 수리)에 맞춰 일정 표시를 전환(축제는 탭 전용) */}
+      <div className="mb-3 flex flex-wrap items-center gap-2">
+        <ShopScenarioFilters includeFestival />
       </div>
 
       {/* 모바일: 가게 드롭다운 + 세로 카드 */}
@@ -358,7 +354,12 @@ export default function ShopScheduleDialog({
         ))}
       </div>
 
-      <p className="mt-3 text-[10px] text-[var(--sv-ink-muted)]">
+      {/* 축제날 예외 안내(이 축제들엔 상점·집이 정상 영업) */}
+      <p className="mt-3 border-t border-dashed border-[var(--sv-border)] pt-2 text-xs leading-relaxed text-[var(--sv-ink-muted)]">
+        {t("shopSchedule.festivalExceptionNote")}
+      </p>
+
+      <p className="mt-2 text-[10px] text-[var(--sv-ink-muted)]">
         {t("shopSchedule.source")}
       </p>
     </Modal>

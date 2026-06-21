@@ -106,8 +106,10 @@ function PixelImage({ src, size = 18 }: { src: string; size?: number }) {
 
 export default function TodoSettingsDialog({
   onClose,
+  onBack,
 }: {
   onClose: () => void;
+  onBack?: () => void;
 }) {
   const t = useTranslations();
   const {
@@ -164,6 +166,9 @@ export default function TodoSettingsDialog({
     setDrag(null);
     setOver(null);
   };
+
+  // 카테고리(메인/정보/할 일): 상단 레이블(탭)로 선택. 기본은 메인.
+  const [active, setActive] = useState<Section>("main");
   const drop = (section: Section, to: number) => {
     if (!drag || drag.section !== section || drag.from === to) {
       resetDrag();
@@ -390,35 +395,49 @@ export default function TodoSettingsDialog({
     </ul>
   );
 
+  // 카테고리 정의(섹션 키 + 제목 메시지 + 항목 목록)
+  const sections: { section: Section; title: string; items: DisplayItem[] }[] = [
+    { section: "main", title: t("settings.mainTitle"), items: mainItems },
+    { section: "info", title: t("dashboard.infoTitle"), items: infoItems },
+    { section: "todo", title: t("dashboard.todoList"), items: todoItems },
+  ];
+
   return (
-    <Modal title={t("settings.todoSettings")} onClose={onClose}>
-      <p className="mb-2 text-xs text-[var(--sv-ink-muted)]">
+    <Modal title={t("settings.todoSettings")} onClose={onClose} onBack={onBack}>
+      <p className="mb-3 text-xs text-[var(--sv-ink-muted)]">
         {t("settings.orderHint")}
       </p>
 
-      {/* 메인 상단 박스(가게 일정 표시·꾸러미 추적) */}
-      <h3 className="mb-1 text-xs font-bold text-[var(--sv-ink-muted)]">
-        {t("settings.mainTitle")}
-      </h3>
-      {renderSection("main", mainItems)}
+      {/* 상단 카테고리 탭(밑줄형 — 필터 칩과 구분): 선택 시 아래 패널 전환 */}
+      <div className="mb-3 flex flex-wrap gap-1 border-b border-[var(--sv-border)]">
+        {sections.map(({ section, title, items }) => {
+          const isActive = section === active;
+          return (
+            <button
+              key={section}
+              onClick={() => setActive(section)}
+              aria-pressed={isActive}
+              className={`-mb-px flex items-center gap-1.5 border-b-2 px-3 py-1.5 text-sm font-semibold ${
+                isActive
+                  ? "border-[var(--sv-accent)] text-[var(--sv-ink)]"
+                  : "border-transparent text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
+              }`}
+            >
+              {title}
+              <span className="text-xs text-[var(--sv-ink-muted)]">
+                {items.length}
+              </span>
+            </button>
+          );
+        })}
+      </div>
 
-      {/* 메인 ↔ 정보 구분선 */}
-      <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
-
-      {/* 정보 항목 */}
-      <h3 className="mb-1 text-xs font-bold text-[var(--sv-ink-muted)]">
-        {t("dashboard.infoTitle")}
-      </h3>
-      {renderSection("info", infoItems)}
-
-      {/* 정보 ↔ 할 일 구분선 */}
-      <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
-
-      {/* 할 일 목록 항목 */}
-      <h3 className="mb-1 text-xs font-bold text-[var(--sv-ink-muted)]">
-        {t("dashboard.todoList")}
-      </h3>
-      {renderSection("todo", todoItems)}
+      {/* 선택된 카테고리 패널 */}
+      {sections
+        .filter(({ section }) => section === active)
+        .map(({ section, items }) => (
+          <div key={section}>{renderSection(section, items)}</div>
+        ))}
     </Modal>
   );
 }

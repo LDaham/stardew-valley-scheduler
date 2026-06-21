@@ -57,6 +57,7 @@ const DEFAULT_DIALOG_FILTERS: DialogFilters = {
   shopKeyApplied: false,
   shopCcRestored: false,
   shopFestivalOn: false,
+  shopBoatRepaired: false,
   shopPinned: [],
 };
 
@@ -118,8 +119,9 @@ const DEFAULT_STATE: ScheduleState = {
   dialogFilters: DEFAULT_DIALOG_FILTERS,
   bundleTrackerShown: true,
   shopScheduleShown: false,
-  rainFishShown: false,
+  rainFishShown: true,
   mainOrder: DEFAULT_MAIN_ORDER,
+  notepadText: "",
 };
 
 let state: ScheduleState = DEFAULT_STATE;
@@ -162,8 +164,14 @@ function ensureLoaded(): void {
     dialogFilters: { ...DEFAULT_DIALOG_FILTERS, ...saved.dialogFilters },
     bundleTrackerShown: saved.bundleTrackerShown ?? true,
     shopScheduleShown: saved.shopScheduleShown ?? false,
-    rainFishShown: saved.rainFishShown ?? false,
+    rainFishShown: saved.rainFishShown ?? true,
     mainOrder: reconcileMainOrder(saved.mainOrder),
+    // 구버전 블록 메모(notes[])는 줄바꿈으로 합쳐 단일 텍스트로 이전.
+    notepadText:
+      saved.notepadText ??
+      ((saved as { notes?: { text: string }[] }).notes ?? [])
+        .map((n) => n.text)
+        .join("\n"),
     year: saved.year ?? 1,
     version: STATE_VERSION,
   };
@@ -425,9 +433,14 @@ export const scheduleActions = {
       dialogFilters: { ...DEFAULT_DIALOG_FILTERS },
       bundleTrackerShown: true,
       shopScheduleShown: false,
-      rainFishShown: false,
+      rainFishShown: true,
       mainOrder: [...DEFAULT_MAIN_ORDER],
+      notepadText: "",
     });
+  },
+  // 메인 메모장: 자유 텍스트 갱신
+  setNotepadText(text: string) {
+    commit({ ...state, notepadText: text });
   },
   // 번들 품목 기증 토글
   toggleBundleItem(key: string) {

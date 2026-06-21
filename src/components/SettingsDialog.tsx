@@ -4,16 +4,37 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Modal from "@/components/Modal";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
+import PixelIcon from "@/components/PixelIcon";
 import { useSchedule } from "@/components/ScheduleProvider";
 
-// 설정 다이얼로그. 언어 전환 · 초기화.
-export default function SettingsDialog({ onClose }: { onClose: () => void }) {
+// 설정 다이얼로그. 메인화면 설정 진입 · 언어 전환 · 초기화.
+export default function SettingsDialog({
+  onClose,
+  onOpenTodoSettings,
+}: {
+  onClose: () => void;
+  onOpenTodoSettings: () => void;
+}) {
   const t = useTranslations();
   const { resetAll } = useSchedule();
   const [confirming, setConfirming] = useState(false);
 
   return (
     <Modal title={t("settings.title")} onClose={onClose}>
+      {/* 메인화면 설정 진입(별도 다이얼로그로 전환). 설정 톤에 맞춘 네비게이션 행. */}
+      <section className="mb-5">
+        <button
+          onClick={onOpenTodoSettings}
+          aria-label={t("settings.openTodo")}
+          className="inline-flex items-center gap-2 rounded-lg border border-[var(--sv-border)] px-3 py-2 text-left hover:bg-[var(--sv-bg)]"
+        >
+          <PixelIcon src="/icons/ui/note.png" size={18} />
+          <span className="text-sm font-semibold">
+            {t("settings.todoSettings")}
+          </span>
+        </button>
+      </section>
+
       {/* 언어 전환 */}
       <section className="mb-5">
         <h3 className="mb-2 text-sm font-semibold text-[var(--sv-ink-muted)]">

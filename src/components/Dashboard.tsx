@@ -15,6 +15,7 @@ import AddTaskDialog from "@/components/AddTaskDialog";
 import BundleTrackerBox from "@/components/BundleTrackerBox";
 import ShopScheduleBox from "@/components/ShopScheduleBox";
 import RainFishBox from "@/components/RainFishBox";
+import Notepad from "@/components/Notepad";
 import FishInfoDialog from "@/components/FishInfoDialog";
 import MiniCalendarDialog from "@/components/MiniCalendarDialog";
 import MyTasksDialog from "@/components/MyTasksDialog";
@@ -520,9 +521,22 @@ export default function Dashboard() {
               <h2 className="text-base font-bold text-[var(--sv-ink-muted)]">
                 {t("dashboard.tomorrowInfoTitle")}
               </h2>
-              {/* 내일 비 예보 토글 (제목 오른쪽) */}
-              <span className="flex shrink-0 items-center gap-1">
+              {/* 내일 비 예보 토글 (제목 오른쪽). 켜면 '내일 비 와요'로 바뀌어 의미가 직관적. */}
+              <span className="flex shrink-0 items-center gap-1.5">
                 <PixelIcon src="/icons/ui/rain.png" size={14} />
+                <span
+                  className={`text-xs ${
+                    rainTomorrow
+                      ? "font-semibold text-[#5b8fb0]"
+                      : "text-[var(--sv-ink-muted)]"
+                  }`}
+                >
+                  {t(
+                    rainTomorrow
+                      ? "dashboard.rainTomorrowYes"
+                      : "dashboard.rainForecast",
+                  )}
+                </span>
                 <RainSwitch
                   on={rainTomorrow}
                   onToggle={toggleRainTomorrow}
@@ -542,29 +556,36 @@ export default function Dashboard() {
 
         <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
 
-        {/* 할 일 목록 헤더: 좌측 제목, 우측 [추가한 할 일 확인][오늘 할 일 추가] */}
-        <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-          <h2 className="text-base font-bold">{t("dashboard.todoList")}</h2>
-          <div className="flex flex-wrap items-center gap-2">
-            <button
-              onClick={() => setMyTasksOpen(true)}
-              className="sv-btn px-3 py-1.5 text-base"
-            >
-              {t("myTasks.checkButton")}
-            </button>
-            <button
-              onClick={() => setAddTarget("today")}
-              className="sv-btn sv-btn-primary px-3 py-1.5 text-base"
-            >
-              ＋ {t("addTask.titleWithDay", { day: t("dashboard.today") })}
-            </button>
+        {/* 할 일 목록(왼쪽 절반) + 메모장(오른쪽 절반) */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            {/* 할 일 목록 헤더: 좌측 제목, 우측 [추가한 할 일 확인][오늘 할 일 추가] */}
+            <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+              <h2 className="text-base font-bold">{t("dashboard.todoList")}</h2>
+              <div className="flex flex-wrap items-center gap-1.5">
+                <button
+                  onClick={() => setMyTasksOpen(true)}
+                  className="sv-btn px-2.5 py-1 text-sm"
+                >
+                  {t("myTasks.checkButton")}
+                </button>
+                <button
+                  onClick={() => setAddTarget("today")}
+                  className="sv-btn sv-btn-primary px-2.5 py-1 text-sm"
+                >
+                  ＋ {t("dashboard.addTodo")}
+                </button>
+              </div>
+            </div>
+            <TaskList
+              rows={todayBuilt.todo}
+              emptyText={t("dashboard.noTasks")}
+              deleteLabel={t("memo.delete")}
+            />
           </div>
+
+          <Notepad />
         </div>
-        <TaskList
-          rows={todayBuilt.todo}
-          emptyText={t("dashboard.noTasks")}
-          deleteLabel={t("memo.delete")}
-        />
       </div>
 
       {addTarget && (

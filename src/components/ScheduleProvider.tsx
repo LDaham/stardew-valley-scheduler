@@ -49,6 +49,7 @@ export function useSchedule() {
     shopScheduleShown: state.shopScheduleShown,
     rainFishShown: state.rainFishShown,
     mainOrder: state.mainOrder,
+    notepadText: state.notepadText,
     memosOn: (date: SDate): Memo[] =>
       state.memos.filter(
         (m) => m.season === date.season && m.day === date.day,
@@ -87,6 +88,7 @@ export function useSchedule() {
     setShopScheduleShown: scheduleActions.setShopScheduleShown,
     setRainFishShown: scheduleActions.setRainFishShown,
     setMainOrder: scheduleActions.setMainOrder,
+    setNotepadText: scheduleActions.setNotepadText,
     resetAll: scheduleActions.resetAll,
   };
 }

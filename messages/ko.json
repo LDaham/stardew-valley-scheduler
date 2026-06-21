@@ -10,11 +10,16 @@
     "confirm": "확인"
   },
   "miniCalendar": {
-    "title": "날짜 이동",
-    "yearLabel": "{year}년째",
-    "prevYear": "이전 연도",
-    "nextYear": "다음 연도",
+    "title": "달력",
+    "yearPrefix": "",
+    "yearSuffix": "년째",
+    "prev": "이전",
+    "next": "다음",
     "confirmMove": "{date}(으)로 이동하시겠습니까?"
+  },
+  "notepad": {
+    "title": "메모장",
+    "placeholder": "메모를 입력하세요"
   },
   "home": {
     "title": "스타듀밸리 스케줄러",
@@ -58,6 +63,7 @@
     "prevDay": "전날",
     "nextDay": "다음날",
     "todoList": "To Do List",
+    "addTodo": "할 일 추가",
     "noTasks": "할 일이 없습니다",
     "rainTomorrow": "내일 비",
     "birthdayOf": "{name} 생일",
@@ -66,6 +72,7 @@
     "wateringGroup": "작물 물주기",
     "fruitGroup": "과일 수확하기",
     "rainForecast": "내일 비 예보",
+    "rainTomorrowYes": "내일 비 예보",
     "rainExpected": "비 예보",
     "rainToday": "비 오는 날",
     "deleteTitle": "할 일 삭제",
@@ -127,9 +134,9 @@
     "mainTitle": "메인",
     "bundleTracker": "꾸러미 표시",
     "bundleTrackerNote": "메인 화면 상단에 꾸러미 추적 박스가 함께 표시됩니다.",
-    "shopScheduleShow": "가게 일정 표시",
+    "shopScheduleShow": "메인 화면에 가게 일정 표시",
     "shopScheduleShowNote": "정보 - 가게 일정 탭에서 고정(핀)한 일정을 메인 화면 상단에 표시합니다.",
-    "rainFishShow": "비 생선 표시",
+    "rainFishShow": "비 오는 날에, 구할 수 있는 생선 표시",
     "rainFishShowNote": "비 예보가 있는 날, 그 계절에 비 오는 날에만 잡히는 생선을 메인 화면 상단에 표시합니다."
   },
   "blacksmith": {
@@ -503,7 +510,7 @@
     "short": "정보",
     "open": "정보 열기",
     "back": "이전",
-    "birthdayGift": "생일 선물",
+    "birthdayGift": "선물 선호",
     "birthdayGiftHint": "주민을 선택하면 좋아하는 선물을 볼 수 있어요.",
     "moviePref": "영화 선호",
     "moviePrefHint": "주민을 선택하면 좋아하는 영화·간식을 볼 수 있어요."
@@ -523,7 +530,7 @@
   },
   "fish": {
     "title": "생선 정보",
-    "rainOnlyToggle": "비 오는 날에만 구할 수 있는 생선 표시",
+    "rainOnlyToggle": "메인 화면에서 비 오는 날에, 구할 수 있는 생선 표시",
     "excludeUnobtainable": "이번 계절에 잡을 수 없는 생선 제외",
     "location": "위치",
     "allSeasons": "상시",
@@ -639,11 +646,11 @@
     "short": "가게 일정",
     "open": "가게 일정 열기",
     "selectShop": "가게 선택",
-    "ruleFestival": "예외 축제: 영령의 전야제·달빛 해파리들의 춤·사막 축제·송어 시합·오징어 축제·야시장.",
-    "ruleKey": "마을의 열쇠: 획득 후 가게별로 이용 시간이 확장됩니다.",
+    "festivalExceptionNote": "축제날에는 대부분의 가게가 휴무합니다. 단, 다음 예외 축제에는 정상 영업합니다: 영령의 전야제·달빛 해파리들의 춤·사막 축제·송어 시합·오징어 축제·야시장.",
     "keyToggle": "마을의 열쇠",
     "ccToggle": "마을회관 복구",
     "festivalToggle": "축제날",
+    "boatToggle": "진저섬 배 수리",
     "statusOpen": "정상 영업",
     "statusClosed": "축제 휴무",
     "statusPartial": "특정 축제 휴무",
@@ -652,6 +659,16 @@
     "legendClosed": "휴무",
     "pin": "고정",
     "boxEmpty": "정보 → 가게 일정에서 일정을 고정(핀)하면 여기에 표시됩니다.",
+    "todayClosed": "휴무",
+    "reasonClosed": "정기 휴무",
+    "reasonFestival": "축제 휴무",
+    "reasonSeason": "운영 기간 아님",
+    "reasonRain": "비 휴무",
+    "reasonPermanent": "영구 폐점",
+    "am": "오전",
+    "pm": "오후",
+    "timeHour": "{ampm} {h}시",
+    "timeHourMin": "{ampm} {h}시 {m}분",
     "source": "출처: Stardew Valley Wiki - 가게 일정표 (CC BY-NC-SA 3.0)",
     "colOpen": "개점 시간",
     "colKey": "열쇠 시간",
@@ -689,10 +706,11 @@
         "name": "생선 가게",
         "open": "오전 9시 – 오후 5시",
         "key": "변동 없음",
+        "boat": "오전 8시 – 오후 5시",
         "closed": "토요일 (비 안 올 때)",
         "festival": "모두 닫음(예외 축제 제외)",
         "checkup": "봄 9일",
-        "note": "비가 오는 토요일에는 개점.\n봄 9일에는 오전 9–10시에만 개점.\n진저섬 배 수리 후 8시 개점."
+        "note": "비가 오는 토요일에는 개점.\n봄 9일에는 오전 9–10시에만 개점."
       },
       "clinic": {
         "name": "하비의 병원",
@@ -821,7 +839,7 @@
   "myTasks": {
     "title": "내가 추가한 할 일",
     "short": "내 할 일",
-    "checkButton": "추가한 할 일 확인",
+    "checkButton": "할 일 확인",
     "open": "내가 추가한 할 일 열기",
     "empty": "추가한 할 일이 없습니다",
     "emptyFuture": "표시할 이후·미뤄진 할 일이 없습니다",
@@ -981,7 +999,7 @@
     "nonCommercial": "본 사이트는 비영리로 운영됩니다."
   },
   "gift": {
-    "prefBy": "{name}의 선물 반응",
+    "prefBy": "{name}의 선물 선호",
     "loves": "사랑하는 것 (+80)",
     "likes": "좋아하는 것 (+45)",
     "neutral": "중립적인 것 (+20)",
