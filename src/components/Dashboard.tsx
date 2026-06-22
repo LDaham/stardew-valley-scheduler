@@ -453,17 +453,6 @@ export default function Dashboard() {
 
   return (
     <section className="flex flex-col gap-3">
-      {/* 메인 상단 박스(가게 일정·꾸러미 추적·비 생선): 설정의 메인 순서대로, 각 토글 켜짐 시 표시 */}
-      {mainOrder.map((k) =>
-        k === "shopSchedule" ? (
-          <ShopScheduleBox key={k} />
-        ) : k === "rainFish" ? (
-          <RainFishBox key={k} />
-        ) : (
-          <BundleTrackerBox key={k} />
-        ),
-      )}
-
       {/* 날짜 이동 버튼 (박스 밖) */}
       <div className="flex items-center justify-between gap-2">
         <button
@@ -587,6 +576,18 @@ export default function Dashboard() {
           <Notepad />
         </div>
       </div>
+
+      {/* 참고 박스(가게 일정·꾸러미 추적·비 생선): todolist 아래에 배치.
+          설정의 메인 순서대로, 각 토글 켜짐 시 표시. */}
+      {mainOrder.map((k) =>
+        k === "shopSchedule" ? (
+          <ShopScheduleBox key={k} />
+        ) : k === "rainFish" ? (
+          <RainFishBox key={k} />
+        ) : (
+          <BundleTrackerBox key={k} />
+        ),
+      )}
 
       {addTarget && (
         <AddTaskDialog

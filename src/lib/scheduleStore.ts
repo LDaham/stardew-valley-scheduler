@@ -118,9 +118,9 @@ const DEFAULT_STATE: ScheduleState = {
   achievementsDone: {},
   character: DEFAULT_CHARACTER,
   dialogFilters: DEFAULT_DIALOG_FILTERS,
-  bundleTrackerShown: true,
-  shopScheduleShown: true,
-  rainFishShown: true,
+  bundleTrackerShown: false,
+  shopScheduleShown: false,
+  rainFishShown: false,
   mainOrder: DEFAULT_MAIN_ORDER,
   notepadText: "",
 };
@@ -163,9 +163,9 @@ function ensureLoaded(): void {
     achievementsDone: saved.achievementsDone ?? {},
     character: { ...DEFAULT_CHARACTER, ...saved.character },
     dialogFilters: { ...DEFAULT_DIALOG_FILTERS, ...saved.dialogFilters },
-    bundleTrackerShown: saved.bundleTrackerShown ?? true,
-    shopScheduleShown: saved.shopScheduleShown ?? true,
-    rainFishShown: saved.rainFishShown ?? true,
+    bundleTrackerShown: saved.bundleTrackerShown ?? false,
+    shopScheduleShown: saved.shopScheduleShown ?? false,
+    rainFishShown: saved.rainFishShown ?? false,
     mainOrder: reconcileMainOrder(saved.mainOrder),
     // 구버전 블록 메모(notes[])는 줄바꿈으로 합쳐 단일 텍스트로 이전.
     notepadText:
@@ -432,9 +432,9 @@ export const scheduleActions = {
       achievementsDone: {},
       character: { ...DEFAULT_CHARACTER },
       dialogFilters: { ...DEFAULT_DIALOG_FILTERS },
-      bundleTrackerShown: true,
-      shopScheduleShown: true,
-      rainFishShown: true,
+      bundleTrackerShown: false,
+      shopScheduleShown: false,
+      rainFishShown: false,
       mainOrder: [...DEFAULT_MAIN_ORDER],
       notepadText: "",
     });
