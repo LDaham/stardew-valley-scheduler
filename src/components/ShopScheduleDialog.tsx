@@ -7,6 +7,7 @@ import Modal from "@/components/Modal";
 import TitleToggle from "@/components/TitleToggle";
 import Dropdown from "@/components/Dropdown";
 import PixelIcon from "@/components/PixelIcon";
+import MasonryColumns from "@/components/MasonryColumns";
 import {
   SHOP_SCHEDULE,
   WEEK_ORDER,
@@ -290,16 +291,6 @@ export default function ShopScheduleDialog({
     </section>
   );
 
-  // PC 2열 메이슨리: 우선순위 순으로 더 짧은 열에 배치(동률은 왼쪽).
-  // 높이는 내용량(메모·정기 휴무 유무)으로 근사 → 박스는 자기 내용 높이만큼만.
-  const cols: ShopScheduleEntry[][] = [[], []];
-  const heights = [0, 0];
-  for (const s of orderedShops) {
-    const c = heights[0] <= heights[1] ? 0 : 1;
-    cols[c].push(s);
-    heights[c] += 2 + (s.hasCheckup ? 1 : 0) + (s.hasNote ? 2 : 0);
-  }
-
   return (
     <Modal
       title={t("shopSchedule.title")}
@@ -345,13 +336,13 @@ export default function ShopScheduleDialog({
         </div>
       </div>
 
-      {/* PC: 2열 메이슨리(더 짧은 열에 배치, 박스는 내용 높이만큼만). 핀된 가게 우선 */}
-      <div className="hidden gap-2 sm:flex sm:items-start">
-        {cols.map((col, i) => (
-          <div key={i} className="flex flex-1 flex-col gap-2">
-            {col.map(renderCard)}
-          </div>
-        ))}
+      {/* PC: 2열 메이슨리(실제 높이 측정 → 먼저 끝난 짧은 열에 배치). 핀된 가게 우선 */}
+      <div className="hidden sm:block">
+        <MasonryColumns
+          items={orderedShops}
+          getKey={(s) => s.id}
+          render={renderCard}
+        />
       </div>
 
       {/* 축제날 예외 안내(이 축제들엔 상점·집이 정상 영업) */}

@@ -248,7 +248,8 @@ export default function SeedEfficiencyDialog({
 
       {/* 옵션 */}
       <div className="mb-3 flex flex-col gap-2">
-        <div className="grid grid-cols-2 gap-2">
+        {/* 내용 너비 드롭다운들을 한 줄에 배치(좁으면 자동 줄바꿈) */}
+        <div className="flex flex-wrap items-start gap-3">
           <div>
             <label className="mb-1 block text-xs font-semibold text-[var(--sv-ink-muted)]">
               {t("seedEfficiency.fertilizer")}
@@ -295,7 +296,7 @@ export default function SeedEfficiencyDialog({
             />
           </div>
           {/* 다계절 포함: 체크박스로만 토글(라벨 클릭으로 토글되지 않도록 label 미사용) */}
-          <div className="flex items-end gap-1.5 pb-2 text-sm">
+          <div className="flex items-end gap-1.5 self-end pb-2 text-sm">
             <input
               type="checkbox"
               checked={crossSeason}

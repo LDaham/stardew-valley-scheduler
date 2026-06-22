@@ -58,7 +58,8 @@ const DEFAULT_DIALOG_FILTERS: DialogFilters = {
   shopCcRestored: false,
   shopFestivalOn: false,
   shopBoatRepaired: false,
-  shopPinned: [],
+  // 기본 고정: 피에르네 잡화점·목공 작업실·대장간
+  shopPinned: ["pierre", "carpenter", "blacksmith"],
 };
 
 // 메인 상단 박스 종류·기본 순서(가게 일정 → 꾸러미 추적 → 비 생선).
@@ -118,7 +119,7 @@ const DEFAULT_STATE: ScheduleState = {
   character: DEFAULT_CHARACTER,
   dialogFilters: DEFAULT_DIALOG_FILTERS,
   bundleTrackerShown: true,
-  shopScheduleShown: false,
+  shopScheduleShown: true,
   rainFishShown: true,
   mainOrder: DEFAULT_MAIN_ORDER,
   notepadText: "",
@@ -163,7 +164,7 @@ function ensureLoaded(): void {
     character: { ...DEFAULT_CHARACTER, ...saved.character },
     dialogFilters: { ...DEFAULT_DIALOG_FILTERS, ...saved.dialogFilters },
     bundleTrackerShown: saved.bundleTrackerShown ?? true,
-    shopScheduleShown: saved.shopScheduleShown ?? false,
+    shopScheduleShown: saved.shopScheduleShown ?? true,
     rainFishShown: saved.rainFishShown ?? true,
     mainOrder: reconcileMainOrder(saved.mainOrder),
     // 구버전 블록 메모(notes[])는 줄바꿈으로 합쳐 단일 텍스트로 이전.
@@ -432,7 +433,7 @@ export const scheduleActions = {
       character: { ...DEFAULT_CHARACTER },
       dialogFilters: { ...DEFAULT_DIALOG_FILTERS },
       bundleTrackerShown: true,
-      shopScheduleShown: false,
+      shopScheduleShown: true,
       rainFishShown: true,
       mainOrder: [...DEFAULT_MAIN_ORDER],
       notepadText: "",

@@ -80,7 +80,21 @@ export default function Dropdown({
   }, [open]);
 
   return (
-    <div>
+    // 내용 너비(가장 긴 옵션 폭에 고정): 모든 옵션을 같은 grid 셀에 보이지 않게 겹쳐 쌓으면
+    // 셀 너비가 '가장 긴 옵션'으로 잡힌다 → 선택값이 바뀌어도 폭이 출렁이지 않는다(측정 JS 불필요).
+    // max-w-full+overflow로 컨테이너를 넘지 않게, 라벨은 truncate로 보호(전체 텍스트는 펼침 목록에서 확인).
+    <div className="relative inline-grid max-w-full overflow-hidden align-top">
+      {options.map((o) => (
+        <span
+          key={o.value}
+          aria-hidden
+          className="invisible col-start-1 row-start-1 flex items-center gap-2 whitespace-nowrap border border-transparent px-2 py-2 text-sm"
+        >
+          {o.icon && <span className="size-5 shrink-0" />}
+          <span>{o.label}</span>
+          <span className="text-xs">▼</span>
+        </span>
+      ))}
       <button
         ref={btnRef}
         type="button"
@@ -88,10 +102,10 @@ export default function Dropdown({
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={toggle}
-        className="flex w-full items-center gap-2 rounded-lg border border-[var(--sv-border)] bg-white px-2 py-2 text-sm"
+        className="col-start-1 row-start-1 flex w-full min-w-0 items-center gap-2 rounded-lg border border-[var(--sv-border)] bg-white px-2 py-2 text-sm"
       >
         {current?.icon && <OptIcon src={current.icon} />}
-        <span className="flex-1 text-left">{current?.label}</span>
+        <span className="flex-1 truncate text-left">{current?.label}</span>
         <span className="text-xs text-[var(--sv-ink-muted)]">
           {open ? "▲" : "▼"}
         </span>

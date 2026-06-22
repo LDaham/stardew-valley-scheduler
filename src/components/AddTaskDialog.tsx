@@ -269,7 +269,10 @@ export default function AddTaskDialog({
           )}
           {(current === "artisanMachine" ||
             current === "refiningMachine") && (
+            // 두 장비 탭이 같은 MachineForm을 공유 → key로 카테고리별 재마운트
+            // (내부 machineId가 다른 카테고리 값으로 남아 드롭다운이 비어 보이는 현상 방지)
             <MachineForm
+              key={current}
               startDate={baseDate}
               dateLabel={dateLabel}
               fixedCategory={current === "artisanMachine" ? "artisan" : "refining"}
@@ -421,32 +424,35 @@ function SeedForm({
         </span>
       </div>
 
-      <div>
-        <FieldLabel>{t("addTask.selectCrop")}</FieldLabel>
-        <Dropdown
-          value={cropId}
-          options={seasonCrops.map((c) => ({
-            value: c.id,
-            label: t(`crops.${c.id}`),
-            icon: `/icons/seeds/${c.id}.png`,
-          }))}
-          onChange={setCropId}
-          ariaLabel={t("addTask.selectCrop")}
-        />
-      </div>
+      {/* 작물 선택·비료: 내용 너비 드롭다운을 한 행에 배치(좁으면 자동 줄바꿈) */}
+      <div className="flex flex-wrap items-start gap-3">
+        <div>
+          <FieldLabel>{t("addTask.selectCrop")}</FieldLabel>
+          <Dropdown
+            value={cropId}
+            options={seasonCrops.map((c) => ({
+              value: c.id,
+              label: t(`crops.${c.id}`),
+              icon: `/icons/seeds/${c.id}.png`,
+            }))}
+            onChange={setCropId}
+            ariaLabel={t("addTask.selectCrop")}
+          />
+        </div>
 
-      <div>
-        <FieldLabel>{t("addTask.fertilizer")}</FieldLabel>
-        <Dropdown
-          value={fert}
-          options={FERTILIZERS.map((f) => ({
-            value: f,
-            label: t(`fertilizer.${f}`),
-            icon: f === "none" ? undefined : `/icons/fertilizer/${f}.png`,
-          }))}
-          onChange={(v) => setFert(v as Fertilizer)}
-          ariaLabel={t("addTask.fertilizer")}
-        />
+        <div>
+          <FieldLabel>{t("addTask.fertilizer")}</FieldLabel>
+          <Dropdown
+            value={fert}
+            options={FERTILIZERS.map((f) => ({
+              value: f,
+              label: t(`fertilizer.${f}`),
+              icon: f === "none" ? undefined : `/icons/fertilizer/${f}.png`,
+            }))}
+            onChange={(v) => setFert(v as Fertilizer)}
+            ariaLabel={t("addTask.fertilizer")}
+          />
+        </div>
       </div>
 
       {harvest && (
@@ -584,38 +590,41 @@ function MachineForm({
 
   return (
     <div className="flex flex-col gap-3">
-      <div>
-        <FieldLabel>{t("addTask.selectMachine")}</FieldLabel>
-        <Dropdown
-          value={machineId}
-          options={inCategory.map((m) => ({
-            value: m.id,
-            label: t(`machines.${m.id}`),
-            icon: `/icons/machines/${m.id}.png`,
-          }))}
-          onChange={(v) => {
-            const m = inCategory.find((x) => x.id === v) ?? inCategory[0];
-            setMachineId(m.id);
-            setOutputId(
-              [...m.recipes].sort((a, b) => a.days - b.days)[0].id,
-            );
-          }}
-          ariaLabel={t("addTask.selectMachine")}
-        />
-      </div>
+      {/* 장비 선택·산출물: 내용 너비 드롭다운을 한 행에 배치(좁으면 자동 줄바꿈) */}
+      <div className="flex flex-wrap items-start gap-3">
+        <div>
+          <FieldLabel>{t("addTask.selectMachine")}</FieldLabel>
+          <Dropdown
+            value={machineId}
+            options={inCategory.map((m) => ({
+              value: m.id,
+              label: t(`machines.${m.id}`),
+              icon: `/icons/machines/${m.id}.png`,
+            }))}
+            onChange={(v) => {
+              const m = inCategory.find((x) => x.id === v) ?? inCategory[0];
+              setMachineId(m.id);
+              setOutputId(
+                [...m.recipes].sort((a, b) => a.days - b.days)[0].id,
+              );
+            }}
+            ariaLabel={t("addTask.selectMachine")}
+          />
+        </div>
 
-      <div>
-        <FieldLabel>{t("addTask.selectOutput")}</FieldLabel>
-        <Dropdown
-          value={outputId}
-          options={sortedRecipes.map((r) => ({
-            value: r.id,
-            label: `${t(`machineOutputs.${r.id}`)} · ${daysLabel(r.days)}`,
-            icon: `/icons/machineOutputs/${r.id}.png`,
-          }))}
-          onChange={setOutputId}
-          ariaLabel={t("addTask.selectOutput")}
-        />
+        <div>
+          <FieldLabel>{t("addTask.selectOutput")}</FieldLabel>
+          <Dropdown
+            value={outputId}
+            options={sortedRecipes.map((r) => ({
+              value: r.id,
+              label: `${t(`machineOutputs.${r.id}`)} · ${daysLabel(r.days)}`,
+              icon: `/icons/machineOutputs/${r.id}.png`,
+            }))}
+            onChange={setOutputId}
+            ariaLabel={t("addTask.selectOutput")}
+          />
+        </div>
       </div>
 
       {/* 오늘 가동 → N일 뒤 수령 예정 */}
