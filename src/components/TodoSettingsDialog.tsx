@@ -50,33 +50,11 @@ const INFO_KEYS = new Set<string>([
   "reminder:desertTraderStaircase", // 계단 판매
 ]);
 
-type Section = "main" | "info" | "todo";
+type Section = "info" | "todo";
 interface DisplayItem {
   id: string;
   keys: string[];
 }
-
-// 메인 상단 박스 항목의 표시 아이콘.
-const MAIN_ICON: Record<string, string> = {
-  shopSchedule: "/icons/ui/time.png",
-  bundleTracker: "/icons/ui/bundle.png",
-  rainFish: "/icons/ui/rain.png",
-};
-// 메인 항목 id → 라벨/설명 메시지 키
-const MAIN_LABEL: Record<string, { title: string; note: string }> = {
-  shopSchedule: {
-    title: "settings.shopScheduleShow",
-    note: "settings.shopScheduleShowNote",
-  },
-  bundleTracker: {
-    title: "settings.bundleTracker",
-    note: "settings.bundleTrackerNote",
-  },
-  rainFish: {
-    title: "settings.rainFishShow",
-    note: "settings.rainFishShowNote",
-  },
-};
 
 function move<T>(arr: T[], from: number, to: number): T[] {
   const next = [...arr];
@@ -121,12 +99,6 @@ export default function TodoSettingsDialog({
     setTodoOrder,
     bundleTrackerShown,
     setBundleTrackerShown,
-    shopScheduleShown,
-    setShopScheduleShown,
-    rainFishShown,
-    setRainFishShown,
-    mainOrder,
-    setMainOrder,
   } = useSchedule();
 
   // 씨앗 심기(plant/watering/harvest/eatFood)는 한 그룹으로 접어 표시한다.
@@ -147,12 +119,6 @@ export default function TodoSettingsDialog({
     return items;
   }, [todoOrder]);
 
-  // 메인 상단 박스 항목(가게 일정·꾸러미 추적): mainOrder 순서.
-  const mainItems = useMemo<DisplayItem[]>(
-    () => mainOrder.map((id) => ({ id, keys: [id] })),
-    [mainOrder],
-  );
-
   // 정보 항목 / 할 일 항목으로 분리(각각 todoOrder 상대 순서 유지).
   const infoItems = displayItems.filter((it) => INFO_KEYS.has(it.id));
   const todoItems = displayItems.filter((it) => !INFO_KEYS.has(it.id));
@@ -167,15 +133,10 @@ export default function TodoSettingsDialog({
     setOver(null);
   };
 
-  // 카테고리(메인/정보/할 일): 상단 레이블(탭)로 선택. 기본은 메인.
-  const [active, setActive] = useState<Section>("main");
+  // 카테고리(정보/할 일): 상단 레이블(탭)로 선택. 기본은 정보.
+  const [active, setActive] = useState<Section>("info");
   const drop = (section: Section, to: number) => {
     if (!drag || drag.section !== section || drag.from === to) {
-      resetDrag();
-      return;
-    }
-    if (section === "main") {
-      setMainOrder(move(mainOrder, drag.from, to));
       resetDrag();
       return;
     }
@@ -203,36 +164,24 @@ export default function TodoSettingsDialog({
     let icon: React.ReactNode = null;
     let label: React.ReactNode = null;
 
-    // 메인 상단 박스 항목(가게 일정·꾸러미·비 생선): 체크박스(만)로 표시 토글 + 드래그 정렬.
-    if (MAIN_LABEL[item.id]) {
-      const shown =
-        item.id === "shopSchedule"
-          ? shopScheduleShown
-          : item.id === "rainFish"
-            ? rainFishShown
-            : bundleTrackerShown;
-      const setShown =
-        item.id === "shopSchedule"
-          ? setShopScheduleShown
-          : item.id === "rainFish"
-            ? setRainFishShown
-            : setBundleTrackerShown;
+    // 꾸러미 표시: 체크박스로 메인 화면 표시 토글(정보 최상단 고정 항목).
+    if (item.id === "bundleTracker") {
       control = (
         <input
           type="checkbox"
-          checked={shown}
-          onChange={(e) => setShown(e.target.checked)}
+          checked={bundleTrackerShown}
+          onChange={(e) => setBundleTrackerShown(e.target.checked)}
           className="mt-0.5 size-4 shrink-0 accent-[var(--sv-accent)]"
         />
       );
-      icon = <PixelImage src={MAIN_ICON[item.id]} />;
+      icon = <PixelImage src="/icons/ui/bundle.png" />;
       label = (
         <span>
           <span className="text-sm font-semibold">
-            {t(MAIN_LABEL[item.id].title)}
+            {t("settings.bundleTracker")}
           </span>
           <span className="block text-xs text-[var(--sv-ink-muted)]">
-            {t(MAIN_LABEL[item.id].note)}
+            {t("settings.bundleTrackerNote")}
           </span>
         </span>
       );
@@ -366,9 +315,27 @@ export default function TodoSettingsDialog({
     </span>
   );
 
-  // 한 섹션의 행 목록 렌더
-  const renderSection = (section: Section, items: DisplayItem[]) => (
+  // 정보 최상단 고정 행(꾸러미 표시): 체크박스만, 드래그 핸들 없음(이동 불가).
+  const renderFixedBundleRow = () => {
+    const parts = rowParts({ id: "bundleTracker", keys: ["bundleTracker"] });
+    if (!parts) return null;
+    return (
+      <li className="flex items-center gap-2 rounded-md border-t-2 border-transparent px-2 py-1.5">
+        {parts.control ?? <span aria-hidden className="size-4 shrink-0" />}
+        <span className="mt-0.5">{parts.icon}</span>
+        <span className="flex-1">{parts.label}</span>
+      </li>
+    );
+  };
+
+  // 한 섹션의 행 목록 렌더(lead: 맨 위 고정 행)
+  const renderSection = (
+    section: Section,
+    items: DisplayItem[],
+    lead?: React.ReactNode,
+  ) => (
     <ul className="flex flex-col gap-1">
+      {lead}
       {items.map((item, i) => {
         const parts = rowParts(item);
         if (!parts) return null;
@@ -395,11 +362,10 @@ export default function TodoSettingsDialog({
     </ul>
   );
 
-  // 카테고리 정의(섹션 키 + 제목 메시지 + 항목 목록)
-  const sections: { section: Section; title: string; items: DisplayItem[] }[] = [
-    { section: "main", title: t("settings.mainTitle"), items: mainItems },
-    { section: "info", title: t("dashboard.infoTitle"), items: infoItems },
-    { section: "todo", title: t("dashboard.todoList"), items: todoItems },
+  // 카테고리 정의(탭 제목 + 개수). 정보는 고정 꾸러미 행 포함해 +1.
+  const sections: { section: Section; title: string; count: number }[] = [
+    { section: "info", title: t("dashboard.infoTitle"), count: infoItems.length + 1 },
+    { section: "todo", title: t("dashboard.todoList"), count: todoItems.length },
   ];
 
   return (
@@ -410,7 +376,7 @@ export default function TodoSettingsDialog({
 
       {/* 상단 카테고리 탭(밑줄형 — 필터 칩과 구분): 선택 시 아래 패널 전환 */}
       <div className="mb-3 flex flex-wrap gap-1 border-b border-[var(--sv-border)]">
-        {sections.map(({ section, title, items }) => {
+        {sections.map(({ section, title, count }) => {
           const isActive = section === active;
           return (
             <button
@@ -424,20 +390,16 @@ export default function TodoSettingsDialog({
               }`}
             >
               {title}
-              <span className="text-xs text-[var(--sv-ink-muted)]">
-                {items.length}
-              </span>
+              <span className="text-xs text-[var(--sv-ink-muted)]">{count}</span>
             </button>
           );
         })}
       </div>
 
-      {/* 선택된 카테고리 패널 */}
-      {sections
-        .filter(({ section }) => section === active)
-        .map(({ section, items }) => (
-          <div key={section}>{renderSection(section, items)}</div>
-        ))}
+      {/* 선택된 카테고리 패널. 정보는 맨 위에 꾸러미 표시(고정) 행을 둔다. */}
+      {active === "info"
+        ? renderSection("info", infoItems, renderFixedBundleRow())
+        : renderSection("todo", todoItems)}
     </Modal>
   );
 }

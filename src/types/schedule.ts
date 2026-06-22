@@ -151,7 +151,7 @@ export interface DialogFilters {
   bundleIncompleteFirst: boolean;
   fishSeasons?: string[];
   fishWeather?: string[]; // 생선 날씨 필터(없으면 전체). 값: "any" | "sun" | "rain"
-  fishType?: string[]; // 생선 유형 필터(없으면 전체). 값: "rodNormal" | "rodLegendary" | "crabpot"
+  fishType?: string[]; // 생선 유형 필터(없으면 전체). 값: "rodNormal" | "rodSpecial" | "crabpot"
   perfectionIncompleteFirst: boolean;
   achievementIncompleteFirst: boolean;
   seedCrossSeason: boolean;

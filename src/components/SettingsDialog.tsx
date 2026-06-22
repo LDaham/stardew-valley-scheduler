@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import Modal from "@/components/Modal";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
 import PixelIcon from "@/components/PixelIcon";
+import ThemeToggle from "@/components/ThemeToggle";
 import { useSchedule } from "@/components/ScheduleProvider";
 
 // 설정 다이얼로그. 메인화면 설정 진입 · 언어 전환 · 초기화.
@@ -33,6 +34,14 @@ export default function SettingsDialog({
             {t("settings.todoSettings")}
           </span>
         </button>
+      </section>
+
+      {/* 테마(라이트/다크) */}
+      <section className="mb-5">
+        <h3 className="mb-2 text-sm font-semibold text-[var(--sv-ink-muted)]">
+          {t("settings.themeTitle")}
+        </h3>
+        <ThemeToggle />
       </section>
 
       {/* 언어 전환 */}

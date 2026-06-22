@@ -14,8 +14,6 @@ import ReminderIcon from "@/components/ReminderIcon";
 import AddTaskDialog from "@/components/AddTaskDialog";
 import BundleTrackerBox from "@/components/BundleTrackerBox";
 import ShopScheduleBox from "@/components/ShopScheduleBox";
-import RainFishBox from "@/components/RainFishBox";
-import Notepad from "@/components/Notepad";
 import FishInfoDialog from "@/components/FishInfoDialog";
 import MiniCalendarDialog from "@/components/MiniCalendarDialog";
 import MyTasksDialog from "@/components/MyTasksDialog";
@@ -85,7 +83,8 @@ export default function Dashboard() {
   const openGifts = useGiftDialog();
   const [addTarget, setAddTarget] = useState<"today" | "tomorrow" | null>(null);
   const [seedEffOpen, setSeedEffOpen] = useState(false);
-  const [fishInfoOpen, setFishInfoOpen] = useState(false);
+  // 생선 정보 모달: "all"=일반(낚시 메모), "rain"=비 오는 날 잡을 수 있는 생선(프리셋)
+  const [fishInfoMode, setFishInfoMode] = useState<"all" | "rain" | null>(null);
   const [miniCalOpen, setMiniCalOpen] = useState(false);
   const [myTasksOpen, setMyTasksOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<DeleteTarget | null>(null);
@@ -118,7 +117,7 @@ export default function Dashboard() {
   const reminderBadge = (badge: ReminderBadge): ReactNode => {
     if (badge.kind === "dDay")
       return (
-        <span className="shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-[12px] font-semibold text-[#5a4416]">
+        <span className="sv-num shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-[12px] font-semibold text-[#5a4416]">
           {t("dashboard.dDay", { days: badge.days })}
         </span>
       );
@@ -262,7 +261,7 @@ export default function Dashboard() {
           rightBadge: (
             <ActionChip
               onClick={() => setSeedEffOpen(true)}
-              label={t("seedEfficiency.view")}
+              label={t("seedEfficiency.short")}
             />
           ),
           done: false,
@@ -361,7 +360,7 @@ export default function Dashboard() {
         rightBadge:
           m.category === "fishing" ? (
             <ActionChip
-              onClick={() => setFishInfoOpen(true)}
+              onClick={() => setFishInfoMode("all")}
               label={t("fish.title")}
             />
           ) : undefined,
@@ -441,6 +440,13 @@ export default function Dashboard() {
         orderKey: "info:rain",
         icon: <PixelIcon src="/icons/ui/rain.png" size={16} />,
         label: t(isTom ? "dashboard.rainExpected" : "dashboard.rainToday"),
+        // 오늘 비 오는 날: 잡을 수 있는 생선 보기(상시+계절·비·낚싯대 프리셋)
+        rightBadge: isTom ? undefined : (
+          <ActionChip
+            onClick={() => setFishInfoMode("rain")}
+            label={t("fish.catchable")}
+          />
+        ),
         done: false,
         onToggle: () => {},
       });
@@ -545,7 +551,7 @@ export default function Dashboard() {
 
         <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
 
-        {/* 할 일 목록(왼쪽 절반) + 메모장(오른쪽 절반) */}
+        {/* 할 일 목록(왼쪽 절반) + 가게 일정(오른쪽 절반) */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             {/* 할 일 목록 헤더: 좌측 제목, 우측 [추가한 할 일 확인][오늘 할 일 추가] */}
@@ -573,21 +579,20 @@ export default function Dashboard() {
             />
           </div>
 
-          <Notepad />
+          {/* 가게 일정(메모장 자리로 이동). 2열일 때 왼쪽 점선으로 할 일 목록과 구분 */}
+          <div className="sm:border-l sm:border-dashed sm:border-[var(--sv-border)] sm:pl-4">
+            <ShopScheduleBox />
+          </div>
         </div>
       </div>
 
-      {/* 참고 박스(가게 일정·꾸러미 추적·비 생선): todolist 아래에 배치.
-          설정의 메인 순서대로, 각 토글 켜짐 시 표시. */}
-      {mainOrder.map((k) =>
-        k === "shopSchedule" ? (
-          <ShopScheduleBox key={k} />
-        ) : k === "rainFish" ? (
-          <RainFishBox key={k} />
-        ) : (
+      {/* 참고 박스(꾸러미 추적): todolist 아래에 배치(가게 일정은 위 오른쪽 칸으로 이동).
+          설정의 메인 순서대로, 토글 켜짐 시 표시. */}
+      {mainOrder
+        .filter((k) => k === "bundleTracker")
+        .map((k) => (
           <BundleTrackerBox key={k} />
-        ),
-      )}
+        ))}
 
       {addTarget && (
         <AddTaskDialog
@@ -602,6 +607,7 @@ export default function Dashboard() {
       {seedEffOpen && (
         <SeedEfficiencyDialog
           season={currentDate.season}
+          lockSeason
           onClose={() => setSeedEffOpen(false)}
         />
       )}
@@ -616,10 +622,11 @@ export default function Dashboard() {
         />
       )}
 
-      {fishInfoOpen && (
+      {fishInfoMode && (
         <FishInfoDialog
           season={currentDate.season}
-          onClose={() => setFishInfoOpen(false)}
+          rainPreset={fishInfoMode === "rain"}
+          onClose={() => setFishInfoMode(null)}
         />
       )}
 
@@ -648,7 +655,7 @@ function ActionChip({
         e.stopPropagation();
         onClick();
       }}
-      className="shrink-0 rounded bg-[var(--sv-accent)] px-1.5 py-0.5 text-[12px] font-semibold text-white"
+      className="shrink-0 rounded bg-[var(--sv-accent)] px-1.5 py-0.5 text-[12px] font-semibold text-[var(--sv-accent-ink)]"
     >
       {label}
     </button>

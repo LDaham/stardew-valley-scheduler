@@ -300,7 +300,7 @@ function FormFooter({
       <button
         onClick={onAdd}
         disabled={addDisabled}
-        className="rounded-lg bg-[var(--sv-accent)] px-4 py-1.5 text-sm font-semibold text-white disabled:opacity-40"
+        className="rounded-lg bg-[var(--sv-accent)] px-4 py-1.5 text-sm font-semibold text-[var(--sv-accent-ink)] disabled:opacity-40"
       >
         {t("addTask.add")}
       </button>

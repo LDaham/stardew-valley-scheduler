@@ -102,7 +102,7 @@ export default function Dropdown({
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={toggle}
-        className="col-start-1 row-start-1 flex w-full min-w-0 items-center gap-2 rounded-lg border border-[var(--sv-border)] bg-white px-2 py-2 text-sm"
+        className="col-start-1 row-start-1 flex w-full min-w-0 items-center gap-2 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-2 py-2 text-sm"
       >
         {current?.icon && <OptIcon src={current.icon} />}
         <span className="flex-1 truncate text-left">{current?.label}</span>

@@ -251,7 +251,7 @@ export default function MiniCalendarDialog({ onClose }: { onClose: () => void })
                   goToDate(pending.date, pending.year);
                   onClose();
                 }}
-                className="rounded-lg bg-[var(--sv-accent)] px-4 py-1.5 text-sm font-semibold text-white"
+                className="rounded-lg bg-[var(--sv-accent)] px-4 py-1.5 text-sm font-semibold text-[var(--sv-accent-ink)]"
               >
                 {t("common.confirm")}
               </button>

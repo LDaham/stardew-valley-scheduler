@@ -61,7 +61,7 @@ export default function SeasonFilter({
             onClick={() => onToggle(tk)}
             className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold ${
               on
-                ? "bg-[var(--sv-accent)] text-white"
+                ? "bg-[var(--sv-accent)] text-[var(--sv-accent-ink)]"
                 : "border border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink)] hover:bg-[var(--sv-bg)]"
             }`}
           >

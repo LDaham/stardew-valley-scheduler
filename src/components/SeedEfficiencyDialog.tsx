@@ -34,18 +34,23 @@ export default function SeedEfficiencyDialog({
   season,
   onClose,
   onBack,
+  lockSeason = false,
 }: {
   season: Season;
   onClose: () => void;
   onBack?: () => void;
+  // 새 계절 "작물 효율": 계절 필터 숨기고 현재 계절로 고정.
+  lockSeason?: boolean;
 }) {
   const t = useTranslations();
   const { character, setCharacter, dialogFilters, setDialogFilters } =
     useSchedule();
   // 캐릭터 설정(레벨·스킬)은 효율에 영향을 주는 보조 설정이라 아코디언으로 접어 둔다.
   const [charOpen, setCharOpen] = useState(false);
-  // 보고 있는 계절(저장값 없으면 현재 계절). 닫았다 열어도 마지막 선택 유지.
-  const viewSeason = (dialogFilters.seedSeason as Season) ?? season;
+  // 잠금이면 현재 계절 고정. 아니면 저장값(없으면 현재 계절), 마지막 선택 유지.
+  const viewSeason = lockSeason
+    ? season
+    : ((dialogFilters.seedSeason as Season) ?? season);
   const setViewSeason = (s: Season) => setDialogFilters({ seedSeason: s });
   // 필터(다계절 포함·비료·가공·음식) 마지막 선택값 영속.
   const crossSeason = dialogFilters.seedCrossSeason;
@@ -130,25 +135,27 @@ export default function SeedEfficiencyDialog({
       onClose={onClose}
       onBack={onBack}
     >
-      {/* 계절 선택(꾸러미 계절 필터와 동일한 스타일, 단일 선택) */}
-      <div className="mb-3 flex flex-wrap gap-1.5">
-        {SEASONS.map((s) => {
-          const on = s === viewSeason;
-          return (
-            <button
-              key={s}
-              onClick={() => setViewSeason(s)}
-              className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                on
-                  ? "bg-[var(--sv-accent)] text-white"
-                  : "border border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink)] hover:bg-[var(--sv-bg)]"
-              }`}
-            >
-              {t(`seasons.${s}`)}
-            </button>
-          );
-        })}
-      </div>
+      {/* 계절 선택(잠금 시 숨김 — 현재 계절 고정) */}
+      {!lockSeason && (
+        <div className="mb-3 flex flex-wrap gap-1.5">
+          {SEASONS.map((s) => {
+            const on = s === viewSeason;
+            return (
+              <button
+                key={s}
+                onClick={() => setViewSeason(s)}
+                className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                  on
+                    ? "bg-[var(--sv-accent)] text-[var(--sv-accent-ink)]"
+                    : "border border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink)] hover:bg-[var(--sv-bg)]"
+                }`}
+              >
+                {t(`seasons.${s}`)}
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       {/* 캐릭터 설정(레벨·스킬) 아코디언 */}
       <section className="mb-3 overflow-hidden rounded-md border border-[var(--sv-border)]">

@@ -6,7 +6,6 @@ import { useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
-import TitleToggle from "@/components/TitleToggle";
 import PixelIcon from "@/components/PixelIcon";
 import TimeIcon from "@/components/TimeIcon";
 import SeasonFilter, {
@@ -47,7 +46,7 @@ function FilterChip({
       aria-pressed={active}
       className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
         active
-          ? "bg-[var(--sv-accent)] text-white"
+          ? "bg-[var(--sv-accent)] text-[var(--sv-accent-ink)]"
           : "border border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
       }`}
     >
@@ -134,21 +133,25 @@ export default function FishInfoDialog({
   season,
   onClose,
   onBack,
+  rainPreset = false,
 }: {
   season: Season;
   onClose: () => void;
   onBack?: () => void;
+  // 비 오는 날 "잡을 수 있는 생선": 필터 UI 숨기고 상시+해당 계절·비·낚싯대(일반+특수) 자동 적용.
+  rainPreset?: boolean;
 }) {
   const t = useTranslations();
-  const { dialogFilters, setDialogFilters, rainFishShown, setRainFishShown } =
-    useSchedule();
-  // 저장값 없으면 이번 계절+상시. 마지막 선택값 영속.
+  const { dialogFilters, setDialogFilters } = useSchedule();
+  // 프리셋이면 상시+해당 계절 고정. 아니면 저장값(없으면 이번 계절+상시), 마지막 선택 영속.
   const selected = useMemo(
     () =>
-      dialogFilters.fishSeasons
-        ? new Set(dialogFilters.fishSeasons as SeasonToken[])
-        : defaultSeasonSelection(season),
-    [dialogFilters.fishSeasons, season],
+      rainPreset
+        ? defaultSeasonSelection(season)
+        : dialogFilters.fishSeasons
+          ? new Set(dialogFilters.fishSeasons as SeasonToken[])
+          : defaultSeasonSelection(season),
+    [rainPreset, dialogFilters.fishSeasons, season],
   );
   const toggleToken = (tk: SeasonToken) => {
     const next = new Set(selected);
@@ -157,9 +160,11 @@ export default function FishInfoDialog({
     setDialogFilters({ fishSeasons: [...next] });
   };
 
-  // 날씨 필터(없으면 전체 선택 = 필터 없음). 마지막 선택 영속.
+  // 날씨 필터(없으면 전체 선택 = 필터 없음). 프리셋이면 비만. 마지막 선택 영속.
   const WEATHER_TOKENS = ["any", "sun", "rain"];
-  const weatherSel = new Set(dialogFilters.fishWeather ?? WEATHER_TOKENS);
+  const weatherSel = rainPreset
+    ? new Set(["rain"])
+    : new Set(dialogFilters.fishWeather ?? WEATHER_TOKENS);
   const toggleWeather = (v: string) => {
     const base = new Set(dialogFilters.fishWeather ?? WEATHER_TOKENS);
     if (base.has(v)) base.delete(v);
@@ -168,16 +173,16 @@ export default function FishInfoDialog({
   };
   const matchWeather = (f: FishInfo) => weatherSel.has(f.weather);
 
-  // 유형 필터: 낚싯대(일반)·낚싯대(전설)·게잡이 통발.
-  const TYPE_TOKENS = [
-    "rodNormal",
-    "rodNightMarket",
-    "rodLegendary",
-    "crabpot",
-  ];
-  const typeSel = new Set(dialogFilters.fishType ?? TYPE_TOKENS);
+  // 유형 필터: 낚싯대(일반)·낚싯대(특수: 야시장+전설)·게잡이 통발.
+  const TYPE_TOKENS = ["rodNormal", "rodSpecial", "crabpot"];
+  // 구버전 저장값(rodNightMarket·rodLegendary)은 rodSpecial로 흡수.
+  const normalizeType = (x: string) =>
+    x === "rodNightMarket" || x === "rodLegendary" ? "rodSpecial" : x;
+  const typeSel = rainPreset
+    ? new Set(["rodNormal", "rodSpecial"])
+    : new Set((dialogFilters.fishType ?? TYPE_TOKENS).map(normalizeType));
   const toggleType = (v: string) => {
-    const base = new Set(dialogFilters.fishType ?? TYPE_TOKENS);
+    const base = new Set(typeSel);
     if (base.has(v)) base.delete(v);
     else base.add(v);
     setDialogFilters({ fishType: [...base] });
@@ -185,11 +190,11 @@ export default function FishInfoDialog({
   const typeOf = (f: FishInfo) =>
     f.tool === "crabpot"
       ? "crabpot"
-      : f.category === "legendary" || f.category === "legendaryII"
-        ? "rodLegendary"
-        : f.category === "nightMarket"
-          ? "rodNightMarket"
-          : "rodNormal";
+      : f.category === "legendary" ||
+          f.category === "legendaryII" ||
+          f.category === "nightMarket"
+        ? "rodSpecial"
+        : "rodNormal";
   const matchType = (f: FishInfo) => typeSel.has(typeOf(f));
 
   // 계절·날씨·유형 필터 통과 + 이번 계절 우선 정렬
@@ -266,61 +271,49 @@ export default function FishInfoDialog({
   );
 
   return (
-    <Modal
-      title={t("fish.title")}
-      onClose={onClose}
-      onBack={onBack}
-      titleAfter={
-        <TitleToggle
-          checked={rainFishShown}
-          onChange={setRainFishShown}
-          label={t("fish.rainOnlyToggle")}
-        />
-      }
-    >
-      <div className="mb-3 flex flex-col gap-2">
-        <SeasonFilter selected={selected} onToggle={toggleToken} />
-        {/* 날씨 필터(토글) */}
-        <FilterGroup label={t("fish.weather")}>
-          {(["any", "sun", "rain"] as const).map((w) => (
-            <FilterChip
-              key={w}
-              active={weatherSel.has(w)}
-              onClick={() => toggleWeather(w)}
-            >
-              {t(
-                w === "any"
-                  ? "fish.weatherAny"
-                  : w === "sun"
-                    ? "fish.weatherSun"
-                    : "fish.weatherRain",
-              )}
-            </FilterChip>
-          ))}
-        </FilterGroup>
-        {/* 유형 필터(토글) */}
-        <FilterGroup label={t("fish.type")}>
-          {(
-            ["rodNormal", "rodNightMarket", "rodLegendary", "crabpot"] as const
-          ).map((tp) => (
-            <FilterChip
-              key={tp}
-              active={typeSel.has(tp)}
-              onClick={() => toggleType(tp)}
-            >
-              {t(
-                tp === "rodNormal"
-                  ? "fish.typeRodNormal"
-                  : tp === "rodNightMarket"
-                    ? "fish.typeRodNightMarket"
-                    : tp === "rodLegendary"
-                      ? "fish.typeRodLegendary"
+    <Modal title={t("fish.title")} onClose={onClose} onBack={onBack}>
+      {/* 프리셋(비 오는 날 잡을 수 있는 생선)에서는 필터 UI를 숨긴다 */}
+      {!rainPreset && (
+        <div className="mb-3 flex flex-col gap-2">
+          <SeasonFilter selected={selected} onToggle={toggleToken} />
+          {/* 날씨 필터(토글) */}
+          <FilterGroup label={t("fish.weather")}>
+            {(["any", "sun", "rain"] as const).map((w) => (
+              <FilterChip
+                key={w}
+                active={weatherSel.has(w)}
+                onClick={() => toggleWeather(w)}
+              >
+                {t(
+                  w === "any"
+                    ? "fish.weatherAny"
+                    : w === "sun"
+                      ? "fish.weatherSun"
+                      : "fish.weatherRain",
+                )}
+              </FilterChip>
+            ))}
+          </FilterGroup>
+          {/* 유형 필터(토글) */}
+          <FilterGroup label={t("fish.type")}>
+            {(["rodNormal", "rodSpecial", "crabpot"] as const).map((tp) => (
+              <FilterChip
+                key={tp}
+                active={typeSel.has(tp)}
+                onClick={() => toggleType(tp)}
+              >
+                {t(
+                  tp === "rodNormal"
+                    ? "fish.typeRodNormal"
+                    : tp === "rodSpecial"
+                      ? "fish.typeRodSpecial"
                       : "fish.typeCrabpot",
-              )}
-            </FilterChip>
-          ))}
-        </FilterGroup>
-      </div>
+                )}
+              </FilterChip>
+            ))}
+          </FilterGroup>
+        </div>
+      )}
 
       {/* 낚싯대 */}
       {rod.length > 0 && (

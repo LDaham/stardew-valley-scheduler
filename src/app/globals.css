@@ -1,49 +1,111 @@
 @import "tailwindcss";
 
-/* 스타듀밸리 감성 팔레트 (양피지/나무/계절색) */
+/* ─────────────────────────────────────────────────────────────
+   방향 C · 프로 덴스 대시보드 (슬레이트). 라이트 기본 + 다크 오버라이드.
+   색은 의미 토큰(--sv-*)만 사용 → 다크모드는 [data-theme="dark"]에서 토큰만 교체.
+   ───────────────────────────────────────────────────────────── */
 :root {
-  --sv-bg: #f4e2bf;
-  --sv-panel: #fff7e6;
-  --sv-ink: #4a3728;
-  --sv-ink-muted: #8b7355;
-  --sv-border: #b07a3c;
-  --sv-accent: #5a8f3c;
-  --sv-danger: #b3402f; /* 휴무/경고(빨강) */
-  --sv-warn: #d98b29; /* 일부 휴무(주황) */
+  /* 라이트(목업 B · 그린 베이스 — 민트 배경·그린톤 중성색·팜그린 강조) */
+  --sv-bg: #e7f2ea; /* 흰 박스가 떠 보이도록 배경을 좀 더 그린톤으로 */
+  --sv-panel: #ffffff;
+  --sv-box: #ffffff;
+  --sv-ink: #14342a;
+  --sv-ink-muted: #5e7a6b;
+  --sv-border: #aacdba; /* 경계가 분명한 진한 그린 보더 */
+  --sv-shadow: rgba(16, 52, 42, 0.1); /* 그린톤 그림자(라이트 구분감) */
+  --sv-accent: #15803d; /* 팜그린: 흰 글자 대비 4.5:1 확보 */
+  --sv-accent-ink: #ffffff;
+  --sv-danger: #c0392f;
+  --sv-warn: #ca8a04;
+  --sv-info: #0d9488; /* 버튼 hover 테두리(그린 테마에 맞춘 틸) */
+  /* 외곽(데스크) — 본문 배경과 어울리는 그린톤 */
+  --sv-desk: #d7ece0;
 
-  /* 나무 프레임 테마 */
-  --sv-wood: #8a5a2b;
-  --sv-wood-dark: #5e3a17;
-  --sv-wood-light: #c08a4e;
-  --sv-frame: #7a4f24;
-  --sv-btn: #e8c993;
-  --sv-btn-hover: #f1d8a8;
-  --sv-btn-border: #9c6b34;
-  --sv-banner: #f6e6c2;
-  --sv-banner-border: #d07f2f;
-  --sv-desk: #caa069;
+  /* 폰트 */
+  --font-sans: var(--font-inter), "Malgun Gothic", "Apple SD Gothic Neo",
+    system-ui, "Segoe UI", sans-serif;
+  --font-mono: var(--font-jbmono), ui-monospace, "JetBrains Mono",
+    "SFMono-Regular", Consolas, monospace;
 
-  /* 계절색 */
+  /* 계절색(유지) */
   --season-spring: #7ec850;
   --season-summer: #f4c430;
   --season-fall: #d2691e;
   --season-winter: #8fc7e8;
 }
 
+/* 다크(슬레이트-950) */
+html[data-theme="dark"] {
+  --sv-bg: #0b1120;
+  --sv-panel: #111a2e;
+  --sv-box: #0f1729;
+  --sv-ink: #e8edf6;
+  --sv-ink-muted: #8493ab;
+  --sv-border: #243049;
+  --sv-accent: #22c55e;
+  --sv-accent-ink: #04140a;
+  --sv-danger: #ef4444;
+  --sv-warn: #eab308;
+  --sv-info: #38bdf8;
+  --sv-desk: #0b1120;
+  /* 다크는 보더로 충분히 구분되므로 그림자 미적용(투명) */
+  --sv-shadow: rgba(0, 0, 0, 0);
+}
+
+/* 스타듀밸리(낮) — 양피지 배경·나무 보더·풀빛 그린·황금 강조 */
+html[data-theme="stardew"] {
+  --sv-bg: #f1e0bd;
+  --sv-panel: #fffaf0;
+  --sv-box: #fffaf0;
+  --sv-ink: #4a3728;
+  --sv-ink-muted: #8a6f4e;
+  --sv-border: #c08a4e;
+  --sv-accent: #4d7c2f; /* 풀빛 그린(흰 글자 대비 확보) */
+  --sv-accent-ink: #ffffff;
+  --sv-danger: #b3402f;
+  --sv-warn: #d98b29; /* 황금/호박 */
+  --sv-info: #3d7d9a; /* 하늘색(버튼 hover) */
+  --sv-desk: #e3cb9d;
+  --sv-shadow: rgba(74, 55, 40, 0.14);
+}
+
+/* 스타듀밸리(밤) — 짙은 남색 밤하늘·따뜻한 크림 글자·풀빛 그린 */
+html[data-theme="stardewNight"] {
+  --sv-bg: #14213d;
+  --sv-panel: #1e2a4a;
+  --sv-box: #1b2645;
+  --sv-ink: #f0e6cf;
+  --sv-ink-muted: #9aa6c4;
+  --sv-border: #3a4d7a;
+  --sv-accent: #6fbf4a;
+  --sv-accent-ink: #0c1a08;
+  --sv-danger: #e26d5a;
+  --sv-warn: #e0a93f;
+  --sv-info: #6cb7d9;
+  --sv-desk: #14213d;
+  --sv-shadow: rgba(0, 0, 0, 0);
+}
+
 @theme inline {
   --color-background: var(--sv-bg);
   --color-foreground: var(--sv-ink);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
 body {
-  font-family: system-ui, "Segoe UI", "Malgun Gothic", Arial, sans-serif;
-  /* 전체 UI 확대(버튼·텍스트·이미지 일괄). 콘텐츠는 축소된 가상 뷰포트로 리플로우되어
-     가로 스크롤 없이 커진다. 너무 크면 이 값을 낮추면 된다. */
-  zoom: 1.0;
+  font-family: var(--font-sans);
+  background-color: var(--sv-bg);
+  color: var(--sv-ink);
 }
 
-/* 클릭 가능한 요소는 마우스 올리면 손가락 커서(비활성은 제외).
-   Tailwind v4 preflight는 버튼에 pointer를 주지 않으므로 전역으로 지정한다. */
+/* 숫자(시간·진행도·D-day)는 mono + tabular로 정렬 흔들림 제거 */
+.sv-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 클릭 가능한 요소는 손가락 커서(Tailwind v4 preflight 보강) */
 @layer base {
   button:not(:disabled),
   a,
@@ -54,72 +116,72 @@ body {
   }
 }
 
-/* 게임 메뉴풍 나무 프레임·양피지·나무 버튼 */
+/* ─────────────────────────────────────────────────────────────
+   공용 프리미티브 — 플랫 슬레이트(테두리로 계층 표현, 그림자 최소).
+   ───────────────────────────────────────────────────────────── */
 @layer components {
-  /* 앱 전체를 감싸는 나무 외곽 프레임 */
+  /* 앱 전체 컨테이너(과거 나무 프레임 → 가벼운 패널) */
   .sv-frame {
-    background-color: var(--sv-bg);
-    border: 8px solid var(--sv-frame);
-    border-radius: 18px;
-    box-shadow:
-      inset 0 0 0 3px var(--sv-wood-light),
-      inset 0 0 0 6px var(--sv-frame),
-      0 8px 24px rgba(60, 36, 12, 0.35);
+    background-color: var(--sv-panel);
+    border: 1px solid var(--sv-border);
+    border-radius: 16px;
+    box-shadow: 0 4px 14px var(--sv-shadow);
   }
 
-  /* 양피지 패널(둥근 나무 테두리) */
+  /* 일반 패널 */
   .sv-panel {
     background-color: var(--sv-panel);
-    border: 3px solid var(--sv-btn-border);
-    border-radius: 14px;
-    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--sv-border);
+    border-radius: 10px;
+    box-shadow: 0 1px 3px var(--sv-shadow);
   }
 
-  /* 강조 패널(할 일 목록 등 — 두꺼운 주황 프레임) */
+  /* 콘텐츠 박스(정보/할 일/참고) */
   .sv-box {
-    background-color: var(--sv-panel);
-    border: 4px solid var(--sv-banner-border);
-    border-radius: 14px;
-    box-shadow:
-      inset 0 0 0 2px rgba(255, 255, 255, 0.55),
-      0 3px 0 rgba(120, 70, 20, 0.18);
+    background-color: var(--sv-box);
+    border: 1px solid var(--sv-border);
+    border-radius: 10px;
+    box-shadow: 0 1px 3px var(--sv-shadow);
   }
 
   /* 타이틀 배너 */
   .sv-banner {
-    background-color: var(--sv-banner);
-    border: 4px solid var(--sv-banner-border);
-    border-radius: 14px;
-    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.55);
+    background-color: var(--sv-panel);
+    border: 1px solid var(--sv-border);
+    border-radius: 10px;
+    box-shadow: 0 1px 3px var(--sv-shadow);
   }
 
-  /* 나무 버튼 */
+  /* 기본 버튼 */
   .sv-btn {
-    background-color: var(--sv-btn);
-    border: 2px solid var(--sv-btn-border);
-    border-radius: 10px;
+    background-color: var(--sv-panel);
+    border: 1px solid var(--sv-border);
+    border-radius: 8px;
     color: var(--sv-ink);
     font-weight: 600;
-    box-shadow: 0 2px 0 var(--sv-wood-dark);
+    box-shadow: 0 1px 2px var(--sv-shadow);
+    transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
   }
   .sv-btn:hover:not(:disabled) {
-    background-color: var(--sv-btn-hover);
+    border-color: var(--sv-info);
+    box-shadow: 0 2px 5px var(--sv-shadow);
   }
   .sv-btn:active:not(:disabled) {
     transform: translateY(1px);
-    box-shadow: 0 1px 0 var(--sv-wood-dark);
+    box-shadow: 0 1px 2px var(--sv-shadow);
   }
   .sv-btn:disabled {
     opacity: 0.45;
   }
 
-  /* 강조(주요 동작) 나무 버튼 */
+  /* 강조(주요 동작) 버튼 */
   .sv-btn-primary {
     background-color: var(--sv-accent);
-    border-color: #3f6e29;
-    color: #fff;
+    border-color: transparent;
+    color: var(--sv-accent-ink);
   }
   .sv-btn-primary:hover:not(:disabled) {
-    background-color: #69a047;
+    border-color: transparent;
+    filter: brightness(1.05);
   }
 }

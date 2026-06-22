@@ -62,9 +62,9 @@ const DEFAULT_DIALOG_FILTERS: DialogFilters = {
   shopPinned: ["pierre", "carpenter", "blacksmith"],
 };
 
-// 메인 상단 박스 종류·기본 순서(가게 일정 → 꾸러미 추적 → 비 생선).
-const MAIN_ORDER_IDS = ["shopSchedule", "bundleTracker", "rainFish"];
-const DEFAULT_MAIN_ORDER = ["shopSchedule", "bundleTracker", "rainFish"];
+// 메인 상단 박스 종류(꾸러미 추적만). 가게 일정은 항상 표시(할 일 옆), 비 생선은 제거됨.
+const MAIN_ORDER_IDS = ["bundleTracker"];
+const DEFAULT_MAIN_ORDER = ["bundleTracker"];
 // 저장된 순서를 알려진 id로 정리(중복 제거 + 누락분 기본 순서로 보충).
 function reconcileMainOrder(saved?: string[]): string[] {
   if (!saved) return [...DEFAULT_MAIN_ORDER];

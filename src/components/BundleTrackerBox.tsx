@@ -125,10 +125,10 @@ export default function BundleTrackerBox() {
             {t(`bundle.${b.id}`)}
           </h3>
           <span
-            className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold ${
+            className={`sv-num shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold ${
               complete
-                ? "bg-[var(--sv-accent)] text-white"
-                : "bg-[var(--sv-ink)] text-white"
+                ? "bg-[var(--sv-accent)] text-[var(--sv-accent-ink)]"
+                : "bg-[var(--sv-ink)] text-[var(--sv-bg)]"
             }`}
           >
             {complete ? t("bundle.complete") : `${done}/${b.needed}`}

@@ -4,7 +4,6 @@ import { Fragment, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
-import TitleToggle from "@/components/TitleToggle";
 import Dropdown from "@/components/Dropdown";
 import PixelIcon from "@/components/PixelIcon";
 import MasonryColumns from "@/components/MasonryColumns";
@@ -12,6 +11,7 @@ import {
   SHOP_SCHEDULE,
   WEEK_ORDER,
   resolveClosedDays,
+  shopIconSrc,
   type ShopScheduleEntry,
 } from "@/data/shopSchedule";
 
@@ -76,7 +76,7 @@ export function ShopBody({
               className={`flex size-6 items-center justify-center rounded-full text-xs font-bold ${
                 isClosed
                   ? "bg-[var(--sv-danger)] text-white"
-                  : "bg-[var(--sv-accent)] text-white"
+                  : "bg-[var(--sv-accent)] text-[var(--sv-accent-ink)]"
               }`}
             >
               {t(`weekdays.${d}`)}
@@ -127,7 +127,7 @@ function Badge({
 }) {
   const cls =
     tone === "open"
-      ? "bg-[var(--sv-accent)] text-white"
+      ? "bg-[var(--sv-accent)] text-[var(--sv-accent-ink)]"
       : tone === "partial"
         ? "bg-[var(--sv-warn)] text-[var(--sv-ink)]"
         : "bg-[var(--sv-danger)] text-white";
@@ -156,7 +156,7 @@ function ScenarioToggle({
       aria-pressed={active}
       className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
         active
-          ? "bg-[var(--sv-accent)] text-white"
+          ? "bg-[var(--sv-accent)] text-[var(--sv-accent-ink)]"
           : "border border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
       }`}
     >
@@ -244,8 +244,7 @@ export default function ShopScheduleDialog({
   onBack?: () => void;
 }) {
   const t = useTranslations();
-  const { dialogFilters, setDialogFilters, shopScheduleShown, setShopScheduleShown } =
-    useSchedule();
+  const { dialogFilters, setDialogFilters } = useSchedule();
   const [selected, setSelected] = useState(SHOP_SCHEDULE[0].id);
   // 시나리오 토글은 스토어(dialogFilters)에 저장 → 탭을 닫아도 유지된다.
   const scenario: Scenario = {
@@ -277,7 +276,7 @@ export default function ShopScheduleDialog({
       className="rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] p-3"
     >
       <div className="mb-2 flex items-center gap-2">
-        <PixelIcon src={`/icons/shops/${s.id}.png`} size={20} />
+        <PixelIcon src={shopIconSrc(s.id)} size={20} />
         <h3 className="flex-1 text-base font-bold">
           {t(`shopSchedule.shops.${s.id}.name`)}
         </h3>
@@ -292,21 +291,14 @@ export default function ShopScheduleDialog({
   );
 
   return (
-    <Modal
-      title={t("shopSchedule.title")}
-      onClose={onClose}
-      onBack={onBack}
-      titleAfter={
-        <TitleToggle
-          checked={shopScheduleShown}
-          onChange={setShopScheduleShown}
-          label={t("settings.shopScheduleShow")}
-        />
-      }
-    >
-      {/* 시나리오 토글: 내 상황(열쇠·복구·축제·배 수리)에 맞춰 일정 표시를 전환(축제는 탭 전용) */}
+    <Modal title={t("shopSchedule.title")} onClose={onClose} onBack={onBack}>
+      {/* 시나리오 토글: 내 상황(열쇠·복구·축제·배 수리)에 맞춰 일정 표시를 전환(축제는 탭 전용).
+          열쇠·복구·배 수리는 메인 가게 일정 박스에도 적용됨을 오른쪽에 안내. */}
       <div className="mb-3 flex flex-wrap items-center gap-2">
         <ShopScenarioFilters includeFestival />
+        <span className="text-xs text-[var(--sv-ink-muted)]">
+          {t("shopSchedule.filterAppliesNote")}
+        </span>
       </div>
 
       {/* 모바일: 가게 드롭다운 + 세로 카드 */}
@@ -322,7 +314,7 @@ export default function ShopScheduleDialog({
         />
         <div className="mt-3 rounded-md border border-[var(--sv-border)] p-3">
           <div className="mb-2 flex items-center gap-2">
-            <PixelIcon src={`/icons/shops/${sel.id}.png`} size={20} />
+            <PixelIcon src={shopIconSrc(sel.id)} size={20} />
             <h3 className="flex-1 text-base font-bold">
               {t(`shopSchedule.shops.${sel.id}.name`)}
             </h3>

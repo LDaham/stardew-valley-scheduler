@@ -265,6 +265,14 @@ function isFestivalClosed(entry: ShopScheduleEntry, date: SDate): boolean {
   return festivalLocksShops(date); // "all": 그날 실제 축제 여부로 자동 판정
 }
 
+// 일부 가게는 대표 이미지를 별도 지정(영화관 → 팝콘 등). 그 외엔 가게 id로 매핑.
+const SHOP_ICON_OVERRIDE: Record<string, string> = {
+  movieTheater: "/icons/snacks/Popcorn.png",
+};
+export function shopIconSrc(id: string): string {
+  return SHOP_ICON_OVERRIDE[id] ?? `/icons/shops/${id}.png`;
+}
+
 // 설정한 날짜 기준으로 가게의 오늘 상태(휴무 여부·영업시간)를 계산한다.
 // 판정 순서: 영구 폐점 → 운영 계절 → 축제(자동) → 특정일 휴무 → 비 휴무 → 요일 휴무 → 영업시간.
 export function resolveShopStatusOn(

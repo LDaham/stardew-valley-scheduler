@@ -142,7 +142,7 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
                 <span
                   className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold ${
                     complete
-                      ? "bg-[var(--sv-accent)] text-white"
+                      ? "bg-[var(--sv-accent)] text-[var(--sv-accent-ink)]"
                       : "bg-[var(--sv-ink)] text-white"
                   }`}
                 >
