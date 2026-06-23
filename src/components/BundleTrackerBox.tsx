@@ -79,8 +79,18 @@ export default function BundleTrackerBox() {
       let items = b.items.filter((i) =>
         matchesSeason(i.seasons, selectedSeasons, i.rainy),
       );
-      if (onlyIncomplete)
-        items = items.filter((i) => !done[bundleItemKey(b.id, i.id)]);
+      if (onlyIncomplete) {
+        // 꾸러미가 완료(needed 충족)면 남은 미체크 물품까지 모두 숨긴다.
+        // 모험가(4개 중 2개)처럼 subset 꾸러미는 다 채워도 여분 물품이 미체크라
+        // 개별 완료 필터만으론 남는데, 꾸러미 단위로는 할 일이 없으므로 통째로 제외.
+        const completeCount = b.items.filter(
+          (i) => done[bundleItemKey(b.id, i.id)],
+        ).length;
+        items =
+          completeCount >= b.needed
+            ? []
+            : items.filter((i) => !done[bundleItemKey(b.id, i.id)]);
+      }
       return { bundle: b, items };
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
