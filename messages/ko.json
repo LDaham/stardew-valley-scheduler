@@ -9,6 +9,12 @@
     "cancel": "취소",
     "confirm": "확인"
   },
+  "nav": {
+    "today": "오늘",
+    "tools": "참고 도구",
+    "progress": "진행도",
+    "addTask": "할 일 추가"
+  },
   "miniCalendar": {
     "title": "달력",
     "yearPrefix": "",

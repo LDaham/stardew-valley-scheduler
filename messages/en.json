@@ -9,6 +9,12 @@
     "cancel": "Cancel",
     "confirm": "Confirm"
   },
+  "nav": {
+    "today": "Today",
+    "tools": "Tools",
+    "progress": "Progress",
+    "addTask": "Add task"
+  },
   "miniCalendar": {
     "title": "Calendar",
     "yearPrefix": "Year ",

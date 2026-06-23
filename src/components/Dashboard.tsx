@@ -498,8 +498,8 @@ export default function Dashboard() {
 
       {/* 정보(오늘·내일 좌우 분할) → 점선 → 할 일 목록 → 할 일 추가. 비어 있어도 표시. */}
       <div className="sv-box p-4">
-        {/* 오늘 정보 / 내일 정보 좌우 분할 */}
-        <div className="grid grid-cols-2 gap-4">
+        {/* 오늘 정보 / 내일 정보 좌우 분할(모바일은 내일 숨김 → 정보 전체 폭) */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           <div>
             <h2 className="mb-2 text-base font-bold text-[var(--sv-ink-muted)]">
               {t("dashboard.infoTitle")}
@@ -511,7 +511,7 @@ export default function Dashboard() {
               hideCheckbox
             />
           </div>
-          <div className="border-l border-dashed border-[var(--sv-border)] pl-4">
+          <div className="hidden lg:block lg:border-l lg:border-dashed lg:border-[var(--sv-border)] lg:pl-4">
             <div className="mb-2 flex items-center justify-between gap-2">
               <h2 className="text-base font-bold text-[var(--sv-ink-muted)]">
                 {t("dashboard.tomorrowInfoTitle")}
@@ -552,7 +552,7 @@ export default function Dashboard() {
         <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
 
         {/* 할 일 목록(왼쪽 절반) + 가게 일정(오른쪽 절반) */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           <div>
             {/* 할 일 목록 헤더: 좌측 제목, 우측 [추가한 할 일 확인][오늘 할 일 추가] */}
             <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
@@ -564,9 +564,10 @@ export default function Dashboard() {
                 >
                   {t("myTasks.checkButton")}
                 </button>
+                {/* 모바일은 하단 ＋FAB로 추가하므로 데스크탑에서만 노출 */}
                 <button
                   onClick={() => setAddTarget("today")}
-                  className="sv-btn sv-btn-primary px-2.5 py-1 text-sm"
+                  className="sv-btn sv-btn-primary hidden px-2.5 py-1 text-sm lg:inline-block"
                 >
                   ＋ {t("dashboard.addTodo")}
                 </button>
@@ -580,7 +581,7 @@ export default function Dashboard() {
           </div>
 
           {/* 가게 일정(메모장 자리로 이동). 2열일 때 왼쪽 점선으로 할 일 목록과 구분 */}
-          <div className="sm:border-l sm:border-dashed sm:border-[var(--sv-border)] sm:pl-4">
+          <div className="lg:border-l lg:border-dashed lg:border-[var(--sv-border)] lg:pl-4">
             <ShopScheduleBox />
           </div>
         </div>
