@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { useSchedule } from "@/components/ScheduleProvider";
 import { toYearDay } from "@/lib/calendar";
 import PixelIcon from "@/components/PixelIcon";
-import { PinButton } from "@/components/ShopScheduleDialog";
+import { PinButton, ShopScenarioFilters } from "@/components/ShopScheduleDialog";
 import {
   SHOP_SCHEDULE,
   resolveShopStatusOn,
@@ -37,11 +37,12 @@ export default function ShopScheduleBox() {
     useSchedule();
 
   const isRainToday = !!rainDays[toYearDay(currentDate)];
+  // 메인 박스 전용 시나리오 상태(box*) — 참고 도구 탭(shop*)과 독립.
   const ctx = {
     date: currentDate,
-    ccRestored: dialogFilters.shopCcRestored,
-    keyApplied: dialogFilters.shopKeyApplied,
-    boatRepaired: dialogFilters.shopBoatRepaired,
+    ccRestored: dialogFilters.boxCcRestored,
+    keyApplied: dialogFilters.boxKeyApplied,
+    boatRepaired: dialogFilters.boxBoatRepaired,
     isRainToday,
   };
 
@@ -75,7 +76,10 @@ export default function ShopScheduleBox() {
           .map((seg) => `${timeLabel(seg.open, t)} – ${timeLabel(seg.close, t)}`)
           .join(", ");
     return (
-      <li key={s.id} className="flex items-start gap-2">
+      <li
+        key={s.id}
+        className="flex items-start gap-2 rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] p-2.5"
+      >
         <PixelIcon src={shopIconSrc(s.id)} size={18} />
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5">
@@ -106,14 +110,23 @@ export default function ShopScheduleBox() {
     // 외곽 박스 없이(부모 sv-box 안에 임베드) 제목 + 가게 목록.
     // 시나리오 필터(열쇠·복구·배 수리)는 가게 일정 모달에서 설정 → 여기 자동 반영(축제는 날짜 자동 판정).
     <div className="flex flex-col">
-      <h2 className="mb-2 text-base font-bold">{t("shopSchedule.title")}</h2>
+      {/* 헤더: 시계 아이콘 + 제목(좌) + 시나리오 필터(우, 박스 전용·탭과 독립) */}
+      <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+        <h2 className="flex items-center gap-1.5 text-base font-bold">
+          <PixelIcon src="/icons/ui/time.png" size={18} />
+          {t("shopSchedule.title")}
+        </h2>
+        <div className="flex flex-wrap items-center gap-2">
+          <ShopScenarioFilters scope="box" />
+        </div>
+      </div>
 
       {shops.length === 0 ? (
         <p className="rounded-md bg-[var(--sv-bg)] px-3 py-2 text-sm text-[var(--sv-ink-muted)]">
           {t("shopSchedule.boxEmpty")}
         </p>
       ) : (
-        <ul className="flex flex-col gap-2.5">{shops.map(renderShop)}</ul>
+        <ul className="flex flex-wrap gap-2">{shops.map(renderShop)}</ul>
       )}
     </div>
   );

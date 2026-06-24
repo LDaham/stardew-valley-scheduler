@@ -53,11 +53,15 @@ const DEFAULT_DIALOG_FILTERS: DialogFilters = {
   trackerSeasons: ["spring"],
   trackerOnlyIncomplete: true,
   trackerGrouped: true,
-  // 가게 일정 시나리오 토글 기본값(모두 꺼짐)
+  // 참고 도구-가게 일정 탭 시나리오 토글 기본값(모두 꺼짐)
   shopKeyApplied: false,
   shopCcRestored: false,
   shopFestivalOn: false,
   shopBoatRepaired: false,
+  // 메인 가게 일정 박스 시나리오 토글(탭과 독립, 모두 꺼짐)
+  boxKeyApplied: false,
+  boxCcRestored: false,
+  boxBoatRepaired: false,
   // 기본 고정: 피에르네 잡화점·목공 작업실·대장간
   shopPinned: ["pierre", "carpenter", "blacksmith"],
 };
@@ -116,6 +120,9 @@ const DEFAULT_STATE: ScheduleState = {
   addTaskOrder: DEFAULT_ADD_TASK_ORDER,
   addTaskChildOrder: defaultChildOrder(),
   achievementsDone: {},
+  monsterGoalsDone: {},
+  fieldOfficeDone: {},
+  museumDone: {},
   character: DEFAULT_CHARACTER,
   dialogFilters: DEFAULT_DIALOG_FILTERS,
   bundleTrackerShown: false,
@@ -161,6 +168,9 @@ function ensureLoaded(): void {
       ? defaultChildOrder()
       : reconcileAllChildOrders(saved.addTaskChildOrder),
     achievementsDone: saved.achievementsDone ?? {},
+    monsterGoalsDone: saved.monsterGoalsDone ?? {},
+    fieldOfficeDone: saved.fieldOfficeDone ?? {},
+    museumDone: saved.museumDone ?? {},
     character: { ...DEFAULT_CHARACTER, ...saved.character },
     dialogFilters: { ...DEFAULT_DIALOG_FILTERS, ...saved.dialogFilters },
     bundleTrackerShown: saved.bundleTrackerShown ?? false,
@@ -430,6 +440,9 @@ export const scheduleActions = {
       addTaskOrder: [...DEFAULT_ADD_TASK_ORDER],
       addTaskChildOrder: defaultChildOrder(),
       achievementsDone: {},
+      monsterGoalsDone: {},
+      fieldOfficeDone: {},
+      museumDone: {},
       character: { ...DEFAULT_CHARACTER },
       dialogFilters: { ...DEFAULT_DIALOG_FILTERS },
       bundleTrackerShown: false,
@@ -511,6 +524,30 @@ export const scheduleActions = {
         ...state.achievementsDone,
         [id]: !state.achievementsDone[id],
       },
+    });
+  },
+  // 몬스터 박멸 목표 달성 토글
+  toggleMonsterGoal(id: string) {
+    commit({
+      ...state,
+      monsterGoalsDone: {
+        ...state.monsterGoalsDone,
+        [id]: !state.monsterGoalsDone[id],
+      },
+    });
+  },
+  // 현장 사무소 기증 토글
+  toggleFieldOffice(id: string) {
+    commit({
+      ...state,
+      fieldOfficeDone: { ...state.fieldOfficeDone, [id]: !state.fieldOfficeDone[id] },
+    });
+  },
+  // 박물관 기증 토글
+  toggleMuseum(id: string) {
+    commit({
+      ...state,
+      museumDone: { ...state.museumDone, [id]: !state.museumDone[id] },
     });
   },
 };

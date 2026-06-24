@@ -93,6 +93,11 @@ html[data-theme="stardewNight"] {
   --font-mono: var(--font-mono);
 }
 
+/* 스크롤바 자리를 항상 예약 → 스크롤 없는 탭↔있는 탭 전환 시 가로 폭이 안 흔들림(움찔 방지) */
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   font-family: var(--font-sans);
   background-color: var(--sv-bg);

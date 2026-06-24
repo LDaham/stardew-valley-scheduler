@@ -663,7 +663,6 @@
     "ccToggle": "마을회관 복구",
     "festivalToggle": "축제날",
     "boatToggle": "진저섬 배 수리",
-    "filterAppliesNote": "이 필터는 메인 가게 일정에도 적용됩니다(축제 제외 — 설정한 날짜의 실제 축제 여부를 따름).",
     "statusOpen": "정상 영업",
     "statusClosed": "축제 휴무",
     "statusPartial": "특정 축제 휴무",
@@ -2413,6 +2412,31 @@
     "open": "업적 목록 열기",
     "progress": "달성 {done} / 전체 {total}"
   },
+  "monster": {
+    "title": "몬스터 박멸 목표",
+    "short": "박멸 목표",
+    "open": "몬스터 박멸 목표 열기",
+    "progress": "달성 {done} / 전체 {total}",
+    "kills": "{count}마리",
+    "source": "출처: Stardew Valley Wiki (CC BY-NC-SA 3.0)"
+  },
+  "museum": {
+    "title": "박물관 기증",
+    "short": "박물관",
+    "open": "박물관 기증 열기",
+    "progress": "기증 {done} / 전체 {total}",
+    "artifact": "유물",
+    "mineral": "광물",
+    "source": "출처: Stardew Valley Wiki (CC BY-NC-SA 3.0)"
+  },
+  "fieldOffice": {
+    "title": "현장 사무소 기증",
+    "short": "현장 사무소",
+    "open": "현장 사무소 기증 열기",
+    "hint": "진저 섬 스네일 박사에게 기증하는 화석·조사 항목.",
+    "progress": "기증 {done} / 전체 {total}",
+    "source": "출처: Stardew Valley Wiki (CC BY-NC-SA 3.0)"
+  },
   "logic": {
     "weatherFortune": "매일 · 당일 끝남(안 보면 다음 날 새 날씨·운세). 완료 안 해도 다음 날 새로 생성.",
     "animalCare": "매일 · 당일 끝남. 매일 새로 진행해야 함.",
@@ -2451,11 +2475,30 @@
     "gold": "골드",
     "free": "무료",
     "source": "출처: Stardew Valley Wiki (CC BY-NC-SA 3.0)",
+    "cats": {
+      "shop": "상점",
+      "upgrade": "업그레이드",
+      "geode": "정동석 가공",
+      "building": "건물 건설",
+      "barter": "물물교환",
+      "coin": "코인 상점",
+      "magic": "마법 상품"
+    },
     "shops": {
+      "pierre": "잡화점",
       "carpenter": "목공 작업실",
       "blacksmith": "대장간",
       "wizard": "마법사의 탑",
-      "desertTrader": "사막 상인"
+      "clinic": "하비의 병원",
+      "joja": "조자마트",
+      "saloon": "스타드롭 주점",
+      "sewers": "하수도 (크로버스)",
+      "ranch": "마니의 목장",
+      "fishShop": "생선 가게",
+      "adventurersGuild": "모험가의 길드",
+      "oasis": "오아시스",
+      "desertTrader": "사막 상인",
+      "casino": "카지노"
     }
   }
 }

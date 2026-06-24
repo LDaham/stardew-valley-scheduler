@@ -165,29 +165,44 @@ function ScenarioToggle({
   );
 }
 
-// 시나리오 필터(열쇠·복구·[축제]·배 수리). dialogFilters를 읽고 쓰므로
-// 가게 일정 탭과 메인 박스가 같은 상태를 공유한다(한쪽에서 켜면 다른 쪽도 적용).
-// 단, 축제 토글은 가게 일정 탭 전용(includeFestival)이며 메인 박스는 당일 날짜로 자동 판정한다.
+// 시나리오 필터(열쇠·복구·[축제]·배 수리).
+// scope="dialog"(기본)는 참고 도구-가게 일정 탭 전용 상태(shop*)를,
+// scope="box"는 메인 박스 전용 상태(box*)를 읽고 쓴다 → 탭과 박스가 서로 독립.
+// 축제 토글은 탭 전용(includeFestival)이며 메인 박스는 당일 날짜로 자동 판정한다.
 // fragment를 반환하므로 감싸는 컨테이너(정렬)는 호출부가 제공한다.
 export function ShopScenarioFilters({
   includeFestival = false,
+  scope = "dialog",
 }: {
   includeFestival?: boolean;
+  scope?: "dialog" | "box";
 }) {
   const t = useTranslations();
   const { dialogFilters, setDialogFilters } = useSchedule();
   const s = dialogFilters;
+  const box = scope === "box";
+  const key = box ? s.boxKeyApplied : s.shopKeyApplied;
+  const cc = box ? s.boxCcRestored : s.shopCcRestored;
+  const boat = box ? s.boxBoatRepaired : s.shopBoatRepaired;
   return (
     <>
       <ScenarioToggle
         label={t("shopSchedule.keyToggle")}
-        active={s.shopKeyApplied}
-        onToggle={() => setDialogFilters({ shopKeyApplied: !s.shopKeyApplied })}
+        active={key}
+        onToggle={() =>
+          setDialogFilters(
+            box ? { boxKeyApplied: !key } : { shopKeyApplied: !key },
+          )
+        }
       />
       <ScenarioToggle
         label={t("shopSchedule.ccToggle")}
-        active={s.shopCcRestored}
-        onToggle={() => setDialogFilters({ shopCcRestored: !s.shopCcRestored })}
+        active={cc}
+        onToggle={() =>
+          setDialogFilters(
+            box ? { boxCcRestored: !cc } : { shopCcRestored: !cc },
+          )
+        }
       />
       {includeFestival && (
         <ScenarioToggle
@@ -198,9 +213,11 @@ export function ShopScenarioFilters({
       )}
       <ScenarioToggle
         label={t("shopSchedule.boatToggle")}
-        active={s.shopBoatRepaired}
+        active={boat}
         onToggle={() =>
-          setDialogFilters({ shopBoatRepaired: !s.shopBoatRepaired })
+          setDialogFilters(
+            box ? { boxBoatRepaired: !boat } : { shopBoatRepaired: !boat },
+          )
         }
       />
     </>
@@ -293,12 +310,9 @@ export default function ShopScheduleDialog({
   return (
     <Modal title={t("shopSchedule.title")} onClose={onClose} onBack={onBack}>
       {/* 시나리오 토글: 내 상황(열쇠·복구·축제·배 수리)에 맞춰 일정 표시를 전환(축제는 탭 전용).
-          열쇠·복구·배 수리는 메인 가게 일정 박스에도 적용됨을 오른쪽에 안내. */}
+          이 탭의 필터는 메인 박스와 독립(box*가 아닌 shop* 상태 사용). */}
       <div className="mb-3 flex flex-wrap items-center gap-2">
         <ShopScenarioFilters includeFestival />
-        <span className="text-xs text-[var(--sv-ink-muted)]">
-          {t("shopSchedule.filterAppliesNote")}
-        </span>
       </div>
 
       {/* 모바일: 가게 드롭다운 + 세로 카드 */}

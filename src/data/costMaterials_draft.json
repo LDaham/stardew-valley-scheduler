@@ -1,0 +1,2396 @@
+[
+ {
+  "id": "pierre",
+  "offers": [
+   {
+    "ko": "번식용 잔디",
+    "en": "Grass Starter",
+    "icon": "/icons/costMaterials/Grass_Starter.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "번식용 잔디 (제작법)",
+    "en": "Grass Starter",
+    "icon": "/icons/costMaterials/Grass_Starter.png",
+    "gold": 1000,
+    "materials": []
+   },
+   {
+    "ko": "설탕",
+    "en": "Sugar",
+    "icon": "/icons/costMaterials/Sugar.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "밀가루",
+    "en": "Wheat Flour",
+    "icon": "/icons/costMaterials/Wheat_Flour.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "쌀",
+    "en": "Rice",
+    "icon": "/icons/costMaterials/Rice.png",
+    "gold": 200,
+    "materials": []
+   },
+   {
+    "ko": "기름",
+    "en": "Oil",
+    "icon": "/icons/costMaterials/Oil.png",
+    "gold": 200,
+    "materials": []
+   },
+   {
+    "ko": "식초",
+    "en": "Vinegar",
+    "icon": "/icons/costMaterials/Vinegar.png",
+    "gold": 200,
+    "materials": []
+   },
+   {
+    "ko": "기본 비료",
+    "en": "Basic Fertilizer",
+    "icon": "/icons/costMaterials/Basic_Fertilizer.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "고급 비료",
+    "en": "Quality Fertilizer",
+    "icon": "/icons/costMaterials/Quality_Fertilizer.png",
+    "gold": 150,
+    "materials": [],
+    "note": "2년차 이후"
+   },
+   {
+    "ko": "기본 보습 토양",
+    "en": "Basic Retaining Soil",
+    "icon": "/icons/costMaterials/Basic_Retaining_Soil.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "고급 보습 토양",
+    "en": "Quality Retaining Soil",
+    "icon": "/icons/costMaterials/Quality_Retaining_Soil.png",
+    "gold": 150,
+    "materials": []
+   },
+   {
+    "ko": "성장 촉진제",
+    "en": "Speed-Gro",
+    "icon": "/icons/costMaterials/Speed-Gro.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "디럭스 성장 촉진제",
+    "en": "Deluxe Speed-Gro",
+    "icon": "/icons/costMaterials/Deluxe_Speed-Gro.png",
+    "gold": 150,
+    "materials": []
+   },
+   {
+    "ko": "체리나무 묘목",
+    "en": "Cherry Sapling",
+    "icon": "/icons/costMaterials/Cherry_Sapling.png",
+    "gold": 3400,
+    "materials": []
+   },
+   {
+    "ko": "살구나무 묘목",
+    "en": "Apricot Sapling",
+    "icon": "/icons/costMaterials/Apricot_Sapling.png",
+    "gold": 2000,
+    "materials": []
+   },
+   {
+    "ko": "오렌지나무 묘목",
+    "en": "Orange Sapling",
+    "icon": "/icons/costMaterials/Orange_Sapling.png",
+    "gold": 4000,
+    "materials": []
+   },
+   {
+    "ko": "복숭아나무 묘목",
+    "en": "Peach Sapling",
+    "icon": "/icons/costMaterials/Peach_Sapling.png",
+    "gold": 6000,
+    "materials": []
+   },
+   {
+    "ko": "석류나무 묘목",
+    "en": "Pomegranate Sapling",
+    "icon": "/icons/costMaterials/Pomegranate_Sapling.png",
+    "gold": 6000,
+    "materials": []
+   },
+   {
+    "ko": "사과나무 묘목",
+    "en": "Apple Sapling",
+    "icon": "/icons/costMaterials/Apple_Sapling.png",
+    "gold": 4000,
+    "materials": []
+   },
+   {
+    "ko": "카탈로그",
+    "en": "Catalogue",
+    "icon": "/icons/costMaterials/Catalogue.png",
+    "gold": 30000,
+    "materials": []
+   },
+   {
+    "ko": "탈수기 (제작법)",
+    "en": "Dehydrator",
+    "icon": "/icons/costMaterials/Dehydrator.png",
+    "gold": 10000,
+    "materials": []
+   },
+   {
+    "ko": "부케",
+    "en": "Bouquet",
+    "icon": "/icons/costMaterials/Bouquet.png",
+    "gold": 200,
+    "materials": []
+   },
+   {
+    "ko": "큰 가방",
+    "en": "Backpack",
+    "icon": "/icons/costMaterials/Backpack.png",
+    "gold": 0,
+    "materials": []
+   },
+   {
+    "ko": "디럭스 가방",
+    "en": "36 Backpack",
+    "icon": "/icons/costMaterials/36_Backpack.png",
+    "gold": 0,
+    "materials": []
+   },
+   {
+    "ko": "파스닙 씨앗",
+    "en": "Parsnip Seeds",
+    "icon": "/icons/costMaterials/Parsnip_Seeds.png",
+    "gold": 20,
+    "materials": [],
+    "note": "봄 한정"
+   },
+   {
+    "ko": "콩 종자",
+    "en": "Bean Starter",
+    "icon": "/icons/costMaterials/Bean_Starter.png",
+    "gold": 60,
+    "materials": [],
+    "note": "봄 한정"
+   },
+   {
+    "ko": "콜리플라워 씨앗",
+    "en": "Cauliflower Seeds",
+    "icon": "/icons/costMaterials/Cauliflower_Seeds.png",
+    "gold": 80,
+    "materials": [],
+    "note": "봄 한정"
+   },
+   {
+    "ko": "감자 씨앗",
+    "en": "Potato Seeds",
+    "icon": "/icons/costMaterials/Potato_Seeds.png",
+    "gold": 50,
+    "materials": [],
+    "note": "봄 한정"
+   },
+   {
+    "ko": "튤립 구근",
+    "en": "Tulip Bulb",
+    "icon": "/icons/costMaterials/Tulip_Bulb.png",
+    "gold": 20,
+    "materials": [],
+    "note": "봄 한정"
+   },
+   {
+    "ko": "케일 씨앗",
+    "en": "Kale Seeds",
+    "icon": "/icons/costMaterials/Kale_Seeds.png",
+    "gold": 70,
+    "materials": [],
+    "note": "봄 한정"
+   },
+   {
+    "ko": "재즈 씨앗",
+    "en": "Jazz Seeds",
+    "icon": "/icons/costMaterials/Jazz_Seeds.png",
+    "gold": 30,
+    "materials": [],
+    "note": "봄 한정"
+   },
+   {
+    "ko": "마늘 씨앗",
+    "en": "Garlic Seeds",
+    "icon": "/icons/costMaterials/Garlic_Seeds.png",
+    "gold": 40,
+    "materials": [],
+    "note": "봄 한정 / 2년차 이후"
+   },
+   {
+    "ko": "쌀 새싹",
+    "en": "Rice Shoot",
+    "icon": "/icons/costMaterials/Rice_Shoot.png",
+    "gold": 40,
+    "materials": [],
+    "note": "봄 한정 / 2년차 이후"
+   },
+   {
+    "ko": "멜론 씨앗",
+    "en": "Melon Seeds",
+    "icon": "/icons/costMaterials/Melon_Seeds.png",
+    "gold": 80,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "토마토 씨앗",
+    "en": "Tomato Seeds",
+    "icon": "/icons/costMaterials/Tomato_Seeds.png",
+    "gold": 50,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "블루베리 씨앗",
+    "en": "Blueberry Seeds",
+    "icon": "/icons/costMaterials/Blueberry_Seeds.png",
+    "gold": 80,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "고추 씨앗",
+    "en": "Pepper Seeds",
+    "icon": "/icons/costMaterials/Pepper_Seeds.png",
+    "gold": 40,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "밀 씨앗",
+    "en": "Wheat Seeds",
+    "icon": "/icons/costMaterials/Wheat_Seeds.png",
+    "gold": 10,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "무 씨앗",
+    "en": "Radish Seeds",
+    "icon": "/icons/costMaterials/Radish_Seeds.png",
+    "gold": 40,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "양귀비 씨앗",
+    "en": "Poppy Seeds",
+    "icon": "/icons/costMaterials/Poppy_Seeds.png",
+    "gold": 100,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "여름별꽃 씨앗",
+    "en": "Spangle Seeds",
+    "icon": "/icons/costMaterials/Spangle_Seeds.png",
+    "gold": 50,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "홉 종자",
+    "en": "Hops Starter",
+    "icon": "/icons/costMaterials/Hops_Starter.png",
+    "gold": 60,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "옥수수 씨앗",
+    "en": "Corn Seeds",
+    "icon": "/icons/costMaterials/Corn_Seeds.png",
+    "gold": 150,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "해바라기 씨앗",
+    "en": "Sunflower Seeds",
+    "icon": "/icons/costMaterials/Sunflower_Seeds.png",
+    "gold": 200,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "붉은 양배추 씨앗",
+    "en": "Red Cabbage Seeds",
+    "icon": "/icons/costMaterials/Red_Cabbage_Seeds.png",
+    "gold": 100,
+    "materials": [],
+    "note": "여름 한정 / 2년차 이후"
+   },
+   {
+    "ko": "가지 씨앗",
+    "en": "Eggplant Seeds",
+    "icon": "/icons/costMaterials/Eggplant_Seeds.png",
+    "gold": 20,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "옥수수 씨앗",
+    "en": "Corn Seeds",
+    "icon": "/icons/costMaterials/Corn_Seeds.png",
+    "gold": 150,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "호박 씨앗",
+    "en": "Pumpkin Seeds",
+    "icon": "/icons/costMaterials/Pumpkin_Seeds.png",
+    "gold": 100,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "청경채 씨앗",
+    "en": "Bok Choy Seeds",
+    "icon": "/icons/costMaterials/Bok_Choy_Seeds.png",
+    "gold": 50,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "참마 씨앗",
+    "en": "Yam Seeds",
+    "icon": "/icons/costMaterials/Yam_Seeds.png",
+    "gold": 60,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "크랜베리 씨앗",
+    "en": "Cranberry Seeds",
+    "icon": "/icons/costMaterials/Cranberry_Seeds.png",
+    "gold": 240,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "해바라기 씨앗",
+    "en": "Sunflower Seeds",
+    "icon": "/icons/costMaterials/Sunflower_Seeds.png",
+    "gold": 200,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "요정장미 씨앗",
+    "en": "Fairy Seeds",
+    "icon": "/icons/costMaterials/Fairy_Seeds.png",
+    "gold": 200,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "아마란스 씨앗",
+    "en": "Amaranth Seeds",
+    "icon": "/icons/costMaterials/Amaranth_Seeds.png",
+    "gold": 70,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "포도 종자",
+    "en": "Grape Starter",
+    "icon": "/icons/costMaterials/Grape_Starter.png",
+    "gold": 60,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "밀 씨앗",
+    "en": "Wheat Seeds",
+    "icon": "/icons/costMaterials/Wheat_Seeds.png",
+    "gold": 10,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "아티초크 씨앗",
+    "en": "Artichoke Seeds",
+    "icon": "/icons/costMaterials/Artichoke_Seeds.png",
+    "gold": 30,
+    "materials": [],
+    "note": "가을 한정 / 2년차 이후"
+   }
+  ]
+ },
+ {
+  "id": "blacksmith",
+  "offers": [
+   {
+    "ko": "구리광석",
+    "en": "Copper Ore",
+    "icon": "/icons/costMaterials/Copper_Ore.png",
+    "gold": 75,
+    "materials": [],
+    "note": "1년차 75골드 / 2년차부터 150골드"
+   },
+   {
+    "ko": "철광석",
+    "en": "Iron Ore",
+    "icon": "/icons/costMaterials/Iron_Ore.png",
+    "gold": 150,
+    "materials": [],
+    "note": "1년차 150골드 / 2년차부터 250골드"
+   },
+   {
+    "ko": "석탄",
+    "en": "Coal",
+    "icon": "/icons/costMaterials/Coal.png",
+    "gold": 150,
+    "materials": [],
+    "note": "1년차 150골드 / 2년차부터 250골드"
+   },
+   {
+    "ko": "금광석",
+    "en": "Gold Ore",
+    "icon": "/icons/costMaterials/Gold_Ore.png",
+    "gold": 400,
+    "materials": [],
+    "note": "1년차 400골드 / 2년차부터 750골드"
+   },
+   {
+    "ko": "구리 도구",
+    "en": "Copper Hoe",
+    "icon": "/icons/costMaterials/Copper_Hoe.png",
+    "gold": 2000,
+    "materials": [
+     {
+      "ko": "Copper Bar",
+      "en": "Copper Bar",
+      "icon": "/icons/costMaterials/Copper_Bar.png",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "ko": "강철 도구",
+    "en": "Steel Hoe",
+    "icon": "/icons/costMaterials/Steel_Hoe.png",
+    "gold": 5000,
+    "materials": [
+     {
+      "ko": "Iron Bar",
+      "en": "Iron Bar",
+      "icon": "/icons/costMaterials/Iron_Bar.png",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "ko": "황금 도구",
+    "en": "Gold Hoe",
+    "icon": "/icons/costMaterials/Gold_Hoe.png",
+    "gold": 10000,
+    "materials": [
+     {
+      "ko": "Gold Bar",
+      "en": "Gold Bar",
+      "icon": "/icons/costMaterials/Gold_Bar.png",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "ko": "이리듐 도구",
+    "en": "Iridium Hoe",
+    "icon": "/icons/costMaterials/Iridium_Hoe.png",
+    "gold": 25000,
+    "materials": [
+     {
+      "ko": "Iridium Bar",
+      "en": "Iridium Bar",
+      "icon": "/icons/costMaterials/Iridium_Bar.png",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "ko": "구리 쓰레기통",
+    "en": "Trash Can Copper",
+    "icon": "/icons/costMaterials/Trash_Can_Copper.png",
+    "gold": 1000,
+    "materials": [
+     {
+      "ko": "Copper Bar",
+      "en": "Copper Bar",
+      "icon": "/icons/costMaterials/Copper_Bar.png",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "ko": "강철 쓰레기통",
+    "en": "Trash Can Steel",
+    "icon": "/icons/costMaterials/Trash_Can_Steel.png",
+    "gold": 2500,
+    "materials": [
+     {
+      "ko": "Iron Bar",
+      "en": "Iron Bar",
+      "icon": "/icons/costMaterials/Iron_Bar.png",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "ko": "황금 쓰레기통",
+    "en": "Trash Can Gold",
+    "icon": "/icons/costMaterials/Trash_Can_Gold.png",
+    "gold": 5000,
+    "materials": [
+     {
+      "ko": "Gold Bar",
+      "en": "Gold Bar",
+      "icon": "/icons/costMaterials/Gold_Bar.png",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "ko": "이리듐 쓰레기통",
+    "en": "Trash Can Iridium",
+    "icon": "/icons/costMaterials/Trash_Can_Iridium.png",
+    "gold": 12500,
+    "materials": [
+     {
+      "ko": "Iridium Bar",
+      "en": "Iridium Bar",
+      "icon": "/icons/costMaterials/Iridium_Bar.png",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "ko": "정동석",
+    "en": "Geode",
+    "icon": "/icons/costMaterials/Geode.png",
+    "gold": 25,
+    "materials": []
+   },
+   {
+    "ko": "얼어붙은 정동석",
+    "en": "Frozen Geode",
+    "icon": "/icons/costMaterials/Frozen_Geode.png",
+    "gold": 25,
+    "materials": []
+   },
+   {
+    "ko": "마그마 정동석",
+    "en": "Magma Geode",
+    "icon": "/icons/costMaterials/Magma_Geode.png",
+    "gold": 25,
+    "materials": []
+   },
+   {
+    "ko": "전 정동석",
+    "en": "Omni Geode",
+    "icon": "/icons/costMaterials/Omni_Geode.png",
+    "gold": 25,
+    "materials": []
+   },
+   {
+    "ko": "유물 상자",
+    "en": "Artifact Trove",
+    "icon": "/icons/costMaterials/Artifact_Trove.png",
+    "gold": 25,
+    "materials": []
+   },
+   {
+    "ko": "황금 코코넛",
+    "en": "Golden Coconut",
+    "icon": "/icons/costMaterials/Golden_Coconut.png",
+    "gold": 25,
+    "materials": []
+   },
+   {
+    "ko": "미스테리 박스",
+    "en": "Mystery Box",
+    "icon": "/icons/costMaterials/Mystery_Box.png",
+    "gold": 25,
+    "materials": []
+   },
+   {
+    "ko": "황금 미스테리 박스",
+    "en": "Golden Mystery Box",
+    "icon": "/icons/costMaterials/Golden_Mystery_Box.png",
+    "gold": 25,
+    "materials": []
+   }
+  ]
+ },
+ {
+  "id": "clinic",
+  "offers": [
+   {
+    "ko": "자양강장제",
+    "en": "Energy Tonic",
+    "icon": "/icons/costMaterials/Energy_Tonic.png",
+    "gold": 5,
+    "materials": []
+   },
+   {
+    "ko": "근육 치료제",
+    "en": "Muscle Remedy",
+    "icon": "/icons/costMaterials/Muscle_Remedy.png",
+    "gold": 0,
+    "materials": []
+   }
+  ]
+ },
+ {
+  "id": "joja",
+  "offers": [
+   {
+    "ko": "조자 콜라",
+    "en": "Joja Cola",
+    "icon": "/icons/costMaterials/Joja_Cola.png",
+    "gold": 75,
+    "materials": []
+   },
+   {
+    "ko": "조자 벽지",
+    "en": "Wallpaper 022 Icon",
+    "icon": "/icons/costMaterials/Wallpaper_022_Icon.png",
+    "gold": 20,
+    "materials": []
+   },
+   {
+    "ko": "조자 콜라 라이트",
+    "en": "J. Cola Light",
+    "icon": "/icons/costMaterials/J._Cola_Light.png",
+    "gold": 500,
+    "materials": []
+   },
+   {
+    "ko": "번식용 잔디",
+    "en": "Grass Starter",
+    "icon": "/icons/costMaterials/Grass_Starter.png",
+    "gold": 125,
+    "materials": []
+   },
+   {
+    "ko": "설탕",
+    "en": "Sugar",
+    "icon": "/icons/costMaterials/Sugar.png",
+    "gold": 125,
+    "materials": []
+   },
+   {
+    "ko": "밀가루",
+    "en": "Wheat Flour",
+    "icon": "/icons/costMaterials/Wheat_Flour.png",
+    "gold": 125,
+    "materials": []
+   },
+   {
+    "ko": "쌀",
+    "en": "Rice",
+    "icon": "/icons/costMaterials/Rice.png",
+    "gold": 250,
+    "materials": []
+   },
+   {
+    "ko": "벽지",
+    "en": "Wallpaper 001 Icon",
+    "icon": "/icons/costMaterials/Wallpaper_001_Icon.png",
+    "gold": 250,
+    "materials": []
+   },
+   {
+    "ko": "바닥재",
+    "en": "Flooring 01 Icon",
+    "icon": "/icons/costMaterials/Flooring_01_Icon.png",
+    "gold": 250,
+    "materials": []
+   },
+   {
+    "ko": "파스닙 씨앗",
+    "en": "Parsnip Seeds",
+    "icon": "/icons/costMaterials/Parsnip_Seeds.png",
+    "gold": 25,
+    "materials": [],
+    "note": "봄 한정"
+   },
+   {
+    "ko": "콩 종자",
+    "en": "Bean Starter",
+    "icon": "/icons/costMaterials/Bean_Starter.png",
+    "gold": 75,
+    "materials": [],
+    "note": "봄 한정"
+   },
+   {
+    "ko": "콜리플라워 씨앗",
+    "en": "Cauliflower Seeds",
+    "icon": "/icons/costMaterials/Cauliflower_Seeds.png",
+    "gold": 100,
+    "materials": [],
+    "note": "봄 한정"
+   },
+   {
+    "ko": "감자 씨앗",
+    "en": "Potato Seeds",
+    "icon": "/icons/costMaterials/Potato_Seeds.png",
+    "gold": 62,
+    "materials": [],
+    "note": "봄 한정"
+   },
+   {
+    "ko": "튤립 구근",
+    "en": "Tulip Bulb",
+    "icon": "/icons/costMaterials/Tulip_Bulb.png",
+    "gold": 25,
+    "materials": [],
+    "note": "봄 한정"
+   },
+   {
+    "ko": "케일 씨앗",
+    "en": "Kale Seeds",
+    "icon": "/icons/costMaterials/Kale_Seeds.png",
+    "gold": 87,
+    "materials": [],
+    "note": "봄 한정"
+   },
+   {
+    "ko": "재즈 씨앗",
+    "en": "Jazz Seeds",
+    "icon": "/icons/costMaterials/Jazz_Seeds.png",
+    "gold": 37,
+    "materials": [],
+    "note": "봄 한정"
+   },
+   {
+    "ko": "토마토 씨앗",
+    "en": "Tomato Seeds",
+    "icon": "/icons/costMaterials/Tomato_Seeds.png",
+    "gold": 62,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "고추 씨앗",
+    "en": "Pepper Seeds",
+    "icon": "/icons/costMaterials/Pepper_Seeds.png",
+    "gold": 50,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "밀 씨앗",
+    "en": "Wheat Seeds",
+    "icon": "/icons/costMaterials/Wheat_Seeds.png",
+    "gold": 12,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "무 씨앗",
+    "en": "Radish Seeds",
+    "icon": "/icons/costMaterials/Radish_Seeds.png",
+    "gold": 50,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "멜론 씨앗",
+    "en": "Melon Seeds",
+    "icon": "/icons/costMaterials/Melon_Seeds.png",
+    "gold": 100,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "홉 종자",
+    "en": "Hops Starter",
+    "icon": "/icons/costMaterials/Hops_Starter.png",
+    "gold": 75,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "양귀비 씨앗",
+    "en": "Poppy Seeds",
+    "icon": "/icons/costMaterials/Poppy_Seeds.png",
+    "gold": 125,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "여름별꽃 씨앗",
+    "en": "Spangle Seeds",
+    "icon": "/icons/costMaterials/Spangle_Seeds.png",
+    "gold": 62,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "해바라기 씨앗",
+    "en": "Sunflower Seeds",
+    "icon": "/icons/costMaterials/Sunflower_Seeds.png",
+    "gold": 125,
+    "materials": [],
+    "note": "여름 한정"
+   },
+   {
+    "ko": "옥수수 씨앗",
+    "en": "Corn Seeds",
+    "icon": "/icons/costMaterials/Corn_Seeds.png",
+    "gold": 187,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "가지 씨앗",
+    "en": "Eggplant Seeds",
+    "icon": "/icons/costMaterials/Eggplant_Seeds.png",
+    "gold": 25,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "호박 씨앗",
+    "en": "Pumpkin Seeds",
+    "icon": "/icons/costMaterials/Pumpkin_Seeds.png",
+    "gold": 125,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "아마란스 씨앗",
+    "en": "Amaranth Seeds",
+    "icon": "/icons/costMaterials/Amaranth_Seeds.png",
+    "gold": 87,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "포도 종자",
+    "en": "Grape Starter",
+    "icon": "/icons/costMaterials/Grape_Starter.png",
+    "gold": 75,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "참마 씨앗",
+    "en": "Yam Seeds",
+    "icon": "/icons/costMaterials/Yam_Seeds.png",
+    "gold": 75,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "청경채 씨앗",
+    "en": "Bok Choy Seeds",
+    "icon": "/icons/costMaterials/Bok_Choy_Seeds.png",
+    "gold": 62,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "크랜베리 씨앗",
+    "en": "Cranberry Seeds",
+    "icon": "/icons/costMaterials/Cranberry_Seeds.png",
+    "gold": 300,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "해바라기 씨앗",
+    "en": "Sunflower Seeds",
+    "icon": "/icons/costMaterials/Sunflower_Seeds.png",
+    "gold": 125,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "요정장미 씨앗",
+    "en": "Fairy Seeds",
+    "icon": "/icons/costMaterials/Fairy_Seeds.png",
+    "gold": 250,
+    "materials": [],
+    "note": "가을 한정"
+   },
+   {
+    "ko": "밀 씨앗",
+    "en": "Wheat Seeds",
+    "icon": "/icons/costMaterials/Wheat_Seeds.png",
+    "gold": 12,
+    "materials": [],
+    "note": "가을 한정"
+   }
+  ]
+ },
+ {
+  "id": "saloon",
+  "offers": [
+   {
+    "ko": "맥주",
+    "en": "Beer",
+    "icon": "/icons/costMaterials/Beer.png",
+    "gold": 400,
+    "materials": []
+   },
+   {
+    "ko": "샐러드",
+    "en": "Salad",
+    "icon": "/icons/costMaterials/Salad.png",
+    "gold": 220,
+    "materials": []
+   },
+   {
+    "ko": "빵",
+    "en": "Bread",
+    "icon": "/icons/costMaterials/Bread.png",
+    "gold": 120,
+    "materials": []
+   },
+   {
+    "ko": "스파게티",
+    "en": "Spaghetti",
+    "icon": "/icons/costMaterials/Spaghetti.png",
+    "gold": 240,
+    "materials": []
+   },
+   {
+    "ko": "피자",
+    "en": "Pizza",
+    "icon": "/icons/costMaterials/Pizza.png",
+    "gold": 600,
+    "materials": []
+   },
+   {
+    "ko": "커피",
+    "en": "Coffee",
+    "icon": "/icons/costMaterials/Coffee.png",
+    "gold": 300,
+    "materials": []
+   },
+   {
+    "ko": "해시브라운",
+    "en": "Hashbrowns",
+    "icon": "/icons/costMaterials/Hashbrowns.png",
+    "gold": 50,
+    "materials": []
+   },
+   {
+    "ko": "오믈렛",
+    "en": "Omelet",
+    "icon": "/icons/costMaterials/Omelet.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "팬케이크",
+    "en": "Pancakes",
+    "icon": "/icons/costMaterials/Pancakes.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "빵",
+    "en": "Bread",
+    "icon": "/icons/costMaterials/Bread.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "또띠아",
+    "en": "Tortilla",
+    "icon": "/icons/costMaterials/Tortilla.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "피자",
+    "en": "Pizza",
+    "icon": "/icons/costMaterials/Pizza.png",
+    "gold": 150,
+    "materials": []
+   },
+   {
+    "ko": "마키 롤",
+    "en": "Maki Roll",
+    "icon": "/icons/costMaterials/Maki_Roll.png",
+    "gold": 300,
+    "materials": []
+   },
+   {
+    "ko": "트리플 샷 에스프레소",
+    "en": "Triple Shot Espresso",
+    "icon": "/icons/costMaterials/Triple_Shot_Espresso.png",
+    "gold": 5000,
+    "materials": []
+   },
+   {
+    "ko": "쿠키",
+    "en": "Cookie",
+    "icon": "/icons/costMaterials/Cookie.png",
+    "gold": 300,
+    "materials": []
+   },
+   {
+    "ko": "가을의 수확",
+    "en": "Autumn's Bounty",
+    "icon": "/icons/costMaterials/Autumn_s_Bounty.png",
+    "gold": 700,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "생선구이",
+    "en": "Baked Fish",
+    "icon": "/icons/costMaterials/Baked_Fish.png",
+    "gold": 200,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "콩 스튜",
+    "en": "Bean Hotpot",
+    "icon": "/icons/costMaterials/Bean_Hotpot.png",
+    "gold": 200,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "블루베리 타르트",
+    "en": "Blueberry Tart",
+    "icon": "/icons/costMaterials/Blueberry_Tart.png",
+    "gold": 300,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "깜짝잉어",
+    "en": "Carp Surprise",
+    "icon": "/icons/costMaterials/Carp_Surprise.png",
+    "gold": 300,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "치즈 콜리플라워",
+    "en": "Cheese Cauliflower",
+    "icon": "/icons/costMaterials/Cheese_Cauliflower.png",
+    "gold": 600,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "초콜릿 케이크",
+    "en": "Chocolate Cake",
+    "icon": "/icons/costMaterials/Chocolate_Cake.png",
+    "gold": 400,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "완벽한 아침",
+    "en": "Complete Breakfast",
+    "icon": "/icons/costMaterials/Complete_Breakfast.png",
+    "gold": 700,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "쿠키",
+    "en": "Cookie",
+    "icon": "/icons/costMaterials/Cookie.png",
+    "gold": 280,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "크랜베리 소스",
+    "en": "Cranberry Sauce",
+    "icon": "/icons/costMaterials/Cranberry_Sauce.png",
+    "gold": 240,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "우럭 튀김",
+    "en": "Crispy Bass",
+    "icon": "/icons/costMaterials/Crispy_Bass.png",
+    "gold": 300,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "가지 파마산",
+    "en": "Eggplant Parmesan",
+    "icon": "/icons/costMaterials/Eggplant_Parmesan.png",
+    "gold": 400,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "생선 타코",
+    "en": "Fish Taco",
+    "icon": "/icons/costMaterials/Fish_Taco.png",
+    "gold": 1000,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "오징어튀김",
+    "en": "Fried Calamari",
+    "icon": "/icons/costMaterials/Fried_Calamari.png",
+    "gold": 300,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "장어튀김",
+    "en": "Fried Eel",
+    "icon": "/icons/costMaterials/Fried_Eel.png",
+    "gold": 240,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "계란 프라이",
+    "en": "Fried Egg",
+    "icon": "/icons/costMaterials/Fried_Egg.png",
+    "gold": 70,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "버섯구이",
+    "en": "Fried Mushroom",
+    "icon": "/icons/costMaterials/Fried_Mushroom.png",
+    "gold": 400,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "맛탕",
+    "en": "Glazed Yams",
+    "icon": "/icons/costMaterials/Glazed_Yams.png",
+    "gold": 400,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "해시브라운",
+    "en": "Hashbrowns",
+    "icon": "/icons/costMaterials/Hashbrowns.png",
+    "gold": 240,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "아이스크림",
+    "en": "Ice Cream",
+    "icon": "/icons/costMaterials/Ice_Cream.png",
+    "gold": 240,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "행운의 점심",
+    "en": "Lucky Lunch",
+    "icon": "/icons/costMaterials/Lucky_Lunch.png",
+    "gold": 500,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "마키 롤",
+    "en": "Maki Roll",
+    "icon": "/icons/costMaterials/Maki_Roll.png",
+    "gold": 440,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "오믈렛",
+    "en": "Omelet",
+    "icon": "/icons/costMaterials/Omelet.png",
+    "gold": 250,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "팬케이크",
+    "en": "Pancakes",
+    "icon": "/icons/costMaterials/Pancakes.png",
+    "gold": 160,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "설탕당근 스프",
+    "en": "Parsnip Soup",
+    "icon": "/icons/costMaterials/Parsnip_Soup.png",
+    "gold": 240,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "페퍼 파퍼",
+    "en": "Pepper Poppers",
+    "icon": "/icons/costMaterials/Pepper_Poppers.png",
+    "gold": 400,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "핑크 케이크",
+    "en": "Pink Cake",
+    "icon": "/icons/costMaterials/Pink_Cake.png",
+    "gold": 960,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "호박죽",
+    "en": "Pumpkin Soup",
+    "icon": "/icons/costMaterials/Pumpkin_Soup.png",
+    "gold": 600,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "붉은 정식",
+    "en": "Red Plate",
+    "icon": "/icons/costMaterials/Red_Plate.png",
+    "gold": 800,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "대황 파이",
+    "en": "Rhubarb Pie",
+    "icon": "/icons/costMaterials/Rhubarb_Pie.png",
+    "gold": 800,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "라이스 푸딩",
+    "en": "Rice Pudding",
+    "icon": "/icons/costMaterials/Rice_Pudding.png",
+    "gold": 520,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "연어 정찬",
+    "en": "Salmon Dinner",
+    "icon": "/icons/costMaterials/Salmon_Dinner.png",
+    "gold": 600,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "회",
+    "en": "Sashimi",
+    "icon": "/icons/costMaterials/Sashimi.png",
+    "gold": 150,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "매콤한 장어",
+    "en": "Spicy Eel",
+    "icon": "/icons/costMaterials/Spicy_Eel.png",
+    "gold": 350,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "수상한 롤",
+    "en": "Strange Bun",
+    "icon": "/icons/costMaterials/Strange_Bun.png",
+    "gold": 450,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "요리용 속",
+    "en": "Stuffing",
+    "icon": "/icons/costMaterials/Stuffing.png",
+    "gold": 330,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "슈퍼 건강식",
+    "en": "Super Meal",
+    "icon": "/icons/costMaterials/Super_Meal.png",
+    "gold": 440,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "똠카 스프",
+    "en": "Tom Kha Soup",
+    "icon": "/icons/costMaterials/Tom_Kha_Soup.png",
+    "gold": 500,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "또띠아",
+    "en": "Tortilla",
+    "icon": "/icons/costMaterials/Tortilla.png",
+    "gold": 100,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "송어 스프",
+    "en": "Trout Soup",
+    "icon": "/icons/costMaterials/Trout_Soup.png",
+    "gold": 200,
+    "materials": [],
+    "note": "요리 로테이션"
+   },
+   {
+    "ko": "야채의 메들리",
+    "en": "Vegetable Medley",
+    "icon": "/icons/costMaterials/Vegetable_Medley.png",
+    "gold": 240,
+    "materials": [],
+    "note": "요리 로테이션"
+   }
+  ]
+ },
+ {
+  "id": "sewers",
+  "offers": [
+   {
+    "ko": "공허의 달걀",
+    "en": "Void Egg",
+    "icon": "/icons/costMaterials/Void_Egg.png",
+    "gold": 5000,
+    "materials": []
+   },
+   {
+    "ko": "공허 정수",
+    "en": "Void Essence",
+    "icon": "/icons/costMaterials/Void_Essence.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "태양 정수",
+    "en": "Solar Essence",
+    "icon": "/icons/costMaterials/Solar_Essence.png",
+    "gold": 80,
+    "materials": []
+   },
+   {
+    "ko": "그릇의 표식",
+    "en": "Sign Of The Vessel",
+    "icon": "/icons/costMaterials/Sign_Of_The_Vessel.png",
+    "gold": 350,
+    "materials": []
+   },
+   {
+    "ko": "몬스터 벽난로",
+    "en": "Monster Fireplace",
+    "icon": "/icons/costMaterials/Monster_Fireplace.png",
+    "gold": 20000,
+    "materials": []
+   },
+   {
+    "ko": "슬라임",
+    "en": "Slime",
+    "icon": "/icons/costMaterials/Slime.png",
+    "gold": 10,
+    "materials": [],
+    "day": "월요일"
+   },
+   {
+    "ko": "정동석",
+    "en": "Omni Geode",
+    "icon": "/icons/costMaterials/Omni_Geode.png",
+    "gold": 300,
+    "materials": [],
+    "day": "화요일"
+   },
+   {
+    "ko": "생선",
+    "en": "Bream",
+    "icon": "/icons/costMaterials/Bream.png",
+    "gold": 200,
+    "materials": [],
+    "day": "수요일"
+   },
+   {
+    "ko": "씨앗 모음",
+    "en": "Mixed Seeds",
+    "icon": "/icons/costMaterials/Mixed_Seeds.png",
+    "gold": 30,
+    "materials": [],
+    "day": "목요일"
+   },
+   {
+    "ko": "이리듐 스프링클러",
+    "en": "Iridium Sprinkler",
+    "icon": "/icons/costMaterials/Iridium_Sprinkler.png",
+    "gold": 10000,
+    "materials": [],
+    "day": "금요일"
+   },
+   {
+    "ko": "요리",
+    "en": "Cooking Icon",
+    "icon": "/icons/costMaterials/Cooking_Icon.png",
+    "gold": 50,
+    "materials": [],
+    "day": "토요일"
+   },
+   {
+    "ko": "크랜베리 소스",
+    "en": "Autumn's Bounty",
+    "icon": "/icons/costMaterials/Autumn_s_Bounty.png",
+    "gold": 0,
+    "materials": []
+   },
+   {
+    "ko": "박쥐 날개",
+    "en": "Bat Wing",
+    "icon": "/icons/costMaterials/Bat_Wing.png",
+    "gold": 30,
+    "materials": [],
+    "day": "일요일"
+   },
+   {
+    "ko": "별방울",
+    "en": "Stardrop",
+    "icon": "/icons/costMaterials/Stardrop.png",
+    "gold": 20000,
+    "materials": []
+   },
+   {
+    "ko": "수정 길 제작법",
+    "en": "Crystal Floor",
+    "icon": "/icons/costMaterials/Crystal_Floor.png",
+    "gold": 500,
+    "materials": []
+   },
+   {
+    "ko": "사악한 석상 제작법",
+    "en": "Wicked Statue",
+    "icon": "/icons/costMaterials/Wicked_Statue.png",
+    "gold": 1000,
+    "materials": []
+   },
+   {
+    "ko": "나비 가루",
+    "en": "Butterfly Powder",
+    "icon": "/icons/costMaterials/Butterfly_Powder.png",
+    "gold": 20000,
+    "materials": []
+   },
+   {
+    "ko": "마법사 카탈로그",
+    "en": "Wizard Catalogue",
+    "icon": "/icons/costMaterials/Wizard_Catalogue.png",
+    "gold": 150000,
+    "materials": []
+   },
+   {
+    "ko": "귀환의 지팡이",
+    "en": "Return Scepter",
+    "icon": "/icons/costMaterials/Return_Scepter.png",
+    "gold": 2000000,
+    "materials": []
+   }
+  ]
+ },
+ {
+  "id": "ranch",
+  "offers": [
+   {
+    "ko": "건초",
+    "en": "Hay",
+    "icon": "/icons/costMaterials/Hay.png",
+    "gold": 50,
+    "materials": []
+   },
+   {
+    "ko": "히터",
+    "en": "Heater",
+    "icon": "/icons/costMaterials/Heater.png",
+    "gold": 2000,
+    "materials": []
+   },
+   {
+    "ko": "우유 들통",
+    "en": "Milk Pail",
+    "icon": "/icons/costMaterials/Milk_Pail.png",
+    "gold": 1000,
+    "materials": []
+   },
+   {
+    "ko": "양털 가위",
+    "en": "Shears",
+    "icon": "/icons/costMaterials/Shears.png",
+    "gold": 1000,
+    "materials": []
+   },
+   {
+    "ko": "자동 채집기",
+    "en": "Auto-Grabber",
+    "icon": "/icons/costMaterials/Auto-Grabber.png",
+    "gold": 25000,
+    "materials": []
+   },
+   {
+    "ko": "장식용 건초 더미",
+    "en": "Ornamental Hay Bale",
+    "icon": "/icons/costMaterials/Ornamental_Hay_Bale.png",
+    "gold": 250,
+    "materials": []
+   },
+   {
+    "ko": "닭",
+    "en": "White Chicken",
+    "icon": "/icons/costMaterials/White_Chicken.png",
+    "gold": 800,
+    "materials": [],
+    "note": "닭장 필요"
+   },
+   {
+    "ko": "소",
+    "en": "White Cow",
+    "icon": "/icons/costMaterials/White_Cow.png",
+    "gold": 1500,
+    "materials": [],
+    "note": "외양간 필요"
+   },
+   {
+    "ko": "염소",
+    "en": "Goat",
+    "icon": "/icons/costMaterials/Goat.png",
+    "gold": 4000,
+    "materials": [],
+    "note": "큰 외양간 필요"
+   },
+   {
+    "ko": "오리",
+    "en": "Duck",
+    "icon": "/icons/costMaterials/Duck.png",
+    "gold": 4000,
+    "materials": [],
+    "note": "큰 닭장 필요"
+   },
+   {
+    "ko": "양",
+    "en": "Sheep",
+    "icon": "/icons/costMaterials/Sheep.png",
+    "gold": 8000,
+    "materials": [],
+    "note": "디럭스 외양간 필요"
+   },
+   {
+    "ko": "토끼",
+    "en": "Rabbit",
+    "icon": "/icons/costMaterials/Rabbit.png",
+    "gold": 8000,
+    "materials": [],
+    "note": "디럭스 닭장 필요"
+   },
+   {
+    "ko": "돼지",
+    "en": "Pig",
+    "icon": "/icons/costMaterials/Pig.png",
+    "gold": 16000,
+    "materials": [],
+    "note": "디럭스 외양간 필요"
+   }
+  ]
+ },
+ {
+  "id": "fishShop",
+  "offers": [
+   {
+    "ko": "생선 훈제기",
+    "en": "Fish Smoker",
+    "icon": "/icons/costMaterials/Fish_Smoker.png",
+    "gold": 10000,
+    "materials": [],
+    "note": "낚시 레벨 제한 없음"
+   },
+   {
+    "ko": "송어 스프",
+    "en": "Trout Soup",
+    "icon": "/icons/costMaterials/Trout_Soup.png",
+    "gold": 250,
+    "materials": [],
+    "note": "낚시 레벨 제한 없음"
+   },
+   {
+    "ko": "미끼",
+    "en": "Bait",
+    "icon": "/icons/costMaterials/Bait.png",
+    "gold": 5,
+    "materials": [],
+    "note": "낚시 레벨 2"
+   },
+   {
+    "ko": "게잡이 통발",
+    "en": "Crab Pot",
+    "icon": "/icons/costMaterials/Crab_Pot.png",
+    "gold": 1500,
+    "materials": [],
+    "note": "낚시 레벨 3"
+   },
+   {
+    "ko": "회전식 미끼",
+    "en": "Spinner",
+    "icon": "/icons/costMaterials/Spinner.png",
+    "gold": 500,
+    "materials": [],
+    "note": "낚시 레벨 6"
+   },
+   {
+    "ko": "함정 찌",
+    "en": "Trap Bobber",
+    "icon": "/icons/costMaterials/Trap_Bobber.png",
+    "gold": 500,
+    "materials": [],
+    "note": "낚시 레벨 6"
+   },
+   {
+    "ko": "무거운 찌",
+    "en": "Lead Bobber",
+    "icon": "/icons/costMaterials/Lead_Bobber.png",
+    "gold": 200,
+    "materials": [],
+    "note": "낚시 레벨 6"
+   },
+   {
+    "ko": "보물사냥꾼",
+    "en": "Treasure Hunter",
+    "icon": "/icons/costMaterials/Treasure_Hunter.png",
+    "gold": 750,
+    "materials": [],
+    "note": "낚시 레벨 7"
+   },
+   {
+    "ko": "코르크 찌",
+    "en": "Cork Bobber",
+    "icon": "/icons/costMaterials/Cork_Bobber.png",
+    "gold": 750,
+    "materials": [],
+    "note": "낚시 레벨 7"
+   },
+   {
+    "ko": "가시 돋친 낚시바늘",
+    "en": "Barbed Hook",
+    "icon": "/icons/costMaterials/Barbed_Hook.png",
+    "gold": 1000,
+    "materials": [],
+    "note": "낚시 레벨 8"
+   },
+   {
+    "ko": "꾸며진 회전식 미끼",
+    "en": "Dressed Spinner",
+    "icon": "/icons/costMaterials/Dressed_Spinner.png",
+    "gold": 1000,
+    "materials": [],
+    "note": "낚시 레벨 8"
+   },
+   {
+    "ko": "자석",
+    "en": "Magnet",
+    "icon": "/icons/costMaterials/Magnet.png",
+    "gold": 1000,
+    "materials": [],
+    "note": "낚시 레벨 9"
+   },
+   {
+    "ko": "대나무 막대",
+    "en": "Bamboo Pole",
+    "icon": "/icons/costMaterials/Bamboo_Pole.png",
+    "gold": 500,
+    "materials": [],
+    "note": "낚시 레벨 제한 없음"
+   },
+   {
+    "ko": "섬유 유리 낚싯대",
+    "en": "Fiberglass Rod",
+    "icon": "/icons/costMaterials/Fiberglass_Rod.png",
+    "gold": 1800,
+    "materials": [],
+    "note": "낚시 레벨 2"
+   },
+   {
+    "ko": "이리듐 낚싯대",
+    "en": "Iridium Rod",
+    "icon": "/icons/costMaterials/Iridium_Rod.png",
+    "gold": 7500,
+    "materials": [],
+    "note": "낚시 레벨 6"
+   },
+   {
+    "ko": "연습용 낚싯대",
+    "en": "Training Rod",
+    "icon": "/icons/costMaterials/Training_Rod.png",
+    "gold": 25,
+    "materials": [],
+    "note": "낚시 레벨 제한 없음"
+   },
+   {
+    "ko": "구리 선광 냄비",
+    "en": "Copper Pan",
+    "icon": "/icons/costMaterials/Copper_Pan.png",
+    "gold": 2500,
+    "materials": [],
+    "note": "낚시 레벨 제한 없음"
+   },
+   {
+    "ko": "큰 수조",
+    "en": "Large Fish Tank",
+    "icon": "/icons/costMaterials/Large_Fish_Tank.png",
+    "gold": 2000,
+    "materials": [],
+    "note": "낚시 레벨 제한 없음"
+   },
+   {
+    "ko": "작은 수조",
+    "en": "Small Fish Tank",
+    "icon": "/icons/costMaterials/Small_Fish_Tank.png",
+    "gold": 500,
+    "materials": [],
+    "note": "낚시 레벨 제한 없음"
+   },
+   {
+    "ko": "디럭스 수조",
+    "en": "Deluxe Fish Tank",
+    "icon": "/icons/costMaterials/Deluxe_Fish_Tank.png",
+    "gold": 5000,
+    "materials": [],
+    "note": "낚시 레벨 제한 없음"
+   },
+   {
+    "ko": "낚시꾼 더블 침대",
+    "en": "Fisher Double Bed",
+    "icon": "/icons/costMaterials/Fisher_Double_Bed.png",
+    "gold": 25000,
+    "materials": [],
+    "note": "낚시 레벨 제한 없음"
+   }
+  ]
+ },
+ {
+  "id": "adventurersGuild",
+  "offers": [
+   {
+    "ko": "목도",
+    "en": "Wooden Blade",
+    "icon": "/icons/costMaterials/Wooden_Blade.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "철 더크",
+    "en": "Iron Dirk",
+    "icon": "/icons/costMaterials/Iron_Dirk.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "은 사브르",
+    "en": "Silver Saber",
+    "icon": "/icons/costMaterials/Silver_Saber.png",
+    "gold": 150,
+    "materials": []
+   },
+   {
+    "ko": "해적의 검",
+    "en": "Pirate's Sword",
+    "icon": "/icons/costMaterials/Pirate_s_Sword.png",
+    "gold": 200,
+    "materials": []
+   },
+   {
+    "ko": "커틀라스",
+    "en": "Cutlass",
+    "icon": "/icons/costMaterials/Cutlass.png",
+    "gold": 200,
+    "materials": []
+   },
+   {
+    "ko": "나무망치",
+    "en": "Wood Mallet",
+    "icon": "/icons/costMaterials/Wood_Mallet.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "클레이모어",
+    "en": "Claymore",
+    "icon": "/icons/costMaterials/Claymore.png",
+    "gold": 300,
+    "materials": []
+   },
+   {
+    "ko": "기사단원의 검",
+    "en": "Templar's Blade",
+    "icon": "/icons/costMaterials/Templar_s_Blade.png",
+    "gold": 300,
+    "materials": []
+   },
+   {
+    "ko": "뼈의 검",
+    "en": "Bone Sword",
+    "icon": "/icons/costMaterials/Bone_Sword.png",
+    "gold": 500,
+    "materials": []
+   },
+   {
+    "ko": "강철 언월도",
+    "en": "Steel Falchion",
+    "icon": "/icons/costMaterials/Steel_Falchion.png",
+    "gold": 700,
+    "materials": []
+   },
+   {
+    "ko": "용암 카타나",
+    "en": "Lava Katana",
+    "icon": "/icons/costMaterials/Lava_Katana.png",
+    "gold": 750,
+    "materials": []
+   },
+   {
+    "ko": "갤럭시 소드",
+    "en": "Galaxy Sword",
+    "icon": "/icons/costMaterials/Galaxy_Sword.png",
+    "gold": 1300,
+    "materials": []
+   },
+   {
+    "ko": "갤럭시 대거",
+    "en": "Galaxy Dagger",
+    "icon": "/icons/costMaterials/Galaxy_Dagger.png",
+    "gold": 1000,
+    "materials": []
+   },
+   {
+    "ko": "갤럭시 해머",
+    "en": "Galaxy Hammer",
+    "icon": "/icons/costMaterials/Galaxy_Hammer.png",
+    "gold": 450,
+    "materials": []
+   },
+   {
+    "ko": "운동화",
+    "en": "Sneakers",
+    "icon": "/icons/costMaterials/Sneakers.png",
+    "gold": 50,
+    "materials": []
+   },
+   {
+    "ko": "가죽 장화",
+    "en": "Leather Boots",
+    "icon": "/icons/costMaterials/Leather_Boots.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "툰드라 장화",
+    "en": "Tundra Boots",
+    "icon": "/icons/costMaterials/Tundra_Boots.png",
+    "gold": 150,
+    "materials": []
+   },
+   {
+    "ko": "전투 장화",
+    "en": "Combat Boots",
+    "icon": "/icons/costMaterials/Combat_Boots.png",
+    "gold": 150,
+    "materials": []
+   },
+   {
+    "ko": "불길 장화",
+    "en": "Firewalker Boots",
+    "icon": "/icons/costMaterials/Firewalker_Boots.png",
+    "gold": 300,
+    "materials": []
+   },
+   {
+    "ko": "어둠의 장화",
+    "en": "Dark Boots",
+    "icon": "/icons/costMaterials/Dark_Boots.png",
+    "gold": 300,
+    "materials": []
+   },
+   {
+    "ko": "우주 장화",
+    "en": "Space Boots",
+    "icon": "/icons/costMaterials/Space_Boots.png",
+    "gold": 400,
+    "materials": []
+   },
+   {
+    "ko": "자수정 반지",
+    "en": "Amethyst Ring",
+    "icon": "/icons/costMaterials/Amethyst_Ring.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "토파즈 반지",
+    "en": "Topaz Ring",
+    "icon": "/icons/costMaterials/Topaz_Ring.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "아쿠아마린 반지",
+    "en": "Aquamarine Ring",
+    "icon": "/icons/costMaterials/Aquamarine_Ring.png",
+    "gold": 200,
+    "materials": []
+   },
+   {
+    "ko": "옥 반지",
+    "en": "Jade Ring",
+    "icon": "/icons/costMaterials/Jade_Ring.png",
+    "gold": 200,
+    "materials": []
+   },
+   {
+    "ko": "에메랄드 반지",
+    "en": "Emerald Ring",
+    "icon": "/icons/costMaterials/Emerald_Ring.png",
+    "gold": 300,
+    "materials": []
+   },
+   {
+    "ko": "루비 반지",
+    "en": "Ruby Ring",
+    "icon": "/icons/costMaterials/Ruby_Ring.png",
+    "gold": 300,
+    "materials": []
+   },
+   {
+    "ko": "새총",
+    "en": "Slingshot",
+    "icon": "/icons/costMaterials/Slingshot.png",
+    "gold": 0,
+    "materials": []
+   },
+   {
+    "ko": "마스터 새총",
+    "en": "Master Slingshot",
+    "icon": "/icons/costMaterials/Master_Slingshot.png",
+    "gold": 0,
+    "materials": []
+   },
+   {
+    "ko": "폭발성 탄약",
+    "en": "Explosive Ammo",
+    "icon": "/icons/costMaterials/Explosive_Ammo.png",
+    "gold": 20,
+    "materials": []
+   },
+   {
+    "ko": "벽걸이 검",
+    "en": "Wall Sword",
+    "icon": "/icons/costMaterials/Wall_Sword.png",
+    "gold": 0,
+    "materials": []
+   },
+   {
+    "ko": "장식용 검",
+    "en": "Decorative Sword",
+    "icon": "/icons/costMaterials/Decorative_Sword.png",
+    "gold": 0,
+    "materials": []
+   },
+   {
+    "ko": "슬라임부리미 반지",
+    "en": "Slime Charmer Ring",
+    "icon": "/icons/costMaterials/Slime_Charmer_Ring.png",
+    "gold": 350,
+    "materials": []
+   },
+   {
+    "ko": "흉포한 반지",
+    "en": "Savage Ring",
+    "icon": "/icons/costMaterials/Savage_Ring.png",
+    "gold": 750,
+    "materials": []
+   },
+   {
+    "ko": "도둑의 반지",
+    "en": "Burglar's Ring",
+    "icon": "/icons/costMaterials/Burglar_s_Ring.png",
+    "gold": 750,
+    "materials": []
+   },
+   {
+    "ko": "흡혈 반지",
+    "en": "Vampire Ring",
+    "icon": "/icons/costMaterials/Vampire_Ring.png",
+    "gold": 750,
+    "materials": []
+   },
+   {
+    "ko": "게딱지 반지",
+    "en": "Crabshell Ring",
+    "icon": "/icons/costMaterials/Crabshell_Ring.png",
+    "gold": 1000,
+    "materials": []
+   },
+   {
+    "ko": "네이팜 반지",
+    "en": "Napalm Ring",
+    "icon": "/icons/costMaterials/Napalm_Ring.png",
+    "gold": 1000,
+    "materials": []
+   },
+   {
+    "ko": "해골 가면",
+    "en": "Skeleton Mask",
+    "icon": "/icons/costMaterials/Skeleton_Mask.png",
+    "gold": 0,
+    "materials": []
+   },
+   {
+    "ko": "안전모",
+    "en": "Hard Hat",
+    "icon": "/icons/costMaterials/Hard_Hat.png",
+    "gold": 0,
+    "materials": []
+   },
+   {
+    "ko": "신비한 모자",
+    "en": "Arcane Hat",
+    "icon": "/icons/costMaterials/Arcane_Hat.png",
+    "gold": 0,
+    "materials": []
+   },
+   {
+    "ko": "기사의 투구",
+    "en": "Knight's Helmet",
+    "icon": "/icons/costMaterials/Knight_s_Helmet.png",
+    "gold": 0,
+    "materials": []
+   },
+   {
+    "ko": "곤충 머리",
+    "en": "Insect Head",
+    "icon": "/icons/costMaterials/Insect_Head.png",
+    "gold": 200,
+    "materials": []
+   }
+  ]
+ },
+ {
+  "id": "casino",
+  "offers": [
+   {
+    "ko": "'태고의 동작'",
+    "en": "'Primal Motion'",
+    "icon": "/icons/costMaterials/_Primal_Motion_.png",
+    "gold": 0,
+    "materials": [],
+    "note": "카지노 코인 5,000"
+   },
+   {
+    "ko": "'타버린 공물'",
+    "en": "'Burnt Offering'",
+    "icon": "/icons/costMaterials/_Burnt_Offering_.png",
+    "gold": 0,
+    "materials": [],
+    "note": "카지노 코인 4,000"
+   },
+   {
+    "ko": "'고속도로 89'",
+    "en": "'Highway 89'",
+    "icon": "/icons/costMaterials/_Highway_89_.png",
+    "gold": 0,
+    "materials": [],
+    "note": "카지노 코인 4,000"
+   },
+   {
+    "ko": "'첨탑'",
+    "en": "'Spires'",
+    "icon": "/icons/costMaterials/_Spires_.png",
+    "gold": 0,
+    "materials": [],
+    "note": "카지노 코인 3,000"
+   },
+   {
+    "ko": "실크해트",
+    "en": "Top Hat",
+    "icon": "/icons/costMaterials/Top_Hat.png",
+    "gold": 0,
+    "materials": [],
+    "note": "카지노 코인 8,000"
+   },
+   {
+    "ko": "희귀한 허수아비",
+    "en": "Rarecrow 3",
+    "icon": "/icons/costMaterials/Rarecrow_3.png",
+    "gold": 0,
+    "materials": [],
+    "note": "카지노 코인 10,000"
+   },
+   {
+    "ko": "단단한 나무 울타리",
+    "en": "Hardwood Fence",
+    "icon": "/icons/costMaterials/Hardwood_Fence.png",
+    "gold": 0,
+    "materials": [],
+    "note": "카지노 코인 100"
+   },
+   {
+    "ko": "자석",
+    "en": "Magnet",
+    "icon": "/icons/costMaterials/Magnet.png",
+    "gold": 0,
+    "materials": [],
+    "note": "카지노 코인 1,000"
+   },
+   {
+    "ko": "워프 토템: 농장",
+    "en": "Warp Totem Farm",
+    "icon": "/icons/costMaterials/Warp_Totem_Farm.png",
+    "gold": 0,
+    "materials": [],
+    "note": "카지노 코인 500"
+   },
+   {
+    "ko": "모던 더블 침대",
+    "en": "Modern Double Bed",
+    "icon": "/icons/costMaterials/Modern_Double_Bed.png",
+    "gold": 0,
+    "materials": [],
+    "note": "카지노 코인 8,000"
+   }
+  ]
+ },
+ {
+  "id": "oasis",
+  "offers": [
+   {
+    "ko": "선인장 씨앗",
+    "en": "Cactus Seeds",
+    "icon": "/icons/costMaterials/Cactus_Seeds.png",
+    "gold": 150,
+    "materials": []
+   },
+   {
+    "ko": "대황 씨앗",
+    "en": "Rhubarb Seeds",
+    "icon": "/icons/costMaterials/Rhubarb_Seeds.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "스타프루트 씨앗",
+    "en": "Starfruit Seeds",
+    "icon": "/icons/costMaterials/Starfruit_Seeds.png",
+    "gold": 400,
+    "materials": []
+   },
+   {
+    "ko": "사탕무 씨앗",
+    "en": "Beet Seeds",
+    "icon": "/icons/costMaterials/Beet_Seeds.png",
+    "gold": 20,
+    "materials": []
+   },
+   {
+    "ko": "계절 식물",
+    "en": "Seasonal Plant 4 Spring",
+    "icon": "/icons/costMaterials/Seasonal_Plant_4_Spring.png",
+    "gold": 100,
+    "materials": []
+   },
+   {
+    "ko": "무작위 셔츠",
+    "en": "무작위 셔츠",
+    "icon": "/icons/costMaterials/무작위_셔츠.png",
+    "gold": 1000,
+    "materials": []
+   },
+   {
+    "ko": "선인장 벽장식",
+    "en": "Wall Cactus",
+    "icon": "/icons/costMaterials/Wall_Cactus.png",
+    "gold": 700,
+    "materials": []
+   },
+   {
+    "ko": "코코넛",
+    "en": "Coconut",
+    "icon": "/icons/costMaterials/Coconut.png",
+    "gold": 200,
+    "materials": [],
+    "day": "월요일"
+   },
+   {
+    "ko": "큰 시골집 카펫",
+    "en": "Large Cottage Rug",
+    "icon": "/icons/costMaterials/Large_Cottage_Rug.png",
+    "gold": 2000,
+    "materials": [],
+    "day": "월요일"
+   },
+   {
+    "ko": "선인장 열매",
+    "en": "Cactus Fruit",
+    "icon": "/icons/costMaterials/Cactus_Fruit.png",
+    "gold": 150,
+    "materials": [],
+    "day": "화요일"
+   },
+   {
+    "ko": "벽걸이 촛대",
+    "en": "Wall Sconce 1",
+    "icon": "/icons/costMaterials/Wall_Sconce_1.png",
+    "gold": 500,
+    "materials": [],
+    "day": "화요일"
+   },
+   {
+    "ko": "벽걸이 촛대",
+    "en": "Wall Sconce 2",
+    "icon": "/icons/costMaterials/Wall_Sconce_2.png",
+    "gold": 500,
+    "materials": [],
+    "day": "화요일"
+   },
+   {
+    "ko": "벽걸이 촛대",
+    "en": "Wall Sconce 3",
+    "icon": "/icons/costMaterials/Wall_Sconce_3.png",
+    "gold": 500,
+    "materials": [],
+    "day": "화요일"
+   },
+   {
+    "ko": "벽걸이 촛대",
+    "en": "Wall Sconce 4",
+    "icon": "/icons/costMaterials/Wall_Sconce_4.png",
+    "gold": 500,
+    "materials": [],
+    "day": "화요일"
+   },
+   {
+    "ko": "전 정동석",
+    "en": "Omni Geode",
+    "icon": "/icons/costMaterials/Omni_Geode.png",
+    "gold": 1000,
+    "materials": [],
+    "day": "수요일"
+   },
+   {
+    "ko": "'비취 언덕 (대)'",
+    "en": "'Jade Hills Extended'",
+    "icon": "/icons/costMaterials/_Jade_Hills_Extended_.png",
+    "gold": 5000,
+    "materials": [],
+    "day": "수요일"
+   },
+   {
+    "ko": "디럭스 성장 촉진제",
+    "en": "Deluxe Speed-Gro",
+    "icon": "/icons/costMaterials/Deluxe_Speed-Gro.png",
+    "gold": 80,
+    "materials": [],
+    "day": "목요일"
+   },
+   {
+    "ko": "구대륙 카펫",
+    "en": "Old World Rug",
+    "icon": "/icons/costMaterials/Old_World_Rug.png",
+    "gold": 2500,
+    "materials": [],
+    "day": "목요일"
+   },
+   {
+    "ko": "벌꿀",
+    "en": "Honey",
+    "icon": "/icons/costMaterials/Honey.png",
+    "gold": 200,
+    "materials": [],
+    "day": "금요일"
+   },
+   {
+    "ko": "큰 녹색 카펫",
+    "en": "Large Green Rug",
+    "icon": "/icons/costMaterials/Large_Green_Rug.png",
+    "gold": 2500,
+    "materials": [],
+    "day": "금요일"
+   },
+   {
+    "ko": "고급 보습 토양",
+    "en": "Quality Retaining Soil",
+    "icon": "/icons/costMaterials/Quality_Retaining_Soil.png",
+    "gold": 200,
+    "materials": [],
+    "day": "토요일"
+   },
+   {
+    "ko": "벽걸이 촛대",
+    "en": "Wall Sconce 5",
+    "icon": "/icons/costMaterials/Wall_Sconce_5.png",
+    "gold": 500,
+    "materials": [],
+    "day": "토요일"
+   },
+   {
+    "ko": "벽걸이 촛대",
+    "en": "Wall Sconce 7",
+    "icon": "/icons/costMaterials/Wall_Sconce_7.png",
+    "gold": 500,
+    "materials": [],
+    "day": "토요일"
+   },
+   {
+    "ko": "아이스크림",
+    "en": "Ice Cream",
+    "icon": "/icons/costMaterials/Ice_Cream.png",
+    "gold": 240,
+    "materials": [],
+    "day": "일요일"
+   },
+   {
+    "ko": "큰 갈색 소파",
+    "en": "Large Brown Couch",
+    "icon": "/icons/costMaterials/Large_Brown_Couch.png",
+    "gold": 3000,
+    "materials": [],
+    "day": "일요일"
+   }
+  ]
+ }
+]

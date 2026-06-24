@@ -59,7 +59,7 @@ export default async function LocaleLayout({
       lang={locale}
       className={`h-full antialiased ${inter.variable} ${jbMono.variable}`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--sv-bg)] text-[var(--sv-ink)] pb-16 lg:pb-0">
+      <body className="min-h-full flex flex-col bg-[var(--sv-bg)] text-[var(--sv-ink)]">
         {/* 페인트 전에 테마 적용(깜빡임 방지) */}
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
         <NextIntlClientProvider>

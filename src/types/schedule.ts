@@ -126,6 +126,12 @@ export interface ScheduleState {
   addTaskChildOrder: Record<string, string[]>;
   // 달성한 업적. 키=업적 id.
   achievementsDone: Record<string, boolean>;
+  // 달성한 몬스터 박멸 목표. 키=목표 id.
+  monsterGoalsDone: Record<string, boolean>;
+  // 기증한 현장 사무소 항목. 키=항목 id.
+  fieldOfficeDone: Record<string, boolean>;
+  // 기증한 박물관 항목. 키=항목 id.
+  museumDone: Record<string, boolean>;
   // 캐릭터 정보(농사/채집 레벨·스킬). 씨앗 효율 계산에 사용.
   character: CharacterInfo;
   // 다이얼로그 필터(꾸러미·완벽·업적·생선·씨앗 효율)의 마지막 선택값. 다시 열 때 복원.
@@ -162,9 +168,12 @@ export interface DialogFilters {
   trackerSeasons?: string[]; // 꾸러미 추적의 계절 필터(없으면 현재 계절+상시)
   trackerOnlyIncomplete: boolean; // 꾸러미 추적에서 완료되지 않은 물품만 보기
   trackerGrouped: boolean; // 꾸러미 단위 박스로 묶어서 보기(끄면 물품만 평면 표시)
-  shopKeyApplied: boolean; // 가게 일정: 마을의 열쇠 적용
-  shopCcRestored: boolean; // 가게 일정: 마을회관 복구
+  shopKeyApplied: boolean; // 참고 도구-가게 일정: 마을의 열쇠 적용(탭 전용)
+  shopCcRestored: boolean; // 참고 도구-가게 일정: 마을회관 복구(탭 전용)
   shopFestivalOn: boolean; // 가게 일정 탭 전용: 축제날 가정(메인 박스는 당일 날짜로 자동 판정)
-  shopBoatRepaired: boolean; // 가게 일정: 진저섬 배 수리(생선 가게 8시 개점)
-  shopPinned: string[]; // 가게 일정: 고정(핀)된 가게 id 목록(우선 표시)
+  shopBoatRepaired: boolean; // 참고 도구-가게 일정: 진저섬 배 수리(탭 전용)
+  shopPinned: string[]; // 가게 일정: 고정(핀)된 가게 id 목록(우선 표시·박스/탭 공유)
+  boxKeyApplied: boolean; // 메인 가게 일정 박스: 마을의 열쇠(탭과 독립)
+  boxCcRestored: boolean; // 메인 가게 일정 박스: 마을회관 복구(탭과 독립)
+  boxBoatRepaired: boolean; // 메인 가게 일정 박스: 진저섬 배 수리(탭과 독립)
 }

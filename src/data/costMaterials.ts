@@ -18,6 +18,7 @@ export interface CostOffer {
   materials: CostMaterial[];
   day?: string; // 사막 상인 일시 판매 물품의 판매 요일
   note?: string; // 구매 조건 등 부가 설명(요일이 아닌 긴 텍스트)
+  cat?: string; // 가게 내 서비스 분류(messages costMaterials.cats.*). 없으면 분류 없음
 }
 
 export interface CostShop {
@@ -29,10 +30,20 @@ const shops = data as CostShop[];
 
 // 가게 아이콘(/icons/shops/<icon>.png)
 export const COST_SHOP_ICON: Record<string, string> = {
+  pierre: "pierre",
   carpenter: "carpenter",
   blacksmith: "blacksmith",
   wizard: "wizardTower",
+  clinic: "clinic",
+  joja: "joja",
+  saloon: "saloon",
+  sewers: "sewers",
+  ranch: "ranch",
+  fishShop: "fishShop",
+  adventurersGuild: "adventurersGuild",
+  oasis: "oasis",
   desertTrader: "desertTrader",
+  casino: "casino",
 };
 
 export const COST_SHOPS = shops;

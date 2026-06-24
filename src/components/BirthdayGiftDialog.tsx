@@ -40,21 +40,17 @@ export default function BirthdayGiftDialog({
         title={t("gift.prefBy", { name: t(`villagers.${selected}`) })}
         onClose={onClose}
         onBack={() => setSelected(null)}
-      >
-        <div className="mb-3 flex items-center gap-2">
+        titleIcon={
           <Image
             src={asset(`/icons/villagers/${selected}.png`)}
             alt=""
             width={28}
             height={28}
             unoptimized
-            className="shrink-0"
             style={{ imageRendering: "pixelated" }}
           />
-          <h3 className="text-base font-bold">
-            {t("gift.prefBy", { name: t(`villagers.${selected}`) })}
-          </h3>
-        </div>
+        }
+      >
         <GiftSections villagerId={selected} />
       </Modal>
     );

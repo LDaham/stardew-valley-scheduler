@@ -6,7 +6,6 @@ import { useLocale, useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
 import Modal from "@/components/Modal";
 import PixelIcon from "@/components/PixelIcon";
-import MasonryColumns from "@/components/MasonryColumns";
 import {
   COST_SHOPS,
   COST_SHOP_ICON,
@@ -14,7 +13,21 @@ import {
   type CostOffer,
 } from "@/data/costMaterials";
 
-// 비용 및 재료: 상단 레이블(탭)로 가게 선택 → 해당 가게의 비용(골드)·재료 패널 표시.
+// note의 "<계절> 한정"으로 계절 토큰을 뽑는다(잡화점 등 계절 한정 씨앗용).
+const SEASON_KEYS = ["spring", "summer", "fall", "winter"] as const;
+const SEASON_WORD: Record<string, string> = {
+  spring: "봄",
+  summer: "여름",
+  fall: "가을",
+  winter: "겨울",
+};
+function offerSeasons(o: CostOffer): string[] {
+  const note = o.note ?? "";
+  return SEASON_KEYS.filter((k) => note.includes(`${SEASON_WORD[k]} 한정`));
+}
+
+// 비용 및 재료: 가게 목록 → 가게 클릭 시 해당 가게의 비용(골드)·재료 패널 표시.
+// 가게가 많아져(14개) 탭 대신 선물 선호와 동일한 목록→드릴인 방식. 상세에서 '‹'로 복귀.
 export default function CostMaterialsDialog({
   onClose,
   onBack,
@@ -23,62 +36,129 @@ export default function CostMaterialsDialog({
   onBack?: () => void;
 }) {
   const t = useTranslations();
-  // 기본 선택: 첫 가게(탭 형태라 항상 하나가 열려 있다)
-  const [selected, setSelected] = useState<string>(COST_SHOPS[0].id);
+  const [selected, setSelected] = useState<string | null>(null);
 
+  // 상세: 선택한 가게의 판매 물품(목록과 같은 창, '‹'로 복귀)
+  if (selected) {
+    return (
+      <Modal
+        title={t(`costMaterials.shops.${selected}`)}
+        onClose={onClose}
+        onBack={() => setSelected(null)}
+        titleIcon={
+          <PixelIcon
+            src={`/icons/shops/${COST_SHOP_ICON[selected]}.png`}
+            size={22}
+          />
+        }
+      >
+        <ShopOffersPanel key={selected} id={selected} />
+        <p className="mt-3 text-[10px] text-[var(--sv-ink-muted)]">
+          {t("costMaterials.source")}
+        </p>
+      </Modal>
+    );
+  }
+
+  // 목록: 가게 선택
   return (
     <Modal title={t("costMaterials.title")} onClose={onClose} onBack={onBack}>
-      {/* 상단 가게 탭(밑줄형 — 필터 칩과 구분): 클릭 시 아래 패널 전환 */}
-      <div className="mb-3 flex flex-wrap gap-1 border-b border-[var(--sv-border)]">
-        {COST_SHOPS.map((s) => {
-          const active = s.id === selected;
-          return (
+      <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+        {COST_SHOPS.map((s) => (
+          <li key={s.id}>
             <button
-              key={s.id}
               onClick={() => setSelected(s.id)}
-              aria-pressed={active}
-              className={`-mb-px flex items-center gap-1.5 border-b-2 px-3 py-1.5 text-base font-semibold transition-transform ${
-                active
-                  ? "-translate-y-0.5 border-[var(--sv-accent)] text-[var(--sv-ink)]"
-                  : "border-transparent text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
-              }`}
+              className="flex w-full cursor-pointer items-center gap-2 rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] px-2 py-2 text-left text-sm font-semibold hover:bg-[var(--sv-bg)]"
             >
-              <PixelIcon src={`/icons/shops/${COST_SHOP_ICON[s.id]}.png`} size={16} />
-              {t(`costMaterials.shops.${s.id}`)}
+              <PixelIcon
+                src={`/icons/shops/${COST_SHOP_ICON[s.id]}.png`}
+                size={24}
+              />
+              <span className="truncate">{t(`costMaterials.shops.${s.id}`)}</span>
             </button>
-          );
-        })}
-      </div>
-
-      <ShopOffersPanel id={selected} />
-
-      <p className="mt-3 text-[10px] text-[var(--sv-ink-muted)]">
-        {t("costMaterials.source")}
-      </p>
+          </li>
+        ))}
+      </ul>
     </Modal>
   );
 }
 
 // 선택된 가게의 판매 물품 패널(모달 래퍼 없이 본문만).
+// 가게가 여러 서비스(상점·업그레이드·정동석 가공 등)를 제공하면 offer의 cat으로
+// 묶어 상단 탭으로 나눈다(데이터 등장 순서 = 탭 순서). cat이 1종 이하면 탭 없이 표시.
+// 읽기 순서대로 채우는 단순 그리드(데이터 순서 = 표시 순서).
 function ShopOffersPanel({ id }: { id: string }) {
-  const shop = getCostShop(id);
+  const t = useTranslations();
+  const offers = getCostShop(id)?.offers ?? [];
+
+  // 등장 순서대로 카테고리 수집(중복 제거)
+  const cats: string[] = [];
+  for (const o of offers) {
+    const c = o.cat;
+    if (c && !cats.includes(c)) cats.push(c);
+  }
+  const hasTabs = cats.length > 1;
+  const [tab, setTab] = useState(cats[0] ?? "");
+
+  const catShown = hasTabs ? offers.filter((o) => o.cat === tab) : offers;
+
+  // 계절 필터: note의 "<계절> 한정"으로 판별. 계절 항목이 있는 가게(잡화점 등)에만 노출.
+  const seasonsPresent = SEASON_KEYS.filter((k) =>
+    offers.some((o) => offerSeasons(o).includes(k)),
+  );
+  const hasSeasonFilter = seasonsPresent.length > 0;
+  const [season, setSeason] = useState<string>("all");
+  const shown =
+    !hasSeasonFilter || season === "all"
+      ? catShown
+      : catShown.filter((o) => {
+          const ss = offerSeasons(o);
+          return ss.length === 0 || ss.includes(season); // 상시 품목은 항상 표시
+        });
 
   return (
     <>
-      {/* 모바일: 1열 */}
-      <div className="flex flex-col gap-2 sm:hidden">
-        {shop?.offers.map((o, i) => (
-          <OfferRow key={`${o.en}-${i}`} offer={o} />
+      {hasTabs && (
+        <div className="mb-3 flex flex-wrap gap-1.5">
+          {cats.map((c) => (
+            <button
+              key={c}
+              onClick={() => setTab(c)}
+              className={`cursor-pointer rounded-md border px-2.5 py-1 text-xs font-semibold ${
+                tab === c
+                  ? "border-[var(--sv-accent)] bg-[var(--sv-accent)] text-white"
+                  : "border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
+              }`}
+            >
+              {t(`costMaterials.cats.${c}`)}
+            </button>
+          ))}
+        </div>
+      )}
+      {hasSeasonFilter && (
+        <div className="mb-3 flex flex-wrap gap-1.5">
+          {["all", ...seasonsPresent].map((k) => (
+            <button
+              key={k}
+              onClick={() => setSeason(k)}
+              className={`cursor-pointer rounded-full px-3 py-1 text-xs font-semibold ${
+                season === k
+                  ? "bg-[var(--sv-accent)] text-[var(--sv-accent-ink)]"
+                  : "border border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink)] hover:bg-[var(--sv-bg)]"
+              }`}
+            >
+              {k === "all" ? t("seasonFilter.all") : t(`seasons.${k}`)}
+            </button>
+          ))}
+        </div>
+      )}
+      <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        {shown.map((o, i) => (
+          <li key={`${o.en}-${i}`}>
+            <OfferRow offer={o} />
+          </li>
         ))}
-      </div>
-      {/* 데스크톱: 2열(내용 높이만큼 — 빈 공간 없이 채움) */}
-      <div className="hidden sm:block">
-        <MasonryColumns
-          items={shop?.offers ?? []}
-          getKey={(o) => `${o.en}-${o.gold}-${o.day ?? ""}`}
-          render={(o) => <OfferRow offer={o} />}
-        />
-      </div>
+      </ul>
     </>
   );
 }

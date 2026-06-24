@@ -663,7 +663,6 @@
     "ccToggle": "Community Center",
     "festivalToggle": "Festival day",
     "boatToggle": "Boat repaired",
-    "filterAppliesNote": "These filters also apply to the main shop schedule (except festival — the box follows the actual festival of the selected date).",
     "statusOpen": "Open",
     "statusClosed": "Festival closed",
     "statusPartial": "Closed on some festivals",
@@ -2413,6 +2412,31 @@
     "open": "Open achievements",
     "progress": "{done} / {total} unlocked"
   },
+  "monster": {
+    "title": "Monster Eradication Goals",
+    "short": "Eradication",
+    "open": "Open eradication goals",
+    "progress": "{done} / {total} done",
+    "kills": "{count} kills",
+    "source": "Source: Stardew Valley Wiki (CC BY-NC-SA 3.0)"
+  },
+  "museum": {
+    "title": "Museum Donations",
+    "short": "Museum",
+    "open": "Open museum donations",
+    "progress": "{done} / {total} donated",
+    "artifact": "Artifacts",
+    "mineral": "Minerals",
+    "source": "Source: Stardew Valley Wiki (CC BY-NC-SA 3.0)"
+  },
+  "fieldOffice": {
+    "title": "Field Office Donations",
+    "short": "Field Office",
+    "open": "Open field office donations",
+    "hint": "Fossils and surveys donated to Professor Snail on Ginger Island.",
+    "progress": "{done} / {total} donated",
+    "source": "Source: Stardew Valley Wiki (CC BY-NC-SA 3.0)"
+  },
   "logic": {
     "weatherFortune": "매일 · 당일 끝남(안 보면 다음 날 새 날씨·운세). 완료 안 해도 다음 날 새로 생성.",
     "animalCare": "매일 · 당일 끝남. 매일 새로 진행해야 함.",
@@ -2451,11 +2475,30 @@
     "gold": "g",
     "free": "Free",
     "source": "Source: Stardew Valley Wiki (CC BY-NC-SA 3.0)",
+    "cats": {
+      "shop": "Shop",
+      "upgrade": "Upgrades",
+      "geode": "Geode processing",
+      "building": "Buildings",
+      "barter": "Barter",
+      "coin": "Coin shop",
+      "magic": "Magic goods"
+    },
     "shops": {
+      "pierre": "Pierre's General Store",
       "carpenter": "Carpenter's Shop",
       "blacksmith": "Blacksmith",
       "wizard": "Wizard's Tower",
-      "desertTrader": "Desert Trader"
+      "clinic": "Harvey's Clinic",
+      "joja": "JojaMart",
+      "saloon": "Stardrop Saloon",
+      "sewers": "Sewers (Krobus)",
+      "ranch": "Marnie's Ranch",
+      "fishShop": "Fish Shop",
+      "adventurersGuild": "Adventurer's Guild",
+      "oasis": "Oasis",
+      "desertTrader": "Desert Trader",
+      "casino": "Casino"
     }
   }
 }

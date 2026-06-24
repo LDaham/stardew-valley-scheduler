@@ -455,7 +455,6 @@ export default function Dashboard() {
   };
 
   const todayBuilt = buildRows(currentDate);
-  const tomorrowBuilt = buildRows(tomorrow);
 
   return (
     <section className="flex flex-col gap-3">
@@ -496,9 +495,29 @@ export default function Dashboard() {
         </button>
       </div>
 
-      {/* 정보(오늘·내일 좌우 분할) → 점선 → 할 일 목록 → 할 일 추가. 비어 있어도 표시. */}
+      {/* 내일 비 예보 토글(정보 위로 이동). 켜면 '내일 비 와요'로 바뀌어 의미가 직관적. */}
+      <div className="flex items-center justify-end gap-1.5">
+        <PixelIcon src="/icons/ui/rain.png" size={14} />
+        <span
+          className={`text-xs ${
+            rainTomorrow
+              ? "font-semibold text-[#5b8fb0]"
+              : "text-[var(--sv-ink-muted)]"
+          }`}
+        >
+          {t(
+            rainTomorrow ? "dashboard.rainTomorrowYes" : "dashboard.rainForecast",
+          )}
+        </span>
+        <RainSwitch
+          on={rainTomorrow}
+          onToggle={toggleRainTomorrow}
+          ariaLabel={t("dashboard.rainForecast")}
+        />
+      </div>
+
+      {/* 정보(좌) + 할 일 목록(우). 내일 정보·가게 일정·꾸러미 박스는 잠시 숨김. */}
       <div className="sv-box p-4">
-        {/* 오늘 정보 / 내일 정보 좌우 분할(모바일은 내일 숨김 → 정보 전체 폭) */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           <div>
             <h2 className="mb-2 text-base font-bold text-[var(--sv-ink-muted)]">
@@ -511,49 +530,7 @@ export default function Dashboard() {
               hideCheckbox
             />
           </div>
-          <div className="hidden lg:block lg:border-l lg:border-dashed lg:border-[var(--sv-border)] lg:pl-4">
-            <div className="mb-2 flex items-center justify-between gap-2">
-              <h2 className="text-base font-bold text-[var(--sv-ink-muted)]">
-                {t("dashboard.tomorrowInfoTitle")}
-              </h2>
-              {/* 내일 비 예보 토글 (제목 오른쪽). 켜면 '내일 비 와요'로 바뀌어 의미가 직관적. */}
-              <span className="flex shrink-0 items-center gap-1.5">
-                <PixelIcon src="/icons/ui/rain.png" size={14} />
-                <span
-                  className={`text-xs ${
-                    rainTomorrow
-                      ? "font-semibold text-[#5b8fb0]"
-                      : "text-[var(--sv-ink-muted)]"
-                  }`}
-                >
-                  {t(
-                    rainTomorrow
-                      ? "dashboard.rainTomorrowYes"
-                      : "dashboard.rainForecast",
-                  )}
-                </span>
-                <RainSwitch
-                  on={rainTomorrow}
-                  onToggle={toggleRainTomorrow}
-                  ariaLabel={t("dashboard.rainForecast")}
-                />
-              </span>
-            </div>
-            <TaskList
-              rows={tomorrowBuilt.info}
-              emptyText={t("dashboard.noInfo")}
-              deleteLabel={t("memo.delete")}
-              hideCheckbox
-              disabled
-            />
-          </div>
-        </div>
-
-        <div className="my-3 border-t border-dashed border-[var(--sv-border)]" />
-
-        {/* 할 일 목록(왼쪽 절반) + 가게 일정(오른쪽 절반) */}
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <div>
+          <div className="lg:border-l lg:border-dashed lg:border-[var(--sv-border)] lg:pl-4">
             {/* 할 일 목록 헤더: 좌측 제목, 우측 [추가한 할 일 확인][오늘 할 일 추가] */}
             <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
               <h2 className="text-base font-bold">{t("dashboard.todoList")}</h2>
@@ -564,10 +541,9 @@ export default function Dashboard() {
                 >
                   {t("myTasks.checkButton")}
                 </button>
-                {/* 모바일은 하단 ＋FAB로 추가하므로 데스크탑에서만 노출 */}
                 <button
                   onClick={() => setAddTarget("today")}
-                  className="sv-btn sv-btn-primary hidden px-2.5 py-1 text-sm lg:inline-block"
+                  className="sv-btn sv-btn-primary px-2.5 py-1 text-sm"
                 >
                   ＋ {t("dashboard.addTodo")}
                 </button>
@@ -579,16 +555,13 @@ export default function Dashboard() {
               deleteLabel={t("memo.delete")}
             />
           </div>
-
-          {/* 가게 일정(메모장 자리로 이동). 2열일 때 왼쪽 점선으로 할 일 목록과 구분 */}
-          <div className="lg:border-l lg:border-dashed lg:border-[var(--sv-border)] lg:pl-4">
-            <ShopScheduleBox />
-          </div>
         </div>
       </div>
 
-      {/* 참고 박스(꾸러미 추적): todolist 아래에 배치(가게 일정은 위 오른쪽 칸으로 이동).
-          설정의 메인 순서대로, 토글 켜짐 시 표시. */}
+      {/* 가게 일정·꾸러미 추적: 정보·할 일 아래에 표시 */}
+      <div className="sv-box p-4">
+        <ShopScheduleBox />
+      </div>
       {mainOrder
         .filter((k) => k === "bundleTracker")
         .map((k) => (

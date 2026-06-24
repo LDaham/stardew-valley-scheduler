@@ -103,22 +103,17 @@ function MovieDetailView({
       title={t("movie.prefBy", { name: t(`villagers.${id}`) })}
       onClose={onClose}
       onBack={onBack}
-    >
-      <div className="mb-3 flex items-center gap-2">
+      titleIcon={
         <Image
           src={asset(`/icons/villagers/${id}.png`)}
           alt=""
           width={28}
           height={28}
           unoptimized
-          className="shrink-0"
           style={{ imageRendering: "pixelated" }}
         />
-        <h3 className="text-base font-bold">
-          {t("movie.prefBy", { name: t(`villagers.${id}`) })}
-        </h3>
-      </div>
-
+      }
+    >
       {hasAny ? (
         <div className="flex flex-col gap-4">
           {sections
