@@ -6,7 +6,6 @@ import { ScheduleProvider, useSchedule } from "@/components/ScheduleProvider";
 import { GiftDialogProvider } from "@/components/GiftDialogProvider";
 import Dashboard from "@/components/Dashboard";
 import SettingsDialog from "@/components/SettingsDialog";
-import TodoSettingsDialog from "@/components/TodoSettingsDialog";
 import BundleDialog from "@/components/BundleDialog";
 import PerfectionDialog from "@/components/PerfectionDialog";
 import AchievementDialog from "@/components/AchievementDialog";
@@ -53,9 +52,8 @@ function AppShell() {
   const [tab, setTab] = useState<MainTab>("today");
   const [tool, setTool] = useState<ToolView>("seed");
   const [view, setView] = useState<ProgressView>("bundle");
-  // 설정은 오버레이 모달로 연다(별도 페이지 아님). 메인화면 설정(중첩)도 오버레이.
+  // 설정은 오버레이 모달로 연다(별도 페이지 아님).
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [todoSettingsOpen, setTodoSettingsOpen] = useState(false);
 
   // 첫 진입/공유 링크/뒤로가기에서 URL → 상태 복원
   useEffect(() => {
@@ -248,21 +246,8 @@ function AppShell() {
 
       </main>
 
-      {/* 설정: 오버레이 모달(메인화면 설정은 그 위 중첩 오버레이) */}
-      {settingsOpen && (
-        <SettingsDialog
-          onClose={() => setSettingsOpen(false)}
-          onOpenTodoSettings={() => setTodoSettingsOpen(true)}
-        />
-      )}
-
-      {/* 메인화면 설정(설정 모달 위 오버레이) */}
-      {todoSettingsOpen && (
-        <TodoSettingsDialog
-          onClose={() => setTodoSettingsOpen(false)}
-          onBack={() => setTodoSettingsOpen(false)}
-        />
-      )}
+      {/* 설정: 오버레이 모달(일반/메인화면/오류 보고 탭) */}
+      {settingsOpen && <SettingsDialog onClose={() => setSettingsOpen(false)} />}
     </>
   );
 }

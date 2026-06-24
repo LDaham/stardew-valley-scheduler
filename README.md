@@ -1,33 +1,46 @@
 <div align="center">
   <img src="public/icon.svg" width="72" alt="logo" />
 
-  # 🌱 스타듀밸리 스케줄러
+  # Stardew Valley Scheduler
 
-  스타듀밸리의 순환 달력으로 축제·생일·작물 마감을 챙기고, 주민 선물 취향을 확인하는 메모장.
+  A personal planner for Stardew Valley's repeating calendar — never miss a festival, birthday, or planting deadline, and look up villager gift tastes at a glance.
 
-  **🔗 데모 · [ldaham.github.io/stardew-valley-scheduler](https://ldaham.github.io/stardew-valley-scheduler/)**
+  **Live demo · [ldaham.github.io/stardew-valley-scheduler](https://ldaham.github.io/stardew-valley-scheduler/)**
+
+  English · [한국어](#korean)
 </div>
 
-## 개요
+## Overview
 
-스타듀밸리는 **28일 × 4계절**이 매년 똑같이 반복되지만, 축제·주민 생일·작물 심기 마감일을 놓치기 쉽습니다. 이 앱은 연도 없는 **112일 순환 달력**에 일정을 미리 챙기도록 만든 개인용 메모장입니다.
+Stardew Valley runs on the same **28 days × 4 seasons** loop every year, yet it's easy to miss a festival, a villager's birthday, or the last day to plant a crop. This app maps your plans onto a year-agnostic **112-day cyclic calendar** so you can prepare ahead. Everything runs in the browser — no account, no server.
 
-**주요 기능**
-- 📅 112일 순환 달력 + 날짜별 메모
-- 🎉 축제·주민 생일·작물 심기 마감 자동 표시, 대시보드에서 **D-N 예고**
-- 🎁 주민별 선물 취향(사랑/좋아함/보통) — **보편 선물 폴더**, 카테고리 펼치기(야채·과일·장신구 등), 주민별 예외 표시
-- 🔎 표시할 이벤트 필터 · 🌐 한국어/English · 📲 **PWA**(오프라인·설치)
-- 💾 데이터는 브라우저 localStorage에 저장(서버·로그인 없음)
+## Features
 
-## 미리보기
+**Calendar & dashboard**
+- 112-day cyclic calendar with per-date memos; pick any day as "today".
+- Auto-flagged festivals, villager birthdays, crop planting deadlines, and seasonal foraging events, with **D-N countdowns** on the dashboard.
+- Day-of-week reminders that account for shop hours, closures, festivals, weather, and progress.
 
-> 실행 화면은 위 **데모 링크**에서 바로 확인할 수 있습니다.
+**Info tools**
+- **Crop efficiency** — seed profitability and growth planning.
+- **Fish info** — by season, weather, location, and time.
+- **Shop schedule** — opening hours and closed days; click a shop to open its prices.
+- **Purchase prices** — buy costs and materials, reflecting the current season/day.
+- **Gift preferences** — per-villager loves/likes/neutrals, with a **universal-gift folder** and expandable categories.
+- **Movie preferences** — what each villager wants at the theater.
 
-<!-- 스크린샷/GIF는 이 위치에 추가하세요 (예: docs/preview.gif) -->
+**Progress tracking**
+- Achievements, Perfection, Community Center bundles, the Museum, monster eradication goals, and the Ginger Island Field Office.
 
-## 시작하기
+**Everything else**
+- Theme picker combining **mode** (system / light / dark) × **season** (auto / spring / summer / fall / winter); the *auto* season follows the current in-game date and color shifts smoothly.
+- Korean / English (next-intl).
+- **PWA** — installable and works offline.
+- Data is saved to browser localStorage. **Export / import as JSON** for backup or moving between devices.
 
-**요구 사항**: Node.js 24+ (npm 11)
+## Getting started
+
+**Requirements:** Node.js 20.9+
 
 ```bash
 git clone https://github.com/LDaham/stardew-valley-scheduler.git
@@ -36,39 +49,50 @@ npm install
 npm run dev
 ```
 
-개발 서버는 미들웨어가 없어 루트(`/`)가 404이므로 **`http://localhost:3000/ko`** 로 접속하세요.
+The dev server has no locale middleware, so the root (`/`) is 404 — open **`http://localhost:3000/ko`** (or `/en`).
 
-## 사용법
+## Scripts
 
 ```bash
-npm run dev     # 개발 서버 (/ko, /en)
-npm run build   # 정적 사이트 생성 → out/
-npm run lint    # ESLint 검사
+npm run dev     # dev server (/ko, /en)
+npm run build   # static export → out/
+npm run lint    # ESLint
 ```
 
-- **달력**에서 날짜를 클릭해 메모를 작성하고, 원하는 날을 "오늘"로 설정합니다.
-- **대시보드**에서 오늘/내일 할 일과 다가오는 이벤트를 한눈에 봅니다.
-- 주민 생일 등에서 **선물 보기**를 눌러 취향(보편 선물·카테고리 포함)을 확인합니다.
-- **⚙ 설정**에서 표시할 이벤트와 언어를 바꿉니다.
+> For a GitHub Pages **project site** (served from a subpath), build with `NEXT_PUBLIC_BASE_PATH=/your-repo-name`. Pushing to `main` triggers automatic deployment via GitHub Actions.
 
-> GitHub Pages 프로젝트 사이트(서브경로)로 배포할 때는 `NEXT_PUBLIC_BASE_PATH=/저장소명` 으로 빌드합니다. `main` 브랜치 push 시 GitHub Actions가 자동 배포합니다.
+## Tech stack
 
-## 기술 스택
+- **[Next.js 16](https://nextjs.org/)** (App Router, static export) · **[React 19](https://react.dev/)** · **[TypeScript](https://www.typescriptlang.org/)**
+- **[Tailwind CSS 4](https://tailwindcss.com/)** · **[next-intl](https://next-intl.dev/)** (ko/en)
+- Deployment: **GitHub Pages + GitHub Actions** · PWA
 
-- **[Next.js 16](https://nextjs.org/)** (App Router, 정적 export) · **[React 19](https://react.dev/)** · **[TypeScript](https://www.typescriptlang.org/)**
-- **[Tailwind CSS 4](https://tailwindcss.com/)** · **[next-intl](https://next-intl.dev/)** (ko/en 다국어)
-- 배포: **GitHub Pages + GitHub Actions**, PWA
+## Contributing
 
-## 기여 방법
+Bug reports, feature ideas, and PRs are welcome.
 
-버그 제보·기능 제안·PR 환영합니다.
+- **Issues** — for bugs include reproduction steps and screenshots; for ideas describe the use case. File them at [Issues](https://github.com/LDaham/stardew-valley-scheduler/issues). The in-app **Settings → Report** tab links here too.
+- **Pull requests** — target `main`, one topic per PR. `npm run lint` and `npm run build` must pass before merge.
+- New display strings must be added to **both** `messages/ko.json` and `messages/en.json`.
 
-- **이슈**: 버그는 재현 단계와 스크린샷을, 기능 제안은 사용 시나리오를 함께 적어 [Issues](https://github.com/LDaham/stardew-valley-scheduler/issues)에 등록해 주세요.
-- **Pull Request**: `main` 브랜치를 대상으로, 1 PR = 1 주제로 작성합니다. 머지 전 `npm run lint`·`npm run build`가 통과해야 합니다.
-- 게임 데이터·번역(`src/data`, `messages`)을 수정할 때는 출처(Stardew Valley Wiki, CC BY-NC-SA 3.0)를 유지해 주세요.
+## License
 
-## 라이선스
+- **Source code:** [MIT](LICENSE) © 2026 Lee Daham.
+- **Game assets & data** (icons under `public/icons/**`, names/values/descriptions in `src/data/**` and `messages/**`): © ConcernedApe LLC — derived from Stardew Valley, **not** covered by MIT, used for **non-commercial fan purposes only**.
+- Some data was referenced from the [Stardew Valley Wiki](https://stardewvalleywiki.com) ([CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/)) and is being replaced with values extracted directly from game files. See [NOTICE](NOTICE) for details.
+- This is an **unofficial, non-commercial fan project**, not affiliated with ConcernedApe. Run with **no ads or paywalls — donation-supported only**.
 
-- **소스 코드**: [MIT](LICENSE) © 2026 Lee Daham
-- **게임 데이터·번역**: [Stardew Valley Wiki](https://stardewvalleywiki.com) 기반, [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/)
-- Stardew Valley © ConcernedApe. 본 프로젝트는 **비공식·비영리 팬 제작물**이며 ConcernedApe와 제휴하지 않았습니다.
+---
+
+<a name="korean"></a>
+
+## 한국어
+
+스타듀밸리의 **28일 × 4계절** 순환 달력에 일정을 미리 챙기는 개인용 플래너입니다. 축제·주민 생일·작물 심기 마감을 놓치지 않고, 주민 선물 취향을 바로 확인하세요. 모든 데이터는 브라우저에 저장되며 서버·로그인이 없습니다.
+
+- **달력·대시보드**: 112일 순환 달력 + 날짜별 메모, 축제·생일·작물 마감·채집 이벤트 자동 표시와 **D-N 예고**, 가게 일정을 고려한 요일 리마인더.
+- **정보 도구**: 작물 효율 · 생선 정보 · 가게 일정 · 구매 가격 · 선물 선호 · 영화 선호.
+- **진행도**: 업적 · 완벽 · 마을회관 꾸러미 · 박물관 · 박멸 목표 · 현장 사무소.
+- **그 외**: 모드(시스템/라이트/다크) × 계절(자동/봄/여름/가을/겨울) 테마(자동은 현재 날짜를 따라 부드럽게 전환), 한국어/English, PWA(오프라인·설치), JSON 내보내기/가져오기.
+
+실행은 위 **데모 링크**에서 바로 확인할 수 있고, 로컬 개발은 `npm install && npm run dev` 후 **`http://localhost:3000/ko`** 로 접속합니다. 라이선스·기여 방법은 위 영어 섹션을 참고하세요.

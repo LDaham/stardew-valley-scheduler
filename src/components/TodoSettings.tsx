@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useSchedule } from "@/components/ScheduleProvider";
 import { asset } from "@/lib/asset";
-import Modal from "@/components/Modal";
 import ReminderIcon from "@/components/ReminderIcon";
 import type { FixedEventType } from "@/lib/events";
 import type { ReminderId } from "@/data/reminders";
@@ -82,13 +81,9 @@ function PixelImage({ src, size = 18 }: { src: string; size?: number }) {
   );
 }
 
-export default function TodoSettingsDialog({
-  onClose,
-  onBack,
-}: {
-  onClose: () => void;
-  onBack?: () => void;
-}) {
+// 메인화면(정보/할 일) 표시 항목·순서 설정 본문.
+// 설정 모달의 '메인화면' 탭에 인라인으로 렌더된다(별도 모달 래퍼 없음).
+export default function TodoSettings() {
   const t = useTranslations();
   const {
     eventFilters,
@@ -369,7 +364,7 @@ export default function TodoSettingsDialog({
   ];
 
   return (
-    <Modal title={t("settings.todoSettings")} onClose={onClose} onBack={onBack}>
+    <div>
       <p className="mb-3 text-xs text-[var(--sv-ink-muted)]">
         {t("settings.orderHint")}
       </p>
@@ -400,6 +395,6 @@ export default function TodoSettingsDialog({
       {active === "info"
         ? renderSection("info", infoItems, renderFixedBundleRow())
         : renderSection("todo", todoItems)}
-    </Modal>
+    </div>
   );
 }

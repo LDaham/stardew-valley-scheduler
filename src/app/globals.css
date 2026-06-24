@@ -52,38 +52,64 @@ html[data-theme="dark"] {
   --sv-shadow: rgba(0, 0, 0, 0);
 }
 
-/* 스타듀밸리(낮) — 양피지 배경·나무 보더·풀빛 그린·황금 강조 */
-html[data-theme="stardew"] {
-  --sv-bg: #f1e0bd;
-  --sv-panel: #fffaf0;
-  --sv-box: #fffaf0;
-  --sv-ink: #4a3728;
-  --sv-ink-muted: #8a6f4e;
-  --sv-border: #c08a4e;
-  --sv-accent: #4d7c2f; /* 풀빛 그린(흰 글자 대비 확보) */
-  --sv-accent-ink: #ffffff;
-  --sv-danger: #b3402f;
-  --sv-warn: #d98b29; /* 황금/호박 */
-  --sv-info: #3d7d9a; /* 하늘색(버튼 hover) */
-  --sv-desk: #e3cb9d;
-  --sv-shadow: rgba(74, 55, 40, 0.14);
+/* ── 계절 테마(생선 정보 필터의 계절색 기반: 봄 초록·여름 노랑·가을 적·겨울 청) ── */
+html[data-theme="spring"] {
+  --sv-bg: #e9f6dd; --sv-panel: #ffffff; --sv-box: #ffffff;
+  --sv-ink: #1f3614; --sv-ink-muted: #557049; --sv-border: #b6d894;
+  --sv-accent: #2e7d32; --sv-accent-ink: #ffffff;
+  --sv-danger: #c0392f; --sv-warn: #b45309; --sv-info: #0369a1;
+  --sv-desk: #dcecca; --sv-shadow: rgba(31, 54, 20, 0.1);
+}
+html[data-theme="summer"] {
+  --sv-bg: #fbf2cf; --sv-panel: #fffdf3; --sv-box: #fffdf3;
+  --sv-ink: #3a2e0a; --sv-ink-muted: #756321; --sv-border: #e6cf80;
+  --sv-accent: #a16207; --sv-accent-ink: #ffffff;
+  --sv-danger: #c0392f; --sv-warn: #b45309; --sv-info: #0369a1;
+  --sv-desk: #f1e4b4; --sv-shadow: rgba(58, 46, 10, 0.12);
+}
+html[data-theme="fall"] {
+  --sv-bg: #f8ebdd; --sv-panel: #fffaf2; --sv-box: #fffaf2;
+  --sv-ink: #3d2412; --sv-ink-muted: #7d6147; --sv-border: #e0b98a;
+  --sv-accent: #c2410c; --sv-accent-ink: #ffffff;
+  --sv-danger: #b3402f; --sv-warn: #a16207; --sv-info: #0f766e;
+  --sv-desk: #eedcc3; --sv-shadow: rgba(61, 36, 18, 0.12);
+}
+html[data-theme="winter"] {
+  --sv-bg: #e6f4fb; --sv-panel: #ffffff; --sv-box: #ffffff;
+  --sv-ink: #0f2e3d; --sv-ink-muted: #4f6f7d; --sv-border: #a7d3e8;
+  --sv-accent: #0369a1; --sv-accent-ink: #ffffff;
+  --sv-danger: #c0392f; --sv-warn: #b45309; --sv-info: #0f766e;
+  --sv-desk: #cfe8f5; --sv-shadow: rgba(15, 46, 61, 0.1);
 }
 
-/* 스타듀밸리(밤) — 짙은 남색 밤하늘·따뜻한 크림 글자·풀빛 그린 */
-html[data-theme="stardewNight"] {
-  --sv-bg: #14213d;
-  --sv-panel: #1e2a4a;
-  --sv-box: #1b2645;
-  --sv-ink: #f0e6cf;
-  --sv-ink-muted: #9aa6c4;
-  --sv-border: #3a4d7a;
-  --sv-accent: #6fbf4a;
-  --sv-accent-ink: #0c1a08;
-  --sv-danger: #e26d5a;
-  --sv-warn: #e0a93f;
-  --sv-info: #6cb7d9;
-  --sv-desk: #14213d;
-  --sv-shadow: rgba(0, 0, 0, 0);
+/* ── 계절 다크 테마(어두운 배경 + 밝은 계절색 강조) ────────────── */
+html[data-theme="springDark"] {
+  --sv-bg: #0f1a0d; --sv-panel: #162412; --sv-box: #131f10;
+  --sv-ink: #e6f0df; --sv-ink-muted: #9db58e; --sv-border: #2c4a25;
+  --sv-accent: #4ade80; --sv-accent-ink: #06210f;
+  --sv-danger: #ef4444; --sv-warn: #eab308; --sv-info: #38bdf8;
+  --sv-desk: #0f1a0d; --sv-shadow: rgba(0, 0, 0, 0);
+}
+html[data-theme="summerDark"] {
+  --sv-bg: #1a1606; --sv-panel: #251f0b; --sv-box: #221c0a;
+  --sv-ink: #f3ecd0; --sv-ink-muted: #bdae7a; --sv-border: #4a3f18;
+  --sv-accent: #facc15; --sv-accent-ink: #1a1606;
+  --sv-danger: #ef4444; --sv-warn: #eab308; --sv-info: #38bdf8;
+  --sv-desk: #1a1606; --sv-shadow: rgba(0, 0, 0, 0);
+}
+html[data-theme="fallDark"] {
+  --sv-bg: #1a0f08; --sv-panel: #261810; --sv-box: #22150e;
+  --sv-ink: #f0e2d6; --sv-ink-muted: #bd9b86; --sv-border: #4a3320;
+  --sv-accent: #fb923c; --sv-accent-ink: #1a0f08;
+  --sv-danger: #ef4444; --sv-warn: #eab308; --sv-info: #38bdf8;
+  --sv-desk: #1a0f08; --sv-shadow: rgba(0, 0, 0, 0);
+}
+html[data-theme="winterDark"] {
+  --sv-bg: #0b1626; --sv-panel: #13233a; --sv-box: #101e33;
+  --sv-ink: #e3edf7; --sv-ink-muted: #93a9c2; --sv-border: #294a6e;
+  --sv-accent: #38bdf8; --sv-accent-ink: #06151f;
+  --sv-danger: #ef4444; --sv-warn: #eab308; --sv-info: #38bdf8;
+  --sv-desk: #0b1626; --sv-shadow: rgba(0, 0, 0, 0);
 }
 
 @theme inline {
@@ -93,9 +119,41 @@ html[data-theme="stardewNight"] {
   --font-mono: var(--font-mono);
 }
 
+/* 색 토큰을 <color>로 등록 → 테마 전환 시 변수 자체가 보간되어
+   var(--sv-*)를 쓰는 모든 요소가 한 번에 확 바뀌지 않고 부드럽게 따라온다. */
+@property --sv-bg { syntax: "<color>"; inherits: true; initial-value: #e7f2ea; }
+@property --sv-panel { syntax: "<color>"; inherits: true; initial-value: #ffffff; }
+@property --sv-box { syntax: "<color>"; inherits: true; initial-value: #ffffff; }
+@property --sv-ink { syntax: "<color>"; inherits: true; initial-value: #14342a; }
+@property --sv-ink-muted { syntax: "<color>"; inherits: true; initial-value: #5e7a6b; }
+@property --sv-border { syntax: "<color>"; inherits: true; initial-value: #aacdba; }
+@property --sv-shadow { syntax: "<color>"; inherits: true; initial-value: rgba(16, 52, 42, 0.1); }
+@property --sv-accent { syntax: "<color>"; inherits: true; initial-value: #15803d; }
+@property --sv-accent-ink { syntax: "<color>"; inherits: true; initial-value: #ffffff; }
+@property --sv-danger { syntax: "<color>"; inherits: true; initial-value: #c0392f; }
+@property --sv-warn { syntax: "<color>"; inherits: true; initial-value: #ca8a04; }
+@property --sv-info { syntax: "<color>"; inherits: true; initial-value: #0d9488; }
+@property --sv-desk { syntax: "<color>"; inherits: true; initial-value: #d7ece0; }
+
 /* 스크롤바 자리를 항상 예약 → 스크롤 없는 탭↔있는 탭 전환 시 가로 폭이 안 흔들림(움찔 방지) */
 html {
   scrollbar-gutter: stable;
+}
+
+/* 계절 자동 전환·테마 변경 시 ~1.5초에 걸쳐 색이 천천히 바뀜.
+   theme-ready는 첫 페인트 직후 부여 → 초기 로드 시의 페이드(깜빡임)는 방지. */
+html.theme-ready {
+  transition: --sv-bg 1.5s, --sv-panel 1.5s, --sv-box 1.5s, --sv-ink 1.5s,
+    --sv-ink-muted 1.5s, --sv-border 1.5s, --sv-shadow 1.5s, --sv-accent 1.5s,
+    --sv-accent-ink 1.5s, --sv-danger 1.5s, --sv-warn 1.5s, --sv-info 1.5s,
+    --sv-desk 1.5s;
+}
+
+/* 모션 최소화 선호 시 즉시 전환 */
+@media (prefers-reduced-motion: reduce) {
+  html.theme-ready {
+    transition: none;
+  }
 }
 
 body {

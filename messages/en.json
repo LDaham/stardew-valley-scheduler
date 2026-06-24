@@ -118,9 +118,21 @@
   "ui": {
     "language": "Language"
   },
+  "feedback": {
+    "desc": "Opens a GitHub issue (GitHub account required). Write below and the prefilled issue page opens.",
+    "typeBug": "Bug report",
+    "typeIdea": "Idea",
+    "titlePlaceholder": "Title",
+    "descPlaceholder": "Description",
+    "submit": "Open on GitHub"
+  },
   "settings": {
     "title": "Settings",
     "open": "Open settings",
+    "tabGeneral": "General",
+    "tabMain": "Main screen",
+    "tabFeedback": "Bug report",
+    "mainTabDesc": "Choose what to show on the main screen and in what order.",
     "todoSettings": "Main screen settings",
     "openTodo": "Open to-do list settings",
     "events": "Fixed events",
@@ -129,8 +141,13 @@
     "themeSystem": "System",
     "themeLight": "Light",
     "themeDark": "Dark",
-    "themeStardew": "Stardew",
-    "themeStardewNight": "Stardew Night",
+    "themeModeLabel": "Mode",
+    "themeSeasonLabel": "Season",
+    "themeSeasonAuto": "Auto",
+    "themeSpring": "Spring",
+    "themeSummer": "Summer",
+    "themeFall": "Fall",
+    "themeWinter": "Winter",
     "language": "Language",
     "dataTitle": "Backup & transfer",
     "dataDesc": "Export your settings and progress to a file, or import that file on another device.",

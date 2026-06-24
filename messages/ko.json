@@ -118,9 +118,21 @@
   "ui": {
     "language": "언어"
   },
+  "feedback": {
+    "desc": "GitHub 이슈로 등록돼요(깃허브 계정 필요). 내용을 적고 올리면 작성 페이지가 열려요.",
+    "typeBug": "오류 보고",
+    "typeIdea": "아이디어 제시",
+    "titlePlaceholder": "제목",
+    "descPlaceholder": "설명을 적어주세요",
+    "submit": "GitHub에 올리기"
+  },
   "settings": {
     "title": "설정",
     "open": "설정 열기",
+    "tabGeneral": "일반",
+    "tabMain": "메인화면",
+    "tabFeedback": "오류 보고",
+    "mainTabDesc": "메인 화면에 표시할 항목과 순서를 설정해요.",
     "todoSettings": "메인화면 설정",
     "openTodo": "할 일 목록 설정 열기",
     "events": "고정 이벤트",
@@ -129,8 +141,13 @@
     "themeSystem": "시스템",
     "themeLight": "라이트",
     "themeDark": "다크",
-    "themeStardew": "스타듀",
-    "themeStardewNight": "스타듀 밤",
+    "themeModeLabel": "모드",
+    "themeSeasonLabel": "계절",
+    "themeSeasonAuto": "자동",
+    "themeSpring": "봄",
+    "themeSummer": "여름",
+    "themeFall": "가을",
+    "themeWinter": "겨울",
     "language": "언어",
     "dataTitle": "데이터 백업·이전",
     "dataDesc": "설정·진행 데이터를 파일로 내보내거나, 다른 기기에서 그 파일을 불러올 수 있어요.",
