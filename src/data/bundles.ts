@@ -157,14 +157,19 @@ export const BUNDLES: Bundle[] = [
     item("woodskip", []),
   ]),
   // ── 식료품 저장실 (추가) ──
-  // 고급 작물 꾸러미: 모든 작물이 금 등급 이상이어야 함
+  // 고급 작물 꾸러미: 4개 중 3개 선택, 모든 작물이 금 등급 이상이어야 함
   {
-    ...all("qualityCrops", "pantry", [
-      qn(crop("parsnip", ["spring"]), 5),
-      qn(crop("melon", ["summer"]), 5),
-      qn(crop("pumpkin", ["fall"]), 5),
-      qn(crop("corn", ["summer", "fall"]), 5),
-    ]),
+    ...all(
+      "qualityCrops",
+      "pantry",
+      [
+        qn(crop("parsnip", ["spring"]), 5),
+        qn(crop("melon", ["summer"]), 5),
+        qn(crop("pumpkin", ["fall"]), 5),
+        qn(crop("corn", ["summer", "fall"]), 5),
+      ],
+      3,
+    ),
     quality: "gold",
   },
   all(

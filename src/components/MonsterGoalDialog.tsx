@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
@@ -11,9 +12,25 @@ import { MONSTER_GOALS } from "@/data/monsterGoals";
 export default function MonsterGoalDialog({ onClose }: { onClose: () => void }) {
   const t = useTranslations();
   const locale = useLocale();
-  const { monsterGoalsDone, toggleMonsterGoal } = useSchedule();
+  const { monsterGoalsDone, toggleMonsterGoal, dialogFilters, setDialogFilters } =
+    useSchedule();
   const name = (o: { ko: string; en: string }) =>
     locale === "ko" ? o.ko : o.en;
+
+  // 완료되지 않은 항목 먼저 보기(체크 직후 즉시 재정렬하지 않도록 열 때·필터 변경 시에만 계산)
+  const incompleteFirst = dialogFilters.monsterIncompleteFirst;
+  const computeList = (inc: boolean) =>
+    inc
+      ? [...MONSTER_GOALS].sort(
+          (a, b) =>
+            Number(!!monsterGoalsDone[a.id]) - Number(!!monsterGoalsDone[b.id]),
+        )
+      : MONSTER_GOALS;
+  const [list, setList] = useState(() => computeList(incompleteFirst));
+  const setIncompleteFirst = (v: boolean) => {
+    setDialogFilters({ monsterIncompleteFirst: v });
+    setList(computeList(v));
+  };
 
   const total = MONSTER_GOALS.length;
   const done = MONSTER_GOALS.filter((g) => monsterGoalsDone[g.id]).length;
@@ -30,8 +47,18 @@ export default function MonsterGoalDialog({ onClose }: { onClose: () => void }) 
         />
       </div>
 
+      <span className="mb-3 flex items-center gap-2 text-sm">
+        <input
+          type="checkbox"
+          checked={incompleteFirst}
+          onChange={(e) => setIncompleteFirst(e.target.checked)}
+          className="size-4 accent-[var(--sv-accent)]"
+        />
+        {t("common.incompleteFirst")}
+      </span>
+
       <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
-        {MONSTER_GOALS.map((g) => {
+        {list.map((g) => {
           const checked = !!monsterGoalsDone[g.id];
           return (
             <li key={g.id}>
@@ -68,7 +95,7 @@ export default function MonsterGoalDialog({ onClose }: { onClose: () => void }) 
         })}
       </ul>
 
-      <p className="mt-3 text-[10px] text-[var(--sv-ink-muted)]">
+      <p className="mt-3 text-xs text-[var(--sv-ink-muted)]">
         {t("monster.source")}
       </p>
     </Modal>

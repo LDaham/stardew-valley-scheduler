@@ -45,12 +45,15 @@ const DEFAULT_DIALOG_FILTERS: DialogFilters = {
   bundleIncompleteFirst: false,
   perfectionIncompleteFirst: false,
   achievementIncompleteFirst: false,
+  museumIncompleteFirst: false,
+  fieldOfficeIncompleteFirst: false,
+  monsterIncompleteFirst: false,
   seedCrossSeason: false,
   seedFertilizer: "none",
   seedProduce: "raw",
   seedFood: "none",
-  // 꾸러미 추적 기본: 봄만 선택, 완료되지 않은 물품만 보기
-  trackerSeasons: ["spring"],
+  // 꾸러미 추적 기본: 현재 계절은 항상 표시 + 상시 물품 포함, 완료되지 않은 물품만 보기
+  trackerIncludeAlways: true,
   trackerOnlyIncomplete: true,
   trackerGrouped: true,
   // 참고 도구-가게 일정 탭 시나리오 토글 기본값(모두 꺼짐)

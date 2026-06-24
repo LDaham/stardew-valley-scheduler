@@ -39,6 +39,14 @@ export default function Modal({
   // (입력값 드래그 중 창 밖에서 마우스를 떼도 닫히지 않도록)
   const pressedOnBackdrop = useRef(false);
 
+  // 뒤로가기(history) 연동용. onClose는 매 렌더 바뀔 수 있어 ref로 최신값을 참조.
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  });
+  const pushedRef = useRef(false); // history 항목을 이미 추가했는지(중복 push 방지)
+  const cancelPendingBack = useRef<(() => void) | null>(null);
+
   useEffect(() => {
     if (inline) return; // 인라인은 ESC 닫기 없음
     const onKey = (e: KeyboardEvent) => {
@@ -62,11 +70,47 @@ export default function Modal({
     };
   }, [inline]);
 
+  // 오버레이 모달이 열려 있는 동안 history 항목을 추가 → 모바일/브라우저 '뒤로가기'가
+  // URL 이동 대신 모달을 닫는다. (인라인 패널은 페이지 흐름이라 제외.)
+  useEffect(() => {
+    if (inline) return;
+    // 직전 cleanup이 예약한 back()을 취소(React StrictMode의 즉시 재마운트 대비).
+    cancelPendingBack.current?.();
+    cancelPendingBack.current = null;
+    if (!pushedRef.current) {
+      window.history.pushState({ __modal: true }, "");
+      pushedRef.current = true;
+    }
+    let closedByPop = false;
+    const onPop = () => {
+      closedByPop = true;
+      pushedRef.current = false;
+      onCloseRef.current();
+    };
+    window.addEventListener("popstate", onPop);
+    return () => {
+      window.removeEventListener("popstate", onPop);
+      if (closedByPop) return; // 뒤로가기로 닫힘 → history는 이미 이동됨
+      // 닫기 버튼·ESC·배경 클릭으로 닫힘 → 추가했던 history 항목을 되돌린다.
+      // StrictMode 재마운트면 다음 setup에서 취소되도록 마이크로태스크로 지연.
+      let cancelled = false;
+      const timer = window.setTimeout(() => {
+        if (cancelled) return;
+        pushedRef.current = false;
+        window.history.back();
+      }, 0);
+      cancelPendingBack.current = () => {
+        cancelled = true;
+        window.clearTimeout(timer);
+      };
+    };
+  }, [inline]);
+
   // 인라인: 오버레이·닫기 없이 패널로 렌더. 내부 중첩 모달은 다시 overlay로(컨텍스트 리셋).
   if (inline) {
     return (
       <ModalModeContext.Provider value="overlay">
-        <section className="sv-panel p-5" aria-label={title}>
+        <section className="sv-panel p-4 sm:p-5" aria-label={title}>
           <div className="mb-4 flex items-center gap-2">
             {onBack && (
               <button
@@ -78,7 +122,7 @@ export default function Modal({
               </button>
             )}
             {titleIcon && <div className="shrink-0">{titleIcon}</div>}
-            <h2 className="truncate text-lg font-bold">{title}</h2>
+            <h2 className="truncate text-xl font-bold">{title}</h2>
             {titleAfter && <div className="shrink-0">{titleAfter}</div>}
           </div>
           {children}
@@ -89,7 +133,7 @@ export default function Modal({
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex justify-center bg-black/40 p-4 ${
+      className={`fixed inset-0 z-50 flex justify-center bg-black/40 p-3 sm:p-4 ${
         center ? "items-center" : "items-start pt-[7.5vh]"
       }`}
       onMouseDown={(e) => {
@@ -101,7 +145,7 @@ export default function Modal({
       role="presentation"
     >
       <div
-        className={`relative max-h-[85vh] w-full ${maxWidthClass} overflow-y-auto rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-5 shadow-xl`}
+        className={`relative max-h-[85vh] w-full ${maxWidthClass} overflow-y-auto rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-4 shadow-xl sm:p-5`}
         role="dialog"
         aria-modal="true"
       >
@@ -117,7 +161,7 @@ export default function Modal({
               </button>
             )}
             {titleIcon && <div className="shrink-0">{titleIcon}</div>}
-            <h2 className="truncate text-lg font-bold">{title}</h2>
+            <h2 className="truncate text-xl font-bold">{title}</h2>
             {titleAfter && <div className="shrink-0">{titleAfter}</div>}
           </div>
           <button

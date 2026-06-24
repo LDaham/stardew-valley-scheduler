@@ -160,12 +160,15 @@ export interface DialogFilters {
   fishType?: string[]; // 생선 유형 필터(없으면 전체). 값: "rodNormal" | "rodSpecial" | "crabpot"
   perfectionIncompleteFirst: boolean;
   achievementIncompleteFirst: boolean;
+  museumIncompleteFirst: boolean;
+  fieldOfficeIncompleteFirst: boolean;
+  monsterIncompleteFirst: boolean;
   seedCrossSeason: boolean;
   seedFertilizer: string;
   seedProduce: string;
   seedFood: string;
   seedSeason?: string; // 작물 효율 계절 필터(없으면 현재 계절)
-  trackerSeasons?: string[]; // 꾸러미 추적의 계절 필터(없으면 현재 계절+상시)
+  trackerIncludeAlways: boolean; // 꾸러미 추적: 상시(사계절) 물품 포함 여부(현재 계절은 항상 표시)
   trackerOnlyIncomplete: boolean; // 꾸러미 추적에서 완료되지 않은 물품만 보기
   trackerGrouped: boolean; // 꾸러미 단위 박스로 묶어서 보기(끄면 물품만 평면 표시)
   shopKeyApplied: boolean; // 참고 도구-가게 일정: 마을의 열쇠 적용(탭 전용)

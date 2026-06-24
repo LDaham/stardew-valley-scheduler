@@ -338,7 +338,7 @@ export default function SeedEfficiencyDialog({
                   <span className="truncate">
                     {t(`crops.${r.cropId}`)}
                     {r.regrow && (
-                      <span className="ml-1 text-[10px] text-[var(--sv-ink-muted)]">
+                      <span className="ml-1 text-xs text-[var(--sv-ink-muted)]">
                         ↻
                       </span>
                     )}

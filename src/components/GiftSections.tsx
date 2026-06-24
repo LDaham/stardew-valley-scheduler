@@ -77,7 +77,7 @@ function CategoryRow({
       >
         <PixelIcon src="/icons/ui/gift.png" size={14} />
         <span>{locale === "ko" ? entry.ko : entry.en}</span>
-        <span className="ml-auto text-[10px] text-[var(--sv-ink-muted)]">
+        <span className="ml-auto text-xs text-[var(--sv-ink-muted)]">
           {open ? "▾" : `▸ ${t("gift.expand")}`}
         </span>
       </button>
@@ -120,14 +120,14 @@ function UniversalFolder({
       >
         <PixelIcon src="/icons/ui/gift.png" size={14} />
         <span>{t(`gift.universal.${tierKey}`)}</span>
-        <span className="ml-auto text-[10px] text-[var(--sv-ink-muted)]">
+        <span className="ml-auto text-xs text-[var(--sv-ink-muted)]">
           {open ? "▾" : `▸ ${t("gift.expand")}`}
         </span>
       </button>
       {open && (
         <div className="mt-1.5 flex flex-col gap-1.5">
           {exceptions.length > 0 && (
-            <p className="text-[10px] text-[var(--sv-ink-muted)]">
+            <p className="text-xs text-[var(--sv-ink-muted)]">
               <span className="font-semibold">{t("gift.exceptionLabel")}: </span>
               {exceptions.map((ex, i) => (
                 <span key={ex.entry.en}>

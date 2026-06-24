@@ -117,7 +117,7 @@ export default function Dashboard() {
   const reminderBadge = (badge: ReminderBadge): ReactNode => {
     if (badge.kind === "dDay")
       return (
-        <span className="sv-num shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-[12px] font-semibold text-[#5a4416]">
+        <span className="sv-num shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-xs font-semibold text-[#5a4416]">
           {t("dashboard.dDay", { days: badge.days })}
         </span>
       );
@@ -629,7 +629,7 @@ function ActionChip({
         e.stopPropagation();
         onClick();
       }}
-      className="shrink-0 rounded bg-[var(--sv-accent)] px-1.5 py-0.5 text-[12px] font-semibold text-[var(--sv-accent-ink)]"
+      className="shrink-0 rounded bg-[var(--sv-accent)] px-1.5 py-0.5 text-xs font-semibold text-[var(--sv-accent-ink)]"
     >
       {label}
     </button>
@@ -849,7 +849,7 @@ function TaskList({
                 {row.icon}
                 <span>{row.label}</span>
                 {row.rolled && !row.done && (
-                  <span className="shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-[12px] font-semibold text-[#5a4416]">
+                  <span className="shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-xs font-semibold text-[#5a4416]">
                     {t("dashboard.rolled")}
                   </span>
                 )}
@@ -872,7 +872,7 @@ function TaskList({
             )}
           </div>
           {row.blocked && !row.done && (
-            <p className="mx-2 mb-1 mt-0.5 rounded bg-[#fbeaea] px-2 py-1 text-[13px] font-semibold leading-snug text-[#b02a2a]">
+            <p className="mx-2 mb-1 mt-0.5 rounded bg-[#fbeaea] px-2 py-1 text-sm font-semibold leading-snug text-[#b02a2a]">
               ⚠ {row.blocked}
             </p>
           )}

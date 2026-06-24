@@ -142,7 +142,7 @@ export default function MyTasksDialog({ onClose }: { onClose: () => void }) {
               <PixelIcon src={iconSrc(m)} size={16} />
               <span className="flex-1 text-sm">{m.text}</span>
               {isRolled(m) && (
-                <span className="shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-[10px] font-semibold text-[#5a4416]">
+                <span className="shrink-0 rounded bg-[#e0b84c] px-1.5 py-0.5 text-xs font-semibold text-[#5a4416]">
                   {t("dashboard.rolled")}
                 </span>
               )}

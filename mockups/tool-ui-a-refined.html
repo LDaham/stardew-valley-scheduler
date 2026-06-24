@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>도구 탭 상단 가로 배치 + A안 상세</title>
+<style>
+  :root{
+    --bg:#f3e7cc; --panel:#fbf5e6; --panel2:#f0e6cf;
+    --border:#aacdba; --border2:#cdbb95;
+    --accent:#5a8f3c; --accent-ink:#fff;
+    --ink:#3a2e1f; --muted:#8a7355; --warn:#b9892f;
+    --loved:#c0506b; --liked:#5a8f3c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Segoe UI","Apple SD Gothic Neo",system-ui,sans-serif;font-size:14px;line-height:1.5}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 20px 80px}
+  h1{font-size:20px;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:20px}
+  .note{font-size:12px;color:var(--muted);margin:6px 0 18px}
+  .winbar{font-size:11px;color:var(--muted);text-align:right;margin-bottom:4px}
+
+  .page{background:var(--panel);border:2px solid var(--border);border-radius:14px;padding:16px 16px 18px;
+    box-shadow:0 2px 0 #0001;margin-bottom:14px}
+  .frame{width:1040px;max-width:100%}
+
+  /* 상단 메인 네비게이션 바 */
+  .navbar{display:flex;gap:8px;align-items:center;padding-bottom:14px;border-bottom:2px solid var(--border)}
+  .navbar .brand{font-weight:800;font-size:15px;margin-right:10px;display:flex;align-items:center;gap:8px}
+  .navbar .brand .logo{width:26px;height:26px;border-radius:7px;background:#d9c08a}
+  .nav-main{display:flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--bg);
+    border-radius:10px;padding:8px 14px;font-size:13.5px;font-weight:700;color:var(--muted)}
+  .nav-main.on{background:var(--accent);color:#fff;border-color:transparent}
+
+  /* 도구 탭 — 네비 바와 띄워서 가로 나열 */
+  .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;margin-bottom:18px}
+  .tool-tab{display:flex;align-items:center;gap:7px;border:1px solid var(--border);background:var(--panel);
+    border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer}
+  .tool-tab .ic{width:18px;height:18px;border-radius:4px;background:#cdb27a;flex:0 0 auto}
+  .tool-tab.on{background:var(--accent);color:#fff;border-color:transparent}
+  .tool-tab.on .ic{background:#ffffff66}
+
+  /* 콘텐츠: 좌측 NPC 목록 1개 + 넓은 상세 (도구 네비가 위로 빠져 레일 1개만) */
+  .layout{display:grid;grid-template-columns:200px 1fr;gap:16px}
+  .npc-rail{border:1px solid var(--border);border-radius:10px;background:var(--panel);padding:7px}
+  .search{width:100%;border:1px solid var(--border);background:var(--bg);border-radius:7px;
+    padding:7px 9px;font-size:12.5px;margin-bottom:6px}
+  .npc-list{max-height:360px;overflow:auto}
+  .npc{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;cursor:pointer;font-size:13px}
+  .npc:hover{background:var(--bg)}
+  .npc .av{width:22px;height:22px;border-radius:5px;background:#d9c08a;flex:0 0 auto}
+  .npc .bd{font-size:10px;color:var(--muted);margin-left:auto}
+  .npc.on{background:var(--accent);color:#fff;font-weight:700}
+  .npc.on .bd{color:#eafde0}
+
+  .detail{border:1px solid var(--border);border-radius:10px;background:var(--panel);padding:18px;min-width:0}
+  .d-head{display:flex;align-items:center;gap:9px;font-weight:800;font-size:16px;margin-bottom:4px}
+  .d-head .av{width:32px;height:32px;border-radius:7px;background:#d9c08a}
+  .secTitle{font-weight:700;font-size:13px;margin:14px 0 6px}
+  .secTitle.loved{color:var(--loved)} .secTitle.liked{color:var(--liked)} .secTitle.hate{color:var(--warn)}
+  .gifts{display:flex;flex-wrap:wrap;gap:6px}
+  .gift{display:inline-flex;align-items:center;gap:6px;background:var(--panel2);border-radius:8px;padding:5px 9px;font-size:12.5px}
+  .gift .ic{width:18px;height:18px;border-radius:4px;background:#cdb27a}
+
+  .pros{font-size:12px;color:var(--muted);margin-top:14px;border-top:1px dashed var(--border);padding-top:10px}
+  .pros b{color:var(--accent)} .pros .con b{color:var(--warn)}
+  .mhead{font-size:14px;font-weight:800;margin:26px 0 4px}
+
+  /* 모바일 */
+  .phone{width:360px;max-width:100%;border:2px solid var(--border);border-radius:18px;background:var(--panel);padding:12px;margin-top:8px}
+  .mrow{display:flex;gap:6px;overflow:auto;padding-bottom:8px}
+  .mrow.nav{border-bottom:2px solid var(--border);margin-bottom:14px}
+  .mtab{flex:0 0 auto;display:flex;align-items:center;gap:6px;border:1px solid var(--border);background:var(--panel);
+    border-radius:999px;padding:6px 12px;font-size:12px;font-weight:700;color:var(--muted)}
+  .mtab.on{background:var(--accent);color:#fff;border-color:transparent}
+  .mtab.main{border-radius:9px}
+  .msearch{width:100%;border:1px solid var(--border);background:var(--bg);border-radius:7px;padding:7px 10px;font-size:13px;margin:10px 0 8px}
+  .mnpc{display:flex;gap:6px;overflow:auto;padding-bottom:6px;margin-bottom:12px}
+  .mnpc .npc{flex:0 0 auto;border:1px solid var(--border);border-radius:8px}
+  .mnpc .npc.on{border-color:transparent}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>도구 탭을 상단 가로로 배치</h1>
+  <div class="sub">좌측 도구 사이드바를 없애고, 메인 네비(오늘·참고 도구·진행도) <b>아래에 띄워서</b> 가로 탭으로 나열. 드릴인 페이지는 좌측 레일이 NPC 목록 1개만 남아 상세가 넓어짐.</div>
+
+  <div class="winbar">▼ 데스크톱(≥lg)</div>
+  <div class="page">
+    <div class="frame">
+      <!-- 메인 네비 바 -->
+      <div class="navbar">
+        <div class="brand"><span class="logo"></span>스케줄러</div>
+        <span class="nav-main">오늘</span>
+        <span class="nav-main on">참고 도구</span>
+        <span class="nav-main">진행도</span>
+      </div>
+
+      <!-- 도구 탭(네비 바와 띄움) -->
+      <div class="toolbar">
+        <span class="tool-tab"><span class="ic"></span>작물 효율</span>
+        <span class="tool-tab"><span class="ic"></span>생선 정보</span>
+        <span class="tool-tab"><span class="ic"></span>가게 일정</span>
+        <span class="tool-tab"><span class="ic"></span>구매 가격</span>
+        <span class="tool-tab on"><span class="ic"></span>선물 선호</span>
+        <span class="tool-tab"><span class="ic"></span>영화 선호</span>
+      </div>
+
+      <!-- 콘텐츠: NPC 목록 + 상세 -->
+      <div class="layout">
+        <div class="npc-rail">
+          <input class="search" placeholder="🔍 NPC 검색" />
+          <div class="npc-list">
+            <div class="npc on"><span class="av"></span>샘<span class="bd">여름 17</span></div>
+            <div class="npc"><span class="av"></span>세바스찬<span class="bd">겨울 10</span></div>
+            <div class="npc"><span class="av"></span>애비게일<span class="bd">가을 13</span></div>
+            <div class="npc"><span class="av"></span>에밀리<span class="bd">봄 27</span></div>
+            <div class="npc"><span class="av"></span>레아<span class="bd">겨울 23</span></div>
+            <div class="npc"><span class="av"></span>페니<span class="bd">가을 2</span></div>
+            <div class="npc"><span class="av"></span>해리<span class="bd">겨울 14</span></div>
+            <div class="npc"><span class="av"></span>알렉스<span class="bd">여름 13</span></div>
+            <div class="npc"><span class="av"></span>엘리엇<span class="bd">가을 5</span></div>
+            <div class="npc"><span class="av"></span>셰인<span class="bd">봄 20</span></div>
+            <div class="npc"><span class="av"></span>… (35명)</div>
+          </div>
+        </div>
+
+        <div class="detail">
+          <div class="d-head"><span class="av"></span>샘의 선물 선호</div>
+          <div style="font-size:12px;color:var(--muted)">생일 여름 17 · 1번 갱도 입구 거주</div>
+          <div class="secTitle loved">사랑함</div>
+          <div class="gifts">
+            <span class="gift"><span class="ic"></span>피자</span><span class="gift"><span class="ic"></span>타이거 송어</span>
+            <span class="gift"><span class="ic"></span>선인장 열매</span><span class="gift"><span class="ic"></span>구운 고구마</span>
+          </div>
+          <div class="secTitle liked">좋아함</div>
+          <div class="gifts">
+            <span class="gift"><span class="ic"></span>모든 우유</span><span class="gift"><span class="ic"></span>달걀</span>
+            <span class="gift"><span class="ic"></span>마요네즈</span><span class="gift"><span class="ic"></span>모든 과일</span>
+            <span class="gift"><span class="ic"></span>모든 채소</span>
+          </div>
+          <div class="secTitle hate">싫어함</div>
+          <div class="gifts">
+            <span class="gift"><span class="ic"></span>피에르의 토탈 시리얼</span><span class="gift"><span class="ic"></span>도롱뇽</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pros"><b>장점</b> 좌측 레일 1개만 남아 상세 폭 최대(~800px) · 도구 6개가 한눈에 가로로 보여 탐색 빠름 · 모든 도구 페이지에서 일관된 상단 구조. <span class="con"><b>단점</b></span> 세로 공간을 탭 줄만큼 더 씀 · 도구가 더 늘면 가로가 비좁아질 수 있음(현재 6개는 충분).</div>
+  </div>
+
+  <div class="mhead">모바일(&lt;lg)</div>
+  <div class="note">메인 네비·도구 탭 모두 가로 스크롤. NPC 목록도 칩으로 접혀 상세가 전체 폭 사용.</div>
+  <div class="phone">
+    <div class="mrow nav">
+      <span class="mtab main">오늘</span>
+      <span class="mtab main on">참고 도구</span>
+      <span class="mtab main">진행도</span>
+    </div>
+    <div class="mrow">
+      <span class="mtab"><span class="ic" style="width:16px;height:16px;border-radius:4px;background:#cdb27a;display:inline-block"></span>가게 일정</span>
+      <span class="mtab"><span class="ic" style="width:16px;height:16px;border-radius:4px;background:#cdb27a;display:inline-block"></span>구매 가격</span>
+      <span class="mtab on"><span class="ic" style="width:16px;height:16px;border-radius:4px;background:#ffffff66;display:inline-block"></span>선물 선호</span>
+      <span class="mtab"><span class="ic" style="width:16px;height:16px;border-radius:4px;background:#cdb27a;display:inline-block"></span>영화 선호</span>
+    </div>
+    <input class="msearch" placeholder="🔍 NPC 검색" />
+    <div class="mnpc">
+      <div class="npc on"><span class="av"></span>샘</div>
+      <div class="npc"><span class="av"></span>세바스찬</div>
+      <div class="npc"><span class="av"></span>애비게일</div>
+      <div class="npc"><span class="av"></span>에밀리</div>
+    </div>
+    <div class="detail">
+      <div class="d-head"><span class="av"></span>샘의 선물 선호</div>
+      <div class="secTitle loved">사랑함</div>
+      <div class="gifts">
+        <span class="gift"><span class="ic"></span>피자</span><span class="gift"><span class="ic"></span>타이거 송어</span><span class="gift"><span class="ic"></span>선인장 열매</span>
+      </div>
+      <div class="secTitle liked">좋아함</div>
+      <div class="gifts">
+        <span class="gift"><span class="ic"></span>모든 우유</span><span class="gift"><span class="ic"></span>달걀</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub" style="margin-top:24px">이 구조(상단 가로 도구 탭 + 좌측 목록 1개 + 넓은 상세)로 진행할까요? 진행도 탭(꾸러미·박멸·박물관 등)도 동일하게 가로 탭으로 통일 가능합니다.</div>
+</div>
+</body>
+</html>

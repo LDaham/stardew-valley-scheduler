@@ -13,11 +13,7 @@ import {
   type BundleItem,
 } from "@/data/bundles";
 import { REMIX_SLOTS } from "@/data/remixBundles";
-import SeasonFilter, {
-  defaultSeasonSelection,
-  matchesSeason,
-  type SeasonToken,
-} from "@/components/SeasonFilter";
+import { matchesSeason, type SeasonToken } from "@/components/SeasonFilter";
 
 // 메인 화면 상단 꾸러미 추적 박스.
 // - 표시 여부는 스케줄러 설정 최상단의 "꾸러미 추적" 토글(bundleTrackerShown)로 켠다.
@@ -41,20 +37,19 @@ export default function BundleTrackerBox() {
   } = useSchedule();
 
   const season = currentDate.season;
-  const trackerSeasons = dialogFilters.trackerSeasons;
+  // 현재 계절은 항상 표시. "상시"(사계절) 물품만 켜고 끌 수 있다.
+  const includeAlways = dialogFilters.trackerIncludeAlways;
   const onlyIncomplete = dialogFilters.trackerOnlyIncomplete;
   const grouped = dialogFilters.trackerGrouped;
   // 날짜 키: 바뀌면 스냅샷을 다시 계산(완료된 물품을 다시 걸러냄)
   const dayKey = `${year}-${currentDate.season}-${currentDate.day}`;
 
-  // 계절 필터 집합(없으면 현재 계절+상시)
-  const selectedSeasons = useMemo<Set<SeasonToken>>(
-    () =>
-      trackerSeasons
-        ? new Set(trackerSeasons as SeasonToken[])
-        : defaultSeasonSelection(season),
-    [trackerSeasons, season],
-  );
+  // 표시 계절 집합: 현재 계절 고정 + (상시 토글 시) 사계절·비 물품 포함
+  const selectedSeasons = useMemo<Set<SeasonToken>>(() => {
+    const s = new Set<SeasonToken>([season]);
+    if (includeAlways) s.add("all");
+    return s;
+  }, [season, includeAlways]);
 
   // 표시 스냅샷: {꾸러미, 표시할 물품}[]. deps가 바뀔 때만(=필터·모드·날짜 변경) 다시 계산.
   // bundleItemsDone는 일부러 deps에서 제외 → 완료 토글로는 재계산되지 않아 목록이 유지된다.
@@ -99,13 +94,6 @@ export default function BundleTrackerBox() {
   // 박스 표시 여부는 스케줄러 설정 최상단의 "꾸러미 추적" 토글로 켠다.
   if (!bundleTrackerShown) return null;
 
-  const toggleSeason = (tk: SeasonToken) => {
-    const next = new Set(selectedSeasons);
-    if (next.has(tk)) next.delete(tk);
-    else next.add(tk);
-    setDialogFilters({ trackerSeasons: [...next] });
-  };
-
   // 진행도 카운트는 실시간(완료 토글 즉시 반영)
   const doneCount = (b: Bundle) =>
     b.items.filter((i) => bundleItemsDone[bundleItemKey(b.id, i.id)]).length;
@@ -129,13 +117,13 @@ export default function BundleTrackerBox() {
       >
         <div className="mb-1 flex items-baseline justify-between gap-2">
           <h3 className="text-sm font-semibold">
-            <span className="text-[10px] text-[var(--sv-ink-muted)]">
+            <span className="text-xs text-[var(--sv-ink-muted)]">
               {t(`bundleRoom.${b.roomKey}`)}
             </span>{" "}
             {t(`bundle.${b.id}`)}
           </h3>
           <span
-            className={`sv-num shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold ${
+            className={`sv-num shrink-0 rounded px-1.5 py-0.5 text-[11px] font-semibold ${
               complete
                 ? "bg-[var(--sv-accent)] text-[var(--sv-accent-ink)]"
                 : "bg-[var(--sv-ink)] text-[var(--sv-bg)]"
@@ -167,14 +155,34 @@ export default function BundleTrackerBox() {
 
   return (
     <div className="sv-box p-3">
-      {/* 헤더: 제목 + 오른쪽 인라인 필터(계절·비·상시 + 완료되지 않은 물품만) */}
+      {/* 헤더: 제목 + 오른쪽 인라인 필터(상시 포함 + 완료되지 않은 물품만 + 묶어서 보기) */}
       <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-2">
         <h2 className="flex items-center gap-1.5 text-base font-bold">
           <PixelIcon src="/icons/ui/bundle.png" size={18} />
           {t("bundleTracker.title")}
         </h2>
         <div className="flex flex-wrap items-center gap-2">
-          <SeasonFilter selected={selectedSeasons} onToggle={toggleSeason} />
+          {/* 현재 계절은 항상 표시. 상시(사계절) 물품만 타원형 토글로 켜고 끈다. */}
+          <button
+            onClick={() =>
+              setDialogFilters({ trackerIncludeAlways: !includeAlways })
+            }
+            aria-pressed={includeAlways}
+            className={`inline-flex cursor-pointer items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold ${
+              includeAlways
+                ? "bg-[var(--sv-accent)] text-[var(--sv-accent-ink)]"
+                : "border border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink)] hover:bg-[var(--sv-bg)]"
+            }`}
+          >
+            <span
+              className="inline-block size-2 rounded-full"
+              style={{
+                background: "var(--sv-ink-muted)",
+                outline: includeAlways ? "1px solid white" : "none",
+              }}
+            />
+            {t("seasonFilter.all")}
+          </button>
           <span className="flex items-center gap-1.5 text-xs">
             <input
               type="checkbox"

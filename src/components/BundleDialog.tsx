@@ -6,6 +6,7 @@ import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
 import TitleToggle from "@/components/TitleToggle";
 import BundleItemChip from "@/components/BundleItemChip";
+import MasonryColumns from "@/components/MasonryColumns";
 import {
   BUNDLES,
   bundleItemKey,
@@ -96,21 +97,24 @@ export default function BundleDialog({
     const complete = isComplete(b);
     const subset = b.needed < b.items.length;
     return (
-      <section key={b.id}>
+      <section
+        key={b.id}
+        className="rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] p-2"
+      >
         <div className="mb-1 flex items-baseline justify-between gap-2">
           <h3 className="text-sm font-semibold">
-            <span className="text-[10px] text-[var(--sv-ink-muted)]">
+            <span className="text-xs text-[var(--sv-ink-muted)]">
               {t(`bundleRoom.${b.roomKey}`)}
             </span>{" "}
             {t(`bundle.${b.id}`)}
             {subset && (
-              <span className="ml-1 text-[10px] text-[var(--sv-ink-muted)]">
+              <span className="ml-1 text-xs text-[var(--sv-ink-muted)]">
                 ({t("bundle.pick", { needed: b.needed, total: b.items.length })})
               </span>
             )}
           </h3>
           <span
-            className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold ${
+            className={`shrink-0 rounded px-1.5 py-0.5 text-[11px] font-semibold ${
               complete
                 ? "bg-[var(--sv-accent)] text-[var(--sv-accent-ink)]"
                 : "bg-[var(--sv-ink)] text-white"
@@ -158,7 +162,7 @@ export default function BundleDialog({
           <span className="text-xs font-semibold text-[var(--sv-ink-muted)]">
             {t(`bundleRoom.${slot.roomKey}`)} · {t("bundle.remixRandomSlot")}
           </span>
-          <span className="shrink-0 text-[10px] font-semibold text-[var(--sv-ink-muted)]">
+          <span className="shrink-0 text-xs font-semibold text-[var(--sv-ink-muted)]">
             {t("bundle.remixPickCount", {
               pick: slot.pick,
               count: selected.length,
@@ -251,15 +255,39 @@ export default function BundleDialog({
         </p>
       )}
 
-      <div className="flex flex-col gap-4">
-        {bundleMode === "standard"
-          ? bundleOrder.map((b) => renderBundle(b))
-          : REMIX_SLOTS.map((slot) =>
-              slot.fixed
-                ? slot.bundles.map((b) => renderBundle(b))
-                : renderRandomSlot(slot),
-            )}
-      </div>
+      {/* 꾸러미 목록: 모바일 1열, PC 2열 메이슨리(가게 일정과 동일한 높이 채움 방식).
+          renderBundle은 계절 필터로 표시 품목이 없으면 null이라 미리 걸러낸다. */}
+      {(() => {
+        const entries: { key: string; node: React.ReactNode }[] =
+          bundleMode === "standard"
+            ? bundleOrder.map((b) => ({ key: b.id, node: renderBundle(b) }))
+            : REMIX_SLOTS.flatMap((slot) =>
+                slot.fixed
+                  ? slot.bundles.map((b) => ({
+                      key: b.id,
+                      node: renderBundle(b),
+                    }))
+                  : [{ key: slot.id, node: renderRandomSlot(slot) }],
+              );
+        const visible = entries.filter((e) => e.node !== null);
+        return (
+          <>
+            <div className="flex flex-col gap-4 sm:hidden">
+              {visible.map((e) => (
+                <div key={e.key}>{e.node}</div>
+              ))}
+            </div>
+            <div className="hidden sm:block">
+              <MasonryColumns
+                items={visible}
+                getKey={(e) => e.key}
+                render={(e) => e.node}
+                gap={16}
+              />
+            </div>
+          </>
+        );
+      })()}
     </Modal>
   );
 }

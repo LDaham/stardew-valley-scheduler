@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
 import Modal from "@/components/Modal";
+import MasterDetailPanel from "@/components/MasterDetailPanel";
 import {
   MOVIE_PREF_VILLAGERS,
   getMoviePref,
@@ -20,7 +20,7 @@ const NPC_ORDER = [
   "jodi", "george", "caroline", "kent", "krobus", "clint", "pam", "pierre",
 ];
 
-// 영화 선호: 주민 목록 → 클릭 시 사랑/좋아하는 영화·간식 표시.
+// 영화 선호: 좌측 주민 목록 + 우측 사랑/좋아하는 영화·간식을 동시에 표시.
 export default function MoviePreferenceDialog({
   onClose,
   onBack,
@@ -29,7 +29,6 @@ export default function MoviePreferenceDialog({
   onBack?: () => void;
 }) {
   const t = useTranslations();
-  const [selected, setSelected] = useState<string | null>(null);
 
   // 선호 데이터가 있는 주민: 지정 순서(미지정은 뒤)
   const rank = (id: string) => {
@@ -38,55 +37,34 @@ export default function MoviePreferenceDialog({
   };
   const npcs = [...MOVIE_PREF_VILLAGERS].sort((a, b) => rank(a) - rank(b));
 
-  if (selected) {
-    return (
-      <MovieDetailView
-        id={selected}
-        onClose={onClose}
-        onBack={() => setSelected(null)}
-      />
-    );
-  }
-
   return (
     <Modal title={t("info.moviePref")} onClose={onClose} onBack={onBack}>
-      <p className="mb-3 text-xs text-[var(--sv-ink-muted)]">
-        {t("info.moviePrefHint")}
-      </p>
-      <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-        {npcs.map((id) => (
-          <li key={id}>
-            <button
-              onClick={() => setSelected(id)}
-              className="flex w-full cursor-pointer items-center gap-2 rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] px-2 py-2 text-left text-sm font-semibold hover:bg-[var(--sv-bg)]"
-            >
-              <Image
-                src={asset(`/icons/villagers/${id}.png`)}
-                alt=""
-                width={28}
-                height={28}
-                unoptimized
-                className="shrink-0"
-                style={{ imageRendering: "pixelated" }}
-              />
-              <span className="truncate">{t(`villagers.${id}`)}</span>
-            </button>
-          </li>
-        ))}
-      </ul>
+      <MasterDetailPanel
+        items={npcs}
+        getId={(id) => id}
+        getSearchText={(id) => t(`villagers.${id}`)}
+        searchPlaceholder={t("info.searchVillager")}
+        renderItem={(id) => (
+          <>
+            <Image
+              src={asset(`/icons/villagers/${id}.png`)}
+              alt=""
+              width={28}
+              height={28}
+              unoptimized
+              className="shrink-0"
+              style={{ imageRendering: "pixelated" }}
+            />
+            <span className="truncate font-semibold">{t(`villagers.${id}`)}</span>
+          </>
+        )}
+        renderDetail={(id) => <MovieDetail id={id} />}
+      />
     </Modal>
   );
 }
 
-function MovieDetailView({
-  id,
-  onClose,
-  onBack,
-}: {
-  id: string;
-  onClose: () => void;
-  onBack: () => void;
-}) {
+function MovieDetail({ id }: { id: string }) {
   const t = useTranslations();
   const pref = getMoviePref(id);
 
@@ -99,21 +77,22 @@ function MovieDetailView({
   const hasAny = sections.some((s) => s.items.length > 0);
 
   return (
-    <Modal
-      title={t("movie.prefBy", { name: t(`villagers.${id}`) })}
-      onClose={onClose}
-      onBack={onBack}
-      titleIcon={
+    <div>
+      <div className="mb-3 flex items-center gap-2">
         <Image
           src={asset(`/icons/villagers/${id}.png`)}
           alt=""
           width={28}
           height={28}
           unoptimized
+          className="shrink-0"
           style={{ imageRendering: "pixelated" }}
         />
-      }
-    >
+        <h3 className="text-base font-bold">
+          {t("movie.prefBy", { name: t(`villagers.${id}`) })}
+        </h3>
+      </div>
+
       {hasAny ? (
         <div className="flex flex-col gap-4">
           {sections
@@ -142,10 +121,10 @@ function MovieDetailView({
         </p>
       )}
 
-      <p className="mt-3 text-[10px] text-[var(--sv-ink-muted)]">
+      <p className="mt-3 text-xs text-[var(--sv-ink-muted)]">
         {t("movie.source")}
       </p>
-    </Modal>
+    </div>
   );
 }
 

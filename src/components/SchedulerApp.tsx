@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ScheduleProvider, useSchedule } from "@/components/ScheduleProvider";
 import { GiftDialogProvider } from "@/components/GiftDialogProvider";
@@ -22,8 +22,8 @@ import CostMaterialsDialog from "@/components/CostMaterialsDialog";
 import { ModalModeContext } from "@/components/Modal";
 import PixelIcon from "@/components/PixelIcon";
 
-// 상단 네비 탭(쿼리파라미터로 URL 동기화)
-type MainTab = "today" | "tools" | "progress" | "settings";
+// 상단 네비 탭(쿼리파라미터로 URL 동기화). 설정은 탭이 아니라 오버레이 모달로 연다.
+type MainTab = "today" | "info" | "progress";
 // 참고 도구 하위 보기
 type ToolView = "seed" | "fish" | "shop" | "cost" | "gift" | "movie";
 // 진행도 하위 보기
@@ -53,7 +53,8 @@ function AppShell() {
   const [tab, setTab] = useState<MainTab>("today");
   const [tool, setTool] = useState<ToolView>("seed");
   const [view, setView] = useState<ProgressView>("bundle");
-  // 설정 → 메인화면 설정(중첩)은 오버레이 모달로 유지
+  // 설정은 오버레이 모달로 연다(별도 페이지 아님). 메인화면 설정(중첩)도 오버레이.
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const [todoSettingsOpen, setTodoSettingsOpen] = useState(false);
 
   // 첫 진입/공유 링크/뒤로가기에서 URL → 상태 복원
@@ -61,9 +62,7 @@ function AppShell() {
     const sync = () => {
       const p = new URLSearchParams(window.location.search);
       const tb = p.get("tab");
-      setTab(
-        tb === "tools" || tb === "progress" || tb === "settings" ? tb : "today",
-      );
+      setTab(tb === "info" || tb === "progress" ? tb : "today");
       const tl = p.get("tool") as ToolView | null;
       if (tl && TOOL_VIEWS.includes(tl)) setTool(tl);
       const vw = p.get("view") as ProgressView | null;
@@ -86,7 +85,7 @@ function AppShell() {
     setView(nView);
     const p = new URLSearchParams();
     if (nextTab !== "today") p.set("tab", nextTab);
-    if (nextTab === "tools") p.set("tool", nTool);
+    if (nextTab === "info") p.set("tool", nTool);
     if (nextTab === "progress") p.set("view", nView);
     const qs = p.toString();
     window.history.pushState(
@@ -96,14 +95,21 @@ function AppShell() {
     );
   };
 
-  // 참고 도구 목록(좌측 레이블 ↔ 인라인 콘텐츠)
+  // 상단 메인 탭(오늘·정보·진행도). 모바일 2행·데스크톱 1행에서 동일 목록을 재사용.
+  const mainTabs: { key: MainTab; icon: string; label: string }[] = [
+    { key: "today", icon: "/icons/ui/calendar.png", label: t("nav.today") },
+    { key: "info", icon: "/icons/ui/note.png", label: t("nav.tools") },
+    { key: "progress", icon: "/icons/ui/bundle.png", label: t("nav.progress") },
+  ];
+
+  // 참고 도구 목록(상단 가로 탭 ↔ 인라인 콘텐츠)
   const toolItems: { key: ToolView; icon: string; label: string }[] = [
     { key: "seed", icon: "/icons/ui/corn.png", label: t("seedEfficiency.short") },
     { key: "fish", icon: "/icons/fish/sardine.png", label: t("fish.title") },
     { key: "shop", icon: "/icons/ui/time.png", label: t("shopSchedule.short") },
     {
       key: "cost",
-      icon: "/icons/shops/carpenter.png",
+      icon: "/icons/costMaterials/Backpack.png",
       label: t("costMaterials.title"),
     },
     { key: "gift", icon: "/icons/ui/gift.png", label: t("info.birthdayGift") },
@@ -115,17 +121,23 @@ function AppShell() {
   ];
 
   // 진행도 목록
+  // 표시 순서: 업적 → 완벽 → 꾸러미 → 박물관 → 박멸 목표 → 현장 사무소
   const progressNav: { key: ProgressView; icon: string; label: string }[] = [
-    { key: "bundle", icon: "/icons/ui/bundle.png", label: t("bundle.short") },
+    {
+      key: "achievement",
+      icon: "/icons/ui/achievement.jpg",
+      label: t("achievement.short"),
+    },
     {
       key: "perfection",
       icon: "/icons/ui/perfection.png",
       label: t("perfection.short"),
     },
+    { key: "bundle", icon: "/icons/ui/bundle.png", label: t("bundle.short") },
     {
-      key: "achievement",
-      icon: "/icons/ui/achievement.jpg",
-      label: t("achievement.short"),
+      key: "museum",
+      icon: "/icons/addTask/museum.png",
+      label: t("museum.short"),
     },
     {
       key: "monster",
@@ -137,46 +149,51 @@ function AppShell() {
       icon: "/icons/addTask/geode.png",
       label: t("fieldOffice.short"),
     },
-    {
-      key: "museum",
-      icon: "/icons/addTask/museum.png",
-      label: t("museum.short"),
-    },
   ];
 
   return (
     <>
-      {/* 전체폭 분리형 상단 네비(아이콘+텍스트). 모달(z-50)보다 아래(z-30). */}
+      {/* 전체폭 분리형 상단 네비(아이콘+텍스트). 모달(z-50)보다 아래(z-30).
+          모바일: 1행 = 앱 이름(좌)+설정(우), 2행 = 오늘·정보·진행도.
+          데스크톱(sm+): 한 줄에 앱 이름·탭·설정 모두 표시. */}
       <nav className="sticky top-0 z-30 border-b-2 border-[var(--sv-border)] bg-[var(--sv-panel)]">
-        <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-1 gap-y-0 px-3 sm:px-5">
-          <span className="mr-3 py-2.5 text-base font-extrabold tracking-wide">
-            {t("common.appName")}
-          </span>
-          <NavTab
-            icon="/icons/ui/calendar.png"
-            label={t("nav.today")}
-            active={tab === "today"}
-            onClick={() => navigate("today")}
-          />
-          <NavTab
-            icon="/icons/ui/note.png"
-            label={t("nav.tools")}
-            active={tab === "tools"}
-            onClick={() => navigate("tools")}
-          />
-          <NavTab
-            icon="/icons/ui/perfection.png"
-            label={t("nav.progress")}
-            active={tab === "progress"}
-            onClick={() => navigate("progress")}
-          />
-          <NavTab
-            icon="/icons/ui/settings.png"
-            label={t("settings.title")}
-            active={tab === "settings"}
-            onClick={() => navigate("settings")}
-            className="ml-auto"
-          />
+        <div className="mx-auto max-w-5xl px-3 sm:px-5">
+          {/* 상단 행: 앱 이름 + (데스크톱)메인 탭 + 설정(우) */}
+          <div className="flex items-center gap-x-1">
+            <span className="mr-3 py-2.5 text-lg font-extrabold tracking-wide">
+              {t("common.appName")}
+            </span>
+            <div className="hidden items-center gap-x-1 sm:flex">
+              {mainTabs.map((m) => (
+                <NavTab
+                  key={m.key}
+                  icon={m.icon}
+                  label={m.label}
+                  active={tab === m.key}
+                  onClick={() => navigate(m.key)}
+                />
+              ))}
+            </div>
+            <NavTab
+              icon="/icons/ui/settings.png"
+              label={t("settings.title")}
+              active={settingsOpen}
+              onClick={() => setSettingsOpen(true)}
+              className="ml-auto"
+            />
+          </div>
+          {/* 모바일 전용 2행: 메인 탭 */}
+          <div className="flex items-center gap-x-1 sm:hidden">
+            {mainTabs.map((m) => (
+              <NavTab
+                key={m.key}
+                icon={m.icon}
+                label={m.label}
+                active={tab === m.key}
+                onClick={() => navigate(m.key)}
+              />
+            ))}
+          </div>
         </div>
       </nav>
 
@@ -186,12 +203,12 @@ function AppShell() {
           <Dashboard />
         </div>
 
-        {/* 참고 도구: 좌측 세로 레이블 + 우측 인라인 콘텐츠 */}
-        {tab === "tools" && (
+        {/* 참고 도구: 상단 가로 탭 + 인라인 콘텐츠 */}
+        {tab === "info" && (
           <SectionLayout
             items={toolItems}
             active={tool}
-            onSelect={(k) => navigate("tools", { tool: k })}
+            onSelect={(k) => navigate("info", { tool: k })}
           >
             <ModalModeContext.Provider value="inline">
               {tool === "seed" && (
@@ -211,7 +228,7 @@ function AppShell() {
           </SectionLayout>
         )}
 
-        {/* 진행도: 좌측 세로 레이블 + 우측 인라인 콘텐츠 */}
+        {/* 진행도: 상단 가로 탭 + 인라인 콘텐츠 */}
         {tab === "progress" && (
           <SectionLayout
             items={progressNav}
@@ -229,18 +246,17 @@ function AppShell() {
           </SectionLayout>
         )}
 
-        {/* 설정: 인라인 패널(메인화면 설정은 오버레이 모달로 진입) */}
-        {tab === "settings" && (
-          <ModalModeContext.Provider value="inline">
-            <SettingsDialog
-              onClose={noop}
-              onOpenTodoSettings={() => setTodoSettingsOpen(true)}
-            />
-          </ModalModeContext.Provider>
-        )}
       </main>
 
-      {/* 메인화면 설정(설정 페이지 위 오버레이) */}
+      {/* 설정: 오버레이 모달(메인화면 설정은 그 위 중첩 오버레이) */}
+      {settingsOpen && (
+        <SettingsDialog
+          onClose={() => setSettingsOpen(false)}
+          onOpenTodoSettings={() => setTodoSettingsOpen(true)}
+        />
+      )}
+
+      {/* 메인화면 설정(설정 모달 위 오버레이) */}
       {todoSettingsOpen && (
         <TodoSettingsDialog
           onClose={() => setTodoSettingsOpen(false)}
@@ -269,7 +285,7 @@ function NavTab({
     <button
       onClick={onClick}
       aria-current={active ? "page" : undefined}
-      className={`-mb-0.5 flex items-center gap-1.5 border-b-2 px-2.5 py-2.5 text-sm font-semibold sm:px-3 ${
+      className={`-mb-0.5 flex items-center gap-1.5 border-b-2 px-2.5 py-2.5 text-[15px] font-semibold sm:px-3 ${
         active
           ? "border-[var(--sv-accent)] text-[var(--sv-accent)]"
           : "border-transparent text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
@@ -280,7 +296,7 @@ function NavTab({
   );
 }
 
-// 좌측 세로 레이블(모바일은 가로 스크롤) + 우측 콘텐츠 2단 레이아웃
+// 상단 가로 탭(도구/진행도 공용) + 아래 콘텐츠
 function SectionLayout<K extends string>({
   items,
   active,
@@ -292,17 +308,29 @@ function SectionLayout<K extends string>({
   onSelect: (key: K) => void;
   children: React.ReactNode;
 }) {
+  // 선택된 탭이 가로 스크롤 영역 끝에서 잘려 있으면 보이도록 최소한만 스크롤.
+  const activeRef = useRef<HTMLButtonElement | null>(null);
+  useEffect(() => {
+    activeRef.current?.scrollIntoView({
+      inline: "nearest", // 잘리지 않을 정도만(가운데 정렬 X)
+      block: "nearest", // 세로 스크롤은 건드리지 않음
+    });
+  }, [active]);
+
   return (
-    <div className="lg:grid lg:grid-cols-[180px_1fr] lg:gap-5">
-      <aside className="mb-4 flex gap-2 overflow-x-auto pb-1 lg:mb-0 lg:flex-col lg:overflow-visible lg:pb-0">
+    <div>
+      {/* 도구/진행도 탭: 상단 네비 바와 여백으로 구분되는 가로 알약 탭.
+          줄바꿈 없이 좌우 스크롤(라벨이 많아도 한 줄 유지). */}
+      <div className="mb-5 flex gap-2 overflow-x-auto pb-1">
         {items.map((it) => {
           const on = it.key === active;
           return (
             <button
               key={it.key}
+              ref={on ? activeRef : undefined}
               onClick={() => onSelect(it.key)}
               aria-current={on ? "page" : undefined}
-              className={`flex shrink-0 items-center gap-2 rounded-lg border px-3 py-2 text-sm font-semibold lg:w-full ${
+              className={`flex shrink-0 cursor-pointer items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-semibold ${
                 on
                   ? "border-transparent bg-[var(--sv-accent)] text-[var(--sv-accent-ink)]"
                   : "border-[var(--sv-border)] text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
@@ -312,7 +340,7 @@ function SectionLayout<K extends string>({
             </button>
           );
         })}
-      </aside>
+      </div>
       <div className="min-w-0">{children}</div>
     </div>
   );

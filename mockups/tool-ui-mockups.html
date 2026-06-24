@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>참고 도구 UI 개선 목업 — 선물 선호 기준</title>
+<style>
+  :root{
+    --bg:#f3e7cc; --panel:#fbf5e6; --panel2:#f0e6cf;
+    --border:#aacdba; --border2:#cdbb95;
+    --accent:#5a8f3c; --accent-ink:#fff;
+    --ink:#3a2e1f; --muted:#8a7355; --warn:#b9892f;
+    --loved:#c0506b; --liked:#5a8f3c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Segoe UI","Apple SD Gothic Neo",system-ui,sans-serif;font-size:14px;line-height:1.5}
+  .wrap{max-width:1040px;margin:0 auto;padding:24px 20px 80px}
+  h1{font-size:20px;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:24px}
+  .opt{background:var(--panel);border:2px solid var(--border);border-radius:14px;padding:18px;margin-bottom:26px;box-shadow:0 2px 0 #0001}
+  .opt > h2{font-size:16px;margin:0 0 2px;display:flex;align-items:center;gap:8px}
+  .badge{background:var(--accent);color:#fff;border-radius:999px;font-size:11px;padding:2px 8px;font-weight:700}
+  .desc{color:var(--muted);font-size:12.5px;margin:0 0 14px}
+  .pros{font-size:12px;color:var(--muted);margin-top:12px;border-top:1px dashed var(--border);padding-top:10px}
+  .pros b{color:var(--accent)}
+  .pros .con b{color:var(--warn)}
+
+  /* 공용 칩/요소 */
+  .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);background:var(--panel);
+    border-radius:8px;padding:4px 9px;font-size:12.5px;font-weight:600;cursor:pointer}
+  .chip .ic{width:18px;height:18px;border-radius:4px;background:#d9c08a;display:inline-block;flex:0 0 auto}
+  .pill{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--border);background:var(--panel);
+    border-radius:999px;padding:3px 11px;font-size:12px;font-weight:600;cursor:pointer}
+  .pill.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .gift{display:inline-flex;align-items:center;gap:5px;background:var(--panel2);border-radius:8px;padding:4px 8px;font-size:12px;margin:0 4px 4px 0}
+  .gift .ic{width:18px;height:18px;border-radius:4px;background:#cdb27a;display:inline-block}
+  .secTitle{font-weight:700;font-size:13px;margin:10px 0 6px}
+  .secTitle.loved{color:var(--loved)} .secTitle.liked{color:var(--liked)}
+  .search{width:100%;border:1px solid var(--border);background:var(--panel);border-radius:8px;padding:7px 10px;font-size:13px;margin-bottom:8px}
+  .panelBox{border:1px solid var(--border);border-radius:10px;background:var(--panel);padding:14px}
+  .muted{color:var(--muted)}
+
+  /* A: 좌측 목록 + 우측 상세 */
+  .a-grid{display:grid;grid-template-columns:190px 1fr;gap:14px}
+  .a-list{border:1px solid var(--border);border-radius:10px;background:var(--panel);padding:8px;max-height:300px;overflow:auto}
+  .a-item{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:8px;cursor:pointer;font-size:13px}
+  .a-item .av{width:24px;height:24px;border-radius:6px;background:#d9c08a;flex:0 0 auto}
+  .a-item.on{background:var(--accent);color:#fff}
+  .a-item .bd{font-size:10px;color:var(--muted)} .a-item.on .bd{color:#eafde0}
+
+  /* B: 상단 칩 + 아래 상세 */
+  .b-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+
+  /* C: 전체 펼침 + 점프 */
+  .c-jump{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;position:sticky;top:0;background:var(--panel);padding:6px 0}
+  .c-row{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:start;border-top:1px solid var(--border);padding:12px 4px}
+  .c-row:first-of-type{border-top:none}
+  .c-name{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px}
+  .c-name .av{width:26px;height:26px;border-radius:6px;background:#d9c08a}
+
+  @media(max-width:640px){ .a-grid{grid-template-columns:1fr} .c-row{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>참고 도구 UI 개선 목업</h1>
+  <div class="sub">대표 예시: <b>선물 선호</b> (NPC 35명). 구매 가격(가게 14)·영화 선호도 동일 패턴으로 적용됩니다. 실제 아이콘 대신 회색 박스로 표현했습니다.</div>
+
+  <!-- ================= OPTION A ================= -->
+  <section class="opt">
+    <h2><span class="badge">A</span> 좌측 목록 + 우측 상세 (고정)</h2>
+    <p class="desc">왼쪽에 NPC 목록을 고정하고 오른쪽에 상세를 표시. 클릭하면 즉시 전환(뒤로가기 불필요). 상단 검색으로 빠르게 찾기. 앱의 좌측 사이드바 패턴과 일관.</p>
+    <div class="a-grid">
+      <div>
+        <input class="search" placeholder="🔍 NPC 검색…" />
+        <div class="a-list">
+          <div class="a-item on"><span class="av"></span><div><div>샘</div><div class="bd">여름 17</div></div></div>
+          <div class="a-item"><span class="av"></span><div><div>세바스찬</div><div class="bd">겨울 10</div></div></div>
+          <div class="a-item"><span class="av"></span><div><div>애비게일</div><div class="bd">가을 13</div></div></div>
+          <div class="a-item"><span class="av"></span><div><div>에밀리</div><div class="bd">봄 27</div></div></div>
+          <div class="a-item"><span class="av"></span><div><div>레아</div><div class="bd">겨울 23</div></div></div>
+          <div class="a-item"><span class="av"></span><div><div>페니</div><div class="bd">가을 2</div></div></div>
+          <div class="a-item"><span class="av"></span><div><div>… (35명)</div></div></div>
+        </div>
+      </div>
+      <div class="panelBox">
+        <div style="display:flex;align-items:center;gap:8px;font-weight:700"><span style="width:28px;height:28px;border-radius:6px;background:#d9c08a;display:inline-block"></span>샘의 선물 선호</div>
+        <div class="secTitle loved">사랑함</div>
+        <div><span class="gift"><span class="ic"></span>피자</span><span class="gift"><span class="ic"></span>타이거 송어</span><span class="gift"><span class="ic"></span>선인장 열매</span><span class="gift"><span class="ic"></span>구운 고구마</span></div>
+        <div class="secTitle liked">좋아함</div>
+        <div><span class="gift"><span class="ic"></span>모든 우유</span><span class="gift"><span class="ic"></span>달걀</span><span class="gift"><span class="ic"></span>마요네즈</span></div>
+      </div>
+    </div>
+    <div class="pros"><b>장점</b> 왕복 클릭 0회 · 목록·상세 동시 확인 · 검색으로 35명도 빠르게. <span class="con"><b>단점</b></span> 데스크톱에서 사이드바 2개(도구 네비 + NPC 목록)로 폭이 다소 줄어듦.</div>
+  </section>
+
+  <!-- ================= OPTION B ================= -->
+  <section class="opt">
+    <h2><span class="badge">B</span> 상단 선택칩/검색 + 아래 상세</h2>
+    <p class="desc">상단에 선택 칩 줄(가게)이나 검색 드롭다운(NPC)을 두고 아래에 상세. 생선 정보·작물 효율의 ‘상단 필터 + 콘텐츠’ 패턴과 동일. 두 번째 사이드바 없이 넓게 사용.</p>
+    <input class="search" placeholder="🔍 NPC 선택…  (샘)" />
+    <div class="b-chips">
+      <span class="pill on"><span class="ic" style="width:16px;height:16px;border-radius:4px;background:#cdb27a;display:inline-block"></span>샘</span>
+      <span class="pill">세바스찬</span><span class="pill">애비게일</span><span class="pill">에밀리</span>
+      <span class="pill">레아</span><span class="pill">페니</span><span class="pill muted">…더보기</span>
+    </div>
+    <div class="panelBox">
+      <div style="display:flex;align-items:center;gap:8px;font-weight:700"><span style="width:28px;height:28px;border-radius:6px;background:#d9c08a;display:inline-block"></span>샘의 선물 선호</div>
+      <div class="secTitle loved">사랑함</div>
+      <div><span class="gift"><span class="ic"></span>피자</span><span class="gift"><span class="ic"></span>타이거 송어</span><span class="gift"><span class="ic"></span>선인장 열매</span><span class="gift"><span class="ic"></span>구운 고구마</span></div>
+      <div class="secTitle liked">좋아함</div>
+      <div><span class="gift"><span class="ic"></span>모든 우유</span><span class="gift"><span class="ic"></span>달걀</span><span class="gift"><span class="ic"></span>마요네즈</span></div>
+    </div>
+    <div class="pros"><b>장점</b> 콘텐츠 폭 최대 · 앱의 기존 ‘상단 필터’ 패턴과 통일 · 가게(14개)엔 칩 줄이 딱 맞음. <span class="con"><b>단점</b></span> NPC 35명은 칩이 많아 검색 의존 · 여전히 한 번에 1명만 표시.</div>
+  </section>
+
+  <!-- ================= OPTION C ================= -->
+  <section class="opt">
+    <h2><span class="badge">C</span> 전체 펼쳐 보기 + 빠른 이동</h2>
+    <p class="desc">모든 NPC를 한 화면에 세로로 펼치고(가게 일정처럼), 상단 이름 점프로 이동. 클릭 자체가 거의 불필요 — 스크롤·검색으로 훑어봄.</p>
+    <div class="c-jump">
+      <span class="pill on">샘</span><span class="pill">세바스찬</span><span class="pill">애비게일</span><span class="pill">에밀리</span><span class="pill">레아</span><span class="pill">페니</span><span class="pill muted">…</span>
+    </div>
+    <div class="panelBox" style="padding:4px 14px">
+      <div class="c-row"><div class="c-name"><span class="av"></span>샘</div><div>
+        <span class="secTitle loved" style="margin:0 8px 0 0">사랑함</span>
+        <span class="gift"><span class="ic"></span>피자</span><span class="gift"><span class="ic"></span>타이거 송어</span><span class="gift"><span class="ic"></span>선인장 열매</span>
+        <span class="secTitle liked" style="margin:0 8px 0 8px">좋아함</span><span class="gift"><span class="ic"></span>우유</span></div></div>
+      <div class="c-row"><div class="c-name"><span class="av"></span>세바스찬</div><div>
+        <span class="secTitle loved" style="margin:0 8px 0 0">사랑함</span>
+        <span class="gift"><span class="ic"></span>개구리알</span><span class="gift"><span class="ic"></span>흑요석</span><span class="gift"><span class="ic"></span>맥주</span>
+        <span class="secTitle liked" style="margin:0 8px 0 8px">좋아함</span><span class="gift"><span class="ic"></span>퀘사디아</span></div></div>
+      <div class="c-row"><div class="c-name"><span class="av"></span>애비게일</div><div>
+        <span class="secTitle loved" style="margin:0 8px 0 0">사랑함</span>
+        <span class="gift"><span class="ic"></span>자수정</span><span class="gift"><span class="ic"></span>호박</span><span class="gift"><span class="ic"></span>초콜릿 케이크</span></div></div>
+    </div>
+    <div class="pros"><b>장점</b> 전체를 한눈에 비교 · 클릭 거의 불필요 · 가게 일정과 가장 비슷. <span class="con"><b>단점</b></span> 세로로 매우 길어짐(35명×선물 목록) · 특정 1명 집중 보기는 덜 편함.</div>
+  </section>
+
+  <div class="sub" style="margin-top:8px">선호하는 방식(또는 페이지별 혼합: 예 “가게는 B, 선물·영화는 A”)을 알려주시면 실제로 구현합니다.</div>
+</div>
+</body>
+</html>

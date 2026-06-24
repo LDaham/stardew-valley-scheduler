@@ -105,7 +105,7 @@ function TimelineBar({ windows }: { windows: number[][] }) {
           />
         ))}
       </div>
-      <div className="relative mt-0.5 h-3 text-[8px] leading-none text-[var(--sv-ink-muted)]">
+      <div className="relative mt-0.5 h-3 text-[10px] leading-none text-[var(--sv-ink-muted)]">
         {TL_TICKS.map((h) => (
           <span
             key={h}
@@ -264,8 +264,8 @@ export default function FishInfoDialog({
   );
 
   const toolHeader = (icon: string, label: string) => (
-    <h3 className="mb-1.5 flex items-center gap-1.5 border-b border-[var(--sv-border)] pb-1 text-sm font-bold">
-      <PixelIcon src={icon} size={16} />
+    <h3 className="mb-1.5 flex items-center gap-1.5 border-b border-[var(--sv-border)] pb-1 text-base font-bold">
+      <PixelIcon src={icon} size={18} />
       {label}
     </h3>
   );

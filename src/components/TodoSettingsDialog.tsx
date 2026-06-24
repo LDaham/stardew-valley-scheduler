@@ -197,7 +197,7 @@ export default function TodoSettingsDialog({
             <span className="text-sm font-semibold">
               {t("settings.cropGroup")}
             </span>
-            <span className="rounded bg-[var(--sv-bg)] px-1 py-0.5 text-[10px] text-[var(--sv-ink-muted)]">
+            <span className="rounded bg-[var(--sv-bg)] px-1 py-0.5 text-xs text-[var(--sv-ink-muted)]">
               {t("settings.userAdded")}
             </span>
           </span>
@@ -264,7 +264,7 @@ export default function TodoSettingsDialog({
                 <ReminderIcon id="queenOfSauceRerun" size={14} />
                 <span>{t("reminders.queenOfSauceRerun.title")}</span>
               </span>
-              <span className="mt-0.5 block text-[10px] text-[var(--sv-ink-muted)]">
+              <span className="mt-0.5 block text-xs text-[var(--sv-ink-muted)]">
                 {t("reminders.queenOfSauceRerun.note")}
               </span>
             </span>
@@ -278,7 +278,7 @@ export default function TodoSettingsDialog({
       label = (
         <span className="flex items-center gap-1.5">
           <span className="text-sm">{t(`todoCategory.${cat}`)}</span>
-          <span className="rounded bg-[var(--sv-bg)] px-1 py-0.5 text-[10px] text-[var(--sv-ink-muted)]">
+          <span className="rounded bg-[var(--sv-bg)] px-1 py-0.5 text-xs text-[var(--sv-ink-muted)]">
             {t("settings.userAdded")}
           </span>
         </span>

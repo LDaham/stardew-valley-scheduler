@@ -11,7 +11,7 @@
   },
   "nav": {
     "today": "오늘",
-    "tools": "참고 도구",
+    "tools": "정보",
     "progress": "진행도",
     "addTask": "할 일 추가"
   },
@@ -525,7 +525,8 @@
     "birthdayGift": "선물 선호",
     "birthdayGiftHint": "주민을 선택하면 좋아하는 선물을 볼 수 있어요.",
     "moviePref": "영화 선호",
-    "moviePrefHint": "주민을 선택하면 좋아하는 영화·간식을 볼 수 있어요."
+    "moviePrefHint": "주민을 선택하면 좋아하는 영화·간식을 볼 수 있어요.",
+    "searchVillager": "주민 검색"
   },
   "movie": {
     "prefBy": "{name}의 영화 선호",
@@ -558,8 +559,8 @@
     "toolRod": "낚싯대",
     "toolCrabpot": "게잡이 통발",
     "type": "유형",
-    "typeRodNormal": "낚싯대(일반)",
-    "typeRodSpecial": "낚싯대(특수)",
+    "typeRodNormal": "낚시(일반)",
+    "typeRodSpecial": "낚시(특수)",
     "typeCrabpot": "게잡이 통발",
     "catNormal": "일반",
     "catNightMarket": "야시장",
@@ -2470,8 +2471,12 @@
     "eatFood": "수확일 · 수확 전에 먹어야 함. 작물 수확을 먼저 체크하면 자동 삭제."
   },
   "costMaterials": {
-    "title": "비용 및 재료",
-    "hint": "가게를 선택하면 판매 물품의 비용과 재료를 볼 수 있어요.",
+    "title": "구매 가격",
+    "hint": "가게를 선택하면 판매 물품의 구매 가격과 재료를 볼 수 있어요.",
+    "always": "상시",
+    "rotating": "무작위",
+    "byDay": "요일별",
+    "searchShop": "가게 검색",
     "gold": "골드",
     "free": "무료",
     "source": "출처: Stardew Valley Wiki (CC BY-NC-SA 3.0)",

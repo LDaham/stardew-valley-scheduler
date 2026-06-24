@@ -184,8 +184,18 @@ export function ShopScenarioFilters({
   const key = box ? s.boxKeyApplied : s.shopKeyApplied;
   const cc = box ? s.boxCcRestored : s.shopCcRestored;
   const boat = box ? s.boxBoatRepaired : s.shopBoatRepaired;
+  // 표시 순서: 마을회관 복구 → 마을의 열쇠 → 진저섬 배 수리 → 축제날
   return (
     <>
+      <ScenarioToggle
+        label={t("shopSchedule.ccToggle")}
+        active={cc}
+        onToggle={() =>
+          setDialogFilters(
+            box ? { boxCcRestored: !cc } : { shopCcRestored: !cc },
+          )
+        }
+      />
       <ScenarioToggle
         label={t("shopSchedule.keyToggle")}
         active={key}
@@ -196,11 +206,11 @@ export function ShopScenarioFilters({
         }
       />
       <ScenarioToggle
-        label={t("shopSchedule.ccToggle")}
-        active={cc}
+        label={t("shopSchedule.boatToggle")}
+        active={boat}
         onToggle={() =>
           setDialogFilters(
-            box ? { boxCcRestored: !cc } : { shopCcRestored: !cc },
+            box ? { boxBoatRepaired: !boat } : { shopBoatRepaired: !boat },
           )
         }
       />
@@ -211,15 +221,6 @@ export function ShopScenarioFilters({
           onToggle={() => setDialogFilters({ shopFestivalOn: !s.shopFestivalOn })}
         />
       )}
-      <ScenarioToggle
-        label={t("shopSchedule.boatToggle")}
-        active={boat}
-        onToggle={() =>
-          setDialogFilters(
-            box ? { boxBoatRepaired: !boat } : { shopBoatRepaired: !boat },
-          )
-        }
-      />
     </>
   );
 }
@@ -356,7 +357,7 @@ export default function ShopScheduleDialog({
         {t("shopSchedule.festivalExceptionNote")}
       </p>
 
-      <p className="mt-2 text-[10px] text-[var(--sv-ink-muted)]">
+      <p className="mt-2 text-xs text-[var(--sv-ink-muted)]">
         {t("shopSchedule.source")}
       </p>
     </Modal>

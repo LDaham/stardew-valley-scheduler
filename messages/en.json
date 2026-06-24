@@ -11,7 +11,7 @@
   },
   "nav": {
     "today": "Today",
-    "tools": "Tools",
+    "tools": "Info",
     "progress": "Progress",
     "addTask": "Add task"
   },
@@ -525,7 +525,8 @@
     "birthdayGift": "Birthday gifts",
     "birthdayGiftHint": "Pick a villager to see their favorite gifts.",
     "moviePref": "Movie preferences",
-    "moviePrefHint": "Pick a villager to see their favorite movies and snacks."
+    "moviePrefHint": "Pick a villager to see their favorite movies and snacks.",
+    "searchVillager": "Search villager"
   },
   "movie": {
     "prefBy": "{name}'s movie tastes",
@@ -2470,8 +2471,12 @@
     "eatFood": "수확일 · 수확 전에 먹어야 함. 작물 수확을 먼저 체크하면 자동 삭제."
   },
   "costMaterials": {
-    "title": "Cost & materials",
-    "hint": "Pick a shop to see each item's cost and materials.",
+    "title": "Purchase prices",
+    "hint": "Pick a shop to see each item's purchase price and materials.",
+    "always": "Always",
+    "rotating": "Rotating",
+    "byDay": "By day",
+    "searchShop": "Search shop",
     "gold": "g",
     "free": "Free",
     "source": "Source: Stardew Valley Wiki (CC BY-NC-SA 3.0)",

@@ -135,12 +135,12 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
                 </span>
                 <span className="flex-1 text-sm font-semibold">
                   {t(`perfectionCategory.${c.id}`)}
-                  <span className="ml-1 text-[10px] font-normal text-[var(--sv-ink-muted)]">
+                  <span className="ml-1 text-xs font-normal text-[var(--sv-ink-muted)]">
                     ({t("perfection.contribute")} {c.weight}%)
                   </span>
                 </span>
                 <span
-                  className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold ${
+                  className={`shrink-0 rounded px-1.5 py-0.5 text-xs font-semibold ${
                     complete
                       ? "bg-[var(--sv-accent)] text-[var(--sv-accent-ink)]"
                       : "bg-[var(--sv-ink)] text-white"
@@ -232,7 +232,7 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
                               {name}
                             </span>
                             {recipe && (
-                              <span className="block text-[10px] leading-tight text-[var(--sv-ink-muted)]">
+                              <span className="block text-xs leading-tight text-[var(--sv-ink-muted)]">
                                 {recipe}
                               </span>
                             )}

@@ -1,6 +1,9 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
+import { asset } from "@/lib/asset";
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
 import { FIELD_OFFICE_ITEMS } from "@/data/fieldOffice";
@@ -9,7 +12,23 @@ import { FIELD_OFFICE_ITEMS } from "@/data/fieldOffice";
 export default function FieldOfficeDialog({ onClose }: { onClose: () => void }) {
   const t = useTranslations();
   const locale = useLocale();
-  const { fieldOfficeDone, toggleFieldOffice } = useSchedule();
+  const { fieldOfficeDone, toggleFieldOffice, dialogFilters, setDialogFilters } =
+    useSchedule();
+
+  // 완료되지 않은 항목 먼저 보기(체크 직후 즉시 재정렬하지 않도록 열 때·필터 변경 시에만 계산)
+  const incompleteFirst = dialogFilters.fieldOfficeIncompleteFirst;
+  const computeList = (inc: boolean) =>
+    inc
+      ? [...FIELD_OFFICE_ITEMS].sort(
+          (a, b) =>
+            Number(!!fieldOfficeDone[a.id]) - Number(!!fieldOfficeDone[b.id]),
+        )
+      : FIELD_OFFICE_ITEMS;
+  const [list, setList] = useState(() => computeList(incompleteFirst));
+  const setIncompleteFirst = (v: boolean) => {
+    setDialogFilters({ fieldOfficeIncompleteFirst: v });
+    setList(computeList(v));
+  };
 
   const total = FIELD_OFFICE_ITEMS.length;
   const done = FIELD_OFFICE_ITEMS.filter((m) => fieldOfficeDone[m.id]).length;
@@ -29,36 +48,58 @@ export default function FieldOfficeDialog({ onClose }: { onClose: () => void }) 
         />
       </div>
 
-      <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
-        {FIELD_OFFICE_ITEMS.map((m) => {
+      <span className="mb-3 flex items-center gap-2 text-sm">
+        <input
+          type="checkbox"
+          checked={incompleteFirst}
+          onChange={(e) => setIncompleteFirst(e.target.checked)}
+          className="size-4 accent-[var(--sv-accent)]"
+        />
+        {t("common.incompleteFirst")}
+      </span>
+
+      {/* 물품을 클릭하면 기증 토글되는 칩(아이콘+이름)을 행으로 나열(넘치면 다음 줄) */}
+      <ul className="flex flex-wrap gap-1.5">
+        {list.map((m) => {
           const checked = !!fieldOfficeDone[m.id];
+          const name = locale === "ko" ? m.ko : m.en;
           return (
             <li key={m.id}>
-              <label className="flex cursor-pointer items-center gap-2 rounded-md bg-[var(--sv-bg)] px-2.5 py-1.5 hover:bg-[var(--sv-panel)]">
-                <input
-                  type="checkbox"
-                  checked={checked}
-                  onChange={() => toggleFieldOffice(m.id)}
-                  aria-label={locale === "ko" ? m.ko : m.en}
-                  className="size-4 shrink-0 accent-[var(--sv-accent)]"
+              <button
+                type="button"
+                onClick={() => toggleFieldOffice(m.id)}
+                aria-pressed={checked}
+                aria-label={name}
+                className={`inline-flex items-center gap-1.5 rounded border px-2 py-1 text-left text-xs ${
+                  checked
+                    ? "border-[var(--sv-accent)] bg-[#5a8f3c26] text-[var(--sv-ink-muted)]"
+                    : "border-[var(--sv-border)] bg-[var(--sv-panel)] hover:bg-[var(--sv-bg)]"
+                }`}
+              >
+                <Image
+                  src={asset(m.icon)}
+                  alt=""
+                  width={16}
+                  height={16}
+                  unoptimized
+                  className="shrink-0"
+                  style={{ imageRendering: "pixelated" }}
                 />
-                <span
-                  className={`text-sm font-semibold ${checked ? "text-[var(--sv-ink-muted)] line-through" : ""}`}
-                >
-                  {locale === "ko" ? m.ko : m.en}
+                <span className={checked ? "line-through" : ""}>
+                  {name}
                   {m.qty > 1 && (
                     <span className="ml-1 text-[var(--sv-ink-muted)]">
                       ×{m.qty}
                     </span>
                   )}
                 </span>
-              </label>
+              </button>
             </li>
           );
         })}
       </ul>
 
-      <p className="mt-3 text-[10px] text-[var(--sv-ink-muted)]">
+      <p className="mt-3 text-xs text-[var(--sv-ink-muted)]">
         {t("fieldOffice.source")}
       </p>
     </Modal>

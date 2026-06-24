@@ -1,10 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useSchedule } from "@/components/ScheduleProvider";
 import { toYearDay } from "@/lib/calendar";
 import PixelIcon from "@/components/PixelIcon";
 import { PinButton, ShopScenarioFilters } from "@/components/ShopScheduleDialog";
+import ShopCostDialog from "@/components/ShopCostDialog";
+import { getCostShop } from "@/data/costMaterials";
 import {
   SHOP_SCHEDULE,
   resolveShopStatusOn,
@@ -12,6 +15,11 @@ import {
   type ShopScheduleEntry,
   type ShopStatus,
 } from "@/data/shopSchedule";
+
+// 가게 일정 id → 구매 가격(비용) 데이터 id. 대부분 동일하고 마법사 탑만 다르다.
+const SCHEDULE_TO_COST: Record<string, string> = { wizardTower: "wizard" };
+const costShopId = (scheduleId: string) =>
+  SCHEDULE_TO_COST[scheduleId] ?? scheduleId;
 
 // 자정 기준 분 → "오전 9시" / "9 AM" 라벨(로케일별 포맷은 메시지 timeHour(Min)로 구성).
 function timeLabel(min: number, t: ReturnType<typeof useTranslations>): string {
@@ -35,6 +43,8 @@ export default function ShopScheduleBox() {
   const t = useTranslations();
   const { dialogFilters, setDialogFilters, currentDate, rainDays } =
     useSchedule();
+  // 가게 이름 클릭 시 여는 구매 가격 모달의 대상 가게(비용 id). null이면 닫힘.
+  const [costId, setCostId] = useState<string | null>(null);
 
   const isRainToday = !!rainDays[toYearDay(currentDate)];
   // 메인 박스 전용 시나리오 상태(box*) — 참고 도구 탭(shop*)과 독립.
@@ -83,9 +93,19 @@ export default function ShopScheduleBox() {
         <PixelIcon src={shopIconSrc(s.id)} size={18} />
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5">
-            <span className="flex-1 text-sm font-semibold">
-              {t(`shopSchedule.shops.${s.id}.name`)}
-            </span>
+            {getCostShop(costShopId(s.id)) ? (
+              // 구매 가격 데이터가 있는 가게는 이름 클릭 시 모달로 구매 가격 표시
+              <button
+                onClick={() => setCostId(costShopId(s.id))}
+                className="flex-1 cursor-pointer text-left text-sm font-semibold underline decoration-dotted decoration-[var(--sv-border)] underline-offset-2 hover:text-[var(--sv-accent)]"
+              >
+                {t(`shopSchedule.shops.${s.id}.name`)}
+              </button>
+            ) : (
+              <span className="flex-1 text-sm font-semibold">
+                {t(`shopSchedule.shops.${s.id}.name`)}
+              </span>
+            )}
             <PinButton
               pinned
               onToggle={() => unpin(s.id)}
@@ -127,6 +147,11 @@ export default function ShopScheduleBox() {
         </p>
       ) : (
         <ul className="flex flex-wrap gap-2">{shops.map(renderShop)}</ul>
+      )}
+
+      {/* 가게 이름 클릭 시 구매 가격 모달(현재 계절·요일 반영) */}
+      {costId && (
+        <ShopCostDialog id={costId} onClose={() => setCostId(null)} />
       )}
     </div>
   );
