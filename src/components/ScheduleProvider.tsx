@@ -96,5 +96,7 @@ export function useSchedule() {
     setMainOrder: scheduleActions.setMainOrder,
     setNotepadText: scheduleActions.setNotepadText,
     resetAll: scheduleActions.resetAll,
+    exportState: scheduleActions.exportState,
+    importState: scheduleActions.importState,
   };
 }

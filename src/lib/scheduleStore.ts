@@ -139,13 +139,12 @@ let state: ScheduleState = DEFAULT_STATE;
 let loaded = false;
 const listeners = new Set<() => void>();
 
-// 클라이언트에서 최초 접근 시 1회 로드 (getSnapshot 참조 안정성 유지)
-function ensureLoaded(): void {
-  if (loaded || typeof window === "undefined") return;
-  const saved = loadJSON(STORAGE_KEY, DEFAULT_STATE);
+// 저장본(또는 가져온 JSON)을 기본값과 안전하게 병합 → 누락 필드·구버전 호환·순서 재정리.
+// 최초 로드(ensureLoaded)와 데이터 가져오기(importState)가 함께 쓴다.
+function mergeSaved(saved: ScheduleState): ScheduleState {
   // 구버전(<2) 저장본은 할 일 추가 순서를 새 기본값으로 1회 마이그레이션한다.
   const migrateOrder = saved.version !== STATE_VERSION;
-  state = {
+  return {
     ...DEFAULT_STATE,
     ...saved,
     // 신규 필드는 기본값과 병합(구버전 저장 데이터 호환)
@@ -189,6 +188,12 @@ function ensureLoaded(): void {
     year: saved.year ?? 1,
     version: STATE_VERSION,
   };
+}
+
+// 클라이언트에서 최초 접근 시 1회 로드 (getSnapshot 참조 안정성 유지)
+function ensureLoaded(): void {
+  if (loaded || typeof window === "undefined") return;
+  state = mergeSaved(loadJSON(STORAGE_KEY, DEFAULT_STATE));
   loaded = true;
 }
 
@@ -552,5 +557,24 @@ export const scheduleActions = {
       ...state,
       museumDone: { ...state.museumDone, [id]: !state.museumDone[id] },
     });
+  },
+  // 전체 설정을 JSON 문자열로 내보낸다(기기 이전·백업용 다운로드).
+  exportState(): string {
+    ensureLoaded();
+    return JSON.stringify(state, null, 2);
+  },
+  // 내보낸 JSON을 불러와 상태를 교체한다(기본값 병합으로 누락 필드·구버전 호환).
+  // 형식이 올바르지 않으면 false를 반환하고 상태를 바꾸지 않는다.
+  importState(json: string): boolean {
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(json);
+    } catch {
+      return false;
+    }
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed))
+      return false;
+    commit(mergeSaved(parsed as ScheduleState));
+    return true;
   },
 };
