@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
+import { localizeItem } from "@/lib/itemName";
 import Modal from "@/components/Modal";
 import PixelIcon from "@/components/PixelIcon";
 import MasonryColumns from "@/components/MasonryColumns";
@@ -215,7 +216,7 @@ function OfferRow({ offer, today }: { offer: CostOffer; today?: string }) {
   const t = useTranslations();
   const locale = useLocale();
   const name = (it: { ko: string; en: string }) =>
-    locale === "ko" ? it.ko : it.en;
+    localizeItem(it.en, it.ko, locale);
   const isToday = !!today && offer.day === today; // 오늘 판매 요일이면 배지 강조
 
   const hasMaterials = offer.materials.length > 0;

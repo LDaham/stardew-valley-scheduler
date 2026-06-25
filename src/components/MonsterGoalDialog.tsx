@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
+import { localizeItem } from "@/lib/itemName";
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
 import { MONSTER_GOALS } from "@/data/monsterGoals";
@@ -15,7 +16,7 @@ export default function MonsterGoalDialog({ onClose }: { onClose: () => void }) 
   const { monsterGoalsDone, toggleMonsterGoal, dialogFilters, setDialogFilters } =
     useSchedule();
   const name = (o: { ko: string; en: string }) =>
-    locale === "ko" ? o.ko : o.en;
+    localizeItem(o.en, o.ko, locale);
 
   // 완료되지 않은 항목 먼저 보기(체크 직후 즉시 재정렬하지 않도록 열 때·필터 변경 시에만 계산)
   const incompleteFirst = dialogFilters.monsterIncompleteFirst;

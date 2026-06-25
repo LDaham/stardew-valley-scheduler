@@ -1,0 +1,775 @@
+{
+  "buildings": {
+    "coop": "Hühnerstall",
+    "bigCoop": "Großer Hühnerstall",
+    "deluxeCoop": "Luxus-Hühnerstall",
+    "barn": "Stall",
+    "bigBarn": "Großer Stall",
+    "deluxeBarn": "Luxus-Stall",
+    "fishPond": "Fischteich",
+    "mill": "Mühle",
+    "shed": "Schuppen",
+    "bigShed": "Großer Schuppen",
+    "silo": "Silo",
+    "slimeHutch": "Schleim-Stall",
+    "stable": "Pferdestall",
+    "well": "Brunnen",
+    "shippingBin": "Versandbehälter",
+    "logCabin": "Hütte"
+  },
+  "fishInfo": {
+    "pufferfish": {
+      "name": "Kugelfisch",
+      "location": "Meer, Ingwerinsel-Meer",
+      "time": "12:00 – 16:00"
+    },
+    "anchovy": {
+      "name": "Sardelle",
+      "location": "Meer",
+      "time": "Jederzeit"
+    },
+    "tuna": {
+      "name": "Thunfisch",
+      "location": "Meer, Ingwerinsel-Meer",
+      "time": "6:00 – 19:00"
+    },
+    "sardine": {
+      "name": "Sardine",
+      "location": "Meer",
+      "time": "6:00 – 19:00"
+    },
+    "bream": {
+      "name": "Brasse",
+      "location": "Fluss (Stadt + Wald)",
+      "time": "18:00 – 2:00"
+    },
+    "largemouthBass": {
+      "name": "Forellenbarsch",
+      "location": "Bergsee",
+      "time": "6:00 – 19:00"
+    },
+    "smallmouthBass": {
+      "name": "Schwarzbarsch",
+      "location": "Fluss (Stadt), Waldteich, Flusslandfarm",
+      "time": "Jederzeit"
+    },
+    "rainbowTrout": {
+      "name": "Regenbogenforelle",
+      "location": "Fluss (Stadt + Wald), Bergsee",
+      "time": "6:00 – 19:00"
+    },
+    "salmon": {
+      "name": "Lachs",
+      "location": "Fluss (Stadt + Wald)",
+      "time": "6:00 – 19:00"
+    },
+    "walleye": {
+      "name": "Glasaugenbarsch",
+      "location": "Fluss (Stadt + Wald), Waldteich, Bergsee",
+      "time": "12:00 – 2:00"
+    },
+    "perch": {
+      "name": "Barsch",
+      "location": "Fluss (Stadt + Wald), Waldteich, Bergsee",
+      "time": "Jederzeit"
+    },
+    "carp": {
+      "name": "Karpfen",
+      "location": "Bergsee, Teich im Geheimen Wald, Kanalisation",
+      "time": "Jederzeit"
+    },
+    "catfish": {
+      "name": "Katzenfisch",
+      "location": "Fluss (Stadt + Wald), Teich im Geheimen Wald, Hexensumpf",
+      "time": "Jederzeit"
+    },
+    "pike": {
+      "name": "Hecht",
+      "location": "Fluss (Stadt + Wald), Waldteich",
+      "time": "Jederzeit"
+    },
+    "sunfish": {
+      "name": "Gotteslachs",
+      "location": "Fluss (Stadt + Wald), Waldfarm",
+      "time": "6:00 – 19:00"
+    },
+    "redMullet": {
+      "name": "Rotbarbe",
+      "location": "Meer",
+      "time": "6:00 – 19:00"
+    },
+    "herring": {
+      "name": "Hering",
+      "location": "Meer",
+      "time": "Jederzeit"
+    },
+    "eel": {
+      "name": "Aal",
+      "location": "Meer",
+      "time": "16:00 – 2:00"
+    },
+    "octopus": {
+      "name": "Oktopus",
+      "location": "Meer",
+      "time": "6:00 – 13:00"
+    },
+    "redSnapper": {
+      "name": "Riffbarsch",
+      "location": "Meer",
+      "time": "6:00 – 19:00"
+    },
+    "squid": {
+      "name": "Tintenfisch",
+      "location": "Meer",
+      "time": "18:00 – 2:00"
+    },
+    "seaCucumber": {
+      "name": "Seegurke",
+      "location": "Meer",
+      "time": "6:00 – 19:00"
+    },
+    "superCucumber": {
+      "name": "Super-Seegurke",
+      "location": "Meer, Ingwerinsel-Meer",
+      "time": "18:00 – 2:00"
+    },
+    "ghostfish": {
+      "name": "Indischer Glaswels",
+      "location": "Minen (Ebene 20, 60), Geist-Beute",
+      "time": "Jederzeit"
+    },
+    "stonefish": {
+      "name": "Steinfisch",
+      "location": "Minen, Ebene 20, Angelstufe 3+",
+      "time": "Jederzeit"
+    },
+    "icePip": {
+      "name": "Eis-Pip",
+      "location": "Minen, Ebene 60, Angelstufe 5+",
+      "time": "Jederzeit"
+    },
+    "lavaEel": {
+      "name": "Lava-Aal",
+      "location": "Minen Ebene 100 (Angelstufe 7+), Vulkan-Caldera",
+      "time": "Jederzeit"
+    },
+    "sandfish": {
+      "name": "Sandfisch",
+      "location": "Wüste",
+      "time": "6:00 – 20:00"
+    },
+    "scorpionCarp": {
+      "name": "Skorpionkarpfen",
+      "location": "Wüste, Angelstufe 4+",
+      "time": "6:00 – 20:00"
+    },
+    "flounder": {
+      "name": "Flunder",
+      "location": "Meer, Ingwerinsel-Meer",
+      "time": "6:00 – 20:00"
+    },
+    "midnightCarp": {
+      "name": "Mitternachtskarpfen",
+      "location": "Bergsee, Waldsee, Seen & Flüsse der Ingwerinsel",
+      "time": "22:00 – 2:00"
+    },
+    "sturgeon": {
+      "name": "Stör",
+      "location": "Bergsee",
+      "time": "6:00 – 19:00"
+    },
+    "tigerTrout": {
+      "name": "Tigerforelle",
+      "location": "Fluss (Stadt + Wald)",
+      "time": "6:00 – 19:00"
+    },
+    "bullhead": {
+      "name": "Zwergwels",
+      "location": "Bergsee",
+      "time": "Jederzeit"
+    },
+    "tilapia": {
+      "name": "Buntbarsch",
+      "location": "Meer, Süßwasser der Ingwerinsel",
+      "time": "6:00 – 14:00"
+    },
+    "chub": {
+      "name": "Kaulbarsch",
+      "location": "Fluss (Wald), Bergsee",
+      "time": "Jederzeit"
+    },
+    "dorado": {
+      "name": "Goldmakrele",
+      "location": "Fluss (Wald)",
+      "time": "6:00 – 19:00"
+    },
+    "albacore": {
+      "name": "Weißer Thun",
+      "location": "Meer",
+      "time": "6:00 – 11:00, 18:00 – 2:00"
+    },
+    "shad": {
+      "name": "Blaubarsch",
+      "location": "Fluss (Stadt + Wald)",
+      "time": "9:00 – 2:00"
+    },
+    "lingcod": {
+      "name": "Lengdorsch",
+      "location": "Fluss (Stadt + Wald), Bergsee",
+      "time": "Jederzeit"
+    },
+    "halibut": {
+      "name": "Heilbutt",
+      "location": "Meer",
+      "time": "6:00 – 11:00, 19:00 – 2:00"
+    },
+    "woodskip": {
+      "name": "Waldspringer",
+      "location": "Teich im Geheimen Wald, Waldfarm",
+      "time": "Jederzeit"
+    },
+    "voidSalmon": {
+      "name": "Schattenlachs",
+      "location": "Hexensumpf",
+      "time": "Jederzeit"
+    },
+    "slimejack": {
+      "name": "Schleimmakrele",
+      "location": "Mutanten-Käfernest",
+      "time": "Jederzeit"
+    },
+    "lionfish": {
+      "name": "Rotfeuerfisch",
+      "location": "Ingwerinsel-Meer",
+      "time": "Jederzeit"
+    },
+    "blueDiscus": {
+      "name": "Blauer Diskusbuntbarsch",
+      "location": "Seen & Flüsse der Ingwerinsel",
+      "time": "Jederzeit"
+    },
+    "stingray": {
+      "name": "Stachelrochen",
+      "location": "Piratenbucht (Ingwerinsel)",
+      "time": "Jederzeit"
+    },
+    "crimsonfish": {
+      "name": "Purpurfisch",
+      "location": "Östliche Brücke am Strand, im tiefen Wasser. Angelstufe 5 erforderlich.",
+      "time": "Jederzeit"
+    },
+    "angler": {
+      "name": "Anglerfisch",
+      "location": "Holzbrücke nördlich des JojaMarkts. Angelstufe 3 erforderlich.",
+      "time": "Jederzeit"
+    },
+    "legend": {
+      "name": "Legende",
+      "location": "Bergsee, beim Baumstamm. Angelstufe 10 erforderlich.",
+      "time": "Jederzeit"
+    },
+    "glacierfish": {
+      "name": "Gletscherfisch",
+      "location": "Glutsaft-Wald an der Südspitze der Pfeilspitzen-Insel, im tiefen Wasser. Angelstufe 6 erforderlich.",
+      "time": "Jederzeit"
+    },
+    "mutantCarp": {
+      "name": "Mutantenkarpfen",
+      "location": "Kanalisation",
+      "time": "Jederzeit"
+    },
+    "sonOfCrimsonfish": {
+      "name": "Sohn vom Purpurfisch",
+      "location": "Östlicher Pier am Strand. Angelstufe 5 erforderlich.",
+      "time": "Jederzeit"
+    },
+    "msAngler": {
+      "name": "Frau Angler",
+      "location": "Holzbrücke nördlich des JojaMarkts. Angelstufe 3 erforderlich.",
+      "time": "Jederzeit"
+    },
+    "legendII": {
+      "name": "Legende II",
+      "location": "Bergsee, beim Baumstamm. Angelstufe 10 oder höher erforderlich.",
+      "time": "Jederzeit"
+    },
+    "glacierfishJr": {
+      "name": "Gletscherfisch Junior",
+      "location": "Glutsaft-Wald an der Südspitze der Pfeilspitzen-Insel. Angelstufe 6 erforderlich.",
+      "time": "Jederzeit"
+    },
+    "radioactiveCarp": {
+      "name": "Radioaktiver Karpfen",
+      "location": "Kanalisation",
+      "time": "Jederzeit"
+    },
+    "midnightSquid": {
+      "name": "Mitternächtlicher Tintenfisch",
+      "location": "U-Boot (Nachtmarkt)",
+      "time": "17:00 – 2:00"
+    },
+    "spookFish": {
+      "name": "Gruselfisch",
+      "location": "U-Boot (Nachtmarkt)",
+      "time": "17:00 – 2:00"
+    },
+    "blobfish": {
+      "name": "Blobfisch",
+      "location": "U-Boot (Nachtmarkt)",
+      "time": "17:00 – 2:00"
+    },
+    "lobster": {
+      "name": "Hummer",
+      "location": "Meer",
+      "time": "Jederzeit"
+    },
+    "crab": {
+      "name": "Krabbe",
+      "location": "Meer",
+      "time": "Jederzeit"
+    },
+    "shrimp": {
+      "name": "Garnele",
+      "location": "Meer",
+      "time": "Jederzeit"
+    },
+    "cockle": {
+      "name": "Herzmuschel",
+      "location": "Meer",
+      "time": "Jederzeit"
+    },
+    "mussel": {
+      "name": "Miesmuschel",
+      "location": "Meer",
+      "time": "Jederzeit"
+    },
+    "oyster": {
+      "name": "Auster",
+      "location": "Meer",
+      "time": "Jederzeit"
+    },
+    "clam": {
+      "name": "Venusmuschel",
+      "location": "Meer",
+      "time": "Jederzeit"
+    },
+    "crayfish": {
+      "name": "Flusskrebs",
+      "location": "Süßwasser (Fluss/See)",
+      "time": "Jederzeit"
+    },
+    "snail": {
+      "name": "Schnecke",
+      "location": "Süßwasser (Fluss/See)",
+      "time": "Jederzeit"
+    },
+    "periwinkle": {
+      "name": "Strandschnecke",
+      "location": "Süßwasser (Fluss/See)",
+      "time": "Jederzeit"
+    }
+  },
+  "achievements": {
+    "a1": {
+      "name": "Grünschnabel (15.000)",
+      "desc": "Verdiene 15.000 G"
+    },
+    "a2": {
+      "name": "Cowboy (50.000)",
+      "desc": "Verdiene 50.000 G"
+    },
+    "a3": {
+      "name": "Heimstätter (250.000)",
+      "desc": "Verdiene 250.000 G"
+    },
+    "a4": {
+      "name": "Millionär (1 Mio.)",
+      "desc": "Verdiene 1.000.000 G"
+    },
+    "a5": {
+      "name": "Legende (10 Mio.)",
+      "desc": "Verdiene 10.000.000 G"
+    },
+    "a6": {
+      "name": "Eine vollständige Sammlung",
+      "desc": "Vervollständige die Museumskollektion"
+    },
+    "a7": {
+      "name": "Ein neuer Freund",
+      "desc": "Freunde dich mit jemandem an, bis die Zuneigung 5 Herzen erreicht."
+    },
+    "a8": {
+      "name": "Beste Freunde",
+      "desc": "Freunde dich mit jemandem an, bis die Zuneigung 10 Herzen erreicht."
+    },
+    "a9": {
+      "name": "Der beliebte Bauer",
+      "desc": "Erreiche mit 8 Personen jeweils eine Zuneigung von 10 Herzen."
+    },
+    "a10": {
+      "name": "Cliquen",
+      "desc": "Erreiche mit 4 Personen jeweils eine Zuneigung von 5 Herzen."
+    },
+    "a11": {
+      "name": "Vernetzt",
+      "desc": "Erreiche mit 10 Personen jeweils eine Zuneigung von 5 Herzen."
+    },
+    "a12": {
+      "name": "Populär",
+      "desc": "Erreiche mit 20 Personen jeweils eine Zuneigung von 5 Herzen."
+    },
+    "a13": {
+      "name": "Koch",
+      "desc": "Bereite 10 verschiedene Rezepte zu."
+    },
+    "a14": {
+      "name": "Souschef",
+      "desc": "Bereite 25 verschiedene Rezepte zu."
+    },
+    "a15": {
+      "name": "Gourmetkoch",
+      "desc": "Bereite alle Rezepte zu."
+    },
+    "a16": {
+      "name": "Ausbauen",
+      "desc": "Erweitere dein Haus."
+    },
+    "a17": {
+      "name": "Das große Leben",
+      "desc": "Erweitere dein Haus auf die maximale Größe."
+    },
+    "a18": {
+      "name": "D.I.Y.",
+      "desc": "Stelle 15 verschiedene Gegenstände her."
+    },
+    "a19": {
+      "name": "Handwerker",
+      "desc": "Stelle 30 verschiedene Gegenstände her."
+    },
+    "a20": {
+      "name": "Handwerksmeister",
+      "desc": "Stelle alle Gegenstände her."
+    },
+    "a21": {
+      "name": "Fischer",
+      "desc": "Fange 10 verschiedene Fische."
+    },
+    "a22": {
+      "name": "Alter Seemann",
+      "desc": "Fange 24 verschiedene Fische."
+    },
+    "a23": {
+      "name": "Meisterangler",
+      "desc": "Fange alle Fische."
+    },
+    "a24": {
+      "name": "Massiver Fang",
+      "desc": "Fange 100 Fische."
+    },
+    "a25": {
+      "name": "Fundgrube",
+      "desc": "Spende dem Museum 40 verschiedene Gegenstände."
+    },
+    "a26": {
+      "name": "Laufbursche",
+      "desc": "Vollende 10 \"Aushilfe gesucht\"-Anfragen."
+    },
+    "a27": {
+      "name": "Große Hilfe",
+      "desc": "Vollende 40 \"Aushilfe gesucht\"-Anfragen."
+    },
+    "a28": {
+      "name": "Polykultur",
+      "desc": "Verschicke 15 Stück von jeder Nutzpflanze."
+    },
+    "a29": {
+      "name": "Monokultur",
+      "desc": "Verschicke 300 Stück von einer Nutzpflanze."
+    },
+    "a30": {
+      "name": "Volle Lieferung",
+      "desc": "Verschicke alle Gegenstände."
+    },
+    "a41": {
+      "name": "Ein fernes Ufer",
+      "desc": "Erreiche die Ingwerinsel."
+    },
+    "a42": {
+      "name": "Belesen",
+      "desc": "Lese jedes Buch."
+    },
+    "a43": {
+      "name": "Zwei Daumen hoch",
+      "desc": "Sieh einen Film."
+    },
+    "a44": {
+      "name": "Blaues Band",
+      "desc": "Erreiche den 1. Platz im Sternentautal Jahrmarkt-Wettbewerb."
+    },
+    "a45": {
+      "name": "Eine unvergessliche Suppe",
+      "desc": "Erfreu den Gouverneur."
+    },
+    "a46": {
+      "name": "Gute Nachbarn",
+      "desc": "Hilf deinen Waldnachbarn dabei, ihre Familie zu vergrößern."
+    },
+    "a47": {
+      "name": "Gefahr in der Tiefe",
+      "desc": "Erreiche den Grund der \"gefährlichen\" Minen."
+    },
+    "a48": {
+      "name": "Unendliche Macht",
+      "desc": "Erhalte die mächtigste Waffe."
+    },
+    "a49": {
+      "name": "Perfektion",
+      "desc": "Erreiche den Gipfel."
+    }
+  },
+  "villagers": {
+    "kent": "Kent",
+    "lewis": "Lewis",
+    "vincent": "Vincent",
+    "haley": "Haley",
+    "pam": "Pam",
+    "shane": "Shane",
+    "pierre": "Pierre",
+    "emily": "Emily",
+    "jas": "Jas",
+    "gus": "Gus",
+    "maru": "Maru",
+    "alex": "Alex",
+    "sam": "Sam",
+    "demetrius": "Demetrius",
+    "dwarf": "Zwerg",
+    "willy": "Willy",
+    "leo": "Leo",
+    "penny": "Penny",
+    "elliott": "Elliott",
+    "jodi": "Jodi",
+    "abigail": "Abigail",
+    "sandy": "Sandy",
+    "marnie": "Marnie",
+    "robin": "Robin",
+    "george": "George",
+    "krobus": "Krobus",
+    "linus": "Linus",
+    "caroline": "Caroline",
+    "sebastian": "Sebastian",
+    "harvey": "Harvey",
+    "wizard": "Zauberer",
+    "evelyn": "Evelyn",
+    "leah": "Leah",
+    "clint": "Clint"
+  },
+  "bundleItem": {
+    "wildHorseradish": "Wilder Meerrettich",
+    "daffodil": "Narzisse",
+    "leek": "Lauch",
+    "dandelion": "Löwenzahn",
+    "spiceBerry": "Gewürzbeere",
+    "sweetPea": "Edelwicke",
+    "commonMushroom": "Gewöhnlicher Pilz",
+    "wildPlum": "Wildpflaume",
+    "hazelnut": "Haselnuss",
+    "blackberry": "Brombeere",
+    "winterRoot": "Winterwurzel",
+    "crystalFruit": "Kristallfrucht",
+    "snowYam": "Schnee-Süßkartoffel",
+    "crocus": "Krokus",
+    "wood": "Holz",
+    "stone": "Stein",
+    "hardwood": "Hartholz",
+    "coconut": "Kokosnuss",
+    "cactusFruit": "Kaktus-Frucht",
+    "caveCarrot": "Höhlenkarotte",
+    "redMushroom": "Roter Pilz",
+    "purpleMushroom": "Violetter Pilz",
+    "mapleSyrup": "Ahornsirup",
+    "oakResin": "Eichenharz",
+    "pineTar": "Kiefernteer",
+    "morel": "Morchel",
+    "sunfish": "Gotteslachs",
+    "catfish": "Katzenfisch",
+    "shad": "Blaubarsch",
+    "tigerTrout": "Tigerforelle",
+    "largemouthBass": "Forellenbarsch",
+    "carp": "Karpfen",
+    "bullhead": "Zwergwels",
+    "sturgeon": "Stör",
+    "sardine": "Sardine",
+    "tuna": "Thunfisch",
+    "redSnapper": "Riffbarsch",
+    "tilapia": "Buntbarsch",
+    "walleye": "Glasaugenbarsch",
+    "bream": "Brasse",
+    "eel": "Aal",
+    "lobster": "Hummer",
+    "crab": "Krabbe",
+    "shrimp": "Garnele",
+    "crayfish": "Flusskrebs",
+    "snail": "Schnecke",
+    "periwinkle": "Strandschnecke",
+    "mussel": "Miesmuschel",
+    "cockle": "Herzmuschel",
+    "oyster": "Auster",
+    "clam": "Venusmuschel",
+    "pufferfish": "Kugelfisch",
+    "ghostfish": "Indischer Glaswels",
+    "sandfish": "Sandfisch",
+    "woodskip": "Waldspringer",
+    "largeMilk": "Große Milch",
+    "largeEgg": "Großes Ei",
+    "wool": "Wolle",
+    "duckEgg": "Entenei",
+    "truffleOil": "Trüffelöl",
+    "cloth": "Stoff",
+    "goatCheese": "Ziegenkäse",
+    "cheese": "Käse",
+    "honey": "Honig",
+    "jelly": "Gelee",
+    "apple": "Apfel",
+    "apricot": "Aprikose",
+    "orange": "Orange",
+    "peach": "Pfirsich",
+    "pomegranate": "Granatapfel",
+    "cherry": "Kirsche",
+    "copperBar": "Kupferbarren",
+    "ironBar": "Eisenbarren",
+    "goldBar": "Goldbarren",
+    "quartz": "Quarz",
+    "earthCrystal": "Erdkristall",
+    "frozenTear": "Gefrorene Träne",
+    "fireQuartz": "Feuer-Quarz",
+    "slime": "Schleim",
+    "batWing": "Fledermausflügel",
+    "solarEssence": "Solar-Essenz",
+    "voidEssence": "Schattenessenz",
+    "fiddleheadFern": "Straußfarn",
+    "truffle": "Trüffel",
+    "makiRoll": "Maki-Rolle",
+    "friedEgg": "Spiegelei",
+    "seaUrchin": "Seeigel",
+    "duckFeather": "Entenfeder",
+    "aquamarine": "Aquamarin",
+    "nautilusShell": "Nautilusmuschel",
+    "chub": "Kaulbarsch",
+    "frozenGeode": "Gefrorene Geode",
+    "hay": "Heu",
+    "wine": "Wein",
+    "rabbitsFoot": "Hasenpfote",
+    "springOnion": "Frühlingszwiebel",
+    "holly": "Stechpalme",
+    "sap": "Harz",
+    "moss": "Moos",
+    "fiber": "Fasern",
+    "acorn": "Eichel",
+    "mapleSeed": "Ahornsamen",
+    "whiteAlgae": "Weißalge",
+    "wood2": "Holz",
+    "mead": "Met",
+    "paleAle": "Helles Bier",
+    "juice": "Saft",
+    "greenTea": "Grüner Tee",
+    "roe": "Fischlaich",
+    "agedRoe": "Gealterter Fischlaich",
+    "squidInk": "Tintenfisch Tinte",
+    "lavaEel": "Lava-Aal",
+    "scorpionCarp": "Skorpionkarpfen",
+    "octopus": "Oktopus",
+    "blobfish": "Blobfisch",
+    "boneFragment": "Knochenfragment",
+    "amethyst": "Amethyst",
+    "diamond": "Diamant",
+    "emerald": "Smaragd",
+    "ruby": "Rubin",
+    "topaz": "Topas",
+    "iridiumOre": "Iridiumerz",
+    "iridiumBar": "Iridiumbarren",
+    "batteryPack": "Batterie",
+    "refinedQuartz": "Verfeinerter Quarz",
+    "egg": "Ei",
+    "milk": "Milch",
+    "salmonberry": "Lachsbeere",
+    "ancientDoll": "Alte Puppe",
+    "iceCream": "Eis",
+    "jackOLantern": "Kürbislaterne",
+    "largeBrownEgg": "Großes Ei",
+    "largeGoatMilk": "Gr. Ziegenmilch",
+    "flour": "Weizenmehl",
+    "cookie": "Kekse"
+  },
+  "crops": {
+    "parsnip": "Pastinake",
+    "potato": "Kartoffel",
+    "cauliflower": "Blumenkohl",
+    "kale": "Grünkohl",
+    "garlic": "Knoblauch",
+    "rhubarb": "Rhabarber",
+    "strawberry": "Erdbeere",
+    "greenBean": "Grüne Bohne",
+    "tulip": "Tulpe",
+    "blueJazz": "Blaue Jazz",
+    "coffeeBean": "Kaffeebohne",
+    "blueberry": "Blaubeere",
+    "melon": "Melone",
+    "tomato": "Tomate",
+    "hotPepper": "Peperoni",
+    "radish": "Radieschen",
+    "hops": "Hopfen",
+    "poppy": "Mohn",
+    "redCabbage": "Rotkohl",
+    "starfruit": "Sternfrucht",
+    "wheat": "Weizen",
+    "corn": "Mais",
+    "sunflower": "Sonnenblume",
+    "pumpkin": "Kürbis",
+    "cranberry": "Preiselbeere",
+    "eggplant": "Aubergine",
+    "amaranth": "Amarant",
+    "grape": "Weintraube",
+    "yam": "Süßkartoffel",
+    "bokChoy": "Senfkohl",
+    "artichoke": "Artischocke",
+    "beet": "Rübe",
+    "fairyRose": "Feenrose",
+    "sweetGemBerry": "Süße Edelsteinbeere",
+    "carrot": "Karotte",
+    "unmilledRice": "Ungemahlener Reis",
+    "springSeeds": "Frühlingssaat",
+    "pineapple": "Ananas",
+    "summerSquash": "Sommerkürbis",
+    "taroRoot": "Taro-Wurzel",
+    "summerSpangle": "Sommerschmuck",
+    "summerSeeds": "Sommersaat",
+    "broccoli": "Brokkoli",
+    "fallSeeds": "Herbstsaat",
+    "powdermelon": "Pulvermelone",
+    "winterSeeds": "Wintersaat",
+    "teaLeaves": "Teeblätter",
+    "ancientFruit": "Uralte Frucht"
+  },
+  "materials": {
+    "wood": "Holz",
+    "stone": "Stein",
+    "clay": "Lehm",
+    "cloth": "Stoff",
+    "copperBar": "Kupferbarren",
+    "ironBar": "Eisenbarren",
+    "iridiumBar": "Iridiumbarren",
+    "refinedQuartz": "Verfeinerter Quarz",
+    "seaweed": "Seetang",
+    "greenAlgae": "Grünalge",
+    "hardwood": "Hartholz",
+    "fiber": "Fasern"
+  },
+  "bundleRoom": {
+    "pantry": "Speisekammer",
+    "craftsRoom": "Handwerksraum",
+    "fishTank": "Aquarium",
+    "boilerRoom": "Heizraum",
+    "bulletinBoard": "Schwarzes Brett",
+    "vault": "Tresor"
+  }
+}

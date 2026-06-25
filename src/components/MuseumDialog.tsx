@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
+import { localizeItem } from "@/lib/itemName";
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
 import { MUSEUM_ITEMS } from "@/data/museum";
@@ -77,7 +78,7 @@ export default function MuseumDialog({ onClose }: { onClose: () => void }) {
       <ul className="flex flex-wrap gap-1.5">
         {shown.map((m) => {
           const checked = !!museumDone[m.id];
-          const name = locale === "ko" ? m.ko : m.en;
+          const name = localizeItem(m.en, m.ko, locale);
           return (
             <li key={m.id}>
               <button

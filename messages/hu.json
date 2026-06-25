@@ -1,0 +1,775 @@
+{
+  "buildings": {
+    "coop": "Csűr",
+    "bigCoop": "Nagy csűr",
+    "deluxeCoop": "Luxus csűr",
+    "barn": "Istálló",
+    "bigBarn": "Nagy istálló",
+    "deluxeBarn": "Luxus istálló",
+    "fishPond": "Halastó",
+    "mill": "Malom",
+    "shed": "Raktár",
+    "bigShed": "Nagy raktár",
+    "silo": "Siló",
+    "slimeHutch": "Ragacsketrec",
+    "stable": "Istálló",
+    "well": "Kút",
+    "shippingBin": "Szállítós láda",
+    "logCabin": "Kunyhó"
+  },
+  "fishInfo": {
+    "pufferfish": {
+      "name": "Gömbhal",
+      "location": "Óceán, Gyömbér-sziget óceán",
+      "time": "12:00 – 16:00"
+    },
+    "anchovy": {
+      "name": "Szardella",
+      "location": "Óceán",
+      "time": "Bármikor"
+    },
+    "tuna": {
+      "name": "Tonhal",
+      "location": "Óceán, Gyömbér-sziget óceán",
+      "time": "6:00 – 19:00"
+    },
+    "sardine": {
+      "name": "Szardínia",
+      "location": "Óceán",
+      "time": "6:00 – 19:00"
+    },
+    "bream": {
+      "name": "Keszeg",
+      "location": "Folyó (város + erdő)",
+      "time": "18:00 – 2:00"
+    },
+    "largemouthBass": {
+      "name": "Nagyszájú sügér",
+      "location": "Hegyi tó",
+      "time": "6:00 – 19:00"
+    },
+    "smallmouthBass": {
+      "name": "Kisszájú sügér",
+      "location": "Folyó (város), erdei tó, Folyóparti farm",
+      "time": "Bármikor"
+    },
+    "rainbowTrout": {
+      "name": "Szivárványos pisztráng",
+      "location": "Folyó (város + erdő), Hegyi tó",
+      "time": "6:00 – 19:00"
+    },
+    "salmon": {
+      "name": "Lazac",
+      "location": "Folyó (város + erdő)",
+      "time": "6:00 – 19:00"
+    },
+    "walleye": {
+      "name": "Süllő",
+      "location": "Folyó (város + erdő), erdei tó, Hegyi tó",
+      "time": "12:00 – 2:00"
+    },
+    "perch": {
+      "name": "Sügér",
+      "location": "Folyó (város + erdő), erdei tó, Hegyi tó",
+      "time": "Bármikor"
+    },
+    "carp": {
+      "name": "Ponty",
+      "location": "Hegyi tó, Titkos erdő tava, Csatorna",
+      "time": "Bármikor"
+    },
+    "catfish": {
+      "name": "Harcsa",
+      "location": "Folyó (város + erdő), Titkos erdő tava, Boszorkány mocsara",
+      "time": "Bármikor"
+    },
+    "pike": {
+      "name": "Csuka",
+      "location": "Folyó (város + erdő), erdei tó",
+      "time": "Bármikor"
+    },
+    "sunfish": {
+      "name": "Naphal",
+      "location": "Folyó (város + erdő), Erdei farm",
+      "time": "6:00 – 19:00"
+    },
+    "redMullet": {
+      "name": "Vörös márna",
+      "location": "Óceán",
+      "time": "6:00 – 19:00"
+    },
+    "herring": {
+      "name": "Hering",
+      "location": "Óceán",
+      "time": "Bármikor"
+    },
+    "eel": {
+      "name": "Angolna",
+      "location": "Óceán",
+      "time": "16:00 – 2:00"
+    },
+    "octopus": {
+      "name": "Polip",
+      "location": "Óceán",
+      "time": "6:00 – 13:00"
+    },
+    "redSnapper": {
+      "name": "Vörös sügér",
+      "location": "Óceán",
+      "time": "6:00 – 19:00"
+    },
+    "squid": {
+      "name": "Tintahal",
+      "location": "Óceán",
+      "time": "18:00 – 2:00"
+    },
+    "seaCucumber": {
+      "name": "Tengeri uborka",
+      "location": "Óceán",
+      "time": "6:00 – 19:00"
+    },
+    "superCucumber": {
+      "name": "Szuper uborka",
+      "location": "Óceán, Gyömbér-sziget óceán",
+      "time": "18:00 – 2:00"
+    },
+    "ghostfish": {
+      "name": "Szellemhal",
+      "location": "Bánya (20., 60. szint), Szellem zsákmány",
+      "time": "Bármikor"
+    },
+    "stonefish": {
+      "name": "Kőhal",
+      "location": "Bánya 20. szint, 3+ horgászszint",
+      "time": "Bármikor"
+    },
+    "icePip": {
+      "name": "Jégpötty",
+      "location": "Bánya 60. szint, 5+ horgászszint",
+      "time": "Bármikor"
+    },
+    "lavaEel": {
+      "name": "Lávaangolna",
+      "location": "Bánya 100. szint (7+ horgászszint), Vulkán-kaldera",
+      "time": "Bármikor"
+    },
+    "sandfish": {
+      "name": "Homokhal",
+      "location": "Sivatag",
+      "time": "6:00 – 20:00"
+    },
+    "scorpionCarp": {
+      "name": "Skorpióponty",
+      "location": "Sivatag, 4+ horgászszint",
+      "time": "6:00 – 20:00"
+    },
+    "flounder": {
+      "name": "Lepényhal",
+      "location": "Óceán, Gyömbér-sziget óceán",
+      "time": "6:00 – 20:00"
+    },
+    "midnightCarp": {
+      "name": "Éjféli ponty",
+      "location": "Hegyi tó, erdei tó, Gyömbér-sziget tavai és folyói",
+      "time": "22:00 – 2:00"
+    },
+    "sturgeon": {
+      "name": "Tokhal",
+      "location": "Hegyi tó",
+      "time": "6:00 – 19:00"
+    },
+    "tigerTrout": {
+      "name": "Tigris pisztráng",
+      "location": "Folyó (város + erdő)",
+      "time": "6:00 – 19:00"
+    },
+    "bullhead": {
+      "name": "Kölönte",
+      "location": "Hegyi tó",
+      "time": "Bármikor"
+    },
+    "tilapia": {
+      "name": "Tilápia",
+      "location": "Óceán, Gyömbér-sziget édesvíz",
+      "time": "6:00 – 14:00"
+    },
+    "chub": {
+      "name": "Domolykó",
+      "location": "Folyó (erdő), Hegyi tó",
+      "time": "Bármikor"
+    },
+    "dorado": {
+      "name": "Aranydurbincs",
+      "location": "Folyó (erdő)",
+      "time": "6:00 – 19:00"
+    },
+    "albacore": {
+      "name": "Germon",
+      "location": "Óceán",
+      "time": "6:00 – 11:00, 18:00 – 2:00"
+    },
+    "shad": {
+      "name": "Vándor alóza",
+      "location": "Folyó (város + erdő)",
+      "time": "9:00 – 2:00"
+    },
+    "lingcod": {
+      "name": "Lingcod",
+      "location": "Folyó (város + erdő), Hegyi tó",
+      "time": "Bármikor"
+    },
+    "halibut": {
+      "name": "Óriás laposhal",
+      "location": "Óceán",
+      "time": "6:00 – 11:00, 19:00 – 2:00"
+    },
+    "woodskip": {
+      "name": "Faugró",
+      "location": "Titkos erdő tava, Erdei farm",
+      "time": "Bármikor"
+    },
+    "voidSalmon": {
+      "name": "Űrlazac",
+      "location": "Boszorkány mocsara",
+      "time": "Bármikor"
+    },
+    "slimejack": {
+      "name": "Ragacsbubi",
+      "location": "Mutáns rovarfészek",
+      "time": "Bármikor"
+    },
+    "lionfish": {
+      "name": "Oroszlánhal",
+      "location": "Gyömbér-sziget óceán",
+      "time": "Bármikor"
+    },
+    "blueDiscus": {
+      "name": "Kék diszkoszhal",
+      "location": "Gyömbér-sziget tavai és folyói",
+      "time": "Bármikor"
+    },
+    "stingray": {
+      "name": "Rája",
+      "location": "Kalózöböl (Gyömbér-sziget)",
+      "time": "Bármikor"
+    },
+    "crimsonfish": {
+      "name": "Bíborhal",
+      "location": "A Strand keleti hídja, mély vízben. 5-ös horgászszint szükséges.",
+      "time": "Bármikor"
+    },
+    "angler": {
+      "name": "Ördöghal",
+      "location": "Pallóhíd a JojaMarttól északra. 3-as horgászszint szükséges.",
+      "time": "Bármikor"
+    },
+    "legend": {
+      "name": "Legenda",
+      "location": "Hegyi tó, a rönk közelében. 10-es horgászszint szükséges.",
+      "time": "Bármikor"
+    },
+    "glacierfish": {
+      "name": "Gleccserhal",
+      "location": "Parázsnedv-erdő a Nyílhegy-sziget déli csücskén, mély vízben. 6-os horgászszint szükséges.",
+      "time": "Bármikor"
+    },
+    "mutantCarp": {
+      "name": "Mutáns ponty",
+      "location": "Csatorna",
+      "time": "Bármikor"
+    },
+    "sonOfCrimsonfish": {
+      "name": "Bíborhal fia",
+      "location": "A Strand keleti mólója. 5-ös horgászszint szükséges.",
+      "time": "Bármikor"
+    },
+    "msAngler": {
+      "name": "Miss Ördöghal",
+      "location": "Pallóhíd a JojaMarttól északra. 3-as horgászszint szükséges.",
+      "time": "Bármikor"
+    },
+    "legendII": {
+      "name": "II. Legenda",
+      "location": "Hegyi tó, a rönk közelében. Legalább 10-es horgászszint szükséges.",
+      "time": "Bármikor"
+    },
+    "glacierfishJr": {
+      "name": "Ifjabb gleccserhal",
+      "location": "Parázsnedv-erdő a Nyílhegy-sziget déli csücskén. 6-os horgászszint szükséges.",
+      "time": "Bármikor"
+    },
+    "radioactiveCarp": {
+      "name": "Radioaktív ponty",
+      "location": "Csatorna",
+      "time": "Bármikor"
+    },
+    "midnightSquid": {
+      "name": "Éjféli tintahal",
+      "location": "Tengeralattjáró (Éjszakai piac)",
+      "time": "17:00 – 2:00"
+    },
+    "spookFish": {
+      "name": "Rémhal",
+      "location": "Tengeralattjáró (Éjszakai piac)",
+      "time": "17:00 – 2:00"
+    },
+    "blobfish": {
+      "name": "Pacahal",
+      "location": "Tengeralattjáró (Éjszakai piac)",
+      "time": "17:00 – 2:00"
+    },
+    "lobster": {
+      "name": "Homár",
+      "location": "Óceán",
+      "time": "Bármikor"
+    },
+    "crab": {
+      "name": "Rák",
+      "location": "Óceán",
+      "time": "Bármikor"
+    },
+    "shrimp": {
+      "name": "Garnélarák",
+      "location": "Óceán",
+      "time": "Bármikor"
+    },
+    "cockle": {
+      "name": "Szívkagyló",
+      "location": "Óceán",
+      "time": "Bármikor"
+    },
+    "mussel": {
+      "name": "Éti kagyló",
+      "location": "Óceán",
+      "time": "Bármikor"
+    },
+    "oyster": {
+      "name": "Osztriga",
+      "location": "Óceán",
+      "time": "Bármikor"
+    },
+    "clam": {
+      "name": "Kagyló",
+      "location": "Óceán",
+      "time": "Bármikor"
+    },
+    "crayfish": {
+      "name": "Folyami rák",
+      "location": "Édesvíz (folyó/tó)",
+      "time": "Bármikor"
+    },
+    "snail": {
+      "name": "Csiga",
+      "location": "Édesvíz (folyó/tó)",
+      "time": "Bármikor"
+    },
+    "periwinkle": {
+      "name": "Parti csiga",
+      "location": "Édesvíz (folyó/tó)",
+      "time": "Bármikor"
+    }
+  },
+  "achievements": {
+    "a1": {
+      "name": "Zöldfülű (15k)",
+      "desc": "Szerezz 15.000g-t"
+    },
+    "a2": {
+      "name": "Tehenész (50k)",
+      "desc": "Szerezz 50.000g-t"
+    },
+    "a3": {
+      "name": "Telepes (250k)",
+      "desc": "Szerezz 250.000g-t"
+    },
+    "a4": {
+      "name": "Milliomos (1mil)",
+      "desc": "Szerezz 1.000.000g-t"
+    },
+    "a5": {
+      "name": "Legenda (10mil)",
+      "desc": "Szerezz 10.000.000g-t"
+    },
+    "a6": {
+      "name": "Teljes gyűjtemény",
+      "desc": "Teljesítsd a múzeumi gyűjteményt."
+    },
+    "a7": {
+      "name": "Egy új barát",
+      "desc": "Érj el valakivel 5 szíves barátságot."
+    },
+    "a8": {
+      "name": "Legjobb barát",
+      "desc": "Érj el valakivel 10 szíves barátságot."
+    },
+    "a9": {
+      "name": "A szeretett gazda",
+      "desc": "Érj el 8 emberrel 10 szíves barátságot."
+    },
+    "a10": {
+      "name": "Klikkesedés",
+      "desc": "Érj el 4 emberrel 5 szíves barátságot."
+    },
+    "a11": {
+      "name": "Hálózat",
+      "desc": "Érj el 10 emberrel 5 szíves barátságot."
+    },
+    "a12": {
+      "name": "Híresség",
+      "desc": "Érj el 20 emberrel 5 szíves barátságot."
+    },
+    "a13": {
+      "name": "Szakács",
+      "desc": "Készíts el 10 különböző receptet."
+    },
+    "a14": {
+      "name": "Pácolós séf",
+      "desc": "Készíts el 25 különböző receptet."
+    },
+    "a15": {
+      "name": "Ínyenc séf",
+      "desc": "Készíts el minden receptet."
+    },
+    "a16": {
+      "name": "Fejlődés",
+      "desc": "Fejleszd fel a házadat."
+    },
+    "a17": {
+      "name": "A nagybetűs Élet",
+      "desc": "Fejleszd fel maximális szintre a házadat."
+    },
+    "a18": {
+      "name": "Csináld magad",
+      "desc": "Barkácsolj 15 különböző tárgyat."
+    },
+    "a19": {
+      "name": "Kézműves",
+      "desc": "Barkácsolj 30 különböző tárgyat."
+    },
+    "a20": {
+      "name": "Barkácsmester",
+      "desc": "Barkácsolj minden tárgyat."
+    },
+    "a21": {
+      "name": "Horgász",
+      "desc": "Fogj ki 10 különböző halat."
+    },
+    "a22": {
+      "name": "Öreg halász",
+      "desc": "Fogj ki 24 különböző halat."
+    },
+    "a23": {
+      "name": "Mesterhorgász",
+      "desc": "Fogj ki minden halat."
+    },
+    "a24": {
+      "name": "A nagy fogás",
+      "desc": "Fogj ki 100 halat."
+    },
+    "a25": {
+      "name": "Kincsesláda",
+      "desc": "Ajándékozz 40 különböző tárgyat a múzeumnak."
+    },
+    "a26": {
+      "name": "Futár",
+      "desc": "Teljesíts 10 'Felhívásos' kérést."
+    },
+    "a27": {
+      "name": "Nagy segítség",
+      "desc": "Teljesíts 40 'Felhívásos' kérést."
+    },
+    "a28": {
+      "name": "Polikultúra",
+      "desc": "Szállíts le 15 darabot minden termésből."
+    },
+    "a29": {
+      "name": "Monokultúra",
+      "desc": "Szállíts le 300 darabot egy termésből."
+    },
+    "a30": {
+      "name": "Teljes szállítmány",
+      "desc": "Szállíts le minden tárgyat."
+    },
+    "a41": {
+      "name": "Messzi partokon",
+      "desc": "Juss el a Gyömbér-szigetre."
+    },
+    "a42": {
+      "name": "Könyvmoly",
+      "desc": "Olvasd el az összes könyvet."
+    },
+    "a43": {
+      "name": "Dupla lájk",
+      "desc": "Nézz meg egy filmet."
+    },
+    "a44": {
+      "name": "Kék szalag",
+      "desc": "Légy első helyezett a Stardew Valley vásár versenyén."
+    },
+    "a45": {
+      "name": "Egy felejthetetlen leves",
+      "desc": "Örvendeztesd meg a Kormányzót."
+    },
+    "a46": {
+      "name": "Jó szomszédok",
+      "desc": "Segíts az erdei szomszédaidnak családot alapítani."
+    },
+    "a47": {
+      "name": "Veszély a mélyben",
+      "desc": "Juss le a 'veszélyes' barlang legaljára."
+    },
+    "a48": {
+      "name": "Végtelen erő",
+      "desc": "Szerezd meg a legerősebb fegyvert."
+    },
+    "a49": {
+      "name": "Tökéletesség",
+      "desc": "Juss fel a csúcsra."
+    }
+  },
+  "villagers": {
+    "kent": "Kent",
+    "lewis": "Lewis",
+    "vincent": "Vincent",
+    "haley": "Haley",
+    "pam": "Pam",
+    "shane": "Shane",
+    "pierre": "Pierre",
+    "emily": "Emily",
+    "jas": "Jas",
+    "gus": "Gus",
+    "maru": "Maru",
+    "alex": "Alex",
+    "sam": "Sam",
+    "demetrius": "Demetrius",
+    "dwarf": "Törpe",
+    "willy": "Willy",
+    "leo": "Leo",
+    "penny": "Penny",
+    "elliott": "Elliott",
+    "jodi": "Jodi",
+    "abigail": "Abigail",
+    "sandy": "Sandy",
+    "marnie": "Marnie",
+    "robin": "Robin",
+    "george": "George",
+    "krobus": "Krobus",
+    "linus": "Linus",
+    "caroline": "Caroline",
+    "sebastian": "Sebastian",
+    "harvey": "Harvey",
+    "wizard": "Varázsló",
+    "evelyn": "Evelyn",
+    "leah": "Leah",
+    "clint": "Clint"
+  },
+  "bundleItem": {
+    "wildHorseradish": "Vad torma",
+    "daffodil": "Nárcisz",
+    "leek": "Póréhagyma",
+    "dandelion": "Pitypang",
+    "spiceBerry": "Fűszeres bogyó",
+    "sweetPea": "Szagos bükköny",
+    "commonMushroom": "Közönséges gomba",
+    "wildPlum": "Vadszilva",
+    "hazelnut": "Mogyoró",
+    "blackberry": "Szeder",
+    "winterRoot": "Téli gyökér",
+    "crystalFruit": "Kristálygyümölcs",
+    "snowYam": "Téli jamgyökér",
+    "crocus": "Sáfrány",
+    "wood": "Fa",
+    "stone": "Kő",
+    "hardwood": "Keményfa",
+    "coconut": "Kókuszdió",
+    "cactusFruit": "Kaktuszgyümölcs",
+    "caveCarrot": "Barlangi répa",
+    "redMushroom": "Vörös gomba",
+    "purpleMushroom": "Lila gomba",
+    "mapleSyrup": "Juharfaszirup",
+    "oakResin": "Tölgyfagyanta",
+    "pineTar": "Fenyőkátrány",
+    "morel": "Kucsmagomba",
+    "sunfish": "Naphal",
+    "catfish": "Harcsa",
+    "shad": "Vándor alóza",
+    "tigerTrout": "Tigris pisztráng",
+    "largemouthBass": "Nagyszájú sügér",
+    "carp": "Ponty",
+    "bullhead": "Kölönte",
+    "sturgeon": "Tokhal",
+    "sardine": "Szardínia",
+    "tuna": "Tonhal",
+    "redSnapper": "Vörös sügér",
+    "tilapia": "Tilápia",
+    "walleye": "Süllő",
+    "bream": "Keszeg",
+    "eel": "Angolna",
+    "lobster": "Homár",
+    "crab": "Rák",
+    "shrimp": "Garnélarák",
+    "crayfish": "Folyami rák",
+    "snail": "Csiga",
+    "periwinkle": "Parti csiga",
+    "mussel": "Éti kagyló",
+    "cockle": "Szívkagyló",
+    "oyster": "Osztriga",
+    "clam": "Kagyló",
+    "pufferfish": "Gömbhal",
+    "ghostfish": "Szellemhal",
+    "sandfish": "Homokhal",
+    "woodskip": "Faugró",
+    "largeMilk": "Nagy tej",
+    "largeEgg": "Nagy tojás",
+    "wool": "Gyapjú",
+    "duckEgg": "Kacsatojás",
+    "truffleOil": "Szarvasgombaolaj",
+    "cloth": "Szövet",
+    "goatCheese": "Kecskesajt",
+    "cheese": "Sajt",
+    "honey": "Méz",
+    "jelly": "Dzsem",
+    "apple": "Alma",
+    "apricot": "Sárgabarack",
+    "orange": "Narancs",
+    "peach": "Őszibarack",
+    "pomegranate": "Gránátalma",
+    "cherry": "Cseresznye",
+    "copperBar": "Rézrúd",
+    "ironBar": "Vasrúd",
+    "goldBar": "Aranyrúd",
+    "quartz": "Kvarc",
+    "earthCrystal": "Földkristály",
+    "frozenTear": "Fagyos könny",
+    "fireQuartz": "Tűzkvarc",
+    "slime": "Ragacs",
+    "batWing": "Denevérszárny",
+    "solarEssence": "Szoláris esszencia",
+    "voidEssence": "Űresszencia",
+    "fiddleheadFern": "Hegedűfejpáfrány",
+    "truffle": "Szarvasgomba",
+    "makiRoll": "Maki-tekercs",
+    "friedEgg": "Tükörtojás",
+    "seaUrchin": "Tengeri sün",
+    "duckFeather": "Kacsatoll",
+    "aquamarine": "Akvamarin",
+    "nautilusShell": "Nautilusz kagyló",
+    "chub": "Domolykó",
+    "frozenGeode": "Fagyos geóda",
+    "hay": "Széna",
+    "wine": "Bor",
+    "rabbitsFoot": "Nyúlláb",
+    "springOnion": "Újhagyma",
+    "holly": "Magyal",
+    "sap": "Fanedv",
+    "moss": "Moha",
+    "fiber": "Rost",
+    "acorn": "Makk",
+    "mapleSeed": "Juharfa magvak",
+    "whiteAlgae": "Fehér alga",
+    "wood2": "Fa",
+    "mead": "Mézsör",
+    "paleAle": "Világos sör",
+    "juice": "Gyümölcslé",
+    "greenTea": "Zöld tea",
+    "roe": "Ikra",
+    "agedRoe": "Érlelt ikra",
+    "squidInk": "Tintahaltinta",
+    "lavaEel": "Lávaangolna",
+    "scorpionCarp": "Skorpióponty",
+    "octopus": "Polip",
+    "blobfish": "Pacahal",
+    "boneFragment": "Csonttöredék",
+    "amethyst": "Ametiszt",
+    "diamond": "Gyémánt",
+    "emerald": "Smaragd",
+    "ruby": "Rubin",
+    "topaz": "Topáz",
+    "iridiumOre": "Irídiumérc",
+    "iridiumBar": "Irídiumrúd",
+    "batteryPack": "Elemcsomag",
+    "refinedQuartz": "Finomított kvarc",
+    "egg": "Tojás",
+    "milk": "Tej",
+    "salmonberry": "Díszszeder",
+    "ancientDoll": "Ősi baba",
+    "iceCream": "Jégkrém",
+    "jackOLantern": "Töklámpás",
+    "largeBrownEgg": "Nagy tojás",
+    "largeGoatMilk": "Nagy kecsketej",
+    "flour": "Búzaliszt",
+    "cookie": "Süti"
+  },
+  "crops": {
+    "parsnip": "Paszternák",
+    "potato": "Krumpli",
+    "cauliflower": "Karfiol",
+    "kale": "Vadkáposzta",
+    "garlic": "Fokhagyma",
+    "rhubarb": "Rebarbara",
+    "strawberry": "Eper",
+    "greenBean": "Zöldbab",
+    "tulip": "Tulipán",
+    "blueJazz": "Kék jazz",
+    "coffeeBean": "Kávébab",
+    "blueberry": "Kék áfonya",
+    "melon": "Dinnye",
+    "tomato": "Paradicsom",
+    "hotPepper": "Erős paprika",
+    "radish": "Retek",
+    "hops": "Komló",
+    "poppy": "Mák",
+    "redCabbage": "Vörös káposzta",
+    "starfruit": "Csillaggyümölcs",
+    "wheat": "Búza",
+    "corn": "Kukorica",
+    "sunflower": "Napraforgó",
+    "pumpkin": "Tök",
+    "cranberry": "Vörös áfonya",
+    "eggplant": "Padlizsán",
+    "amaranth": "Amaránt",
+    "grape": "Szőlő",
+    "yam": "Jamgyökér",
+    "bokChoy": "Bordáskel",
+    "artichoke": "Articsóka",
+    "beet": "Cékla",
+    "fairyRose": "Tündérrózsa",
+    "sweetGemBerry": "Édes drágakőbogyó",
+    "carrot": "Répa",
+    "unmilledRice": "Hántolatlan rizs",
+    "springSeeds": "Tavaszi magvak",
+    "pineapple": "Ananász",
+    "summerSquash": "Zsenge tök",
+    "taroRoot": "Tarógyökér",
+    "summerSpangle": "Nyári tölgyfagubacs",
+    "summerSeeds": "Nyári magvak",
+    "broccoli": "Brokkoli",
+    "fallSeeds": "Őszi magvak",
+    "powdermelon": "Púderdinnye",
+    "winterSeeds": "Téli magvak",
+    "teaLeaves": "Tealevelek",
+    "ancientFruit": "Ősi gyümölcs"
+  },
+  "materials": {
+    "wood": "Fa",
+    "stone": "Kő",
+    "clay": "Agyag",
+    "cloth": "Szövet",
+    "copperBar": "Rézrúd",
+    "ironBar": "Vasrúd",
+    "iridiumBar": "Irídiumrúd",
+    "refinedQuartz": "Finomított kvarc",
+    "seaweed": "Hínár",
+    "greenAlgae": "Zöld alga",
+    "hardwood": "Keményfa",
+    "fiber": "Rost"
+  },
+  "bundleRoom": {
+    "pantry": "Éléskamra",
+    "craftsRoom": "Barkácsszoba",
+    "fishTank": "Haltartály",
+    "boilerRoom": "Kazánszoba",
+    "bulletinBoard": "Közleményes tábla",
+    "vault": "Pince"
+  }
+}

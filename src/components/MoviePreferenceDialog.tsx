@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
+import { localizeItem } from "@/lib/itemName";
 import Modal from "@/components/Modal";
 import MasterDetailPanel from "@/components/MasterDetailPanel";
 import {
@@ -141,7 +142,7 @@ function PrefChip({ item }: { item: PrefItem }) {
         className="shrink-0"
         style={{ imageRendering: "pixelated" }}
       />
-      <span>{locale === "ko" ? item.ko : item.en}</span>
+      <span>{localizeItem(item.en, item.ko, locale)}</span>
     </span>
   );
 }

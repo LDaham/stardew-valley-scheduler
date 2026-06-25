@@ -11,6 +11,7 @@ import {
   type Tier,
 } from "@/data/universal-gifts";
 import { asset } from "@/lib/asset";
+import { localizeItem } from "@/lib/itemName";
 import PixelIcon from "@/components/PixelIcon";
 
 const TIER_COLOR: Record<string, string> = {
@@ -36,7 +37,7 @@ function ItemChip({ ko, en, icon }: { ko: string; en: string; icon?: string }) {
       ) : (
         <PixelIcon src="/icons/ui/gift.png" size={18} />
       )}
-      <span>{locale === "ko" ? ko : en}</span>
+      <span>{localizeItem(en, ko, locale)}</span>
     </span>
   );
 }
@@ -132,7 +133,7 @@ function UniversalFolder({
               {exceptions.map((ex, i) => (
                 <span key={ex.entry.en}>
                   {i > 0 ? ", " : ""}
-                  {locale === "ko" ? ex.entry.ko : ex.entry.en}
+                  {localizeItem(ex.entry.en, ex.entry.ko, locale)}
                   {` (${t(`gift.reaction.${ex.reaction}`)})`}
                 </span>
               ))}

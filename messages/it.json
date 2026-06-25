@@ -1,0 +1,775 @@
+{
+  "buildings": {
+    "coop": "Stia",
+    "bigCoop": "Stia grande",
+    "deluxeCoop": "Stia deluxe",
+    "barn": "Granaio",
+    "bigBarn": "Granaio grande",
+    "deluxeBarn": "Granaio deluxe",
+    "fishPond": "Laghetto per pesci",
+    "mill": "Mulino",
+    "shed": "Rimessa",
+    "bigShed": "Rimessa grande",
+    "silo": "Silo",
+    "slimeHutch": "Gabbia per melme",
+    "stable": "Stalla",
+    "well": "Pozzo",
+    "shippingBin": "Cassetta delle spedizioni",
+    "logCabin": "Casupola"
+  },
+  "fishInfo": {
+    "pufferfish": {
+      "name": "Pesce palla",
+      "location": "Oceano, oceano dell'Isola Zenzero",
+      "time": "12:00 – 16:00"
+    },
+    "anchovy": {
+      "name": "Acciuga",
+      "location": "Oceano",
+      "time": "In qualsiasi momento"
+    },
+    "tuna": {
+      "name": "Tonno",
+      "location": "Oceano, oceano dell'Isola Zenzero",
+      "time": "6:00 – 19:00"
+    },
+    "sardine": {
+      "name": "Sardina",
+      "location": "Oceano",
+      "time": "6:00 – 19:00"
+    },
+    "bream": {
+      "name": "Abramide",
+      "location": "Fiume (paese + foresta)",
+      "time": "18:00 – 2:00"
+    },
+    "largemouthBass": {
+      "name": "Boccalone",
+      "location": "Lago di montagna",
+      "time": "6:00 – 19:00"
+    },
+    "smallmouthBass": {
+      "name": "Boccalino",
+      "location": "Fiume (paese), stagno della foresta, Fattoria del fiume",
+      "time": "In qualsiasi momento"
+    },
+    "rainbowTrout": {
+      "name": "Trota arcobaleno",
+      "location": "Fiume (paese + foresta), Lago di montagna",
+      "time": "6:00 – 19:00"
+    },
+    "salmon": {
+      "name": "Salmone",
+      "location": "Fiume (paese + foresta)",
+      "time": "6:00 – 19:00"
+    },
+    "walleye": {
+      "name": "Walleye",
+      "location": "Fiume (paese + foresta), stagno della foresta, Lago di montagna",
+      "time": "12:00 – 2:00"
+    },
+    "perch": {
+      "name": "Pesce persico",
+      "location": "Fiume (paese + foresta), stagno della foresta, Lago di montagna",
+      "time": "In qualsiasi momento"
+    },
+    "carp": {
+      "name": "Carpa",
+      "location": "Lago di montagna, stagno del Bosco segreto, Fogne",
+      "time": "In qualsiasi momento"
+    },
+    "catfish": {
+      "name": "Pesce gatto",
+      "location": "Fiume (paese + foresta), stagno del Bosco segreto, Palude della strega",
+      "time": "In qualsiasi momento"
+    },
+    "pike": {
+      "name": "Luccio",
+      "location": "Fiume (paese + foresta), stagno della foresta",
+      "time": "In qualsiasi momento"
+    },
+    "sunfish": {
+      "name": "Persico sole",
+      "location": "Fiume (paese + foresta), Fattoria della foresta",
+      "time": "6:00 – 19:00"
+    },
+    "redMullet": {
+      "name": "Triglia",
+      "location": "Oceano",
+      "time": "6:00 – 19:00"
+    },
+    "herring": {
+      "name": "Aringa",
+      "location": "Oceano",
+      "time": "In qualsiasi momento"
+    },
+    "eel": {
+      "name": "Anguilla",
+      "location": "Oceano",
+      "time": "16:00 – 2:00"
+    },
+    "octopus": {
+      "name": "Piovra",
+      "location": "Oceano",
+      "time": "6:00 – 13:00"
+    },
+    "redSnapper": {
+      "name": "Dentice rosso",
+      "location": "Oceano",
+      "time": "6:00 – 19:00"
+    },
+    "squid": {
+      "name": "Calamaro",
+      "location": "Oceano",
+      "time": "18:00 – 2:00"
+    },
+    "seaCucumber": {
+      "name": "Cetriolo di mare",
+      "location": "Oceano",
+      "time": "6:00 – 19:00"
+    },
+    "superCucumber": {
+      "name": "Supercetriolo",
+      "location": "Oceano, oceano dell'Isola Zenzero",
+      "time": "18:00 – 2:00"
+    },
+    "ghostfish": {
+      "name": "Pesce fantasma",
+      "location": "Miniera (livelli 20, 60), bottino del Fantasma",
+      "time": "In qualsiasi momento"
+    },
+    "stonefish": {
+      "name": "Pesce pietra",
+      "location": "Miniera livello 20, livello di pesca 3+",
+      "time": "In qualsiasi momento"
+    },
+    "icePip": {
+      "name": "Ghiacciolo",
+      "location": "Miniera livello 60, livello di pesca 5+",
+      "time": "In qualsiasi momento"
+    },
+    "lavaEel": {
+      "name": "Anguilla lavica",
+      "location": "Miniera livello 100 (livello di pesca 7+), Caldera del vulcano",
+      "time": "In qualsiasi momento"
+    },
+    "sandfish": {
+      "name": "Pesce delle sabbie",
+      "location": "Deserto",
+      "time": "6:00 – 20:00"
+    },
+    "scorpionCarp": {
+      "name": "Carpa scorpione",
+      "location": "Deserto, livello di pesca 4+",
+      "time": "6:00 – 20:00"
+    },
+    "flounder": {
+      "name": "Platessa",
+      "location": "Oceano, oceano dell'Isola Zenzero",
+      "time": "6:00 – 20:00"
+    },
+    "midnightCarp": {
+      "name": "Carpa di mezzanotte",
+      "location": "Lago di montagna, lago della foresta, laghi e fiumi dell'Isola Zenzero",
+      "time": "22:00 – 2:00"
+    },
+    "sturgeon": {
+      "name": "Storione",
+      "location": "Lago di montagna",
+      "time": "6:00 – 19:00"
+    },
+    "tigerTrout": {
+      "name": "Trota tigre",
+      "location": "Fiume (paese + foresta)",
+      "time": "6:00 – 19:00"
+    },
+    "bullhead": {
+      "name": "Scazzone",
+      "location": "Lago di montagna",
+      "time": "In qualsiasi momento"
+    },
+    "tilapia": {
+      "name": "Tilapia",
+      "location": "Oceano, acqua dolce dell'Isola Zenzero",
+      "time": "6:00 – 14:00"
+    },
+    "chub": {
+      "name": "Cavedano",
+      "location": "Fiume (foresta), Lago di montagna",
+      "time": "In qualsiasi momento"
+    },
+    "dorado": {
+      "name": "Dorado",
+      "location": "Fiume (foresta)",
+      "time": "6:00 – 19:00"
+    },
+    "albacore": {
+      "name": "Alalonga",
+      "location": "Oceano",
+      "time": "6:00 – 11:00, 18:00 – 2:00"
+    },
+    "shad": {
+      "name": "Alosa",
+      "location": "Fiume (paese + foresta)",
+      "time": "9:00 – 2:00"
+    },
+    "lingcod": {
+      "name": "Ofiodonte",
+      "location": "Fiume (paese + foresta), Lago di montagna",
+      "time": "In qualsiasi momento"
+    },
+    "halibut": {
+      "name": "Ippoglosso",
+      "location": "Oceano",
+      "time": "6:00 – 11:00, 19:00 – 2:00"
+    },
+    "woodskip": {
+      "name": "Saltaboschi",
+      "location": "Stagno del Bosco segreto, Fattoria della foresta",
+      "time": "In qualsiasi momento"
+    },
+    "voidSalmon": {
+      "name": "Salmone del Vuoto",
+      "location": "Palude della strega",
+      "time": "In qualsiasi momento"
+    },
+    "slimejack": {
+      "name": "Luccio melmoso",
+      "location": "Covo degli insetti mutanti",
+      "time": "In qualsiasi momento"
+    },
+    "lionfish": {
+      "name": "Pesce scorpione",
+      "location": "Oceano dell'Isola Zenzero",
+      "time": "In qualsiasi momento"
+    },
+    "blueDiscus": {
+      "name": "Pesce disco",
+      "location": "Laghi e fiumi dell'Isola Zenzero",
+      "time": "In qualsiasi momento"
+    },
+    "stingray": {
+      "name": "Razza",
+      "location": "Baia dei pirati (Isola Zenzero)",
+      "time": "In qualsiasi momento"
+    },
+    "crimsonfish": {
+      "name": "Pesce cremisi",
+      "location": "Ponte est della Spiaggia, in acque profonde. Livello di pesca 5 richiesto.",
+      "time": "In qualsiasi momento"
+    },
+    "angler": {
+      "name": "Rana pescatrice",
+      "location": "Ponte di assi a nord del JojaMart. Livello di pesca 3 richiesto.",
+      "time": "In qualsiasi momento"
+    },
+    "legend": {
+      "name": "Leggenda",
+      "location": "Lago di montagna, vicino al tronco. Livello di pesca 10 richiesto.",
+      "time": "In qualsiasi momento"
+    },
+    "glacierfish": {
+      "name": "Pesce ghiacciaio",
+      "location": "Foresta di linfa ardente all'estremità sud dell'Isola Punta di Freccia, in acque profonde. Livello di pesca 6 richiesto.",
+      "time": "In qualsiasi momento"
+    },
+    "mutantCarp": {
+      "name": "Carpa mutante",
+      "location": "Fogne",
+      "time": "In qualsiasi momento"
+    },
+    "sonOfCrimsonfish": {
+      "name": "Figlio del Pesce cremisi",
+      "location": "Molo est della Spiaggia. Livello di pesca 5 richiesto.",
+      "time": "In qualsiasi momento"
+    },
+    "msAngler": {
+      "name": "Sig.ra Rana pescatrice",
+      "location": "Ponte di assi a nord del JojaMart. Livello di pesca 3 richiesto.",
+      "time": "In qualsiasi momento"
+    },
+    "legendII": {
+      "name": "Leggenda II",
+      "location": "Lago di montagna, vicino al tronco. Livello di pesca 10 o superiore richiesto.",
+      "time": "In qualsiasi momento"
+    },
+    "glacierfishJr": {
+      "name": "Pesce ghiacciaio Jr.",
+      "location": "Foresta di linfa ardente all'estremità sud dell'Isola Punta di Freccia. Livello di pesca 6 richiesto.",
+      "time": "In qualsiasi momento"
+    },
+    "radioactiveCarp": {
+      "name": "Carpa radioattiva",
+      "location": "Fogne",
+      "time": "In qualsiasi momento"
+    },
+    "midnightSquid": {
+      "name": "Calamaro di mezzanotte",
+      "location": "Sottomarino (Mercato notturno)",
+      "time": "17:00 – 2:00"
+    },
+    "spookFish": {
+      "name": "Pesce spettro",
+      "location": "Sottomarino (Mercato notturno)",
+      "time": "17:00 – 2:00"
+    },
+    "blobfish": {
+      "name": "Pesce blob",
+      "location": "Sottomarino (Mercato notturno)",
+      "time": "17:00 – 2:00"
+    },
+    "lobster": {
+      "name": "Aragosta",
+      "location": "Oceano",
+      "time": "In qualsiasi momento"
+    },
+    "crab": {
+      "name": "Granchio",
+      "location": "Oceano",
+      "time": "In qualsiasi momento"
+    },
+    "shrimp": {
+      "name": "Gamberetto",
+      "location": "Oceano",
+      "time": "In qualsiasi momento"
+    },
+    "cockle": {
+      "name": "Tellina",
+      "location": "Oceano",
+      "time": "In qualsiasi momento"
+    },
+    "mussel": {
+      "name": "Cozza",
+      "location": "Oceano",
+      "time": "In qualsiasi momento"
+    },
+    "oyster": {
+      "name": "Ostrica",
+      "location": "Oceano",
+      "time": "In qualsiasi momento"
+    },
+    "clam": {
+      "name": "Vongola",
+      "location": "Oceano",
+      "time": "In qualsiasi momento"
+    },
+    "crayfish": {
+      "name": "Gambero",
+      "location": "Acqua dolce (fiume/lago)",
+      "time": "In qualsiasi momento"
+    },
+    "snail": {
+      "name": "Lumaca",
+      "location": "Acqua dolce (fiume/lago)",
+      "time": "In qualsiasi momento"
+    },
+    "periwinkle": {
+      "name": "Lumachina",
+      "location": "Acqua dolce (fiume/lago)",
+      "time": "In qualsiasi momento"
+    }
+  },
+  "achievements": {
+    "a1": {
+      "name": "Principiante (15k)",
+      "desc": "Guadagna 15.000 oro"
+    },
+    "a2": {
+      "name": "Mandriano (50k)",
+      "desc": "Guadagna 50.000 oro"
+    },
+    "a3": {
+      "name": "Colono (250k)",
+      "desc": "Guadagna 250.000 oro"
+    },
+    "a4": {
+      "name": "Milionario (1mil)",
+      "desc": "Guadagna 1.000.000 oro"
+    },
+    "a5": {
+      "name": "Leggenda (10mil)",
+      "desc": "Guadagna 10.000.000 oro"
+    },
+    "a6": {
+      "name": "Collezione Completa",
+      "desc": "Completa la collezione del museo."
+    },
+    "a7": {
+      "name": "Un Nuovo Amico",
+      "desc": "Raggiungi 5 cuori d'amicizia con qualcuno."
+    },
+    "a8": {
+      "name": "Migliori Amici",
+      "desc": "Raggiungi 10 cuori d'amicizia con qualcuno."
+    },
+    "a9": {
+      "name": "L'Amato Fattore",
+      "desc": "Raggiungi 10 cuori d'amicizia con 8 persone."
+    },
+    "a10": {
+      "name": "Cricca",
+      "desc": "Raggiungi 5 cuori d'amicizia con 4 persone."
+    },
+    "a11": {
+      "name": "Contatti",
+      "desc": "Raggiungi 5 cuori d'amicizia con 10 persone."
+    },
+    "a12": {
+      "name": "Popolare",
+      "desc": "Raggiungi 5 cuori d'amicizia con 20 persone."
+    },
+    "a13": {
+      "name": "Cuoco",
+      "desc": "Cucina 10 ricette diverse."
+    },
+    "a14": {
+      "name": "Sotto-Chef",
+      "desc": "Cucina 25 ricette diverse."
+    },
+    "a15": {
+      "name": "Chef Stellato",
+      "desc": "Cucina tutte le ricette."
+    },
+    "a16": {
+      "name": "Verso l'Alto",
+      "desc": "Amplia la tua casa."
+    },
+    "a17": {
+      "name": "Vivere in Grande",
+      "desc": "Amplia la tua casa fino alle dimensioni massime."
+    },
+    "a18": {
+      "name": "Fai Da Te",
+      "desc": "Crea 15 oggetti diversi."
+    },
+    "a19": {
+      "name": "Artigiano",
+      "desc": "Crea 30 oggetti diversi."
+    },
+    "a20": {
+      "name": "Maestro dell'Arte",
+      "desc": "Crea tutti gli oggetti."
+    },
+    "a21": {
+      "name": "Pescatore",
+      "desc": "Prendi 10 pesci diversi."
+    },
+    "a22": {
+      "name": "Vecchio Marinaio",
+      "desc": "Prendi 24 pesci diversi."
+    },
+    "a23": {
+      "name": "Maestro della Pesca",
+      "desc": "Prendi tutti i pesci."
+    },
+    "a24": {
+      "name": "Pesca Fruttuosa",
+      "desc": "Prendi 100 pesci."
+    },
+    "a25": {
+      "name": "Tesoro Trovato",
+      "desc": "Dona 40 oggetti diversi al museo."
+    },
+    "a26": {
+      "name": "Fattorino",
+      "desc": "Completa 10 richieste 'Cercasi Aiuto'."
+    },
+    "a27": {
+      "name": "Un Grande Aiuto",
+      "desc": "Completa 40 richieste 'Cercasi Aiuto'."
+    },
+    "a28": {
+      "name": "Policoltura",
+      "desc": "Spedisci 15 di ogni coltura."
+    },
+    "a29": {
+      "name": "Monocoltura",
+      "desc": "Spedisci 300 di una sola coltura."
+    },
+    "a30": {
+      "name": "Spedizione Completa",
+      "desc": "Spedisci tutti gli oggetti."
+    },
+    "a41": {
+      "name": "Litorale Lontano",
+      "desc": "Raggiungi l'Isola Zenzero."
+    },
+    "a42": {
+      "name": "Erudizione",
+      "desc": "Leggi tutti i libri."
+    },
+    "a43": {
+      "name": "Doppio Pollice in Su",
+      "desc": "Guarda un film."
+    },
+    "a44": {
+      "name": "Primo Premio",
+      "desc": "Piazzati al primo posto nella Fiera di Stardew Valley."
+    },
+    "a45": {
+      "name": "Una Zuppa Indimenticabile",
+      "desc": "Delizia il Governatore."
+    },
+    "a46": {
+      "name": "Buoni Vicini",
+      "desc": "Aiuta i tuoi vicini della foresta a far crescere la loro famiglia."
+    },
+    "a47": {
+      "name": "Pericolo nel Profondo",
+      "desc": "Raggiungi il fondo delle miniere 'pericolose'."
+    },
+    "a48": {
+      "name": "Potere Infinito",
+      "desc": "Ottieni l'arma più potente."
+    },
+    "a49": {
+      "name": "Perfezione",
+      "desc": "Raggiungi la vetta."
+    }
+  },
+  "villagers": {
+    "kent": "Kent",
+    "lewis": "Lewis",
+    "vincent": "Vincent",
+    "haley": "Haley",
+    "pam": "Pam",
+    "shane": "Shane",
+    "pierre": "Pierre",
+    "emily": "Emily",
+    "jas": "Jas",
+    "gus": "Gus",
+    "maru": "Maru",
+    "alex": "Alex",
+    "sam": "Sam",
+    "demetrius": "Demetrius",
+    "dwarf": "Nano",
+    "willy": "Willy",
+    "leo": "Leo",
+    "penny": "Penny",
+    "elliott": "Elliott",
+    "jodi": "Jodi",
+    "abigail": "Abigail",
+    "sandy": "Sandy",
+    "marnie": "Marnie",
+    "robin": "Robin",
+    "george": "George",
+    "krobus": "Krobus",
+    "linus": "Linus",
+    "caroline": "Caroline",
+    "sebastian": "Sebastian",
+    "harvey": "Harvey",
+    "wizard": "Mago",
+    "evelyn": "Evelyn",
+    "leah": "Leah",
+    "clint": "Clint"
+  },
+  "bundleItem": {
+    "wildHorseradish": "Rafano selvatico",
+    "daffodil": "Giunchiglia",
+    "leek": "Porro",
+    "dandelion": "Tarassaco",
+    "spiceBerry": "Bacca speziata",
+    "sweetPea": "Pisello odoroso",
+    "commonMushroom": "Fungo comune",
+    "wildPlum": "Prugna selvatica",
+    "hazelnut": "Nocciola",
+    "blackberry": "Mora",
+    "winterRoot": "Radice invernale",
+    "crystalFruit": "Frutto cristallino",
+    "snowYam": "Patata dolce delle nevi",
+    "crocus": "Croco",
+    "wood": "Legno",
+    "stone": "Pietra",
+    "hardwood": "Legno duro",
+    "coconut": "Noce di cocco",
+    "cactusFruit": "Fico d'India",
+    "caveCarrot": "Carota di grotta",
+    "redMushroom": "Fungo rosso",
+    "purpleMushroom": "Fungo viola",
+    "mapleSyrup": "Sciroppo d'acero",
+    "oakResin": "Resina di quercia",
+    "pineTar": "Catrame di pino",
+    "morel": "Spugnola",
+    "sunfish": "Persico sole",
+    "catfish": "Pesce gatto",
+    "shad": "Alosa",
+    "tigerTrout": "Trota tigre",
+    "largemouthBass": "Boccalone",
+    "carp": "Carpa",
+    "bullhead": "Scazzone",
+    "sturgeon": "Storione",
+    "sardine": "Sardina",
+    "tuna": "Tonno",
+    "redSnapper": "Dentice rosso",
+    "tilapia": "Tilapia",
+    "walleye": "Walleye",
+    "bream": "Abramide",
+    "eel": "Anguilla",
+    "lobster": "Aragosta",
+    "crab": "Granchio",
+    "shrimp": "Gamberetto",
+    "crayfish": "Gambero",
+    "snail": "Lumaca",
+    "periwinkle": "Lumachina",
+    "mussel": "Cozza",
+    "cockle": "Tellina",
+    "oyster": "Ostrica",
+    "clam": "Vongola",
+    "pufferfish": "Pesce palla",
+    "ghostfish": "Pesce fantasma",
+    "sandfish": "Pesce delle sabbie",
+    "woodskip": "Saltaboschi",
+    "largeMilk": "Latte grande",
+    "largeEgg": "Uovo grande",
+    "wool": "Lana",
+    "duckEgg": "Uovo d'anatra",
+    "truffleOil": "Olio di tartufo",
+    "cloth": "Stoffa",
+    "goatCheese": "Formaggio di capra",
+    "cheese": "Formaggio",
+    "honey": "Miele",
+    "jelly": "Gelatina",
+    "apple": "Mela",
+    "apricot": "Albicocca",
+    "orange": "Arancia",
+    "peach": "Pesca",
+    "pomegranate": "Melagrana",
+    "cherry": "Ciliegia",
+    "copperBar": "Lingotto di rame",
+    "ironBar": "Lingotto di ferro",
+    "goldBar": "Lingotto d'oro",
+    "quartz": "Quarzo",
+    "earthCrystal": "Cristallo della terra",
+    "frozenTear": "Lacrima ghiacciata",
+    "fireQuartz": "Quarzo di fuoco",
+    "slime": "Melma",
+    "batWing": "Ala di pipistrello",
+    "solarEssence": "Essenza solare",
+    "voidEssence": "Essenza del Vuoto",
+    "fiddleheadFern": "Germoglio di felce",
+    "truffle": "Tartufo",
+    "makiRoll": "Rotolo di maki",
+    "friedEgg": "Uovo fritto",
+    "seaUrchin": "Riccio di mare",
+    "duckFeather": "Penna d'anatra",
+    "aquamarine": "Acquamarina",
+    "nautilusShell": "Conchiglia di nautilo",
+    "chub": "Cavedano",
+    "frozenGeode": "Geode ghiacciato",
+    "hay": "Fieno",
+    "wine": "Vino",
+    "rabbitsFoot": "Zampa di coniglio",
+    "springOnion": "Cipolla primaverile",
+    "holly": "Agrifoglio",
+    "sap": "Linfa",
+    "moss": "Muschio",
+    "fiber": "Fibra",
+    "acorn": "Ghianda",
+    "mapleSeed": "Seme di acero",
+    "whiteAlgae": "Alghetta bianca",
+    "wood2": "Legno",
+    "mead": "Idromele",
+    "paleAle": "Malto chiaro",
+    "juice": "Succo",
+    "greenTea": "Tè verde",
+    "roe": "Uova di pesce",
+    "agedRoe": "Uova di pesce invecchiate",
+    "squidInk": "Nero di seppia",
+    "lavaEel": "Anguilla lavica",
+    "scorpionCarp": "Carpa scorpione",
+    "octopus": "Piovra",
+    "blobfish": "Pesce blob",
+    "boneFragment": "Frammento d'osso",
+    "amethyst": "Ametista",
+    "diamond": "Diamante",
+    "emerald": "Smeraldo",
+    "ruby": "Rubino",
+    "topaz": "Topazio",
+    "iridiumOre": "Iridio grezzo",
+    "iridiumBar": "Lingotto d'iridio",
+    "batteryPack": "Batteria",
+    "refinedQuartz": "Quarzo raffinato",
+    "egg": "Uovo",
+    "milk": "Latte",
+    "salmonberry": "Lampone",
+    "ancientDoll": "Bambola antica",
+    "iceCream": "Gelato",
+    "jackOLantern": "Zucca-lanterna",
+    "largeBrownEgg": "Uovo grande",
+    "largeGoatMilk": "Latte di capra gr.",
+    "flour": "Farina di grano",
+    "cookie": "Biscotto"
+  },
+  "crops": {
+    "parsnip": "Pastinaca",
+    "potato": "Patata",
+    "cauliflower": "Cavolfiore",
+    "kale": "Cavolo verde",
+    "garlic": "Aglio",
+    "rhubarb": "Rabarbaro",
+    "strawberry": "Fragola",
+    "greenBean": "Fagiolo verde",
+    "tulip": "Tulipano",
+    "blueJazz": "Jazz blu",
+    "coffeeBean": "Chicco di caffè",
+    "blueberry": "Mirtillo",
+    "melon": "Melone",
+    "tomato": "Pomodoro",
+    "hotPepper": "Peperoncino",
+    "radish": "Ravanello",
+    "hops": "Luppolo",
+    "poppy": "Papavero",
+    "redCabbage": "Cavolo rosso",
+    "starfruit": "Carambola",
+    "wheat": "Grano",
+    "corn": "Mais",
+    "sunflower": "Girasole",
+    "pumpkin": "Zucca",
+    "cranberry": "Mirtilli rossi",
+    "eggplant": "Melanzana",
+    "amaranth": "Amaranto",
+    "grape": "Uva",
+    "yam": "Patata dolce",
+    "bokChoy": "Bok Choy",
+    "artichoke": "Carciofo",
+    "beet": "Barbabietola",
+    "fairyRose": "Rosa fatata",
+    "sweetGemBerry": "Baccagemma dolce",
+    "carrot": "Carota",
+    "unmilledRice": "Riso non macinato",
+    "springSeeds": "Semi primaverili",
+    "pineapple": "Ananas",
+    "summerSquash": "Zucca estiva",
+    "taroRoot": "Radice di taro",
+    "summerSpangle": "Lustrino d'estate",
+    "summerSeeds": "Semi estivi",
+    "broccoli": "Broccoli",
+    "fallSeeds": "Semi autunnali",
+    "powdermelon": "Melone incipriato",
+    "winterSeeds": "Semi invernali",
+    "teaLeaves": "Foglie di tè",
+    "ancientFruit": "Frutto antico"
+  },
+  "materials": {
+    "wood": "Legno",
+    "stone": "Pietra",
+    "clay": "Argilla",
+    "cloth": "Stoffa",
+    "copperBar": "Lingotto di rame",
+    "ironBar": "Lingotto di ferro",
+    "iridiumBar": "Lingotto d'iridio",
+    "refinedQuartz": "Quarzo raffinato",
+    "seaweed": "Alga marina",
+    "greenAlgae": "Alghetta verde",
+    "hardwood": "Legno duro",
+    "fiber": "Fibra"
+  },
+  "bundleRoom": {
+    "pantry": "Dispensa",
+    "craftsRoom": "Stanza delle arti",
+    "fishTank": "Vasca dei pesci",
+    "boilerRoom": "Stanza della caldaia",
+    "bulletinBoard": "Bacheca",
+    "vault": "Cassaforte"
+  }
+}

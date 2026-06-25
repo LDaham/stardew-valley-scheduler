@@ -38,9 +38,7 @@ export const BUILDINGS: BuildingDef[] = [
   { id: "stable", category: "other", gold: 10000, buildDays: 2, materials: [{ id: "hardwood", qty: 100 }, { id: "ironBar", qty: 5 }] },
   { id: "well", category: "other", gold: 1000, buildDays: 2, materials: [{ id: "stone", qty: 75 }] },
 
-  // 오두막·배송 상자(즉시)
-  { id: "stoneCabin", category: "cabin", gold: 100, buildDays: 0, materials: [{ id: "stone", qty: 10 }] },
-  { id: "plankCabin", category: "cabin", gold: 100, buildDays: 0, materials: [{ id: "wood", qty: 5 }, { id: "fiber", qty: 10 }] },
+  // 오두막·배송 상자(즉시). 오두막은 인게임상 1종(100골드, 디자인은 건설 시 선택) — 통나무 오두막 아이콘 유지.
   { id: "logCabin", category: "cabin", gold: 100, buildDays: 0, materials: [{ id: "wood", qty: 10 }] },
   { id: "shippingBin", category: "cabin", gold: 250, buildDays: 0, materials: [{ id: "wood", qty: 150 }] },
 

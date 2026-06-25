@@ -6,6 +6,7 @@ import { ScheduleProvider, useSchedule } from "@/components/ScheduleProvider";
 import { GiftDialogProvider } from "@/components/GiftDialogProvider";
 import Dashboard from "@/components/Dashboard";
 import SettingsDialog from "@/components/SettingsDialog";
+import LocaleSwitcher from "@/components/LocaleSwitcher";
 import BundleDialog from "@/components/BundleDialog";
 import PerfectionDialog from "@/components/PerfectionDialog";
 import AchievementDialog from "@/components/AchievementDialog";
@@ -172,13 +173,16 @@ function AppShell() {
                 />
               ))}
             </div>
-            <NavTab
-              icon="/icons/ui/settings.png"
-              label={t("settings.title")}
-              active={settingsOpen}
-              onClick={() => setSettingsOpen(true)}
-              className="ml-auto"
-            />
+            {/* 우측 정렬: 언어 선택 + 설정 */}
+            <div className="ml-auto flex items-center gap-x-2">
+              <LocaleSwitcher />
+              <NavTab
+                icon="/icons/ui/settings.png"
+                label={t("settings.title")}
+                active={settingsOpen}
+                onClick={() => setSettingsOpen(true)}
+              />
+            </div>
           </div>
           {/* 모바일 전용 2행: 메인 탭 */}
           <div className="flex items-center gap-x-1 sm:hidden">

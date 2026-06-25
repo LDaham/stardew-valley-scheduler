@@ -1,0 +1,775 @@
+{
+  "buildings": {
+    "coop": "Poulailler",
+    "bigCoop": "Grand poulailler",
+    "deluxeCoop": "Poulailler de luxe",
+    "barn": "Grange",
+    "bigBarn": "Grande grange",
+    "deluxeBarn": "Grange de luxe",
+    "fishPond": "Étang à poissons",
+    "mill": "Moulin",
+    "shed": "Cabanon",
+    "bigShed": "Grand cabanon",
+    "silo": "Silo",
+    "slimeHutch": "Clapier pour Slime",
+    "stable": "Étable",
+    "well": "Puits",
+    "shippingBin": "Bac d’expédition",
+    "logCabin": "Cabane"
+  },
+  "fishInfo": {
+    "pufferfish": {
+      "name": "Poisson-globe",
+      "location": "Océan, océan de l'Île Gingembre",
+      "time": "12h – 16h"
+    },
+    "anchovy": {
+      "name": "Anchois",
+      "location": "Océan",
+      "time": "À tout moment"
+    },
+    "tuna": {
+      "name": "Thon",
+      "location": "Océan, océan de l'Île Gingembre",
+      "time": "6h – 19h"
+    },
+    "sardine": {
+      "name": "Sardine",
+      "location": "Océan",
+      "time": "6h – 19h"
+    },
+    "bream": {
+      "name": "Dorade",
+      "location": "Rivière (ville + forêt)",
+      "time": "18h – 2h"
+    },
+    "largemouthBass": {
+      "name": "Achigan à grande bouche",
+      "location": "Lac de montagne",
+      "time": "6h – 19h"
+    },
+    "smallmouthBass": {
+      "name": "Achigan à petite bouche",
+      "location": "Rivière (ville), étang de la forêt, Ferme de la rivière",
+      "time": "À tout moment"
+    },
+    "rainbowTrout": {
+      "name": "Truite arc-en-ciel",
+      "location": "Rivière (ville + forêt), Lac de montagne",
+      "time": "6h – 19h"
+    },
+    "salmon": {
+      "name": "Saumon",
+      "location": "Rivière (ville + forêt)",
+      "time": "6h – 19h"
+    },
+    "walleye": {
+      "name": "Doré jaune",
+      "location": "Rivière (ville + forêt), étang de la forêt, Lac de montagne",
+      "time": "12h – 2h"
+    },
+    "perch": {
+      "name": "Perche",
+      "location": "Rivière (ville + forêt), étang de la forêt, Lac de montagne",
+      "time": "À tout moment"
+    },
+    "carp": {
+      "name": "Carpe",
+      "location": "Lac de montagne, étang de la Forêt secrète, Égouts",
+      "time": "À tout moment"
+    },
+    "catfish": {
+      "name": "Poisson-chat",
+      "location": "Rivière (ville + forêt), étang de la Forêt secrète, Marais de la sorcière",
+      "time": "À tout moment"
+    },
+    "pike": {
+      "name": "Brochet",
+      "location": "Rivière (ville + forêt), étang de la forêt",
+      "time": "À tout moment"
+    },
+    "sunfish": {
+      "name": "Poisson lune",
+      "location": "Rivière (ville + forêt), Ferme de la forêt",
+      "time": "6h – 19h"
+    },
+    "redMullet": {
+      "name": "Rouget",
+      "location": "Océan",
+      "time": "6h – 19h"
+    },
+    "herring": {
+      "name": "Hareng",
+      "location": "Océan",
+      "time": "À tout moment"
+    },
+    "eel": {
+      "name": "Anguille",
+      "location": "Océan",
+      "time": "16h – 2h"
+    },
+    "octopus": {
+      "name": "Poulpe",
+      "location": "Océan",
+      "time": "6h – 13h"
+    },
+    "redSnapper": {
+      "name": "Vivaneau rouge",
+      "location": "Océan",
+      "time": "6h – 19h"
+    },
+    "squid": {
+      "name": "Calamar",
+      "location": "Océan",
+      "time": "18h – 2h"
+    },
+    "seaCucumber": {
+      "name": "Concombre de mer",
+      "location": "Océan",
+      "time": "6h – 19h"
+    },
+    "superCucumber": {
+      "name": "Grand concombre de mer",
+      "location": "Océan, océan de l'Île Gingembre",
+      "time": "18h – 2h"
+    },
+    "ghostfish": {
+      "name": "Poisson spectral",
+      "location": "Mines (niveaux 20, 60), butin de Fantôme",
+      "time": "À tout moment"
+    },
+    "stonefish": {
+      "name": "Poisson pierre",
+      "location": "Mines niveau 20, niveau de pêche 3+",
+      "time": "À tout moment"
+    },
+    "icePip": {
+      "name": "Poisson-glace",
+      "location": "Mines niveau 60, niveau de pêche 5+",
+      "time": "À tout moment"
+    },
+    "lavaEel": {
+      "name": "Anguille de lave",
+      "location": "Mines niveau 100 (niveau de pêche 7+), Caldeira du volcan",
+      "time": "À tout moment"
+    },
+    "sandfish": {
+      "name": "Poisson des sables",
+      "location": "Désert",
+      "time": "6h – 20h"
+    },
+    "scorpionCarp": {
+      "name": "Carpe scorpion",
+      "location": "Désert, niveau de pêche 4+",
+      "time": "6h – 20h"
+    },
+    "flounder": {
+      "name": "Flet",
+      "location": "Océan, océan de l'Île Gingembre",
+      "time": "6h – 20h"
+    },
+    "midnightCarp": {
+      "name": "Carpe de minuit",
+      "location": "Lac de montagne, lac de la forêt, lacs et rivières de l'Île Gingembre",
+      "time": "22h – 2h"
+    },
+    "sturgeon": {
+      "name": "Esturgeon",
+      "location": "Lac de montagne",
+      "time": "6h – 19h"
+    },
+    "tigerTrout": {
+      "name": "Truite tigrée",
+      "location": "Rivière (ville + forêt)",
+      "time": "6h – 19h"
+    },
+    "bullhead": {
+      "name": "Barbotte",
+      "location": "Lac de montagne",
+      "time": "À tout moment"
+    },
+    "tilapia": {
+      "name": "Tilapia",
+      "location": "Océan, eau douce de l'Île Gingembre",
+      "time": "6h – 14h"
+    },
+    "chub": {
+      "name": "Chevesne",
+      "location": "Rivière (forêt), Lac de montagne",
+      "time": "À tout moment"
+    },
+    "dorado": {
+      "name": "Dorade coryphène",
+      "location": "Rivière (forêt)",
+      "time": "6h – 19h"
+    },
+    "albacore": {
+      "name": "Albacore",
+      "location": "Océan",
+      "time": "6h – 11h, 18h – 2h"
+    },
+    "shad": {
+      "name": "Alose",
+      "location": "Rivière (ville + forêt)",
+      "time": "9h – 2h"
+    },
+    "lingcod": {
+      "name": "Morue-lingue",
+      "location": "Rivière (ville + forêt), Lac de montagne",
+      "time": "À tout moment"
+    },
+    "halibut": {
+      "name": "Flétan",
+      "location": "Océan",
+      "time": "6h – 11h, 19h – 2h"
+    },
+    "woodskip": {
+      "name": "Poisson de forêt",
+      "location": "Étang de la Forêt secrète, Ferme de la forêt",
+      "time": "À tout moment"
+    },
+    "voidSalmon": {
+      "name": "Saumon du Vide",
+      "location": "Marais de la sorcière",
+      "time": "À tout moment"
+    },
+    "slimejack": {
+      "name": "Slime-Jack",
+      "location": "Repaire des insectes mutants",
+      "time": "À tout moment"
+    },
+    "lionfish": {
+      "name": "Poisson-papillon",
+      "location": "Océan de l'Île Gingembre",
+      "time": "À tout moment"
+    },
+    "blueDiscus": {
+      "name": "Discus bleu",
+      "location": "Lacs et rivières de l'Île Gingembre",
+      "time": "À tout moment"
+    },
+    "stingray": {
+      "name": "Raie",
+      "location": "Crique des pirates (Île Gingembre)",
+      "time": "À tout moment"
+    },
+    "crimsonfish": {
+      "name": "Poisson écarlate",
+      "location": "Pont est de la Plage, en eau profonde. Niveau de pêche 5 requis.",
+      "time": "À tout moment"
+    },
+    "angler": {
+      "name": "Poisson-pêcheur",
+      "location": "Pont de planches au nord du JojaMart. Niveau de pêche 3 requis.",
+      "time": "À tout moment"
+    },
+    "legend": {
+      "name": "Légende",
+      "location": "Lac de montagne, près du rondin. Niveau de pêche 10 requis.",
+      "time": "À tout moment"
+    },
+    "glacierfish": {
+      "name": "Poisson des glaciers",
+      "location": "Forêt de sève incandescente à la pointe sud de l'Île Pointe-de-Flèche, en eau profonde. Niveau de pêche 6 requis.",
+      "time": "À tout moment"
+    },
+    "mutantCarp": {
+      "name": "Carpe mutante",
+      "location": "Égouts",
+      "time": "À tout moment"
+    },
+    "sonOfCrimsonfish": {
+      "name": "Fils de poisson écarlate",
+      "location": "Jetée est de la Plage. Niveau de pêche 5 requis.",
+      "time": "À tout moment"
+    },
+    "msAngler": {
+      "name": "Mme Poisson-pêcheur",
+      "location": "Pont de planches au nord du JojaMart. Niveau de pêche 3 requis.",
+      "time": "À tout moment"
+    },
+    "legendII": {
+      "name": "Légende II",
+      "location": "Lac de montagne, près du rondin. Niveau de pêche 10 ou plus requis.",
+      "time": "À tout moment"
+    },
+    "glacierfishJr": {
+      "name": "Poisson des glaciers junior",
+      "location": "Forêt de sève incandescente à la pointe sud de l'Île Pointe-de-Flèche. Niveau de pêche 6 requis.",
+      "time": "À tout moment"
+    },
+    "radioactiveCarp": {
+      "name": "Carpe radioactive",
+      "location": "Égouts",
+      "time": "À tout moment"
+    },
+    "midnightSquid": {
+      "name": "Calamar de minuit",
+      "location": "Sous-marin (Marché nocturne)",
+      "time": "17h – 2h"
+    },
+    "spookFish": {
+      "name": "Poisson-espion",
+      "location": "Sous-marin (Marché nocturne)",
+      "time": "17h – 2h"
+    },
+    "blobfish": {
+      "name": "Poisson-blob",
+      "location": "Sous-marin (Marché nocturne)",
+      "time": "17h – 2h"
+    },
+    "lobster": {
+      "name": "Homard",
+      "location": "Océan",
+      "time": "À tout moment"
+    },
+    "crab": {
+      "name": "Crabe",
+      "location": "Océan",
+      "time": "À tout moment"
+    },
+    "shrimp": {
+      "name": "Crevette",
+      "location": "Océan",
+      "time": "À tout moment"
+    },
+    "cockle": {
+      "name": "Coque",
+      "location": "Océan",
+      "time": "À tout moment"
+    },
+    "mussel": {
+      "name": "Moule",
+      "location": "Océan",
+      "time": "À tout moment"
+    },
+    "oyster": {
+      "name": "Huître",
+      "location": "Océan",
+      "time": "À tout moment"
+    },
+    "clam": {
+      "name": "Palourde",
+      "location": "Océan",
+      "time": "À tout moment"
+    },
+    "crayfish": {
+      "name": "Écrevisse",
+      "location": "Eau douce (rivière/lac)",
+      "time": "À tout moment"
+    },
+    "snail": {
+      "name": "Escargot",
+      "location": "Eau douce (rivière/lac)",
+      "time": "À tout moment"
+    },
+    "periwinkle": {
+      "name": "Bigorneau",
+      "location": "Eau douce (rivière/lac)",
+      "time": "À tout moment"
+    }
+  },
+  "achievements": {
+    "a1": {
+      "name": "Néophyte (15k)",
+      "desc": "Gagner 15,000po"
+    },
+    "a2": {
+      "name": "Piquevache (50k)",
+      "desc": "Gagner 50,000po"
+    },
+    "a3": {
+      "name": "Marteau-hardi (250k)",
+      "desc": "Gagner 250,000po"
+    },
+    "a4": {
+      "name": "Millionnaire (1M)",
+      "desc": "Gagner 1,000,000po"
+    },
+    "a5": {
+      "name": "Légende (10M)",
+      "desc": "Gagner 10,000,000po"
+    },
+    "a6": {
+      "name": "Une collection complète",
+      "desc": "Compléter la collection du musée."
+    },
+    "a7": {
+      "name": "Un nouvel ami",
+      "desc": "Atteindre 5 coeurs d’amitié avec quelqu’un."
+    },
+    "a8": {
+      "name": "Meilleurs amis",
+      "desc": "Atteindre 10 coeurs d’amitié avec quelqu’un."
+    },
+    "a9": {
+      "name": "Le fermier bien-aimé",
+      "desc": "Atteindre 10 coeurs d’amitié avec 8 personnes."
+    },
+    "a10": {
+      "name": "Groupe d’amis",
+      "desc": "Atteindre 5 coeurs d’amitié avec 4 personnes."
+    },
+    "a11": {
+      "name": "Collaboration",
+      "desc": "Atteindre 5 coeurs d’amitié avec 10 personnes."
+    },
+    "a12": {
+      "name": "Populaire",
+      "desc": "Atteindre 5 coeurs d’amitié avec 20 personnes."
+    },
+    "a13": {
+      "name": "Cuisinier",
+      "desc": "Cuisiner 10 recettes différentes."
+    },
+    "a14": {
+      "name": "Sous-chef",
+      "desc": "Cuisiner 25 recettes différentes."
+    },
+    "a15": {
+      "name": "Chef gastronomique",
+      "desc": "Cuisiner toutes les recettes."
+    },
+    "a16": {
+      "name": "Changement",
+      "desc": "Améliorer sa maison."
+    },
+    "a17": {
+      "name": "Belle vie",
+      "desc": "Améliorer sa maison à la grandeur maximale."
+    },
+    "a18": {
+      "name": "Bricolage",
+      "desc": "Fabriquer 15 objets différents."
+    },
+    "a19": {
+      "name": "Artisan",
+      "desc": "Fabriquer 30 objets différents."
+    },
+    "a20": {
+      "name": "Maître artisan",
+      "desc": "Fabriquer tous les objets."
+    },
+    "a21": {
+      "name": "Pêcheur",
+      "desc": "Attraper 10 poissons différents."
+    },
+    "a22": {
+      "name": "Marin",
+      "desc": "Attraper 24 poissons différents."
+    },
+    "a23": {
+      "name": "Maître pêcheur",
+      "desc": "Attraper tous les poissons."
+    },
+    "a24": {
+      "name": "Le bon filon",
+      "desc": "Attraper 100 poissons."
+    },
+    "a25": {
+      "name": "Trésor",
+      "desc": "Donner 40 objets différents au musée."
+    },
+    "a26": {
+      "name": "Coursier",
+      "desc": "Terminer 10 offres \"d’embauche\"."
+    },
+    "a27": {
+      "name": "D’une grande aide",
+      "desc": "Terminer 40 offres \"d’embauche\"."
+    },
+    "a28": {
+      "name": "Polyculture",
+      "desc": "Expédier 15 spécimens de chaque récolte."
+    },
+    "a29": {
+      "name": "Monoculture",
+      "desc": "Expédier 300 spécimens de chaque récolte."
+    },
+    "a30": {
+      "name": "Cargaison pleine",
+      "desc": "Expédier toutes les sortes de récolte."
+    },
+    "a41": {
+      "name": "Un rivage lointain.",
+      "desc": "Atteindre l’île Gingembre."
+    },
+    "a42": {
+      "name": "Instruit.",
+      "desc": "Lire tous les livres."
+    },
+    "a43": {
+      "name": "Deux pouces en l’air.",
+      "desc": "Voir un film."
+    },
+    "a44": {
+      "name": "Ruban bleu.",
+      "desc": "Obtenir la 1re place au concours du grand festival de Stardew Valley."
+    },
+    "a45": {
+      "name": "Une soupe inoubliable.",
+      "desc": "Réjouir le gouverneur."
+    },
+    "a46": {
+      "name": "Bons voisins.",
+      "desc": "Aider ses voisins de la forêt à agrandir leur famille."
+    },
+    "a47": {
+      "name": "Danger dans les profondeurs.",
+      "desc": "Atteindre le fond des mines \"dangereuses\"."
+    },
+    "a48": {
+      "name": "Pouvoir infini.",
+      "desc": "Obtenir l’arme la plus puissante."
+    },
+    "a49": {
+      "name": "Perfection.",
+      "desc": "Atteindre le sommet."
+    }
+  },
+  "villagers": {
+    "kent": "Kent",
+    "lewis": "Lewis",
+    "vincent": "Vincent",
+    "haley": "Haley",
+    "pam": "Pam",
+    "shane": "Shane",
+    "pierre": "Pierre",
+    "emily": "Emily",
+    "jas": "Jas",
+    "gus": "Gus",
+    "maru": "Maru",
+    "alex": "Alex",
+    "sam": "Sam",
+    "demetrius": "Demetrius",
+    "dwarf": "Nain",
+    "willy": "Willy",
+    "leo": "Léo",
+    "penny": "Penny",
+    "elliott": "Elliott",
+    "jodi": "Jodi",
+    "abigail": "Abigail",
+    "sandy": "Sandy",
+    "marnie": "Marnie",
+    "robin": "Robine",
+    "george": "George",
+    "krobus": "Krobus",
+    "linus": "Linus",
+    "caroline": "Caroline",
+    "sebastian": "Sebastian",
+    "harvey": "Harvey",
+    "wizard": "Sorcier",
+    "evelyn": "Evelyn",
+    "leah": "Leah",
+    "clint": "Clint"
+  },
+  "bundleItem": {
+    "wildHorseradish": "Raifort sauvage",
+    "daffodil": "Jonquille",
+    "leek": "Poireau",
+    "dandelion": "Pissenlit",
+    "spiceBerry": "Baie épicée",
+    "sweetPea": "Pois de senteur",
+    "commonMushroom": "Champignon commun",
+    "wildPlum": "Prune sauvage",
+    "hazelnut": "Noisette",
+    "blackberry": "Mûre",
+    "winterRoot": "Racine d’hiver",
+    "crystalFruit": "Fruit de cristal",
+    "snowYam": "Igname des neiges",
+    "crocus": "Crocus",
+    "wood": "Bois",
+    "stone": "Amas de pierres",
+    "hardwood": "Bois dur",
+    "coconut": "Noix de coco",
+    "cactusFruit": "Fruit de cactus",
+    "caveCarrot": "Carotte des cavernes",
+    "redMushroom": "Champignon rouge",
+    "purpleMushroom": "Champignon violet",
+    "mapleSyrup": "Sirop d’érable",
+    "oakResin": "Résine de chêne",
+    "pineTar": "Goudron de pin",
+    "morel": "Morille",
+    "sunfish": "Poisson lune",
+    "catfish": "Poisson-chat",
+    "shad": "Alose",
+    "tigerTrout": "Truite tigrée",
+    "largemouthBass": "Achigan à grande bouche",
+    "carp": "Carpe",
+    "bullhead": "Barbotte",
+    "sturgeon": "Esturgeon",
+    "sardine": "Sardine",
+    "tuna": "Thon",
+    "redSnapper": "Vivaneau rouge",
+    "tilapia": "Tilapia",
+    "walleye": "Doré jaune",
+    "bream": "Dorade",
+    "eel": "Anguille",
+    "lobster": "Homard",
+    "crab": "Crabe",
+    "shrimp": "Crevette",
+    "crayfish": "Écrevisse",
+    "snail": "Escargot",
+    "periwinkle": "Bigorneau",
+    "mussel": "Moule",
+    "cockle": "Coque",
+    "oyster": "Huître",
+    "clam": "Palourde",
+    "pufferfish": "Poisson-globe",
+    "ghostfish": "Poisson spectral",
+    "sandfish": "Poisson des sables",
+    "woodskip": "Poisson de forêt",
+    "largeMilk": "Grosse quantité de lait",
+    "largeEgg": "Gros oeuf",
+    "wool": "Laine",
+    "duckEgg": "Oeuf de canard",
+    "truffleOil": "Huile de truffe",
+    "cloth": "Tissu",
+    "goatCheese": "Fromage de chèvre",
+    "cheese": "Fromage",
+    "honey": "Miel",
+    "jelly": "Gelée",
+    "apple": "Pomme",
+    "apricot": "Abricot",
+    "orange": "Orange",
+    "peach": "Pêche",
+    "pomegranate": "Grenade",
+    "cherry": "Cerise",
+    "copperBar": "Lingot de cuivre",
+    "ironBar": "Lingot de fer",
+    "goldBar": "Lingot en or",
+    "quartz": "Quartz",
+    "earthCrystal": "Cristal de terre",
+    "frozenTear": "Larme gelée",
+    "fireQuartz": "Quartz de feu",
+    "slime": "Slime",
+    "batWing": "Aile de chauve-souris",
+    "solarEssence": "Essence solaire",
+    "voidEssence": "Essence du Vide",
+    "fiddleheadFern": "Crosse de fougère",
+    "truffle": "Truffe",
+    "makiRoll": "Maki",
+    "friedEgg": "Oeuf sur le plat",
+    "seaUrchin": "Oursin",
+    "duckFeather": "Plume de canard",
+    "aquamarine": "Aigue-marine",
+    "nautilusShell": "Coquillage",
+    "chub": "Chevesne",
+    "frozenGeode": "Géode gelée",
+    "hay": "Paille",
+    "wine": "Vin",
+    "rabbitsFoot": "Patte de lapin",
+    "springOnion": "Oignon nouveau",
+    "holly": "Houx",
+    "sap": "Sève",
+    "moss": "Mousse",
+    "fiber": "Fibre",
+    "acorn": "Gland",
+    "mapleSeed": "Graine d’érable",
+    "whiteAlgae": "Algues blanches",
+    "wood2": "Bois",
+    "mead": "Hydromel",
+    "paleAle": "Bière blonde",
+    "juice": "Jus",
+    "greenTea": "Thé vert",
+    "roe": "Oeufs de poisson",
+    "agedRoe": "Oeufs de poisson marinés",
+    "squidInk": "Encre de Calamar",
+    "lavaEel": "Anguille de lave",
+    "scorpionCarp": "Carpe scorpion",
+    "octopus": "Poulpe",
+    "blobfish": "Poisson-blob",
+    "boneFragment": "Fragments d’os",
+    "amethyst": "Améthyste",
+    "diamond": "Diamant",
+    "emerald": "Émeraude",
+    "ruby": "Rubis",
+    "topaz": "Topaze",
+    "iridiumOre": "Minerai d’iridium",
+    "iridiumBar": "Lingot en iridium",
+    "batteryPack": "Pile",
+    "refinedQuartz": "Quartz raffiné",
+    "egg": "Oeuf",
+    "milk": "Lait",
+    "salmonberry": "Baie de saumon",
+    "ancientDoll": "Poupée ancienne",
+    "iceCream": "Crème glacée",
+    "jackOLantern": "Citrouille-lanterne",
+    "largeBrownEgg": "Gros oeuf",
+    "largeGoatMilk": "Grand lait de chèvre",
+    "flour": "Farine de blé",
+    "cookie": "Biscuit"
+  },
+  "crops": {
+    "parsnip": "Panais",
+    "potato": "Pomme de terre",
+    "cauliflower": "Chou-fleur",
+    "kale": "Chou frisé",
+    "garlic": "Ail",
+    "rhubarb": "Rhubarbe",
+    "strawberry": "Fraise",
+    "greenBean": "Haricot vert",
+    "tulip": "Tulipe",
+    "blueJazz": "Zinnia bleue",
+    "coffeeBean": "Grain de café",
+    "blueberry": "Myrtille",
+    "melon": "Melon",
+    "tomato": "Tomate",
+    "hotPepper": "Piment fort",
+    "radish": "Radis",
+    "hops": "Houblon",
+    "poppy": "Pavot",
+    "redCabbage": "Chou rouge",
+    "starfruit": "Carambole",
+    "wheat": "Blé",
+    "corn": "Maïs",
+    "sunflower": "Tournesol",
+    "pumpkin": "Citrouille",
+    "cranberry": "Canneberges",
+    "eggplant": "Aubergine",
+    "amaranth": "Amarante",
+    "grape": "Raisin",
+    "yam": "Igname",
+    "bokChoy": "Chou chinois",
+    "artichoke": "Artichaut",
+    "beet": "Betterave",
+    "fairyRose": "Rose de fée",
+    "sweetGemBerry": "Baie de gemme sucrée",
+    "carrot": "Carotte",
+    "unmilledRice": "Riz non moulu",
+    "springSeeds": "Graines de printemps",
+    "pineapple": "Ananas",
+    "summerSquash": "Courge d’été",
+    "taroRoot": "Racine de taro",
+    "summerSpangle": "Fleur tropicale d’été",
+    "summerSeeds": "Graines d’été",
+    "broccoli": "Brocoli",
+    "fallSeeds": "Graines d’automne",
+    "powdermelon": "Poudremelon",
+    "winterSeeds": "Graines d’hiver",
+    "teaLeaves": "Feuilles de thé",
+    "ancientFruit": "Fruit ancien"
+  },
+  "materials": {
+    "wood": "Bois",
+    "stone": "Amas de pierres",
+    "clay": "Argile",
+    "cloth": "Tissu",
+    "copperBar": "Lingot de cuivre",
+    "ironBar": "Lingot de fer",
+    "iridiumBar": "Lingot en iridium",
+    "refinedQuartz": "Quartz raffiné",
+    "seaweed": "Algues",
+    "greenAlgae": "Algues vertes",
+    "hardwood": "Bois dur",
+    "fiber": "Fibre"
+  },
+  "bundleRoom": {
+    "pantry": "Cellier",
+    "craftsRoom": "Salle d’artisanat",
+    "fishTank": "Aquarium",
+    "boilerRoom": "Chaufferie",
+    "bulletinBoard": "Panneau d’affichage",
+    "vault": "Coffre"
+  }
+}

@@ -1,0 +1,775 @@
+{
+  "buildings": {
+    "coop": "小屋",
+    "bigCoop": "大型の小屋",
+    "deluxeCoop": "デラックス小屋",
+    "barn": "家畜小屋",
+    "bigBarn": "大型の家畜小屋",
+    "deluxeBarn": "デラックス家畜小屋",
+    "fishPond": "魚のいる池",
+    "mill": "製粉機",
+    "shed": "納屋",
+    "bigShed": "ビッグシェッド",
+    "silo": "サイロ",
+    "slimeHutch": "スライムハッチ",
+    "stable": "馬小屋",
+    "well": "井戸",
+    "shippingBin": "出荷箱",
+    "logCabin": "小屋"
+  },
+  "fishInfo": {
+    "pufferfish": {
+      "name": "ハリセンボン",
+      "location": "海、ジンジャー島の海",
+      "time": "午後12時～午後4時"
+    },
+    "anchovy": {
+      "name": "カタクチイワシ",
+      "location": "海",
+      "time": "いつでも"
+    },
+    "tuna": {
+      "name": "マグロ",
+      "location": "海、ジンジャー島の海",
+      "time": "午前6時～午後7時"
+    },
+    "sardine": {
+      "name": "イワシ",
+      "location": "海",
+      "time": "午前6時～午後7時"
+    },
+    "bream": {
+      "name": "ブリーム",
+      "location": "川（町＋森）",
+      "time": "午後6時～午前2時"
+    },
+    "largemouthBass": {
+      "name": "ブラックバス",
+      "location": "山の湖",
+      "time": "午前6時～午後7時"
+    },
+    "smallmouthBass": {
+      "name": "コクチバス",
+      "location": "川（町）、森の池、川辺の農場",
+      "time": "いつでも"
+    },
+    "rainbowTrout": {
+      "name": "ニジマス",
+      "location": "川（町＋森）、山の湖",
+      "time": "午前6時～午後7時"
+    },
+    "salmon": {
+      "name": "サケ",
+      "location": "川（町＋森）",
+      "time": "午前6時～午後7時"
+    },
+    "walleye": {
+      "name": "ウォールアイ",
+      "location": "川（町＋森）、森の池、山の湖",
+      "time": "午後12時～午前2時"
+    },
+    "perch": {
+      "name": "パーチ",
+      "location": "川（町＋森）、森の池、山の湖",
+      "time": "いつでも"
+    },
+    "carp": {
+      "name": "コイ",
+      "location": "山の湖、秘密の森の池、下水道",
+      "time": "いつでも"
+    },
+    "catfish": {
+      "name": "ナマズ",
+      "location": "川（町＋森）、秘密の森の池、魔女の沼",
+      "time": "いつでも"
+    },
+    "pike": {
+      "name": "パイク",
+      "location": "川（町＋森）、森の池",
+      "time": "いつでも"
+    },
+    "sunfish": {
+      "name": "ブルーギル",
+      "location": "川（町＋森）、森の農場",
+      "time": "午前6時～午後7時"
+    },
+    "redMullet": {
+      "name": "ウミヒゴイ",
+      "location": "海",
+      "time": "午前6時～午後7時"
+    },
+    "herring": {
+      "name": "ニシン",
+      "location": "海",
+      "time": "いつでも"
+    },
+    "eel": {
+      "name": "ウナギ",
+      "location": "海",
+      "time": "午後4時～午前2時"
+    },
+    "octopus": {
+      "name": "タコ",
+      "location": "海",
+      "time": "午前6時～午後1時"
+    },
+    "redSnapper": {
+      "name": "フエダイ",
+      "location": "海",
+      "time": "午前6時～午後7時"
+    },
+    "squid": {
+      "name": "イカ",
+      "location": "海",
+      "time": "午後6時～午前2時"
+    },
+    "seaCucumber": {
+      "name": "ナマコ",
+      "location": "海",
+      "time": "午前6時～午後7時"
+    },
+    "superCucumber": {
+      "name": "スーパーナマコ",
+      "location": "海、ジンジャー島の海",
+      "time": "午後6時～午前2時"
+    },
+    "ghostfish": {
+      "name": "ヒヨケウオ",
+      "location": "鉱山（20・60階）、ゴーストのドロップ",
+      "time": "いつでも"
+    },
+    "stonefish": {
+      "name": "ダルマオコゼ",
+      "location": "鉱山20階、釣りレベル3以上",
+      "time": "いつでも"
+    },
+    "icePip": {
+      "name": "アイスピップ",
+      "location": "鉱山60階、釣りレベル5以上",
+      "time": "いつでも"
+    },
+    "lavaEel": {
+      "name": "溶岩ウナギ",
+      "location": "鉱山100階（釣りレベル7以上）、火山のカルデラ",
+      "time": "いつでも"
+    },
+    "sandfish": {
+      "name": "スナゴチ",
+      "location": "砂漠",
+      "time": "午前6時～午後8時"
+    },
+    "scorpionCarp": {
+      "name": "サソリゴイ",
+      "location": "砂漠、釣りレベル4以上",
+      "time": "午前6時～午後8時"
+    },
+    "flounder": {
+      "name": "平らな魚",
+      "location": "海、ジンジャー島の海",
+      "time": "午前6時～午後8時"
+    },
+    "midnightCarp": {
+      "name": "シャイなコイ",
+      "location": "山の湖、森の湖、ジンジャー島の湖と川",
+      "time": "午後10時～午前2時"
+    },
+    "sturgeon": {
+      "name": "チョウザメ",
+      "location": "山の湖",
+      "time": "午前6時～午後7時"
+    },
+    "tigerTrout": {
+      "name": "タイガートラウト",
+      "location": "川（町＋森）",
+      "time": "午前6時～午後7時"
+    },
+    "bullhead": {
+      "name": "ブルヘッド",
+      "location": "山の湖",
+      "time": "いつでも"
+    },
+    "tilapia": {
+      "name": "ティラピア",
+      "location": "海、ジンジャー島の淡水",
+      "time": "午前6時～午後2時"
+    },
+    "chub": {
+      "name": "チャブ",
+      "location": "川（森）、山の湖",
+      "time": "いつでも"
+    },
+    "dorado": {
+      "name": "ドラド",
+      "location": "川（森）",
+      "time": "午前6時～午後7時"
+    },
+    "albacore": {
+      "name": "ビンナガ",
+      "location": "海",
+      "time": "午前6時～午前11時、午後6時～午前2時"
+    },
+    "shad": {
+      "name": "アロサ",
+      "location": "川（町＋森）",
+      "time": "午前9時～午前2時"
+    },
+    "lingcod": {
+      "name": "リングコッド",
+      "location": "川（町＋森）、山の湖",
+      "time": "いつでも"
+    },
+    "halibut": {
+      "name": "オヒョウ",
+      "location": "海",
+      "time": "午前6時～午前11時、午後7時～午前2時"
+    },
+    "woodskip": {
+      "name": "キノボリウオ",
+      "location": "秘密の森の池、森の農場",
+      "time": "いつでも"
+    },
+    "voidSalmon": {
+      "name": "闇サーモン",
+      "location": "魔女の沼",
+      "time": "いつでも"
+    },
+    "slimejack": {
+      "name": "スライムジャック",
+      "location": "突然変異した虫の巣",
+      "time": "いつでも"
+    },
+    "lionfish": {
+      "name": "ミノカサゴ",
+      "location": "ジンジャー島の海",
+      "time": "いつでも"
+    },
+    "blueDiscus": {
+      "name": "ブルーディスカス",
+      "location": "ジンジャー島の湖と川",
+      "time": "いつでも"
+    },
+    "stingray": {
+      "name": "エイ",
+      "location": "海賊の入り江（ジンジャー島）",
+      "time": "いつでも"
+    },
+    "crimsonfish": {
+      "name": "クリムゾンフィッシュ",
+      "location": "浜辺の東の橋、深い水で。釣りレベル5が必要。",
+      "time": "いつでも"
+    },
+    "angler": {
+      "name": "ツリビトアンコウ",
+      "location": "ジョジャマートの北の板の橋。釣りレベル3が必要。",
+      "time": "いつでも"
+    },
+    "legend": {
+      "name": "レジェンド",
+      "location": "山の湖、丸太の近く。釣りレベル10が必要。",
+      "time": "いつでも"
+    },
+    "glacierfish": {
+      "name": "アイスフィッシュ",
+      "location": "矢じり島の南端にある残り火の樹液の森、深い水で。釣りレベル6が必要。",
+      "time": "いつでも"
+    },
+    "mutantCarp": {
+      "name": "ミュータントゴイ",
+      "location": "下水道",
+      "time": "いつでも"
+    },
+    "sonOfCrimsonfish": {
+      "name": "クリムゾンフィッシュの息子",
+      "location": "浜辺の東の桟橋。釣りレベル5が必要。",
+      "time": "いつでも"
+    },
+    "msAngler": {
+      "name": "ミズ・ツリビトアンコウ",
+      "location": "ジョジャマートの北の板の橋。釣りレベル3が必要。",
+      "time": "いつでも"
+    },
+    "legendII": {
+      "name": "レジェンド2世",
+      "location": "山の湖、丸太の近く。釣りレベル10以上が必要。",
+      "time": "いつでも"
+    },
+    "glacierfishJr": {
+      "name": "アイスフィッシュ・ジュニア",
+      "location": "矢じり島の南端にある残り火の樹液の森。釣りレベル6が必要。",
+      "time": "いつでも"
+    },
+    "radioactiveCarp": {
+      "name": "放射性コイ",
+      "location": "下水道",
+      "time": "いつでも"
+    },
+    "midnightSquid": {
+      "name": "夜闇イカ",
+      "location": "潜水艦（夜市）",
+      "time": "午後5時～午前2時"
+    },
+    "spookFish": {
+      "name": "ぶきみ魚",
+      "location": "潜水艦（夜市）",
+      "time": "午後5時～午前2時"
+    },
+    "blobfish": {
+      "name": "ぶくぶく魚",
+      "location": "潜水艦（夜市）",
+      "time": "午後5時～午前2時"
+    },
+    "lobster": {
+      "name": "ロブスター",
+      "location": "海",
+      "time": "いつでも"
+    },
+    "crab": {
+      "name": "カニ",
+      "location": "海",
+      "time": "いつでも"
+    },
+    "shrimp": {
+      "name": "エビ",
+      "location": "海",
+      "time": "いつでも"
+    },
+    "cockle": {
+      "name": "ザルガイ",
+      "location": "海",
+      "time": "いつでも"
+    },
+    "mussel": {
+      "name": "ムールガイ",
+      "location": "海",
+      "time": "いつでも"
+    },
+    "oyster": {
+      "name": "カキ",
+      "location": "海",
+      "time": "いつでも"
+    },
+    "clam": {
+      "name": "アサリ",
+      "location": "海",
+      "time": "いつでも"
+    },
+    "crayfish": {
+      "name": "ザリガニ",
+      "location": "淡水（川・湖）",
+      "time": "いつでも"
+    },
+    "snail": {
+      "name": "カタツムリ",
+      "location": "淡水（川・湖）",
+      "time": "いつでも"
+    },
+    "periwinkle": {
+      "name": "タマキビ",
+      "location": "淡水（川・湖）",
+      "time": "いつでも"
+    }
+  },
+  "achievements": {
+    "a1": {
+      "name": "新人牧場主",
+      "desc": "15000Gをかせぐ"
+    },
+    "a2": {
+      "name": "牛飼い",
+      "desc": "50000Gをかせぐ"
+    },
+    "a3": {
+      "name": "1人前の牧場主",
+      "desc": "250000Gをかせぐ"
+    },
+    "a4": {
+      "name": "ミリオネア",
+      "desc": "1000000Gをかせぐ"
+    },
+    "a5": {
+      "name": "伝説の牧場主",
+      "desc": "10000000Gをかせぐ"
+    },
+    "a6": {
+      "name": "コンプリートコレクション",
+      "desc": "博物館のコレクションをすべてあつめる。"
+    },
+    "a7": {
+      "name": "新しい友達",
+      "desc": "だれかとの友好度を5まで上げる。"
+    },
+    "a8": {
+      "name": "親友",
+      "desc": "だれかとの友好度を10まで上げる。"
+    },
+    "a9": {
+      "name": "愛され系牧場主",
+      "desc": "8人の友好度を10まで上げる。"
+    },
+    "a10": {
+      "name": "友達グループ",
+      "desc": "4人の友好度を5まで上げる。"
+    },
+    "a11": {
+      "name": "ご近所づきあい",
+      "desc": "10人の友好度を5まで上げる。"
+    },
+    "a12": {
+      "name": "人気者",
+      "desc": "20人の友好度を5まで上げる。"
+    },
+    "a13": {
+      "name": "コック",
+      "desc": "10種類の料理をつくる。"
+    },
+    "a14": {
+      "name": "シェフ",
+      "desc": "25種類の料理をつくる。"
+    },
+    "a15": {
+      "name": "グルメマスター",
+      "desc": "すべての料理をつくる。"
+    },
+    "a16": {
+      "name": "上昇志向",
+      "desc": "家をアップグレードする。"
+    },
+    "a17": {
+      "name": "ブルジョア生活",
+      "desc": "家を最大サイズまでアップグレードする。"
+    },
+    "a18": {
+      "name": "D.I.Y.",
+      "desc": "クラフトで15種類のアイテムをつくる。"
+    },
+    "a19": {
+      "name": "職人",
+      "desc": "クラフトで30種類のアイテムをつくる。"
+    },
+    "a20": {
+      "name": "クラフトマスター",
+      "desc": "クラフトできるアイテムをすべてつくる。"
+    },
+    "a21": {
+      "name": "釣り人",
+      "desc": "魚を10種類釣りあげる。"
+    },
+    "a22": {
+      "name": "海の古兵",
+      "desc": "魚を24種類釣りあげる。"
+    },
+    "a23": {
+      "name": "釣りマスター",
+      "desc": "魚を全種類釣りあげる。"
+    },
+    "a24": {
+      "name": "大漁旗",
+      "desc": "魚を100匹釣りあげる。"
+    },
+    "a25": {
+      "name": "お宝発掘",
+      "desc": "博物館に40種類アイテムを寄付する。"
+    },
+    "a26": {
+      "name": "雑用係",
+      "desc": "「お手伝い」を10件完了させる。"
+    },
+    "a27": {
+      "name": "大きな親切",
+      "desc": "「お手伝い」を40件完了させる。"
+    },
+    "a28": {
+      "name": "混作農業",
+      "desc": "すべての作物を15個ずつ出荷する。"
+    },
+    "a29": {
+      "name": "単作農業",
+      "desc": "作物のどれか1種類を300個出荷する。"
+    },
+    "a30": {
+      "name": "満タンの出荷箱",
+      "desc": "すべてのアイテムを出荷する。"
+    },
+    "a41": {
+      "name": "遠い海岸",
+      "desc": "ジンジャーアイランドにたどり着く。"
+    },
+    "a42": {
+      "name": "読書家",
+      "desc": "すべての本を読む。"
+    },
+    "a43": {
+      "name": "超いいね",
+      "desc": "映画を見る。"
+    },
+    "a44": {
+      "name": "ブルーリボン",
+      "desc": "スターデューバレーまつりの品評会で1位になる。"
+    },
+    "a45": {
+      "name": "忘れられないスープ",
+      "desc": "知事を満足させる。"
+    },
+    "a46": {
+      "name": "親しいご近所さん",
+      "desc": "森に住むご近所さんが家族を増やすのを手助けする。"
+    },
+    "a47": {
+      "name": "底にひそむ危険",
+      "desc": "「危険」な鉱山の底に到達する。"
+    },
+    "a48": {
+      "name": "無限のパワー",
+      "desc": "最強の武器を手に入れる。"
+    },
+    "a49": {
+      "name": "完璧",
+      "desc": "頂点に到達する。"
+    }
+  },
+  "villagers": {
+    "kent": "ケント",
+    "lewis": "ルイス",
+    "vincent": "ヴィンセント",
+    "haley": "ヘイリー",
+    "pam": "パム",
+    "shane": "シェーン",
+    "pierre": "ピエール",
+    "emily": "エミリー",
+    "jas": "ジャス",
+    "gus": "ガス",
+    "maru": "マル",
+    "alex": "アレックス",
+    "sam": "サム",
+    "demetrius": "ディメトリウス",
+    "dwarf": "ドワーフ",
+    "willy": "ウィリー",
+    "leo": "レオ",
+    "penny": "ペニー",
+    "elliott": "エリオット",
+    "jodi": "ジョディ",
+    "abigail": "アビゲイル",
+    "sandy": "サンディ",
+    "marnie": "マーニー",
+    "robin": "ロビン",
+    "george": "ジョージ",
+    "krobus": "クロバス",
+    "linus": "ライナス",
+    "caroline": "キャロライン",
+    "sebastian": "セバスチャン",
+    "harvey": "ハーヴィー",
+    "wizard": "魔術師",
+    "evelyn": "エブリン",
+    "leah": "リア",
+    "clint": "クリント"
+  },
+  "bundleItem": {
+    "wildHorseradish": "ノワサビ",
+    "daffodil": "ラッパスイセン",
+    "leek": "ポロネギ",
+    "dandelion": "タンポポ",
+    "spiceBerry": "スパイスベリー",
+    "sweetPea": "スイートピー",
+    "commonMushroom": "マッシュルーム",
+    "wildPlum": "野生のプラム",
+    "hazelnut": "ヘーゼルナッツ",
+    "blackberry": "ブラックベリー",
+    "winterRoot": "クワイ",
+    "crystalFruit": "クリスタルフルーツ",
+    "snowYam": "スノーヤム",
+    "crocus": "クロッカス",
+    "wood": "木材",
+    "stone": "石",
+    "hardwood": "堅い木",
+    "coconut": "ココナッツ",
+    "cactusFruit": "サボテンフルーツ",
+    "caveCarrot": "洞窟ニンジン",
+    "redMushroom": "赤キノコ",
+    "purpleMushroom": "むらさきキノコ",
+    "mapleSyrup": "メープルシロップ",
+    "oakResin": "オークの樹脂",
+    "pineTar": "マツやに",
+    "morel": "アミガサタケ",
+    "sunfish": "ブルーギル",
+    "catfish": "ナマズ",
+    "shad": "アロサ",
+    "tigerTrout": "タイガートラウト",
+    "largemouthBass": "ブラックバス",
+    "carp": "コイ",
+    "bullhead": "ブルヘッド",
+    "sturgeon": "チョウザメ",
+    "sardine": "イワシ",
+    "tuna": "マグロ",
+    "redSnapper": "フエダイ",
+    "tilapia": "ティラピア",
+    "walleye": "ウォールアイ",
+    "bream": "ブリーム",
+    "eel": "ウナギ",
+    "lobster": "ロブスター",
+    "crab": "カニ",
+    "shrimp": "エビ",
+    "crayfish": "ザリガニ",
+    "snail": "カタツムリ",
+    "periwinkle": "タマキビ",
+    "mussel": "ムールガイ",
+    "cockle": "ザルガイ",
+    "oyster": "カキ",
+    "clam": "アサリ",
+    "pufferfish": "ハリセンボン",
+    "ghostfish": "ヒヨケウオ",
+    "sandfish": "スナゴチ",
+    "woodskip": "キノボリウオ",
+    "largeMilk": "おおきなミルク",
+    "largeEgg": "おおきなタマゴ",
+    "wool": "ウール",
+    "duckEgg": "アヒルのタマゴ",
+    "truffleOil": "トリュフオイル",
+    "cloth": "布",
+    "goatCheese": "ヤギのチーズ",
+    "cheese": "チーズ",
+    "honey": "ハチミツ",
+    "jelly": "ジャム",
+    "apple": "リンゴ",
+    "apricot": "アプリコット",
+    "orange": "オレンジ",
+    "peach": "モモ",
+    "pomegranate": "ザクロ",
+    "cherry": "サクランボ",
+    "copperBar": "銅ののべ棒",
+    "ironBar": "鉄ののべ棒",
+    "goldBar": "金ののべ棒",
+    "quartz": "水晶",
+    "earthCrystal": "アースクリスタル",
+    "frozenTear": "イエティのなみだ",
+    "fireQuartz": "ファイアクオーツ",
+    "slime": "スライム",
+    "batWing": "コウモリのつばさ",
+    "solarEssence": "光の結晶",
+    "voidEssence": "闇の結晶",
+    "fiddleheadFern": "フィドルヘッド",
+    "truffle": "トリュフ",
+    "makiRoll": "巻きずし",
+    "friedEgg": "目玉焼き",
+    "seaUrchin": "ウニ",
+    "duckFeather": "アヒルのハネ",
+    "aquamarine": "アクアマリン",
+    "nautilusShell": "オウムガイの貝がら",
+    "chub": "チャブ",
+    "frozenGeode": "フローズンジオード",
+    "hay": "ほし草",
+    "wine": "ワイン",
+    "rabbitsFoot": "ウサギの足",
+    "springOnion": "葉タマネギ",
+    "holly": "ひいらぎ",
+    "sap": "樹液",
+    "moss": "コケ",
+    "fiber": "せんい",
+    "acorn": "ドングリ",
+    "mapleSeed": "カエデのタネ",
+    "whiteAlgae": "白い藻",
+    "wood2": "木材",
+    "mead": "はちみつ酒",
+    "paleAle": "ペールエール",
+    "juice": "ジュース",
+    "greenTea": "緑茶",
+    "roe": "魚卵",
+    "agedRoe": "熟成卵",
+    "squidInk": "イカのインク",
+    "lavaEel": "溶岩ウナギ",
+    "scorpionCarp": "サソリゴイ",
+    "octopus": "タコ",
+    "blobfish": "ぶくぶく魚",
+    "boneFragment": "骨の破片",
+    "amethyst": "アメシスト",
+    "diamond": "ダイヤモンド",
+    "emerald": "エメラルド",
+    "ruby": "ルビー",
+    "topaz": "トパーズ",
+    "iridiumOre": "イリジウム鉱石",
+    "iridiumBar": "イリジウムののべ棒",
+    "batteryPack": "電池",
+    "refinedQuartz": "精錬クリスタル",
+    "egg": "タマゴ",
+    "milk": "ミルク",
+    "salmonberry": "サーモンベリー",
+    "ancientDoll": "古代の人形",
+    "iceCream": "アイスクリーム",
+    "jackOLantern": "ジャックオーランタン",
+    "largeBrownEgg": "おおきなタマゴ",
+    "largeGoatMilk": "おおきなヤギミルク",
+    "flour": "コムギ粉",
+    "cookie": "クッキー"
+  },
+  "crops": {
+    "parsnip": "パースニップ",
+    "potato": "ジャガイモ",
+    "cauliflower": "カリフラワー",
+    "kale": "ケール",
+    "garlic": "ニンニク",
+    "rhubarb": "ルバーブ",
+    "strawberry": "イチゴ",
+    "greenBean": "サヤエンドウ",
+    "tulip": "チューリップ",
+    "blueJazz": "ブルージャズ",
+    "coffeeBean": "コーヒー豆",
+    "blueberry": "ブルーベリー",
+    "melon": "メロン",
+    "tomato": "トマト",
+    "hotPepper": "トウガラシ",
+    "radish": "ラディッシュ",
+    "hops": "ホップ",
+    "poppy": "ポピー",
+    "redCabbage": "赤キャベツ",
+    "starfruit": "スターフルーツ",
+    "wheat": "コムギ",
+    "corn": "トウモロコシ",
+    "sunflower": "ヒマワリ",
+    "pumpkin": "カボチャ",
+    "cranberry": "クランベリー",
+    "eggplant": "ナス",
+    "amaranth": "アマランサス",
+    "grape": "ブドウ",
+    "yam": "サツマイモ",
+    "bokChoy": "チンゲンサイ",
+    "artichoke": "アーティチョーク",
+    "beet": "ビーツ",
+    "fairyRose": "フェアリーローズ",
+    "sweetGemBerry": "スイートジェムベリー",
+    "carrot": "ニンジン",
+    "unmilledRice": "玄米",
+    "springSeeds": "春のタネつめあわせ",
+    "pineapple": "パイナップル",
+    "summerSquash": "サマースクワッシュ",
+    "taroRoot": "タロイモの根",
+    "summerSpangle": "サマースパングル",
+    "summerSeeds": "夏のタネつめあわせ",
+    "broccoli": "ブロッコリー",
+    "fallSeeds": "秋のタネつめあわせ",
+    "powdermelon": "パウダーメロン",
+    "winterSeeds": "冬のタネつめあわせ",
+    "teaLeaves": "茶葉",
+    "ancientFruit": "古代のフルーツ"
+  },
+  "materials": {
+    "wood": "木材",
+    "stone": "石",
+    "clay": "粘土",
+    "cloth": "布",
+    "copperBar": "銅ののべ棒",
+    "ironBar": "鉄ののべ棒",
+    "iridiumBar": "イリジウムののべ棒",
+    "refinedQuartz": "精錬クリスタル",
+    "seaweed": "海草",
+    "greenAlgae": "緑の藻",
+    "hardwood": "堅い木",
+    "fiber": "せんい"
+  },
+  "bundleRoom": {
+    "pantry": "食料室",
+    "craftsRoom": "クラフトルーム",
+    "fishTank": "水そう",
+    "boilerRoom": "ボイラールーム",
+    "bulletinBoard": "けいじばん",
+    "vault": "金庫室"
+  }
+}

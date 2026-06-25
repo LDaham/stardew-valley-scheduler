@@ -3,19 +3,22 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Modal from "@/components/Modal";
-import LocaleSwitcher from "@/components/LocaleSwitcher";
 import ThemeToggle from "@/components/ThemeToggle";
-import FeedbackForm from "@/components/FeedbackForm";
 import TodoSettings from "@/components/TodoSettings";
 import { useSchedule } from "@/components/ScheduleProvider";
 
-// 설정 다이얼로그(탭): 일반 · 메인화면(정보/할 일) · 오류 보고.
+// GitHub 저장소(owner/repo). 오류 보고·건의를 이슈 페이지로 연결한다.
+// 다른 저장소로 바꾸려면 NEXT_PUBLIC_GITHUB_REPO 환경변수로 덮어쓴다.
+const REPO =
+  process.env.NEXT_PUBLIC_GITHUB_REPO || "LDaham/stardew-valley-scheduler";
+
+// 설정 다이얼로그(탭): 일반 · 메인화면(정보/할 일).
 export default function SettingsDialog({ onClose }: { onClose: () => void }) {
   const t = useTranslations();
   const { resetAll, exportState, importState } = useSchedule();
   const [confirming, setConfirming] = useState(false);
-  // 설정 탭: 일반 / 메인화면 / 오류 보고
-  const [tab, setTab] = useState<"general" | "main" | "feedback">("general");
+  // 설정 탭: 일반 / 메인화면
+  const [tab, setTab] = useState<"general" | "main">("general");
   // 가져오기 결과 안내(성공/실패)
   const [importMsg, setImportMsg] = useState<{ ok: boolean; text: string } | null>(
     null,
@@ -50,15 +53,14 @@ export default function SettingsDialog({ onClose }: { onClose: () => void }) {
     reader.readAsText(file);
   };
 
-  const tabs: { key: "general" | "main" | "feedback"; label: string }[] = [
+  const tabs: { key: "general" | "main"; label: string }[] = [
     { key: "general", label: t("settings.tabGeneral") },
     { key: "main", label: t("settings.tabMain") },
-    { key: "feedback", label: t("settings.tabFeedback") },
   ];
 
   return (
     <Modal title={t("settings.title")} onClose={onClose}>
-      {/* 상단 탭(밑줄형): 일반 / 메인화면 / 오류 보고 */}
+      {/* 상단 탭(밑줄형): 일반 / 메인화면 */}
       <div className="mb-4 flex flex-wrap gap-1 border-b border-[var(--sv-border)]">
         {tabs.map(({ key, label }) => {
           const isActive = tab === key;
@@ -89,18 +91,20 @@ export default function SettingsDialog({ onClose }: { onClose: () => void }) {
             <ThemeToggle />
           </section>
 
-          <section className="mb-5">
-            <h3 className="mb-2 text-sm font-semibold text-[var(--sv-ink-muted)]">
-              {t("settings.language")}
-            </h3>
-            <LocaleSwitcher />
-          </section>
-
           {/* 데이터 백업·이전(내보내기/가져오기 JSON) */}
           <section className="mb-5">
             <h3 className="mb-2 text-sm font-semibold text-[var(--sv-ink-muted)]">
               {t("settings.dataTitle")}
             </h3>
+            {/* 오류 보고·건의: 서버 없이 GitHub 이슈 페이지로 연결(제출엔 깃허브 계정 필요) */}
+            <a
+              href={`https://github.com/${REPO}/issues`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mb-3 inline-flex items-center gap-2 rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm font-semibold hover:bg-[var(--sv-bg)]"
+            >
+              {t("settings.reportIssue")}
+            </a>
             <p className="mb-2 text-xs text-[var(--sv-ink-muted)]">
               {t("settings.dataDesc")}
             </p>
@@ -177,9 +181,6 @@ export default function SettingsDialog({ onClose }: { onClose: () => void }) {
 
       {/* 메인화면: 표시 항목·순서 설정(정보/할 일)을 인라인으로 표시 */}
       {tab === "main" && <TodoSettings />}
-
-      {/* 오류 보고·아이디어 제시 */}
-      {tab === "feedback" && <FeedbackForm />}
     </Modal>
   );
 }

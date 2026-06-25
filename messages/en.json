@@ -118,20 +118,11 @@
   "ui": {
     "language": "Language"
   },
-  "feedback": {
-    "desc": "Opens a GitHub issue (GitHub account required). Write below and the prefilled issue page opens.",
-    "typeBug": "Bug report",
-    "typeIdea": "Idea",
-    "titlePlaceholder": "Title",
-    "descPlaceholder": "Description",
-    "submit": "Open on GitHub"
-  },
   "settings": {
     "title": "Settings",
     "open": "Open settings",
     "tabGeneral": "General",
     "tabMain": "Main screen",
-    "tabFeedback": "Bug report",
     "mainTabDesc": "Choose what to show on the main screen and in what order.",
     "todoSettings": "Main screen settings",
     "openTodo": "Open to-do list settings",
@@ -148,7 +139,7 @@
     "themeSummer": "Summer",
     "themeFall": "Fall",
     "themeWinter": "Winter",
-    "language": "Language",
+    "reportIssue": "Report a bug / suggestion (GitHub)",
     "dataTitle": "Backup & transfer",
     "dataDesc": "Export your settings and progress to a file, or import that file on another device.",
     "exportButton": "Export",
@@ -156,7 +147,7 @@
     "importSuccess": "Imported! Your data has been applied.",
     "importError": "Import failed: not a valid backup file.",
     "resetTitle": "Reset all settings",
-    "resetDesc": "Restores all saved settings (bundles, character, tasks, etc.) to defaults. This cannot be undone.",
+    "resetDesc": "Restores all saved settings (bundles, tasks, etc.) to defaults. This cannot be undone.",
     "resetButton": "Reset all settings",
     "resetConfirm": "Reset everything?",
     "resetYes": "Reset",
@@ -366,8 +357,8 @@
     "woodskip": "Woodskip",
     "largeMilk": "Large Milk",
     "largeEgg": "Large Egg",
-    "largeBrownEgg": "Large Brown Egg",
-    "largeGoatMilk": "Large Goat Milk",
+    "largeBrownEgg": "Large Egg",
+    "largeGoatMilk": "L. Goat Milk",
     "wool": "Wool",
     "duckEgg": "Duck Egg",
     "truffleOil": "Truffle Oil",
@@ -438,9 +429,9 @@
     "refinedQuartz": "Refined Quartz",
     "egg": "Egg",
     "milk": "Milk",
-    "flour": "Flour",
+    "flour": "Wheat Flour",
     "salmonberry": "Salmonberry",
-    "cookie": "Cookie",
+    "cookie": "Cookies",
     "ancientDoll": "Ancient Doll",
     "iceCream": "Ice Cream",
     "jackOLantern": "Jack-O-Lantern",
@@ -621,9 +612,7 @@
     "slimeHutch": "Slime Hutch",
     "stable": "Stable",
     "well": "Well",
-    "stoneCabin": "Stone Cabin",
-    "plankCabin": "Plank Cabin",
-    "logCabin": "Log Cabin",
+    "logCabin": "Cabin",
     "shippingBin": "Shipping Bin",
     "farmhouse1": "Farmhouse Upgrade 1",
     "farmhouse2": "Farmhouse Upgrade 2",
@@ -1133,7 +1122,7 @@
     "corn": "Corn",
     "sunflower": "Sunflower",
     "pumpkin": "Pumpkin",
-    "cranberry": "Cranberry",
+    "cranberry": "Cranberries",
     "eggplant": "Eggplant",
     "amaranth": "Amaranth",
     "grape": "Grape",
@@ -1666,288 +1655,288 @@
   "fishInfo": {
     "pufferfish": {
       "name": "Pufferfish",
-      "location": "바다, 진저 섬 바다",
-      "time": "오후 12시 – 오후 4시"
+      "location": "Ocean, Ginger Island ocean",
+      "time": "12 PM – 4 PM"
     },
     "anchovy": {
       "name": "Anchovy",
-      "location": "바다",
-      "time": "아무때나"
+      "location": "Ocean",
+      "time": "Anytime"
     },
     "tuna": {
       "name": "Tuna",
-      "location": "바다, 진저 섬 바다",
-      "time": "오전 6시 – 오후 7시"
+      "location": "Ocean, Ginger Island ocean",
+      "time": "6 AM – 7 PM"
     },
     "sardine": {
       "name": "Sardine",
-      "location": "바다",
-      "time": "오전 6시 – 오후 7시"
+      "location": "Ocean",
+      "time": "6 AM – 7 PM"
     },
     "bream": {
       "name": "Bream",
-      "location": "강 (마을 + 숲)",
-      "time": "오후 6시 – 오전 2시"
+      "location": "River (Town + Forest)",
+      "time": "6 PM – 2 AM"
     },
     "largemouthBass": {
       "name": "Largemouth Bass",
-      "location": "산 호수",
-      "time": "오전 6시 – 오후 7시"
+      "location": "Mountain Lake",
+      "time": "6 AM – 7 PM"
     },
     "smallmouthBass": {
       "name": "Smallmouth Bass",
-      "location": "강 (마을) 숲 연못 강변 농장",
-      "time": "아무때나"
+      "location": "River (Town), Forest pond, Riverland Farm",
+      "time": "Anytime"
     },
     "rainbowTrout": {
       "name": "Rainbow Trout",
-      "location": "강 (마을+숲) 산 호수",
-      "time": "오전 6시 – 오후 7시"
+      "location": "River (Town + Forest), Mountain Lake",
+      "time": "6 AM – 7 PM"
     },
     "salmon": {
       "name": "Salmon",
-      "location": "강 (마을+숲)",
-      "time": "오전 6시 – 오후 7시"
+      "location": "River (Town + Forest)",
+      "time": "6 AM – 7 PM"
     },
     "walleye": {
       "name": "Walleye",
-      "location": "강 (마을+숲) 숲 연못 산 호수",
-      "time": "오후 12시 – 오전 2시"
+      "location": "River (Town + Forest), Forest pond, Mountain Lake",
+      "time": "12 PM – 2 AM"
     },
     "perch": {
       "name": "Perch",
-      "location": "강 (마을+숲) 숲 연못 산 호수",
-      "time": "아무때나"
+      "location": "River (Town + Forest), Forest pond, Mountain Lake",
+      "time": "Anytime"
     },
     "carp": {
       "name": "Carp",
-      "location": "산 호수 비밀의 숲 연못 하수도",
-      "time": "아무때나"
+      "location": "Mountain Lake, Secret Woods pond, Sewers",
+      "time": "Anytime"
     },
     "catfish": {
       "name": "Catfish",
-      "location": "강 (마을+숲) 비밀의 숲 연못 마녀의 늪",
-      "time": "아무때나"
+      "location": "River (Town + Forest), Secret Woods pond, Witch's Swamp",
+      "time": "Anytime"
     },
     "pike": {
       "name": "Pike",
-      "location": "강 (마을+숲) 숲 연못",
-      "time": "아무때나"
+      "location": "River (Town + Forest), Forest pond",
+      "time": "Anytime"
     },
     "sunfish": {
       "name": "Sunfish",
-      "location": "강 (마을+숲) 삼림 농장",
-      "time": "오전 6시 – 오후 7시"
+      "location": "River (Town + Forest), Forest Farm",
+      "time": "6 AM – 7 PM"
     },
     "redMullet": {
       "name": "Red Mullet",
-      "location": "바다",
-      "time": "오전 6시 – 오후 7시"
+      "location": "Ocean",
+      "time": "6 AM – 7 PM"
     },
     "herring": {
       "name": "Herring",
-      "location": "바다",
-      "time": "아무때나"
+      "location": "Ocean",
+      "time": "Anytime"
     },
     "eel": {
       "name": "Eel",
-      "location": "바다",
-      "time": "오후 4시 – 오전 2시"
+      "location": "Ocean",
+      "time": "4 PM – 2 AM"
     },
     "octopus": {
       "name": "Octopus",
-      "location": "바다",
-      "time": "오전 6시 – 오후 1시"
+      "location": "Ocean",
+      "time": "6 AM – 1 PM"
     },
     "redSnapper": {
       "name": "Red Snapper",
-      "location": "바다",
-      "time": "오전 6시 – 오후 7시"
+      "location": "Ocean",
+      "time": "6 AM – 7 PM"
     },
     "squid": {
       "name": "Squid",
-      "location": "바다",
-      "time": "오후 6시 – 오전 2시"
+      "location": "Ocean",
+      "time": "6 PM – 2 AM"
     },
     "seaCucumber": {
       "name": "Sea Cucumber",
-      "location": "바다",
-      "time": "오전 6시 – 오후 7시"
+      "location": "Ocean",
+      "time": "6 AM – 7 PM"
     },
     "superCucumber": {
       "name": "Super Cucumber",
-      "location": "바다, 진저 섬 바다",
-      "time": "오후 6시 – 오전 2시"
+      "location": "Ocean, Ginger Island ocean",
+      "time": "6 PM – 2 AM"
     },
     "ghostfish": {
       "name": "Ghostfish",
-      "location": "광산 (20, 60) 유령 드랍",
-      "time": "아무때나"
+      "location": "Mines (floors 20, 60), Ghost drop",
+      "time": "Anytime"
     },
     "stonefish": {
       "name": "Stonefish",
-      "location": "광산 20층 낚시 3 레벨 이상",
-      "time": "아무때나"
+      "location": "Mines floor 20, Fishing level 3+",
+      "time": "Anytime"
     },
     "icePip": {
       "name": "Ice Pip",
-      "location": "광산 60층 낚시 5 레벨 이상",
-      "time": "아무때나"
+      "location": "Mines floor 60, Fishing level 5+",
+      "time": "Anytime"
     },
     "lavaEel": {
       "name": "Lava Eel",
-      "location": "광산 100층 낚시 7 레벨 이상 화산 칼데라",
-      "time": "아무때나"
+      "location": "Mines floor 100 (Fishing level 7+), Volcano Caldera",
+      "time": "Anytime"
     },
     "sandfish": {
       "name": "Sandfish",
-      "location": "사막",
-      "time": "오전 6시 – 오후 8시"
+      "location": "Desert",
+      "time": "6 AM – 8 PM"
     },
     "scorpionCarp": {
       "name": "Scorpion Carp",
-      "location": "사막 낚시 4 레벨 이상",
-      "time": "오전 6시 – 오후 8시"
+      "location": "Desert, Fishing level 4+",
+      "time": "6 AM – 8 PM"
     },
     "flounder": {
       "name": "Flounder",
-      "location": "바다 , 진저 섬 바다",
-      "time": "오전 6시 – 오후 8시"
+      "location": "Ocean, Ginger Island ocean",
+      "time": "6 AM – 8 PM"
     },
     "midnightCarp": {
       "name": "Midnight Carp",
-      "location": "산 호수 , 숲 호수, 진저 섬 호수와 강",
-      "time": "오후 10시 – 오전 2시"
+      "location": "Mountain Lake, Forest lake, Ginger Island lakes & rivers",
+      "time": "10 PM – 2 AM"
     },
     "sturgeon": {
       "name": "Sturgeon",
-      "location": "산 호수",
-      "time": "오전 6시 – 오후 7시"
+      "location": "Mountain Lake",
+      "time": "6 AM – 7 PM"
     },
     "tigerTrout": {
       "name": "Tiger Trout",
-      "location": "강 (마을+숲)",
-      "time": "오전 6시 – 오후 7시"
+      "location": "River (Town + Forest)",
+      "time": "6 AM – 7 PM"
     },
     "bullhead": {
       "name": "Bullhead",
-      "location": "산 호수",
-      "time": "아무때나"
+      "location": "Mountain Lake",
+      "time": "Anytime"
     },
     "tilapia": {
       "name": "Tilapia",
-      "location": "바다, 진저 섬 민물",
-      "time": "오전 6시 – 오후 2시"
+      "location": "Ocean, Ginger Island freshwater",
+      "time": "6 AM – 2 PM"
     },
     "chub": {
       "name": "Chub",
-      "location": "강 (숲) 산 호수",
-      "time": "아무때나"
+      "location": "River (Forest), Mountain Lake",
+      "time": "Anytime"
     },
     "dorado": {
       "name": "Dorado",
-      "location": "강 (숲)",
-      "time": "오전 6시 – 오후 7시"
+      "location": "River (Forest)",
+      "time": "6 AM – 7 PM"
     },
     "albacore": {
       "name": "Albacore",
-      "location": "바다",
-      "time": "오전 6시 – 오전 11시 오후 6시 – 오전 2시"
+      "location": "Ocean",
+      "time": "6 AM – 11 AM, 6 PM – 2 AM"
     },
     "shad": {
       "name": "Shad",
-      "location": "강 (마을+숲)",
-      "time": "오전 9시 – 오전 2시"
+      "location": "River (Town + Forest)",
+      "time": "9 AM – 2 AM"
     },
     "lingcod": {
       "name": "Lingcod",
-      "location": "강 (마을+숲) 산 호수",
-      "time": "아무때나"
+      "location": "River (Town + Forest), Mountain Lake",
+      "time": "Anytime"
     },
     "halibut": {
       "name": "Halibut",
-      "location": "바다",
-      "time": "오전 6시 – 오전 11시 오후 7시 – 오전 2시"
+      "location": "Ocean",
+      "time": "6 AM – 11 AM, 7 PM – 2 AM"
     },
     "woodskip": {
       "name": "Woodskip",
-      "location": "비밀의 숲 연못 삼림 농장",
-      "time": "아무때나"
+      "location": "Secret Woods pond, Forest Farm",
+      "time": "Anytime"
     },
     "voidSalmon": {
       "name": "Void Salmon",
-      "location": "마녀의 늪",
-      "time": "아무때나"
+      "location": "Witch's Swamp",
+      "time": "Anytime"
     },
     "slimejack": {
       "name": "Slimejack",
-      "location": "돌연변이 곤충 둥지",
-      "time": "아무때나"
+      "location": "Mutant Bug Lair",
+      "time": "Anytime"
     },
     "lionfish": {
       "name": "Lionfish",
-      "location": "진저 섬 바다",
-      "time": "아무때나"
+      "location": "Ginger Island ocean",
+      "time": "Anytime"
     },
     "blueDiscus": {
       "name": "Blue Discus",
-      "location": "진저 섬 호수와 강",
-      "time": "아무때나"
+      "location": "Ginger Island lakes & rivers",
+      "time": "Anytime"
     },
     "stingray": {
       "name": "Stingray",
-      "location": "해적의 만(진저 섬)",
-      "time": "아무때나"
+      "location": "Pirate Cove (Ginger Island)",
+      "time": "Anytime"
     },
     "crimsonfish": {
       "name": "Crimsonfish",
-      "location": "해변 의 동쪽 다리. 깊은 물에서. 낚시 레벨 5 필요.",
-      "time": "아무때나"
+      "location": "East bridge at the Beach, in deep water. Fishing level 5 required.",
+      "time": "Anytime"
     },
     "angler": {
       "name": "Angler",
-      "location": "조자마트 북쪽에 있는 나무판자 다리. 낚시 레벨 3 필요.",
-      "time": "아무때나"
+      "location": "Wooden plank bridge north of JojaMart. Fishing level 3 required.",
+      "time": "Anytime"
     },
     "legend": {
       "name": "Legend",
-      "location": "산 호수 통나무 근처. 낚시 레벨 10 필요.",
-      "time": "아무때나"
+      "location": "Mountain Lake, near the log. Fishing level 10 required.",
+      "time": "Anytime"
     },
     "glacierfish": {
       "name": "Glacierfish",
-      "location": "화살머리 섬 남쪽 끝에 있는 잉걸불 수액 숲 . 깊은 물에서. 낚시 레벨 6 필요.",
-      "time": "아무때나"
+      "location": "Pulsenest sap forest at the south tip of Arrowhead Island, in deep water. Fishing level 6 required.",
+      "time": "Anytime"
     },
     "mutantCarp": {
       "name": "Mutant Carp",
-      "location": "하수도",
-      "time": "아무때나"
+      "location": "Sewers",
+      "time": "Anytime"
     },
     "sonOfCrimsonfish": {
       "name": "Son of Crimsonfish",
-      "location": "해변 의 동쪽 부두. 낚시 레벨 5 필요.",
-      "time": "아무때나"
+      "location": "East pier at the Beach. Fishing level 5 required.",
+      "time": "Anytime"
     },
     "msAngler": {
       "name": "Ms. Angler",
-      "location": "조자마트 북쪽 나무판자 다리. 낚시 레벨 3 필요.",
-      "time": "아무때나"
+      "location": "Wooden plank bridge north of JojaMart. Fishing level 3 required.",
+      "time": "Anytime"
     },
     "legendII": {
       "name": "Legend II",
-      "location": "산 호수 통나무 근처. 낚시 레벨 10 이상 필요.",
-      "time": "아무때나"
+      "location": "Mountain Lake, near the log. Fishing level 10 or higher required.",
+      "time": "Anytime"
     },
     "glacierfishJr": {
       "name": "Glacierfish Jr.",
-      "location": "화살머리 섬 남쪽 끝에 있는 잉걸불 수액 숲 . 낚시 레벨 6 필요.",
-      "time": "아무때나"
+      "location": "Pulsenest sap forest at the south tip of Arrowhead Island. Fishing level 6 required.",
+      "time": "Anytime"
     },
     "radioactiveCarp": {
       "name": "Radioactive Carp",
-      "location": "하수도",
-      "time": "아무때나"
+      "location": "Sewers",
+      "time": "Anytime"
     },
     "midnightSquid": {
       "name": "Midnight Squid",
@@ -2234,124 +2223,124 @@
   },
   "achievements": {
     "a1": {
-      "name": "풋내기",
-      "desc": "15,000골드 벌기."
+      "name": "Greenhorn (15k)",
+      "desc": "Earn 15,000g"
     },
     "a2": {
-      "name": "소몰이",
-      "desc": "50,000골드 벌기."
+      "name": "Cowpoke (50k)",
+      "desc": "Earn 50,000g"
     },
     "a3": {
-      "name": "농가 주인",
-      "desc": "250,000골드 벌기."
+      "name": "Homesteader (250k)",
+      "desc": "Earn 250,000g"
     },
     "a4": {
-      "name": "백만장자",
-      "desc": "1,000,000골드 벌기."
+      "name": "Millionaire (1mil)",
+      "desc": "Earn 1,000,000g"
     },
     "a5": {
-      "name": "전설",
-      "desc": "10,000,000골드 벌기 (히든 업적)."
+      "name": "Legend (10mil)",
+      "desc": "Earn 10,000,000g"
     },
     "a6": {
-      "name": "완성된 컬렉션",
-      "desc": "박물관 소장품 모두 완성."
+      "name": "A Complete Collection",
+      "desc": "Complete the museum collection."
     },
     "a7": {
-      "name": "새 친구",
-      "desc": "주민 한 명과 친밀도 5 하트 달성."
+      "name": "A New Friend",
+      "desc": "Reach a 5-heart friend level with someone."
     },
     "a8": {
-      "name": "절친",
-      "desc": "주민 한 명과 친밀도 10 하트 달성."
+      "name": "Best Friends",
+      "desc": "Reach a 10-heart friend level with someone."
     },
     "a9": {
-      "name": "총애 받는 농부",
-      "desc": "주민 8명과 친밀도 10 하트 달성."
+      "name": "The Beloved Farmer",
+      "desc": "Reach a 10-heart friend level with 8 people."
     },
     "a10": {
-      "name": "무리",
-      "desc": "주민 4명과 친밀도 5 하트 달성."
+      "name": "Cliques",
+      "desc": "Reach a 5-heart friend level with 4 people."
     },
     "a11": {
-      "name": "인맥 형성",
-      "desc": "주민 10명과 친밀도 5 하트 달성."
+      "name": "Networking",
+      "desc": "Reach a 5-heart friend level with 10 people."
     },
     "a12": {
-      "name": "인기인",
-      "desc": "주민 20명과 친밀도 5 하트 달성."
+      "name": "Popular",
+      "desc": "Reach a 5-heart friend level with 20 people."
     },
     "a13": {
-      "name": "요리사",
-      "desc": "10가지 요리 만들기."
+      "name": "Cook",
+      "desc": "Cook 10 different recipes."
     },
     "a14": {
-      "name": "수셰프",
-      "desc": "25가지 요리 만들기."
+      "name": "Sous Chef",
+      "desc": "Cook 25 different recipes."
     },
     "a15": {
-      "name": "미식가 셰프",
-      "desc": "모든 요리 만들기."
+      "name": "Gourmet Chef",
+      "desc": "Cook every recipe."
     },
     "a16": {
-      "name": "출세",
-      "desc": "집 업그레이드 하기."
+      "name": "Moving Up",
+      "desc": "Upgrade your house."
     },
     "a17": {
-      "name": "크게 살기",
-      "desc": "집 최대 크기로 업그레이드 하기. (지하 저장고까지가 아닌 2번째 업그레이드)"
+      "name": "Living Large",
+      "desc": "Upgrade your house to the maximum size."
     },
     "a18": {
-      "name": "수작업",
-      "desc": "15가지 아이템 제작 하기."
+      "name": "D.I.Y.",
+      "desc": "Craft 15 different items."
     },
     "a19": {
-      "name": "장인",
-      "desc": "30가지 아이템 제작 하기."
+      "name": "Artisan",
+      "desc": "Craft 30 different items."
     },
     "a20": {
-      "name": "제작의 달인",
-      "desc": "모든 아이템 제작 하기."
+      "name": "Craft Master",
+      "desc": "Craft every item."
     },
     "a21": {
-      "name": "낚시꾼",
-      "desc": "10가지 물고기 잡기."
+      "name": "Fisherman",
+      "desc": "Catch 10 different fish."
     },
     "a22": {
-      "name": "경험 많은 뱃사람",
-      "desc": "24가지 물고기 잡기."
+      "name": "Ol' Mariner",
+      "desc": "Catch 24 different fish."
     },
     "a23": {
-      "name": "낚시의 달인",
-      "desc": "모든 종류의 물고기 잡기."
+      "name": "Master Angler",
+      "desc": "Catch every fish."
     },
     "a24": {
-      "name": "낚시의 신",
-      "desc": "물고기 100마리 잡기."
+      "name": "Mother Catch",
+      "desc": "Catch 100 fish."
     },
     "a25": {
-      "name": "보물창고",
-      "desc": "박물관 에 40가지 다른 아이템 기증하기."
+      "name": "Treasure Trove",
+      "desc": "Donate 40 different items to the museum."
     },
     "a26": {
-      "name": "심부름꾼",
-      "desc": "' 도움 필요함 ' 요청 10개 완수."
+      "name": "Gofer",
+      "desc": "Complete 10 'Help Wanted' requests."
     },
     "a27": {
-      "name": "큰 도움",
-      "desc": "' 도움 필요함 ' 요청 40개 완수."
+      "name": "A Big Help",
+      "desc": "Complete 40 'Help Wanted' requests."
     },
     "a28": {
-      "name": "혼합 양식",
-      "desc": "각 작물 을 15개씩 배송 . (자세한 내용은 아래의 노트 에서 볼 수 있습니다)"
+      "name": "Polyculture",
+      "desc": "Ship 15 of each crop."
     },
     "a29": {
-      "name": "단일재배",
-      "desc": "한 종류의 작물 을 300개 배송 . 자세한 내용은 아래의 노트 에서 볼 수 있습니다)"
+      "name": "Monoculture",
+      "desc": "Ship 300 of one crop."
     },
     "a30": {
-      "name": "수송품 한가득",
-      "desc": "모든 아이템 운송 하기."
+      "name": "Full Shipment",
+      "desc": "Ship every item."
     },
     "a31": {
       "name": "Prairie King",
@@ -2394,40 +2383,40 @@
       "desc": "' 대초원의 왕의 모험 '을 죽지 않고 클리어. (히든 업적)"
     },
     "a41": {
-      "name": "먼 곳의 해안",
-      "desc": "진저 섬 에 도달."
+      "name": "A Distant Shore",
+      "desc": "Reach Ginger Island."
     },
     "a42": {
-      "name": "독서왕",
-      "desc": "모든 책 읽기. 참고: 능력 책에만 적용됩니다."
+      "name": "Well-read",
+      "desc": "Read every book."
     },
     "a43": {
-      "name": "최고의 평점",
-      "desc": "영화 보기."
+      "name": "Two Thumbs Up",
+      "desc": "See a movie."
     },
     "a44": {
-      "name": "블루 리본",
-      "desc": "스타듀 밸리 품평회 농가 전시 우승하기."
+      "name": "Blue Ribbon",
+      "desc": "Get 1st place in the Stardew Valley Fair competition."
     },
     "a45": {
-      "name": "잊을 수 없는 스프",
-      "desc": "도지사 를 기쁘게 하기."
+      "name": "An Unforgettable Soup",
+      "desc": "Delight the Governor."
     },
     "a46": {
-      "name": "좋은 이웃",
-      "desc": "숲의 이웃 이 가정을 꾸릴 수 있게 돕기."
+      "name": "Good Neighbors",
+      "desc": "Help your forest neighbors grow their family."
     },
     "a47": {
-      "name": "깊은 곳의 위험",
-      "desc": "'위험한' 광산 바닥에 도달."
+      "name": "Danger In The Deep",
+      "desc": "Reach the bottom of the 'dangerous' mines."
     },
     "a48": {
-      "name": "무한한 힘",
-      "desc": "가장 강한 무기 획득."
+      "name": "Infinite Power",
+      "desc": "Obtain the most powerful weapon."
     },
     "a49": {
-      "name": "완벽",
-      "desc": "정상 에 도달."
+      "name": "Perfection",
+      "desc": "Reach the summit."
     }
   },
   "achievement": {

@@ -1,0 +1,775 @@
+{
+  "buildings": {
+    "coop": "Kümes",
+    "bigCoop": "Büyük Kümes",
+    "deluxeCoop": "Kocaman Kümes",
+    "barn": "Ahır",
+    "bigBarn": "Büyük Ahır",
+    "deluxeBarn": "Kocaman Ahır",
+    "fishPond": "Balık Havuzu",
+    "mill": "Değirmen",
+    "shed": "Baraka",
+    "bigShed": "Büyük Baraka",
+    "silo": "Silo",
+    "slimeHutch": "Balçıkça Kümesi",
+    "stable": "At Ahırı",
+    "well": "Kuyu",
+    "shippingBin": "Gönderi Kutusu",
+    "logCabin": "Taş Kulübe"
+  },
+  "fishInfo": {
+    "pufferfish": {
+      "name": "Balon Balığı",
+      "location": "Okyanus, Zencefil Adası okyanusu",
+      "time": "12:00 – 16:00"
+    },
+    "anchovy": {
+      "name": "Hamsi",
+      "location": "Okyanus",
+      "time": "Her zaman"
+    },
+    "tuna": {
+      "name": "Ton Balığı",
+      "location": "Okyanus, Zencefil Adası okyanusu",
+      "time": "6:00 – 19:00"
+    },
+    "sardine": {
+      "name": "Sardalya",
+      "location": "Okyanus",
+      "time": "6:00 – 19:00"
+    },
+    "bream": {
+      "name": "Mercanbalığı",
+      "location": "Nehir (kasaba + orman)",
+      "time": "18:00 – 2:00"
+    },
+    "largemouthBass": {
+      "name": "İri Ağızlı Levrek",
+      "location": "Dağ Gölü",
+      "time": "6:00 – 19:00"
+    },
+    "smallmouthBass": {
+      "name": "Ufak Ağızlı Levrek",
+      "location": "Nehir (kasaba), orman göleti, Nehir Kıyısı Çiftliği",
+      "time": "Her zaman"
+    },
+    "rainbowTrout": {
+      "name": "Renkli Alabalık",
+      "location": "Nehir (kasaba + orman), Dağ Gölü",
+      "time": "6:00 – 19:00"
+    },
+    "salmon": {
+      "name": "Somon Balığı",
+      "location": "Nehir (kasaba + orman)",
+      "time": "6:00 – 19:00"
+    },
+    "walleye": {
+      "name": "Kömür Balığı",
+      "location": "Nehir (kasaba + orman), orman göleti, Dağ Gölü",
+      "time": "12:00 – 2:00"
+    },
+    "perch": {
+      "name": "Tatlısu Levreği",
+      "location": "Nehir (kasaba + orman), orman göleti, Dağ Gölü",
+      "time": "Her zaman"
+    },
+    "carp": {
+      "name": "Sazanbalığı",
+      "location": "Dağ Gölü, Gizli Orman göleti, Kanalizasyon",
+      "time": "Her zaman"
+    },
+    "catfish": {
+      "name": "Kedibalığı",
+      "location": "Nehir (kasaba + orman), Gizli Orman göleti, Cadının Bataklığı",
+      "time": "Her zaman"
+    },
+    "pike": {
+      "name": "Turna Balığı",
+      "location": "Nehir (kasaba + orman), orman göleti",
+      "time": "Her zaman"
+    },
+    "sunfish": {
+      "name": "Güneşbalığı",
+      "location": "Nehir (kasaba + orman), Orman Çiftliği",
+      "time": "6:00 – 19:00"
+    },
+    "redMullet": {
+      "name": "Barbunya Balığı",
+      "location": "Okyanus",
+      "time": "6:00 – 19:00"
+    },
+    "herring": {
+      "name": "Ringa Balığı",
+      "location": "Okyanus",
+      "time": "Her zaman"
+    },
+    "eel": {
+      "name": "Yılanbalığı",
+      "location": "Okyanus",
+      "time": "16:00 – 2:00"
+    },
+    "octopus": {
+      "name": "Ahtapot",
+      "location": "Okyanus",
+      "time": "6:00 – 13:00"
+    },
+    "redSnapper": {
+      "name": "Kırlangıç Balığı",
+      "location": "Okyanus",
+      "time": "6:00 – 19:00"
+    },
+    "squid": {
+      "name": "Mürekkepbalığı",
+      "location": "Okyanus",
+      "time": "18:00 – 2:00"
+    },
+    "seaCucumber": {
+      "name": "Denizhıyarı",
+      "location": "Okyanus",
+      "time": "6:00 – 19:00"
+    },
+    "superCucumber": {
+      "name": "Büyük Denizhıyarı",
+      "location": "Okyanus, Zencefil Adası okyanusu",
+      "time": "18:00 – 2:00"
+    },
+    "ghostfish": {
+      "name": "Hayaletbalığı",
+      "location": "Madenler (kat 20, 60), Hayalet düşürür",
+      "time": "Her zaman"
+    },
+    "stonefish": {
+      "name": "Kayabalığı",
+      "location": "Madenler kat 20, balıkçılık seviyesi 3+",
+      "time": "Her zaman"
+    },
+    "icePip": {
+      "name": "Buzul Çekirdekbalığı",
+      "location": "Madenler kat 60, balıkçılık seviyesi 5+",
+      "time": "Her zaman"
+    },
+    "lavaEel": {
+      "name": "Lav Yılanbalığı",
+      "location": "Madenler kat 100 (balıkçılık seviyesi 7+), Volkan Kalderası",
+      "time": "Her zaman"
+    },
+    "sandfish": {
+      "name": "Kumbalığı",
+      "location": "Çöl",
+      "time": "6:00 – 20:00"
+    },
+    "scorpionCarp": {
+      "name": "Akrepbalığı",
+      "location": "Çöl, balıkçılık seviyesi 4+",
+      "time": "6:00 – 20:00"
+    },
+    "flounder": {
+      "name": "Yassıbalık",
+      "location": "Okyanus, Zencefil Adası okyanusu",
+      "time": "6:00 – 20:00"
+    },
+    "midnightCarp": {
+      "name": "Alacakaranlık Sazanı",
+      "location": "Dağ Gölü, orman gölü, Zencefil Adası gölleri ve nehirleri",
+      "time": "22:00 – 2:00"
+    },
+    "sturgeon": {
+      "name": "Mersinbalığı",
+      "location": "Dağ Gölü",
+      "time": "6:00 – 19:00"
+    },
+    "tigerTrout": {
+      "name": "Kaplanbalığı",
+      "location": "Nehir (kasaba + orman)",
+      "time": "6:00 – 19:00"
+    },
+    "bullhead": {
+      "name": "Yayınbalığı",
+      "location": "Dağ Gölü",
+      "time": "Her zaman"
+    },
+    "tilapia": {
+      "name": "Tilapi",
+      "location": "Okyanus, Zencefil Adası tatlı suyu",
+      "time": "6:00 – 14:00"
+    },
+    "chub": {
+      "name": "Kefal",
+      "location": "Nehir (orman), Dağ Gölü",
+      "time": "Her zaman"
+    },
+    "dorado": {
+      "name": "Turuncubalık",
+      "location": "Nehir (orman)",
+      "time": "6:00 – 19:00"
+    },
+    "albacore": {
+      "name": "Orkinoz",
+      "location": "Okyanus",
+      "time": "6:00 – 11:00, 18:00 – 2:00"
+    },
+    "shad": {
+      "name": "Tirsi",
+      "location": "Nehir (kasaba + orman)",
+      "time": "9:00 – 2:00"
+    },
+    "lingcod": {
+      "name": "Dipbalığı",
+      "location": "Nehir (kasaba + orman), Dağ Gölü",
+      "time": "Her zaman"
+    },
+    "halibut": {
+      "name": "Pisibalığı",
+      "location": "Okyanus",
+      "time": "6:00 – 11:00, 19:00 – 2:00"
+    },
+    "woodskip": {
+      "name": "Korkakbalık",
+      "location": "Gizli Orman göleti, Orman Çiftliği",
+      "time": "Her zaman"
+    },
+    "voidSalmon": {
+      "name": "Boşluk Somonu",
+      "location": "Cadının Bataklığı",
+      "time": "Her zaman"
+    },
+    "slimejack": {
+      "name": "Balçık İstavridi",
+      "location": "Mutant Böcek İni",
+      "time": "Her zaman"
+    },
+    "lionfish": {
+      "name": "Aslanbalığı",
+      "location": "Zencefil Adası okyanusu",
+      "time": "Her zaman"
+    },
+    "blueDiscus": {
+      "name": "Mavi Diskus",
+      "location": "Zencefil Adası gölleri ve nehirleri",
+      "time": "Her zaman"
+    },
+    "stingray": {
+      "name": "İğnelivatoz",
+      "location": "Korsan Koyu (Zencefil Adası)",
+      "time": "Her zaman"
+    },
+    "crimsonfish": {
+      "name": "Kızılbalık",
+      "location": "Plaj'ın doğu köprüsü, derin suda. 5. balıkçılık seviyesi gerekir.",
+      "time": "Her zaman"
+    },
+    "angler": {
+      "name": "Fenerbalığı",
+      "location": "JojaMart'ın kuzeyindeki tahta köprü. 3. balıkçılık seviyesi gerekir.",
+      "time": "Her zaman"
+    },
+    "legend": {
+      "name": "Efsane",
+      "location": "Dağ Gölü, kütüğün yanında. 10. balıkçılık seviyesi gerekir.",
+      "time": "Her zaman"
+    },
+    "glacierfish": {
+      "name": "Buzulbalık",
+      "location": "Okucu Adası'nın güney ucundaki kor özsuyu ormanı, derin suda. 6. balıkçılık seviyesi gerekir.",
+      "time": "Her zaman"
+    },
+    "mutantCarp": {
+      "name": "Türeşik Sazanbalığı",
+      "location": "Kanalizasyon",
+      "time": "Her zaman"
+    },
+    "sonOfCrimsonfish": {
+      "name": "Kızılbalığın Oğlu",
+      "location": "Plaj'ın doğu iskelesi. 5. balıkçılık seviyesi gerekir.",
+      "time": "Her zaman"
+    },
+    "msAngler": {
+      "name": "Bayan Fenerbalığı",
+      "location": "JojaMart'ın kuzeyindeki tahta köprü. 3. balıkçılık seviyesi gerekir.",
+      "time": "Her zaman"
+    },
+    "legendII": {
+      "name": "II. Efsane",
+      "location": "Dağ Gölü, kütüğün yanında. En az 10. balıkçılık seviyesi gerekir.",
+      "time": "Her zaman"
+    },
+    "glacierfishJr": {
+      "name": "Buzulbalığın Oğlu",
+      "location": "Okucu Adası'nın güney ucundaki kor özsuyu ormanı. 6. balıkçılık seviyesi gerekir.",
+      "time": "Her zaman"
+    },
+    "radioactiveCarp": {
+      "name": "Radyoaktif Sazanbalığı",
+      "location": "Kanalizasyon",
+      "time": "Her zaman"
+    },
+    "midnightSquid": {
+      "name": "Gecekalamarı",
+      "location": "Denizaltı (Gece Pazarı)",
+      "time": "17:00 – 2:00"
+    },
+    "spookFish": {
+      "name": "Hortlakbalığı",
+      "location": "Denizaltı (Gece Pazarı)",
+      "time": "17:00 – 2:00"
+    },
+    "blobfish": {
+      "name": "Lekebalığı",
+      "location": "Denizaltı (Gece Pazarı)",
+      "time": "17:00 – 2:00"
+    },
+    "lobster": {
+      "name": "Istakoz",
+      "location": "Okyanus",
+      "time": "Her zaman"
+    },
+    "crab": {
+      "name": "Yengeç",
+      "location": "Okyanus",
+      "time": "Her zaman"
+    },
+    "shrimp": {
+      "name": "Karides",
+      "location": "Okyanus",
+      "time": "Her zaman"
+    },
+    "cockle": {
+      "name": "Kum Midyesi",
+      "location": "Okyanus",
+      "time": "Her zaman"
+    },
+    "mussel": {
+      "name": "Midye",
+      "location": "Okyanus",
+      "time": "Her zaman"
+    },
+    "oyster": {
+      "name": "İstiridye",
+      "location": "Okyanus",
+      "time": "Her zaman"
+    },
+    "clam": {
+      "name": "Deniz Tarağı",
+      "location": "Okyanus",
+      "time": "Her zaman"
+    },
+    "crayfish": {
+      "name": "Kerevit",
+      "location": "Tatlı su (nehir/göl)",
+      "time": "Her zaman"
+    },
+    "snail": {
+      "name": "Salyangoz",
+      "location": "Tatlı su (nehir/göl)",
+      "time": "Her zaman"
+    },
+    "periwinkle": {
+      "name": "Deniz Salyangozu",
+      "location": "Tatlı su (nehir/göl)",
+      "time": "Her zaman"
+    }
+  },
+  "achievements": {
+    "a1": {
+      "name": "Acemi (15b)",
+      "desc": "15.000g kazan."
+    },
+    "a2": {
+      "name": "Kovboy (50b)",
+      "desc": "50.000g kazan."
+    },
+    "a3": {
+      "name": "Çiftçi (250b)",
+      "desc": "250.000g kazan."
+    },
+    "a4": {
+      "name": "Milyoner (1mil)",
+      "desc": "1.000.000g kazan."
+    },
+    "a5": {
+      "name": "Efsane (10mil)",
+      "desc": "10.000.000g kazan."
+    },
+    "a6": {
+      "name": "Koleksiyoncu",
+      "desc": "Müze koleksiyonunu tamamla."
+    },
+    "a7": {
+      "name": "Yeni Arkadaşlar",
+      "desc": "5 kalp düzeyinde bir ilişkiye sahip ol."
+    },
+    "a8": {
+      "name": "En İyi Arkadaşlar",
+      "desc": "10 kalp düzeyinde bir ilişkiye sahip ol."
+    },
+    "a9": {
+      "name": "Sevilen Çiftçi",
+      "desc": "8 kişi ile 10 kalp düzeyinde ilişkiye sahip ol."
+    },
+    "a10": {
+      "name": "Tayfa",
+      "desc": "4 kişi ile 5 kalp düzeyinde ilişkiye sahip ol."
+    },
+    "a11": {
+      "name": "Ortamcı",
+      "desc": "10 kişi ile 5 kalp düzeyinde ilişkiye sahip ol."
+    },
+    "a12": {
+      "name": "Ünlü",
+      "desc": "20 kişi ile 5 kalp düzeyinde ilişkiye sahip ol."
+    },
+    "a13": {
+      "name": "Aşçı",
+      "desc": "10 farklı tarif pişir."
+    },
+    "a14": {
+      "name": "Usta Aşçı",
+      "desc": "25 farklı tarif pişir."
+    },
+    "a15": {
+      "name": "Gurme",
+      "desc": "Her tarifi pişir."
+    },
+    "a16": {
+      "name": "Yükseliş",
+      "desc": "Evini geliştir."
+    },
+    "a17": {
+      "name": "Geniş Yaşam",
+      "desc": "Evini en büyük boyuta yükselt."
+    },
+    "a18": {
+      "name": "Kendin Yap",
+      "desc": "15 farklı nesne üret."
+    },
+    "a19": {
+      "name": "Zanaatkâr",
+      "desc": "30 farklı nesne üret."
+    },
+    "a20": {
+      "name": "Zanaat Ustası",
+      "desc": "Her nesneyi üret."
+    },
+    "a21": {
+      "name": "Balıkçı",
+      "desc": "10 farklı balık tut."
+    },
+    "a22": {
+      "name": "Denizci",
+      "desc": "24 farkı balık tut."
+    },
+    "a23": {
+      "name": "Usta Oltacı",
+      "desc": "Her çeşit balığı tut."
+    },
+    "a24": {
+      "name": "Becerikli Oltacı",
+      "desc": "100 balık tut."
+    },
+    "a25": {
+      "name": "Hazine Avcısı",
+      "desc": "Müzeye 40 farklı öge bağışla."
+    },
+    "a26": {
+      "name": "Ayakçı",
+      "desc": "10 tane 'Yardım Aranıyor' ilanı tamamla."
+    },
+    "a27": {
+      "name": "Yardımsever",
+      "desc": "40 tane 'Yardım Aranıyor' ilanı tamamla."
+    },
+    "a28": {
+      "name": "Çoklu Tarım",
+      "desc": "Her ekinden 15 tane gönder."
+    },
+    "a29": {
+      "name": "Tekli Tarım",
+      "desc": "Bir ekinden 300 tane gönder."
+    },
+    "a30": {
+      "name": "Kargocu",
+      "desc": "Her nesneden gönder."
+    },
+    "a41": {
+      "name": "Uzak Kıyı",
+      "desc": "Zencefil Adası'na ulaş."
+    },
+    "a42": {
+      "name": "Kitap Kurdu",
+      "desc": "Her kitabı oku."
+    },
+    "a43": {
+      "name": "Çok Çok Güzeldi",
+      "desc": "Bir film izle."
+    },
+    "a44": {
+      "name": "Mavi Kurdele",
+      "desc": "Yıldızçiyi Vadisi Şöleni yarışmasında 1. ol."
+    },
+    "a45": {
+      "name": "Unutulmaz Bir Çorba",
+      "desc": "Vali'yi memnun et."
+    },
+    "a46": {
+      "name": "İyi Komşular",
+      "desc": "Ormandaki komşularının ailelerini büyütmesine yardım et."
+    },
+    "a47": {
+      "name": "Derinlerdeki Tehlike",
+      "desc": "'Tehlikeli' madenin dibine ulaş."
+    },
+    "a48": {
+      "name": "Sonsuz Güç",
+      "desc": "En güçlü silahı elde et."
+    },
+    "a49": {
+      "name": "Mükemmellik",
+      "desc": "Zirveye ulaş."
+    }
+  },
+  "villagers": {
+    "kent": "Kent",
+    "lewis": "Lewis",
+    "vincent": "Vincent",
+    "haley": "Haley",
+    "pam": "Pam",
+    "shane": "Shane",
+    "pierre": "Pierre",
+    "emily": "Emily",
+    "jas": "Jas",
+    "gus": "Gus",
+    "maru": "Maru",
+    "alex": "Alex",
+    "sam": "Sam",
+    "demetrius": "Demetrius",
+    "dwarf": "Cüce",
+    "willy": "Willy",
+    "leo": "Leo",
+    "penny": "Penny",
+    "elliott": "Elliott",
+    "jodi": "Jodi",
+    "abigail": "Abigail",
+    "sandy": "Sandy",
+    "marnie": "Marnie",
+    "robin": "Robin",
+    "george": "George",
+    "krobus": "Krobus",
+    "linus": "Linus",
+    "caroline": "Caroline",
+    "sebastian": "Sebastian",
+    "harvey": "Harvey",
+    "wizard": "Büyücü",
+    "evelyn": "Evelyn",
+    "leah": "Leah",
+    "clint": "Clint"
+  },
+  "bundleItem": {
+    "wildHorseradish": "Yabani Bayır Turpu",
+    "daffodil": "Fulya",
+    "leek": "Pırasa",
+    "dandelion": "Kara Hindiba",
+    "spiceBerry": "Baharat Meyvesi",
+    "sweetPea": "Itırşahi",
+    "commonMushroom": "Mantar",
+    "wildPlum": "Çakaleriği",
+    "hazelnut": "Fındık",
+    "blackberry": "Böğürtlen",
+    "winterRoot": "Kış Kökü",
+    "crystalFruit": "Kristal Meyve",
+    "snowYam": "Kar Patatesi",
+    "crocus": "Çiğdem",
+    "wood": "Odun",
+    "stone": "Taş",
+    "hardwood": "Kereste",
+    "coconut": "Hindistan Cevizi",
+    "cactusFruit": "Kaktüs Meyvesi",
+    "caveCarrot": "Mağara Havucu",
+    "redMushroom": "Kırmızı Mantar",
+    "purpleMushroom": "Mor Mantar",
+    "mapleSyrup": "Akçaağaç Pekmezi",
+    "oakResin": "Meşe Reçinesi",
+    "pineTar": "Çam Katranı",
+    "morel": "Kuzumantarı",
+    "sunfish": "Güneşbalığı",
+    "catfish": "Kedibalığı",
+    "shad": "Tirsi",
+    "tigerTrout": "Kaplanbalığı",
+    "largemouthBass": "İri Ağızlı Levrek",
+    "carp": "Sazanbalığı",
+    "bullhead": "Yayınbalığı",
+    "sturgeon": "Mersinbalığı",
+    "sardine": "Sardalya",
+    "tuna": "Ton Balığı",
+    "redSnapper": "Kırlangıç Balığı",
+    "tilapia": "Tilapi",
+    "walleye": "Kömür Balığı",
+    "bream": "Mercanbalığı",
+    "eel": "Yılanbalığı",
+    "lobster": "Istakoz",
+    "crab": "Yengeç",
+    "shrimp": "Karides",
+    "crayfish": "Kerevit",
+    "snail": "Salyangoz",
+    "periwinkle": "Deniz Salyangozu",
+    "mussel": "Midye",
+    "cockle": "Kum Midyesi",
+    "oyster": "İstiridye",
+    "clam": "Deniz Tarağı",
+    "pufferfish": "Balon Balığı",
+    "ghostfish": "Hayaletbalığı",
+    "sandfish": "Kumbalığı",
+    "woodskip": "Korkakbalık",
+    "largeMilk": "Büyük Süt",
+    "largeEgg": "Büyük Yumurta",
+    "wool": "Yün",
+    "duckEgg": "Ördek Yumurtası",
+    "truffleOil": "Yermantarı Yağı",
+    "cloth": "Kumaş",
+    "goatCheese": "Keçi Peyniri",
+    "cheese": "Peynir",
+    "honey": "Bal",
+    "jelly": "Reçel",
+    "apple": "Elma",
+    "apricot": "Kayısı",
+    "orange": "Portakal",
+    "peach": "Şeftali",
+    "pomegranate": "Nar",
+    "cherry": "Kiraz",
+    "copperBar": "Bakır Külçesi",
+    "ironBar": "Demir Külçesi",
+    "goldBar": "Altın Külçesi",
+    "quartz": "Kuvars",
+    "earthCrystal": "Yüzey Kristali",
+    "frozenTear": "Donmuş Gözyaşı",
+    "fireQuartz": "Kızıl Kuvars",
+    "slime": "Balçıkça",
+    "batWing": "Yarasa Kanadı",
+    "solarEssence": "Güneş Özü",
+    "voidEssence": "Boşluk Özü",
+    "fiddleheadFern": "Eğrelti Otu",
+    "truffle": "Yermantarı",
+    "makiRoll": "Dilim Maki",
+    "friedEgg": "Sahanda Yumurta",
+    "seaUrchin": "Denizkestanesi",
+    "duckFeather": "Ördek Tüyü",
+    "aquamarine": "Gök Zümrütü",
+    "nautilusShell": "Notilus Kabuğu",
+    "chub": "Kefal",
+    "frozenGeode": "Donuk Jeot",
+    "hay": "Saman",
+    "wine": "Şarap",
+    "rabbitsFoot": "Tavşan Ayağı",
+    "springOnion": "Yeşil Soğan",
+    "holly": "Çobanpüskülü",
+    "sap": "Öz",
+    "moss": "Yosun",
+    "fiber": "Lif",
+    "acorn": "Meşe Palamudu",
+    "mapleSeed": "Akçaağaç Tohumu",
+    "whiteAlgae": "Beyaz Su Yosunu",
+    "wood2": "Odun",
+    "mead": "Likör",
+    "paleAle": "Soluk Bira",
+    "juice": "Meyve Suyu",
+    "greenTea": "Yeşil Çay",
+    "roe": "Balık Yumurtası",
+    "agedRoe": "Olgun Balık Yumurtası",
+    "squidInk": "Mürekkepbalığı Mürekkebi",
+    "lavaEel": "Lav Yılanbalığı",
+    "scorpionCarp": "Akrepbalığı",
+    "octopus": "Ahtapot",
+    "blobfish": "Lekebalığı",
+    "boneFragment": "Kemik Parçası",
+    "amethyst": "Ametist",
+    "diamond": "Elmas",
+    "emerald": "Zümrüt",
+    "ruby": "Yakut",
+    "topaz": "Topaz",
+    "iridiumOre": "İridyum Cevheri",
+    "iridiumBar": "İridyum Külçesi",
+    "batteryPack": "Pil",
+    "refinedQuartz": "İşlenmiş Kuvars",
+    "egg": "Yumurta",
+    "milk": "Süt",
+    "salmonberry": "Ahududu",
+    "ancientDoll": "Eski Bebek",
+    "iceCream": "Dondurma",
+    "jackOLantern": "Kabak Feneri",
+    "largeBrownEgg": "Büyük Yumurta",
+    "largeGoatMilk": "Büyük Keçi Sütü",
+    "flour": "Buğday Unu",
+    "cookie": "Kurabiyeler"
+  },
+  "crops": {
+    "parsnip": "Yaban Havucu",
+    "potato": "Patates",
+    "cauliflower": "Karnabahar",
+    "kale": "Lahana",
+    "garlic": "Sarımsak",
+    "rhubarb": "Uşkun",
+    "strawberry": "Çilek",
+    "greenBean": "Yeşil Fasulye",
+    "tulip": "Lale",
+    "blueJazz": "Maviruh",
+    "coffeeBean": "Kahve Çekirdeği",
+    "blueberry": "Yaban Mersini",
+    "melon": "Kavun",
+    "tomato": "Domates",
+    "hotPepper": "Acı Biber",
+    "radish": "Turp",
+    "hops": "Şerbetçi Otu",
+    "poppy": "Haşhaş",
+    "redCabbage": "Kırmızı Lahana",
+    "starfruit": "Yıldızmeyvesi",
+    "wheat": "Buğday",
+    "corn": "Mısır",
+    "sunflower": "Ayçiçeği",
+    "pumpkin": "Bal Kabağı",
+    "cranberry": "Kızılcık",
+    "eggplant": "Patlıcan",
+    "amaranth": "Horozibiği",
+    "grape": "Üzüm",
+    "yam": "Tatlı Patates",
+    "bokChoy": "Çin Lahanası",
+    "artichoke": "Enginar",
+    "beet": "Pancar",
+    "fairyRose": "Perigülü",
+    "sweetGemBerry": "Tatlıtaş Meyvesi",
+    "carrot": "Havuç",
+    "unmilledRice": "Öğütülmemiş Pirinç",
+    "springSeeds": "Bahar Tohumları",
+    "pineapple": "Ananas",
+    "summerSquash": "Yaz Kabağı",
+    "taroRoot": "Gölevez Kökü",
+    "summerSpangle": "Yazpulu",
+    "summerSeeds": "Yaz Tohumları",
+    "broccoli": "Brokoli",
+    "fallSeeds": "Güz Tohumları",
+    "powdermelon": "Kış Kavunu",
+    "winterSeeds": "Kış Tohumları",
+    "teaLeaves": "Çay Yaprakları",
+    "ancientFruit": "Eski Meyve"
+  },
+  "materials": {
+    "wood": "Odun",
+    "stone": "Taş",
+    "clay": "Kil",
+    "cloth": "Kumaş",
+    "copperBar": "Bakır Külçesi",
+    "ironBar": "Demir Külçesi",
+    "iridiumBar": "İridyum Külçesi",
+    "refinedQuartz": "İşlenmiş Kuvars",
+    "seaweed": "Su Yosunu",
+    "greenAlgae": "Yeşil Su Yosunu",
+    "hardwood": "Kereste",
+    "fiber": "Lif"
+  },
+  "bundleRoom": {
+    "pantry": "Kiler",
+    "craftsRoom": "Zanaat Odası",
+    "fishTank": "Balık Havuzu",
+    "boilerRoom": "Kazan Dairesi",
+    "bulletinBoard": "Duyuru Panosu",
+    "vault": "Mahzen"
+  }
+}

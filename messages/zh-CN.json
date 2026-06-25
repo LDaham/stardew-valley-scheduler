@@ -1,0 +1,775 @@
+{
+  "buildings": {
+    "coop": "鸡舍",
+    "bigCoop": "大鸡舍",
+    "deluxeCoop": "高级鸡舍",
+    "barn": "畜棚",
+    "bigBarn": "大畜棚",
+    "deluxeBarn": "高级畜棚",
+    "fishPond": "鱼塘",
+    "mill": "磨坊",
+    "shed": "小屋",
+    "bigShed": "大屋子",
+    "silo": "筒仓",
+    "slimeHutch": "史莱姆屋",
+    "stable": "马厩",
+    "well": "水井",
+    "shippingBin": "出货箱",
+    "logCabin": "联机小屋"
+  },
+  "fishInfo": {
+    "pufferfish": {
+      "name": "河豚",
+      "location": "海洋、姜岛海域",
+      "time": "中午12点–下午4点"
+    },
+    "anchovy": {
+      "name": "鳀鱼",
+      "location": "海洋",
+      "time": "任何时间"
+    },
+    "tuna": {
+      "name": "金枪鱼",
+      "location": "海洋、姜岛海域",
+      "time": "上午6点–晚上7点"
+    },
+    "sardine": {
+      "name": "沙丁鱼",
+      "location": "海洋",
+      "time": "上午6点–晚上7点"
+    },
+    "bream": {
+      "name": "鲷鱼",
+      "location": "河流（镇区+森林）",
+      "time": "晚上6点–凌晨2点"
+    },
+    "largemouthBass": {
+      "name": "大嘴鲈鱼",
+      "location": "山顶湖",
+      "time": "上午6点–晚上7点"
+    },
+    "smallmouthBass": {
+      "name": "小嘴鲈鱼",
+      "location": "河流（镇区）、森林池塘、河畔农场",
+      "time": "任何时间"
+    },
+    "rainbowTrout": {
+      "name": "虹鳟鱼",
+      "location": "河流（镇区+森林）、山顶湖",
+      "time": "上午6点–晚上7点"
+    },
+    "salmon": {
+      "name": "鲑鱼",
+      "location": "河流（镇区+森林）",
+      "time": "上午6点–晚上7点"
+    },
+    "walleye": {
+      "name": "大眼鱼",
+      "location": "河流（镇区+森林）、森林池塘、山顶湖",
+      "time": "中午12点–凌晨2点"
+    },
+    "perch": {
+      "name": "河鲈",
+      "location": "河流（镇区+森林）、森林池塘、山顶湖",
+      "time": "任何时间"
+    },
+    "carp": {
+      "name": "鲤鱼",
+      "location": "山顶湖、神秘森林池塘、下水道",
+      "time": "任何时间"
+    },
+    "catfish": {
+      "name": "鲶鱼",
+      "location": "河流（镇区+森林）、神秘森林池塘、女巫沼泽",
+      "time": "任何时间"
+    },
+    "pike": {
+      "name": "狗鱼",
+      "location": "河流（镇区+森林）、森林池塘",
+      "time": "任何时间"
+    },
+    "sunfish": {
+      "name": "太阳鱼",
+      "location": "河流（镇区+森林）、森林农场",
+      "time": "上午6点–晚上7点"
+    },
+    "redMullet": {
+      "name": "红鲻鱼",
+      "location": "海洋",
+      "time": "上午6点–晚上7点"
+    },
+    "herring": {
+      "name": "鲱鱼",
+      "location": "海洋",
+      "time": "任何时间"
+    },
+    "eel": {
+      "name": "鳗鱼",
+      "location": "海洋",
+      "time": "下午4点–凌晨2点"
+    },
+    "octopus": {
+      "name": "章鱼",
+      "location": "海洋",
+      "time": "上午6点–下午1点"
+    },
+    "redSnapper": {
+      "name": "红鲷鱼",
+      "location": "海洋",
+      "time": "上午6点–晚上7点"
+    },
+    "squid": {
+      "name": "鱿鱼",
+      "location": "海洋",
+      "time": "晚上6点–凌晨2点"
+    },
+    "seaCucumber": {
+      "name": "海参",
+      "location": "海洋",
+      "time": "上午6点–晚上7点"
+    },
+    "superCucumber": {
+      "name": "大海参",
+      "location": "海洋、姜岛海域",
+      "time": "晚上6点–凌晨2点"
+    },
+    "ghostfish": {
+      "name": "鬼鱼",
+      "location": "矿井（20、60层）、幽灵掉落",
+      "time": "任何时间"
+    },
+    "stonefish": {
+      "name": "石鱼",
+      "location": "矿井20层，钓鱼等级3以上",
+      "time": "任何时间"
+    },
+    "icePip": {
+      "name": "冰柱鱼",
+      "location": "矿井60层，钓鱼等级5以上",
+      "time": "任何时间"
+    },
+    "lavaEel": {
+      "name": "岩浆鳗鱼",
+      "location": "矿井100层（钓鱼等级7以上）、火山口",
+      "time": "任何时间"
+    },
+    "sandfish": {
+      "name": "沙鱼",
+      "location": "沙漠",
+      "time": "上午6点–晚上8点"
+    },
+    "scorpionCarp": {
+      "name": "蝎鲤鱼",
+      "location": "沙漠，钓鱼等级4以上",
+      "time": "上午6点–晚上8点"
+    },
+    "flounder": {
+      "name": "比目鱼",
+      "location": "海洋、姜岛海域",
+      "time": "上午6点–晚上8点"
+    },
+    "midnightCarp": {
+      "name": "午夜鲤鱼",
+      "location": "山顶湖、森林湖、姜岛湖泊与河流",
+      "time": "晚上10点–凌晨2点"
+    },
+    "sturgeon": {
+      "name": "鲟鱼",
+      "location": "山顶湖",
+      "time": "上午6点–晚上7点"
+    },
+    "tigerTrout": {
+      "name": "虎纹鳟鱼",
+      "location": "河流（镇区+森林）",
+      "time": "上午6点–晚上7点"
+    },
+    "bullhead": {
+      "name": "大头鱼",
+      "location": "山顶湖",
+      "time": "任何时间"
+    },
+    "tilapia": {
+      "name": "罗非鱼",
+      "location": "海洋、姜岛淡水",
+      "time": "上午6点–下午2点"
+    },
+    "chub": {
+      "name": "鲢鱼",
+      "location": "河流（森林）、山顶湖",
+      "time": "任何时间"
+    },
+    "dorado": {
+      "name": "麻哈脂鲤",
+      "location": "河流（森林）",
+      "time": "上午6点–晚上7点"
+    },
+    "albacore": {
+      "name": "青花鱼",
+      "location": "海洋",
+      "time": "上午6点–上午11点，晚上6点–凌晨2点"
+    },
+    "shad": {
+      "name": "西鲱",
+      "location": "河流（镇区+森林）",
+      "time": "上午9点–凌晨2点"
+    },
+    "lingcod": {
+      "name": "蛇齿单线鱼",
+      "location": "河流（镇区+森林）、山顶湖",
+      "time": "任何时间"
+    },
+    "halibut": {
+      "name": "大比目鱼",
+      "location": "海洋",
+      "time": "上午6点–上午11点，晚上7点–凌晨2点"
+    },
+    "woodskip": {
+      "name": "木跃鱼",
+      "location": "神秘森林池塘、森林农场",
+      "time": "任何时间"
+    },
+    "voidSalmon": {
+      "name": "虚空鲑鱼",
+      "location": "女巫沼泽",
+      "time": "任何时间"
+    },
+    "slimejack": {
+      "name": "史莱姆鱼",
+      "location": "变异虫巢",
+      "time": "任何时间"
+    },
+    "lionfish": {
+      "name": "狮子鱼",
+      "location": "姜岛海域",
+      "time": "任何时间"
+    },
+    "blueDiscus": {
+      "name": "蓝铁饼鱼",
+      "location": "姜岛湖泊与河流",
+      "time": "任何时间"
+    },
+    "stingray": {
+      "name": "黄貂鱼",
+      "location": "海盗湾（姜岛）",
+      "time": "任何时间"
+    },
+    "crimsonfish": {
+      "name": "绯红鱼",
+      "location": "沙滩东侧桥上，深水处。需要钓鱼等级5。",
+      "time": "任何时间"
+    },
+    "angler": {
+      "name": "鮟鱇鱼",
+      "location": "Joja超市北侧的木板桥。需要钓鱼等级3。",
+      "time": "任何时间"
+    },
+    "legend": {
+      "name": "传说之鱼",
+      "location": "山顶湖原木附近。需要钓鱼等级10。",
+      "time": "任何时间"
+    },
+    "glacierfish": {
+      "name": "冰川鱼",
+      "location": "箭头岛南端的余烬树液森林，深水处。需要钓鱼等级6。",
+      "time": "任何时间"
+    },
+    "mutantCarp": {
+      "name": "变种鲤鱼",
+      "location": "下水道",
+      "time": "任何时间"
+    },
+    "sonOfCrimsonfish": {
+      "name": "绯红鱼之子",
+      "location": "沙滩东侧码头。需要钓鱼等级5。",
+      "time": "任何时间"
+    },
+    "msAngler": {
+      "name": "雌鮟鱇鱼",
+      "location": "Joja超市北侧的木板桥。需要钓鱼等级3。",
+      "time": "任何时间"
+    },
+    "legendII": {
+      "name": "传说之鱼二代",
+      "location": "山顶湖原木附近。需要钓鱼等级10或以上。",
+      "time": "任何时间"
+    },
+    "glacierfishJr": {
+      "name": "小冰川鱼",
+      "location": "箭头岛南端的余烬树液森林。需要钓鱼等级6。",
+      "time": "任何时间"
+    },
+    "radioactiveCarp": {
+      "name": "放射性鲤鱼",
+      "location": "下水道",
+      "time": "任何时间"
+    },
+    "midnightSquid": {
+      "name": "午夜鱿鱼",
+      "location": "潜水艇（夜市）",
+      "time": "下午5点–凌晨2点"
+    },
+    "spookFish": {
+      "name": "幽灵鱼",
+      "location": "潜水艇（夜市）",
+      "time": "下午5点–凌晨2点"
+    },
+    "blobfish": {
+      "name": "水滴鱼",
+      "location": "潜水艇（夜市）",
+      "time": "下午5点–凌晨2点"
+    },
+    "lobster": {
+      "name": "龙虾",
+      "location": "海洋",
+      "time": "任何时间"
+    },
+    "crab": {
+      "name": "螃蟹",
+      "location": "海洋",
+      "time": "任何时间"
+    },
+    "shrimp": {
+      "name": "虾",
+      "location": "海洋",
+      "time": "任何时间"
+    },
+    "cockle": {
+      "name": "鸟蛤",
+      "location": "海洋",
+      "time": "任何时间"
+    },
+    "mussel": {
+      "name": "蚌",
+      "location": "海洋",
+      "time": "任何时间"
+    },
+    "oyster": {
+      "name": "牡蛎",
+      "location": "海洋",
+      "time": "任何时间"
+    },
+    "clam": {
+      "name": "蛤",
+      "location": "海洋",
+      "time": "任何时间"
+    },
+    "crayfish": {
+      "name": "小龙虾",
+      "location": "淡水（河流·湖泊）",
+      "time": "任何时间"
+    },
+    "snail": {
+      "name": "蜗牛",
+      "location": "淡水（河流·湖泊）",
+      "time": "任何时间"
+    },
+    "periwinkle": {
+      "name": "玉黍螺",
+      "location": "淡水（河流·湖泊）",
+      "time": "任何时间"
+    }
+  },
+  "achievements": {
+    "a1": {
+      "name": "新手（1.5万）",
+      "desc": "赚取 15,000 金"
+    },
+    "a2": {
+      "name": "牛仔（5万）",
+      "desc": "赚取 50,000 金"
+    },
+    "a3": {
+      "name": "农场主（25万）",
+      "desc": "赚取 250,000 金"
+    },
+    "a4": {
+      "name": "百万富翁(100万)",
+      "desc": "赚取 1,000,000 金"
+    },
+    "a5": {
+      "name": "千万富翁(1000万)",
+      "desc": "赚取 10,000,000 金"
+    },
+    "a6": {
+      "name": "全套收集",
+      "desc": "完成博物馆收集。"
+    },
+    "a7": {
+      "name": "新朋友",
+      "desc": "与某人达到了 5 颗心的等级。"
+    },
+    "a8": {
+      "name": "最好的朋友",
+      "desc": "与某人达到了 10 颗心的等级。"
+    },
+    "a9": {
+      "name": "深受喜爱的农夫",
+      "desc": "与 8 个人达到了 10 颗心的等级。"
+    },
+    "a10": {
+      "name": "朋友圈",
+      "desc": "与 4 个人达到了 5 颗心的等级。"
+    },
+    "a11": {
+      "name": "广结好友",
+      "desc": "与 10 个人达到了 5 颗心的等级。"
+    },
+    "a12": {
+      "name": "万人迷",
+      "desc": "与 20 个人达到了 5 颗心的等级。"
+    },
+    "a13": {
+      "name": "厨子",
+      "desc": "做出 10 道不同的料理。"
+    },
+    "a14": {
+      "name": "副主厨师",
+      "desc": "做出 25 道不同的料理。"
+    },
+    "a15": {
+      "name": "美食大厨",
+      "desc": "烹饪每种配方"
+    },
+    "a16": {
+      "name": "节节高升",
+      "desc": "升级你的房屋。"
+    },
+    "a17": {
+      "name": "富裕生活",
+      "desc": "将房屋升级至最大号。"
+    },
+    "a18": {
+      "name": "自己动手",
+      "desc": "制作 15 个不同的物品。"
+    },
+    "a19": {
+      "name": "工匠",
+      "desc": "制作 30 个不同的物品。"
+    },
+    "a20": {
+      "name": "制造大师",
+      "desc": "制作所有物品。"
+    },
+    "a21": {
+      "name": "渔夫",
+      "desc": "抓住 10 种不同的鱼。"
+    },
+    "a22": {
+      "name": "老海员",
+      "desc": "抓住 24 种不同的鱼。"
+    },
+    "a23": {
+      "name": "垂钓大师",
+      "desc": "抓住所有种类的鱼。"
+    },
+    "a24": {
+      "name": "捕鱼大师",
+      "desc": "抓住 100 条鱼。"
+    },
+    "a25": {
+      "name": "无主宝藏",
+      "desc": "向博物馆捐赠 40 种不同的物品。"
+    },
+    "a26": {
+      "name": "听差",
+      "desc": "完成 10 个“需要帮助”任务。"
+    },
+    "a27": {
+      "name": "帮了大忙",
+      "desc": "完成 40 个“需要帮助”任务。"
+    },
+    "a28": {
+      "name": "混合栽培",
+      "desc": "每种作物运送 15 份。"
+    },
+    "a29": {
+      "name": "单一栽培",
+      "desc": "一种作物运送 300 份。"
+    },
+    "a30": {
+      "name": "全部货物",
+      "desc": "寄出每一种物品。"
+    },
+    "a41": {
+      "name": "遥远的海岸",
+      "desc": "到达姜岛。"
+    },
+    "a42": {
+      "name": "博览群书",
+      "desc": "读完所有的书。"
+    },
+    "a43": {
+      "name": "意犹未尽",
+      "desc": "看一部电影。"
+    },
+    "a44": {
+      "name": "冠军",
+      "desc": "在星露谷集市的比赛中获得第一名。"
+    },
+    "a45": {
+      "name": "难忘的汤",
+      "desc": "让州长高兴。"
+    },
+    "a46": {
+      "name": "热心邻居",
+      "desc": "帮助森林里的邻居朋友组建家庭。"
+    },
+    "a47": {
+      "name": "深处的危险",
+      "desc": "到达“危险”矿井的底层。"
+    },
+    "a48": {
+      "name": "无限力量",
+      "desc": "获得最强大的武器。"
+    },
+    "a49": {
+      "name": "完美",
+      "desc": "到达山顶。"
+    }
+  },
+  "villagers": {
+    "kent": "肯特",
+    "lewis": "刘易斯",
+    "vincent": "文森特",
+    "haley": "海莉",
+    "pam": "潘姆",
+    "shane": "谢恩",
+    "pierre": "皮埃尔",
+    "emily": "艾米丽",
+    "jas": "贾斯",
+    "gus": "格斯",
+    "maru": "玛鲁",
+    "alex": "亚历克斯",
+    "sam": "山姆",
+    "demetrius": "德米特里厄斯",
+    "dwarf": "矮人",
+    "willy": "威利",
+    "leo": "雷欧",
+    "penny": "潘妮",
+    "elliott": "艾利欧特",
+    "jodi": "乔迪",
+    "abigail": "阿比盖尔",
+    "sandy": "桑迪",
+    "marnie": "玛妮",
+    "robin": "罗宾",
+    "george": "乔治",
+    "krobus": "科罗布斯",
+    "linus": "莱纳斯",
+    "caroline": "卡洛琳",
+    "sebastian": "塞巴斯蒂安",
+    "harvey": "哈维",
+    "wizard": "法师",
+    "evelyn": "艾芙琳",
+    "leah": "莉亚",
+    "clint": "克林特"
+  },
+  "bundleItem": {
+    "wildHorseradish": "野山葵",
+    "daffodil": "黄水仙",
+    "leek": "韭葱",
+    "dandelion": "蒲公英",
+    "spiceBerry": "香味浆果",
+    "sweetPea": "甜豌豆",
+    "commonMushroom": "普通蘑菇",
+    "wildPlum": "野梅",
+    "hazelnut": "榛子",
+    "blackberry": "黑莓",
+    "winterRoot": "冬根",
+    "crystalFruit": "水晶果",
+    "snowYam": "雪山药",
+    "crocus": "番红花",
+    "wood": "木材",
+    "stone": "石头",
+    "hardwood": "硬木",
+    "coconut": "椰子",
+    "cactusFruit": "仙人掌果子",
+    "caveCarrot": "山洞萝卜",
+    "redMushroom": "红蘑菇",
+    "purpleMushroom": "紫蘑菇",
+    "mapleSyrup": "枫糖浆",
+    "oakResin": "橡树树脂",
+    "pineTar": "松焦油",
+    "morel": "羊肚菌",
+    "sunfish": "太阳鱼",
+    "catfish": "鲶鱼",
+    "shad": "西鲱",
+    "tigerTrout": "虎纹鳟鱼",
+    "largemouthBass": "大嘴鲈鱼",
+    "carp": "鲤鱼",
+    "bullhead": "大头鱼",
+    "sturgeon": "鲟鱼",
+    "sardine": "沙丁鱼",
+    "tuna": "金枪鱼",
+    "redSnapper": "红鲷鱼",
+    "tilapia": "罗非鱼",
+    "walleye": "大眼鱼",
+    "bream": "鲷鱼",
+    "eel": "鳗鱼",
+    "lobster": "龙虾",
+    "crab": "螃蟹",
+    "shrimp": "虾",
+    "crayfish": "小龙虾",
+    "snail": "蜗牛",
+    "periwinkle": "玉黍螺",
+    "mussel": "蚌",
+    "cockle": "鸟蛤",
+    "oyster": "牡蛎",
+    "clam": "蛤",
+    "pufferfish": "河豚",
+    "ghostfish": "鬼鱼",
+    "sandfish": "沙鱼",
+    "woodskip": "木跃鱼",
+    "largeMilk": "大壶牛奶",
+    "largeEgg": "大鸡蛋",
+    "wool": "动物毛",
+    "duckEgg": "鸭蛋",
+    "truffleOil": "松露油",
+    "cloth": "布料",
+    "goatCheese": "山羊奶酪",
+    "cheese": "奶酪",
+    "honey": "蜂蜜",
+    "jelly": "果酱",
+    "apple": "苹果",
+    "apricot": "杏子",
+    "orange": "橙子",
+    "peach": "桃子",
+    "pomegranate": "石榴",
+    "cherry": "樱桃",
+    "copperBar": "铜锭",
+    "ironBar": "铁锭",
+    "goldBar": "金锭",
+    "quartz": "石英",
+    "earthCrystal": "地晶",
+    "frozenTear": "泪晶",
+    "fireQuartz": "火水晶",
+    "slime": "史莱姆泥",
+    "batWing": "蝙蝠翅膀",
+    "solarEssence": "太阳精华",
+    "voidEssence": "虚空精华",
+    "fiddleheadFern": "蕨菜",
+    "truffle": "松露",
+    "makiRoll": "生鱼寿司",
+    "friedEgg": "煎鸡蛋",
+    "seaUrchin": "海胆",
+    "duckFeather": "鸭毛",
+    "aquamarine": "海蓝宝石",
+    "nautilusShell": "鹦鹉螺",
+    "chub": "鲢鱼",
+    "frozenGeode": "冰封晶球",
+    "hay": "干草",
+    "wine": "果酒",
+    "rabbitsFoot": "兔子的脚",
+    "springOnion": "大葱",
+    "holly": "冬青树",
+    "sap": "树液",
+    "moss": "苔藓",
+    "fiber": "纤维",
+    "acorn": "橡子",
+    "mapleSeed": "枫树种子",
+    "whiteAlgae": "白藻",
+    "wood2": "木材",
+    "mead": "蜜蜂酒",
+    "paleAle": "淡啤酒",
+    "juice": "果汁",
+    "greenTea": "绿茶",
+    "roe": "鱼籽",
+    "agedRoe": "腌鱼籽",
+    "squidInk": "鱿鱼墨汁",
+    "lavaEel": "岩浆鳗鱼",
+    "scorpionCarp": "蝎鲤鱼",
+    "octopus": "章鱼",
+    "blobfish": "水滴鱼",
+    "boneFragment": "骨头碎片",
+    "amethyst": "紫水晶",
+    "diamond": "钻石",
+    "emerald": "绿宝石",
+    "ruby": "红宝石",
+    "topaz": "黄水晶",
+    "iridiumOre": "铱矿石",
+    "iridiumBar": "铱锭",
+    "batteryPack": "电池组",
+    "refinedQuartz": "精炼石英",
+    "egg": "蛋",
+    "milk": "牛奶",
+    "salmonberry": "美洲大树莓",
+    "ancientDoll": "古代玩偶",
+    "iceCream": "冰淇淋",
+    "jackOLantern": "南瓜灯",
+    "largeBrownEgg": "大鸡蛋",
+    "largeGoatMilk": "大瓶羊奶",
+    "flour": "大麦粉",
+    "cookie": "饼干"
+  },
+  "crops": {
+    "parsnip": "防风草",
+    "potato": "土豆",
+    "cauliflower": "花椰菜",
+    "kale": "甘蓝菜",
+    "garlic": "蒜",
+    "rhubarb": "大黄",
+    "strawberry": "草莓",
+    "greenBean": "青豆",
+    "tulip": "郁金香",
+    "blueJazz": "蓝爵",
+    "coffeeBean": "咖啡豆",
+    "blueberry": "蓝莓",
+    "melon": "甜瓜",
+    "tomato": "西红柿",
+    "hotPepper": "辣椒",
+    "radish": "萝卜",
+    "hops": "啤酒花",
+    "poppy": "虞美人花",
+    "redCabbage": "红叶卷心菜",
+    "starfruit": "杨桃",
+    "wheat": "小麦",
+    "corn": "玉米",
+    "sunflower": "向日葵",
+    "pumpkin": "南瓜",
+    "cranberry": "蔓越莓",
+    "eggplant": "茄子",
+    "amaranth": "苋菜",
+    "grape": "葡萄",
+    "yam": "山药",
+    "bokChoy": "小白菜",
+    "artichoke": "洋蓟",
+    "beet": "甜菜",
+    "fairyRose": "玫瑰仙子",
+    "sweetGemBerry": "宝石甜莓",
+    "carrot": "胡萝卜",
+    "unmilledRice": "未碾米",
+    "springSeeds": "春季种子",
+    "pineapple": "菠萝",
+    "summerSquash": "金皮西葫芦",
+    "taroRoot": "芋头",
+    "summerSpangle": "夏季亮片",
+    "summerSeeds": "夏季种子",
+    "broccoli": "西蓝花",
+    "fallSeeds": "秋季种子",
+    "powdermelon": "霜瓜",
+    "winterSeeds": "冬季种子",
+    "teaLeaves": "茶叶",
+    "ancientFruit": "上古水果"
+  },
+  "materials": {
+    "wood": "木材",
+    "stone": "石头",
+    "clay": "粘土",
+    "cloth": "布料",
+    "copperBar": "铜锭",
+    "ironBar": "铁锭",
+    "iridiumBar": "铱锭",
+    "refinedQuartz": "精炼石英",
+    "seaweed": "海草",
+    "greenAlgae": "绿藻",
+    "hardwood": "硬木",
+    "fiber": "纤维"
+  },
+  "bundleRoom": {
+    "pantry": "茶水间",
+    "craftsRoom": "工艺室",
+    "fishTank": "鱼缸",
+    "boilerRoom": "锅炉房",
+    "bulletinBoard": "布告栏",
+    "vault": "金库"
+  }
+}

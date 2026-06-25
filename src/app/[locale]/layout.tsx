@@ -60,6 +60,8 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       className={`h-full antialiased ${inter.variable} ${jbMono.variable}`}
+      // 페인트 전 인라인 스크립트가 data-theme를 주입 → 서버 HTML과 다름. 의도된 차이라 경고 억제.
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-[var(--sv-bg)] text-[var(--sv-ink)]">
         {/* 페인트 전에 테마 적용(깜빡임 방지) */}

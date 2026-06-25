@@ -118,20 +118,11 @@
   "ui": {
     "language": "언어"
   },
-  "feedback": {
-    "desc": "GitHub 이슈로 등록돼요(깃허브 계정 필요). 내용을 적고 올리면 작성 페이지가 열려요.",
-    "typeBug": "오류 보고",
-    "typeIdea": "아이디어 제시",
-    "titlePlaceholder": "제목",
-    "descPlaceholder": "설명을 적어주세요",
-    "submit": "GitHub에 올리기"
-  },
   "settings": {
     "title": "설정",
     "open": "설정 열기",
     "tabGeneral": "일반",
     "tabMain": "메인화면",
-    "tabFeedback": "오류 보고",
     "mainTabDesc": "메인 화면에 표시할 항목과 순서를 설정해요.",
     "todoSettings": "메인화면 설정",
     "openTodo": "할 일 목록 설정 열기",
@@ -148,7 +139,7 @@
     "themeSummer": "여름",
     "themeFall": "가을",
     "themeWinter": "겨울",
-    "language": "언어",
+    "reportIssue": "오류 보고·건의 (GitHub)",
     "dataTitle": "데이터 백업·이전",
     "dataDesc": "설정·진행 데이터를 파일로 내보내거나, 다른 기기에서 그 파일을 불러올 수 있어요.",
     "exportButton": "내보내기",
@@ -156,7 +147,7 @@
     "importSuccess": "가져오기 완료! 데이터가 적용되었어요.",
     "importError": "가져오기 실패: 올바른 백업 파일이 아니에요.",
     "resetTitle": "모든 설정 초기화",
-    "resetDesc": "꾸러미·캐릭터·할 일 등 저장된 모든 설정을 기본값으로 되돌립니다. 되돌릴 수 없습니다.",
+    "resetDesc": "꾸러미·할 일 등 저장된 모든 설정을 기본값으로 되돌립니다. 되돌릴 수 없습니다.",
     "resetButton": "모든 설정 초기화",
     "resetConfirm": "정말 초기화할까요?",
     "resetYes": "초기화",
@@ -302,8 +293,8 @@
   },
   "bundleRoom": {
     "pantry": "식료품 저장실",
-    "craftsRoom": "공예품 방",
-    "fishTank": "어류 탱크",
+    "craftsRoom": "공예실",
+    "fishTank": "어항",
     "boilerRoom": "보일러실",
     "bulletinBoard": "게시판",
     "vault": "금고"
@@ -311,17 +302,17 @@
   "bundleItem": {
     "wildHorseradish": "야생 고추냉이",
     "daffodil": "수선화",
-    "leek": "부추",
+    "leek": "리크",
     "dandelion": "민들레",
-    "spiceBerry": "스파이스베리",
+    "spiceBerry": "백량금",
     "sweetPea": "스위트피",
     "commonMushroom": "흔한 버섯",
     "wildPlum": "야생 자두",
     "hazelnut": "헤이즐넛",
     "blackberry": "블랙베리",
-    "winterRoot": "겨울 뿌리",
-    "crystalFruit": "수정 열매",
-    "snowYam": "눈 참마",
+    "winterRoot": "겨울뿌리",
+    "crystalFruit": "수정 과일",
+    "snowYam": "눈마",
     "crocus": "크로커스",
     "wood": "나무",
     "stone": "돌",
@@ -329,46 +320,46 @@
     "coconut": "코코넛",
     "cactusFruit": "선인장 열매",
     "caveCarrot": "동굴 당근",
-    "redMushroom": "빨간 버섯",
+    "redMushroom": "붉은 버섯",
     "purpleMushroom": "보라색 버섯",
     "mapleSyrup": "메이플 시럽",
-    "oakResin": "오크 수액",
+    "oakResin": "참나무 수지",
     "pineTar": "소나무 타르",
     "morel": "곰보버섯",
-    "sunfish": "해바라기 물고기",
+    "sunfish": "선피쉬",
     "catfish": "메기",
-    "shad": "청어",
-    "tigerTrout": "호랑이 송어",
-    "largemouthBass": "큰입배스",
+    "shad": "전어",
+    "tigerTrout": "타이거 송어",
+    "largemouthBass": "큰입우럭",
     "carp": "잉어",
-    "bullhead": "동자개",
+    "bullhead": "눈동자개",
     "sturgeon": "철갑상어",
     "sardine": "정어리",
     "tuna": "참치",
-    "redSnapper": "붉돔",
+    "redSnapper": "붉은 퉁돔",
     "tilapia": "틸라피아",
     "walleye": "월아이",
     "bream": "도미",
     "eel": "장어",
-    "lobster": "랍스터",
+    "lobster": "바닷가재",
     "crab": "게",
     "shrimp": "새우",
-    "crayfish": "가재",
+    "crayfish": "민물가재",
     "snail": "달팽이",
-    "periwinkle": "경단고둥",
+    "periwinkle": "충알고둥",
     "mussel": "홍합",
     "cockle": "새조개",
     "oyster": "굴",
     "clam": "조개",
     "pufferfish": "복어",
-    "ghostfish": "유령 물고기",
-    "sandfish": "모래 물고기",
-    "woodskip": "우드스킵",
+    "ghostfish": "귀신물고기",
+    "sandfish": "도루묵",
+    "woodskip": "숲고기",
     "largeMilk": "큰 우유",
     "largeEgg": "큰 달걀",
-    "largeBrownEgg": "큰 갈색 달걀",
-    "largeGoatMilk": "큰 염소 우유",
-    "wool": "양털",
+    "largeBrownEgg": "큰 달걀",
+    "largeGoatMilk": "큰 염소젖",
+    "wool": "털",
     "duckEgg": "오리알",
     "truffleOil": "송로버섯 오일",
     "cloth": "옷감",
@@ -386,27 +377,27 @@
     "ironBar": "철 주괴",
     "goldBar": "금 주괴",
     "quartz": "석영",
-    "earthCrystal": "어스 크리스탈",
+    "earthCrystal": "땅의 수정",
     "frozenTear": "얼어붙은 눈물",
-    "fireQuartz": "불 석영",
+    "fireQuartz": "불의 석영",
     "slime": "슬라임",
     "batWing": "박쥐 날개",
     "solarEssence": "태양 정수",
     "voidEssence": "공허 정수",
-    "fiddleheadFern": "고비 고사리",
+    "fiddleheadFern": "청나래고사리",
     "truffle": "송로버섯",
-    "makiRoll": "마키롤",
-    "friedEgg": "달걀 프라이",
+    "makiRoll": "마키 롤",
+    "friedEgg": "계란 프라이",
     "seaUrchin": "성게",
-    "duckFeather": "오리 깃털",
+    "duckFeather": "오리깃털",
     "aquamarine": "아쿠아마린",
-    "nautilusShell": "앵무조개 껍질",
-    "chub": "민물 송어",
+    "nautilusShell": "앵무조개 껍데기",
+    "chub": "피라미",
     "frozenGeode": "얼어붙은 정동석",
     "hay": "건초",
     "wine": "와인",
     "rabbitsFoot": "토끼발",
-    "springOnion": "봄 양파",
+    "springOnion": "파",
     "holly": "호랑가시나무 열매",
     "sap": "수액",
     "moss": "이끼",
@@ -432,7 +423,7 @@
     "emerald": "에메랄드",
     "ruby": "루비",
     "topaz": "토파즈",
-    "iridiumOre": "이리듐 광석",
+    "iridiumOre": "이리듐광석",
     "iridiumBar": "이리듐 주괴",
     "batteryPack": "배터리 팩",
     "refinedQuartz": "정제된 석영",
@@ -621,9 +612,7 @@
     "slimeHutch": "슬라임 장",
     "stable": "마굿간",
     "well": "우물",
-    "stoneCabin": "돌 오두막",
-    "plankCabin": "널빤지 오두막",
-    "logCabin": "통나무 오두막",
+    "logCabin": "오두막",
     "shippingBin": "배송 상자",
     "farmhouse1": "농가 업그레이드 1",
     "farmhouse2": "농가 업그레이드 2",
@@ -1086,8 +1075,8 @@
     "maru": "마루",
     "alex": "알렉스",
     "sam": "샘",
-    "demetrius": "데메트리우스",
-    "dwarf": "난쟁이",
+    "demetrius": "드미트리우스",
+    "dwarf": "드워프",
     "willy": "윌리",
     "leo": "레오",
     "penny": "페니",
@@ -1095,7 +1084,7 @@
     "jodi": "조디",
     "abigail": "애비게일",
     "sandy": "샌디",
-    "marnie": "마르니",
+    "marnie": "마니",
     "robin": "로빈",
     "george": "조지",
     "krobus": "크로버스",
@@ -1105,7 +1094,7 @@
     "harvey": "하비",
     "wizard": "마법사",
     "evelyn": "에블린",
-    "leah": "리아",
+    "leah": "레아",
     "clint": "클린트"
   },
   "crops": {
@@ -1114,20 +1103,20 @@
     "cauliflower": "콜리플라워",
     "kale": "케일",
     "garlic": "마늘",
-    "rhubarb": "루바브",
+    "rhubarb": "대황",
     "strawberry": "딸기",
-    "greenBean": "그린빈",
+    "greenBean": "완두콩",
     "tulip": "튤립",
-    "blueJazz": "블루 재즈",
+    "blueJazz": "푸른 재즈",
     "coffeeBean": "커피콩",
     "blueberry": "블루베리",
     "melon": "멜론",
     "tomato": "토마토",
-    "hotPepper": "고추",
+    "hotPepper": "매운 고추",
     "radish": "무",
     "hops": "홉",
     "poppy": "양귀비",
-    "redCabbage": "적양배추",
+    "redCabbage": "붉은 양배추",
     "starfruit": "스타프루트",
     "wheat": "밀",
     "corn": "옥수수",
@@ -1137,24 +1126,24 @@
     "eggplant": "가지",
     "amaranth": "아마란스",
     "grape": "포도",
-    "yam": "얌",
+    "yam": "참마",
     "bokChoy": "청경채",
     "artichoke": "아티초크",
-    "beet": "비트",
-    "fairyRose": "요정 장미",
-    "sweetGemBerry": "달콤한 보석 열매",
+    "beet": "사탕무",
+    "fairyRose": "요정장미",
+    "sweetGemBerry": "달콤보석베리",
     "carrot": "당근",
-    "unmilledRice": "도정 안 한 쌀",
-    "springSeeds": "봄 씨앗",
+    "unmilledRice": "벼",
+    "springSeeds": "봄 씨앗 모음",
     "pineapple": "파인애플",
-    "summerSquash": "여름 호박",
+    "summerSquash": "여름호박",
     "taroRoot": "토란",
-    "summerSpangle": "여름 스팽글",
-    "summerSeeds": "여름 씨앗",
+    "summerSpangle": "여름별꽃",
+    "summerSeeds": "여름 씨앗 모음",
     "broccoli": "브로콜리",
-    "fallSeeds": "가을 씨앗",
-    "powdermelon": "가루멜론",
-    "winterSeeds": "겨울 씨앗",
+    "fallSeeds": "가을 씨앗 모음",
+    "powdermelon": "파우더멜론",
+    "winterSeeds": "겨울 씨앗 모음",
     "teaLeaves": "찻잎",
     "ancientFruit": "고대 과일"
   },
@@ -1950,12 +1939,12 @@
       "time": "아무때나"
     },
     "midnightSquid": {
-      "name": "한밤의 오징어",
+      "name": "자정오징어",
       "location": "잠수함(야시장)",
       "time": "오후 5시 – 오전 2시"
     },
     "spookFish": {
-      "name": "도깨비 물고기",
+      "name": "통안어",
       "location": "잠수함(야시장)",
       "time": "오후 5시 – 오전 2시"
     },
@@ -2000,7 +1989,7 @@
       "time": "아무때나"
     },
     "crayfish": {
-      "name": "가재",
+      "name": "민물가재",
       "location": "민물(강·호수)",
       "time": "아무때나"
     },
@@ -2010,7 +1999,7 @@
       "time": "아무때나"
     },
     "periwinkle": {
-      "name": "경단고둥",
+      "name": "충알고둥",
       "location": "민물(강·호수)",
       "time": "아무때나"
     }
@@ -2234,24 +2223,24 @@
   },
   "achievements": {
     "a1": {
-      "name": "풋내기",
-      "desc": "15,000골드 벌기."
+      "name": "풋내기 (1.5만)",
+      "desc": "15,000 골드 벌기"
     },
     "a2": {
-      "name": "소몰이",
-      "desc": "50,000골드 벌기."
+      "name": "소몰이 (5.0만)",
+      "desc": "50,000 골드 벌기"
     },
     "a3": {
-      "name": "농가 주인",
-      "desc": "250,000골드 벌기."
+      "name": "농가 주인 (25만)",
+      "desc": "250,000 골드 벌기"
     },
     "a4": {
-      "name": "백만장자",
-      "desc": "1,000,000골드 벌기."
+      "name": "백만장자 (100만)",
+      "desc": "1,000,000 골드 벌기"
     },
     "a5": {
-      "name": "전설",
-      "desc": "10,000,000골드 벌기 (히든 업적)."
+      "name": "전설 (0.1억)",
+      "desc": "10,000,000 골드 벌기"
     },
     "a6": {
       "name": "완성된 컬렉션",
@@ -2295,23 +2284,23 @@
     },
     "a16": {
       "name": "출세",
-      "desc": "집 업그레이드 하기."
+      "desc": "집 업그레이드하기."
     },
     "a17": {
       "name": "크게 살기",
-      "desc": "집 최대 크기로 업그레이드 하기. (지하 저장고까지가 아닌 2번째 업그레이드)"
+      "desc": "집 최대 크기로 업그레이드하기."
     },
     "a18": {
       "name": "수작업",
-      "desc": "15가지 아이템 제작 하기."
+      "desc": "15가지 아이템 제작하기."
     },
     "a19": {
       "name": "장인",
-      "desc": "30가지 아이템 제작 하기."
+      "desc": "30가지 아이템 제작하기."
     },
     "a20": {
       "name": "제작의 달인",
-      "desc": "모든 아이템 제작 하기."
+      "desc": "모든 아이템 제작하기."
     },
     "a21": {
       "name": "낚시꾼",
@@ -2331,27 +2320,27 @@
     },
     "a25": {
       "name": "보물창고",
-      "desc": "박물관 에 40가지 다른 아이템 기증하기."
+      "desc": "박물관에 40가지 다른 아이템 기증하기."
     },
     "a26": {
       "name": "심부름꾼",
-      "desc": "' 도움 필요함 ' 요청 10개 완수."
+      "desc": "'도움 필요함' 요청 10개 완수."
     },
     "a27": {
       "name": "큰 도움",
-      "desc": "' 도움 필요함 ' 요청 40개 완수."
+      "desc": "'도움 필요함' 요청 40개 완수."
     },
     "a28": {
-      "name": "혼합 양식",
-      "desc": "각 작물 을 15개씩 배송 . (자세한 내용은 아래의 노트 에서 볼 수 있습니다)"
+      "name": "혼합양식",
+      "desc": "각 작물 15개씩 배송하기."
     },
     "a29": {
-      "name": "단일재배",
-      "desc": "한 종류의 작물 을 300개 배송 . 자세한 내용은 아래의 노트 에서 볼 수 있습니다)"
+      "name": "단일 재배",
+      "desc": "한가지 작물 300개 배송하기."
     },
     "a30": {
       "name": "수송품 한가득",
-      "desc": "모든 아이템 운송 하기."
+      "desc": "모든 아이템 운송하기."
     },
     "a31": {
       "name": "Prairie King",
@@ -2395,11 +2384,11 @@
     },
     "a41": {
       "name": "먼 곳의 해안",
-      "desc": "진저 섬 에 도달."
+      "desc": "진저 섬에 도달."
     },
     "a42": {
       "name": "독서왕",
-      "desc": "모든 책 읽기. 참고: 능력 책에만 적용됩니다."
+      "desc": "모든 책 읽기."
     },
     "a43": {
       "name": "최고의 평점",
@@ -2411,11 +2400,11 @@
     },
     "a45": {
       "name": "잊을 수 없는 스프",
-      "desc": "도지사 를 기쁘게 하기."
+      "desc": "도지사를 기쁘게 하기."
     },
     "a46": {
       "name": "좋은 이웃",
-      "desc": "숲의 이웃 이 가정을 꾸릴 수 있게 돕기."
+      "desc": "숲의 이웃이 가정을 꾸릴 수 있게 돕기."
     },
     "a47": {
       "name": "깊은 곳의 위험",
@@ -2427,7 +2416,7 @@
     },
     "a49": {
       "name": "완벽",
-      "desc": "정상 에 도달."
+      "desc": "정상에 도달."
     }
   },
   "achievement": {

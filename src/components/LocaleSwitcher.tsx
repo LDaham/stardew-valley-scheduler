@@ -5,6 +5,22 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import PixelIcon from "@/components/PixelIcon";
 
+// 각 로케일의 원어 표기(드롭다운 표시용)
+const LOCALE_LABELS: Record<string, string> = {
+  ko: "한국어",
+  en: "English",
+  de: "Deutsch",
+  es: "Español",
+  fr: "Français",
+  it: "Italiano",
+  hu: "Magyar",
+  ja: "日本語",
+  "pt-BR": "Português (BR)",
+  ru: "Русский",
+  tr: "Türkçe",
+  "zh-CN": "简体中文",
+};
+
 export default function LocaleSwitcher() {
   const t = useTranslations();
   const locale = useLocale();
@@ -24,7 +40,7 @@ export default function LocaleSwitcher() {
       >
         {routing.locales.map((l) => (
           <option key={l} value={l}>
-            {l.toUpperCase()}
+            {LOCALE_LABELS[l] ?? l.toUpperCase()}
           </option>
         ))}
       </select>
