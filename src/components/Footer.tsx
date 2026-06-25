@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import Support from "@/components/Support";
 
 // 페이지 하단 고지: 팬 제작물 안내 + 위키 데이터 출처(CC BY-NC-SA 3.0) + 코드 라이선스.
@@ -39,6 +40,20 @@ export default function Footer() {
         <p>
           {t.rich("code", { repo: (c) => <Ext href={REPO_URL}>{c}</Ext> })}{" "}
           {t("nonCommercial")} · <Support variant="footer" />
+        </p>
+        <p className="flex flex-wrap justify-center gap-x-3 gap-y-1">
+          <Link
+            href="/privacy"
+            className="underline hover:text-[var(--sv-ink)]"
+          >
+            {t("privacy")}
+          </Link>
+          <Link
+            href="/disclaimer"
+            className="underline hover:text-[var(--sv-ink)]"
+          >
+            {t("disclaimer")}
+          </Link>
         </p>
       </div>
     </footer>
