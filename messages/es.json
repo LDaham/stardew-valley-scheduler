@@ -2482,7 +2482,7 @@
   "footer": {
     "fan": "Un proyecto de fans no oficial, sin afiliación ni respaldo de ConcernedApe / Stardew Valley.",
     "copyright": "Stardew Valley © ConcernedApe.",
-    "data": "Los datos y traducciones del juego se adaptaron del <wiki>Stardew Valley Wiki</wiki> y se licencian bajo <license>CC BY-NC-SA 3.0</license>.",
+    "data": "Los nombres y traducciones del juego se extraen de los archivos del juego; algunos datos se adaptan del <wiki>Stardew Valley Wiki</wiki> (<license>CC BY-NC-SA 3.0</license>).",
     "code": "El código fuente está disponible en <repo>GitHub</repo> bajo la licencia MIT.",
     "nonCommercial": "Este sitio se opera sin fines comerciales."
   },
@@ -2517,5 +2517,29 @@
     "fishing": "Indefinido · se aplaza si no se hace.",
     "misc": "Indefinido · se aplaza si no se hace (Geoda·Museo).",
     "eatFood": "Día de cosecha · hay que comer antes de cosechar. Se elimina automáticamente si se marca antes la cosecha del cultivo."
+  },
+  "slots": {
+    "title": "Ranuras de guardado",
+    "hint": "Guarda varias partidas en ranuras separadas en este dispositivo (hasta {max}).",
+    "slotN": "Ranura {n}",
+    "active": "Activa",
+    "switch": "Cambiar",
+    "add": "Añadir ranura",
+    "full": "Ranuras llenas (máx. {max})",
+    "rename": "Renombrar",
+    "duplicate": "Duplicar",
+    "delete": "Eliminar",
+    "deleteConfirm": "¿Eliminar?",
+    "namePlaceholder": "Nombre de la ranura",
+    "updated": "Actualizado {date}",
+    "copyOf": "{name} (copia)",
+    "importTitle": "¿En qué ranura importar?",
+    "importOverwrite": "Sobrescribir {name}",
+    "importNew": "Importar como ranura nueva"
+  },
+  "support": {
+    "title": "Apoyar",
+    "intro": "Este sitio funciona solo con donaciones, sin anuncios. ¡Hasta una pequeña ayuda significa mucho!",
+    "note": "Las donaciones se destinan solo a los costes de funcionamiento (hosting, etc.); el proyecto sigue siendo sin fines de lucro."
   }
 }

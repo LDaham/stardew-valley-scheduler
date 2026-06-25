@@ -2482,7 +2482,7 @@
   "footer": {
     "fan": "非公式のファン制作物であり、ConcernedApe / Stardew Valley とは提携・承認関係にありません。",
     "copyright": "Stardew Valley © ConcernedApe.",
-    "data": "ゲームデータ・翻訳は <wiki>Stardew Valley Wiki</wiki> を基に加工しており、<license>CC BY-NC-SA 3.0</license> ライセンスに従います。",
+    "data": "ゲーム内の名称・翻訳はゲームファイルから抽出しており、一部のデータは<wiki>Stardew Valley Wiki</wiki>を参考にしています（<license>CC BY-NC-SA 3.0</license>）。",
     "code": "ソースコードは <repo>GitHub</repo> にて MIT ライセンスで提供されています。",
     "nonCommercial": "本サイトは非営利で運営されています。"
   },
@@ -2517,5 +2517,29 @@
     "fishing": "無期限 · やらないと先送り。",
     "misc": "無期限 · やらないと先送り（ジオード・博物館）。",
     "eatFood": "収穫日 · 収穫前に食べる必要あり。作物の収穫を先にチェックすると自動削除。"
+  },
+  "slots": {
+    "title": "セーブスロット",
+    "hint": "同じ端末で複数のゲームをスロット別に保存します（最大{max}個）。",
+    "slotN": "スロット {n}",
+    "active": "使用中",
+    "switch": "切り替え",
+    "add": "スロット追加",
+    "full": "スロットが満杯です（最大{max}個）",
+    "rename": "名前変更",
+    "duplicate": "複製",
+    "delete": "削除",
+    "deleteConfirm": "削除しますか？",
+    "namePlaceholder": "スロット名",
+    "updated": "更新 {date}",
+    "copyOf": "{name}（コピー）",
+    "importTitle": "どのスロットに読み込みますか？",
+    "importOverwrite": "{name}に上書き",
+    "importNew": "新しいスロットに読み込む"
+  },
+  "support": {
+    "title": "支援",
+    "intro": "このサイトは広告なし・支援のみで運営しています。少しのご支援でも大きな力になります！",
+    "note": "支援はホスティングなどの運営費のみに使われ、プロジェクトは非営利を維持します。"
   }
 }

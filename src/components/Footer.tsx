@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import Support from "@/components/Support";
 
 // 페이지 하단 고지: 팬 제작물 안내 + 위키 데이터 출처(CC BY-NC-SA 3.0) + 코드 라이선스.
 // 외부 링크는 새 탭. 링크는 번역 문자열의 <wiki>/<license>/<repo> 태그로 주입한다.
@@ -37,7 +38,7 @@ export default function Footer() {
         </p>
         <p>
           {t.rich("code", { repo: (c) => <Ext href={REPO_URL}>{c}</Ext> })}{" "}
-          {t("nonCommercial")}
+          {t("nonCommercial")} · <Support variant="footer" />
         </p>
       </div>
     </footer>

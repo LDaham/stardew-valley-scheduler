@@ -2482,7 +2482,7 @@
   "footer": {
     "fan": "Resmi olmayan bir hayran projesi; ConcernedApe / Stardew Valley ile bağlantılı veya onaylı değildir.",
     "copyright": "Stardew Valley © ConcernedApe.",
-    "data": "Oyun verileri ve çevirileri <wiki>Stardew Valley Wiki</wiki>'den uyarlanmıştır ve <license>CC BY-NC-SA 3.0</license> lisansı altındadır.",
+    "data": "Oyun içi adlar ve çeviriler oyun dosyalarından çıkarılmıştır; bazı veriler <wiki>Stardew Valley Wiki</wiki>’den uyarlanmıştır (<license>CC BY-NC-SA 3.0</license>).",
     "code": "Kaynak kodu <repo>GitHub</repo>'da MIT lisansı altında mevcuttur.",
     "nonCommercial": "Bu site ticari olmayan bir şekilde işletilmektedir."
   },
@@ -2517,5 +2517,29 @@
     "fishing": "Süresiz · yapılmazsa ertelenir.",
     "misc": "Süresiz · yapılmazsa ertelenir (Jeod·Müze).",
     "eatFood": "Hasat günü · hasattan önce yenmeli. Önce ekin hasadı işaretlenirse otomatik silinir."
+  },
+  "slots": {
+    "title": "Kayıt yuvaları",
+    "hint": "Bu cihazda birden fazla oyunu ayrı yuvalarda saklayın (en fazla {max}).",
+    "slotN": "Yuva {n}",
+    "active": "Etkin",
+    "switch": "Geç",
+    "add": "Yuva ekle",
+    "full": "Yuvalar dolu (en fazla {max})",
+    "rename": "Yeniden adlandır",
+    "duplicate": "Çoğalt",
+    "delete": "Sil",
+    "deleteConfirm": "Silinsin mi?",
+    "namePlaceholder": "Yuva adı",
+    "updated": "Güncellendi {date}",
+    "copyOf": "{name} (kopya)",
+    "importTitle": "Hangi yuvaya aktarılsın?",
+    "importOverwrite": "{name} üzerine yaz",
+    "importNew": "Yeni yuvaya aktar"
+  },
+  "support": {
+    "title": "Destek ol",
+    "intro": "Bu site reklamsız, yalnızca bağışlarla yaşıyor. Küçük bir katkı bile çok değerli!",
+    "note": "Bağışlar yalnızca işletme giderlerine (barındırma vb.) gider; proje ticari olmamaya devam eder."
   }
 }

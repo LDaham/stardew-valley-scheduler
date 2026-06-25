@@ -2482,7 +2482,7 @@
   "footer": {
     "fan": "Un progetto amatoriale non ufficiale, non affiliato né approvato da ConcernedApe / Stardew Valley.",
     "copyright": "Stardew Valley © ConcernedApe.",
-    "data": "I dati e le traduzioni del gioco sono adattati dal <wiki>Stardew Valley Wiki</wiki> e concessi in licenza <license>CC BY-NC-SA 3.0</license>.",
+    "data": "I nomi e le traduzioni del gioco sono estratti dai file di gioco; alcuni dati sono adattati dal <wiki>Stardew Valley Wiki</wiki> (<license>CC BY-NC-SA 3.0</license>).",
     "code": "Il codice sorgente è disponibile su <repo>GitHub</repo> con licenza MIT.",
     "nonCommercial": "Questo sito è gestito su base non commerciale."
   },
@@ -2517,5 +2517,29 @@
     "fishing": "Indefinito · rinviato se non fatto.",
     "misc": "Indefinito · rinviato se non fatto (Geode·Museo).",
     "eatFood": "Giorno del raccolto · va mangiato prima della raccolta. Eliminato automaticamente se spunti prima la raccolta."
+  },
+  "slots": {
+    "title": "Slot di salvataggio",
+    "hint": "Salva più partite in slot separati su questo dispositivo (fino a {max}).",
+    "slotN": "Slot {n}",
+    "active": "Attivo",
+    "switch": "Cambia",
+    "add": "Aggiungi slot",
+    "full": "Slot pieni (max {max})",
+    "rename": "Rinomina",
+    "duplicate": "Duplica",
+    "delete": "Elimina",
+    "deleteConfirm": "Eliminare?",
+    "namePlaceholder": "Nome dello slot",
+    "updated": "Aggiornato {date}",
+    "copyOf": "{name} (copia)",
+    "importTitle": "In quale slot importare?",
+    "importOverwrite": "Sovrascrivi {name}",
+    "importNew": "Importa come nuovo slot"
+  },
+  "support": {
+    "title": "Sostieni",
+    "intro": "Questo sito vive solo di donazioni, senza pubblicità. Anche un piccolo contributo è prezioso!",
+    "note": "Le donazioni coprono solo i costi di gestione (hosting, ecc.); il progetto resta senza scopo di lucro."
   }
 }

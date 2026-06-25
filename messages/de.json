@@ -2482,7 +2482,7 @@
   "footer": {
     "fan": "Ein inoffizielles Fanprojekt, nicht verbunden mit oder unterstützt von ConcernedApe / Stardew Valley.",
     "copyright": "Stardew Valley © ConcernedApe.",
-    "data": "Spieldaten und Übersetzungen wurden aus dem <wiki>Stardew Valley Wiki</wiki> übernommen und unter <license>CC BY-NC-SA 3.0</license> lizenziert.",
+    "data": "Spielnamen und Übersetzungen stammen aus den Spieldateien; einige Daten sind dem <wiki>Stardew Valley Wiki</wiki> entnommen (<license>CC BY-NC-SA 3.0</license>).",
     "code": "Der Quellcode ist auf <repo>GitHub</repo> unter der MIT-Lizenz verfügbar.",
     "nonCommercial": "Diese Website wird nicht-kommerziell betrieben."
   },
@@ -2517,5 +2517,29 @@
     "fishing": "Unbefristet · wird verschoben, wenn nicht erledigt.",
     "misc": "Unbefristet · wird verschoben, wenn nicht erledigt (Geode·Museum).",
     "eatFood": "Am Erntetag · muss vor der Ernte gegessen werden. Wird automatisch gelöscht, wenn die Ernte zuerst abgehakt wird."
+  },
+  "slots": {
+    "title": "Speicherplätze",
+    "hint": "Speichere mehrere Spielstände in getrennten Plätzen auf diesem Gerät (bis zu {max}).",
+    "slotN": "Platz {n}",
+    "active": "Aktiv",
+    "switch": "Wechseln",
+    "add": "Platz hinzufügen",
+    "full": "Plätze sind voll (max. {max})",
+    "rename": "Umbenennen",
+    "duplicate": "Duplizieren",
+    "delete": "Löschen",
+    "deleteConfirm": "Löschen?",
+    "namePlaceholder": "Platzname",
+    "updated": "Aktualisiert {date}",
+    "copyOf": "{name} (Kopie)",
+    "importTitle": "In welchen Platz importieren?",
+    "importOverwrite": "{name} überschreiben",
+    "importNew": "Als neuen Platz importieren"
+  },
+  "support": {
+    "title": "Unterstützen",
+    "intro": "Diese Seite läuft nur über Spenden, ohne Werbung. Schon eine kleine Unterstützung hilft sehr!",
+    "note": "Spenden fließen nur in die Betriebskosten (Hosting usw.); das Projekt bleibt nicht-kommerziell."
   }
 }

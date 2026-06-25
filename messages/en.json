@@ -118,6 +118,30 @@
   "ui": {
     "language": "Language"
   },
+  "slots": {
+    "title": "Save slots",
+    "hint": "Save multiple playthroughs in separate slots on this device (up to {max}).",
+    "slotN": "Slot {n}",
+    "active": "Active",
+    "switch": "Switch",
+    "add": "Add slot",
+    "full": "Slots are full (max {max})",
+    "rename": "Rename",
+    "duplicate": "Duplicate",
+    "delete": "Delete",
+    "deleteConfirm": "Delete?",
+    "namePlaceholder": "Slot name",
+    "updated": "Updated {date}",
+    "copyOf": "{name} (copy)",
+    "importTitle": "Import into which slot?",
+    "importOverwrite": "Overwrite {name}",
+    "importNew": "Import as a new slot"
+  },
+  "support": {
+    "title": "Support",
+    "intro": "This site runs on donations only, with no ads. Even a small tip means a lot!",
+    "note": "Donations go only toward running costs (hosting, etc.); the project stays non-commercial."
+  },
   "settings": {
     "title": "Settings",
     "open": "Open settings",
@@ -1019,7 +1043,7 @@
   "footer": {
     "fan": "An unofficial fan project, not affiliated with or endorsed by ConcernedApe / Stardew Valley.",
     "copyright": "Stardew Valley © ConcernedApe.",
-    "data": "Game data and translations are adapted from the <wiki>Stardew Valley Wiki</wiki> and licensed under <license>CC BY-NC-SA 3.0</license>.",
+    "data": "Game names and translations are extracted from the game files; some data is adapted from the <wiki>Stardew Valley Wiki</wiki> (<license>CC BY-NC-SA 3.0</license>).",
     "code": "Source code is available on <repo>GitHub</repo> under the MIT license.",
     "nonCommercial": "This site is operated on a non-commercial basis."
   },

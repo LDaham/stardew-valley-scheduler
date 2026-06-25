@@ -4,9 +4,14 @@ import { useSyncExternalStore } from "react";
 import { fromYearDay, toYearDay, type SDate } from "@/lib/calendar";
 import {
   getServerSnapshot,
+  getServerSlotsSnapshot,
   getSnapshot,
+  getSlotsSnapshot,
+  MAX_SLOTS,
   scheduleActions,
+  slotActions,
   subscribe,
+  subscribeSlots,
 } from "@/lib/scheduleStore";
 import type { Memo } from "@/types/schedule";
 
@@ -98,5 +103,25 @@ export function useSchedule() {
     resetAll: scheduleActions.resetAll,
     exportState: scheduleActions.exportState,
     importState: scheduleActions.importState,
+  };
+}
+
+// 세이브 슬롯 목록·활성 슬롯 + 슬롯 조작 액션. 설정 다이얼로그의 슬롯 관리에서 사용.
+export function useSlots() {
+  const snap = useSyncExternalStore(
+    subscribeSlots,
+    getSlotsSnapshot,
+    getServerSlotsSnapshot,
+  );
+  return {
+    slots: snap.slots,
+    activeId: snap.activeId,
+    maxSlots: MAX_SLOTS,
+    switchSlot: slotActions.switchSlot,
+    createSlot: slotActions.createSlot,
+    renameSlot: slotActions.renameSlot,
+    duplicateSlot: slotActions.duplicateSlot,
+    deleteSlot: slotActions.deleteSlot,
+    importToSlot: slotActions.importToSlot,
   };
 }

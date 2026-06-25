@@ -7,6 +7,7 @@ import { GiftDialogProvider } from "@/components/GiftDialogProvider";
 import Dashboard from "@/components/Dashboard";
 import SettingsDialog from "@/components/SettingsDialog";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
+import Support from "@/components/Support";
 import BundleDialog from "@/components/BundleDialog";
 import PerfectionDialog from "@/components/PerfectionDialog";
 import AchievementDialog from "@/components/AchievementDialog";
@@ -173,8 +174,9 @@ function AppShell() {
                 />
               ))}
             </div>
-            {/* 우측 정렬: 언어 선택 + 설정 */}
+            {/* 우측 정렬: 후원 + 언어 선택 + 설정 */}
             <div className="ml-auto flex items-center gap-x-2">
+              <Support variant="nav" />
               <LocaleSwitcher />
               <NavTab
                 icon="/icons/ui/settings.png"

@@ -2482,7 +2482,7 @@
   "footer": {
     "fan": "非官方粉丝作品，与 ConcernedApe / Stardew Valley 无隶属关系，也未获其认可。",
     "copyright": "Stardew Valley © ConcernedApe.",
-    "data": "游戏数据与翻译改编自 <wiki>Stardew Valley 维基</wiki>，并遵循 <license>CC BY-NC-SA 3.0</license> 许可。",
+    "data": "游戏名称与翻译提取自游戏文件；部分数据参考自<wiki>Stardew Valley 维基</wiki>（<license>CC BY-NC-SA 3.0</license>）。",
     "code": "源代码在 <repo>GitHub</repo> 上以 MIT 许可提供。",
     "nonCommercial": "本网站以非营利方式运营。"
   },
@@ -2517,5 +2517,29 @@
     "fishing": "无限期 · 不做则顺延。",
     "misc": "无限期 · 不做则顺延（晶洞·博物馆）。",
     "eatFood": "收获日 · 须在收获前进食。若先勾选作物收获则自动删除。"
+  },
+  "slots": {
+    "title": "存档槽",
+    "hint": "在本设备上将多个游戏分槽保存（最多 {max} 个）。",
+    "slotN": "存档 {n}",
+    "active": "使用中",
+    "switch": "切换",
+    "add": "添加存档槽",
+    "full": "存档槽已满（最多 {max} 个）",
+    "rename": "重命名",
+    "duplicate": "复制",
+    "delete": "删除",
+    "deleteConfirm": "删除？",
+    "namePlaceholder": "存档名称",
+    "updated": "更新于 {date}",
+    "copyOf": "{name}（副本）",
+    "importTitle": "导入到哪个存档槽？",
+    "importOverwrite": "覆盖 {name}",
+    "importNew": "导入为新存档槽"
+  },
+  "support": {
+    "title": "赞助",
+    "intro": "本站无广告，仅靠赞助运营。即使一点点支持也意义重大！",
+    "note": "赞助仅用于运营成本（托管等），项目保持非营利。"
   }
 }

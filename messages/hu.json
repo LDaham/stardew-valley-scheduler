@@ -2482,7 +2482,7 @@
   "footer": {
     "fan": "Nem hivatalos rajongói projekt, nem áll kapcsolatban a ConcernedApe / Stardew Valley-vel, és nem támogatja azt.",
     "copyright": "Stardew Valley © ConcernedApe.",
-    "data": "A játékadatok és fordítások a <wiki>Stardew Valley Wiki</wiki> alapján készültek, <license>CC BY-NC-SA 3.0</license> licenc alatt.",
+    "data": "A játékbeli neveket és fordításokat a játékfájlokból nyertük ki; egyes adatok a <wiki>Stardew Valley Wiki</wiki> alapján készültek (<license>CC BY-NC-SA 3.0</license>).",
     "code": "A forráskód elérhető a <repo>GitHubon</repo> MIT licenc alatt.",
     "nonCommercial": "Ezt az oldalt nem kereskedelmi alapon üzemeltetjük."
   },
@@ -2517,5 +2517,29 @@
     "fishing": "Határidő nélkül · áthúzódik, ha nem teljesíted.",
     "misc": "Határidő nélkül · áthúzódik, ha nem teljesíted (Geóda·Múzeum).",
     "eatFood": "Betakarítás napja · a betakarítás előtt kell megenni. Automatikusan törlődik, ha előbb a termény betakarítását pipálod."
+  },
+  "slots": {
+    "title": "Mentési helyek",
+    "hint": "Tarts több játékmenetet külön helyeken ezen az eszközön (legfeljebb {max}).",
+    "slotN": "{n}. hely",
+    "active": "Aktív",
+    "switch": "Váltás",
+    "add": "Hely hozzáadása",
+    "full": "A helyek megteltek (max. {max})",
+    "rename": "Átnevezés",
+    "duplicate": "Másolat",
+    "delete": "Törlés",
+    "deleteConfirm": "Törlöd?",
+    "namePlaceholder": "Hely neve",
+    "updated": "Frissítve: {date}",
+    "copyOf": "{name} (másolat)",
+    "importTitle": "Melyik helyre importáljam?",
+    "importOverwrite": "{name} felülírása",
+    "importNew": "Importálás új helyként"
+  },
+  "support": {
+    "title": "Támogatás",
+    "intro": "Ez az oldal kizárólag adományokból működik, reklámok nélkül. Egy kis támogatás is sokat jelent!",
+    "note": "Az adományok kizárólag az üzemeltetési költségekre (tárhely stb.) mennek; a projekt nonprofit marad."
   }
 }

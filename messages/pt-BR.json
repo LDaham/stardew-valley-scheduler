@@ -2482,7 +2482,7 @@
   "footer": {
     "fan": "Um projeto de fã não oficial, sem afiliação ou endosso da ConcernedApe / Stardew Valley.",
     "copyright": "Stardew Valley © ConcernedApe.",
-    "data": "Dados e traduções do jogo foram adaptados do <wiki>Stardew Valley Wiki</wiki> e licenciados sob <license>CC BY-NC-SA 3.0</license>.",
+    "data": "Os nomes e traduções do jogo são extraídos dos arquivos do jogo; alguns dados são adaptados do <wiki>Stardew Valley Wiki</wiki> (<license>CC BY-NC-SA 3.0</license>).",
     "code": "O código-fonte está disponível no <repo>GitHub</repo> sob a licença MIT.",
     "nonCommercial": "Este site é operado em base não comercial."
   },
@@ -2517,5 +2517,29 @@
     "fishing": "Indefinido · adiado se não feito.",
     "misc": "Indefinido · adiado se não feito (Geodo·Museu).",
     "eatFood": "Dia da colheita · deve comer antes de colher. Excluído automaticamente se a colheita for marcada antes."
+  },
+  "slots": {
+    "title": "Espaços de save",
+    "hint": "Salve várias jogatinas em espaços separados neste dispositivo (até {max}).",
+    "slotN": "Espaço {n}",
+    "active": "Ativo",
+    "switch": "Trocar",
+    "add": "Adicionar espaço",
+    "full": "Espaços cheios (máx. {max})",
+    "rename": "Renomear",
+    "duplicate": "Duplicar",
+    "delete": "Excluir",
+    "deleteConfirm": "Excluir?",
+    "namePlaceholder": "Nome do espaço",
+    "updated": "Atualizado {date}",
+    "copyOf": "{name} (cópia)",
+    "importTitle": "Importar em qual espaço?",
+    "importOverwrite": "Sobrescrever {name}",
+    "importNew": "Importar como novo espaço"
+  },
+  "support": {
+    "title": "Apoiar",
+    "intro": "Este site funciona só com doações, sem anúncios. Até uma pequena ajuda significa muito!",
+    "note": "As doações cobrem apenas os custos de funcionamento (hospedagem, etc.); o projeto continua sem fins lucrativos."
   }
 }

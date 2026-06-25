@@ -82,7 +82,15 @@ function reconcileMainOrder(saved?: string[]): string[] {
   return out;
 }
 
-const STORAGE_KEY = "svs:schedule";
+// 세이브 슬롯: 같은 기기에서 여러 게임을 슬롯별로 저장한다.
+// - svs:slots = 슬롯 목록[{id,name,updatedAt}], svs:activeSlot = 활성 슬롯 id
+// - 각 슬롯 데이터는 svs:slot:<id>. 구버전 단일 키 svs:schedule는 첫 로드 시 슬롯 1로 이전.
+export type Slot = { id: string; name: string; updatedAt: number };
+export const MAX_SLOTS = 5;
+const SLOTS_KEY = "svs:slots";
+const ACTIVE_KEY = "svs:activeSlot";
+const LEGACY_KEY = "svs:schedule";
+const slotDataKey = (id: string) => `svs:slot:${id}`;
 // v2: 할 일 추가 메뉴/장비 기본 순서 개편 → 기존 저장 순서를 1회 새 기본값으로 재설정.
 const STATE_VERSION = 2;
 
@@ -139,6 +147,40 @@ let state: ScheduleState = DEFAULT_STATE;
 let loaded = false;
 const listeners = new Set<() => void>();
 
+// 슬롯 레지스트리(스토어 내부 상태) — UI는 subscribeSlots/getSlotsSnapshot로 구독.
+let slots: Slot[] = [];
+let activeId = "";
+let slotsLoaded = false;
+const slotListeners = new Set<() => void>();
+// useSyncExternalStore 안정성을 위해 변경 시에만 새 객체로 교체.
+let slotsSnapshot: { slots: Slot[]; activeId: string } = { slots: [], activeId: "" };
+function refreshSlotsSnapshot(): void {
+  slotsSnapshot = { slots, activeId };
+}
+
+// 슬롯 목록·활성 슬롯을 1회 로드. 없으면 구버전 데이터를 슬롯 1로 이전(없으면 빈 슬롯 생성).
+function loadSlots(): void {
+  if (slotsLoaded || typeof window === "undefined") return;
+  const saved = loadJSON<Slot[]>(SLOTS_KEY, []);
+  if (Array.isArray(saved) && saved.length > 0) {
+    slots = saved.slice(0, MAX_SLOTS);
+    const savedActive = loadJSON<string>(ACTIVE_KEY, "");
+    activeId = slots.some((s) => s.id === savedActive) ? savedActive : slots[0].id;
+  } else {
+    const id = newId();
+    activeId = id;
+    // 이름은 비워 두고 UI에서 "슬롯 N"으로 표시(스토어는 로케일 비의존).
+    slots = [{ id, name: "", updatedAt: Date.now() }];
+    const legacy = window.localStorage.getItem(LEGACY_KEY);
+    if (legacy) window.localStorage.setItem(slotDataKey(id), legacy);
+    else saveJSON(slotDataKey(id), DEFAULT_STATE);
+    saveJSON(SLOTS_KEY, slots);
+    saveJSON(ACTIVE_KEY, activeId);
+  }
+  slotsLoaded = true;
+  refreshSlotsSnapshot();
+}
+
 // 저장본(또는 가져온 JSON)을 기본값과 안전하게 병합 → 누락 필드·구버전 호환·순서 재정리.
 // 최초 로드(ensureLoaded)와 데이터 가져오기(importState)가 함께 쓴다.
 function mergeSaved(saved: ScheduleState): ScheduleState {
@@ -193,13 +235,21 @@ function mergeSaved(saved: ScheduleState): ScheduleState {
 // 클라이언트에서 최초 접근 시 1회 로드 (getSnapshot 참조 안정성 유지)
 function ensureLoaded(): void {
   if (loaded || typeof window === "undefined") return;
-  state = mergeSaved(loadJSON(STORAGE_KEY, DEFAULT_STATE));
+  loadSlots();
+  state = mergeSaved(loadJSON(slotDataKey(activeId), DEFAULT_STATE));
   loaded = true;
 }
 
 function commit(next: ScheduleState): void {
   state = next;
-  saveJSON(STORAGE_KEY, state);
+  loadSlots();
+  saveJSON(slotDataKey(activeId), state);
+  // 활성 슬롯 수정시각 갱신(슬롯 목록 UI는 다음 구조 변경/열람 시 반영).
+  const s = slots.find((x) => x.id === activeId);
+  if (s) {
+    s.updatedAt = Date.now();
+    saveJSON(SLOTS_KEY, slots);
+  }
   listeners.forEach((l) => l());
 }
 
@@ -217,6 +267,126 @@ export function getSnapshot(): ScheduleState {
 export function getServerSnapshot(): ScheduleState {
   return DEFAULT_STATE;
 }
+
+// ── 세이브 슬롯 구독/스냅샷 ──
+export function subscribeSlots(cb: () => void): () => void {
+  slotListeners.add(cb);
+  return () => slotListeners.delete(cb);
+}
+export function getSlotsSnapshot(): { slots: Slot[]; activeId: string } {
+  loadSlots();
+  return slotsSnapshot;
+}
+const SERVER_SLOTS_SNAPSHOT = { slots: [], activeId: "" } as {
+  slots: Slot[];
+  activeId: string;
+};
+export function getServerSlotsSnapshot() {
+  return SERVER_SLOTS_SNAPSHOT;
+}
+function notifySlots(): void {
+  slotListeners.forEach((l) => l());
+}
+
+export const slotActions = {
+  // 슬롯 전환: 현재 슬롯 저장 후 대상 슬롯 데이터를 로드해 화면을 즉시 갱신.
+  switchSlot(id: string) {
+    loadSlots();
+    if (id === activeId || !slots.some((s) => s.id === id)) return;
+    saveJSON(slotDataKey(activeId), state);
+    activeId = id;
+    saveJSON(ACTIVE_KEY, activeId);
+    state = mergeSaved(loadJSON(slotDataKey(id), DEFAULT_STATE));
+    loaded = true;
+    refreshSlotsSnapshot();
+    listeners.forEach((l) => l());
+    notifySlots();
+  },
+  // 새 빈 슬롯을 목록에 추가(최대 MAX_SLOTS). 활성 슬롯은 그대로 두고,
+  // 전환은 사용자가 '전환'으로 명시적으로 한다(현재 화면이 갑자기 초기화되지 않게).
+  createSlot(name = "") {
+    loadSlots();
+    if (slots.length >= MAX_SLOTS) return null;
+    const id = newId();
+    saveJSON(slotDataKey(id), DEFAULT_STATE);
+    slots = [...slots, { id, name, updatedAt: Date.now() }];
+    saveJSON(SLOTS_KEY, slots);
+    refreshSlotsSnapshot();
+    notifySlots();
+    return id;
+  },
+  renameSlot(id: string, name: string) {
+    loadSlots();
+    slots = slots.map((s) => (s.id === id ? { ...s, name } : s));
+    saveJSON(SLOTS_KEY, slots);
+    refreshSlotsSnapshot();
+    notifySlots();
+  },
+  // 슬롯 복제(최대 MAX_SLOTS). name은 UI가 로케일 반영해 전달.
+  duplicateSlot(id: string, name = "") {
+    loadSlots();
+    if (slots.length >= MAX_SLOTS || !slots.some((s) => s.id === id)) return null;
+    const newIdv = newId();
+    saveJSON(slotDataKey(newIdv), loadJSON(slotDataKey(id), DEFAULT_STATE));
+    slots = [...slots, { id: newIdv, name, updatedAt: Date.now() }];
+    saveJSON(SLOTS_KEY, slots);
+    refreshSlotsSnapshot();
+    notifySlots();
+    return newIdv;
+  },
+  // 슬롯 삭제(마지막 1개는 삭제 불가). 활성 슬롯 삭제 시 첫 슬롯으로 전환.
+  deleteSlot(id: string) {
+    loadSlots();
+    if (slots.length <= 1 || !slots.some((s) => s.id === id)) return;
+    if (typeof window !== "undefined")
+      window.localStorage.removeItem(slotDataKey(id));
+    slots = slots.filter((s) => s.id !== id);
+    saveJSON(SLOTS_KEY, slots);
+    if (activeId === id) {
+      activeId = slots[0].id;
+      saveJSON(ACTIVE_KEY, activeId);
+      state = mergeSaved(loadJSON(slotDataKey(activeId), DEFAULT_STATE));
+      loaded = true;
+      listeners.forEach((l) => l());
+    }
+    refreshSlotsSnapshot();
+    notifySlots();
+  },
+  // 가져온 JSON을 특정 슬롯에 넣는다. targetId=null이면 새 슬롯으로(가득 차면 false).
+  importToSlot(json: string, targetId: string | null): boolean {
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(json);
+    } catch {
+      return false;
+    }
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed))
+      return false;
+    loadSlots();
+    const merged = mergeSaved(parsed as ScheduleState);
+    let id = targetId;
+    if (!id) {
+      if (slots.length >= MAX_SLOTS) return false;
+      id = newId();
+      slots = [...slots, { id, name: "", updatedAt: Date.now() }];
+    } else {
+      if (!slots.some((s) => s.id === id)) return false;
+      slots = slots.map((s) =>
+        s.id === id ? { ...s, updatedAt: Date.now() } : s,
+      );
+    }
+    saveJSON(slotDataKey(id), merged);
+    saveJSON(SLOTS_KEY, slots);
+    if (id === activeId) {
+      state = merged;
+      loaded = true;
+      listeners.forEach((l) => l());
+    }
+    refreshSlotsSnapshot();
+    notifySlots();
+    return true;
+  },
+};
 
 function newId(): string {
   return Math.random().toString(36).slice(2, 10) + Date.now().toString(36);

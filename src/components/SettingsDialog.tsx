@@ -5,7 +5,8 @@ import { useTranslations } from "next-intl";
 import Modal from "@/components/Modal";
 import ThemeToggle from "@/components/ThemeToggle";
 import TodoSettings from "@/components/TodoSettings";
-import { useSchedule } from "@/components/ScheduleProvider";
+import SlotManager from "@/components/SlotManager";
+import { useSchedule, useSlots } from "@/components/ScheduleProvider";
 
 // GitHub 저장소(owner/repo). 오류 보고·건의를 이슈 페이지로 연결한다.
 // 다른 저장소로 바꾸려면 NEXT_PUBLIC_GITHUB_REPO 환경변수로 덮어쓴다.
@@ -15,7 +16,8 @@ const REPO =
 // 설정 다이얼로그(탭): 일반 · 메인화면(정보/할 일).
 export default function SettingsDialog({ onClose }: { onClose: () => void }) {
   const t = useTranslations();
-  const { resetAll, exportState, importState } = useSchedule();
+  const { resetAll, exportState } = useSchedule();
+  const { slots, maxSlots, importToSlot } = useSlots();
   const [confirming, setConfirming] = useState(false);
   // 설정 탭: 일반 / 메인화면
   const [tab, setTab] = useState<"general" | "main">("general");
@@ -23,6 +25,8 @@ export default function SettingsDialog({ onClose }: { onClose: () => void }) {
   const [importMsg, setImportMsg] = useState<{ ok: boolean; text: string } | null>(
     null,
   );
+  // 가져오기 대기: 파일 내용 보관 후 대상 슬롯을 고르게 한다.
+  const [pendingImport, setPendingImport] = useState<string | null>(null);
 
   // 전체 데이터를 JSON 파일로 내려받기(기기 이전·백업용)
   const handleExport = () => {
@@ -35,23 +39,32 @@ export default function SettingsDialog({ onClose }: { onClose: () => void }) {
     URL.revokeObjectURL(url);
   };
 
-  // 선택한 JSON 파일을 읽어 상태로 불러오기
+  // 선택한 JSON 파일을 읽어, 어느 슬롯에 넣을지 고르도록 대기 상태로 둔다.
   const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     e.target.value = ""; // 같은 파일 재선택 허용
     if (!file) return;
+    setImportMsg(null);
     const reader = new FileReader();
-    reader.onload = () => {
-      const ok = importState(String(reader.result));
-      setImportMsg({
-        ok,
-        text: ok ? t("settings.importSuccess") : t("settings.importError"),
-      });
-    };
+    reader.onload = () => setPendingImport(String(reader.result));
     reader.onerror = () =>
       setImportMsg({ ok: false, text: t("settings.importError") });
     reader.readAsText(file);
   };
+
+  // 대상 슬롯 확정(targetId=null이면 새 슬롯). 성공/실패 안내 후 대기 해제.
+  const doImport = (targetId: string | null) => {
+    if (pendingImport == null) return;
+    const ok = importToSlot(pendingImport, targetId);
+    setImportMsg({
+      ok,
+      text: ok ? t("settings.importSuccess") : t("settings.importError"),
+    });
+    setPendingImport(null);
+  };
+
+  const slotLabel = (name: string, index: number) =>
+    name.trim() || t("slots.slotN", { n: index + 1 });
 
   const tabs: { key: "general" | "main"; label: string }[] = [
     { key: "general", label: t("settings.tabGeneral") },
@@ -91,6 +104,17 @@ export default function SettingsDialog({ onClose }: { onClose: () => void }) {
             <ThemeToggle />
           </section>
 
+          {/* 세이브 슬롯: 같은 기기에서 여러 게임을 슬롯별로 저장·전환 */}
+          <section className="mb-5">
+            <h3 className="mb-2 text-sm font-semibold text-[var(--sv-ink-muted)]">
+              {t("slots.title")}
+            </h3>
+            <p className="mb-2 text-xs text-[var(--sv-ink-muted)]">
+              {t("slots.hint", { max: maxSlots })}
+            </p>
+            <SlotManager />
+          </section>
+
           {/* 데이터 백업·이전(내보내기/가져오기 JSON) */}
           <section className="mb-5">
             <h3 className="mb-2 text-sm font-semibold text-[var(--sv-ink-muted)]">
@@ -125,6 +149,46 @@ export default function SettingsDialog({ onClose }: { onClose: () => void }) {
                 />
               </label>
             </div>
+
+            {/* 가져오기 대상 슬롯 선택(매번 어느 슬롯에 넣을지 고른다) */}
+            {pendingImport != null && (
+              <div className="mt-3 rounded-lg border border-[var(--sv-accent)] bg-[var(--sv-bg)] p-3">
+                <p className="mb-2 text-xs font-semibold">
+                  {t("slots.importTitle")}
+                </p>
+                <div className="flex flex-col gap-1.5">
+                  {slots.map((s, i) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => doImport(s.id)}
+                      className="rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] px-2.5 py-1.5 text-left text-sm hover:bg-[var(--sv-bg)]"
+                    >
+                      {t("slots.importOverwrite", {
+                        name: slotLabel(s.name, i),
+                      })}
+                    </button>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => doImport(null)}
+                    disabled={slots.length >= maxSlots}
+                    className="rounded-md border border-transparent bg-[var(--sv-accent)] px-2.5 py-1.5 text-left text-sm font-semibold text-[var(--sv-accent-ink)] disabled:opacity-40"
+                  >
+                    {slots.length >= maxSlots
+                      ? t("slots.full", { max: maxSlots })
+                      : t("slots.importNew")}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPendingImport(null)}
+                    className="self-start px-1 py-0.5 text-xs text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
+                  >
+                    {t("common.cancel")}
+                  </button>
+                </div>
+              </div>
+            )}
             {importMsg && (
               <p
                 className={`mt-2 text-xs ${
