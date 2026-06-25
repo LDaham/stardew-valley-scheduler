@@ -154,16 +154,17 @@ function AppShell() {
   return (
     <>
       {/* 전체폭 분리형 상단 네비(아이콘+텍스트). 모달(z-50)보다 아래(z-30).
-          모바일: 1행 = 앱 이름(좌)+설정(우), 2행 = 오늘·정보·진행도.
-          데스크톱(sm+): 한 줄에 앱 이름·탭·설정 모두 표시. */}
+          좁은~중간 폭: 1행 = 앱 이름(좌)+후원·언어·설정(우), 2행 = 오늘·정보·진행도.
+          넓은 화면(lg+): 한 줄에 앱 이름·탭·우측 컨트롤 모두 표시.
+          (sm~lg에서 인라인하면 탭 글자가 세로로 깨져, lg부터 인라인한다.) */}
       <nav className="sticky top-0 z-30 border-b-2 border-[var(--sv-border)] bg-[var(--sv-panel)]">
         <div className="mx-auto max-w-5xl px-3 sm:px-5">
           {/* 상단 행: 앱 이름 + (데스크톱)메인 탭 + 설정(우) */}
           <div className="flex items-center gap-x-1">
-            <span className="mr-3 py-2.5 text-lg font-extrabold tracking-wide">
+            <span className="mr-2 min-w-0 truncate py-2.5 text-lg font-extrabold tracking-wide sm:mr-3">
               {t("common.appName")}
             </span>
-            <div className="hidden items-center gap-x-1 sm:flex">
+            <div className="hidden items-center gap-x-1 lg:flex">
               {mainTabs.map((m) => (
                 <NavTab
                   key={m.key}
@@ -174,8 +175,8 @@ function AppShell() {
                 />
               ))}
             </div>
-            {/* 우측 정렬: 후원 + 언어 선택 + 설정 */}
-            <div className="ml-auto flex items-center gap-x-2">
+            {/* 우측 정렬: 후원 + 언어 선택 + 설정 (모바일은 폭 절약 위해 아이콘 위주) */}
+            <div className="ml-auto flex shrink-0 items-center gap-x-1 sm:gap-x-2">
               <Support variant="nav" />
               <LocaleSwitcher />
               <NavTab
@@ -183,11 +184,13 @@ function AppShell() {
                 label={t("settings.title")}
                 active={settingsOpen}
                 onClick={() => setSettingsOpen(true)}
+                iconOnlyMobile
               />
             </div>
           </div>
-          {/* 모바일 전용 2행: 메인 탭 */}
-          <div className="flex items-center gap-x-1 sm:hidden">
+          {/* 좁은~중간 폭 2행: 메인 탭(글자 깨짐 방지 위해 lg부터 1행으로 합침).
+              긴 라벨 언어는 통째로 다음 줄로 내려가도록 flex-wrap(글자 단위 줄바꿈 방지). */}
+          <div className="flex flex-wrap items-center gap-x-1 gap-y-1 lg:hidden">
             {mainTabs.map((m) => (
               <NavTab
                 key={m.key}
@@ -265,24 +268,28 @@ function NavTab({
   active,
   onClick,
   className = "",
+  iconOnlyMobile = false,
 }: {
   icon: string;
   label: string;
   active: boolean;
   onClick: () => void;
   className?: string;
+  iconOnlyMobile?: boolean; // 모바일에선 아이콘만(라벨 숨김) — 네비 폭 절약
 }) {
   return (
     <button
       onClick={onClick}
+      aria-label={iconOnlyMobile ? label : undefined}
       aria-current={active ? "page" : undefined}
-      className={`-mb-0.5 flex items-center gap-1.5 border-b-2 px-2.5 py-2.5 text-[15px] font-semibold sm:px-3 ${
+      className={`-mb-0.5 flex items-center gap-1.5 whitespace-nowrap border-b-2 px-2.5 py-2.5 text-[15px] font-semibold sm:px-3 ${
         active
           ? "border-[var(--sv-accent)] text-[var(--sv-accent)]"
           : "border-transparent text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
       } ${className}`}
     >
-      <PixelIcon src={icon} size={18} /> {label}
+      <PixelIcon src={icon} size={18} />
+      <span className={iconOnlyMobile ? "hidden sm:inline" : ""}>{label}</span>
     </button>
   );
 }

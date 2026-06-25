@@ -29,7 +29,9 @@ export default function Dropdown({
   const [rect, setRect] = useState<{
     top: number;
     left: number;
+    right: number;
     width: number;
+    vw: number;
   } | null>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
@@ -41,7 +43,14 @@ export default function Dropdown({
       return;
     }
     const r = btnRef.current?.getBoundingClientRect();
-    if (r) setRect({ top: r.bottom, left: r.left, width: r.width });
+    if (r)
+      setRect({
+        top: r.bottom,
+        left: r.left,
+        right: r.right,
+        width: r.width,
+        vw: window.innerWidth,
+      });
     setOpen(true);
   };
 
@@ -116,14 +125,20 @@ export default function Dropdown({
           <ul
             ref={listRef}
             role="listbox"
+            // 폭: 트리거보다 좁아지지 않게(minWidth) 하되 내용 폭(w-max)으로 펼쳐 항목이 잘리지 않게,
+            // 화면 너비는 넘지 않도록 maxWidth로 클램프.
+            // 위치: 트리거가 화면 오른쪽 절반에 있으면 우측 기준 정렬해 화면 밖으로 넘치지 않게 한다.
             style={{
               position: "fixed",
               top: rect.top + 4,
-              left: rect.left,
-              width: rect.width,
+              ...(rect.left > rect.vw / 2
+                ? { right: Math.max(8, rect.vw - rect.right) }
+                : { left: rect.left }),
+              minWidth: rect.width,
+              maxWidth: "calc(100vw - 16px)",
               zIndex: 60,
             }}
-            className="max-h-56 overflow-y-auto rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] shadow-xl"
+            className="max-h-56 w-max overflow-y-auto rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] shadow-xl"
           >
             {options.map((o) => (
               <li key={o.value} role="option" aria-selected={o.value === value}>
@@ -133,7 +148,7 @@ export default function Dropdown({
                     onChange(o.value);
                     setOpen(false);
                   }}
-                  className={`flex w-full items-center gap-2 px-2 py-2 text-left text-sm hover:bg-[var(--sv-bg)] ${
+                  className={`flex w-full items-center gap-2 whitespace-nowrap px-2 py-2 text-left text-sm hover:bg-[var(--sv-bg)] ${
                     o.value === value ? "bg-[var(--sv-bg)]" : ""
                   }`}
                 >

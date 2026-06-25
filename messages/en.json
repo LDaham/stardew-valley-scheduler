@@ -5,6 +5,7 @@
   },
   "common": {
     "appName": "Stardew Valley Scheduler",
+    "appNameShort": "Scheduler",
     "incompleteFirst": "Show incomplete first",
     "cancel": "Cancel",
     "confirm": "Confirm"
@@ -139,8 +140,8 @@
   },
   "support": {
     "title": "Support",
-    "intro": "This site runs on donations only, with no ads. Even a small tip means a lot!",
-    "note": "Donations go only toward running costs (hosting, etc.); the project stays non-commercial."
+    "intro": "This site is a free, ad-free fan tool.\nDonations are simply a way to show support—even a small tip means a lot!",
+    "note": "Donations are entirely voluntary and not required to keep the site running.\nThe project will stay free and ad-free."
   },
   "legal": {
     "backHome": "← Back to the planner",
@@ -176,12 +177,13 @@
     "disclaimerIpHead": "4. Intellectual property",
     "disclaimerIpBody": "Stardew Valley content, names, and images are trademarks and copyrights of ConcernedApe. This site uses them solely for non-commercial fan purposes. Some data is adapted from the <wiki>Stardew Valley Wiki</wiki> (<license>CC BY-NC-SA 3.0</license>).",
     "disclaimerNonCommercialHead": "5. Non-commercial operation",
-    "disclaimerNonCommercialBody": "This site is run non-commercially with no ads; donations are used only for running costs such as hosting."
+    "disclaimerNonCommercialBody": "This site is provided free of charge with no ads. Donations are entirely voluntary and not required to use the site."
   },
   "settings": {
     "title": "Settings",
     "open": "Open settings",
     "tabGeneral": "General",
+    "tabData": "Data",
     "tabMain": "Main screen",
     "mainTabDesc": "Choose what to show on the main screen and in what order.",
     "todoSettings": "Main screen settings",
@@ -202,13 +204,14 @@
     "reportIssue": "Report a bug / suggestion (GitHub)",
     "dataTitle": "Backup & transfer",
     "dataDesc": "Export your settings and progress to a file, or import that file on another device.",
+    "exportSlotNote": "Exports data from the current slot “{name}”.",
     "exportButton": "Export",
     "importButton": "Import",
     "importSuccess": "Imported! Your data has been applied.",
     "importError": "Import failed: not a valid backup file.",
-    "resetTitle": "Reset all settings",
-    "resetDesc": "Restores all saved settings (bundles, tasks, etc.) to defaults. This cannot be undone.",
-    "resetButton": "Reset all settings",
+    "resetTitle": "Reset all data",
+    "resetDesc": "Restores all saved data (bundles, tasks, etc.) to defaults. This cannot be undone.",
+    "resetButton": "Reset all data",
     "resetConfirm": "Reset everything?",
     "resetYes": "Reset",
     "resetNo": "Cancel",

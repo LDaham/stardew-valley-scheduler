@@ -1910,6 +1910,7 @@
   },
   "common": {
     "appName": "Stardew Valley Planlayıcı",
+    "appNameShort": "Planlayıcı",
     "incompleteFirst": "Önce tamamlanmamışlar",
     "cancel": "İptal",
     "confirm": "Onayla"
@@ -2082,6 +2083,7 @@
     "title": "Ayarlar",
     "open": "Ayarları aç",
     "tabGeneral": "Genel",
+    "tabData": "Veriler",
     "tabMain": "Ana ekran",
     "mainTabDesc": "Ana ekranda neyin hangi sırayla gösterileceğini seçin.",
     "todoSettings": "Ana ekran ayarları",
@@ -2102,13 +2104,14 @@
     "reportIssue": "Hata / öneri bildir (GitHub)",
     "dataTitle": "Yedekleme ve aktarım",
     "dataDesc": "Ayarlarını ve ilerlemeni bir dosyaya aktar veya o dosyayı başka bir cihazda içe aktar.",
+    "exportSlotNote": "Geçerli yuvanın ({name}) verilerini dışa aktarır.",
     "exportButton": "Dışa aktar",
     "importButton": "İçe aktar",
     "importSuccess": "İçe aktarıldı! Verileriniz uygulandı.",
     "importError": "İçe aktarma başarısız: geçerli bir yedek dosyası değil.",
-    "resetTitle": "Tüm ayarları sıfırla",
-    "resetDesc": "Tüm kayıtlı ayarları (paketler, görevler vb.) varsayılana döndürür. Geri alınamaz.",
-    "resetButton": "Tüm ayarları sıfırla",
+    "resetTitle": "Tüm verileri sıfırla",
+    "resetDesc": "Tüm kayıtlı verileri (paketler, görevler vb.) varsayılana döndürür. Geri alınamaz.",
+    "resetButton": "Tüm verileri sıfırla",
     "resetConfirm": "Her şey sıfırlansın mı?",
     "resetYes": "Sıfırla",
     "resetNo": "İptal",
@@ -2539,7 +2542,7 @@
   },
   "support": {
     "title": "Destek ol",
-    "intro": "Bu site reklamsız, yalnızca bağışlarla yaşıyor. Küçük bir katkı bile çok değerli!",
-    "note": "Bağışlar yalnızca işletme giderlerine (barındırma vb.) gider; proje ticari olmamaya devam eder."
+    "intro": "Bu site ücretsiz, reklamsız bir hayran aracıdır.\nBağışlar yalnızca destek göstermenin bir yoludur; küçük bir katkı bile çok değerli!",
+    "note": "Bağışlar tamamen gönüllüdür ve sitenin çalışması için gerekli değildir.\nProje ücretsiz ve reklamsız kalacaktır."
   }
 }

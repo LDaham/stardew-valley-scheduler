@@ -15,6 +15,9 @@ export default function SlotManager() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [draftName, setDraftName] = useState("");
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
+  // 슬롯 추가: 입력칸을 열어 원하는 이름으로 바로 생성(빈칸이면 "슬롯 N")
+  const [adding, setAdding] = useState(false);
+  const [newName, setNewName] = useState("");
 
   const label = (name: string, index: number) =>
     name.trim() || t("slots.slotN", { n: index + 1 });
@@ -38,24 +41,29 @@ export default function SlotManager() {
     renameSlot(id, draftName.trim());
     setEditingId(null);
   };
+  const commitAdd = () => {
+    createSlot(newName.trim().slice(0, 24));
+    setNewName("");
+    setAdding(false);
+  };
 
   return (
     <div className="flex flex-col gap-2">
-      <ul className="flex flex-col gap-1.5">
+      <ul className="flex flex-wrap gap-2">
         {slots.map((s, i) => {
           const isActive = s.id === activeId;
           const editing = editingId === s.id;
           return (
             <li
               key={s.id}
-              className={`rounded-lg border px-3 py-2 ${
+              className={`flex w-full flex-col gap-1 rounded-lg border px-2.5 py-1.5 sm:w-auto sm:min-w-[10rem] sm:max-w-[16rem] ${
                 isActive
                   ? "border-[var(--sv-accent)] bg-[var(--sv-bg)]"
                   : "border-[var(--sv-border)] bg-[var(--sv-panel)]"
               }`}
             >
-              <div className="flex items-center gap-2">
-                {editing ? (
+              {editing ? (
+                <div className="flex items-center gap-1.5">
                   <input
                     autoFocus
                     value={draftName}
@@ -66,14 +74,23 @@ export default function SlotManager() {
                     }}
                     maxLength={24}
                     placeholder={t("slots.namePlaceholder")}
-                    className="min-w-0 flex-1 rounded-md border border-[var(--sv-border)] bg-[var(--sv-bg)] px-2 py-1 text-sm outline-none focus:border-[var(--sv-accent)]"
+                    className="w-32 min-w-0 rounded-md border border-[var(--sv-border)] bg-[var(--sv-bg)] px-2 py-1 text-sm outline-none focus:border-[var(--sv-accent)]"
                   />
-                ) : (
-                  <div className="min-w-0 flex-1">
+                  <button
+                    type="button"
+                    onClick={() => commitRename(s.id)}
+                    className="rounded-md border border-[var(--sv-border)] px-2 py-1 text-xs font-semibold hover:bg-[var(--sv-bg)]"
+                  >
+                    {t("common.confirm")}
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div className="min-w-0">
                     <span className="block truncate text-sm font-semibold">
                       {label(s.name, i)}
                       {isActive && (
-                        <span className="ml-2 rounded-full bg-[var(--sv-accent)] px-1.5 py-0.5 text-[10px] font-bold text-[var(--sv-accent-ink)] align-middle">
+                        <span className="ml-1.5 rounded-full bg-[var(--sv-accent)] px-1.5 py-0.5 text-[10px] font-bold text-[var(--sv-accent-ink)] align-middle">
                           {t("slots.active")}
                         </span>
                       )}
@@ -82,101 +99,122 @@ export default function SlotManager() {
                       {t("slots.updated", { date: fmtDate(s.updatedAt) })}
                     </span>
                   </div>
-                )}
 
-                {editing ? (
-                  <button
-                    type="button"
-                    onClick={() => commitRename(s.id)}
-                    className="rounded-md border border-[var(--sv-border)] px-2 py-1 text-xs font-semibold hover:bg-[var(--sv-bg)]"
-                  >
-                    {t("common.confirm")}
-                  </button>
-                ) : (
-                  !isActive && (
+                  <div className="flex flex-wrap items-center gap-1">
+                    {!isActive && (
+                      <button
+                        type="button"
+                        onClick={() => switchSlot(s.id)}
+                        className="rounded-md border border-transparent bg-[var(--sv-accent)] px-2 py-0.5 text-[11px] font-semibold text-[var(--sv-accent-ink)]"
+                      >
+                        {t("slots.switch")}
+                      </button>
+                    )}
                     <button
                       type="button"
-                      onClick={() => switchSlot(s.id)}
-                      className="rounded-md border border-transparent bg-[var(--sv-accent)] px-2.5 py-1 text-xs font-semibold text-[var(--sv-accent-ink)]"
+                      onClick={() => startRename(s.id, s.name)}
+                      className="rounded-md border border-[var(--sv-border)] px-2 py-0.5 text-[11px] hover:bg-[var(--sv-bg)]"
                     >
-                      {t("slots.switch")}
+                      {t("slots.rename")}
                     </button>
-                  )
-                )}
-              </div>
-
-              {!editing && (
-                <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
-                  <button
-                    type="button"
-                    onClick={() => startRename(s.id, s.name)}
-                    className="rounded-md border border-[var(--sv-border)] px-2 py-0.5 text-[11px] hover:bg-[var(--sv-bg)]"
-                  >
-                    {t("slots.rename")}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      duplicateSlot(
-                        s.id,
-                        t("slots.copyOf", { name: label(s.name, i) }).slice(0, 24),
-                      )
-                    }
-                    disabled={slots.length >= maxSlots}
-                    className="rounded-md border border-[var(--sv-border)] px-2 py-0.5 text-[11px] hover:bg-[var(--sv-bg)] disabled:opacity-40"
-                  >
-                    {t("slots.duplicate")}
-                  </button>
-                  {slots.length > 1 &&
-                    (confirmDelete === s.id ? (
-                      <span className="flex items-center gap-1.5">
-                        <span className="text-[11px] font-semibold text-[var(--sv-danger)]">
-                          {t("slots.deleteConfirm")}
+                    <button
+                      type="button"
+                      onClick={() =>
+                        duplicateSlot(
+                          s.id,
+                          t("slots.copyOf", { name: label(s.name, i) }).slice(0, 24),
+                        )
+                      }
+                      disabled={slots.length >= maxSlots}
+                      className="rounded-md border border-[var(--sv-border)] px-2 py-0.5 text-[11px] hover:bg-[var(--sv-bg)] disabled:opacity-40"
+                    >
+                      {t("slots.duplicate")}
+                    </button>
+                    {slots.length > 1 &&
+                      (confirmDelete === s.id ? (
+                        <span className="flex items-center gap-1">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              deleteSlot(s.id);
+                              setConfirmDelete(null);
+                            }}
+                            className="rounded-md bg-[#e23b3b] px-2 py-0.5 text-[11px] font-semibold text-white hover:bg-[#b02a2a]"
+                          >
+                            {t("slots.deleteConfirm")}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setConfirmDelete(null)}
+                            className="rounded-md border border-[var(--sv-border)] px-2 py-0.5 text-[11px] hover:bg-[var(--sv-bg)]"
+                          >
+                            {t("settings.resetNo")}
+                          </button>
                         </span>
+                      ) : (
                         <button
                           type="button"
-                          onClick={() => {
-                            deleteSlot(s.id);
-                            setConfirmDelete(null);
-                          }}
-                          className="rounded-md bg-[#e23b3b] px-2 py-0.5 text-[11px] font-semibold text-white hover:bg-[#b02a2a]"
+                          onClick={() => setConfirmDelete(s.id)}
+                          className="rounded-md border border-[#e23b3b] px-2 py-0.5 text-[11px] font-semibold text-[#e23b3b] hover:bg-[#fbeaea]"
                         >
                           {t("slots.delete")}
                         </button>
-                        <button
-                          type="button"
-                          onClick={() => setConfirmDelete(null)}
-                          className="rounded-md border border-[var(--sv-border)] px-2 py-0.5 text-[11px] hover:bg-[var(--sv-bg)]"
-                        >
-                          {t("settings.resetNo")}
-                        </button>
-                      </span>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => setConfirmDelete(s.id)}
-                        className="rounded-md border border-[#e23b3b] px-2 py-0.5 text-[11px] font-semibold text-[#e23b3b] hover:bg-[#fbeaea]"
-                      >
-                        {t("slots.delete")}
-                      </button>
-                    ))}
-                </div>
+                      ))}
+                  </div>
+                </>
               )}
             </li>
           );
         })}
       </ul>
 
-      <button
-        type="button"
-        onClick={() => createSlot("")}
-        disabled={slots.length >= maxSlots}
-        className="self-start rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm font-semibold hover:bg-[var(--sv-bg)] disabled:opacity-40"
-      >
-        {slots.length >= maxSlots
-          ? t("slots.full", { max: maxSlots })
-          : t("slots.add")}
-      </button>
+      {adding && slots.length < maxSlots ? (
+        <div className="flex items-center gap-1.5">
+          <input
+            autoFocus
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") commitAdd();
+              if (e.key === "Escape") {
+                setAdding(false);
+                setNewName("");
+              }
+            }}
+            maxLength={24}
+            placeholder={t("slots.namePlaceholder")}
+            className="min-w-0 flex-1 rounded-md border border-[var(--sv-border)] bg-[var(--sv-bg)] px-2 py-1 text-sm outline-none focus:border-[var(--sv-accent)]"
+          />
+          <button
+            type="button"
+            onClick={commitAdd}
+            className="rounded-md border border-transparent bg-[var(--sv-accent)] px-2.5 py-1 text-xs font-semibold text-[var(--sv-accent-ink)]"
+          >
+            {t("slots.add")}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setAdding(false);
+              setNewName("");
+            }}
+            className="rounded-md border border-[var(--sv-border)] px-2 py-1 text-xs hover:bg-[var(--sv-bg)]"
+          >
+            {t("common.cancel")}
+          </button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setAdding(true)}
+          disabled={slots.length >= maxSlots}
+          className="self-start rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm font-semibold hover:bg-[var(--sv-bg)] disabled:opacity-40"
+        >
+          {slots.length >= maxSlots
+            ? t("slots.full", { max: maxSlots })
+            : t("slots.add")}
+        </button>
+      )}
     </div>
   );
 }

@@ -1910,6 +1910,7 @@
   },
   "common": {
     "appName": "Stardew Valley Scheduler",
+    "appNameShort": "Scheduler",
     "incompleteFirst": "Pendientes primero",
     "cancel": "Cancelar",
     "confirm": "Confirmar"
@@ -2082,6 +2083,7 @@
     "title": "Ajustes",
     "open": "Abrir ajustes",
     "tabGeneral": "General",
+    "tabData": "Datos",
     "tabMain": "Pantalla principal",
     "mainTabDesc": "Elige qué mostrar en la pantalla principal y en qué orden.",
     "todoSettings": "Ajustes de pantalla principal",
@@ -2102,13 +2104,14 @@
     "reportIssue": "Informar de un error / sugerencia (GitHub)",
     "dataTitle": "Copia y transferencia",
     "dataDesc": "Exporta tus ajustes y progreso a un archivo, o importa ese archivo en otro dispositivo.",
+    "exportSlotNote": "Exporta los datos del espacio actual «{name}».",
     "exportButton": "Exportar",
     "importButton": "Importar",
     "importSuccess": "¡Importado! Tus datos se han aplicado.",
     "importError": "Error al importar: no es un archivo de copia válido.",
-    "resetTitle": "Restablecer todos los ajustes",
-    "resetDesc": "Restaura todos los ajustes guardados (paquetes, tareas, etc.) a sus valores predeterminados. No se puede deshacer.",
-    "resetButton": "Restablecer todos los ajustes",
+    "resetTitle": "Restablecer todos los datos",
+    "resetDesc": "Restaura todos los datos guardados (paquetes, tareas, etc.) a sus valores predeterminados. No se puede deshacer.",
+    "resetButton": "Restablecer todos los datos",
     "resetConfirm": "¿Restablecer todo?",
     "resetYes": "Restablecer",
     "resetNo": "Cancelar",
@@ -2539,7 +2542,7 @@
   },
   "support": {
     "title": "Apoyar",
-    "intro": "Este sitio funciona solo con donaciones, sin anuncios. ¡Hasta una pequeña ayuda significa mucho!",
-    "note": "Las donaciones se destinan solo a los costes de funcionamiento (hosting, etc.); el proyecto sigue siendo sin fines de lucro."
+    "intro": "Este sitio es una herramienta de fans gratuita y sin anuncios.\nLas donaciones son solo una forma de mostrar apoyo: ¡hasta una pequeña ayuda significa mucho!",
+    "note": "Las donaciones son totalmente voluntarias y no son necesarias para mantener el sitio.\nEl proyecto seguirá siendo gratuito y sin anuncios."
   }
 }

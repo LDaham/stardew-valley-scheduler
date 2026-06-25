@@ -1910,6 +1910,7 @@
   },
   "common": {
     "appName": "星露谷物语 日程表",
+    "appNameShort": "日程表",
     "incompleteFirst": "未完成项优先",
     "cancel": "取消",
     "confirm": "确认"
@@ -2082,6 +2083,7 @@
     "title": "设置",
     "open": "打开设置",
     "tabGeneral": "常规",
+    "tabData": "数据",
     "tabMain": "主屏幕",
     "mainTabDesc": "选择主屏幕显示的项目及顺序。",
     "todoSettings": "主屏幕设置",
@@ -2102,13 +2104,14 @@
     "reportIssue": "报告错误 / 建议（GitHub）",
     "dataTitle": "数据备份与迁移",
     "dataDesc": "将设置和进度导出为文件，或在其他设备导入该文件。",
+    "exportSlotNote": "导出当前存档位“{name}”的数据。",
     "exportButton": "导出",
     "importButton": "导入",
     "importSuccess": "导入完成！数据已应用。",
     "importError": "导入失败：不是有效的备份文件。",
-    "resetTitle": "重置所有设置",
-    "resetDesc": "将所有已保存的设置（捆绑、任务等）恢复为默认值。无法撤销。",
-    "resetButton": "重置所有设置",
+    "resetTitle": "重置所有数据",
+    "resetDesc": "将所有已保存的数据（捆绑、任务等）恢复为默认值。无法撤销。",
+    "resetButton": "重置所有数据",
     "resetConfirm": "确定全部重置？",
     "resetYes": "重置",
     "resetNo": "取消",
@@ -2539,7 +2542,7 @@
   },
   "support": {
     "title": "赞助",
-    "intro": "本站无广告，仅靠赞助运营。即使一点点支持也意义重大！",
-    "note": "赞助仅用于运营成本（托管等），项目保持非营利。"
+    "intro": "本站是免费、无广告的粉丝工具。\n赞助只是表达支持的一种方式，即使一点点也意义重大！",
+    "note": "赞助完全是自愿的，并非维持网站运行所必需。\n本项目将继续保持免费、无广告。"
   }
 }

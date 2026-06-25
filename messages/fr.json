@@ -1910,6 +1910,7 @@
   },
   "common": {
     "appName": "Stardew Valley Scheduler",
+    "appNameShort": "Scheduler",
     "incompleteFirst": "Inachevés d'abord",
     "cancel": "Annuler",
     "confirm": "Confirmer"
@@ -2082,6 +2083,7 @@
     "title": "Paramètres",
     "open": "Ouvrir les paramètres",
     "tabGeneral": "Général",
+    "tabData": "Données",
     "tabMain": "Écran principal",
     "mainTabDesc": "Choisissez ce qui s'affiche sur l'écran principal et dans quel ordre.",
     "todoSettings": "Paramètres de l'écran principal",
@@ -2102,13 +2104,14 @@
     "reportIssue": "Signaler un bug / une suggestion (GitHub)",
     "dataTitle": "Sauvegarde et transfert",
     "dataDesc": "Exportez vos paramètres et votre progression dans un fichier, ou importez ce fichier sur un autre appareil.",
+    "exportSlotNote": "Exporte les données de l’emplacement actuel « {name} ».",
     "exportButton": "Exporter",
     "importButton": "Importer",
     "importSuccess": "Importé ! Vos données ont été appliquées.",
     "importError": "Échec de l'import : fichier de sauvegarde non valide.",
-    "resetTitle": "Réinitialiser tous les paramètres",
-    "resetDesc": "Restaure tous les paramètres enregistrés (lots, tâches, etc.) aux valeurs par défaut. Action irréversible.",
-    "resetButton": "Réinitialiser tous les paramètres",
+    "resetTitle": "Réinitialiser toutes les données",
+    "resetDesc": "Restaure toutes les données enregistrées (lots, tâches, etc.) aux valeurs par défaut. Action irréversible.",
+    "resetButton": "Réinitialiser toutes les données",
     "resetConfirm": "Tout réinitialiser ?",
     "resetYes": "Réinitialiser",
     "resetNo": "Annuler",
@@ -2539,7 +2542,7 @@
   },
   "support": {
     "title": "Soutenir",
-    "intro": "Ce site fonctionne uniquement grâce aux dons, sans publicité. Même un petit geste compte beaucoup !",
-    "note": "Les dons servent uniquement aux frais de fonctionnement (hébergement, etc.) ; le projet reste non commercial."
+    "intro": "Ce site est un outil de fans gratuit et sans publicité.\nLes dons sont simplement une façon de montrer votre soutien — même un petit geste compte beaucoup !",
+    "note": "Les dons sont entièrement facultatifs et ne sont pas nécessaires au fonctionnement du site.\nLe projet restera gratuit et sans publicité."
   }
 }

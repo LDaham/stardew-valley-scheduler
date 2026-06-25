@@ -1910,6 +1910,7 @@
   },
   "common": {
     "appName": "Stardew Valley Scheduler",
+    "appNameShort": "Scheduler",
     "incompleteFirst": "Unerledigte zuerst",
     "cancel": "Abbrechen",
     "confirm": "Bestätigen"
@@ -2082,6 +2083,7 @@
     "title": "Einstellungen",
     "open": "Einstellungen öffnen",
     "tabGeneral": "Allgemein",
+    "tabData": "Daten",
     "tabMain": "Hauptbildschirm",
     "mainTabDesc": "Wähle, was auf dem Hauptbildschirm und in welcher Reihenfolge angezeigt wird.",
     "todoSettings": "Hauptbildschirm-Einstellungen",
@@ -2102,13 +2104,14 @@
     "reportIssue": "Fehler / Vorschlag melden (GitHub)",
     "dataTitle": "Sicherung & Übertragung",
     "dataDesc": "Exportiere deine Einstellungen und deinen Fortschritt in eine Datei oder importiere diese Datei auf einem anderen Gerät.",
+    "exportSlotNote": "Exportiert die Daten des aktuellen Slots „{name}“.",
     "exportButton": "Exportieren",
     "importButton": "Importieren",
     "importSuccess": "Importiert! Deine Daten wurden übernommen.",
     "importError": "Import fehlgeschlagen: keine gültige Sicherungsdatei.",
-    "resetTitle": "Alle Einstellungen zurücksetzen",
-    "resetDesc": "Setzt alle gespeicherten Einstellungen (Bündel, Aufgaben usw.) auf die Standardwerte zurück. Dies kann nicht rückgängig gemacht werden.",
-    "resetButton": "Alle Einstellungen zurücksetzen",
+    "resetTitle": "Alle Daten zurücksetzen",
+    "resetDesc": "Setzt alle gespeicherten Daten (Bündel, Aufgaben usw.) auf die Standardwerte zurück. Dies kann nicht rückgängig gemacht werden.",
+    "resetButton": "Alle Daten zurücksetzen",
     "resetConfirm": "Wirklich alles zurücksetzen?",
     "resetYes": "Zurücksetzen",
     "resetNo": "Abbrechen",
@@ -2539,7 +2542,7 @@
   },
   "support": {
     "title": "Unterstützen",
-    "intro": "Diese Seite läuft nur über Spenden, ohne Werbung. Schon eine kleine Unterstützung hilft sehr!",
-    "note": "Spenden fließen nur in die Betriebskosten (Hosting usw.); das Projekt bleibt nicht-kommerziell."
+    "intro": "Diese Seite ist ein kostenloses, werbefreies Fan-Tool.\nSpenden sind einfach eine Art, Unterstützung zu zeigen – schon eine kleine Spende bedeutet viel!",
+    "note": "Spenden sind völlig freiwillig und nicht nötig, damit die Seite läuft.\nDas Projekt bleibt kostenlos und werbefrei."
   }
 }

@@ -134,7 +134,7 @@ export default function Modal({
   return (
     <div
       className={`fixed inset-0 z-50 flex justify-center bg-black/40 p-3 sm:p-4 ${
-        center ? "items-center" : "items-start pt-[7.5vh]"
+        center ? "items-center" : "items-start pt-[7.5vh] sm:pt-[12vh]"
       }`}
       onMouseDown={(e) => {
         pressedOnBackdrop.current = e.target === e.currentTarget;

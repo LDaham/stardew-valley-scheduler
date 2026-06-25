@@ -463,14 +463,15 @@ export default function Dashboard() {
         <button
           onClick={goToPrevDay}
           disabled={atStart}
-          className="sv-btn px-3 py-1.5 text-base"
+          aria-label={t("dashboard.prevDay")}
+          className="sv-btn shrink-0 whitespace-nowrap px-3 py-1.5 text-base"
         >
-          ◀ {t("dashboard.prevDay")}
+          ◀<span className="hidden sm:inline"> {t("dashboard.prevDay")}</span>
         </button>
         <button
           onClick={() => setMiniCalOpen(true)}
           aria-label={t("miniCalendar.title")}
-          className="flex items-center gap-2 hover:underline"
+          className="flex min-w-0 items-center gap-2 hover:underline"
         >
           {/* 달력 이미지 = 날짜 수정 가능 표시 */}
           <Image
@@ -490,8 +491,12 @@ export default function Dashboard() {
             })}
           </span>
         </button>
-        <button onClick={goToNextDay} className="sv-btn px-3 py-1.5 text-base">
-          {t("dashboard.nextDay")} ▶
+        <button
+          onClick={goToNextDay}
+          aria-label={t("dashboard.nextDay")}
+          className="sv-btn shrink-0 whitespace-nowrap px-3 py-1.5 text-base"
+        >
+          <span className="hidden sm:inline">{t("dashboard.nextDay")} </span>▶
         </button>
       </div>
 

@@ -1910,6 +1910,7 @@
   },
   "common": {
     "appName": "Stardew Valley Scheduler",
+    "appNameShort": "Scheduler",
     "incompleteFirst": "Befejezetlenek elöl",
     "cancel": "Mégse",
     "confirm": "Megerősít"
@@ -2082,6 +2083,7 @@
     "title": "Beállítások",
     "open": "Beállítások megnyitása",
     "tabGeneral": "Általános",
+    "tabData": "Adatok",
     "tabMain": "Főképernyő",
     "mainTabDesc": "Válaszd ki, mi és milyen sorrendben jelenjen meg a főképernyőn.",
     "todoSettings": "Főképernyő beállításai",
@@ -2102,13 +2104,14 @@
     "reportIssue": "Hiba / javaslat jelentése (GitHub)",
     "dataTitle": "Mentés és átvitel",
     "dataDesc": "Exportáld a beállításaidat és haladásodat egy fájlba, vagy importáld azt egy másik eszközön.",
+    "exportSlotNote": "Az aktuális mentési hely („{name}”) adatait exportálja.",
     "exportButton": "Exportálás",
     "importButton": "Importálás",
     "importSuccess": "Importálva! Az adataid alkalmazva lettek.",
     "importError": "Importálás sikertelen: nem érvényes mentésfájl.",
-    "resetTitle": "Minden beállítás visszaállítása",
-    "resetDesc": "Visszaállít minden mentett beállítást (csomagok, feladatok stb.) az alapértelmezettre. Nem vonható vissza.",
-    "resetButton": "Minden beállítás visszaállítása",
+    "resetTitle": "Minden adat visszaállítása",
+    "resetDesc": "Visszaállít minden mentett adatot (csomagok, feladatok stb.) az alapértelmezettre. Nem vonható vissza.",
+    "resetButton": "Minden adat visszaállítása",
     "resetConfirm": "Tényleg mindent visszaállítasz?",
     "resetYes": "Visszaállít",
     "resetNo": "Mégse",
@@ -2539,7 +2542,7 @@
   },
   "support": {
     "title": "Támogatás",
-    "intro": "Ez az oldal kizárólag adományokból működik, reklámok nélkül. Egy kis támogatás is sokat jelent!",
-    "note": "Az adományok kizárólag az üzemeltetési költségekre (tárhely stb.) mennek; a projekt nonprofit marad."
+    "intro": "Ez az oldal egy ingyenes, reklámmentes rajongói eszköz.\nAz adományok csupán a támogatás kifejezésének módja – egy kis hozzájárulás is sokat jelent!",
+    "note": "Az adományok teljesen önkéntesek, és nem szükségesek az oldal működéséhez.\nA projekt ingyenes és reklámmentes marad."
   }
 }

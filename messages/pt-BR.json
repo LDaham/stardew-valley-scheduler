@@ -1910,6 +1910,7 @@
   },
   "common": {
     "appName": "Stardew Valley Scheduler",
+    "appNameShort": "Scheduler",
     "incompleteFirst": "Incompletos primeiro",
     "cancel": "Cancelar",
     "confirm": "Confirmar"
@@ -2082,6 +2083,7 @@
     "title": "Configurações",
     "open": "Abrir configurações",
     "tabGeneral": "Geral",
+    "tabData": "Dados",
     "tabMain": "Tela principal",
     "mainTabDesc": "Escolha o que mostrar na tela principal e em que ordem.",
     "todoSettings": "Configurações da tela principal",
@@ -2102,13 +2104,14 @@
     "reportIssue": "Relatar bug / sugestão (GitHub)",
     "dataTitle": "Backup e transferência",
     "dataDesc": "Exporte suas configurações e progresso para um arquivo, ou importe esse arquivo em outro dispositivo.",
+    "exportSlotNote": "Exporta os dados do espaço atual “{name}”.",
     "exportButton": "Exportar",
     "importButton": "Importar",
     "importSuccess": "Importado! Seus dados foram aplicados.",
     "importError": "Falha na importação: arquivo de backup inválido.",
-    "resetTitle": "Redefinir todas as configurações",
-    "resetDesc": "Restaura todas as configurações salvas (pacotes, tarefas, etc.) para o padrão. Não pode ser desfeito.",
-    "resetButton": "Redefinir todas as configurações",
+    "resetTitle": "Redefinir todos os dados",
+    "resetDesc": "Restaura todos os dados salvos (pacotes, tarefas, etc.) para o padrão. Não pode ser desfeito.",
+    "resetButton": "Redefinir todos os dados",
     "resetConfirm": "Redefinir tudo?",
     "resetYes": "Redefinir",
     "resetNo": "Cancelar",
@@ -2539,7 +2542,7 @@
   },
   "support": {
     "title": "Apoiar",
-    "intro": "Este site funciona só com doações, sem anúncios. Até uma pequena ajuda significa muito!",
-    "note": "As doações cobrem apenas os custos de funcionamento (hospedagem, etc.); o projeto continua sem fins lucrativos."
+    "intro": "Este site é uma ferramenta de fãs gratuita e sem anúncios.\nAs doações são apenas uma forma de mostrar apoio — até uma pequena ajuda significa muito!",
+    "note": "As doações são totalmente voluntárias e não são necessárias para manter o site no ar.\nO projeto continuará gratuito e sem anúncios."
   }
 }

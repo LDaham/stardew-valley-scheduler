@@ -1910,6 +1910,7 @@
   },
   "common": {
     "appName": "Stardew Valley Scheduler",
+    "appNameShort": "Scheduler",
     "incompleteFirst": "Prima gli incompleti",
     "cancel": "Annulla",
     "confirm": "Conferma"
@@ -2082,6 +2083,7 @@
     "title": "Impostazioni",
     "open": "Apri impostazioni",
     "tabGeneral": "Generale",
+    "tabData": "Dati",
     "tabMain": "Schermata principale",
     "mainTabDesc": "Scegli cosa mostrare nella schermata principale e in quale ordine.",
     "todoSettings": "Impostazioni schermata principale",
@@ -2102,13 +2104,14 @@
     "reportIssue": "Segnala un bug / suggerimento (GitHub)",
     "dataTitle": "Backup e trasferimento",
     "dataDesc": "Esporta impostazioni e progressi in un file, o importa quel file su un altro dispositivo.",
+    "exportSlotNote": "Esporta i dati dello slot corrente «{name}».",
     "exportButton": "Esporta",
     "importButton": "Importa",
     "importSuccess": "Importato! I tuoi dati sono stati applicati.",
     "importError": "Importazione fallita: file di backup non valido.",
-    "resetTitle": "Reimposta tutte le impostazioni",
-    "resetDesc": "Ripristina tutte le impostazioni salvate (fasci, attività, ecc.) ai valori predefiniti. Non è reversibile.",
-    "resetButton": "Reimposta tutte le impostazioni",
+    "resetTitle": "Reimposta tutti i dati",
+    "resetDesc": "Ripristina tutti i dati salvati (fasci, attività, ecc.) ai valori predefiniti. Non è reversibile.",
+    "resetButton": "Reimposta tutti i dati",
     "resetConfirm": "Reimpostare tutto?",
     "resetYes": "Reimposta",
     "resetNo": "Annulla",
@@ -2539,7 +2542,7 @@
   },
   "support": {
     "title": "Sostieni",
-    "intro": "Questo sito vive solo di donazioni, senza pubblicità. Anche un piccolo contributo è prezioso!",
-    "note": "Le donazioni coprono solo i costi di gestione (hosting, ecc.); il progetto resta senza scopo di lucro."
+    "intro": "Questo sito è uno strumento per fan gratuito e senza pubblicità.\nLe donazioni sono solo un modo per mostrare sostegno: anche un piccolo contributo è prezioso!",
+    "note": "Le donazioni sono del tutto volontarie e non necessarie per il funzionamento del sito.\nIl progetto resterà gratuito e senza pubblicità."
   }
 }

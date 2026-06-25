@@ -17,10 +17,10 @@ const REPO =
 export default function SettingsDialog({ onClose }: { onClose: () => void }) {
   const t = useTranslations();
   const { resetAll, exportState } = useSchedule();
-  const { slots, maxSlots, importToSlot } = useSlots();
+  const { slots, activeId, maxSlots, importToSlot } = useSlots();
   const [confirming, setConfirming] = useState(false);
-  // 설정 탭: 일반 / 메인화면
-  const [tab, setTab] = useState<"general" | "main">("general");
+  // 설정 탭: 일반 / 데이터 / 메인화면
+  const [tab, setTab] = useState<"general" | "data" | "main">("general");
   // 가져오기 결과 안내(성공/실패)
   const [importMsg, setImportMsg] = useState<{ ok: boolean; text: string } | null>(
     null,
@@ -66,8 +66,14 @@ export default function SettingsDialog({ onClose }: { onClose: () => void }) {
   const slotLabel = (name: string, index: number) =>
     name.trim() || t("slots.slotN", { n: index + 1 });
 
-  const tabs: { key: "general" | "main"; label: string }[] = [
+  // 내보내기 대상 = 현재 활성 슬롯(표기용 이름)
+  const activeIndex = slots.findIndex((s) => s.id === activeId);
+  const activeSlotName =
+    activeIndex >= 0 ? slotLabel(slots[activeIndex].name, activeIndex) : "";
+
+  const tabs: { key: "general" | "data" | "main"; label: string }[] = [
     { key: "general", label: t("settings.tabGeneral") },
+    { key: "data", label: t("settings.tabData") },
     { key: "main", label: t("settings.tabMain") },
   ];
 
@@ -94,7 +100,7 @@ export default function SettingsDialog({ onClose }: { onClose: () => void }) {
         })}
       </div>
 
-      {/* 일반: 테마·언어·데이터 백업·초기화 */}
+      {/* 일반: 테마(계절) · 오류 보고·건의 */}
       {tab === "general" && (
         <>
           <section className="mb-5">
@@ -104,6 +110,26 @@ export default function SettingsDialog({ onClose }: { onClose: () => void }) {
             <ThemeToggle />
           </section>
 
+          {/* 오류 보고·건의: 서버 없이 GitHub 이슈 페이지로 연결(제출엔 깃허브 계정 필요) */}
+          <section>
+            <h3 className="mb-2 text-sm font-semibold text-[var(--sv-ink-muted)]">
+              {t("settings.reportIssue")}
+            </h3>
+            <a
+              href={`https://github.com/${REPO}/issues`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm font-semibold hover:bg-[var(--sv-bg)]"
+            >
+              {t("settings.reportIssue")}
+            </a>
+          </section>
+        </>
+      )}
+
+      {/* 데이터: 세이브 슬롯·백업/이전·초기화 */}
+      {tab === "data" && (
+        <>
           {/* 세이브 슬롯: 같은 기기에서 여러 게임을 슬롯별로 저장·전환 */}
           <section className="mb-5">
             <h3 className="mb-2 text-sm font-semibold text-[var(--sv-ink-muted)]">
@@ -120,17 +146,12 @@ export default function SettingsDialog({ onClose }: { onClose: () => void }) {
             <h3 className="mb-2 text-sm font-semibold text-[var(--sv-ink-muted)]">
               {t("settings.dataTitle")}
             </h3>
-            {/* 오류 보고·건의: 서버 없이 GitHub 이슈 페이지로 연결(제출엔 깃허브 계정 필요) */}
-            <a
-              href={`https://github.com/${REPO}/issues`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mb-3 inline-flex items-center gap-2 rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm font-semibold hover:bg-[var(--sv-bg)]"
-            >
-              {t("settings.reportIssue")}
-            </a>
-            <p className="mb-2 text-xs text-[var(--sv-ink-muted)]">
+            <p className="mb-1 text-xs text-[var(--sv-ink-muted)]">
               {t("settings.dataDesc")}
+            </p>
+            {/* 내보내기 대상이 현재 슬롯임을 명시 */}
+            <p className="mb-2 text-xs font-semibold text-[var(--sv-ink)]">
+              {t("settings.exportSlotNote", { name: activeSlotName })}
             </p>
             <div className="flex flex-wrap items-center gap-2">
               <button
