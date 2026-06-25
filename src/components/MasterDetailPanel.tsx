@@ -1,6 +1,16 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import { useLocale } from "next-intl";
+
+// 검색 정규화: 발음부호 제거(NFD 분해 후 결합문자 strip) + 로케일 소문자.
+// 악센트 라틴어(é·ñ·ü 등)는 부호 없이 입력해도 매칭되고, 터키어 I/İ도 로케일 규칙을 따른다.
+function normalizeSearch(s: string, locale: string): string {
+  return s
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLocaleLowerCase(locale);
+}
 
 // 좌측 목록 + 우측 상세를 동시에 보여주는 공용 레이아웃.
 // 선물 선호·영화 선호·구매 가격처럼 "많은 항목 중 하나를 골라 상세를 본다"에 사용.
@@ -26,9 +36,12 @@ export default function MasterDetailPanel<T>({
   );
   const [q, setQ] = useState("");
   const [open, setOpen] = useState(false); // 모바일 드롭다운 펼침 여부
-  const query = q.trim().toLowerCase();
+  const locale = useLocale();
+  const query = normalizeSearch(q.trim(), locale);
   const filtered = query
-    ? items.filter((it) => getSearchText(it).toLowerCase().includes(query))
+    ? items.filter((it) =>
+        normalizeSearch(getSearchText(it), locale).includes(query),
+      )
     : items;
   // 검색으로 목록에서 빠져도 선택 항목은 유지(상세는 계속 표시)
   const selected =
