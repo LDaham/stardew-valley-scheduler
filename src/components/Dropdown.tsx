@@ -19,11 +19,14 @@ export default function Dropdown({
   options,
   onChange,
   ariaLabel,
+  compactIcon,
 }: {
   value: string;
   options: DropdownOption[];
   onChange: (value: string) => void;
   ariaLabel?: string;
+  // 지정 시 트리거에 현재값 라벨 없이 '아이콘 + 펼침 화살표'만 표시(예: 언어 선택).
+  compactIcon?: string;
 }) {
   const [open, setOpen] = useState(false);
   const [rect, setRect] = useState<{
@@ -93,6 +96,77 @@ export default function Dropdown({
     };
   }, [open]);
 
+  // 펼침 목록(portal). 컴팩트/일반 트리거가 공유.
+  const list =
+    open &&
+    rect &&
+    createPortal(
+      <ul
+        ref={listRef}
+        role="listbox"
+        // 폭: 트리거보다 좁아지지 않게(minWidth) 하되 내용 폭(w-max)으로 펼쳐 항목이 잘리지 않게,
+        // 화면 너비는 넘지 않도록 maxWidth로 클램프.
+        // 위치: 트리거가 화면 오른쪽 절반에 있으면 우측 기준 정렬해 화면 밖으로 넘치지 않게 한다.
+        style={{
+          position: "fixed",
+          top: rect.top + 4,
+          ...(rect.left > rect.vw / 2
+            ? { right: Math.max(8, rect.vw - rect.right) }
+            : { left: rect.left }),
+          minWidth: rect.width,
+          maxWidth: "calc(100vw - 16px)",
+          zIndex: 60,
+        }}
+        className="max-h-56 w-max overflow-y-auto rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] shadow-xl"
+      >
+        {options.map((o) => (
+          <li key={o.value} role="option" aria-selected={o.value === value}>
+            <button
+              type="button"
+              onClick={() => {
+                onChange(o.value);
+                setOpen(false);
+              }}
+              className={`flex w-full items-center gap-2 whitespace-nowrap px-2 py-2 text-left text-sm hover:bg-[var(--sv-bg)] ${
+                o.value === value ? "bg-[var(--sv-bg)]" : ""
+              }`}
+            >
+              {o.icon ? (
+                <OptIcon src={o.icon} />
+              ) : hasIcons ? (
+                <span className="size-5 shrink-0" />
+              ) : null}
+              <span>{o.label}</span>
+            </button>
+          </li>
+        ))}
+      </ul>,
+      document.body,
+    );
+
+  // 컴팩트 트리거: 아이콘 + 펼침 화살표만(현재값 라벨 없음). 예: 언어 선택.
+  if (compactIcon) {
+    return (
+      <div className="relative inline-block align-top">
+        <button
+          ref={btnRef}
+          type="button"
+          aria-label={ariaLabel}
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          onClick={toggle}
+          className="flex cursor-pointer items-center gap-1 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-2 py-2 text-sm"
+        >
+          <OptIcon src={compactIcon} />
+          <span className="text-xs text-[var(--sv-ink-muted)]">
+            {open ? "▲" : "▼"}
+          </span>
+        </button>
+        {list}
+      </div>
+    );
+  }
+
   return (
     // 내용 너비(가장 긴 옵션 폭에 고정): 모든 옵션을 같은 grid 셀에 보이지 않게 겹쳐 쌓으면
     // 셀 너비가 '가장 긴 옵션'으로 잡힌다 → 선택값이 바뀌어도 폭이 출렁이지 않는다(측정 JS 불필요).
@@ -128,51 +202,7 @@ export default function Dropdown({
           {open ? "▲" : "▼"}
         </span>
       </button>
-      {open &&
-        rect &&
-        createPortal(
-          <ul
-            ref={listRef}
-            role="listbox"
-            // 폭: 트리거보다 좁아지지 않게(minWidth) 하되 내용 폭(w-max)으로 펼쳐 항목이 잘리지 않게,
-            // 화면 너비는 넘지 않도록 maxWidth로 클램프.
-            // 위치: 트리거가 화면 오른쪽 절반에 있으면 우측 기준 정렬해 화면 밖으로 넘치지 않게 한다.
-            style={{
-              position: "fixed",
-              top: rect.top + 4,
-              ...(rect.left > rect.vw / 2
-                ? { right: Math.max(8, rect.vw - rect.right) }
-                : { left: rect.left }),
-              minWidth: rect.width,
-              maxWidth: "calc(100vw - 16px)",
-              zIndex: 60,
-            }}
-            className="max-h-56 w-max overflow-y-auto rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] shadow-xl"
-          >
-            {options.map((o) => (
-              <li key={o.value} role="option" aria-selected={o.value === value}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    onChange(o.value);
-                    setOpen(false);
-                  }}
-                  className={`flex w-full items-center gap-2 whitespace-nowrap px-2 py-2 text-left text-sm hover:bg-[var(--sv-bg)] ${
-                    o.value === value ? "bg-[var(--sv-bg)]" : ""
-                  }`}
-                >
-                  {o.icon ? (
-                    <OptIcon src={o.icon} />
-                  ) : hasIcons ? (
-                    <span className="size-5 shrink-0" />
-                  ) : null}
-                  <span>{o.label}</span>
-                </button>
-              </li>
-            ))}
-          </ul>,
-          document.body,
-        )}
+      {list}
     </div>
   );
 }

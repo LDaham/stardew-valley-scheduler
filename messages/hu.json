@@ -1911,7 +1911,6 @@
   },
   "common": {
     "appName": "Stardew Valley Scheduler",
-    "appNameShort": "Scheduler",
     "incompleteFirst": "Befejezetlenek elöl",
     "cancel": "Mégse",
     "confirm": "Megerősít"
@@ -2543,7 +2542,9 @@
   },
   "support": {
     "title": "Támogatás",
+    "pageTitle": "Támogatás",
     "intro": "Ez az oldal egy ingyenes, reklámmentes rajongói eszköz.\nAz adományok csupán a támogatás kifejezésének módja – egy kis hozzájárulás is sokat jelent!",
     "note": "Az adományok teljesen önkéntesek, és nem szükségesek az oldal működéséhez.\nA projekt ingyenes és reklámmentes marad."
   }
 }
+

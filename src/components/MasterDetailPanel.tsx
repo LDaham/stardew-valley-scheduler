@@ -81,8 +81,8 @@ export default function MasterDetailPanel<T>({
     <div className="sm:grid sm:grid-cols-[200px_1fr] sm:gap-4">
       {/* 목록(좌) */}
       <div className="mb-4 sm:mb-0">
-        {/* 모바일: 검색 드롭다운 */}
-        <div className="sm:hidden">
+        {/* 모바일: 검색 드롭다운 (펼침 목록은 아래 내용을 밀어내지 않고 위에 띄움) */}
+        <div className="relative sm:hidden">
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
@@ -95,7 +95,7 @@ export default function MasterDetailPanel<T>({
             </span>
           </button>
           {open && (
-            <div className="mt-1.5 rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] p-1.5">
+            <div className="absolute inset-x-0 z-20 mt-1.5 rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] p-1.5 shadow-xl">
               {searchInput("mb-1.5")}
               <ul className="flex max-h-64 flex-col gap-1 overflow-y-auto">
                 {filtered.map((it) => (

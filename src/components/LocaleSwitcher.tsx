@@ -4,7 +4,6 @@ import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import Dropdown from "@/components/Dropdown";
-import PixelIcon from "@/components/PixelIcon";
 
 // 각 로케일의 원어 표기(드롭다운 표시용)
 const LOCALE_LABELS: Record<string, string> = {
@@ -34,19 +33,14 @@ export default function LocaleSwitcher() {
     label: LOCALE_LABELS[l] ?? l.toUpperCase(),
   }));
 
+  // 컴팩트 트리거: 지구본 아이콘 + 펼침 화살표만(현재 언어명 라벨 없음). 클릭 시 목록.
   return (
-    <div className="flex items-center gap-1 text-[var(--sv-ink-muted)]">
-      <span className="sr-only">{t("ui.language")}</span>
-      <PixelIcon src="/icons/ui/globe.png" size={16} />
-      {/* 모바일에선 폭 제한(라벨 truncate) → 네비 폭 절약. 데스크톱은 전체 표시. */}
-      <div className="max-w-[6.5rem] sm:max-w-none">
-        <Dropdown
-          value={locale}
-          options={options}
-          onChange={(v) => router.replace(pathname, { locale: v })}
-          ariaLabel={t("ui.language")}
-        />
-      </div>
-    </div>
+    <Dropdown
+      value={locale}
+      options={options}
+      onChange={(v) => router.replace(pathname, { locale: v })}
+      ariaLabel={t("ui.language")}
+      compactIcon="/icons/ui/globe.png"
+    />
   );
 }

@@ -7,7 +7,8 @@ import { GiftDialogProvider } from "@/components/GiftDialogProvider";
 import Dashboard from "@/components/Dashboard";
 import SettingsDialog from "@/components/SettingsDialog";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
-import Support from "@/components/Support";
+import SupportPage from "@/components/SupportPage";
+import LegalView from "@/components/LegalView";
 import BundleDialog from "@/components/BundleDialog";
 import PerfectionDialog from "@/components/PerfectionDialog";
 import AchievementDialog from "@/components/AchievementDialog";
@@ -26,7 +27,8 @@ import Image from "next/image";
 import { asset } from "@/lib/asset";
 
 // 상단 네비 탭(쿼리파라미터로 URL 동기화). 설정은 탭이 아니라 오버레이 모달로 연다.
-type MainTab = "today" | "info" | "progress";
+// "legal"은 네비 탭에는 없지만 본문에 표시되는 뷰(푸터·지원에서 진입). URL은 ?tab=legal.
+type MainTab = "today" | "info" | "progress" | "support" | "legal";
 // 참고 도구 하위 보기
 type ToolView = "seed" | "fish" | "shop" | "cost" | "gift" | "movie";
 // 진행도 하위 보기
@@ -64,7 +66,14 @@ function AppShell() {
     const sync = () => {
       const p = new URLSearchParams(window.location.search);
       const tb = p.get("tab");
-      setTab(tb === "info" || tb === "progress" ? tb : "today");
+      setTab(
+        tb === "info" ||
+          tb === "progress" ||
+          tb === "support" ||
+          tb === "legal"
+          ? tb
+          : "today",
+      );
       const tl = p.get("tool") as ToolView | null;
       if (tl && TOOL_VIEWS.includes(tl)) setTool(tl);
       const vw = p.get("view") as ProgressView | null;
@@ -97,11 +106,22 @@ function AppShell() {
     );
   };
 
+  // 법률 뷰로 이동(지원·푸터에서 호출). section이 있으면 해당 섹션으로 스크롤(LegalView가 해시 처리).
+  const openLegal = (section?: string) => {
+    setTab("legal");
+    window.history.pushState(
+      null,
+      "",
+      `?tab=legal${section ? `#${section}` : ""}`,
+    );
+  };
+
   // 상단 메인 탭(오늘·정보·진행도). 모바일 2행·데스크톱 1행에서 동일 목록을 재사용.
   const mainTabs: { key: MainTab; icon: string; label: string }[] = [
     { key: "today", icon: "/icons/ui/calendar.png", label: t("nav.today") },
     { key: "info", icon: "/icons/ui/note.png", label: t("nav.tools") },
     { key: "progress", icon: "/icons/ui/bundle.png", label: t("nav.progress") },
+    { key: "support", icon: "/icons/gifts/Coffee.png", label: t("support.pageTitle") },
   ];
 
   // 참고 도구 목록(상단 가로 탭 ↔ 인라인 콘텐츠)
@@ -192,10 +212,11 @@ function AppShell() {
                 />
               ))}
             </div>
-            {/* 우측 정렬: 후원 + 언어 선택 + 설정 (모바일은 폭 절약 위해 아이콘 위주) */}
+            {/* 우측 정렬: 언어(컴팩트) + 설정. 모바일은 폭 절약 위해 아이콘 위주. */}
             <div className="ml-auto flex shrink-0 items-stretch gap-x-1 sm:gap-x-2">
-              <Support variant="nav" />
-              <LocaleSwitcher />
+              <span className="flex items-center">
+                <LocaleSwitcher />
+              </span>
               <NavTab
                 icon="/icons/ui/settings.png"
                 label={t("settings.title")}
@@ -257,6 +278,12 @@ function AppShell() {
           </SectionLayout>
         )}
 
+        {/* 지원: 후원·오류 보고·법적 고지(인라인, 네비 유지) */}
+        {tab === "support" && <SupportPage onOpenLegal={openLegal} />}
+
+        {/* 법률: 개인정보처리방침·이용약관·저작권 및 면책(인라인, 네비 유지) */}
+        {tab === "legal" && <LegalView />}
+
       </main>
 
       {/* 모바일 하단 고정 네비 바: 오늘·정보·진행도(lg+는 상단 인라인이라 숨김).
@@ -313,10 +340,10 @@ function NavTab({
       onClick={onClick}
       aria-label={iconOnlyMobile ? label : undefined}
       aria-current={active ? "page" : undefined}
-      className={`-mb-0.5 flex items-center gap-1.5 whitespace-nowrap border-b-2 px-2.5 py-2.5 text-[15px] font-semibold sm:px-3 ${
+      className={`-mb-0.5 flex items-center gap-1.5 whitespace-nowrap rounded-t-md border-b-2 px-2.5 py-2.5 text-[15px] font-semibold transition-colors sm:px-3 ${
         active
-          ? "border-[var(--sv-accent)] text-[var(--sv-accent)]"
-          : "border-transparent text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
+          ? "border-[var(--sv-accent)] bg-[var(--sv-bg)] text-[var(--sv-accent)]"
+          : "border-transparent text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)] hover:text-[var(--sv-ink)]"
       } ${className}`}
     >
       <PixelIcon src={icon} size={18} />

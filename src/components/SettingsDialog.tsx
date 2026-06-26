@@ -8,12 +8,7 @@ import TodoSettings from "@/components/TodoSettings";
 import SlotManager from "@/components/SlotManager";
 import { useSchedule, useSlots } from "@/components/ScheduleProvider";
 
-// GitHub 저장소(owner/repo). 오류 보고·건의를 이슈 페이지로 연결한다.
-// 다른 저장소로 바꾸려면 NEXT_PUBLIC_GITHUB_REPO 환경변수로 덮어쓴다.
-const REPO =
-  process.env.NEXT_PUBLIC_GITHUB_REPO || "LDaham/stardew-valley-scheduler";
-
-// 설정 다이얼로그(탭): 일반 · 메인화면(정보/할 일).
+// 설정 다이얼로그(탭): 일반 · 데이터 · 메인화면(정보/할 일).
 export default function SettingsDialog({ onClose }: { onClose: () => void }) {
   const t = useTranslations();
   const { resetAll, exportState } = useSchedule();
@@ -100,31 +95,14 @@ export default function SettingsDialog({ onClose }: { onClose: () => void }) {
         })}
       </div>
 
-      {/* 일반: 테마(계절) · 오류 보고·건의 */}
+      {/* 일반: 테마(계절). 오류 보고·건의는 지원 탭으로 이동 */}
       {tab === "general" && (
-        <>
-          <section className="mb-5">
-            <h3 className="mb-2 text-sm font-semibold text-[var(--sv-ink-muted)]">
-              {t("settings.themeTitle")}
-            </h3>
-            <ThemeToggle />
-          </section>
-
-          {/* 오류 보고·건의: 서버 없이 GitHub 이슈 페이지로 연결(제출엔 깃허브 계정 필요) */}
-          <section>
-            <h3 className="mb-2 text-sm font-semibold text-[var(--sv-ink-muted)]">
-              {t("settings.reportIssue")}
-            </h3>
-            <a
-              href={`https://github.com/${REPO}/issues`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm font-semibold hover:bg-[var(--sv-bg)]"
-            >
-              {t("settings.reportIssue")}
-            </a>
-          </section>
-        </>
+        <section>
+          <h3 className="mb-2 text-sm font-semibold text-[var(--sv-ink-muted)]">
+            {t("settings.themeTitle")}
+          </h3>
+          <ThemeToggle />
+        </section>
       )}
 
       {/* 데이터: 세이브 슬롯·백업/이전·초기화 */}

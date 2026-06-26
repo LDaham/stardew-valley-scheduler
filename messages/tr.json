@@ -1911,7 +1911,6 @@
   },
   "common": {
     "appName": "Stardew Valley Planlayıcı",
-    "appNameShort": "Planlayıcı",
     "incompleteFirst": "Önce tamamlanmamışlar",
     "cancel": "İptal",
     "confirm": "Onayla"
@@ -2543,7 +2542,9 @@
   },
   "support": {
     "title": "Destek ol",
+    "pageTitle": "Destek",
     "intro": "Bu site ücretsiz, reklamsız bir hayran aracıdır.\nBağışlar yalnızca destek göstermenin bir yoludur; küçük bir katkı bile çok değerli!",
     "note": "Bağışlar tamamen gönüllüdür ve sitenin çalışması için gerekli değildir.\nProje ücretsiz ve reklamsız kalacaktır."
   }
 }
+
