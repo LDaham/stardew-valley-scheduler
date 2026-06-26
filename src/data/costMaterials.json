@@ -10,11 +10,12 @@
     "materials": []
    },
    {
-    "ko": "번식용 잔디 (제작법)",
+    "ko": "번식용 잔디",
     "en": "Grass Starter",
     "icon": "/icons/costMaterials/Grass_Starter.png",
     "gold": 1000,
-    "materials": []
+    "materials": [],
+    "recipe": true
    },
    {
     "ko": "설탕",
@@ -144,11 +145,12 @@
     "materials": []
    },
    {
-    "ko": "탈수기 (제작법)",
+    "ko": "탈수기",
     "en": "Dehydrator",
     "icon": "/icons/costMaterials/Dehydrator.png",
     "gold": 10000,
-    "materials": []
+    "materials": [],
+    "recipe": true
    },
    {
     "ko": "부케",
@@ -1236,20 +1238,22 @@
     "cat": "building"
    },
    {
-    "ko": "수정 길 제작법",
-    "en": "Crystal Path Recipe",
+    "ko": "수정 길",
+    "en": "Crystal Path",
     "icon": "/icons/costMaterials/Crystal_Floor.png",
     "gold": 500,
     "materials": [],
-    "cat": "magic"
+    "cat": "magic",
+    "recipe": true
    },
    {
-    "ko": "사악한 석상 제작법",
-    "en": "Wicked Statue Recipe",
+    "ko": "사악한 석상",
+    "en": "Wicked Statue",
     "icon": "/icons/costMaterials/Wicked_Statue.png",
     "gold": 1000,
     "materials": [],
-    "cat": "magic"
+    "cat": "magic",
+    "recipe": true
    },
    {
     "ko": "나비 가루",
@@ -1626,67 +1630,76 @@
     "materials": []
    },
    {
-    "ko": "해시브라운 (제작법)",
-    "en": "Hashbrowns Recipe",
+    "ko": "해시브라운",
+    "en": "Hashbrowns",
     "icon": "/icons/food/hashbrowns.png",
     "gold": 50,
-    "materials": []
+    "materials": [],
+    "recipe": true
    },
    {
-    "ko": "오믈렛 (제작법)",
-    "en": "Omelet Recipe",
+    "ko": "오믈렛",
+    "en": "Omelet",
     "icon": "/icons/gifts/Omelet.png",
     "gold": 100,
-    "materials": []
+    "materials": [],
+    "recipe": true
    },
    {
-    "ko": "팬케이크 (제작법)",
-    "en": "Pancakes Recipe",
+    "ko": "팬케이크",
+    "en": "Pancakes",
     "icon": "/icons/gifts/Pancakes.png",
     "gold": 100,
-    "materials": []
+    "materials": [],
+    "recipe": true
    },
    {
-    "ko": "빵 (제작법)",
-    "en": "Bread Recipe",
+    "ko": "빵",
+    "en": "Bread",
     "icon": "/icons/gifts/Bread.png",
     "gold": 100,
-    "materials": []
+    "materials": [],
+    "recipe": true
    },
    {
-    "ko": "또띠아 (제작법)",
-    "en": "Tortilla Recipe",
+    "ko": "또띠아",
+    "en": "Tortilla",
     "icon": "/icons/gifts/Tortilla.png",
     "gold": 100,
-    "materials": []
+    "materials": [],
+    "recipe": true
    },
    {
-    "ko": "피자 (제작법)",
-    "en": "Pizza Recipe",
+    "ko": "피자",
+    "en": "Pizza",
     "icon": "/icons/gifts/Pizza.png",
     "gold": 150,
-    "materials": []
+    "materials": [],
+    "recipe": true
    },
    {
-    "ko": "마키 롤 (제작법)",
-    "en": "Maki Roll Recipe",
+    "ko": "마키 롤",
+    "en": "Maki Roll",
     "icon": "/icons/gifts/Maki_Roll.png",
     "gold": 300,
-    "materials": []
+    "materials": [],
+    "recipe": true
    },
    {
-    "ko": "트리플 샷 에스프레소 (제작법)",
-    "en": "Triple Shot Espresso Recipe",
+    "ko": "트리플 샷 에스프레소",
+    "en": "Triple Shot Espresso",
     "icon": "/icons/costMaterials/Triple_Shot_Espresso.png",
     "gold": 5000,
-    "materials": []
+    "materials": [],
+    "recipe": true
    },
    {
-    "ko": "쿠키 (제작법)",
-    "en": "Cookie Recipe",
+    "ko": "쿠키",
+    "en": "Cookie",
     "icon": "/icons/bundleItems/cookie.png",
     "gold": 300,
-    "materials": []
+    "materials": [],
+    "recipe": true
    },
    {
     "ko": "가을의 수확",
@@ -2206,12 +2219,13 @@
   "id": "fishShop",
   "offers": [
    {
-    "ko": "생선 훈제기 (제작법)",
-    "en": "Fish Smoker Recipe",
+    "ko": "생선 훈제기",
+    "en": "Fish Smoker",
     "icon": "/icons/costMaterials/Fish_Smoker.png",
     "gold": 10000,
     "materials": [],
-    "note": "낚시 레벨 제한 없음"
+    "note": "낚시 레벨 제한 없음",
+    "recipe": true
    },
    {
     "ko": "송어 스프",
@@ -2979,8 +2993,8 @@
     ]
    },
    {
-    "ko": "워프 토템: 사막 제작법",
-    "en": "Warp Totem: Desert Recipe",
+    "ko": "워프 토템: 사막",
+    "en": "Warp Totem: Desert",
     "icon": "/icons/costMaterials/Warp_Totem_Desert.png",
     "gold": 0,
     "materials": [
@@ -2990,7 +3004,8 @@
       "icon": "/icons/costMaterials/Iridium_Bar.png",
       "qty": 10
      }
-    ]
+    ],
+    "recipe": true
    },
    {
     "ko": "나비장",

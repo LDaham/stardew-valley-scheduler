@@ -224,6 +224,7 @@
     "inSeason": "이번 계절",
     "allSeasons": "상시",
     "qualityGoldNote": "모든 품목을 금 등급(★) 이상으로 제출해야 합니다.",
+    "goldQuality": "금 등급 이상",
     "showAll": "전체 보기",
     "showFill": "획득 불가능한 품목 제외",
     "pick": "{total}개 중 {needed}개",
@@ -2520,6 +2521,7 @@
     "searchShop": "가게 검색",
     "gold": "골드",
     "free": "무료",
+    "recipe": "(제작법)",
     "source": "출처: Stardew Valley Wiki (CC BY-NC-SA 3.0)",
     "cats": {
       "shop": "상점",

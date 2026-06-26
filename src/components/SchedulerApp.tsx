@@ -22,6 +22,8 @@ import MoviePreferenceDialog from "@/components/MoviePreferenceDialog";
 import CostMaterialsDialog from "@/components/CostMaterialsDialog";
 import { ModalModeContext } from "@/components/Modal";
 import PixelIcon from "@/components/PixelIcon";
+import Image from "next/image";
+import { asset } from "@/lib/asset";
 
 // 상단 네비 탭(쿼리파라미터로 URL 동기화). 설정은 탭이 아니라 오버레이 모달로 연다.
 type MainTab = "today" | "info" | "progress";
@@ -146,7 +148,7 @@ function AppShell() {
     },
     {
       key: "fieldOffice",
-      icon: "/icons/addTask/geode.png",
+      icon: "/icons/ui/fieldOffice.png",
       label: t("fieldOffice.short"),
     },
   ];
@@ -154,17 +156,32 @@ function AppShell() {
   return (
     <>
       {/* 전체폭 분리형 상단 네비(아이콘+텍스트). 모달(z-50)보다 아래(z-30).
-          좁은~중간 폭: 1행 = 앱 이름(좌)+후원·언어·설정(우), 2행 = 오늘·정보·진행도.
-          넓은 화면(lg+): 한 줄에 앱 이름·탭·우측 컨트롤 모두 표시.
-          (sm~lg에서 인라인하면 탭 글자가 세로로 깨져, lg부터 인라인한다.) */}
+          좁은~중간 폭: 앱 이름(좌)+후원·언어·설정(우)만. 메인 탭(오늘·정보·진행도)은 하단 고정 바로.
+          넓은 화면(lg+): 한 줄에 앱 이름·탭·우측 컨트롤 모두 표시(하단 바는 숨김). */}
       <nav className="sticky top-0 z-30 border-b-2 border-[var(--sv-border)] bg-[var(--sv-panel)]">
         <div className="mx-auto max-w-5xl px-3 sm:px-5">
-          {/* 상단 행: 앱 이름 + (데스크톱)메인 탭 + 설정(우) */}
-          <div className="flex items-center gap-x-1">
-            <span className="mr-2 min-w-0 truncate py-2.5 text-lg font-extrabold tracking-wide sm:mr-3">
-              {t("common.appName")}
-            </span>
-            <div className="hidden items-center gap-x-1 lg:flex">
+          {/* 상단 행: 앱 이름 + (데스크톱)메인 탭 + 설정(우).
+              하단 바와 비슷한 높이(약 56px). 밑줄 탭이 하단선에 붙도록 items-stretch,
+              로고·언어 등은 self-center로 세로 가운데. */}
+          <div className="flex items-stretch gap-x-1 min-h-[3.5rem]">
+            {/* 앱 로고(가로형, 약 5:1). 클릭 시 '오늘' 페이지로 이동. */}
+            <button
+              type="button"
+              onClick={() => navigate("today")}
+              aria-label={t("nav.today")}
+              className="mr-2 shrink-0 cursor-pointer self-center sm:mr-3"
+            >
+              <Image
+                src={asset("/icons/ui/logo.png")}
+                alt={t("common.appName")}
+                width={2113}
+                height={412}
+                unoptimized
+                priority
+                className="h-9 w-auto max-w-[55vw] object-contain sm:h-10 sm:max-w-none"
+              />
+            </button>
+            <div className="hidden items-stretch gap-x-1 lg:flex">
               {mainTabs.map((m) => (
                 <NavTab
                   key={m.key}
@@ -176,7 +193,7 @@ function AppShell() {
               ))}
             </div>
             {/* 우측 정렬: 후원 + 언어 선택 + 설정 (모바일은 폭 절약 위해 아이콘 위주) */}
-            <div className="ml-auto flex shrink-0 items-center gap-x-1 sm:gap-x-2">
+            <div className="ml-auto flex shrink-0 items-stretch gap-x-1 sm:gap-x-2">
               <Support variant="nav" />
               <LocaleSwitcher />
               <NavTab
@@ -187,19 +204,6 @@ function AppShell() {
                 iconOnlyMobile
               />
             </div>
-          </div>
-          {/* 좁은~중간 폭 2행: 메인 탭(글자 깨짐 방지 위해 lg부터 1행으로 합침).
-              긴 라벨 언어는 통째로 다음 줄로 내려가도록 flex-wrap(글자 단위 줄바꿈 방지). */}
-          <div className="flex flex-wrap items-center gap-x-1 gap-y-1 lg:hidden">
-            {mainTabs.map((m) => (
-              <NavTab
-                key={m.key}
-                icon={m.icon}
-                label={m.label}
-                active={tab === m.key}
-                onClick={() => navigate(m.key)}
-              />
-            ))}
           </div>
         </div>
       </nav>
@@ -255,6 +259,33 @@ function AppShell() {
 
       </main>
 
+      {/* 모바일 하단 고정 네비 바: 오늘·정보·진행도(lg+는 상단 인라인이라 숨김).
+          모달(z-50)보다 아래(z-30). iOS 홈 인디케이터 대응 safe-area 패딩. */}
+      <nav
+        className="fixed inset-x-0 bottom-0 z-30 border-t-2 border-[var(--sv-border)] bg-[var(--sv-panel)] pb-[env(safe-area-inset-bottom)] lg:hidden"
+      >
+        <div className="mx-auto flex max-w-5xl">
+          {mainTabs.map((m) => {
+            const active = tab === m.key;
+            return (
+              <button
+                key={m.key}
+                onClick={() => navigate(m.key)}
+                aria-current={active ? "page" : undefined}
+                className={`flex flex-1 flex-col items-center gap-0.5 py-2 text-[11px] font-semibold ${
+                  active
+                    ? "text-[var(--sv-accent)]"
+                    : "text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
+                }`}
+              >
+                <PixelIcon src={m.icon} size={22} />
+                <span>{m.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </nav>
+
       {/* 설정: 오버레이 모달(일반/메인화면/오류 보고 탭) */}
       {settingsOpen && <SettingsDialog onClose={() => setSettingsOpen(false)} />}
     </>
@@ -306,20 +337,27 @@ function SectionLayout<K extends string>({
   onSelect: (key: K) => void;
   children: React.ReactNode;
 }) {
-  // 선택된 탭이 가로 스크롤 영역 끝에서 잘려 있으면 보이도록 최소한만 스크롤.
+  // 선택된 탭을 가로 스크롤 영역 '가운데'로 부드럽게 이동.
+  // 페이지/세로 스크롤은 건드리지 않도록 scrollIntoView 대신 컨테이너만 직접 스크롤한다.
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   const activeRef = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
-    activeRef.current?.scrollIntoView({
-      inline: "nearest", // 잘리지 않을 정도만(가운데 정렬 X)
-      block: "nearest", // 세로 스크롤은 건드리지 않음
-    });
+    const c = scrollRef.current;
+    const b = activeRef.current;
+    if (!c || !b) return;
+    const cRect = c.getBoundingClientRect();
+    const bRect = b.getBoundingClientRect();
+    // 선택 항목 중심이 컨테이너 중심에 오도록 필요한 스크롤량 계산(끝 항목은 자동으로 양끝에 클램프됨).
+    const delta =
+      bRect.left - cRect.left - (c.clientWidth - b.clientWidth) / 2;
+    c.scrollTo({ left: c.scrollLeft + delta, behavior: "smooth" });
   }, [active]);
 
   return (
     <div>
       {/* 도구/진행도 탭: 상단 네비 바와 여백으로 구분되는 가로 알약 탭.
           줄바꿈 없이 좌우 스크롤(라벨이 많아도 한 줄 유지). */}
-      <div className="mb-5 flex gap-2 overflow-x-auto pb-1">
+      <div ref={scrollRef} className="mb-5 flex gap-2 overflow-x-auto pb-1">
         {items.map((it) => {
           const on = it.key === active;
           return (

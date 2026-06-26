@@ -36,6 +36,9 @@ export default function Dropdown({
   const btnRef = useRef<HTMLButtonElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const current = options.find((o) => o.value === value);
+  // 아이콘이 하나도 없는 드롭다운(예: 언어 선택)은 아이콘 자리(빈 칸)를 두지 않는다.
+  // → 목록이 트리거보다 넓어져 한쪽으로 삐져나오는 현상 방지.
+  const hasIcons = options.some((o) => o.icon);
 
   const toggle = () => {
     if (open) {
@@ -49,7 +52,9 @@ export default function Dropdown({
         left: r.left,
         right: r.right,
         width: r.width,
-        vw: window.innerWidth,
+        // 스크롤바를 제외한 폭. position:fixed의 right는 스크롤바를 뺀 영역 기준이라
+        // window.innerWidth(스크롤바 포함)를 쓰면 우측 정렬이 그만큼 왼쪽으로 밀린다.
+        vw: document.documentElement.clientWidth,
       });
     setOpen(true);
   };
@@ -99,7 +104,7 @@ export default function Dropdown({
           aria-hidden
           className="invisible col-start-1 row-start-1 flex items-center gap-2 whitespace-nowrap border border-transparent px-2 py-2 text-sm"
         >
-          {o.icon && <span className="size-5 shrink-0" />}
+          {hasIcons && <span className="size-5 shrink-0" />}
           <span>{o.label}</span>
           <span className="text-xs">▼</span>
         </span>
@@ -113,7 +118,11 @@ export default function Dropdown({
         onClick={toggle}
         className="col-start-1 row-start-1 flex w-full min-w-0 items-center gap-2 rounded-lg border border-[var(--sv-border)] bg-[var(--sv-panel)] px-2 py-2 text-sm"
       >
-        {current?.icon && <OptIcon src={current.icon} />}
+        {current?.icon ? (
+          <OptIcon src={current.icon} />
+        ) : hasIcons ? (
+          <span className="size-5 shrink-0" />
+        ) : null}
         <span className="flex-1 truncate text-left">{current?.label}</span>
         <span className="text-xs text-[var(--sv-ink-muted)]">
           {open ? "▲" : "▼"}
@@ -154,9 +163,9 @@ export default function Dropdown({
                 >
                   {o.icon ? (
                     <OptIcon src={o.icon} />
-                  ) : (
+                  ) : hasIcons ? (
                     <span className="size-5 shrink-0" />
-                  )}
+                  ) : null}
                   <span>{o.label}</span>
                 </button>
               </li>

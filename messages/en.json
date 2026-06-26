@@ -260,6 +260,7 @@
     "inSeason": "In season",
     "allSeasons": "Year-round",
     "qualityGoldNote": "Every item must be submitted at gold quality (★) or higher.",
+    "goldQuality": "Gold quality or better",
     "showAll": "Show all",
     "showFill": "Hide unobtainable",
     "pick": "{needed} of {total}",
@@ -2556,6 +2557,7 @@
     "searchShop": "Search shop",
     "gold": "g",
     "free": "Free",
+    "recipe": "(Recipe)",
     "source": "Source: Stardew Valley Wiki (CC BY-NC-SA 3.0)",
     "cats": {
       "shop": "Shop",

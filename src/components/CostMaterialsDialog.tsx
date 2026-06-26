@@ -212,6 +212,56 @@ function NoteText({ text }: { text: string }) {
   );
 }
 
+// 판매 물품 아이콘. 제작법이면 인게임처럼 아이템을 흐리게 + 우하단에 제작법 오버레이를 올린다.
+function OfferIcon({
+  src,
+  recipe,
+  size = 24,
+}: {
+  src: string;
+  recipe?: boolean;
+  size?: number;
+}) {
+  if (!recipe) {
+    return (
+      <Image
+        src={asset(src)}
+        alt=""
+        width={size}
+        height={size}
+        unoptimized
+        className="shrink-0"
+        style={{ imageRendering: "pixelated" }}
+      />
+    );
+  }
+  // 오버레이는 (size×size) 정사각 프레임으로 위치가 내장돼 있다.
+  // 아이템 이미지가 세로로 긴 경우(예: 탈수기 48×96 → 폭 기준 렌더로 세로가 길어짐)에도
+  // 어긋나지 않도록, 래퍼는 아이템 실제 크기에 맞추고 오버레이는 하단(bottom-left) 기준으로 정렬한다.
+  return (
+    <span className="relative inline-flex shrink-0">
+      <Image
+        src={asset(src)}
+        alt=""
+        width={size}
+        height={size}
+        unoptimized
+        className="opacity-50"
+        style={{ imageRendering: "pixelated" }}
+      />
+      <Image
+        src={asset("/icons/ui/Recipe_Overlay.png")}
+        alt=""
+        width={size}
+        height={size}
+        unoptimized
+        className="absolute bottom-0 left-0"
+        style={{ width: size, height: size, imageRendering: "pixelated" }}
+      />
+    </span>
+  );
+}
+
 function OfferRow({ offer, today }: { offer: CostOffer; today?: string }) {
   const t = useTranslations();
   const locale = useLocale();
@@ -226,17 +276,14 @@ function OfferRow({ offer, today }: { offer: CostOffer; today?: string }) {
     <div className="rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] p-2.5">
       {/* 이름(좌) + 판매일 + 골드/코인 비용(오른쪽 끝) */}
       <div className="flex items-center gap-2">
-        <Image
-          src={asset(offer.icon)}
-          alt=""
-          width={24}
-          height={24}
-          unoptimized
-          className="shrink-0"
-          style={{ imageRendering: "pixelated" }}
-        />
+        <OfferIcon src={offer.icon} recipe={offer.recipe} size={24} />
         <span className="min-w-0 flex-1 text-sm font-semibold">
           {name(offer)}
+          {offer.recipe && (
+            <span className="ml-1 text-xs font-normal text-[var(--sv-ink-muted)]">
+              {t("costMaterials.recipe")}
+            </span>
+          )}
         </span>
         {offer.day && (
           <span

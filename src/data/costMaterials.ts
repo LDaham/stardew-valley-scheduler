@@ -19,6 +19,7 @@ export interface CostOffer {
   day?: string; // 사막 상인 일시 판매 물품의 판매 요일
   note?: string; // 구매 조건 등 부가 설명(요일이 아닌 긴 텍스트)
   cat?: string; // 가게 내 서비스 분류(messages costMaterials.cats.*). 없으면 분류 없음
+  recipe?: boolean; // 제작법 판매(아이템 자체가 아니라 레시피). 아이콘에 제작법 오버레이 표시
 }
 
 export interface CostShop {
