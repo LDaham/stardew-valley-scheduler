@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Modal from "@/components/Modal";
 import ThemeToggle from "@/components/ThemeToggle";
+import MinMaxToggle from "@/components/MinMaxToggle";
 import TodoSettings from "@/components/TodoSettings";
 import SlotManager from "@/components/SlotManager";
 import { useSchedule, useSlots } from "@/components/ScheduleProvider";
@@ -95,14 +96,19 @@ export default function SettingsDialog({ onClose }: { onClose: () => void }) {
         })}
       </div>
 
-      {/* 일반: 테마(계절). 오류 보고·건의는 지원 탭으로 이동 */}
+      {/* 일반: 테마(계절) + Min-Max Guide 토글. 오류 보고·건의는 지원 탭으로 이동 */}
       {tab === "general" && (
-        <section>
-          <h3 className="mb-2 text-sm font-semibold text-[var(--sv-ink-muted)]">
-            {t("settings.themeTitle")}
-          </h3>
-          <ThemeToggle />
-        </section>
+        <>
+          <section className="mb-5">
+            <h3 className="mb-2 text-sm font-semibold text-[var(--sv-ink-muted)]">
+              {t("settings.themeTitle")}
+            </h3>
+            <ThemeToggle />
+          </section>
+          <section>
+            <MinMaxToggle />
+          </section>
+        </>
       )}
 
       {/* 데이터: 세이브 슬롯·백업/이전·초기화 */}

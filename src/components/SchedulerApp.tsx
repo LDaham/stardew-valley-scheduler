@@ -115,7 +115,7 @@ function AppShell() {
     { key: "today", icon: "/icons/ui/calendar.png", label: t("nav.today") },
     { key: "info", icon: "/icons/ui/note.png", label: t("nav.tools") },
     { key: "progress", icon: "/icons/ui/bundle.png", label: t("nav.progress") },
-    { key: "support", icon: "/icons/gifts/Coffee.png", label: t("support.pageTitle") },
+    { key: "support", icon: "/icons/ui/Speech_bubble.png", label: t("support.pageTitle") },
   ];
 
   // 참고 도구 목록(상단 가로 탭 ↔ 인라인 콘텐츠)

@@ -139,7 +139,7 @@
   },
   "support": {
     "title": "Support",
-    "pageTitle": "Support",
+    "pageTitle": "Other",
     "tabHelp": "Help",
     "tabLegal": "Legal",
     "intro": "This site is a free, ad-free fan tool.\nDonations are simply a way to show support—even a small tip means a lot!",
@@ -1095,6 +1095,22 @@
       "detail": "Wednesday - rerun of the cooking recipe on TV",
       "note": "If you don't check Sunday's new airing, the Wednesday rerun is shown."
     }
+  },
+  "minMax": {
+    "title": "Min-Max Guide",
+    "viewTitle": "Min-Max Guide — Today's tasks",
+    "purpose": "Today's goal",
+    "walkthrough": "Walkthrough",
+    "secondaryGoal": "Secondary goal",
+    "reasonTag": "Why",
+    "filterTip": "Tips",
+    "filterWarn": "Cautions",
+    "filterReason": "Why",
+    "expandAll": "Expand all",
+    "collapseAll": "Collapse all",
+    "carried": "Based on {season} {day}",
+    "source": "Source:",
+    "noGuide": "There is no guide entry for this date."
   },
   "footer": {
     "fan": "An unofficial fan project, not affiliated with or endorsed by ConcernedApe / Stardew Valley.",

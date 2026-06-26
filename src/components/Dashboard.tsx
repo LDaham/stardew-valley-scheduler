@@ -1,9 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
+import {
+  getMinMaxPref,
+  getServerMinMaxPref,
+  subscribeMinMax,
+} from "@/lib/minMaxStore";
+import MinMaxGuideView from "@/components/MinMaxGuideView";
 import { addDays, toYearDay, type SDate } from "@/lib/calendar";
 import { filterEvents, getEventsOn, type FixedEvent } from "@/lib/events";
 import { getActiveReminders, type ReminderBadge } from "@/lib/reminders";
@@ -88,6 +94,12 @@ export default function Dashboard() {
   const [miniCalOpen, setMiniCalOpen] = useState(false);
   const [myTasksOpen, setMyTasksOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<DeleteTarget | null>(null);
+  // Min-Max Guide 모드: 켜면 정보/할 일 대신 해당 날짜 가이드를 표시(날짜 네비는 유지).
+  const guideOn = useSyncExternalStore(
+    subscribeMinMax,
+    getMinMaxPref,
+    getServerMinMaxPref,
+  );
 
   // 게임 시작일(1년째 봄 1일): 전날로 이동 불가
   const atStart =
@@ -500,6 +512,11 @@ export default function Dashboard() {
         </button>
       </div>
 
+      {/* Min-Max Guide 모드: 날짜 네비는 위에 유지하고, 본문만 가이드로 교체 */}
+      {guideOn ? (
+        <MinMaxGuideView date={currentDate} />
+      ) : (
+        <>
       {/* 내일 비 예보 토글(정보 위로 이동). 켜면 '내일 비 와요'로 바뀌어 의미가 직관적. */}
       <div className="flex items-center justify-end gap-1.5">
         <PixelIcon src="/icons/ui/rain.png" size={14} />
@@ -572,6 +589,8 @@ export default function Dashboard() {
         .map((k) => (
           <BundleTrackerBox key={k} />
         ))}
+        </>
+      )}
 
       {addTarget && (
         <AddTaskDialog

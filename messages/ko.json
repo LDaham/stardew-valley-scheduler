@@ -139,7 +139,7 @@
   },
   "support": {
     "title": "후원",
-    "pageTitle": "지원",
+    "pageTitle": "기타",
     "tabHelp": "도움",
     "tabLegal": "법률",
     "intro": "이 사이트는 광고 없는 무료 팬 도구예요.\n후원은 순수한 응원이며, 작은 후원도 큰 힘이 됩니다!",
@@ -1095,6 +1095,22 @@
       "detail": "수요일 - TV에서 요리 레시피 재방송 확인",
       "note": "신규 방영을 일요일에 완료하지 않으면 수요일에 재방송이 표시됩니다."
     }
+  },
+  "minMax": {
+    "title": "Min-Max Guide",
+    "viewTitle": "Min-Max 공략 — 오늘 할 일",
+    "purpose": "오늘의 목표",
+    "walkthrough": "진행 순서",
+    "secondaryGoal": "부가 목표",
+    "reasonTag": "이유",
+    "filterTip": "팁",
+    "filterWarn": "주의",
+    "filterReason": "이유",
+    "expandAll": "세부 모두 펼치기",
+    "collapseAll": "모두 접기",
+    "carried": "{season} {day}일차 기준",
+    "source": "출처:",
+    "noGuide": "이 날짜에 해당하는 가이드 항목이 없습니다."
   },
   "footer": {
     "fan": "비공식 팬 제작물이며, ConcernedApe / Stardew Valley와 제휴하거나 보증받지 않았습니다.",
