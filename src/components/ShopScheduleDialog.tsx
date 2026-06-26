@@ -356,10 +356,6 @@ export default function ShopScheduleDialog({
       <p className="mt-3 border-t border-dashed border-[var(--sv-border)] pt-2 text-xs leading-relaxed text-[var(--sv-ink-muted)]">
         {t("shopSchedule.festivalExceptionNote")}
       </p>
-
-      <p className="mt-2 text-xs text-[var(--sv-ink-muted)]">
-        {t("shopSchedule.source")}
-      </p>
     </Modal>
   );
 }

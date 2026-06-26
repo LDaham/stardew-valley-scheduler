@@ -121,10 +121,6 @@ function MovieDetail({ id }: { id: string }) {
           {t("movie.none")}
         </p>
       )}
-
-      <p className="mt-3 text-xs text-[var(--sv-ink-muted)]">
-        {t("movie.source")}
-      </p>
     </div>
   );
 }

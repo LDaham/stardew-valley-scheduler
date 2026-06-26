@@ -140,6 +140,8 @@
   "support": {
     "title": "후원",
     "pageTitle": "지원",
+    "tabHelp": "도움",
+    "tabLegal": "법률",
     "intro": "이 사이트는 광고 없는 무료 팬 도구예요.\n후원은 순수한 응원이며, 작은 후원도 큰 힘이 됩니다!",
     "note": "후원은 전적으로 자발적이며, 사이트 이용에 필수는 아닙니다.\n프로젝트는 앞으로도 광고 없이 무료로 유지됩니다."
   },
@@ -195,7 +197,7 @@
     "open": "설정 열기",
     "tabGeneral": "일반",
     "tabData": "데이터",
-    "tabMain": "메인화면",
+    "tabMain": "페이지 설정",
     "mainTabDesc": "메인 화면에 표시할 항목과 순서를 설정해요.",
     "todoSettings": "메인화면 설정",
     "openTodo": "할 일 목록 설정 열기",
@@ -212,7 +214,10 @@
     "themeSummer": "여름",
     "themeFall": "가을",
     "themeWinter": "겨울",
-    "reportIssue": "오류 보고·건의 (GitHub)",
+    "reportIssue": "오류 보고·건의",
+    "reportDesc": "버그를 발견했거나 개선·추가 아이디어가 있다면 알려주세요.",
+    "reportButton": "GitHub Issues에서 보고하기 ↗",
+    "reportNote": "작성하려면 GitHub 계정이 필요합니다.",
     "dataTitle": "데이터 백업·이전",
     "dataDesc": "설정·진행 데이터를 파일로 내보내거나, 다른 기기에서 그 파일을 불러올 수 있어요.",
     "exportSlotNote": "현재 슬롯 ‘{name}’의 데이터를 내보냅니다.",
@@ -1097,7 +1102,6 @@
     "data": "게임 명칭·번역은 게임 파일에서 추출했고, 일부 데이터는 <wiki>Stardew Valley 위키</wiki>를 참고했습니다 (<license>CC BY-NC-SA 3.0</license>).",
     "code": "소스 코드는 <repo>GitHub</repo>에서 MIT 라이선스로 제공됩니다.",
     "nonCommercial": "본 사이트는 비영리로 운영됩니다.",
-    "tagline": "팬 제작 일정 도우미",
     "legalLink": "이용약관 · 개인정보처리방침",
     "privacy": "개인정보 처리방침",
     "disclaimer": "면책조항"

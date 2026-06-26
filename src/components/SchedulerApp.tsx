@@ -27,8 +27,9 @@ import Image from "next/image";
 import { asset } from "@/lib/asset";
 
 // 상단 네비 탭(쿼리파라미터로 URL 동기화). 설정은 탭이 아니라 오버레이 모달로 연다.
-// "legal"은 네비 탭에는 없지만 본문에 표시되는 뷰(푸터·지원에서 진입). URL은 ?tab=legal.
-type MainTab = "today" | "info" | "progress" | "support" | "legal";
+type MainTab = "today" | "info" | "progress" | "support";
+// 지원 하위 보기: 도움(후원·오류 보고) / 법률(개인정보·약관·저작권). URL은 ?tab=support&sub=.
+type SupportSub = "help" | "legal";
 // 참고 도구 하위 보기
 type ToolView = "seed" | "fish" | "shop" | "cost" | "gift" | "movie";
 // 진행도 하위 보기
@@ -58,6 +59,7 @@ function AppShell() {
   const [tab, setTab] = useState<MainTab>("today");
   const [tool, setTool] = useState<ToolView>("seed");
   const [view, setView] = useState<ProgressView>("bundle");
+  const [supportSub, setSupportSub] = useState<SupportSub>("help");
   // 설정은 오버레이 모달로 연다(별도 페이지 아님).
   const [settingsOpen, setSettingsOpen] = useState(false);
 
@@ -67,10 +69,7 @@ function AppShell() {
       const p = new URLSearchParams(window.location.search);
       const tb = p.get("tab");
       setTab(
-        tb === "info" ||
-          tb === "progress" ||
-          tb === "support" ||
-          tb === "legal"
+        tb === "info" || tb === "progress" || tb === "support"
           ? tb
           : "today",
       );
@@ -78,6 +77,8 @@ function AppShell() {
       if (tl && TOOL_VIEWS.includes(tl)) setTool(tl);
       const vw = p.get("view") as ProgressView | null;
       if (vw && PROGRESS_VIEWS.includes(vw)) setView(vw);
+      const sb = p.get("sub");
+      if (sb === "help" || sb === "legal") setSupportSub(sb);
     };
     sync();
     window.addEventListener("popstate", sync);
@@ -87,32 +88,25 @@ function AppShell() {
   // 상태 변경 + URL 반영(pushState → 뒤로가기로 탭 이동 가능). 리로드 없이 부드럽게 전환.
   const navigate = (
     nextTab: MainTab,
-    opts?: { tool?: ToolView; view?: ProgressView },
+    opts?: { tool?: ToolView; view?: ProgressView; sub?: SupportSub },
   ) => {
     const nTool = opts?.tool ?? tool;
     const nView = opts?.view ?? view;
+    const nSub = opts?.sub ?? supportSub;
     setTab(nextTab);
     setTool(nTool);
     setView(nView);
+    setSupportSub(nSub);
     const p = new URLSearchParams();
     if (nextTab !== "today") p.set("tab", nextTab);
     if (nextTab === "info") p.set("tool", nTool);
     if (nextTab === "progress") p.set("view", nView);
+    if (nextTab === "support") p.set("sub", nSub);
     const qs = p.toString();
     window.history.pushState(
       null,
       "",
       qs ? `?${qs}` : window.location.pathname,
-    );
-  };
-
-  // 법률 뷰로 이동(지원·푸터에서 호출). section이 있으면 해당 섹션으로 스크롤(LegalView가 해시 처리).
-  const openLegal = (section?: string) => {
-    setTab("legal");
-    window.history.pushState(
-      null,
-      "",
-      `?tab=legal${section ? `#${section}` : ""}`,
     );
   };
 
@@ -144,18 +138,19 @@ function AppShell() {
 
   // 진행도 목록
   // 표시 순서: 업적 → 완벽 → 꾸러미 → 박물관 → 박멸 목표 → 현장 사무소
+  // 정렬 순서: 꾸러미 → 완벽 → 업적 → 박물관 → 박멸 목표 → 현장 사무소
   const progressNav: { key: ProgressView; icon: string; label: string }[] = [
-    {
-      key: "achievement",
-      icon: "/icons/ui/achievement.jpg",
-      label: t("achievement.short"),
-    },
+    { key: "bundle", icon: "/icons/ui/bundle.png", label: t("bundle.short") },
     {
       key: "perfection",
       icon: "/icons/ui/perfection.png",
       label: t("perfection.short"),
     },
-    { key: "bundle", icon: "/icons/ui/bundle.png", label: t("bundle.short") },
+    {
+      key: "achievement",
+      icon: "/icons/ui/achievement.jpg",
+      label: t("achievement.short"),
+    },
     {
       key: "museum",
       icon: "/icons/addTask/museum.png",
@@ -171,6 +166,16 @@ function AppShell() {
       icon: "/icons/ui/fieldOffice.png",
       label: t("fieldOffice.short"),
     },
+  ];
+
+  // 지원 하위 탭: 도움(후원·오류 보고) / 법률(개인정보·약관·저작권)
+  const supportNav: { key: SupportSub; icon: string; label: string }[] = [
+    {
+      key: "help",
+      icon: "/icons/gifts/Coffee.png",
+      label: t("support.tabHelp"),
+    },
+    { key: "legal", icon: "/icons/ui/key.png", label: t("support.tabLegal") },
   ];
 
   return (
@@ -238,6 +243,7 @@ function AppShell() {
         {/* 참고 도구: 상단 가로 탭 + 인라인 콘텐츠 */}
         {tab === "info" && (
           <SectionLayout
+            title={t("nav.tools")}
             items={toolItems}
             active={tool}
             onSelect={(k) => navigate("info", { tool: k })}
@@ -263,6 +269,7 @@ function AppShell() {
         {/* 진행도: 상단 가로 탭 + 인라인 콘텐츠 */}
         {tab === "progress" && (
           <SectionLayout
+            title={t("nav.progress")}
             items={progressNav}
             active={view}
             onSelect={(k) => navigate("progress", { view: k })}
@@ -278,12 +285,21 @@ function AppShell() {
           </SectionLayout>
         )}
 
-        {/* 지원: 후원·오류 보고·법적 고지(인라인, 네비 유지) */}
-        {tab === "support" && <SupportPage onOpenLegal={openLegal} />}
-
-        {/* 법률: 개인정보처리방침·이용약관·저작권 및 면책(인라인, 네비 유지) */}
-        {tab === "legal" && <LegalView />}
-
+        {/* 지원: 하위 탭(도움/법률). 제목+탭 박스 / 탭 내용 박스로 분리.
+            도움 = 후원·오류 보고, 법률 = 개인정보·약관·저작권(인라인, 네비 유지) */}
+        {tab === "support" && (
+          <SectionLayout
+            title={t("support.pageTitle")}
+            items={supportNav}
+            active={supportSub}
+            onSelect={(k) => navigate("support", { sub: k })}
+          >
+            <div className="rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-3 sm:p-4">
+              {supportSub === "help" && <SupportPage />}
+              {supportSub === "legal" && <LegalView />}
+            </div>
+          </SectionLayout>
+        )}
       </main>
 
       {/* 모바일 하단 고정 네비 바: 오늘·정보·진행도(lg+는 상단 인라인이라 숨김).
@@ -340,25 +356,51 @@ function NavTab({
       onClick={onClick}
       aria-label={iconOnlyMobile ? label : undefined}
       aria-current={active ? "page" : undefined}
-      className={`-mb-0.5 flex items-center gap-1.5 whitespace-nowrap rounded-t-md border-b-2 px-2.5 py-2.5 text-[15px] font-semibold transition-colors sm:px-3 ${
+      className={`group -mb-0.5 flex items-center whitespace-nowrap border-b-2 px-2.5 py-2.5 text-[15px] font-semibold transition-colors sm:px-3 ${
         active
-          ? "border-[var(--sv-accent)] bg-[var(--sv-bg)] text-[var(--sv-accent)]"
-          : "border-transparent text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)] hover:text-[var(--sv-ink)]"
+          ? "border-[var(--sv-accent)] text-[var(--sv-accent)]"
+          : "border-transparent text-[var(--sv-ink-muted)] hover:text-[var(--sv-ink)]"
       } ${className}`}
     >
-      <PixelIcon src={icon} size={18} />
-      <span className={iconOnlyMobile ? "hidden sm:inline" : ""}>{label}</span>
+      {/* 아이콘+텍스트만 살짝 띄워(호버 효과) 밑줄과 간격을 둬 구분 */}
+      <span
+        className={`flex items-center gap-1.5 transition-transform group-hover:-translate-y-0.5 ${
+          active ? "-translate-y-0.5" : ""
+        }`}
+      >
+        <PixelIcon src={icon} size={18} />
+        <span className={iconOnlyMobile ? "hidden sm:inline" : ""}>{label}</span>
+      </span>
     </button>
+  );
+}
+
+// 페이지 제목 박스: 현재 페이지명 표시 + (있으면)하위 탭 라벨을 같은 박스에 묶음.
+// 오늘 외 페이지(정보·진행도·지원)에서 현재 위치를 인지시키는 용도.
+function PageTitleBox({
+  title,
+  children,
+}: {
+  title: string;
+  children?: React.ReactNode;
+}) {
+  return (
+    <div className="mb-5 rounded-xl border border-[var(--sv-border)] bg-[var(--sv-panel)] p-3 sm:p-4">
+      <h1 className="text-lg font-bold text-[var(--sv-ink)]">{title}</h1>
+      {children && <div className="mt-3">{children}</div>}
+    </div>
   );
 }
 
 // 상단 가로 탭(도구/진행도 공용) + 아래 콘텐츠
 function SectionLayout<K extends string>({
+  title,
   items,
   active,
   onSelect,
   children,
 }: {
+  title: string;
   items: { key: K; icon: string; label: string }[];
   active: K;
   onSelect: (key: K) => void;
@@ -382,10 +424,11 @@ function SectionLayout<K extends string>({
 
   return (
     <div>
-      {/* 도구/진행도 탭: 상단 네비 바와 여백으로 구분되는 가로 알약 탭.
-          줄바꿈 없이 좌우 스크롤(라벨이 많아도 한 줄 유지). */}
-      <div ref={scrollRef} className="mb-5 flex gap-2 overflow-x-auto pb-1">
-        {items.map((it) => {
+      {/* 제목 박스 안에 하위 탭(알약)을 함께 묶어 현재 페이지·위치를 인지시킴.
+          탭은 줄바꿈 없이 좌우 스크롤(라벨이 많아도 한 줄 유지). */}
+      <PageTitleBox title={title}>
+        <div ref={scrollRef} className="flex gap-2 overflow-x-auto pb-1">
+          {items.map((it) => {
           const on = it.key === active;
           return (
             <button
@@ -401,9 +444,10 @@ function SectionLayout<K extends string>({
             >
               <PixelIcon src={it.icon} size={18} /> {it.label}
             </button>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      </PageTitleBox>
       <div className="min-w-0">{children}</div>
     </div>
   );

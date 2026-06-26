@@ -88,9 +88,6 @@ export default function CostMaterialsDialog({
               </h3>
             </div>
             <ShopOffersPanel key={s.id} id={s.id} />
-            <p className="mt-3 text-xs text-[var(--sv-ink-muted)]">
-              {t("costMaterials.source")}
-            </p>
           </div>
         )}
       />

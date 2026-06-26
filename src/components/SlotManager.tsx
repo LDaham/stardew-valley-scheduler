@@ -15,9 +15,6 @@ export default function SlotManager() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [draftName, setDraftName] = useState("");
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
-  // 슬롯 추가: 입력칸을 열어 원하는 이름으로 바로 생성(빈칸이면 "슬롯 N")
-  const [adding, setAdding] = useState(false);
-  const [newName, setNewName] = useState("");
 
   const label = (name: string, index: number) =>
     name.trim() || t("slots.slotN", { n: index + 1 });
@@ -41,10 +38,9 @@ export default function SlotManager() {
     renameSlot(id, draftName.trim());
     setEditingId(null);
   };
-  const commitAdd = () => {
-    createSlot(newName.trim().slice(0, 24));
-    setNewName("");
-    setAdding(false);
+  // 슬롯 추가: 복제처럼 즉시 생성. 이름은 "슬롯 N"(N = 현재 슬롯 수 + 1), 이후 이름변경 가능.
+  const handleAdd = () => {
+    createSlot(t("slots.slotN", { n: slots.length + 1 }).slice(0, 24));
   };
 
   return (
@@ -168,53 +164,16 @@ export default function SlotManager() {
         })}
       </ul>
 
-      {adding && slots.length < maxSlots ? (
-        <div className="flex items-center gap-1.5">
-          <input
-            autoFocus
-            value={newName}
-            onChange={(e) => setNewName(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") commitAdd();
-              if (e.key === "Escape") {
-                setAdding(false);
-                setNewName("");
-              }
-            }}
-            maxLength={24}
-            placeholder={t("slots.namePlaceholder")}
-            className="min-w-0 flex-1 rounded-md border border-[var(--sv-border)] bg-[var(--sv-bg)] px-2 py-1 text-sm outline-none focus:border-[var(--sv-accent)]"
-          />
-          <button
-            type="button"
-            onClick={commitAdd}
-            className="rounded-md border border-transparent bg-[var(--sv-accent)] px-2.5 py-1 text-xs font-semibold text-[var(--sv-accent-ink)]"
-          >
-            {t("slots.add")}
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setAdding(false);
-              setNewName("");
-            }}
-            className="rounded-md border border-[var(--sv-border)] px-2 py-1 text-xs hover:bg-[var(--sv-bg)]"
-          >
-            {t("common.cancel")}
-          </button>
-        </div>
-      ) : (
-        <button
-          type="button"
-          onClick={() => setAdding(true)}
-          disabled={slots.length >= maxSlots}
-          className="self-start rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm font-semibold hover:bg-[var(--sv-bg)] disabled:opacity-40"
-        >
-          {slots.length >= maxSlots
-            ? t("slots.full", { max: maxSlots })
-            : t("slots.add")}
-        </button>
-      )}
+      <button
+        type="button"
+        onClick={handleAdd}
+        disabled={slots.length >= maxSlots}
+        className="self-start rounded-lg border border-[var(--sv-border)] px-3 py-1.5 text-sm font-semibold hover:bg-[var(--sv-bg)] disabled:opacity-40"
+      >
+        {slots.length >= maxSlots
+          ? t("slots.full", { max: maxSlots })
+          : t("slots.add")}
+      </button>
     </div>
   );
 }

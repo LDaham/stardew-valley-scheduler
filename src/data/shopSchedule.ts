@@ -5,15 +5,15 @@ import { festivalLocksShops } from "@/lib/events";
 
 export type Weekday = "sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat";
 
-// 요일 배지 표시 순서(일~토).
+// 요일 배지 표시 순서(월~일).
 export const WEEK_ORDER: Weekday[] = [
-  "sun",
   "mon",
   "tue",
   "wed",
   "thu",
   "fri",
   "sat",
+  "sun",
 ];
 
 // festivalClose: 축제날 휴무 정도.

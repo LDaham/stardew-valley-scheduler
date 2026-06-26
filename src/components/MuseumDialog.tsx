@@ -107,10 +107,6 @@ export default function MuseumDialog({ onClose }: { onClose: () => void }) {
           );
         })}
       </ul>
-
-      <p className="mt-3 text-xs text-[var(--sv-ink-muted)]">
-        {t("museum.source")}
-      </p>
     </Modal>
   );
 }

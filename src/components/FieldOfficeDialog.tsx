@@ -99,10 +99,6 @@ export default function FieldOfficeDialog({ onClose }: { onClose: () => void }) 
           );
         })}
       </ul>
-
-      <p className="mt-3 text-xs text-[var(--sv-ink-muted)]">
-        {t("fieldOffice.source")}
-      </p>
     </Modal>
   );
 }

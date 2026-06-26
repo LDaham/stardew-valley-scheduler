@@ -9,9 +9,9 @@ import { useTranslations } from "next-intl";
 const WIKI_URL = "https://stardewvalleywiki.com";
 const LICENSE_URL = "https://creativecommons.org/licenses/by-nc-sa/3.0/";
 
-// 법률 뷰 상단으로 이동: ?tab=legal 으로 URL 변경 후 popstate 발생 → SchedulerApp이 해당 탭 표시.
+// 지원 페이지 '법률' 탭으로 이동: URL 변경 후 popstate 발생 → SchedulerApp이 해당 탭 표시.
 function goLegal() {
-  window.history.pushState(null, "", "?tab=legal");
+  window.history.pushState(null, "", "?tab=support&sub=legal");
   window.dispatchEvent(new PopStateEvent("popstate"));
 }
 
@@ -34,27 +34,22 @@ export default function Footer() {
   return (
     <footer className="mt-8 border-t border-[var(--sv-border)] px-4 py-8 text-[var(--sv-ink-muted)]">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-5">
-        {/* 상단행: 브랜드 / 법률 링크 */}
-        <div className="flex flex-col items-center gap-4 text-center md:flex-row md:justify-between md:text-left">
-          <div>
-            <h2 className="text-sm font-black tracking-tight text-[var(--sv-ink)]">
-              {tc("appName")}
-            </h2>
-            <p className="mt-1 text-[10px] font-bold uppercase tracking-widest">
-              {t("tagline")}
-            </p>
-          </div>
+        {/* 상단행: 브랜드 / 법률 링크 — 좁은 폭에서도 한 행 유지(브랜드 좌, 링크 우) */}
+        <div className="flex flex-row items-center justify-between gap-4">
+          <h2 className="text-sm font-black tracking-tight text-[var(--sv-ink)]">
+            {tc("appName")}
+          </h2>
           <button
             type="button"
             onClick={goLegal}
-            className="text-xs font-bold tracking-wider underline hover:text-[var(--sv-ink)]"
+            className="text-right text-xs font-bold tracking-wider underline hover:text-[var(--sv-ink)]"
           >
             {t("legalLink")}
           </button>
         </div>
 
         {/* 하단행: 구분선 + 저작권·출처·비영리 고지 */}
-        <div className="flex flex-col gap-2 border-t border-[var(--sv-border)] pt-4 text-center text-[10px] leading-relaxed md:text-left">
+        <div className="flex flex-col gap-2 border-t border-[var(--sv-border)] pt-4 text-[10px] leading-relaxed">
           <p>
             {t("fan")} {t("copyright")}
           </p>

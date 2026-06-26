@@ -94,12 +94,12 @@ export default function LegalView() {
   }, []);
 
   return (
-    <div className="mx-auto w-full max-w-2xl text-[var(--sv-ink)]">
-      <h1 className="text-2xl font-bold">{t("title")}</h1>
-      <p className="mt-1 text-xs text-[var(--sv-ink-muted)]">{t("updated")}</p>
+    <div className="w-full text-[var(--sv-ink)]">
+      {/* 페이지 제목 박스(지원)+활성 탭(법률)이 맥락을 주므로 별도 큰 제목 없이 개정일만 캡션으로 */}
+      <p className="text-xs text-[var(--sv-ink-muted)]">{t("updated")}</p>
 
       {/* 상단 앵커 이동 */}
-      <nav className="mt-4 flex flex-wrap gap-2">
+      <nav className="mt-3 flex flex-wrap gap-2">
         {NAV.map((n) => (
           <a
             key={n.id}
@@ -113,7 +113,7 @@ export default function LegalView() {
 
       {SECTIONS.map((s) => (
         <section key={s.id} id={s.id} className="mt-8 scroll-mt-24">
-          <h2 className="text-lg font-bold">{t(s.head)}</h2>
+          <h2 className="text-base font-bold">{t(s.head)}</h2>
           {s.blocks.map((b, i) => (
             <div key={i} className="mt-4">
               {b.head && (

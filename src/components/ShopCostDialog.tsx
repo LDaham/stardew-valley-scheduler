@@ -45,9 +45,6 @@ export default function ShopCostDialog({
         preferGroups={[currentDate.season, "byDay"]}
         today={today}
       />
-      <p className="mt-3 text-xs text-[var(--sv-ink-muted)]">
-        {t("costMaterials.source")}
-      </p>
     </Modal>
   );
 }

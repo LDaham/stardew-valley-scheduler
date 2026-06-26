@@ -140,6 +140,8 @@
   "support": {
     "title": "Support",
     "pageTitle": "Support",
+    "tabHelp": "Help",
+    "tabLegal": "Legal",
     "intro": "This site is a free, ad-free fan tool.\nDonations are simply a way to show support—even a small tip means a lot!",
     "note": "Donations are entirely voluntary and not required to keep the site running.\nThe project will stay free and ad-free."
   },
@@ -195,7 +197,7 @@
     "open": "Open settings",
     "tabGeneral": "General",
     "tabData": "Data",
-    "tabMain": "Main screen",
+    "tabMain": "Page settings",
     "mainTabDesc": "Choose what to show on the main screen and in what order.",
     "todoSettings": "Main screen settings",
     "openTodo": "Open to-do list settings",
@@ -212,7 +214,10 @@
     "themeSummer": "Summer",
     "themeFall": "Fall",
     "themeWinter": "Winter",
-    "reportIssue": "Report a bug / suggestion (GitHub)",
+    "reportIssue": "Report a bug / suggestion",
+    "reportDesc": "Found a bug or have an idea for improvement? Let us know.",
+    "reportButton": "Report on GitHub Issues ↗",
+    "reportNote": "A GitHub account is required to post.",
     "dataTitle": "Backup & transfer",
     "dataDesc": "Export your settings and progress to a file, or import that file on another device.",
     "exportSlotNote": "Exports data from the current slot “{name}”.",
@@ -1097,7 +1102,6 @@
     "data": "Game names and translations are extracted from the game files; some data is adapted from the <wiki>Stardew Valley Wiki</wiki> (<license>CC BY-NC-SA 3.0</license>).",
     "code": "Source code is available on <repo>GitHub</repo> under the MIT license.",
     "nonCommercial": "This site is operated on a non-commercial basis.",
-    "tagline": "Fan-Made Planner",
     "legalLink": "Terms · Privacy Policy",
     "privacy": "Privacy Policy",
     "disclaimer": "Disclaimer"
