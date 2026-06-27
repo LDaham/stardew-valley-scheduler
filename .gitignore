@@ -19,6 +19,15 @@
 #progress
 /progress
 
+# 개발용 데이터 파이프라인 스크립트·인게임 추출/정리 데이터(저장소 미포함, 로컬 참고용)
+/tools
+
+# 에이전트/에디터 로컬 설정(저장소 미포함)
+/.claude/
+.claude/
+.mcp.json
+*.claude.json
+
 # next.js
 /.next/
 /out/

@@ -1907,7 +1907,7 @@
     }
   },
   "meta": {
-    "title": "Stardew Valley Scheduler",
+    "title": "Stardew Valley Planer",
     "description": "Ein zyklischer 28-Tage-Kalender mit 4 Jahreszeiten für Stardew Valley – behalte Feste, Geburtstage und Feldfrüchte im Blick."
   },
   "common": {
@@ -1927,7 +1927,7 @@
     "placeholder": "Notiz schreiben …"
   },
   "home": {
-    "title": "Stardew Valley Scheduler",
+    "title": "Stardew Valley Planer",
     "subtitle": "Ein zyklischer Kalender-Notizblock – heutige Aufgaben und kommende Ereignisse auf einen Blick"
   },
   "seasons": {

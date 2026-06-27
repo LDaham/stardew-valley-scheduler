@@ -1907,7 +1907,7 @@
     }
   },
   "meta": {
-    "title": "Stardew Valley Scheduler",
+    "title": "Planejador de Stardew Valley",
     "description": "Um bloco de notas de calendário cíclico de 28 dias e 4 estações para Stardew Valley - antecipe festivais, aniversários e plantações."
   },
   "common": {
@@ -1927,7 +1927,7 @@
     "placeholder": "Escreva uma nota..."
   },
   "home": {
-    "title": "Stardew Valley Scheduler",
+    "title": "Planejador de Stardew Valley",
     "subtitle": "Um bloco de notas de calendário cíclico - as tarefas de hoje e os próximos eventos de relance"
   },
   "seasons": {

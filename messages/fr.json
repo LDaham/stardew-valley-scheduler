@@ -1907,7 +1907,7 @@
     }
   },
   "meta": {
-    "title": "Stardew Valley Scheduler",
+    "title": "Planificateur Stardew Valley",
     "description": "Un bloc-notes calendrier cyclique de 28 jours et 4 saisons pour Stardew Valley – anticipez festivals, anniversaires et cultures."
   },
   "common": {
@@ -1927,7 +1927,7 @@
     "placeholder": "Écrire une note..."
   },
   "home": {
-    "title": "Stardew Valley Scheduler",
+    "title": "Planificateur Stardew Valley",
     "subtitle": "Un bloc-notes calendrier cyclique – les tâches du jour et les événements à venir en un coup d'œil"
   },
   "seasons": {

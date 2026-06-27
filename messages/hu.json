@@ -1907,7 +1907,7 @@
     }
   },
   "meta": {
-    "title": "Stardew Valley Scheduler",
+    "title": "Stardew Valley tervező",
     "description": "Ciklikus, 28 napos, 4 évszakos naptárfüzet a Stardew Valley-hez – legyél előrébb a fesztiváloknál, születésnapoknál és terményeknél."
   },
   "common": {
@@ -1927,7 +1927,7 @@
     "placeholder": "Írj egy jegyzetet..."
   },
   "home": {
-    "title": "Stardew Valley Scheduler",
+    "title": "Stardew Valley tervező",
     "subtitle": "Ciklikus naptárfüzet – a mai feladatok és a közelgő események egy pillantásra"
   },
   "seasons": {
