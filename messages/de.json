@@ -957,7 +957,8 @@
     "modeRemix": "Remix-Bündel",
     "remixRandomSlot": "Zufallsfeld",
     "remixPickCount": "{pick} wählen ({count}/{pick})",
-    "remixChooseHint": "Wähle die Bündel, die du hast."
+    "remixChooseHint": "Wähle die Bündel, die du hast.",
+    "goldQuality": "Gold-Qualität oder besser"
   },
   "addTask": {
     "optionBuilding": "Gebäude",
@@ -2126,7 +2127,10 @@
     "shopScheduleShow": "Ladenplan anzeigen",
     "shopScheduleShowNote": "Zeigt in Info – Ladenplan angeheftete Pläne oben auf dem Hauptbildschirm.",
     "rainFishShow": "Regenfische anzeigen",
-    "rainFishShowNote": "Zeigt an Tagen mit Regenvorhersage oben auf dem Hauptbildschirm Fische, die in dieser Jahreszeit nur bei Regen gefangen werden können."
+    "rainFishShowNote": "Zeigt an Tagen mit Regenvorhersage oben auf dem Hauptbildschirm Fische, die in dieser Jahreszeit nur bei Regen gefangen werden können.",
+    "reportDesc": "Fehler gefunden oder eine Idee zur Verbesserung? Sag uns Bescheid.",
+    "reportButton": "Auf GitHub Issues melden ↗",
+    "reportNote": "Zum Posten ist ein GitHub-Konto erforderlich."
   },
   "bundleTracker": {
     "title": "Bündel-Tracker",
@@ -2487,7 +2491,10 @@
     "copyright": "Stardew Valley © ConcernedApe.",
     "data": "Spielnamen und Übersetzungen stammen aus den Spieldateien; einige Daten sind dem <wiki>Stardew Valley Wiki</wiki> entnommen (<license>CC BY-NC-SA 3.0</license>).",
     "code": "Der Quellcode ist auf <repo>GitHub</repo> unter der MIT-Lizenz verfügbar.",
-    "nonCommercial": "Diese Website wird nicht-kommerziell betrieben."
+    "nonCommercial": "Diese Website wird nicht-kommerziell betrieben.",
+    "legalLink": "Nutzungsbedingungen · Datenschutz",
+    "privacy": "Datenschutzerklärung",
+    "disclaimer": "Haftungsausschluss"
   },
   "logic": {
     "weatherFortune": "Täglich · endet am selben Tag (sonst neues Wetter/Glück am nächsten Tag). Wird auch ohne Erledigung am nächsten Tag neu erstellt.",
@@ -2544,7 +2551,24 @@
     "title": "Unterstützen",
     "pageTitle": "Sonstiges",
     "intro": "Diese Seite ist ein kostenloses, werbefreies Fan-Tool.\nSpenden sind einfach eine Art, Unterstützung zu zeigen – schon eine kleine Spende bedeutet viel!",
-    "note": "Spenden sind völlig freiwillig und nicht nötig, damit die Seite läuft.\nDas Projekt bleibt kostenlos und werbefrei."
+    "note": "Spenden sind völlig freiwillig und nicht nötig, damit die Seite läuft.\nDas Projekt bleibt kostenlos und werbefrei.",
+    "tabHelp": "Hilfe",
+    "tabLegal": "Rechtliches"
+  },
+  "minMax": {
+    "title": "Min-Max-Leitfaden",
+    "viewTitle": "Min-Max-Leitfaden — Heutige Aufgaben",
+    "purpose": "Heutiges Ziel",
+    "walkthrough": "Ablauf",
+    "secondaryGoal": "Nebenziel",
+    "reasonTag": "Warum",
+    "filterTip": "Tipps",
+    "filterWarn": "Achtung",
+    "filterReason": "Warum",
+    "expandAll": "Alle ausklappen",
+    "collapseAll": "Alle einklappen",
+    "carried": "Basierend auf {season} {day}",
+    "source": "Quelle:",
+    "noGuide": "Für dieses Datum gibt es keinen Leitfaden-Eintrag."
   }
 }
-

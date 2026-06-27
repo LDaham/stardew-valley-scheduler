@@ -957,7 +957,8 @@
     "modeRemix": "リミックスバンドル",
     "remixRandomSlot": "ランダム枠",
     "remixPickCount": "{pick}個選択（{count}/{pick}）",
-    "remixChooseHint": "持っているバンドルを選択してください。"
+    "remixChooseHint": "持っているバンドルを選択してください。",
+    "goldQuality": "金品質以上"
   },
   "addTask": {
     "optionBuilding": "建物",
@@ -2126,7 +2127,10 @@
     "shopScheduleShow": "店の営業日程を表示",
     "shopScheduleShowNote": "情報 - 店の営業日程でピン留めした日程をメイン画面上部に表示します。",
     "rainFishShow": "雨の日に釣れる魚を表示",
-    "rainFishShowNote": "雨予報の日に、その季節に雨の日だけ釣れる魚をメイン画面上部に表示します。"
+    "rainFishShowNote": "雨予報の日に、その季節に雨の日だけ釣れる魚をメイン画面上部に表示します。",
+    "reportDesc": "バグを見つけた、または改善のアイデアがあればお知らせください。",
+    "reportButton": "GitHub Issuesで報告する ↗",
+    "reportNote": "投稿にはGitHubアカウントが必要です。"
   },
   "bundleTracker": {
     "title": "バンドル追跡",
@@ -2487,7 +2491,10 @@
     "copyright": "Stardew Valley © ConcernedApe.",
     "data": "ゲーム内の名称・翻訳はゲームファイルから抽出しており、一部のデータは<wiki>Stardew Valley Wiki</wiki>を参考にしています（<license>CC BY-NC-SA 3.0</license>）。",
     "code": "ソースコードは <repo>GitHub</repo> にて MIT ライセンスで提供されています。",
-    "nonCommercial": "本サイトは非営利で運営されています。"
+    "nonCommercial": "本サイトは非営利で運営されています。",
+    "legalLink": "利用規約 · プライバシーポリシー",
+    "privacy": "プライバシーポリシー",
+    "disclaimer": "免責事項"
   },
   "logic": {
     "weatherFortune": "毎日 · 当日で終了（見ないと翌日新しい天気・運勢）。完了しなくても翌日新しく生成。",
@@ -2544,7 +2551,24 @@
     "title": "支援",
     "pageTitle": "その他",
     "intro": "このサイトは広告なしの無料ファンツールです。\n支援は純粋な応援であり、少しのご支援でも大きな力になります！",
-    "note": "支援は完全に任意で、サイトの運営に必須ではありません。\nプロジェクトは今後も無料・広告なしを維持します。"
+    "note": "支援は完全に任意で、サイトの運営に必須ではありません。\nプロジェクトは今後も無料・広告なしを維持します。",
+    "tabHelp": "ヘルプ",
+    "tabLegal": "法的事項"
+  },
+  "minMax": {
+    "title": "Min-Maxガイド",
+    "viewTitle": "Min-Maxガイド — 今日のタスク",
+    "purpose": "今日の目標",
+    "walkthrough": "進行手順",
+    "secondaryGoal": "サブ目標",
+    "reasonTag": "理由",
+    "filterTip": "ヒント",
+    "filterWarn": "注意",
+    "filterReason": "理由",
+    "expandAll": "すべて展開",
+    "collapseAll": "すべて折りたたむ",
+    "carried": "{season} {day}日目を基準",
+    "source": "出典:",
+    "noGuide": "この日付に該当するガイド項目はありません。"
   }
 }
-

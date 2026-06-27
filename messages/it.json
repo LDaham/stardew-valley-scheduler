@@ -957,7 +957,8 @@
     "modeRemix": "Fasci remixati",
     "remixRandomSlot": "Slot casuale",
     "remixPickCount": "Scegli {pick} ({count}/{pick})",
-    "remixChooseHint": "Seleziona i fasci che possiedi."
+    "remixChooseHint": "Seleziona i fasci che possiedi.",
+    "goldQuality": "Qualità oro o superiore"
   },
   "addTask": {
     "optionBuilding": "Edificio",
@@ -2126,7 +2127,10 @@
     "shopScheduleShow": "Mostra orari negozi",
     "shopScheduleShowNote": "Mostra in cima alla schermata principale gli orari fissati in Info – Orari negozi.",
     "rainFishShow": "Mostra pesci della pioggia",
-    "rainFishShowNote": "Nei giorni con pioggia prevista, mostra in cima alla schermata principale i pesci pescabili solo con la pioggia in quella stagione."
+    "rainFishShowNote": "Nei giorni con pioggia prevista, mostra in cima alla schermata principale i pesci pescabili solo con la pioggia in quella stagione.",
+    "reportDesc": "Hai trovato un bug o hai un'idea per migliorare? Faccelo sapere.",
+    "reportButton": "Segnala su GitHub Issues ↗",
+    "reportNote": "Per pubblicare è necessario un account GitHub."
   },
   "bundleTracker": {
     "title": "Tracker fasci",
@@ -2487,7 +2491,10 @@
     "copyright": "Stardew Valley © ConcernedApe.",
     "data": "I nomi e le traduzioni del gioco sono estratti dai file di gioco; alcuni dati sono adattati dal <wiki>Stardew Valley Wiki</wiki> (<license>CC BY-NC-SA 3.0</license>).",
     "code": "Il codice sorgente è disponibile su <repo>GitHub</repo> con licenza MIT.",
-    "nonCommercial": "Questo sito è gestito su base non commerciale."
+    "nonCommercial": "Questo sito è gestito su base non commerciale.",
+    "legalLink": "Termini · Informativa sulla privacy",
+    "privacy": "Informativa sulla privacy",
+    "disclaimer": "Avviso legale"
   },
   "logic": {
     "weatherFortune": "Giornaliero · finisce in giornata (altrimenti nuovo meteo/fortuna il giorno dopo). Si rigenera il giorno dopo anche se non completato.",
@@ -2544,7 +2551,24 @@
     "title": "Sostieni",
     "pageTitle": "Altro",
     "intro": "Questo sito è uno strumento per fan gratuito e senza pubblicità.\nLe donazioni sono solo un modo per mostrare sostegno: anche un piccolo contributo è prezioso!",
-    "note": "Le donazioni sono del tutto volontarie e non necessarie per il funzionamento del sito.\nIl progetto resterà gratuito e senza pubblicità."
+    "note": "Le donazioni sono del tutto volontarie e non necessarie per il funzionamento del sito.\nIl progetto resterà gratuito e senza pubblicità.",
+    "tabHelp": "Aiuto",
+    "tabLegal": "Note legali"
+  },
+  "minMax": {
+    "title": "Guida Min-Max",
+    "viewTitle": "Guida Min-Max — Attività di oggi",
+    "purpose": "Obiettivo di oggi",
+    "walkthrough": "Procedura",
+    "secondaryGoal": "Obiettivo secondario",
+    "reasonTag": "Perché",
+    "filterTip": "Consigli",
+    "filterWarn": "Attenzione",
+    "filterReason": "Perché",
+    "expandAll": "Espandi tutto",
+    "collapseAll": "Comprimi tutto",
+    "carried": "In base a {season} {day}",
+    "source": "Fonte:",
+    "noGuide": "Nessuna voce della guida per questa data."
   }
 }
-

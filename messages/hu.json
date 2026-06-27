@@ -957,7 +957,8 @@
     "modeRemix": "Remix csomagok",
     "remixRandomSlot": "Véletlen hely",
     "remixPickCount": "Válassz {pick}-t ({count}/{pick})",
-    "remixChooseHint": "Válaszd ki a nálad lévő csomagokat."
+    "remixChooseHint": "Válaszd ki a nálad lévő csomagokat.",
+    "goldQuality": "Arany minőség vagy jobb"
   },
   "addTask": {
     "optionBuilding": "Épület",
@@ -2126,7 +2127,10 @@
     "shopScheduleShow": "Boltok nyitvatartásának mutatása",
     "shopScheduleShowNote": "A főképernyő tetején megjeleníti az Infó – Boltok nyitvatartásánál rögzített időpontokat.",
     "rainFishShow": "Esős napi halak mutatása",
-    "rainFishShowNote": "Eső előrejelzéses napokon a főképernyő tetején megjeleníti az adott évszakban csak esőben kifogható halakat."
+    "rainFishShowNote": "Eső előrejelzéses napokon a főképernyő tetején megjeleníti az adott évszakban csak esőben kifogható halakat.",
+    "reportDesc": "Hibát találtál, vagy van ötleted a fejlesztéshez? Jelezd nekünk.",
+    "reportButton": "Jelentés a GitHub Issues oldalon ↗",
+    "reportNote": "A közzétételhez GitHub-fiók szükséges."
   },
   "bundleTracker": {
     "title": "Csomagkövető",
@@ -2487,7 +2491,10 @@
     "copyright": "Stardew Valley © ConcernedApe.",
     "data": "A játékbeli neveket és fordításokat a játékfájlokból nyertük ki; egyes adatok a <wiki>Stardew Valley Wiki</wiki> alapján készültek (<license>CC BY-NC-SA 3.0</license>).",
     "code": "A forráskód elérhető a <repo>GitHubon</repo> MIT licenc alatt.",
-    "nonCommercial": "Ezt az oldalt nem kereskedelmi alapon üzemeltetjük."
+    "nonCommercial": "Ezt az oldalt nem kereskedelmi alapon üzemeltetjük.",
+    "legalLink": "Felhasználási feltételek · Adatvédelem",
+    "privacy": "Adatvédelmi szabályzat",
+    "disclaimer": "Jogi nyilatkozat"
   },
   "logic": {
     "weatherFortune": "Naponta · aznap véget ér (különben új időjárás/szerencse másnap). Másnap akkor is újragenerálódik, ha nem teljesíted.",
@@ -2544,7 +2551,24 @@
     "title": "Támogatás",
     "pageTitle": "Egyéb",
     "intro": "Ez az oldal egy ingyenes, reklámmentes rajongói eszköz.\nAz adományok csupán a támogatás kifejezésének módja – egy kis hozzájárulás is sokat jelent!",
-    "note": "Az adományok teljesen önkéntesek, és nem szükségesek az oldal működéséhez.\nA projekt ingyenes és reklámmentes marad."
+    "note": "Az adományok teljesen önkéntesek, és nem szükségesek az oldal működéséhez.\nA projekt ingyenes és reklámmentes marad.",
+    "tabHelp": "Súgó",
+    "tabLegal": "Jogi"
+  },
+  "minMax": {
+    "title": "Min-Max útmutató",
+    "viewTitle": "Min-Max útmutató — Mai teendők",
+    "purpose": "Mai cél",
+    "walkthrough": "Lépések",
+    "secondaryGoal": "Másodlagos cél",
+    "reasonTag": "Miért",
+    "filterTip": "Tippek",
+    "filterWarn": "Figyelem",
+    "filterReason": "Miért",
+    "expandAll": "Összes kibontása",
+    "collapseAll": "Összes összecsukása",
+    "carried": "{season} {day}. nap alapján",
+    "source": "Forrás:",
+    "noGuide": "Ehhez a dátumhoz nincs útmutatóbejegyzés."
   }
 }
-

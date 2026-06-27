@@ -957,7 +957,8 @@
     "modeRemix": "重组捆绑",
     "remixRandomSlot": "随机槽位",
     "remixPickCount": "选择 {pick} 个（{count}/{pick}）",
-    "remixChooseHint": "请选择你拥有的捆绑。"
+    "remixChooseHint": "请选择你拥有的捆绑。",
+    "goldQuality": "金星品质或以上"
   },
   "addTask": {
     "optionBuilding": "墙体",
@@ -2126,7 +2127,10 @@
     "shopScheduleShow": "显示商店日程",
     "shopScheduleShowNote": "在主屏幕顶部显示在「信息-商店日程」中固定的日程。",
     "rainFishShow": "显示雨天可钓的鱼",
-    "rainFishShowNote": "在有降雨预报的日子，于主屏幕顶部显示该季节仅在雨天可钓的鱼。"
+    "rainFishShowNote": "在有降雨预报的日子，于主屏幕顶部显示该季节仅在雨天可钓的鱼。",
+    "reportDesc": "发现错误或有改进建议？告诉我们。",
+    "reportButton": "在 GitHub Issues 反馈 ↗",
+    "reportNote": "发布需要 GitHub 账号。"
   },
   "bundleTracker": {
     "title": "捆绑追踪",
@@ -2487,7 +2491,10 @@
     "copyright": "Stardew Valley © ConcernedApe.",
     "data": "游戏名称与翻译提取自游戏文件；部分数据参考自<wiki>Stardew Valley 维基</wiki>（<license>CC BY-NC-SA 3.0</license>）。",
     "code": "源代码在 <repo>GitHub</repo> 上以 MIT 许可提供。",
-    "nonCommercial": "本网站以非营利方式运营。"
+    "nonCommercial": "本网站以非营利方式运营。",
+    "legalLink": "条款 · 隐私政策",
+    "privacy": "隐私政策",
+    "disclaimer": "免责声明"
   },
   "logic": {
     "weatherFortune": "每日 · 当天结束（不看则次日刷新天气·运势）。即使未完成，次日也会重新生成。",
@@ -2544,7 +2551,24 @@
     "title": "赞助",
     "pageTitle": "其他",
     "intro": "本站是免费、无广告的粉丝工具。\n赞助只是表达支持的一种方式，即使一点点也意义重大！",
-    "note": "赞助完全是自愿的，并非维持网站运行所必需。\n本项目将继续保持免费、无广告。"
+    "note": "赞助完全是自愿的，并非维持网站运行所必需。\n本项目将继续保持免费、无广告。",
+    "tabHelp": "帮助",
+    "tabLegal": "法律"
+  },
+  "minMax": {
+    "title": "Min-Max 攻略",
+    "viewTitle": "Min-Max 攻略 — 今日任务",
+    "purpose": "今日目标",
+    "walkthrough": "进行顺序",
+    "secondaryGoal": "次要目标",
+    "reasonTag": "原因",
+    "filterTip": "提示",
+    "filterWarn": "注意",
+    "filterReason": "原因",
+    "expandAll": "全部展开",
+    "collapseAll": "全部折叠",
+    "carried": "基于{season}第{day}天",
+    "source": "来源：",
+    "noGuide": "该日期没有对应的攻略条目。"
   }
 }
-

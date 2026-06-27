@@ -957,7 +957,8 @@
     "modeRemix": "Remix paketleri",
     "remixRandomSlot": "Rastgele yuva",
     "remixPickCount": "{pick} seç ({count}/{pick})",
-    "remixChooseHint": "Sahip olduğun paketleri seç."
+    "remixChooseHint": "Sahip olduğun paketleri seç.",
+    "goldQuality": "Altın kalite veya üzeri"
   },
   "addTask": {
     "optionBuilding": "Bina",
@@ -2126,7 +2127,10 @@
     "shopScheduleShow": "Mağaza programını göster",
     "shopScheduleShowNote": "Bilgi – Mağaza programı bölümünde sabitlenen programları ana ekranın üstünde gösterir.",
     "rainFishShow": "Yağmur balıklarını göster",
-    "rainFishShowNote": "Yağmur tahmini olan günlerde, o mevsimde yalnızca yağmurda tutulabilen balıkları ana ekranın üstünde gösterir."
+    "rainFishShowNote": "Yağmur tahmini olan günlerde, o mevsimde yalnızca yağmurda tutulabilen balıkları ana ekranın üstünde gösterir.",
+    "reportDesc": "Bir hata mı buldunuz ya da bir iyileştirme fikriniz mi var? Bize bildirin.",
+    "reportButton": "GitHub Issues'da bildir ↗",
+    "reportNote": "Göndermek için bir GitHub hesabı gerekir."
   },
   "bundleTracker": {
     "title": "Paket takibi",
@@ -2487,7 +2491,10 @@
     "copyright": "Stardew Valley © ConcernedApe.",
     "data": "Oyun içi adlar ve çeviriler oyun dosyalarından çıkarılmıştır; bazı veriler <wiki>Stardew Valley Wiki</wiki>’den uyarlanmıştır (<license>CC BY-NC-SA 3.0</license>).",
     "code": "Kaynak kodu <repo>GitHub</repo>'da MIT lisansı altında mevcuttur.",
-    "nonCommercial": "Bu site ticari olmayan bir şekilde işletilmektedir."
+    "nonCommercial": "Bu site ticari olmayan bir şekilde işletilmektedir.",
+    "legalLink": "Koşullar · Gizlilik Politikası",
+    "privacy": "Gizlilik Politikası",
+    "disclaimer": "Sorumluluk reddi"
   },
   "logic": {
     "weatherFortune": "Günlük · aynı gün biter (yoksa ertesi gün yeni hava/şans). Tamamlanmasa da ertesi gün yeniden oluşturulur.",
@@ -2544,7 +2551,24 @@
     "title": "Destek ol",
     "pageTitle": "Diğer",
     "intro": "Bu site ücretsiz, reklamsız bir hayran aracıdır.\nBağışlar yalnızca destek göstermenin bir yoludur; küçük bir katkı bile çok değerli!",
-    "note": "Bağışlar tamamen gönüllüdür ve sitenin çalışması için gerekli değildir.\nProje ücretsiz ve reklamsız kalacaktır."
+    "note": "Bağışlar tamamen gönüllüdür ve sitenin çalışması için gerekli değildir.\nProje ücretsiz ve reklamsız kalacaktır.",
+    "tabHelp": "Yardım",
+    "tabLegal": "Yasal"
+  },
+  "minMax": {
+    "title": "Min-Max Rehberi",
+    "viewTitle": "Min-Max Rehberi — Bugünün görevleri",
+    "purpose": "Bugünün hedefi",
+    "walkthrough": "İzlenecek adımlar",
+    "secondaryGoal": "İkincil hedef",
+    "reasonTag": "Neden",
+    "filterTip": "İpuçları",
+    "filterWarn": "Dikkat",
+    "filterReason": "Neden",
+    "expandAll": "Tümünü genişlet",
+    "collapseAll": "Tümünü daralt",
+    "carried": "{season} {day}. güne göre",
+    "source": "Kaynak:",
+    "noGuide": "Bu tarih için rehber girişi yok."
   }
 }
-

@@ -957,7 +957,8 @@
     "modeRemix": "Paquetes remezclados",
     "remixRandomSlot": "Casilla aleatoria",
     "remixPickCount": "Elige {pick} ({count}/{pick})",
-    "remixChooseHint": "Selecciona los paquetes que tengas."
+    "remixChooseHint": "Selecciona los paquetes que tengas.",
+    "goldQuality": "Calidad oro o superior"
   },
   "addTask": {
     "optionBuilding": "Paredes",
@@ -2126,7 +2127,10 @@
     "shopScheduleShow": "Mostrar horario de tiendas",
     "shopScheduleShowNote": "Muestra los horarios fijados en Información – Horario de tiendas en la parte superior de la pantalla principal.",
     "rainFishShow": "Mostrar peces de lluvia",
-    "rainFishShowNote": "En días con pronóstico de lluvia, muestra en la parte superior de la pantalla principal los peces que solo se pescan con lluvia en esa estación."
+    "rainFishShowNote": "En días con pronóstico de lluvia, muestra en la parte superior de la pantalla principal los peces que solo se pescan con lluvia en esa estación.",
+    "reportDesc": "¿Encontraste un error o tienes una idea para mejorar? Cuéntanos.",
+    "reportButton": "Reportar en GitHub Issues ↗",
+    "reportNote": "Se requiere una cuenta de GitHub para publicar."
   },
   "bundleTracker": {
     "title": "Seguimiento de paquetes",
@@ -2487,7 +2491,10 @@
     "copyright": "Stardew Valley © ConcernedApe.",
     "data": "Los nombres y traducciones del juego se extraen de los archivos del juego; algunos datos se adaptan del <wiki>Stardew Valley Wiki</wiki> (<license>CC BY-NC-SA 3.0</license>).",
     "code": "El código fuente está disponible en <repo>GitHub</repo> bajo la licencia MIT.",
-    "nonCommercial": "Este sitio se opera sin fines comerciales."
+    "nonCommercial": "Este sitio se opera sin fines comerciales.",
+    "legalLink": "Términos · Política de privacidad",
+    "privacy": "Política de privacidad",
+    "disclaimer": "Aviso legal"
   },
   "logic": {
     "weatherFortune": "Diario · termina el mismo día (si no, nuevo clima/fortuna al día siguiente). Se regenera al día siguiente aunque no se complete.",
@@ -2544,7 +2551,24 @@
     "title": "Apoyar",
     "pageTitle": "Otros",
     "intro": "Este sitio es una herramienta de fans gratuita y sin anuncios.\nLas donaciones son solo una forma de mostrar apoyo: ¡hasta una pequeña ayuda significa mucho!",
-    "note": "Las donaciones son totalmente voluntarias y no son necesarias para mantener el sitio.\nEl proyecto seguirá siendo gratuito y sin anuncios."
+    "note": "Las donaciones son totalmente voluntarias y no son necesarias para mantener el sitio.\nEl proyecto seguirá siendo gratuito y sin anuncios.",
+    "tabHelp": "Ayuda",
+    "tabLegal": "Legal"
+  },
+  "minMax": {
+    "title": "Guía Min-Max",
+    "viewTitle": "Guía Min-Max — Tareas de hoy",
+    "purpose": "Objetivo de hoy",
+    "walkthrough": "Pasos a seguir",
+    "secondaryGoal": "Objetivo secundario",
+    "reasonTag": "Por qué",
+    "filterTip": "Consejos",
+    "filterWarn": "Precauciones",
+    "filterReason": "Por qué",
+    "expandAll": "Expandir todo",
+    "collapseAll": "Contraer todo",
+    "carried": "Según {season} {day}",
+    "source": "Fuente:",
+    "noGuide": "No hay ninguna entrada de la guía para esta fecha."
   }
 }
-

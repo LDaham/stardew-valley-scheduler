@@ -957,7 +957,8 @@
     "modeRemix": "Pacotes remixados",
     "remixRandomSlot": "Espaço aleatório",
     "remixPickCount": "Escolha {pick} ({count}/{pick})",
-    "remixChooseHint": "Selecione os pacotes que você tem."
+    "remixChooseHint": "Selecione os pacotes que você tem.",
+    "goldQuality": "Qualidade ouro ou superior"
   },
   "addTask": {
     "optionBuilding": "Construção",
@@ -2126,7 +2127,10 @@
     "shopScheduleShow": "Mostrar horários das lojas",
     "shopScheduleShowNote": "Mostra na parte superior da tela principal os horários fixados em Informações – Horários das lojas.",
     "rainFishShow": "Mostrar peixes da chuva",
-    "rainFishShowNote": "Em dias com previsão de chuva, mostra no topo da tela principal os peixes que só podem ser pescados na chuva nessa estação."
+    "rainFishShowNote": "Em dias com previsão de chuva, mostra no topo da tela principal os peixes que só podem ser pescados na chuva nessa estação.",
+    "reportDesc": "Encontrou um bug ou tem uma ideia de melhoria? Conte para nós.",
+    "reportButton": "Reportar no GitHub Issues ↗",
+    "reportNote": "É necessária uma conta do GitHub para publicar."
   },
   "bundleTracker": {
     "title": "Rastreador de pacotes",
@@ -2487,7 +2491,10 @@
     "copyright": "Stardew Valley © ConcernedApe.",
     "data": "Os nomes e traduções do jogo são extraídos dos arquivos do jogo; alguns dados são adaptados do <wiki>Stardew Valley Wiki</wiki> (<license>CC BY-NC-SA 3.0</license>).",
     "code": "O código-fonte está disponível no <repo>GitHub</repo> sob a licença MIT.",
-    "nonCommercial": "Este site é operado em base não comercial."
+    "nonCommercial": "Este site é operado em base não comercial.",
+    "legalLink": "Termos · Política de Privacidade",
+    "privacy": "Política de Privacidade",
+    "disclaimer": "Aviso legal"
   },
   "logic": {
     "weatherFortune": "Diário · termina no mesmo dia (senão, novo clima/sorte no dia seguinte). Regenerado no dia seguinte mesmo sem concluir.",
@@ -2544,7 +2551,24 @@
     "title": "Apoiar",
     "pageTitle": "Outros",
     "intro": "Este site é uma ferramenta de fãs gratuita e sem anúncios.\nAs doações são apenas uma forma de mostrar apoio — até uma pequena ajuda significa muito!",
-    "note": "As doações são totalmente voluntárias e não são necessárias para manter o site no ar.\nO projeto continuará gratuito e sem anúncios."
+    "note": "As doações são totalmente voluntárias e não são necessárias para manter o site no ar.\nO projeto continuará gratuito e sem anúncios.",
+    "tabHelp": "Ajuda",
+    "tabLegal": "Jurídico"
+  },
+  "minMax": {
+    "title": "Guia Min-Max",
+    "viewTitle": "Guia Min-Max — Tarefas de hoje",
+    "purpose": "Objetivo de hoje",
+    "walkthrough": "Passo a passo",
+    "secondaryGoal": "Objetivo secundário",
+    "reasonTag": "Por quê",
+    "filterTip": "Dicas",
+    "filterWarn": "Atenção",
+    "filterReason": "Por quê",
+    "expandAll": "Expandir tudo",
+    "collapseAll": "Recolher tudo",
+    "carried": "Com base em {season} {day}",
+    "source": "Fonte:",
+    "noGuide": "Não há nenhuma entrada do guia para esta data."
   }
 }
-
