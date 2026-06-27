@@ -11,6 +11,9 @@ const ISSUES_URL = "https://github.com/LDaham/stardew-valley-scheduler/issues";
 const WIKI_URL = "https://stardewvalleywiki.com";
 const LICENSE_URL = "https://creativecommons.org/licenses/by-nc-sa/3.0/";
 const REPO_URL = "https://github.com/LDaham/stardew-valley-scheduler";
+const GUIDE_URL =
+  "https://github.com/Zamiell/stardew-valley/blob/main/Min-Max_Guide.md";
+const GPL_URL = "https://www.gnu.org/licenses/gpl-3.0.html";
 
 function Ext({ href, children }: { href: string; children: React.ReactNode }) {
   return (
@@ -31,6 +34,8 @@ const LINKS = {
   wiki: (c: React.ReactNode) => <Ext href={WIKI_URL}>{c}</Ext>,
   license: (c: React.ReactNode) => <Ext href={LICENSE_URL}>{c}</Ext>,
   repo: (c: React.ReactNode) => <Ext href={REPO_URL}>{c}</Ext>,
+  guide: (c: React.ReactNode) => <Ext href={GUIDE_URL}>{c}</Ext>,
+  gpl: (c: React.ReactNode) => <Ext href={GPL_URL}>{c}</Ext>,
 };
 
 // 섹션 구성: head 키 + (head,body) 블록들. rich가 있으면 본문에 링크 주입.
@@ -71,6 +76,7 @@ const SECTIONS: { id: string; head: string; blocks: Block[] }[] = [
       { head: "copyrightAffiliationHead", body: "copyrightAffiliationBody" },
       { head: "copyrightIpHead", body: "copyrightIpBody", rich: true },
       { head: "copyrightCodeHead", body: "copyrightCodeBody", rich: true },
+      { head: "copyrightGuideHead", body: "copyrightGuideBody", rich: true },
       { head: "copyrightDisclaimerHead", body: "copyrightDisclaimerBody" },
     ],
   },

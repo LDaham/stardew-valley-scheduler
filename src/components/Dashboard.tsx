@@ -8,9 +8,18 @@ import {
   getMinMaxPref,
   getServerMinMaxPref,
   subscribeMinMax,
+  getMinMaxDate,
+  getServerMinMaxDate,
+  setMinMaxDate,
 } from "@/lib/minMaxStore";
 import MinMaxGuideView from "@/components/MinMaxGuideView";
-import { addDays, toYearDay, type SDate } from "@/lib/calendar";
+import {
+  addDays,
+  fromYearDay,
+  toYearDay,
+  DAYS_PER_YEAR,
+  type SDate,
+} from "@/lib/calendar";
 import { filterEvents, getEventsOn, type FixedEvent } from "@/lib/events";
 import { getActiveReminders, type ReminderBadge } from "@/lib/reminders";
 import { useSchedule } from "@/components/ScheduleProvider";
@@ -100,10 +109,30 @@ export default function Dashboard() {
     getMinMaxPref,
     getServerMinMaxPref,
   );
+  // 가이드 전용 날짜(실제 진행 날짜·연도와 분리). 항상 1년차 범위.
+  const guideDate = useSyncExternalStore(
+    subscribeMinMax,
+    getMinMaxDate,
+    getServerMinMaxDate,
+  );
 
   // 게임 시작일(1년째 봄 1일): 전날로 이동 불가
   const atStart =
     year === 1 && currentDate.season === "spring" && currentDate.day === 1;
+
+  // 날짜 네비게이션: 가이드 모드면 가이드 전용 날짜를, 아니면 실제 진행 날짜를 다룬다.
+  // 가이드는 1년차(봄 1일~겨울 28일)만 다루므로 그 범위로 제한한다.
+  const guideYd = toYearDay(guideDate);
+  const navDate = guideOn ? guideDate : currentDate;
+  const navYear = guideOn ? 1 : year;
+  const navPrevDisabled = guideOn ? guideYd <= 1 : atStart;
+  const navNextDisabled = guideOn ? guideYd >= DAYS_PER_YEAR : false;
+  const guideStep = (delta: number) =>
+    setMinMaxDate(
+      fromYearDay(Math.min(DAYS_PER_YEAR, Math.max(1, guideYd + delta))),
+    );
+  const onPrevDay = guideOn ? () => guideStep(-1) : goToPrevDay;
+  const onNextDay = guideOn ? () => guideStep(1) : goToNextDay;
 
   const tomorrow = addDays(currentDate, 1);
   const tomorrowYd = toYearDay(tomorrow);
@@ -473,8 +502,8 @@ export default function Dashboard() {
       {/* 날짜 이동 버튼 (박스 밖) */}
       <div className="flex items-center justify-between gap-2">
         <button
-          onClick={goToPrevDay}
-          disabled={atStart}
+          onClick={onPrevDay}
+          disabled={navPrevDisabled}
           aria-label={t("dashboard.prevDay")}
           className="sv-btn shrink-0 whitespace-nowrap px-3 py-1.5 text-base"
         >
@@ -497,14 +526,15 @@ export default function Dashboard() {
           />
           <span className="text-lg font-bold">
             {t("dashboard.dateFull", {
-              year,
-              season: t(`seasons.${currentDate.season}`),
-              day: currentDate.day,
+              year: navYear,
+              season: t(`seasons.${navDate.season}`),
+              day: navDate.day,
             })}
           </span>
         </button>
         <button
-          onClick={goToNextDay}
+          onClick={onNextDay}
+          disabled={navNextDisabled}
           aria-label={t("dashboard.nextDay")}
           className="sv-btn shrink-0 whitespace-nowrap px-3 py-1.5 text-base"
         >
@@ -514,7 +544,7 @@ export default function Dashboard() {
 
       {/* Min-Max Guide 모드: 날짜 네비는 위에 유지하고, 본문만 가이드로 교체 */}
       {guideOn ? (
-        <MinMaxGuideView date={currentDate} />
+        <MinMaxGuideView date={guideDate} />
       ) : (
         <>
       {/* 내일 비 예보 토글(정보 위로 이동). 켜면 '내일 비 와요'로 바뀌어 의미가 직관적. */}
@@ -628,9 +658,18 @@ export default function Dashboard() {
         />
       )}
 
-      {miniCalOpen && (
-        <MiniCalendarDialog onClose={() => setMiniCalOpen(false)} />
-      )}
+      {miniCalOpen &&
+        (guideOn ? (
+          <MiniCalendarDialog
+            onClose={() => setMiniCalOpen(false)}
+            pickDate={guideDate}
+            pickYear={1}
+            maxYear={1}
+            onPickDate={(d) => setMinMaxDate(d)}
+          />
+        ) : (
+          <MiniCalendarDialog onClose={() => setMiniCalOpen(false)} />
+        ))}
 
       {myTasksOpen && <MyTasksDialog onClose={() => setMyTasksOpen(false)} />}
     </section>

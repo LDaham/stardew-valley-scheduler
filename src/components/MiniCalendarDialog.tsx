@@ -96,13 +96,31 @@ function Chevron({ dir }: { dir: "left" | "right" }) {
 }
 
 // 소형 달력. 날짜를 고르면 확인 후 그 날짜로 이동(= 해당 일자 todolist 표시).
-export default function MiniCalendarDialog({ onClose }: { onClose: () => void }) {
+// override(pickDate/pickYear/onPickDate/maxYear)가 오면 실제 일정 대신 그 값으로
+// 동작한다(가이드 모드: 전용 날짜, 1년차 범위로 제한).
+export default function MiniCalendarDialog({
+  onClose,
+  pickDate,
+  pickYear,
+  onPickDate,
+  maxYear,
+}: {
+  onClose: () => void;
+  pickDate?: SDate;
+  pickYear?: number;
+  onPickDate?: (date: SDate, year: number) => void;
+  maxYear?: number;
+}) {
   const t = useTranslations();
-  const { currentDate, year, goToDate, eventFilters } = useSchedule();
+  const sched = useSchedule();
+  const currentDate = pickDate ?? sched.currentDate;
+  const year = pickYear ?? sched.year;
+  const goToDate = onPickDate ?? sched.goToDate;
+  const eventFilters = sched.eventFilters;
 
   // 보고 있는 연·계절(현재 일자 강조). 연·계절을 한 상태로 묶어 화살표 이동을 안전하게 단계 처리.
   const [view, setView] = useState<{ year: number; season: Season }>({
-    year,
+    year: maxYear != null ? Math.min(year, maxYear) : year,
     season: currentDate.season,
   });
   // 확인 대기 중인 목표 날짜
@@ -117,16 +135,26 @@ export default function MiniCalendarDialog({ onClose }: { onClose: () => void })
     t("dashboard.dateFull", { year: y, season: seasonLabel(d.season), day: d.day });
 
   // 계절 단위 이동(겨울→다음 해 봄, 봄→이전 해 겨울). 1년째 봄 미만으로는 가지 않음.
-  const step = useCallback((dir: 1 | -1) => {
-    setView((v) => {
-      const idx = (v.year - 1) * 4 + SEASONS.indexOf(v.season) + dir;
-      if (idx < 0) return v; // 1년째 봄에서 더 이전 없음
-      return { year: Math.floor(idx / 4) + 1, season: SEASONS[idx % 4] };
-    });
-  }, []);
+  const step = useCallback(
+    (dir: 1 | -1) => {
+      setView((v) => {
+        const idx = (v.year - 1) * 4 + SEASONS.indexOf(v.season) + dir;
+        if (idx < 0) return v; // 1년째 봄에서 더 이전 없음
+        const ny = Math.floor(idx / 4) + 1;
+        if (maxYear != null && ny > maxYear) return v; // 최대 연도 제한(가이드: 1년차)
+        return { year: ny, season: SEASONS[idx % 4] };
+      });
+    },
+    [maxYear],
+  );
   const stepPrev = useCallback(() => step(-1), [step]);
   const stepNext = useCallback(() => step(1), [step]);
   const atStart = view.year <= 1 && view.season === SEASONS[0];
+  // 최대 연도의 마지막 계절(겨울)이면 다음 이동 없음
+  const atEnd =
+    maxYear != null &&
+    view.year >= maxYear &&
+    view.season === SEASONS[SEASONS.length - 1];
 
   return (
     <Modal title={t("miniCalendar.title")} onClose={onClose}>
@@ -144,7 +172,11 @@ export default function MiniCalendarDialog({ onClose }: { onClose: () => void })
           {view.year}
           {t("miniCalendar.yearSuffix")}
         </span>
-        <RepeatButton onStep={stepNext} ariaLabel={t("miniCalendar.next")}>
+        <RepeatButton
+          onStep={stepNext}
+          ariaLabel={t("miniCalendar.next")}
+          muted={atEnd}
+        >
           <Chevron dir="right" />
         </RepeatButton>
       </div>

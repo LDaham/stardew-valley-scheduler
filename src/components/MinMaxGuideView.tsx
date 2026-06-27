@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { lookupGuide, type GuideNode, type GuideKind } from "@/data/minMaxGuide";
 import { toYearDay, type SDate } from "@/lib/calendar";
 
@@ -11,7 +11,7 @@ import { toYearDay, type SDate } from "@/lib/calendar";
 // 하위 세부는 기본 접힘(아코디언). 읽기 전용(체크박스 없음).
 
 const GUIDE_URL =
-  "https://github.com/Zamiell/stardew-valley/blob/master/Min-Max_Guide.md";
+  "https://github.com/Zamiell/stardew-valley/blob/main/Min-Max_Guide.md";
 
 // 액션의 시간 표현을 추출해 좌측 거터로 분리(타임라인용).
 // 시간은 문장 어디에든 올 수 있으므로 위치별로 다르게 처리한다:
@@ -67,7 +67,8 @@ function filterTree(nodes: GuideNode[], hidden: Set<GuideKind>): GuideNode[] {
 
 export default function MinMaxGuideView({ date }: { date: SDate }) {
   const t = useTranslations();
-  const found = lookupGuide(date.season, date.day);
+  const locale = useLocale();
+  const found = lookupGuide(locale, date.season, date.day);
 
   // 기본값은 '모두 펼침'. 날짜가 바뀔 때 현재 모든 접기 경로를 열어 둔다.
   // (필터 토글에는 반응하지 않도록 allPaths는 ref로 읽는다.)
@@ -190,16 +191,17 @@ export default function MinMaxGuideView({ date }: { date: SDate }) {
     const isOpen = open.has(path);
 
     return (
-      <div key={path} className="flex gap-2">
-        {/* 좌측 시간 거터(줄바꿈 없이 한 줄 유지) */}
-        <div className="w-24 shrink-0 pt-0.5 text-right">
+      <div key={path} className="flex flex-col sm:flex-row sm:gap-2">
+        {/* 시간: 모바일=내용 위 인라인(블록), 데스크톱=좌측 거터(우측 정렬).
+            모바일에서 좌측 거터가 내용 폭을 좁히지 않도록 위로 쌓는다. */}
+        <div className="sm:w-24 sm:shrink-0 sm:pt-0.5 sm:text-right">
           {time && (
-            <span className="inline-block whitespace-nowrap rounded bg-[var(--sv-bg)] px-1 text-[11px] font-semibold text-[var(--sv-accent)]">
+            <span className="mb-1 inline-block whitespace-nowrap rounded bg-[var(--sv-bg)] px-1 text-[11px] font-semibold text-[var(--sv-accent)] sm:mb-0">
               {time}
             </span>
           )}
         </div>
-        {/* 우측 내용 */}
+        {/* 내용 */}
         <div className="min-w-0 flex-1">
           {hasChildren ? (
             <>

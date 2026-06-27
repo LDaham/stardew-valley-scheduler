@@ -1,30 +1,30 @@
+// =============================================================================
+// 라이선스 고지 (GPL-3.0)
+// 이 파일의 가이드 본문(MIN_MAX_GUIDE / DAILY_GOALS)은 BlackSight6 & Zamiel의
+// "Stardew Valley Min-Max Routing / Strategy"(GPL-3.0)를 원저작물로 하는 파생물이다.
+//   원문: https://github.com/Zamiell/stardew-valley/blob/main/Min-Max_Guide.md
+//   라이선스: GNU GPL-3.0 — 전문은 저장소 LICENSES/GPL-3.0.txt 참고.
+// 수정 내용: 원문을 한국어로 번역하고 날짜별 데이터 구조(GuideNode 트리)로 재구성함.
+// 따라서 이 파일은 프로젝트의 MIT 라이선스가 아니라 GPL-3.0을 따른다.
+// (위키 CC BY-NC-SA 자료와는 섞지 않고 별도 파일로 분리해 단순 집합으로 배포한다.)
+//
+// Copyright (C) BlackSight6 & Zamiel (original guide)
+// Korean translation/adaptation (C) 2026 Lee Daham
+// This program is free software: you can redistribute it and/or modify it under
+// the terms of the GNU General Public License as published by the Free Software
+// Foundation, either version 3 of the License, or (at your option) any later
+// version. This program is distributed WITHOUT ANY WARRANTY. See the GNU GPL
+// for more details: https://www.gnu.org/licenses/gpl-3.0.html
+// =============================================================================
+
 // Stardew Valley Min-Max 공략(1년차 중심) 날짜별 할 일.
-// 출처: BlackSight6 & Zamiel — "Stardew Valley Min-Max Routing / Strategy"
-//   https://github.com/Zamiell/stardew-valley/blob/master/Min-Max_Guide.md
 // 게임 버전 1.6 기준. 원문을 한국어로 충실히 번역(고유명사는 인게임 한글 명칭 사용).
 // 표시 정책: 정확한 날짜 항목이 없으면 가장 가까운 '이전' 날짜 항목을 이어 보여준다.
 
-import { SEASONS, seasonIndex, type Season } from "@/lib/calendar";
-
-// 항목 성격: action(기본·할 일) / tip(팁·요령) / reason(이유) / warn(주의) / result(하루 끝 획득)
-export type GuideKind = "tip" | "reason" | "warn" | "result";
-
-// 가이드 노드: 단순 문자열(=action) 또는 { 본문 t, 시간 time, 성격 k, 하위 항목 c }
-// k 생략 = action. c가 있으면 접을 수 있는 하위 항목을 가진다.
-// time: 좌측 타임라인 거터에 표시할 시간(본문에서 시간을 뺀 경우 명시). 없으면 본문에서 파싱.
-export type GuideNode =
-  | string
-  | { t: string; time?: string; k?: GuideKind; c?: GuideNode[] };
-
-export interface GuideDay {
-  notes?: string[]; // 도입 설명 단락
-  items: GuideNode[]; // 할 일(중첩 가능)
-}
+import type { GuideData, GoalsData } from "./types";
 
 // season → day(1..28) → 항목
-export const MIN_MAX_GUIDE: Partial<
-  Record<Season, Record<number, GuideDay>>
-> = {
+export const MIN_MAX_GUIDE: GuideData = {
   spring: {
     1: {
       items: [
@@ -171,8 +171,8 @@ export const MIN_MAX_GUIDE: Partial<
           time: "오후 3시 20분",
         },
         "루이스 집 옆 쓰레기통을 확인한다.",
-        "에블린(꽃밭), 캐롤라인+조디(광장), 빈센트+해비(조디 집 위)을 만난다.",
-        "해비 근처 맵 서쪽의 잡초를 벤다.",
+        "에블린(꽃밭), 캐롤라인+조디(광장), 빈센트+하비(조디 집 위)을 만난다.",
+        "하비 근처 맵 서쪽의 잡초를 벤다.",
         {
           t: "피에르 잡화점 안에서 레아+피에르를 만난다.",
           c: [
@@ -1433,7 +1433,7 @@ export const MIN_MAX_GUIDE: Partial<
 // 오늘의 목표(요약): 주 목표(접기 헤더) + 그 아래 달성 방법/이유(c).
 // 본문 items와 별개로, 날짜별 핵심 목표만 간추린다. 사소한 단계는 생략하고
 // 스노우볼(다음 날을 위한 재료 비축 등) 같은 중요한 항목은 남긴다.
-export const DAILY_GOALS: Partial<Record<Season, Record<number, GuideNode[]>>> = {
+export const DAILY_GOALS: GoalsData = {
   spring: {
     1: [
       {
@@ -1910,45 +1910,3 @@ export const DAILY_GOALS: Partial<Record<Season, Record<number, GuideNode[]>>> =
     ],
   },
 };
-
-// 표시용 룩업: 정확한 (계절,일) 항목이 있으면 그대로, 없으면 가장 가까운 '이전' 항목.
-// 정렬된 키 목록을 1회 구성해 이진 탐색 대신 선형 역탐색으로 찾는다(항목 수가 적다).
-const ENTRY_KEYS: { yd: number; season: Season; day: number }[] = [];
-for (const season of SEASONS) {
-  const days = MIN_MAX_GUIDE[season];
-  if (!days) continue;
-  for (const dayStr of Object.keys(days)) {
-    const day = Number(dayStr);
-    ENTRY_KEYS.push({ yd: seasonIndex(season) * 28 + day, season, day });
-  }
-}
-ENTRY_KEYS.sort((a, b) => a.yd - b.yd);
-
-export interface GuideLookup {
-  season: Season; // 실제 표시 항목의 계절
-  day: number; // 실제 표시 항목의 일
-  exact: boolean; // 대상 날짜와 정확히 일치하는지
-  entry: GuideDay;
-  goals?: GuideNode[]; // 오늘의 목표(요약)
-}
-
-// season/day(연도 무관)에 대해 가이드 항목을 찾는다(이전 항목 이어보기).
-export function lookupGuide(season: Season, day: number): GuideLookup | null {
-  const target = seasonIndex(season) * 28 + day;
-  let found: (typeof ENTRY_KEYS)[number] | null = null;
-  for (const k of ENTRY_KEYS) {
-    if (k.yd <= target) found = k;
-    else break;
-  }
-  if (!found) found = ENTRY_KEYS[0]; // 가장 이른 항목으로 폴백
-  if (!found) return null;
-  const entry = MIN_MAX_GUIDE[found.season]?.[found.day];
-  if (!entry) return null;
-  return {
-    season: found.season,
-    day: found.day,
-    exact: found.season === season && found.day === day,
-    entry,
-    goals: DAILY_GOALS[found.season]?.[found.day],
-  };
-}

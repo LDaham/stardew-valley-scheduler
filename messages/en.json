@@ -147,7 +147,7 @@
   },
   "legal": {
     "title": "Terms of Service · Privacy Policy",
-    "updated": "Last updated: June 26, 2026",
+    "updated": "Last updated: June 27, 2026",
     "navPrivacy": "1. Privacy Policy",
     "navTerms": "2. Terms of Service",
     "navCopyright": "3. Copyright & Disclaimer",
@@ -188,7 +188,9 @@
     "copyrightIpHead": "Intellectual property",
     "copyrightIpBody": "Stardew Valley content, names, and images are trademarks and copyrights of ConcernedApe, and the Service uses them solely for non-commercial fan purposes. Some data is adapted from the <wiki>Stardew Valley Wiki</wiki> (<license>CC BY-NC-SA 3.0</license>).",
     "copyrightCodeHead": "Code license",
-    "copyrightCodeBody": "The Service's source code is available on <repo>GitHub</repo> under the MIT License (game assets and data follow the copyright notice above).",
+    "copyrightCodeBody": "Source code originally written for the Service is available on <repo>GitHub</repo> under the MIT License (game assets and data follow the copyright notice above). However, the Min-Max guide portion below is licensed under GPL-3.0, so any build distributed with it includes GPL-3.0 components.",
+    "copyrightGuideHead": "Min-Max guide license (GPL-3.0)",
+    "copyrightGuideBody": "The multilingual translations and restructured data behind the \"Min-Max Guide\" feature are a derivative work of the <guide>Stardew Valley Min-Max Guide</guide> by BlackSight6 & Zamiel, and—like the original—are licensed under the <gpl>GNU GPL-3.0</gpl>. The original was modified by translating it into 12 languages (English, Korean, German, Spanish, French, Italian, Hungarian, Japanese, Brazilian Portuguese, Russian, Turkish, and Simplified Chinese) and restructuring it into per-day data. The Corresponding Source for this portion is available in the <repo>public repository</repo> above, and anyone may use, redistribute, and modify it under the terms of GPL-3.0. This GPL portion is kept in a separate file from the wiki (CC BY-NC-SA) material and distributed as a mere aggregation.",
     "copyrightDisclaimerHead": "Disclaimer",
     "copyrightDisclaimerBody": "All information and features are provided “as is,” with no warranty of accuracy or completeness. Use of the Service is entirely at your own risk, and the operator is not liable for any damages or data loss arising from its use."
   },
