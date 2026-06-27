@@ -2,9 +2,32 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
+    <title>Stardew Valley Scheduler</title>
+    <script>
+      (function () {
+        var locales = ["ko","en","de","es","fr","it","hu","ja","pt-BR","ru","tr","zh-CN"];
+        // 지역 변형 → 지원 로케일 매핑(pt-PT도 pt-BR로, zh-* 는 zh-CN으로)
+        var alias = { zh: "zh-CN", pt: "pt-BR" };
+        function pick() {
+          var prefs = navigator.languages || [navigator.language || "ko"];
+          for (var i = 0; i < prefs.length; i++) {
+            var tag = (prefs[i] || "").toLowerCase();
+            if (!tag) continue;
+            for (var j = 0; j < locales.length; j++)          // 정확 일치(pt-br, zh-cn)
+              if (tag === locales[j].toLowerCase()) return locales[j];
+            var base = tag.split("-")[0];                      // 언어코드만(fr-FR → fr)
+            if (alias[base]) return alias[base];
+            for (var k = 0; k < locales.length; k++)
+              if (locales[k].toLowerCase().split("-")[0] === base) return locales[k];
+          }
+          return "ko"; // 기본 폴백
+        }
+        location.replace("./" + pick() + "/"); // 상대경로 → basePath(서브경로)에서도 동작
+      })();
+    </script>
+    <!-- JS 비활성 폴백 -->
     <meta http-equiv="refresh" content="0; url=./ko/" />
     <link rel="canonical" href="./ko/" />
-    <title>Stardew Valley Scheduler</title>
   </head>
   <body>
     <a href="./ko/">Stardew Valley Scheduler</a>
