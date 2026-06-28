@@ -34,7 +34,6 @@ export default function MuseumDialog({ onClose }: { onClose: () => void }) {
   const total = MUSEUM_ITEMS.length;
   const done = MUSEUM_ITEMS.filter((m) => museumDone[m.id]).length;
   const shown = list.filter((m) => m.cat === cat);
-  const catDone = shown.filter((m) => museumDone[m.id]).length;
 
   return (
     <Modal title={t("museum.title")} onClose={onClose}>
@@ -49,19 +48,24 @@ export default function MuseumDialog({ onClose }: { onClose: () => void }) {
       </div>
 
       <div className="mb-3 flex flex-wrap gap-1.5">
-        {(["artifact", "mineral"] as const).map((c) => (
-          <button
-            key={c}
-            onClick={() => setCat(c)}
-            className={`cursor-pointer rounded-md border px-2.5 py-1 text-xs font-semibold ${
-              cat === c
-                ? "border-[var(--sv-accent)] bg-[var(--sv-accent)] text-white"
-                : "border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
-            }`}
-          >
-            {t(`museum.${c}`)} ({catDone}/{shown.length})
-          </button>
-        ))}
+        {(["artifact", "mineral"] as const).map((c) => {
+          // 각 버튼은 자기 카테고리(c)의 개수를 표시한다(선택된 cat이 아니라).
+          const items = MUSEUM_ITEMS.filter((m) => m.cat === c);
+          const cDone = items.filter((m) => museumDone[m.id]).length;
+          return (
+            <button
+              key={c}
+              onClick={() => setCat(c)}
+              className={`cursor-pointer rounded-md border px-2.5 py-1 text-xs font-semibold ${
+                cat === c
+                  ? "border-[var(--sv-accent)] bg-[var(--sv-accent)] text-white"
+                  : "border-[var(--sv-border)] bg-[var(--sv-panel)] text-[var(--sv-ink-muted)] hover:bg-[var(--sv-bg)]"
+              }`}
+            >
+              {t(`museum.${c}`)} ({cDone}/{items.length})
+            </button>
+          );
+        })}
       </div>
 
       <span className="mb-3 flex items-center gap-2 text-sm">

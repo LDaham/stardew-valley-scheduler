@@ -12,6 +12,7 @@ import {
 } from "@/data/universal-gifts";
 import { asset } from "@/lib/asset";
 import { localizeItem } from "@/lib/itemName";
+import { giftDetailSlug, giftCategoryKey } from "@/lib/giftDetail";
 import PixelIcon from "@/components/PixelIcon";
 
 const TIER_COLOR: Record<string, string> = {
@@ -55,16 +56,26 @@ function CategoryRow({
   const [open, setOpen] = useState(false);
   const expandable = !!entry.cat;
   const members = open && entry.cat ? expandCategory(entry.cat, entry.detail, avoidEn) : [];
+  // 데이터의 한국어 detail은 그대로 두고(파싱용) 툴팁 표시만 현지화한다.
+  const slug = giftDetailSlug(entry.detail);
+  const detailText = slug ? t(`gift.details.${slug}`) : entry.detail ?? undefined;
+  // 카테고리 칩 라벨도 현지화(데이터 ko/en 대신 gift.categories 키 사용).
+  const catKey = giftCategoryKey(entry.en);
+  const label = catKey
+    ? t(`gift.categories.${catKey}`)
+    : locale === "ko"
+      ? entry.ko
+      : entry.en;
 
   if (!expandable) {
     // 펼치기 불가: 정적 칩 + 전체 설명 툴팁
     return (
       <span
-        title={entry.detail ?? undefined}
+        title={detailText}
         className="flex items-center gap-1.5 rounded-md bg-[var(--sv-bg)] px-2 py-1 text-xs italic"
       >
         <PixelIcon src="/icons/ui/gift.png" size={14} />
-        {locale === "ko" ? entry.ko : entry.en}
+        {label}
       </span>
     );
   }
@@ -73,11 +84,11 @@ function CategoryRow({
     <div className="rounded-md bg-[var(--sv-bg)] px-2 py-1">
       <button
         onClick={() => setOpen((v) => !v)}
-        title={entry.detail ?? undefined}
+        title={detailText}
         className="flex w-full items-center gap-1.5 text-left text-xs font-medium"
       >
         <PixelIcon src="/icons/ui/gift.png" size={14} />
-        <span>{locale === "ko" ? entry.ko : entry.en}</span>
+        <span>{label}</span>
         <span className="ml-auto text-xs text-[var(--sv-ink-muted)]">
           {open ? "▾" : `▸ ${t("gift.expand")}`}
         </span>

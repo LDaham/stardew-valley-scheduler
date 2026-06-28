@@ -234,8 +234,17 @@ export default function Dashboard() {
     const info: TaskRow[] = [];
     const rows: TaskRow[] = [];
     // 메모 anchor가 오늘보다 이전이면 미뤄진 할 일([미뤄짐] 표시).
-    const isRolled = (m: Memo) =>
-      toYearDay({ season: m.season, day: m.day }) < yd;
+    // 단 물주기는 비 온 날 자동 충족되므로, anchor~어제 사이가 전부 비였다면
+    // (= 비 안 온 날이 하나도 없으면) 미뤄진 게 아니라 비로 처리된 것이다.
+    const isRolled = (m: Memo) => {
+      const a = toYearDay({ season: m.season, day: m.day });
+      if (a >= yd) return false;
+      if (m.category === "watering") {
+        for (let x = a; x < yd; x++) if (!rainDays[x]) return true;
+        return false;
+      }
+      return true;
+    };
 
     // 고정 이벤트: 축제·작물 마감일은 정보(완료 없음), 생일은 할 일(당일 한정).
     // 작물 마감일은 휴무 여부와 무관하게 항상 원래 날짜에 표시한다.
@@ -547,34 +556,37 @@ export default function Dashboard() {
         <MinMaxGuideView date={guideDate} />
       ) : (
         <>
-      {/* 내일 비 예보 토글(정보 위로 이동). 켜면 '내일 비 와요'로 바뀌어 의미가 직관적. */}
-      <div className="flex items-center justify-end gap-1.5">
-        <PixelIcon src="/icons/ui/rain.png" size={14} />
-        <span
-          className={`text-xs ${
-            rainTomorrow
-              ? "font-semibold text-[#5b8fb0]"
-              : "text-[var(--sv-ink-muted)]"
-          }`}
-        >
-          {t(
-            rainTomorrow ? "dashboard.rainTomorrowYes" : "dashboard.rainForecast",
-          )}
-        </span>
-        <RainSwitch
-          on={rainTomorrow}
-          onToggle={toggleRainTomorrow}
-          ariaLabel={t("dashboard.rainForecast")}
-        />
-      </div>
-
       {/* 정보(좌) + 할 일 목록(우). 내일 정보·가게 일정·꾸러미 박스는 잠시 숨김. */}
       <div className="sv-box p-4">
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           <div>
-            <h2 className="mb-2 text-base font-bold text-[var(--sv-ink-muted)]">
-              {t("dashboard.infoTitle")}
-            </h2>
+            {/* 정보 제목(좌) + 내일 비 예보 토글(우). 켜면 '내일 비 와요'로 바뀐다. */}
+            <div className="mb-2 flex flex-wrap items-center justify-between gap-1.5">
+              <h2 className="text-base font-bold text-[var(--sv-ink-muted)]">
+                {t("dashboard.infoTitle")}
+              </h2>
+              <div className="flex items-center gap-1.5">
+                <PixelIcon src="/icons/ui/rain.png" size={14} />
+                <span
+                  className={`text-xs ${
+                    rainTomorrow
+                      ? "font-semibold text-[#5b8fb0]"
+                      : "text-[var(--sv-ink-muted)]"
+                  }`}
+                >
+                  {t(
+                    rainTomorrow
+                      ? "dashboard.rainTomorrowYes"
+                      : "dashboard.rainForecast",
+                  )}
+                </span>
+                <RainSwitch
+                  on={rainTomorrow}
+                  onToggle={toggleRainTomorrow}
+                  ariaLabel={t("dashboard.rainForecast")}
+                />
+              </div>
+            </div>
             <TaskList
               rows={todayBuilt.info}
               emptyText={t("dashboard.noInfo")}
@@ -746,11 +758,12 @@ function DeleteBtn({
   onClick: () => void;
   label?: string;
 }) {
+  const t = useTranslations();
   return (
     <button
       type="button"
       onClick={onClick}
-      aria-label={label ?? "삭제"}
+      aria-label={label ?? t("memo.delete")}
       className="flex size-6 shrink-0 items-center justify-center rounded border border-[#e23b3b] text-sm font-bold text-[#e23b3b] hover:bg-[#fbeaea]"
     >
       ✕

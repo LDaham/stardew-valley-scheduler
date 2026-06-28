@@ -2,7 +2,12 @@
 // effect 내 setState 없이 SSR/하이드레이션을 안전하게 처리한다.
 
 import { loadJSON, saveJSON } from "@/lib/storage";
-import { fromYearDay, normalizeYearDay, DAYS_PER_YEAR } from "@/lib/calendar";
+import {
+  fromYearDay,
+  toYearDay,
+  normalizeYearDay,
+  DAYS_PER_YEAR,
+} from "@/lib/calendar";
 import { chainSpawn, spawnYearlyFruitHarvests } from "@/lib/chains";
 import { BUNDLES, bundleItemKey } from "@/data/bundles";
 import { DEFAULT_REMINDER_TOGGLES, type ReminderId } from "@/data/reminders";
@@ -401,8 +406,12 @@ function ccCompleted(done: Record<string, boolean>): boolean {
 }
 
 // 메모 완료(value=true) 처리 시: 수확→음식 취소 + 체인 후속 할 일 생성.
-function applyCompletion(memos: Memo[], ids: string[]): Memo[] {
-  const today = fromYearDay(state.currentDay);
+function applyCompletion(
+  memos: Memo[],
+  ids: string[],
+  todayYd?: number,
+): Memo[] {
+  const today = fromYearDay(todayYd ?? state.currentDay);
   const cc = ccCompleted(state.bundleItemsDone);
   const idset = new Set(ids);
   // 수확일 음식 자동 삭제: 완료된 작물 수확의 그룹에서 아직 안 먹은 음식 메모 제거
@@ -437,6 +446,23 @@ function applyCompletion(memos: Memo[], ids: string[]): Memo[] {
   return [...result, ...children];
 }
 
+// 비 오는 날: 그날(이전) 활성 물주기를 비가 대신 줘 완료 처리 → 체인 진행
+// (remaining 감소·다음 물주기를 다음 날 생성, 마지막이면 수확 생성). 시간 경과로만 적용돼
+// 토글 되돌림 문제가 없다. todayYd로 다음 물주기 날짜를 비 온 날 기준(+1)으로 맞춘다.
+function rainWaterMemos(memos: Memo[], yd: number): Memo[] {
+  const targets = memos.filter((m) => {
+    if (m.category !== "watering" || m.done || m.spawned) return false;
+    if (!m.chain || m.chain.kind !== "crop" || m.chain.stage !== "water")
+      return false;
+    return toYearDay({ season: m.season, day: m.day }) <= yd;
+  });
+  if (targets.length === 0) return memos;
+  const ids = targets.map((m) => m.id);
+  const set = new Set(ids);
+  const marked = memos.map((m) => (set.has(m.id) ? { ...m, done: true } : m));
+  return applyCompletion(marked, ids, yd);
+}
+
 // 연도가 바뀐 직후, 반복 설정된 과일나무의 targetYear 수확 배치를 보충(없으면 추가).
 function withYearlyFruit(memos: Memo[], targetYear: number): Memo[] {
   const extra = spawnYearlyFruitHarvests(memos, targetYear);
@@ -455,15 +481,13 @@ export const scheduleActions = {
   },
   // 하루 뒤로: winter 28(112)→spring 1이면 연도 +1.
   goToNextDay() {
+    const newDay = normalizeYearDay(state.currentDay + 1);
     const year = state.currentDay === DAYS_PER_YEAR ? state.year + 1 : state.year;
-    const memos =
+    let memos =
       year !== state.year ? withYearlyFruit(state.memos, year) : state.memos;
-    commit({
-      ...state,
-      currentDay: normalizeYearDay(state.currentDay + 1),
-      year,
-      memos,
-    });
+    // 새 날이 비 예보면 그날 물주기를 비가 대신 줘 체인을 진행시킨다(시간 경과).
+    if (state.rainDays[newDay]) memos = rainWaterMemos(memos, newDay);
+    commit({ ...state, currentDay: newDay, year, memos });
   },
   // 하루 앞으로: spring 1→winter 28이면 연도 -1(최소 1).
   goToPrevDay() {
@@ -565,10 +589,16 @@ export const scheduleActions = {
   setTodoOrder(order: string[]) {
     commit({ ...state, todoOrder: order });
   },
-  // 특정 날(yearDay)의 비 예보 설정
+  // 특정 날(yearDay)의 비 예보 설정. 지금 날을 비로 표시하면 그날 물주기를 즉시 비로 처리한다
+  // (미래 날은 그 날에 도달할 때 goToNextDay에서 처리).
   setRainDay(yearDay: number, value: boolean) {
+    const memos =
+      value && yearDay === state.currentDay
+        ? rainWaterMemos(state.memos, yearDay)
+        : state.memos;
     commit({
       ...state,
+      memos,
       rainDays: { ...state.rainDays, [yearDay]: value },
     });
   },

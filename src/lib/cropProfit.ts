@@ -44,7 +44,7 @@ export type FoodId =
   | "tomKhaSoup"
   | "farmersLunch";
 
-const FOOD_LEVEL: Record<FoodId, number> = {
+export const FOOD_LEVEL: Record<FoodId, number> = {
   none: 0,
   mapleBar: 1,
   hashbrowns: 1,

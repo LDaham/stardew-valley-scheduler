@@ -2,14 +2,16 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { SEASONS, type Season } from "@/lib/calendar";
 import { asset } from "@/lib/asset";
+import { localizeItem } from "@/lib/itemName";
 import type { CharacterInfo } from "@/types/schedule";
 import {
   seasonSeedProfits,
   FERTILIZER_IDS,
   FOOD_IDS,
+  FOOD_LEVEL,
   type Produce,
   type FertilizerId,
   type FoodId,
@@ -18,6 +20,23 @@ import {
 import { useSchedule } from "@/components/ScheduleProvider";
 import Modal from "@/components/Modal";
 import Dropdown from "@/components/Dropdown";
+
+// 비료·음식 라벨은 게임 공식명(gameItemNames)에서 파생한다(localizeItem → 12개 언어 자동 일치).
+// gameItemNames에 없는 항목(디럭스 비료·초고속 성장 촉진제)·"none"은 메시지 키로 폴백.
+const FERT_ITEM: Partial<Record<FertilizerId, { en: string; ko: string }>> = {
+  basic: { en: "Basic Fertilizer", ko: "기본 비료" },
+  quality: { en: "Quality Fertilizer", ko: "고급 비료" },
+  speedGro: { en: "Speed-Gro", ko: "성장 촉진제" },
+  deluxeSpeed: { en: "Deluxe Speed-Gro", ko: "디럭스 성장 촉진제" },
+};
+const FOOD_ITEM: Partial<Record<FoodId, { en: string; ko: string }>> = {
+  mapleBar: { en: "Maple Bar", ko: "메이플 바" },
+  hashbrowns: { en: "Hashbrowns", ko: "해시브라운" },
+  completeBreakfast: { en: "Complete Breakfast", ko: "완벽한 아침" },
+  pepperPoppers: { en: "Pepper Poppers", ko: "페퍼 파퍼" },
+  tomKhaSoup: { en: "Tom Kha Soup", ko: "똠카 스프" },
+  farmersLunch: { en: "Farmer's Lunch", ko: "농부의 점심" },
+};
 
 const PRODUCE: Produce[] = ["raw", "keg", "jar"];
 // 가공 유형 아이콘: 원물=옥수수(작물), 술통=keg, 절임통=preservesJar
@@ -43,8 +62,20 @@ export default function SeedEfficiencyDialog({
   lockSeason?: boolean;
 }) {
   const t = useTranslations();
+  const locale = useLocale();
   const { character, setCharacter, dialogFilters, setDialogFilters } =
     useSchedule();
+  // 비료/음식 드롭다운 라벨: 공식명(있으면) + 효과 접미사. 없으면 메시지 폴백.
+  const fertLabel = (f: FertilizerId) => {
+    const it = FERT_ITEM[f];
+    return it ? localizeItem(it.en, it.ko, locale) : t(`profitFertilizer.${f}`);
+  };
+  const foodLabel = (f: FoodId) => {
+    const it = FOOD_ITEM[f];
+    return it
+      ? `${localizeItem(it.en, it.ko, locale)} (+${FOOD_LEVEL[f]})`
+      : t(`food.${f}`);
+  };
   // 캐릭터 설정(레벨·스킬)은 효율에 영향을 주는 보조 설정이라 아코디언으로 접어 둔다.
   const [charOpen, setCharOpen] = useState(false);
   // 잠금이면 현재 계절 고정. 아니면 저장값(없으면 현재 계절), 마지막 선택 유지.
@@ -265,7 +296,7 @@ export default function SeedEfficiencyDialog({
               value={fertilizer}
               options={FERTILIZER_IDS.map((f) => ({
                 value: f,
-                label: t(`profitFertilizer.${f}`),
+                label: fertLabel(f),
                 icon: f === "none" ? undefined : `/icons/profitFertilizer/${f}.png`,
               }))}
               onChange={(v) => setFertilizer(v as FertilizerId)}
@@ -295,7 +326,7 @@ export default function SeedEfficiencyDialog({
               value={food}
               options={FOOD_IDS.map((f) => ({
                 value: f,
-                label: t(`food.${f}`),
+                label: foodLabel(f),
                 icon: f === "none" ? undefined : `/icons/food/${f}.png`,
               }))}
               onChange={(v) => setFood(v as FoodId)}

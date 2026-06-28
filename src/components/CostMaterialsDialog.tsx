@@ -15,6 +15,7 @@ import {
   getCostShop,
   type CostOffer,
 } from "@/data/costMaterials";
+import { MONSTER_GOALS } from "@/data/monsterGoals";
 
 // note의 "<계절> 한정"으로 계절 토큰을 뽑는다(잡화점 등 계절 한정 씨앗용).
 const SEASON_KEYS = ["spring", "summer", "fall", "winter"] as const;
@@ -49,6 +50,98 @@ function displayNote(o: CostOffer): string {
   note = note.replace(/카지노\s*코인\s*[\d,]+/g, "");
   // 남은 구분자(/)·공백 정리
   return note.replace(/^\s*\/\s*/, "").replace(/\s*\/\s*$/, "").trim();
+}
+
+// 데이터의 한국어 요일 → 현지화 라벨(표시 전용, 비교/그룹화는 원본 한국어 유지).
+const DAY_KEY: Record<string, string> = {
+  월요일: "mon",
+  화요일: "tue",
+  수요일: "wed",
+  목요일: "thu",
+  금요일: "fri",
+  토요일: "sat",
+  일요일: "sun",
+};
+function dayLabel(day: string, t: ReturnType<typeof useTranslations>): string {
+  if (DAY_KEY[day]) return t(`weekdays.${DAY_KEY[day]}`);
+  if (day === "짝수 날") return t("costMaterials.days.even");
+  if (day === "홀수 날") return t("costMaterials.days.odd");
+  return day;
+}
+
+// 한국어 건물명 → buildings.* 키(12개 언어 보유)
+const BUILDING_KEY: Record<string, string> = {
+  닭장: "coop",
+  "큰 닭장": "bigCoop",
+  "디럭스 닭장": "deluxeCoop",
+  외양간: "barn",
+  "큰 외양간": "bigBarn",
+  "디럭스 외양간": "deluxeBarn",
+};
+
+// note 안 "N골드"를 인라인 골드 아이콘으로 쓰기 위한 작은 아이콘
+function GoldInline() {
+  return (
+    <Image
+      src={asset("/icons/costMaterials/GoldCoin.png")}
+      alt=""
+      width={11}
+      height={11}
+      unoptimized
+      className="mx-0.5 inline-block align-middle"
+      style={{ imageRendering: "pixelated" }}
+    />
+  );
+}
+
+// displayNote가 남긴 한국어 부가설명을 템플릿으로 인식해 현지화 렌더.
+// 데이터는 한국어 그대로 두고(파싱·비교용) 표시 시점에만 번역한다.
+function LocalizedNote({ leftover }: { leftover: string }) {
+  const t = useTranslations();
+  const locale = useLocale();
+  let m: RegExpMatchArray | null;
+  if (leftover === "2년차 이후") return <>{t("costMaterials.notes.year2plus")}</>;
+  if ((m = leftover.match(/^1년차 ([\d,]+)골드 \/ 2년차부터 ([\d,]+)골드$/)))
+    return (
+      <>
+        {t.rich("costMaterials.notes.yearPrice", {
+          y1: m[1],
+          y2: m[2],
+          g: () => <GoldInline />,
+        })}
+      </>
+    );
+  if (leftover === "3개 묶음 판매")
+    return <>{t("costMaterials.notes.pack", { n: 3 })}</>;
+  if ((m = leftover.match(/^낚시 레벨 (\d+)$/)))
+    return <>{t("costMaterials.notes.fishingLevel", { n: Number(m[1]) })}</>;
+  if (leftover === "낚시 레벨 제한 없음")
+    return <>{t("costMaterials.notes.fishingNoLimit")}</>;
+  if ((m = leftover.match(/^(.+) 필요$/)) && BUILDING_KEY[m[1]])
+    return (
+      <>
+        {t("costMaterials.notes.requires", {
+          building: t(`buildings.${BUILDING_KEY[m[1]]}`),
+        })}
+      </>
+    );
+  if ((m = leftover.match(/^박멸 목표: (.+) (\d+)마리 처치 후 구매 가능$/))) {
+    const mob = MONSTER_GOALS.find((g) => g.ko === m![1]);
+    const monster = mob ? localizeItem(mob.en, mob.ko, locale) : m[1];
+    return (
+      <>
+        {t("costMaterials.notes.eradication", {
+          monster,
+          count: Number(m[2]),
+        })}
+      </>
+    );
+  }
+  if (leftover === "수요일마다 무작위 생선 또는 자석 미끼")
+    return <>{t("costMaterials.notes.wednesdayBait")}</>;
+  if (leftover === "크로버스와 친밀도 최대·미혼일 때 단 1개만 구매 가능")
+    return <>{t("costMaterials.notes.krobusSingle")}</>;
+  return <NoteText text={leftover} />; // 미매칭 시 원본(골드 인라인만 적용)
 }
 
 // 비용 및 재료: 좌측 가게 목록 + 우측 해당 가게의 비용(골드)·재료 패널을 동시에 표시.
@@ -290,7 +383,7 @@ function OfferRow({ offer, today }: { offer: CostOffer; today?: string }) {
                 : "bg-[var(--sv-bg)] font-normal text-[var(--sv-ink-muted)]"
             }`}
           >
-            {offer.day}
+            {dayLabel(offer.day, t)}
           </span>
         )}
         {offer.gold > 0 && (
@@ -360,7 +453,7 @@ function OfferRow({ offer, today }: { offer: CostOffer; today?: string }) {
           note 안의 "N골드"는 골드 아이콘+숫자로 인라인 치환 */}
       {note && (
         <p className="mt-1.5 text-[11px] leading-snug text-[var(--sv-ink-muted)]">
-          <NoteText text={note} />
+          <LocalizedNote leftover={note} />
         </p>
       )}
     </div>
