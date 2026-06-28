@@ -849,7 +849,8 @@
       "adventurersGuild": "Gilda degli Avventurieri",
       "oasis": "Oasi",
       "desertTrader": "Mercante del deserto",
-      "casino": "Casinò"
+      "casino": "Casinò",
+      "qiWalnutRoom": "Stanza delle noci di Qi"
     },
     "title": "Prezzi d'acquisto",
     "hint": "Scegli un negozio per vedere prezzo d'acquisto e materiali di ogni articolo.",

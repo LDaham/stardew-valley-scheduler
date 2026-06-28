@@ -849,7 +849,8 @@
       "adventurersGuild": "冒険者ギルド",
       "oasis": "オアシス",
       "desertTrader": "砂漠の商人",
-      "casino": "カジノ"
+      "casino": "カジノ",
+      "qiWalnutRoom": "ミスターQiの秘密のクルミの部屋"
     },
     "title": "購入価格",
     "hint": "店を選ぶと販売品の購入価格と材料を確認できます。",

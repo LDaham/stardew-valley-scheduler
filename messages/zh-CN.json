@@ -849,7 +849,8 @@
       "adventurersGuild": "探险家公会",
       "oasis": "绿洲",
       "desertTrader": "沙漠商人",
-      "casino": "赌场"
+      "casino": "赌场",
+      "qiWalnutRoom": "齐先生的核桃房"
     },
     "title": "购买价格",
     "hint": "选择商店即可查看各商品的购买价格和材料。",

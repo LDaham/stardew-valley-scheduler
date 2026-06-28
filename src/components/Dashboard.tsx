@@ -5,8 +5,6 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { asset } from "@/lib/asset";
 import {
-  getMinMaxPref,
-  getServerMinMaxPref,
   subscribeMinMax,
   getMinMaxDate,
   getServerMinMaxDate,
@@ -94,6 +92,7 @@ export default function Dashboard() {
     setRainDay,
     bundleItemsDone,
     mainOrder,
+    minMaxOn,
   } = useSchedule();
   const openGifts = useGiftDialog();
   const [addTarget, setAddTarget] = useState<"today" | "tomorrow" | null>(null);
@@ -104,11 +103,8 @@ export default function Dashboard() {
   const [myTasksOpen, setMyTasksOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<DeleteTarget | null>(null);
   // Min-Max Guide 모드: 켜면 정보/할 일 대신 해당 날짜 가이드를 표시(날짜 네비는 유지).
-  const guideOn = useSyncExternalStore(
-    subscribeMinMax,
-    getMinMaxPref,
-    getServerMinMaxPref,
-  );
+  // 슬롯별 저장 상태(useSchedule)라 슬롯 전환 시 해당 슬롯의 on/off를 따라간다.
+  const guideOn = minMaxOn;
   // 가이드 전용 날짜(실제 진행 날짜·연도와 분리). 항상 1년차 범위.
   const guideDate = useSyncExternalStore(
     subscribeMinMax,

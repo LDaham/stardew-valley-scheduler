@@ -849,7 +849,8 @@
       "adventurersGuild": "Gremio de aventureros",
       "oasis": "Oasis",
       "desertTrader": "Comerciante del desierto",
-      "casino": "Casino"
+      "casino": "Casino",
+      "qiWalnutRoom": "Habitación de las Nueces de Qi"
     },
     "title": "Precios de compra",
     "hint": "Elige una tienda para ver el precio de compra y los materiales de cada artículo.",

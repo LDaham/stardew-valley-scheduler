@@ -849,7 +849,8 @@
       "adventurersGuild": "Kalandorok céhe",
       "oasis": "Oázis",
       "desertTrader": "Sivatagi kereskedő",
-      "casino": "Kaszinó"
+      "casino": "Kaszinó",
+      "qiWalnutRoom": "Qi diós szobája"
     },
     "title": "Vételárak",
     "hint": "Válassz egy boltot az egyes tételek vételárának és anyagainak megtekintéséhez.",

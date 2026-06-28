@@ -849,7 +849,8 @@
       "adventurersGuild": "Maceraperestler Loncası",
       "oasis": "Vaha",
       "desertTrader": "Çöl Taciri",
-      "casino": "Gazino"
+      "casino": "Gazino",
+      "qiWalnutRoom": "Bay Qi'nin Ceviz Odası"
     },
     "title": "Satın alma fiyatları",
     "hint": "Her öğenin satın alma fiyatını ve malzemelerini görmek için bir mağaza seçin.",

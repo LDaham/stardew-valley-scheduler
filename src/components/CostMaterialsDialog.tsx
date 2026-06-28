@@ -41,6 +41,18 @@ function coinCost(o: CostOffer): number | null {
   return m ? Number(m[1].replace(/,/g, "")) : null;
 }
 
+// 치 보석 비용 추출(치의 호두 방 자판기). note 형식: "치 보석 30".
+function qiGemCost(o: CostOffer): number | null {
+  const m = (o.note ?? "").match(/치 보석\s*([\d,]+)/);
+  return m ? Number(m[1].replace(/,/g, "")) : null;
+}
+
+// 황금 호두 비용 추출(치 보석 구매용). note 형식: "황금 호두 1".
+function walnutCost(o: CostOffer): number | null {
+  const m = (o.note ?? "").match(/황금 호두\s*([\d,]+)/);
+  return m ? Number(m[1].replace(/,/g, "")) : null;
+}
+
 // 표시용 note: 그룹 탭·배지로 이미 드러나는 부분(계절 "한정"·"요리 로테이션"·
 // "카지노 코인 N")은 중복이라 빼고 나머지 부가설명만 남긴다.
 function displayNote(o: CostOffer): string {
@@ -48,6 +60,8 @@ function displayNote(o: CostOffer): string {
   note = note.replace(/(봄|여름|가을|겨울)\s*한정/g, "");
   note = note.replace(/요리\s*로테이션/g, "");
   note = note.replace(/카지노\s*코인\s*[\d,]+/g, "");
+  note = note.replace(/치\s*보석\s*[\d,]+/g, "");
+  note = note.replace(/황금\s*호두\s*[\d,]+/g, "");
   // 남은 구분자(/)·공백 정리
   return note.replace(/^\s*\/\s*/, "").replace(/\s*\/\s*$/, "").trim();
 }
@@ -111,8 +125,8 @@ function LocalizedNote({ leftover }: { leftover: string }) {
         })}
       </>
     );
-  if (leftover === "3개 묶음 판매")
-    return <>{t("costMaterials.notes.pack", { n: 3 })}</>;
+  if ((m = leftover.match(/^(\d+)개 묶음 판매$/)))
+    return <>{t("costMaterials.notes.pack", { n: Number(m[1]) })}</>;
   if ((m = leftover.match(/^낚시 레벨 (\d+)$/)))
     return <>{t("costMaterials.notes.fishingLevel", { n: Number(m[1]) })}</>;
   if (leftover === "낚시 레벨 제한 없음")
@@ -361,6 +375,8 @@ function OfferRow({ offer, today }: { offer: CostOffer; today?: string }) {
 
   const hasMaterials = offer.materials.length > 0;
   const coin = coinCost(offer); // 카지노 코인 비용(있으면 우상단 배지)
+  const qiGem = qiGemCost(offer); // 치 보석 비용(치의 호두 방 자판기)
+  const walnut = walnutCost(offer); // 황금 호두 비용(치 보석 구매용)
   const note = displayNote(offer); // 탭·배지로 드러나는 부분을 뺀 표시용 설명
   return (
     <div className="rounded-md border border-[var(--sv-border)] bg-[var(--sv-panel)] p-2.5">
@@ -412,6 +428,32 @@ function OfferRow({ offer, today }: { offer: CostOffer; today?: string }) {
             {coin.toLocaleString()}
           </span>
         )}
+        {qiGem !== null && (
+          <span className="inline-flex shrink-0 items-center gap-1 rounded-md bg-[var(--sv-bg)] px-2 py-0.5 text-xs font-semibold text-[#c45ad0]">
+            <Image
+              src={asset("/icons/costMaterials/Qi_Gem.png")}
+              alt=""
+              width={14}
+              height={14}
+              unoptimized
+              style={{ imageRendering: "pixelated" }}
+            />
+            {qiGem.toLocaleString()}
+          </span>
+        )}
+        {walnut !== null && (
+          <span className="inline-flex shrink-0 items-center gap-1 rounded-md bg-[var(--sv-bg)] px-2 py-0.5 text-xs font-semibold text-[#b8860b]">
+            <Image
+              src={asset("/icons/costMaterials/Golden_Walnut.png")}
+              alt=""
+              width={14}
+              height={14}
+              unoptimized
+              style={{ imageRendering: "pixelated" }}
+            />
+            {walnut.toLocaleString()}
+          </span>
+        )}
       </div>
 
       {/* 재료(있을 때만). 골드·재료·부가설명(note)이 모두 없을 때만 '무료'.
@@ -442,6 +484,8 @@ function OfferRow({ offer, today }: { offer: CostOffer; today?: string }) {
       ) : (
         offer.gold === 0 &&
         coin === null &&
+        qiGem === null &&
+        walnut === null &&
         !note && (
           <div className="mt-1.5 text-xs text-[var(--sv-ink-muted)]">
             {t("costMaterials.free")}

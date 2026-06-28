@@ -58,6 +58,7 @@ export function useSchedule() {
     rainFishShown: state.rainFishShown,
     mainOrder: state.mainOrder,
     notepadText: state.notepadText,
+    minMaxOn: state.minMaxOn,
     memosOn: (date: SDate): Memo[] =>
       state.memos.filter(
         (m) => m.season === date.season && m.day === date.day,
@@ -100,6 +101,7 @@ export function useSchedule() {
     setRainFishShown: scheduleActions.setRainFishShown,
     setMainOrder: scheduleActions.setMainOrder,
     setNotepadText: scheduleActions.setNotepadText,
+    setMinMaxOn: scheduleActions.setMinMaxOn,
     resetAll: scheduleActions.resetAll,
     exportState: scheduleActions.exportState,
     importState: scheduleActions.importState,

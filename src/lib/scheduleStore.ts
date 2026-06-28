@@ -146,6 +146,7 @@ const DEFAULT_STATE: ScheduleState = {
   rainFishShown: false,
   mainOrder: DEFAULT_MAIN_ORDER,
   notepadText: "",
+  minMaxOn: false,
 };
 
 let state: ScheduleState = DEFAULT_STATE;
@@ -658,11 +659,16 @@ export const scheduleActions = {
       rainFishShown: false,
       mainOrder: [...DEFAULT_MAIN_ORDER],
       notepadText: "",
+      minMaxOn: false,
     });
   },
   // 메인 메모장: 자유 텍스트 갱신
   setNotepadText(text: string) {
     commit({ ...state, notepadText: text });
+  },
+  // Min-Max 가이드 모드 토글(슬롯별 저장 → 슬롯 전환 시 자동 복원)
+  setMinMaxOn(value: boolean) {
+    commit({ ...state, minMaxOn: value });
   },
   // 번들 품목 기증 토글
   toggleBundleItem(key: string) {

@@ -834,7 +834,8 @@
       "adventurersGuild": "Abenteurergilde",
       "oasis": "Oase",
       "desertTrader": "Wüstenhändler",
-      "casino": "Kasino"
+      "casino": "Kasino",
+      "qiWalnutRoom": "Qis Walnussraum"
     },
     "title": "Kaufpreise",
     "hint": "Wähle einen Laden, um Kaufpreis und Materialien jedes Artikels zu sehen.",

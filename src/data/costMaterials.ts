@@ -45,6 +45,7 @@ export const COST_SHOP_ICON: Record<string, string> = {
   oasis: "oasis",
   desertTrader: "desertTrader",
   casino: "casino",
+  qiWalnutRoom: "qiWalnutRoom",
 };
 
 export const COST_SHOPS = shops;

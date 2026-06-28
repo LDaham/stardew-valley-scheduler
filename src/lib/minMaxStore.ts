@@ -1,7 +1,9 @@
-// Min-Max Guide 토글 상태(전역 UI 설정). localStorage 영속 + 구독 알림.
-// 켜면 '오늘' 페이지가 기존 데이터 대신 해당 날짜의 Min-Max 가이드 할 일을 표시한다.
+// Min-Max Guide 전용 날짜 상태(전역). localStorage 영속 + 구독 알림.
 // 가이드 날짜는 실제 진행 날짜·연도와 분리된 전용 상태로, 항상 1년차 범위
 // (봄 1일~겨울 28일)로 제한된다. themeStore와 동일한 useSyncExternalStore 패턴.
+//
+// 가이드 모드 on/off는 슬롯별로 저장해야 하므로 scheduleStore(ScheduleState.minMaxOn)로 이전됐다.
+// 여기서는 가이드 날짜만 다룬다(슬롯과 무관한 전역 보조 상태).
 
 import {
   DAYS_PER_YEAR,
@@ -10,47 +12,13 @@ import {
   type SDate,
 } from "@/lib/calendar";
 
-const KEY = "svMinMaxGuide";
 const KEY_DATE = "svMinMaxDay"; // 가이드 전용 날짜(1..112)
 
-// SSR/하이드레이션 첫 렌더 기준값(기본 꺼짐).
-const SERVER_SNAPSHOT = false;
-
-let snapshot = SERVER_SNAPSHOT;
-let initialized = false;
 const listeners = new Set<() => void>();
-
-function init(): void {
-  if (initialized || typeof window === "undefined") return;
-  snapshot = localStorage.getItem(KEY) === "1";
-  initialized = true;
-}
-
-export function getMinMaxPref(): boolean {
-  init();
-  return snapshot;
-}
-
-export function getServerMinMaxPref(): boolean {
-  return SERVER_SNAPSHOT;
-}
 
 export function subscribeMinMax(cb: () => void): () => void {
   listeners.add(cb);
   return () => listeners.delete(cb);
-}
-
-export function setMinMax(on: boolean): void {
-  init();
-  snapshot = on;
-  try {
-    localStorage.setItem(KEY, on ? "1" : "0");
-  } catch {}
-  listeners.forEach((l) => l());
-}
-
-export function toggleMinMax(): void {
-  setMinMax(!getMinMaxPref());
 }
 
 // ── 가이드 전용 날짜(실제 진행 날짜와 분리, 항상 1년차 범위) ──────────────

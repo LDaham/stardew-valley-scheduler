@@ -146,6 +146,8 @@ export interface ScheduleState {
   mainOrder: string[];
   // 메인 메모장 텍스트(할 일 목록 오른쪽). 자유 입력 메모.
   notepadText: string;
+  // Min-Max 가이드 모드 활성 여부(슬롯별 저장 — 슬롯 전환 시 해당 슬롯의 설정을 따라간다).
+  minMaxOn: boolean;
 }
 
 export type BundleMode = "standard" | "remix";

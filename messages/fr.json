@@ -849,7 +849,8 @@
       "adventurersGuild": "Guilde des aventuriers",
       "oasis": "Oasis",
       "desertTrader": "Marchand du désert",
-      "casino": "Casino"
+      "casino": "Casino",
+      "qiWalnutRoom": "Chambre des noix de Monsieur Qi"
     },
     "title": "Prix d'achat",
     "hint": "Choisissez un magasin pour voir le prix d'achat et les matériaux de chaque article.",

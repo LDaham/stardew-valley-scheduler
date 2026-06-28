@@ -22,12 +22,14 @@ import Modal from "@/components/Modal";
 import Dropdown from "@/components/Dropdown";
 
 // 비료·음식 라벨은 게임 공식명(gameItemNames)에서 파생한다(localizeItem → 12개 언어 자동 일치).
-// gameItemNames에 없는 항목(디럭스 비료·초고속 성장 촉진제)·"none"은 메시지 키로 폴백.
+// "none"만 메시지 키로 폴백.
 const FERT_ITEM: Partial<Record<FertilizerId, { en: string; ko: string }>> = {
   basic: { en: "Basic Fertilizer", ko: "기본 비료" },
   quality: { en: "Quality Fertilizer", ko: "고급 비료" },
+  deluxeFert: { en: "Deluxe Fertilizer", ko: "디럭스 비료" },
   speedGro: { en: "Speed-Gro", ko: "성장 촉진제" },
   deluxeSpeed: { en: "Deluxe Speed-Gro", ko: "디럭스 성장 촉진제" },
+  hyperSpeed: { en: "Hyper Speed-Gro", ko: "하이퍼 성장 촉진제" },
 };
 const FOOD_ITEM: Partial<Record<FoodId, { en: string; ko: string }>> = {
   mapleBar: { en: "Maple Bar", ko: "메이플 바" },
