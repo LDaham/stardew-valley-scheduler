@@ -117,7 +117,7 @@ export default function BundleDialog({
             className={`shrink-0 rounded px-1.5 py-0.5 text-[11px] font-semibold ${
               complete
                 ? "bg-[var(--sv-accent)] text-[var(--sv-accent-ink)]"
-                : "bg-[var(--sv-ink)] text-white"
+                : "bg-[var(--sv-ink)] text-[var(--sv-bg)]"
             }`}
           >
             {complete ? t("bundle.complete") : `${done}/${b.needed}`}

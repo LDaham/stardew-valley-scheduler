@@ -143,7 +143,7 @@ export default function PerfectionDialog({ onClose }: { onClose: () => void }) {
                   className={`shrink-0 rounded px-1.5 py-0.5 text-xs font-semibold ${
                     complete
                       ? "bg-[var(--sv-accent)] text-[var(--sv-accent-ink)]"
-                      : "bg-[var(--sv-ink)] text-white"
+                      : "bg-[var(--sv-ink)] text-[var(--sv-bg)]"
                   }`}
                 >
                   {complete ? t("perfection.complete") : `${done}/${total}`}
